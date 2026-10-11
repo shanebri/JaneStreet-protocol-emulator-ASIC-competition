@@ -7,11 +7,13 @@
 module tb ();
 
   // Dump the signals to a FST file. You can view it with gtkwave or surfer.
+`ifndef COCOTB_RUNNER
   initial begin
     $dumpfile("tb.fst");
     $dumpvars(0, tb);
     #1;
   end
+`endif
 
   // Wire up the inputs and outputs:
   reg clk;
@@ -23,7 +25,7 @@ module tb ();
   wire [7:0] uio_out;
   wire [7:0] uio_oe;
 
-  // Replace tt_um_example with your module name:
+  // All regression stimulus and observations use the external project pins.
   tt_um_shanebri_top user_project (
       .ui_in  (ui_in),    // Dedicated inputs
       .uo_out (uo_out),   // Dedicated outputs

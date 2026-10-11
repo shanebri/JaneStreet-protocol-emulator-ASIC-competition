@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024 Your Name
+ * Copyright (c) 2026 Shane Bringhurst
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -16,12 +16,29 @@ module tt_um_shanebri_top (
     input  wire       rst_n     // reset_n - low to reset
 );
 
-  // All output pins must be assigned. If not used, assign to 0.
-  assign uo_out  = ui_in + uio_in;  // Example: ou_out is the sum of ui_in and uio_in
-  assign uio_out = 0;
-  assign uio_oe  = 0;
+  wire [3:0] host_address;
+  wire host_write_en;
+  wire [7:0] host_write_data;
+  wire [7:0] host_read_data;
+  wire [6:0] gpio;
+  wire uart_tx_pin;
 
-  // List all unused inputs to prevent warnings
-  wire _unused = &{ena, clk, rst_n, 1'b0};
+  host_interface host (
+      .clk(clk), .rst_n(rst_n), .ena(ena), .control(ui_in),
+      .data_in(uio_in), .read_data(host_read_data),
+      .address(host_address), .write_en(host_write_en),
+      .write_data(host_write_data), .data_out(uio_out), .data_oe(uio_oe)
+  );
+
+  protocol_core core (
+      .clk(clk), .rst_n(rst_n), .enable(ena),
+      .host_address(host_address), .host_write_en(host_write_en),
+      .host_write_data(host_write_data), .host_read_data(host_read_data),
+      .gpio(gpio), .uart_tx_pin(uart_tx_pin)
+  );
+
+  assign uo_out = {gpio, uart_tx_pin};
 
 endmodule
+
+`default_nettype wire

@@ -1,23 +1,21 @@
-`timescale 1ns / 1ps
+`default_nettype none
 
-module pc(
-    input  logic clk,
-    input  logic rst,
-    output logic [4:0] pc_out
-    );
-
-    logic [4:0]  pc;
-    logic [4:0]  pc_next;
-
-    assign pc_next   = pc + 5'd1;
-
-    always_ff @(posedge clk) begin
-        if (rst)
-            pc <= 5'd0;
-        else
-            pc <= pc_next;
+// Word-addressed 32-entry program counter. Stalls retain the current word.
+module pc (
+    input  wire       clk,
+    input  wire       rst,
+    input  wire       restart,
+    input  wire       advance,
+    input  wire       branch,
+    input  wire [4:0] target,
+    output reg  [4:0] pc_out
+);
+    always @(posedge clk) begin
+        if (rst || restart)
+            pc_out <= 5'd0;
+        else if (advance)
+            pc_out <= branch ? target : pc_out + 5'd1;
     end
-
-    assign pc_out = pc;
-
 endmodule
+
+`default_nettype wire
