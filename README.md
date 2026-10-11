@@ -41,6 +41,12 @@ The regression exercises host read/write timing, complete program upload and
 readback, arithmetic and branches, exact waits, UART frames and busy handling,
 reset/abort, protection of running code and PC wraparound.
 
+## Arty A7-100T board test
+
+The [FPGA demo guide](fpga/README.md) provides a board wrapper, pin constraints,
+Vivado project script, and button-triggered UART test using the onboard USB serial
+connection. The ASIC core stays unchanged.
+
 ## Scope and area
 
 `info.yaml` declares the updated **8x4** allocation and all eight RTL source files.

@@ -1,0 +1,21 @@
+# Run in Vivado batch mode; opens or creates this repository's isolated project.
+set root [file normalize [file join [file dirname [info script]] ..]]
+set project_file [file join $root fpga build janestreet_arty janestreet_arty.xpr]
+if {[file exists $project_file]} {
+    open_project $project_file
+} else {
+    source [file join $root fpga create_project.tcl]
+}
+reset_run synth_1
+launch_runs synth_1 -jobs 4
+wait_on_run synth_1
+if {[get_property PROGRESS [get_runs synth_1]] ne "100%"} { error "Synthesis failed" }
+launch_runs impl_1 -to_step write_bitstream -jobs 4
+wait_on_run impl_1
+if {[get_property PROGRESS [get_runs impl_1]] ne "100%"} { error "Implementation/bitstream failed" }
+open_run impl_1
+report_clocks -file [file join $root fpga build clocks.rpt]
+report_timing_summary -report_unconstrained -file [file join $root fpga build timing_summary.rpt]
+report_drc -file [file join $root fpga build drc.rpt]
+report_cdc -file [file join $root fpga build cdc.rpt]
+puts "Bitstream and reports ready under fpga/build."
