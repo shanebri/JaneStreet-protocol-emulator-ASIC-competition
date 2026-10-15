@@ -6,7 +6,7 @@ SIM ?= icarus
 FST ?= -fst # Use more efficient FST format
 TOPLEVEL_LANG ?= verilog
 SRC_DIR = $(CURDIR)/../src
-PROJECT_SOURCES = project.sv protocol_core.sv host_interface.sv execution_unit.sv uart_tx.sv \
+PROJECT_SOURCES = project.sv protocol_core.sv host_interface.sv execution_unit.sv pio_fifo.sv \
                   frontend/pc.sv frontend/instruction_fetch.sv frontend/decoder.sv
 
 ifneq ($(GATES),yes)

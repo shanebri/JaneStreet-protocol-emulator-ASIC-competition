@@ -1,5 +1,6 @@
 """Portable alternative to make: python test/run.py (requires Icarus on PATH)."""
 from pathlib import Path
+import subprocess
 from xml.etree import ElementTree
 from cocotb_tools.runner import get_runner
 
@@ -14,6 +15,11 @@ def main():
         if not line.startswith("    - "):
             break
         sources.append(ROOT / "src" / line.split('"')[1])
+    unit_output = ROOT / "test" / "sim_build" / "fifo.vvp"
+    unit_output.parent.mkdir(parents=True, exist_ok=True)
+    subprocess.run(["iverilog", "-g2012", "-s", "pio_fifo_tb", "-o", str(unit_output),
+                    str(ROOT / "src" / "pio_fifo.sv"), str(ROOT / "test" / "pio_fifo_tb.sv")], check=True)
+    subprocess.run(["vvp", str(unit_output)], check=True)
     runner = get_runner("icarus")
     runner.build(
         sources=[*sources, ROOT / "test" / "tb.v"],

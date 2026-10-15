@@ -1,189 +1,251 @@
 ## How it works
 
-V0 is a small programmable output engine targeting **8×4 Tiny Tapeout tiles** on
-IHP CMOS5L. A synchronous 8-bit host bus loads 16-bit instructions into 32 words of
-instruction memory. A 5-bit PC, decoder, 16-bit accumulator and ALU execute them.
-There are eight 16-bit scratch words, seven GPIO outputs and an 8N1 UART transmitter.
-The target clock is 50 MHz (20 ns); final area and timing require physical validation.
+PIO V0 replaces the accumulator/UART architecture with one programmable I/O state
+machine. A 32-word instruction memory feeds a combinational decoder and 32-bit
+shift/register datapath. OSR serializes TX FIFO data; ISR collects data for the RX
+FIFO. X and Y are independent 32-bit scratch registers for counters, comparisons,
+loop control and default output data. All protocol framing is firmware.
 
-Most instructions execute in one clock. WAIT inserts a specified number of extra
-clocks; WAIT_TX and a store to busy UART_DATA stall execution until the transmitter
-is ready. UART timing runs independently of instruction execution, including after
-HALT. This V0 deliberately uses small inferred memories and simple control logic.
+This project borrows the instruction structure described in the
+[Raspberry Pi PIO documentation](https://www.raspberrypi.com/documentation/pico-sdk/hardware.html#hardware_pio),
+but this document defines its own contract. It is not an RP2040-compatible core.
+The host map and example binaries are incompatible with the earlier accumulator V0.
 
-### Pins
+### Pins and clocking
 
 | Pins | Function |
 | --- | --- |
 | `ui[3:0]` | Host byte-register address |
-| `ui[4]` | Host write strobe WR, active high |
-| `ui[5]` | Host read strobe RD, active high |
-| `ui[7:6]` | Reserved; drive zero |
+| `ui[4]`, `ui[5]` | WR, RD strobes |
+| `ui[6]`, `ui[7]` | Protocol inputs 0 and 1; independent two-flop synchronizers |
 | `uio[7:0]` | Bidirectional host data bus |
-| `uo[0]` | UART TX, idle high |
-| `uo[7:1]` | GPIO[6:0], reset low |
-| `clk` | Shared host/core clock |
+| `uo[7:0]` | Programmable output pins 7 through 0; reset value `0x01` |
+| `clk` | Shared synchronous host/core clock, target 50 MHz |
 | `rst_n` | Active-low synchronous reset |
-| `ena` | Enable; hold high during normal operation |
+| `ena` | Host/engine enable; keep high during timed protocols |
 
-### Host bus timing
+Protocol outputs are dedicated outputs. There is no protocol pad-direction control
+in this package; SET/OUT PINDIRS fault. The eight bidirectional pads belong to the
+host interface. Input synchronizers run even when `ena=0`; the engine sees the
+previous synchronized value on its execution edge. Synchronization adds latency
+and asynchronous edge detection has clock-phase uncertainty.
 
-All host signals are synchronous to `clk`; there is no asynchronous clock-domain
-crossing, acknowledge signal or variable bus latency.
+### Deterministic execution
 
-1. Begin with RD and WR low for at least one rising clock edge.
-2. To write, drive address and data before a rising edge with WR high and RD low.
-   The write is accepted on that edge.
-3. To read, release the host's data drivers and drive address with RD high and WR
-   low before a rising edge. Read data is latched on that edge and can be sampled
-   after propagation settles, for example on the following falling edge.
-4. Lower the strobe for at least one rising edge before the next transaction.
+An SM tick occurs every DIVIDER enabled clocks (integer 1–65535; zero writes become
+one). The first tick is the clock following START. At DIVIDER=1 each ordinary
+instruction completes on one rising edge. There is no fetch bubble, branch penalty,
+multi-cycle ALU or background UART. IN/OUT count does not affect execution latency.
 
-A strobe held high causes exactly one transaction. Read data stays latched until
-the next accepted read. The chip drives all eight data pins only while RD is high,
-WR is low, reset is inactive and `ena` is high. Lower RD before the host drives a
-write. Simultaneous RD and WR are ignored and release the data bus; lower both
-before retrying. Address/data must meet normal setup and hold times.
+An instruction with delay `d` makes the next instruction eligible `d+1` SM ticks
+later. Delay follows retirement, including taken branches. An explicit wait or
+blocking FIFO instruction retries on each SM tick without changing PC, registers,
+shift counts or FIFO contents. Side-set is the exception: it applies on the first
+attempt and remains applied while stalled. Invalid instructions fault before any
+side-set or architectural effect.
 
-Host register addresses are **byte registers**. Instruction and CPU data addresses
-are **16-bit word addresses** in separate spaces. Multi-byte host writes stage the
-low byte, then commit the whole word on the high-byte write. Multi-byte reads are
-independent byte snapshots: stop the CPU before reading a coherent PC/accumulator
-or scratch value that software may otherwise change.
+Autopull and autopush are atomic parts of OUT and IN respectively, with no hidden
+extra tick. A FIFO word written on an edge to an empty TX FIFO becomes available
+on the next SM tick. A full FIFO permits simultaneous dequeue/enqueue using the
+old head; an empty FIFO has no same-edge bypass. These rules make boundary timing
+explicit. Timed firmware must keep enough data queued to avoid intentional stalls.
 
-### Host register map
+`ena=0` freezes execution, divider and delay state and disables host transactions.
+It stretches waveforms. STOP freezes the same execution state and retains outputs;
+RESUME continues it. START begins a fresh execution at ENTRY. Reset returns outputs
+to `0x01`. STOP and HALT do not force a UART idle level: firmware owns the pins.
 
-| Address | Register | Read | Write |
-| --- | --- | --- | --- |
-| `0x0` | CONTROL | Zero | Bit 0 START; bit 1 STOP; STOP wins if both set |
-| `0x1` | STATUS | Bit 0 running, bit 1 UART busy, bit 2 fault, bit 3 waiting | Ignored |
-| `0x2` | IMEM_ADDR | Current 5-bit program pointer | Set pointer from bits [4:0] |
-| `0x3` | IMEM_LO | Selected instruction [7:0] | Stage instruction low byte while stopped |
-| `0x4` | IMEM_HI | Selected instruction [15:8] | Commit staged low + this high byte; increment pointer modulo 32, while stopped |
-| `0x5` | DATA_ADDR | Current 8-bit data-map pointer | Select a mapped word |
-| `0x6` | DATA_LO | Selected data word [7:0] | Stage data low byte while stopped |
-| `0x7` | DATA_HI | Selected data word [15:8] | Commit staged low + this high byte while stopped; pointer does not increment |
-| `0x8` | PC | Current instruction address, zero extended | Ignored |
-| `0x9` | ACC_LO | Accumulator [7:0] | Ignored |
-| `0xA` | ACC_HI | Accumulator [15:8] | Ignored |
-| `0xB–0xF` | Reserved | Zero | Ignored |
+### Host transactions
 
-Reads never increment pointers. Pointer writes and reads are allowed while running;
-instruction/data writes, including low-byte staging, are ignored while running.
-A host write to busy UART_DATA while stopped is ignored, so poll STATUS bit 1 before
-sending directly from the host. The host data pointer reaches the first 256 words;
-all currently implemented data registers are within that range.
+All host bus signals must be synchronous to `clk`. Begin with RD=WR=0 for an edge.
+Raise WR with stable address/data for an edge to write, or raise RD after releasing
+the host data drivers to read. Data is latched on the accepted RD edge. Return the
+strobe low for an edge before the next transaction. Held strobes transact only once;
+simultaneous RD/WR do nothing and disable the chip's data drivers. Transactions
+while disabled are discarded; lower strobes before re-enabling.
 
-START restarts at PC=0, clears the accumulator, waits and fault, sets running and
-cancels any UART frame. STOP clears running/waits and cancels UART, retaining the
-PC, accumulator and fault for inspection. Both preserve GPIO, scratch memory, UART
-data/divider and program contents. Writing zero to CONTROL has no effect.
+Instruction writes stage the low byte and commit on the high byte, incrementing
+IMEM_ADDR modulo 32. Instruction writes/staging are ignored while running.
 
-### CPU data and peripheral map
+For a **32-bit data write**, select DATA_ADDR, write bytes in order to host registers
+`6, 7, 9, A` (little endian). Writing A commits all four bytes atomically. The shared
+staging bytes may be written while running; only FIFO/IRQ commits are then accepted.
+Every writer must supply all four bytes; there is one staging buffer and no byte mask.
 
-| Word address | Register | Width and behavior |
+For a **32-bit data read**, select DATA_ADDR and read `6, 7, 9, A` in that order.
+Reading 6 snapshots the entire selected word; the other three registers read that
+snapshot even if the core changes state. When selecting RX, reading 6 also dequeues
+one word. A held RD never dequeues twice. Reading an empty RX returns zero and sets
+underflow. A new read of 6 replaces the snapshot. Separate words are separate
+snapshots; STOP first for a coherent multi-register debug dump.
+
+### Host byte-register map
+
+| Address | Name | Read / write |
 | --- | --- | --- |
-| `0x000–0x007` | SCRATCH[0:7] | Eight read/write 16-bit words, reset to zero |
-| `0x010` | GPIO_OUT | Read/write low seven bits, zero extended on read; reset zero |
-| `0x011` | UART_DATA | Write low eight bits to start a frame; read last accepted byte; reset zero |
-| `0x012` | UART_DIV | Read/write 16-bit clocks per bit; reset 434; zero coerced to one |
-| `0x013` | UART_STATUS | Read-only bit 0 busy; other bits zero |
-| Other addresses | Unmapped | Reads return zero; writes ignored |
+| `0` | CONTROL | Reads zero. W: bit0 START, bit1 STOP, bit2 FIFO_CLEAR, bit3 CLEAR_ERRORS, bit4 RESUME |
+| `1` | STATUS | R: bit0 running, bit1 delayed/stalled, bit2 fault, bit3 TX full, bit4 RX empty, bit5 any IRQ, bit6 TX overflow, bit7 RX underflow |
+| `2` | IMEM_ADDR | R/W low five bits |
+| `3` | IMEM_LO | R selected instruction low byte; W stage low byte while stopped |
+| `4` | IMEM_HI | R selected instruction high byte; W commit/increment while stopped |
+| `5` | DATA_ADDR | R/W 8-bit data-map selector |
+| `6` | DATA_0 | R snapshot low byte (RX pop); W stage byte 0 |
+| `7` | DATA_1 | R snapshot byte 1; W stage byte 1 |
+| `8` | PC | R current five-bit program-memory address |
+| `9` | DATA_2 | R snapshot byte 2; W stage byte 2 |
+| `A` | DATA_3 | R snapshot byte 3; W commit 32-bit word |
+| `B` | FIFO_LEVEL | R TX count[2:0], RX count[6:4], remaining bits zero |
+| `C` | IRQ | R eight flags; W one-to-clear, including while running |
+| `D` | DEBUG | R sticky bit0 TX overflow, bit1 RX underflow, bit2 nonblocking PUSH drop, bit3 empty nonblocking PULL fallback; W one-to-clear |
+| `E` | INPUT | R synchronized protocol inputs [1:0] |
+| `F` | VERSION | R `0x20` |
 
-The CPU uses these same addresses in LD/ST instructions. A CPU store to UART_DATA
-holds its PC and accumulator while busy and sends exactly once when available.
-Writes to the divider do not affect a frame already in progress: the transmitter
-captures the divider at frame launch. There is no receive path or FIFO.
+STOP wins over START/RESUME; START wins over RESUME. START clears X/Y/OSR/ISR,
+shift counts (OSR=32/empty, ISR=0), delay/divider phase, pending EXEC/IRQ-wait and
+fault. It preserves configuration, output levels, IRQ flags, FIFOs and sticky errors.
+STOP preserves all execution state except running. RESUME only sets running and is
+ignored during fault. It can start host-initialized register state at the current PC.
+HALT holds its PC and clears running. RESUME after HALT executes HALT again.
 
-### Instruction set
+FIFO_CLEAR clears both queues only when already stopped or combined with STOP;
+it does not clear OSR/ISR or counts. It is ignored while running, including a restart
+of a running engine. CLEAR_ERRORS clears DEBUG; new errors on the same edge win.
+Reset clears registers, queues, flags and host state, but not instruction memory.
+Load every reachable instruction after power-up.
 
-Each instruction is `{opcode[3:0], immediate[11:0]}`. `A` denotes the 16-bit
-accumulator. Immediates are unsigned and zero extended. Arithmetic wraps modulo
-65536. Branches test A directly; there is no separate flags register.
+### 32-bit data map
 
-| Opcode | Mnemonic | Effect |
+All values are zero-extended to 32 bits where narrower. Unmapped reads are zero;
+unmapped writes are ignored. Unless stated otherwise, writes require stopped state.
+
+| Selector | Register | Behavior / reset |
 | --- | --- | --- |
-| `0x0` | NOP | Advance PC |
-| `0x1` | LDI imm | A = zero-extended imm |
-| `0x2` | LD addr | A = mapped 16-bit word |
-| `0x3` | ST addr | Mapped word = A; UART stores can stall |
-| `0x4` | ADDI imm | A = A + imm |
-| `0x5` | SUBI imm | A = A - imm |
-| `0x6` | ANDI imm | A = A AND imm |
-| `0x7` | XORI imm | A = A XOR imm |
-| `0x8` | JMP addr | PC = addr |
-| `0x9` | JZ addr | Branch if A == 0 |
-| `0xA` | JNZ addr | Branch if A != 0 |
-| `0xB` | WAIT n | Advance PC, then wait n extra clocks (0–4095) |
-| `0xC` | WAIT_TX | Stall until UART is idle, then advance PC |
-| `0xD` | HALT | Clear running; hold PC and outputs; UART finishes its frame |
-| `0xE` | SHL | A = A << 1, zero fill; immediate ignored |
-| `0xF` | Reserved | Halt with fault; retain offending PC |
+| `00`, `01` | X, Y | R/W 32-bit scratch; reset 0 |
+| `02` | OSR | R/W; write also clears OUT count; reset 0 with count 32 |
+| `03` | ISR | R/W; write also clears IN count; reset 0 |
+| `04` | PINS | R/W output levels[7:0]; reset 1 |
+| `05` | COUNTS | R OUT count[5:0], IN count[13:8]; saturate at 32 |
+| `08` | TX | W enqueue 32-bit word, live while running; R0. Full write rejected with overflow unless same-edge CPU pop makes room |
+| `09` | RX | R snapshot/pop at DATA_0; writes ignored |
+| `10` | SHIFTCTRL | R/W described below; reset 3 |
+| `11` | EXECCTRL | R/W described below; reset `0x03E0` |
+| `12` | PINCTRL | R/W described below; reset 0 |
+| `13` | DIVIDER | R/W low 16 bits; reset 1, zero clamps to1 |
+| `14` | IRQ_SET | R IRQ flags; W low8 bits one-to-set, live while running |
+| `15` | FIFO_LEVEL | R same packing as host B |
 
-All branch targets must be 0–31. An out-of-range target faults even for an untaken
-conditional branch. Sequential execution wraps from word 31 to word 0. NOP,
-WAIT_TX and HALT ignore their immediate fields. To load a full 16-bit constant,
-initialize a scratch word through the host then use LD, or build it with ALU operations.
+SHIFTCTRL: bit0 OUT right, bit1 IN right, bit2 autopull, bit3 autopush,
+bits[8:4] pull threshold, bits[13:9] push threshold. A zero threshold means 32.
+Both directions are independently configurable; reset uses right shifts.
 
-If WAIT n executes at edge t, the next instruction executes at edge t+n+1.
-WAIT 0 therefore has ordinary one-cycle instruction latency. STATUS.waiting is
-set while the wait counter is nonzero or execution is stalled by the UART.
+EXECCTRL: bits[4:0] wrap bottom, bits[9:5] wrap top, bits[14:10] ENTRY,
+bit15 optional single-bit side-set enable. Sequential retirement at wrap top jumps
+to wrap bottom without a tick penalty. A taken branch overrides wrap. Otherwise
+the five-bit PC increments modulo32. Configure a meaningful reachable wrap region.
 
-### UART waveform and reset
+PINCTRL: bits[2:0] OUT/MOV base, bits[6:3] OUT/MOV width; bits[10:8] SET base,
+bits[14:11] SET width; bit16 IN base (0/1); bits[19:17] side-set pin;
+bit20 JMP input pin (0/1). Other bits reserved. Width 0 or >8 means8. Mappings are
+clipped at output 7, not rotated. IN reads the synchronized two-bit input vector
+shifted right by IN base, zero extended. SET/OUT/MOV preserve unmapped outputs.
+Side-set wins overlaps with instruction pin writes.
 
-UART TX sends one low start bit, eight data bits least-significant bit first and
-one high stop bit. Every bit, including stop, lasts exactly UART_DIV enabled
-clock edges. Busy clears after the full stop bit. Baud is `clock_hz / UART_DIV`.
-At 50 MHz with divider 434 the rate is about 115207 baud, close to 115200.
+### Instruction encoding
 
-For ASCII `U` (`0x55`) the ten frame bits are:
+Each 16-bit word is `{opcode[2:0], timing[4:0], argument[7:0]}`. Without side-set,
+timing is a 0–31 delay. With EXECCTRL.bit15 set, timing[4] enables side-set for that
+instruction, timing[3] is the value, timing[2:0] is a 0–7 delay. Optional side-set
+disabled on an instruction still leaves only three delay bits.
 
-```text
-            start  d0 d1 d2 d3 d4 d5 d6 d7  stop
-TX level:     0     1  0  1  0  1  0  1  0    1
-clocks/bit:  434   434 for each data bit       434
-```
+| Opcode | Instruction / argument | Behavior |
+| --- | --- | --- |
+| 0 | JMP condition[7:5], target[4:0] | Branch conditions below |
+| 1 | WAIT polarity[7], source[6:5], index[4:0] | Stall until input/IRQ matches polarity |
+| 2 | IN source[7:5], count[4:0] | Shift low count source bits into ISR |
+| 3 | OUT destination[7:5], count[4:0] | Shift count bits from OSR to destination |
+| 4 | PUSH/PULL pull[7], conditional[6], block[5], zero[4:0] | FIFO transfer; see below |
+| 5 | MOV destination[7:5], operation[4:3], source[2:0] | Register/pin transfer, optional inversion or bit reversal |
+| 6 | IRQ zero[7], clear[6], wait[5], zero[4:3], index[2:0] | Set, clear, or set-and-wait for flag acknowledgment |
+| 7 | SET destination[7:5], immediate[4:0] | Zero-extended immediate to pins(0), X(1), Y(2) |
 
-Reset stops execution, clears PC/A/scratch/GPIO and host staging/pointers, restores
-divider 434, clears UART data/busy and returns TX high. Instruction memory is not
-reset and is undefined at power-up: load every reachable instruction before START.
-`ena=0` pauses the CPU, waits and UART counters and disables the host interface.
-It may stretch a UART bit, so hold `ena=1` throughout a frame. Strobed transactions
-while disabled are discarded; return strobes low before resuming.
+`0xC080` is the local HALT extension. NOP is `MOV Y,Y` (`0xA042`). HALT ignores
+delay, applies enabled side-set, and retains output levels. Reserved encodings
+halt with fault before changing data. All encoded JMP targets are five bits.
+
+JMP conditions: 0 always, 1 X==0, 2 X--, 3 Y==0, 4 Y--, 5 X!=Y, 6 configured
+input pin high, 7 OSR count below pull threshold. Decrement tests the old value for
+nonzero and always decrements modulo2^32, including zero wrapping to `0xFFFFFFFF`.
+
+WAIT sources: 0 absolute input index0/1; 1 relative to IN base (missing bits read0);
+2 local IRQ index0–7. Other indices/sources fault. WAIT 1 IRQ clears that flag on
+successful retirement. WAIT 0 IRQ does not clear it.
+
+IN sources: pins0, X1, Y2, null3, ISR6, OSR7. Count field 0 means 32; otherwise1–31.
+Right IN shifts ISR right and inserts the low source bits at its high end. Left IN
+shifts left and inserts low source bits at its low end. IN count saturates at 32.
+At the autopush threshold, enqueue the newly shifted value and clear ISR/count;
+if RX is full the entire IN stalls before any shift. Autopush only applies to IN.
+
+OUT destinations: pins0, X1, Y2, null3 (discard), PC5, ISR6, EXEC7. Destination 4
+(PINDIRS) faults. Right OUT extracts low bits; left OUT extracts high bits; the
+extracted result is right-aligned, zero extended, and OSR shifts with zero fill.
+OUT count saturates at 32. OUT ISR replaces ISR and sets IN count to the shift width.
+OUT PC branches using the low five extracted bits. With autopull, an empty OSR
+(count >= threshold) pulls a word immediately before the OUT on the same tick;
+an empty TX FIFO stalls. No refill occurs in the background or after other opcodes.
+
+PULL replaces OSR and clears OUT count. Conditional PULL acts only when OSR is
+empty. Blocking PULL waits for data; nonblocking empty PULL uses X and sets DEBUG3.
+PUSH enqueues ISR and clears ISR/IN count. Conditional PUSH acts only when IN count
+meets the push threshold. Blocking PUSH waits for space; nonblocking full PUSH
+drops the value, clears ISR/count and sets DEBUG2. Skipped conditional operations
+still retire and apply delay/side-set.
+
+MOV sources: pins0, X1, Y2, null3, status5 (FIFO_LEVEL packing), ISR6, OSR7.
+Destinations: pins0, X1, Y2, EXEC4, PC5, ISR6, OSR7. Operation 0 copies, 1 inverts
+all 32 bits, 2 reverses all 32 bits; 3 faults. MOV ISR/OSR resets the corresponding
+shift count. MOV PC uses low five bits.
+
+MOV/OUT EXEC executes the low 16-bit result on the next eligible tick, after the
+originating instruction's delay. The original instruction advances PC once. An
+injected instruction holds that PC unless it takes a branch/writes PC; it may
+inject another instruction. Its own waits, delays, side-set and faults apply.
+PC readback during injection is the already-advanced program-memory address.
+
+IRQ SET sets a flag; CLEAR clears it. IRQ WAIT sets a flag once, then stalls until
+the host clears it. Relative/multi-SM IRQ indexing is not supported. Concurrent
+firmware sets win host clears; firmware clears win host sets. Flags are visible by
+polling the host interface; there is no dedicated interrupt output pin.
+
+### Load and run UART
+
+1. Reset with RD=WR=0, `ena=1`, and a running clock.
+2. Select data `0x13`, write bytes `1F 00 00 00` to host `6,7,9,A` (divider31).
+3. Select data `0x12`, write `08 10 00 00` (OUT pin0, SET pins[1:0]).
+4. Select data `0x08`, write `55 00 00 00` to queue ASCII U.
+5. Set IMEM_ADDR=0; load these words low byte then high byte:
+   `80A0 E027 ED00 6C01 0043 ED01 E003 C080`.
+6. Write CONTROL=1. Firmware emits start, eight LSB-first data bits, stop, and
+   completion on output 1. Each bit occupies 14 ticks ×31 clocks  = 434 clocks.
+7. Poll running clear. For replay queue another byte and START again. To abort,
+   STOP; to also return UART idle, write PINS=1 while stopped, or reset.
+
+Use `python tools/pioasm.py examples/uart_v0.asm` to regenerate the hex file.
+The assembler supports labels, decimal/hex values, `[delay]`, `.sideset` and
+`side 0/1`. Configure the corresponding host registers separately; the assembler
+does not apply DIVIDER, pin mapping, entry or wrap settings automatically.
 
 ## How to test
 
-### Load and run the supplied UART program
-
-Use `examples/uart_v0.hex`, one 16-bit hexadecimal instruction per line:
-
-```text
-11B2 3012 1055 3000 2000 3011 C000 1001 3010 B010 D000
-```
-
-1. Apply clock and synchronous reset, with RD=WR=0 and `ena=1`.
-2. Write `0x00` to IMEM_ADDR (`0x2`).
-3. For each instruction write its low byte to `0x3`, then its high byte to `0x4`.
-   The program pointer auto-increments after each high-byte commit. For example,
-   `11B2` is written as `B2` to `0x3`, then `11` to `0x4`.
-4. Optionally read each word back by setting IMEM_ADDR and reading `0x3`/`0x4`.
-5. Write `0x01` to CONTROL (`0x0`). Observe one `U` frame on `uo[0]` and then
-   GPIO[0] high on `uo[1]`. After the final wait, STATUS.running and busy are zero.
-6. Write `0x01` again to replay, or `0x02` to abort.
-
-For a host data write, set DATA_ADDR, stage DATA_LO and commit DATA_HI. Example:
-write `0x12` to `0x5`, `0xB2` to `0x6`, then `0x01` to `0x7` to set divider 434
-while the CPU is stopped. All accesses still use the low/high strobe timing above.
-
-The cocotb regression performs this entire flow through the external pins and
-checks every transmitted bit at clock resolution. Run `python test/run.py` from
-the repository root, or `make -C test`, after installing Icarus and the Python
-packages in `test/requirements.txt`. Waveforms are saved to `test/tb.fst`.
+Run `python test/run.py` or `./test/run.ps1`. The FIFO unit test exhausts occupancy
+and simultaneous read/write boundaries. Eleven pin-level tests cover state,
+timing and complete firmware TX/RX waveforms. See [test/README.md](../test/README.md)
+and [the optimization report](pio_v0_optimization_report.md) for validation scope.
 
 ## External hardware
 
-A host that shares the clock and can drive a synchronous 8-bit bidirectional bus,
-plus a logic analyzer or oscilloscope, is sufficient. A UART adapter can receive
-TX at 115200 baud, 8 data bits, no parity and one stop bit with the example's
-50 MHz clock. Use logic levels compatible with the chip or FPGA board and a
-common ground. UART RX is not implemented.
+Use a synchronous host and compatible logic levels. A logic analyzer can observe
+all programmable outputs; a UART adapter receives the example at 115200 8N1 with
+a 50 MHz core clock. Input0 (`ui[6]`) can receive the RX example at 16 clocks/bit.
+The Arty wrapper currently connects only the TX demo; its UART RX pin is not wired
+to the core. Electrical interfaces for Ethernet/USB remain future integration work.

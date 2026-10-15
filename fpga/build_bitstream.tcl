@@ -6,6 +6,12 @@ if {[file exists $project_file]} {
 } else {
     source [file join $root fpga create_project.tcl]
 }
+# Migrate an existing accumulator-era project to the current source manifest.
+set obsolete_uart [get_files -quiet */uart_tx.sv]
+if {[llength $obsolete_uart]} { remove_files $obsolete_uart }
+set fifo_source [file join $root src pio_fifo.sv]
+if {![llength [get_files -quiet $fifo_source]]} { add_files $fifo_source }
+update_compile_order -fileset sources_1
 reset_run synth_1
 launch_runs synth_1 -jobs 4
 wait_on_run synth_1

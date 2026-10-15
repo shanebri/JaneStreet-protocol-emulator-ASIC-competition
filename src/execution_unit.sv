@@ -1,22 +1,18 @@
 `default_nettype none
 
+// Combinational 32-bit shift datapath. A decoded count is always 1..32.
 module execution_unit (
-    input  wire [15:0] accumulator,
-    input  wire [15:0] operand,
-    input  wire [2:0]  alu_op,
-    output reg  [15:0] result
+    input wire [31:0] osr, isr, source,
+    input wire [5:0] count,
+    input wire out_right, in_right,
+    output wire [31:0] out_value, shifted_osr, shifted_isr
 );
-    always @* begin
-        case (alu_op)
-            3'd0: result = operand;
-            3'd1: result = accumulator + operand;
-            3'd2: result = accumulator - operand;
-            3'd3: result = accumulator & operand;
-            3'd4: result = accumulator ^ operand;
-            3'd5: result = {accumulator[14:0], 1'b0};
-            default: result = accumulator;
-        endcase
-    end
+    wire [31:0] mask = 32'hffffffff >> (6'd32 - count);
+    assign out_value = out_right ? (osr & mask) : (osr >> (6'd32 - count));
+    assign shifted_osr = out_right ? (osr >> count) : (osr << count);
+    assign shifted_isr = in_right ?
+        ((isr >> count) | ((source & mask) << (6'd32 - count))) :
+        ((isr << count) | (source & mask));
 endmodule
 
 `default_nettype wire

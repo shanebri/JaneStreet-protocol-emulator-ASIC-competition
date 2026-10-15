@@ -2,8 +2,10 @@
 
 This FPGA-only wrapper instantiates the unchanged JaneStreet Tiny Tapeout design.
 It generates 50 MHz from the board's 100 MHz clock using an MMCM and loads all 32
-instruction words through the real synchronous host interface. The first 11 words
-match `examples/uart_v0.hex`; the remaining words are HALT. No external host wiring,
+instruction words through the real synchronous host interface. The first eight words
+match `examples/uart_v0.hex`; the remaining words are HALT. The loader also writes
+DIVIDER=31, PINCTRL=0x1008 and queues `0x55` in the TX FIFO. The state machine
+generates the entire UART frame in firmware. No external host wiring,
 Clocking Wizard IP generation, or separate USB-UART adapter is needed.
 
 ## Create the Vivado project
@@ -25,6 +27,9 @@ RTL files to your existing project, set `arty_a7_top` as top, and add
 project's active constraints set: it describes the bare core's `clk` input, while
 this wrapper exposes `clk100` and generates 50 MHz internally. Keep the original
 file for standalone core timing analysis.
+
+When updating an older project, remove `uart_tx.sv` and add `pio_fifo.sv`.
+The batch build script performs this source-list migration automatically.
 
 For a command-line build, run from the repository root in a Vivado-enabled shell:
 
@@ -62,7 +67,7 @@ primitives; Vivado derives the generated clock automatically.
 | BTN1 | C9 | Debounced run/replay, active high |
 | USB-UART receive input | A9 | FPGA UART TX to PC |
 | LD4 | H5 | Loader ready; also high during program execution |
-| LD5 | J5 | Program's GPIO[0] completion flag |
+| LD5 | J5 | Program's PIO_OUT[1] completion flag |
 | LD6 | T9 | 50 MHz domain heartbeat |
 | LD7 | T10 | MMCM locked |
 

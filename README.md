@@ -1,69 +1,64 @@
-# Programmable Protocol Emulator — V0
+# Programmable Protocol Emulator — PIO V0
 
-An early end-to-end 16-bit protocol emulator for the Jane Street ASIC competition,
-targeting **8×4 Tiny Tapeout tiles on IHP CMOS5L**. The prototype prioritizes a
-small, testable path from a host-loaded program to real output waveforms.
+A PIO-inspired protocol engine for the Jane Street ASIC competition, targeting
+**8×4 Tiny Tapeout tiles on IHP CMOS5L**. Protocol timing and framing are firmware.
+The old accumulator and dedicated UART transmitter have been replaced.
 
-The V0 slice implements:
+- One state machine, 32 × 16-bit writable instruction memory, programmable entry
+  point and zero-overhead wrap.
+- 32-bit OSR, ISR, X and Y; shifts of 1–32 bits in either direction.
+- Independent four-word, 32-bit TX/RX FIFOs with blocking/nonblocking operations,
+  automatic pull/push, atomic host access and visible error flags.
+- JMP, WAIT, IN, OUT, PUSH/PULL, MOV, SET, IRQ, EXEC, delay and optional side-set.
+- Eight programmable outputs and two synchronized inputs.
+- One instruction per clock at divider 1, including taken branches and shifts.
+  Delays, input/IRQ waits and FIFO backpressure are explicit exceptions.
+- Synchronous 8-bit host bus, plus a small label-aware Python assembler.
 
-- 32 × 16-bit writable instruction memory and a 5-bit word-addressed PC.
-- A decoder, 16-bit accumulator, load/store, immediate ALU operations and branches.
-- Eight 16-bit scratch registers and a mapped GPIO/UART register bank.
-- Seven GPIO outputs, a cycle-counted WAIT instruction and a UART completion wait.
-- An 8-bit synchronous parallel host bus for loading, starting, stopping and inspecting programs.
-- A TX-only UART that sends 8N1 frames with a programmable 16-bit clocks-per-bit divider.
+This is a **breaking ISA/host-map update** (revision register `0xF` reads `0x20`).
+Old accumulator firmware must be replaced. It is PIO-inspired, not a binary
+compatible RP2040 implementation. The current package has fixed-direction protocol
+pins; pin-direction instructions, multiple state machines, FIFO joining, fractional
+clock division, and external DMA are not implemented.
 
-## Try the end-to-end example
+## Run the firmware UART demo
 
-The [UART program](examples/uart_v0.asm) and its [loadable words](examples/uart_v0.hex)
-configure 434 clocks per bit, move ASCII `U` through scratch memory, transmit it on
-`uo[0]`, raise `uo[1]` when the frame completes, wait 16 clocks and halt. With a
-50 MHz clock this is approximately 115200 baud.
+Load [uart_v0.hex](examples/uart_v0.hex), configure `DIVIDER=31` and
+`PINCTRL=0x1008`, enqueue `0x55` in the TX FIFO, and issue START. The
+[eight-instruction program](examples/uart_v0.asm) drives an 8N1 `U` frame on
+`uo[0]`, raises `uo[1]` after the stop bit, and halts. Each bit lasts exactly
+434 clocks: approximately 115200 baud at 50 MHz. Replay requires enqueuing another
+byte. There is no UART peripheral or UART divider register in the RTL.
 
-The [datasheet](docs/info.md) describes each host transaction, the instruction set,
-the complete address/register maps and reset/timing behavior. Program memory must
-be loaded after power-up; there is no automatic boot program.
+[uart_rx.asm](examples/uart_rx.asm) demonstrates firmware receive on `ui[6]`
+at 16 clocks/bit, delivering the byte in bits [31:24] of an RX FIFO word.
+It is a minimal receive example without framing-error/break handling.
 
-## Run the tests
+The [datasheet](docs/info.md) defines encoding, timing, pin assignments and every
+host transaction. The [optimization report](docs/pio_v0_optimization_report.md)
+records validation results and priorities for the next version.
 
-Install Icarus Verilog and Python 3.11 or newer, then from the repository root:
+## Build and test
 
 ```sh
+python tools/pioasm.py examples/uart_v0.asm
 python -m pip install -r test/requirements.txt
 python test/run.py
 ```
 
-Alternatively, use `make -C test` or `./test/run.ps1` on Windows. These run the same ten pin-level cocotb tests and
-produce `test/results.xml` and `test/tb.fst`. See the [test guide](test/README.md)
-for waveform viewing, a single-demo run and gate-level simulation.
+Icarus Verilog must be on PATH. On Windows, `./test/run.ps1` also finds the optional
+project-local tools. The runner checks FIFO boundary cases and eleven pin-level
+cocotb regressions. See [test/README.md](test/README.md) for synthesis and gate-level
+checks. The [Arty A7 guide](fpga/README.md) covers the updated FPGA loader and
+button-triggered firmware UART demo; `./fpga/test.ps1` verifies its behavior.
 
-The regression exercises host read/write timing, complete program upload and
-readback, arithmetic and branches, exact waits, UART frames and busy handling,
-reset/abort, protection of running code and PC wraparound.
-
-## Arty A7-100T board test
-
-The [FPGA demo guide](fpga/README.md) provides a board wrapper, pin constraints,
-Vivado project script, and button-triggered UART test using the onboard USB serial
-connection. The ASIC core stays unchanged.
-
-## Scope and area
-
-`info.yaml` declares the updated **8x4** allocation and all eight RTL source files.
-The data and instruction widths are 16 bits; narrow addresses and small memories
-keep this first prototype bounded. Instruction storage is inferred RTL memory
-and can map to flip-flops, not an ASIC SRAM macro.
-
-This is an integration prototype. UART RX, FIFOs, interrupts, arbitrary protocol
-timing and a general-purpose host software stack are future work. Generic
-synthesis is a structural check; fitting 8×4 tiles and meeting the 50 MHz target
-still require the CMOS5L place-and-route, timing and gate-level flows. The existing
-GDS workflow is configured to run those flows.
+The 50 MHz clock and 8×4 tile allocation remain targets. Generic synthesis passes;
+CMOS5L place-and-route, timing closure and physical gate-level validation remain
+necessary before claiming fit or Ethernet/USB capability.
 
 ## Origin and licensing
 
-The project started from [TinyTapeout/ttihp-verilog-template, branch cmos5l](https://github.com/TinyTapeout/ttihp-verilog-template/tree/b86a2a781484bcab7ba522dc5de540086695a430),
-upstream commit `b86a2a781484bcab7ba522dc5de540086695a430`.
-The repository's original MIT license is retained in [LICENSE](LICENSE).
-Imported Tiny Tapeout files retain their Apache-2.0 license in
-[LICENSE-TinyTapeout](LICENSE-TinyTapeout) and their original notices.
+The project started from
+[TinyTapeout/ttihp-verilog-template, branch cmos5l](https://github.com/TinyTapeout/ttihp-verilog-template/tree/b86a2a781484bcab7ba522dc5de540086695a430).
+The original MIT license remains in [LICENSE](LICENSE); imported Tiny Tapeout files
+retain their Apache-2.0 license in [LICENSE-TinyTapeout](LICENSE-TinyTapeout).

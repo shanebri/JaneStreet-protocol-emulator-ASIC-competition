@@ -34,21 +34,26 @@ tb.user_project.uio_out[7:0]
 @22
 tb.user_project.uo_out[7:0]
 @200
--V0 Execution
+-PIO V0 Execution
 @22
 tb.user_project.core.current_pc[4:0]
 tb.user_project.core.instruction[15:0]
-tb.user_project.core.accumulator[15:0]
-tb.user_project.core.wait_left[11:0]
+tb.user_project.core.x[31:0]
+tb.user_project.core.y[31:0]
+tb.user_project.core.osr[31:0]
+tb.user_project.core.isr[31:0]
+tb.user_project.core.delay_left[4:0]
 @28
 tb.user_project.core.running
 tb.user_project.core.fault
 @200
--UART and GPIO
+-FIFO and Pins
 @28
-tb.user_project.uart_tx_pin
-tb.user_project.core.uart_busy
+tb.user_project.core.stall
+tb.user_project.core.exec_pending
 @22
-tb.user_project.gpio[6:0]
+tb.user_project.core.tx_level[2:0]
+tb.user_project.core.rx_level[2:0]
+tb.user_project.core.pins[7:0]
 [pattern_trace] 1
 [pattern_trace] 0

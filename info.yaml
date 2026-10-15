@@ -3,7 +3,7 @@ project:
   title:        "Programmable Protocol Emulator"      # Project title
   author:       "Shane Bringhurst"      # Your name
   discord:      ""      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
-  description:  "V0 16-bit programmable protocol emulator with parallel host loading, GPIO and UART TX."
+  description:  "PIO V0 protocol emulator: 32-bit shifters and scratch registers, TX/RX FIFOs, firmware-defined I/O."
   language:     "SystemVerilog" # other examples include SystemVerilog, Amaranth, VHDL, etc
   clock_hz:     50000000       # Clock frequency in Hz (or 0 if not applicable)
 
@@ -21,7 +21,7 @@ project:
     - "protocol_core.sv"
     - "host_interface.sv"
     - "execution_unit.sv"
-    - "uart_tx.sv"
+    - "pio_fifo.sv"
     - "frontend/pc.sv"
     - "frontend/instruction_fetch.sv"
     - "frontend/decoder.sv"
@@ -36,18 +36,18 @@ pinout:
   ui[3]: "HOST_ADDR[3]"
   ui[4]: "HOST_WR"
   ui[5]: "HOST_RD"
-  ui[6]: ""
-  ui[7]: ""
+  ui[6]: "PIO_IN[0]"
+  ui[7]: "PIO_IN[1]"
 
   # Outputs
-  uo[0]: "UART_TX"
-  uo[1]: "GPIO[0]"
-  uo[2]: "GPIO[1]"
-  uo[3]: "GPIO[2]"
-  uo[4]: "GPIO[3]"
-  uo[5]: "GPIO[4]"
-  uo[6]: "GPIO[5]"
-  uo[7]: "GPIO[6]"
+  uo[0]: "PIO_OUT[0] / firmware UART TX"
+  uo[1]: "PIO_OUT[1]"
+  uo[2]: "PIO_OUT[2]"
+  uo[3]: "PIO_OUT[3]"
+  uo[4]: "PIO_OUT[4]"
+  uo[5]: "PIO_OUT[5]"
+  uo[6]: "PIO_OUT[6]"
+  uo[7]: "PIO_OUT[7]"
 
   # Bidirectional pins
   uio[0]: "HOST_DATA[0]"

@@ -11,6 +11,7 @@ module host_interface (
     input  wire [7:0] read_data,
     output wire [3:0] address,
     output wire       write_en,
+    output wire       read_en,
     output wire [7:0] write_data,
     output reg  [7:0] data_out,
     output wire [7:0] data_oe
@@ -23,6 +24,7 @@ module host_interface (
     assign address = control[3:0];
     assign write_data = data_in;
     assign write_en = ena && rst_n && wr && !wr_previous && !rd;
+    assign read_en = ena && rst_n && rd && !rd_previous && !wr;
     assign data_oe = {8{ena && rst_n && rd && !wr}};
 
     always @(posedge clk) begin
@@ -33,7 +35,7 @@ module host_interface (
         end else begin
             wr_previous <= wr;
             rd_previous <= rd;
-            if (ena && rd && !rd_previous && !wr)
+            if (read_en)
                 data_out <= read_data;
         end
     end

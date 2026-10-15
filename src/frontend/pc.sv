@@ -1,20 +1,15 @@
 `default_nettype none
 
-// Word-addressed 32-entry program counter. Stalls retain the current word.
 module pc (
-    input  wire       clk,
-    input  wire       rst,
-    input  wire       restart,
-    input  wire       advance,
-    input  wire       branch,
-    input  wire [4:0] target,
-    output reg  [4:0] pc_out
+    input wire clk, rst, restart, advance, branch,
+    input wire [4:0] entry, target, wrap_bottom, wrap_top,
+    output reg [4:0] pc_out
 );
     always @(posedge clk) begin
-        if (rst || restart)
-            pc_out <= 5'd0;
+        if (rst) pc_out <= 0;
+        else if (restart) pc_out <= entry;
         else if (advance)
-            pc_out <= branch ? target : pc_out + 5'd1;
+            pc_out <= branch ? target : (pc_out == wrap_top ? wrap_bottom : pc_out + 5'd1);
     end
 endmodule
 

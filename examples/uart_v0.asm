@@ -1,13 +1,13 @@
-; Reference listing for uart_v0.hex; words are loaded starting at PC 0.
-; UART TX = uo[0], GPIO[0] = uo[1]. At 50 MHz: 434 clocks/bit ~ 115200 baud.
-LDI     434
-ST      0x012       ; UART_DIV
-LDI     0x055       ; ASCII U
-ST      0x000       ; scratch[0]
-LD      0x000
-ST      0x011       ; UART_DATA starts the 8N1 frame
-WAIT_TX
-LDI     1
-ST      0x010       ; GPIO[0] marks completion
-WAIT    16
-HALT
+; Firmware UART TX: configure DIVIDER=31, PINCTRL=0x1008, SHIFTCTRL=3.
+; Enqueue 0x55 into TX FIFO, then START. No UART hardware exists.
+; 14 SM ticks x 31 clocks = 434 clocks/bit at 50 MHz (~115200 baud).
+; OUT covers uo[0]; SET covers uo[1:0]. uo[1] marks completed stop bit.
+    pull block
+    set x, 7
+    set pins, 0 [13]
+bitloop:
+    out pins, 1 [12]
+    jmp x--, bitloop
+    set pins, 1 [13]
+    set pins, 3
+    halt

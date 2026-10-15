@@ -18,26 +18,25 @@ module tt_um_shanebri_top (
 
   wire [3:0] host_address;
   wire host_write_en;
+  wire host_read_en;
   wire [7:0] host_write_data;
   wire [7:0] host_read_data;
-  wire [6:0] gpio;
-  wire uart_tx_pin;
 
   host_interface host (
       .clk(clk), .rst_n(rst_n), .ena(ena), .control(ui_in),
       .data_in(uio_in), .read_data(host_read_data),
       .address(host_address), .write_en(host_write_en),
+      .read_en(host_read_en),
       .write_data(host_write_data), .data_out(uio_out), .data_oe(uio_oe)
   );
 
   protocol_core core (
       .clk(clk), .rst_n(rst_n), .enable(ena),
       .host_address(host_address), .host_write_en(host_write_en),
+      .host_read_en(host_read_en), .pin_in(ui_in[7:6]),
       .host_write_data(host_write_data), .host_read_data(host_read_data),
-      .gpio(gpio), .uart_tx_pin(uart_tx_pin)
+      .pins(uo_out)
   );
-
-  assign uo_out = {gpio, uart_tx_pin};
 
 endmodule
 

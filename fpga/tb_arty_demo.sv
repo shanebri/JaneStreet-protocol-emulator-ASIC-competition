@@ -10,14 +10,14 @@ module tb_arty_demo;
         .uart_tx(tx), .ready(ready), .done(done)
     );
     integer frame_count = 0;
-    reg [15:0] expected [0:10];
+    reg [15:0] expected [0:7];
     integer loaded_word = 0;
     reg [7:0] staged_low;
     always @(posedge clk) begin
         if (!dut.core_reset_n) loaded_word = 0;
         else if (dut.control == 8'h13) staged_low = dut.write_data;
         else if (dut.control == 8'h14) begin
-            if ({dut.write_data, staged_low} !== ((loaded_word < 11) ? expected[loaded_word] : 16'hd000))
+            if ({dut.write_data, staged_low} !== ((loaded_word < 8) ? expected[loaded_word] : 16'hc080))
                 $fatal(1, "Loaded instruction mismatch at %0d", loaded_word);
             loaded_word = loaded_word + 1;
         end

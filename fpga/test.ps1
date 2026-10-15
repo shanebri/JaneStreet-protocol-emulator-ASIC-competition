@@ -9,7 +9,7 @@ Push-Location $projectRoot
 try {
     New-Item -ItemType Directory -Force -Path fpga/build | Out-Null
     $sources = @('src/project.sv', 'src/host_interface.sv', 'src/protocol_core.sv',
-        'src/uart_tx.sv', 'src/execution_unit.sv', 'src/frontend/pc.sv',
+        'src/pio_fifo.sv', 'src/execution_unit.sv', 'src/frontend/pc.sv',
         'src/frontend/instruction_fetch.sv', 'src/frontend/decoder.sv',
         'fpga/arty_demo.sv', 'fpga/tb_arty_demo.sv')
     & $iverilog -g2012 -Wall -Wno-timescale -s tb_arty_demo -o fpga/build/arty_demo.vvp @sources
