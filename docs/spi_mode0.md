@@ -4,7 +4,10 @@
 the existing PIO V0 ISA. It consumes one TX FIFO word, asserts active-low chip
 select, generates eight clock pulses, deasserts chip select, pushes one RX word,
 and halts. No RTL, UART bridge, FPGA wrapper or Vivado configuration is required
-for the simulation. Board wiring and physical SPI validation are separate work.
+for the simulation. For board wiring and physical SPI validation, use the
+[Arty + Nano 33 BLE hardware test guide](../tools/spi_hardware/README.md).
+The [memory architecture guide](memory_architecture.md) explains how instruction
+storage, FIFOs and shift registers support this program.
 
 Mode 0 means SCLK idles low (CPOL=0) and data is sampled on rising edges (CPHA=0).
 The first MOSI bit is established before the first rising edge; subsequent bits

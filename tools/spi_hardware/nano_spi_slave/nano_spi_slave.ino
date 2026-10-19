@@ -22,6 +22,11 @@ static char command[24];
 static size_t commandLength = 0;
 
 static bool acquireBuffer() {
+    // END_ACQUIRE may already have granted ownership after a previous batch.
+    if (NRF_SPIS2->SEMSTAT == SPIS_SEMSTAT_SEMSTAT_CPU) {
+        __DMB();
+        return true;
+    }
     NRF_SPIS2->EVENTS_ACQUIRED = 0;
     NRF_SPIS2->TASKS_ACQUIRE = 1;
     uint32_t started = millis();

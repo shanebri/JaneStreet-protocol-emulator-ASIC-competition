@@ -1,5 +1,9 @@
 # Arty A7-100T hardware demo
 
+For the FPGA SPI master test with an Arduino Nano 33 BLE slave, use the
+[SPI hardware test guide](../tools/spi_hardware/README.md). It has a separate top,
+constraints, sketch and PC checker; the instructions below describe the UART demo.
+
 This FPGA-only wrapper instantiates the unchanged JaneStreet Tiny Tapeout design.
 It generates 50 MHz from the board's 100 MHz clock using an MMCM and loads all 32
 instruction words through the real synchronous host interface. The first eight words
