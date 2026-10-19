@@ -444,6 +444,105 @@ async def firmware_uart_full_waveforms_and_example(dut):
 
 
 @cocotb.test()
+async def firmware_spi_mode0_byte_transfer(dut):
+    """Pin-level SPI slave: launch MISO after falling edges, sample MOSI on rising.
+
+    Drive MISO one core clock after CS assertion / SCLK falling edges to exercise
+    the synchronizers with a nonzero slave response time. No internal RTL probes.
+    """
+    h = Host(dut)
+    program = assemble((ROOT / "examples/spi_mode0.asm").read_text())
+    hex_words = [int(line, 16) for line in
+                 (ROOT / "examples/spi_mode0.hex").read_text().splitlines()]
+    assert program == hex_words
+    payloads = [(0x96, 0x3d), (0x80, 0x01), (0x01, 0x80),
+                (0x00, 0xff), (0xff, 0x00), (0xaa, 0x55), (0x55, 0xaa)]
+    for mosi_pin, sclk_pin, cs_pin, miso_pin in ((0, 1, 2, 0), (5, 7, 3, 1)):
+        for divider in (1, 2, 5):
+            for tx_byte, rx_byte in payloads:
+                await h.reset()
+                # Unmapped pins have a nontrivial pattern and must be preserved.
+                used = (1 << mosi_pin) | (1 << sclk_pin) | (1 << cs_pin)
+                other = 0xa5 & ~used
+                idle = other | (1 << cs_pin)
+                await h.write_word(PINS, idle)
+                await h.write_word(SHIFT, 0)
+                await h.write_word(EXEC, 0x83e0)
+                await h.write_word(PINCTRL, mosi_pin | (1 << 3) | (cs_pin << 8) |
+                                   (1 << 11) | (miso_pin << 16) | (sclk_pin << 17))
+                await h.write_word(DIVIDER, divider)
+                await h.load(hex_words)
+                for index, word in enumerate(hex_words):
+                    assert await h.read_instruction(index) == word
+                await h.write(CTRL, 1)
+                begin = len(h.samples)
+                await h.tick(10 * divider)
+                assert all(value == idle for value in h.samples[begin:]), "Empty TX changed SPI idle"
+                assert await h.read(PC) == 0, "PULL must wait before selecting the slave"
+                await h.write_word(TX, tx_byte << 24)
+
+                previous = h.samples[-1]
+                selected_at = released_at = None
+                rises, falls, sent_bits = [], [], []
+                mosi_changed_at = 0
+                pending = None
+                for cycle in range(180 * divider):
+                    await h.tick()
+                    value = h.samples[-1]
+                    assert value & ~used == other, "SPI changed an unmapped output"
+                    sclk = (value >> sclk_pin) & 1
+                    old_sclk = (previous >> sclk_pin) & 1
+                    cs = (value >> cs_pin) & 1
+                    old_cs = (previous >> cs_pin) & 1
+                    mosi = (value >> mosi_pin) & 1
+                    old_mosi = (previous >> mosi_pin) & 1
+                    if pending is not None and cycle == pending[0]:
+                        # Opposite data on the unused input detects a wrong IN base.
+                        bit = pending[1]
+                        h.inputs = (bit << miso_pin) | ((1 - bit) << (1 - miso_pin))
+                        h.control(0)
+                        pending = None
+                    if old_cs and not cs:
+                        assert selected_at is None, "More than one CS assertion"
+                        selected_at = cycle
+                        pending = (cycle + 1, (rx_byte >> 7) & 1)
+                    if not old_cs and cs:
+                        assert len(falls) == 8 and sclk == 0, "CS released before all eight clocks"
+                        released_at = cycle
+                    if mosi != old_mosi:
+                        assert not old_sclk and not sclk, "MOSI changed on a rising edge or while SCLK high"
+                        assert not cs, "MOSI changed outside the transaction"
+                        mosi_changed_at = cycle
+                    if sclk != old_sclk:
+                        assert not cs and not old_cs, "Clock edge while slave deselected"
+                        if sclk:
+                            assert len(rises) == len(falls), "Unexpected rising edge"
+                            assert cycle - mosi_changed_at >= 4 * divider, "Insufficient MOSI setup"
+                            rises.append(cycle)
+                            sent_bits.append(mosi)
+                        else:
+                            assert len(rises) == len(falls) + 1, "Unexpected falling edge"
+                            falls.append(cycle)
+                            if len(falls) < 8:
+                                pending = (cycle + 1, (rx_byte >> (7 - len(falls))) & 1)
+                    previous = value
+
+                assert len(rises) == len(falls) == 8, "Expected exactly eight full clocks"
+                assert sent_bits == [(tx_byte >> bit) & 1 for bit in range(7, -1, -1)], "MOSI byte/order mismatch"
+                assert all(fall - rise == 8 * divider for rise, fall in zip(rises, falls)), "Wrong SCLK high time"
+                assert all(rises[i + 1] - falls[i] == 8 * divider for i in range(7)), "Wrong SCLK low time"
+                assert rises[0] - selected_at == 8 * divider, "Wrong CS setup time"
+                assert released_at - falls[-1] == 4 * divider, "Wrong CS hold time"
+                assert (previous >> sclk_pin) & 1 == 0, "CPOL=0 idle violated"
+                assert (previous >> cs_pin) & 1 == 1, "CS must return inactive"
+                assert await h.read(STATUS) == 0, "Expected stopped, no fault, RX nonempty"
+                assert await h.read(LEVEL) == 0x10, "Expected one RX word and empty TX"
+                assert await h.read_word(RX) == rx_byte, "MISO byte/order/alignment mismatch"
+                assert await h.read(LEVEL) == 0
+                assert await h.read(DEBUG) == 0
+
+
+@cocotb.test()
 async def protection_pause_restart_fault_and_natural_wrap(dut):
     h = Host(dut)
     await h.reset()

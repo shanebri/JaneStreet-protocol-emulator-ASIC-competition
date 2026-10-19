@@ -34,9 +34,19 @@ byte. There is no UART peripheral or UART divider register in the RTL.
 at 16 clocks/bit, delivering the byte in bits [31:24] of an RX FIFO word.
 It is a minimal receive example without framing-error/break handling.
 
-The [datasheet](docs/info.md) defines encoding, timing, pin assignments and every
-host transaction. The [optimization report](docs/pio_v0_optimization_report.md)
+The [datasheet](docs/info.md) defines timing, logical pin assignments and every
+host transaction. The [ISA reference](docs/isa.md) defines the current instructions
+and assembler syntax. The [optimization report](docs/pio_v0_optimization_report.md)
 records validation results and priorities for the next version.
+
+## SPI mode-0 firmware
+
+[spi_mode0.asm](examples/spi_mode0.asm) performs one eight-bit, MSB-first,
+full-duplex SPI transfer using the existing ISA. OUT drives MOSI, side-set drives
+SCLK, and IN samples synchronized MISO; SET controls active-low chip select.
+The [SPI guide](docs/spi_mode0.md) defines configuration, byte packing, pin
+mapping, clock timing and the cocotb slave model. SPI is simulation-tested;
+the Arty wrapper and Vivado project have not been extended for SPI.
 
 ## Build and test
 
@@ -47,7 +57,7 @@ python test/run.py
 ```
 
 Icarus Verilog must be on PATH. On Windows, `./test/run.ps1` also finds the optional
-project-local tools. The runner checks FIFO boundary cases and eleven pin-level
+project-local tools. The runner checks FIFO boundary cases and twelve pin-level
 cocotb regressions. See [test/README.md](test/README.md) for synthesis and gate-level
 checks. The [Arty A7 guide](fpga/README.md) covers the updated FPGA loader and
 button-triggered firmware UART demo; `./fpga/test.ps1` verifies its behavior.

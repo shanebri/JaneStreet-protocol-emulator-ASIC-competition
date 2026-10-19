@@ -13,8 +13,9 @@ set_property -dict {PACKAGE_PIN C9 IOSTANDARD LVCMOS33} [get_ports btn_run]
 set_false_path -from [get_ports btn_run] -to [get_pins {demo/run_sync_reg[0]/D}]
 set_false_path -from [get_ports btn_reset] -to [get_pins {reset_button_sync_reg[0]/D}]
 
-# FPGA TX -> onboard USB-UART RX (PC COM port), not an external Pmod.
-set_property -dict {PACKAGE_PIN A9 IOSTANDARD LVCMOS33} [get_ports uart_tx]
+# FPGA TX -> bridge RX: D10 (uart_rxd_out in Digilent's master XDC).
+# A9 (uart_txd_in) is bridge TX -> FPGA RX; never drive it as TX.
+set_property -dict {PACKAGE_PIN D10 IOSTANDARD LVCMOS33} [get_ports uart_tx]
 # UART is asynchronous to the external receiver, with no shared sampling clock.
 set_false_path -to [get_ports uart_tx]
 

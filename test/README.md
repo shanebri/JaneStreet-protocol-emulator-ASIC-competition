@@ -8,7 +8,7 @@ python test/run.py
 
 On Windows, `./test/run.ps1` locates optional `.tools` binaries. The portable runner
 uses the submission source list in `info.yaml`. It first runs `pio_fifo_tb.sv`,
-then eleven pin-only cocotb tests. `make -C test` runs the same cocotb suite; the
+then twelve pin-only cocotb tests. `make -C test` runs the same cocotb suite; the
 standalone FIFO unit is included by the Python runner only.
 
 Coverage includes all shift widths 1–32 in both directions, count saturation,
@@ -26,11 +26,19 @@ and read back through host pins, then checked at exactly 434 clocks per bit with
 the completion marker after the full stop bit. RX firmware is driven with the
 same four byte patterns at 16 clocks per bit and checked through the RX FIFO.
 
+The [SPI mode-0 test](../docs/spi_mode0.md#verification) checks 42 full-duplex
+eight-bit transfers across three dividers and two logical pin layouts. It models
+a slave with delayed MISO updates after falling edges and checks exactly eight
+clock pulses, MSB-first MOSI, synchronized MISO results, clock/CS timing, safe
+waiting on empty TX, and preservation of unrelated output pins.
+
 ```powershell
 $env:COCOTB_TEST_FILTER = 'firmware_uart_full_waveforms_and_example$'
 ./test/run.ps1
 Remove-Item Env:COCOTB_TEST_FILTER
 ```
+
+To run only SPI, use `firmware_spi_mode0_byte_transfer$` as the test filter.
 
 Results are `test/results.xml` and `test/tb.fst`. Open the latter with GTKWave or
 Surfer; `test/tb.gtkw` includes PC, shifters, scratch state and queue levels. Tests

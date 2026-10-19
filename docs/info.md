@@ -150,72 +150,11 @@ clipped at output 7, not rotated. IN reads the synchronized two-bit input vector
 shifted right by IN base, zero extended. SET/OUT/MOV preserve unmapped outputs.
 Side-set wins overlaps with instruction pin writes.
 
-### Instruction encoding
+### Instruction set
 
-Each 16-bit word is `{opcode[2:0], timing[4:0], argument[7:0]}`. Without side-set,
-timing is a 0–31 delay. With EXECCTRL.bit15 set, timing[4] enables side-set for that
-instruction, timing[3] is the value, timing[2:0] is a 0–7 delay. Optional side-set
-disabled on an instruction still leaves only three delay bits.
-
-| Opcode | Instruction / argument | Behavior |
-| --- | --- | --- |
-| 0 | JMP condition[7:5], target[4:0] | Branch conditions below |
-| 1 | WAIT polarity[7], source[6:5], index[4:0] | Stall until input/IRQ matches polarity |
-| 2 | IN source[7:5], count[4:0] | Shift low count source bits into ISR |
-| 3 | OUT destination[7:5], count[4:0] | Shift count bits from OSR to destination |
-| 4 | PUSH/PULL pull[7], conditional[6], block[5], zero[4:0] | FIFO transfer; see below |
-| 5 | MOV destination[7:5], operation[4:3], source[2:0] | Register/pin transfer, optional inversion or bit reversal |
-| 6 | IRQ zero[7], clear[6], wait[5], zero[4:3], index[2:0] | Set, clear, or set-and-wait for flag acknowledgment |
-| 7 | SET destination[7:5], immediate[4:0] | Zero-extended immediate to pins(0), X(1), Y(2) |
-
-`0xC080` is the local HALT extension. NOP is `MOV Y,Y` (`0xA042`). HALT ignores
-delay, applies enabled side-set, and retains output levels. Reserved encodings
-halt with fault before changing data. All encoded JMP targets are five bits.
-
-JMP conditions: 0 always, 1 X==0, 2 X--, 3 Y==0, 4 Y--, 5 X!=Y, 6 configured
-input pin high, 7 OSR count below pull threshold. Decrement tests the old value for
-nonzero and always decrements modulo2^32, including zero wrapping to `0xFFFFFFFF`.
-
-WAIT sources: 0 absolute input index0/1; 1 relative to IN base (missing bits read0);
-2 local IRQ index0–7. Other indices/sources fault. WAIT 1 IRQ clears that flag on
-successful retirement. WAIT 0 IRQ does not clear it.
-
-IN sources: pins0, X1, Y2, null3, ISR6, OSR7. Count field 0 means 32; otherwise1–31.
-Right IN shifts ISR right and inserts the low source bits at its high end. Left IN
-shifts left and inserts low source bits at its low end. IN count saturates at 32.
-At the autopush threshold, enqueue the newly shifted value and clear ISR/count;
-if RX is full the entire IN stalls before any shift. Autopush only applies to IN.
-
-OUT destinations: pins0, X1, Y2, null3 (discard), PC5, ISR6, EXEC7. Destination 4
-(PINDIRS) faults. Right OUT extracts low bits; left OUT extracts high bits; the
-extracted result is right-aligned, zero extended, and OSR shifts with zero fill.
-OUT count saturates at 32. OUT ISR replaces ISR and sets IN count to the shift width.
-OUT PC branches using the low five extracted bits. With autopull, an empty OSR
-(count >= threshold) pulls a word immediately before the OUT on the same tick;
-an empty TX FIFO stalls. No refill occurs in the background or after other opcodes.
-
-PULL replaces OSR and clears OUT count. Conditional PULL acts only when OSR is
-empty. Blocking PULL waits for data; nonblocking empty PULL uses X and sets DEBUG3.
-PUSH enqueues ISR and clears ISR/IN count. Conditional PUSH acts only when IN count
-meets the push threshold. Blocking PUSH waits for space; nonblocking full PUSH
-drops the value, clears ISR/count and sets DEBUG2. Skipped conditional operations
-still retire and apply delay/side-set.
-
-MOV sources: pins0, X1, Y2, null3, status5 (FIFO_LEVEL packing), ISR6, OSR7.
-Destinations: pins0, X1, Y2, EXEC4, PC5, ISR6, OSR7. Operation 0 copies, 1 inverts
-all 32 bits, 2 reverses all 32 bits; 3 faults. MOV ISR/OSR resets the corresponding
-shift count. MOV PC uses low five bits.
-
-MOV/OUT EXEC executes the low 16-bit result on the next eligible tick, after the
-originating instruction's delay. The original instruction advances PC once. An
-injected instruction holds that PC unless it takes a branch/writes PC; it may
-inject another instruction. Its own waits, delays, side-set and faults apply.
-PC readback during injection is the already-advanced program-memory address.
-
-IRQ SET sets a flag; CLEAR clears it. IRQ WAIT sets a flag once, then stalls until
-the host clears it. Relative/multi-SM IRQ indexing is not supported. Concurrent
-firmware sets win host clears; firmware clears win host sets. Flags are visible by
-polling the host interface; there is no dedicated interrupt output pin.
+The current [PIO V0 ISA reference](isa.md) defines the 16-bit encoding, all eight
+opcode groups, operands, shifts, delays, side-set, EXEC, HALT, reserved encodings,
+and assembler syntax. Host VERSION is `0x20`; use only programs for this revision.
 
 ### Load and run UART
 
@@ -237,9 +176,12 @@ does not apply DIVIDER, pin mapping, entry or wrap settings automatically.
 
 ## How to test
 
+The [SPI mode-0 guide](spi_mode0.md) describes a full-duplex eight-bit program,
+host configuration, synchronized input timing and its pin-level slave test.
+
 Run `python test/run.py` or `./test/run.ps1`. The FIFO unit test exhausts occupancy
-and simultaneous read/write boundaries. Eleven pin-level tests cover state,
-timing and complete firmware TX/RX waveforms. See [test/README.md](../test/README.md)
+and simultaneous read/write boundaries. Twelve pin-level tests cover state,
+timing, UART TX/RX waveforms and SPI byte transfers. See [test/README.md](../test/README.md)
 and [the optimization report](pio_v0_optimization_report.md) for validation scope.
 
 ## External hardware

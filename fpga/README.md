@@ -48,6 +48,9 @@ primitives; Vivado derives the generated clock automatically.
 
 ## Program and test
 
+For a desktop Python monitor with COM-port selection, hex/text output, and an
+expected-byte counter, see the [UART client guide](../tools/UART_CLIENT.md).
+
 1. Connect a USB data cable to the Arty's PROG/UART connector and power the board.
 2. In Hardware Manager, Open Target -> Auto Connect -> Program Device. Select the
    generated `arty_a7_top.bit` in the project's implementation run directory.
@@ -65,7 +68,7 @@ primitives; Vivado derives the generated clock automatically.
 | 100 MHz oscillator | E3 | MMCM input |
 | BTN0 | D9 | Reset/reload, active high |
 | BTN1 | C9 | Debounced run/replay, active high |
-| USB-UART receive input | A9 | FPGA UART TX to PC |
+| USB-UART bridge receive input | D10 | FPGA UART TX to PC |
 | LD4 | H5 | Loader ready; also high during program execution |
 | LD5 | J5 | Program's PIO_OUT[1] completion flag |
 | LD6 | T9 | 50 MHz domain heartbeat |
@@ -82,6 +85,31 @@ the terminal does not load programs. A future UART-to-host bridge can provide th
 Loading the FPGA over JTAG is volatile; reprogram after power cycling.
 
 ## Simulation
+
+### Standalone USB-UART diagnostic
+
+If LD5 lights in the normal demo but the PC receives no bytes, use the separate
+`arty_uart_diagnostic` image to test the USB path without the PIO engine. Build
+it in a separate Vivado batch process from the repository root:
+
+```powershell
+vivado -mode batch -source fpga/build_uart_diagnostic.tcl
+```
+
+Program `fpga/build/uart_diagnostic/arty_uart_diagnostic.bit` through Hardware
+Manager. This temporarily replaces the running demo; program the normal demo
+bitstream again afterward. The diagnostic automatically sends `U` (`55`) about
+twice per second at 115200 8N1 on D10. No button press is needed. LD5 toggles after
+each frame, LD6 blinks, LD7 stays on (an image indicator, not MMCM lock in this
+diagnostic), and LD4 follows BTN1. Holding BTN0 resets/pauses transmission.
+
+Connect the Python client before or after programming. If repeated `55` bytes
+arrive, investigate the PIO demo implementation. If RX stays at zero with LD5
+toggling, investigate the USB serial path, driver, board connection, or physical
+output. This image uses the board's 100 MHz clock directly and has a simulation
+testbench in `tb_arty_uart_diagnostic.sv` checking three complete UART frames.
+
+### PIO demo simulation
 
 ```powershell
 ./fpga/test.ps1
