@@ -15,8 +15,8 @@ module tb_arty_demo;
     reg [7:0] staged_low;
     always @(posedge clk) begin
         if (!dut.core_reset_n) loaded_word = 0;
-        else if (dut.control == 8'h13) staged_low = dut.write_data;
-        else if (dut.control == 8'h14) begin
+        else if (dut.control == 8'h13 && dut.bus_done) staged_low = dut.write_data;
+        else if (dut.control == 8'h14 && dut.bus_done) begin
             if ({dut.write_data, staged_low} !== ((loaded_word < 8) ? expected[loaded_word] : 16'hc080))
                 $fatal(1, "Loaded instruction mismatch at %0d", loaded_word);
             loaded_word = loaded_word + 1;

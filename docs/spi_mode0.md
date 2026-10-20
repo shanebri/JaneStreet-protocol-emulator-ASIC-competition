@@ -109,3 +109,6 @@ Remove-Item Env:COCOTB_TEST_FILTER
 ```
 
 Run the complete suite with `python test/run.py` or `./test/run.ps1`.
+
+Host revision 0x21 transfers each byte low nibble then high nibble on uio[3:0].
+See [the transport contract](pio21_contract.md) for framing, reset and resynchronization.

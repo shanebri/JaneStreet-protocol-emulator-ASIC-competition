@@ -7,9 +7,10 @@ module protocol_core (
     input wire [3:0] host_address,
     input wire host_write_en, host_read_en,
     input wire [7:0] host_write_data,
-    input wire [1:0] pin_in,
+    input wire [5:0] pin_in,
     output reg [7:0] host_read_data,
-    output reg [7:0] pins
+    output reg [11:0] pins,
+    output reg [3:0] directions, open_drain
 );
     reg running, fault;
     reg [31:0] x, y, osr, isr;
@@ -19,15 +20,40 @@ module protocol_core (
     reg [13:0] shiftctrl;
     reg [15:0] execctrl;
     reg [20:0] pinctrl;
+    reg [27:0] route;
+    reg [3:0] filter_enable;
+    reg [3:0] filtered;
+    reg [3:0] filter_history [0:2];
+    wire [5:0] inputs_actual = {((filtered & filter_enable) |
+        (pins_sync[5:2] & ~filter_enable)), pins_sync[1:0]};
+    wire [2:0] input_base = route[0] ? route[19:17] : {2'b0, pinctrl[16]};
+    wire [2:0] jump_pin = route[0] ? route[26:24] : {2'b0, pinctrl[20]};
+    wire [3:0] side_pin = route[0] ? route[23:20] : {1'b0, pinctrl[19:17]};
     reg [7:0] irq;
     reg irq_waiting;
     reg [3:0] debug_flags;
     reg exec_pending;
     reg [15:0] exec_instruction;
-    (* ASYNC_REG = "TRUE" *) reg [1:0] pins_meta, pins_sync;
+    (* ASYNC_REG = "TRUE" *) reg [5:0] pins_meta, pins_sync;
     always @(posedge clk) begin
         if (!rst_n) begin pins_meta <= 0; pins_sync <= 0; end
         else begin pins_meta <= pin_in; pins_sync <= pins_meta; end
+    end
+
+    integer f;
+    always @(posedge clk) begin
+        if (!rst_n) begin
+            filtered <= 0;
+            filter_history[0] <= 0; filter_history[1] <= 0; filter_history[2] <= 0;
+        end else begin
+            filter_history[0] <= pins_sync[5:2];
+            filter_history[1] <= filter_history[0];
+            filter_history[2] <= filter_history[1];
+            for (f=0; f<4; f=f+1) begin
+                if (&{pins_sync[f+2], filter_history[0][f], filter_history[1][f], filter_history[2][f]}) filtered[f] <= 1;
+                else if (~|{pins_sync[f+2], filter_history[0][f], filter_history[1][f], filter_history[2][f]}) filtered[f] <= 0;
+            end
+        end
     end
 
     reg [4:0] imem_address;
@@ -35,7 +61,8 @@ module protocol_core (
     reg [23:0] data_stage;
     reg [31:0] data_snapshot;
     wire control_write = host_write_en && host_address == 0;
-    wire stop = control_write && host_write_data[1];
+    wire abort_release = control_write && host_write_data[5];
+    wire stop = (control_write && host_write_data[1]) || abort_release;
     wire start = control_write && host_write_data[0] && !stop;
     wire resume = control_write && host_write_data[4] && !stop && !start && !fault;
     wire fifo_clear = control_write && host_write_data[2] && (!running || stop);
@@ -105,7 +132,7 @@ module protocol_core (
 
     wire auto_pull = shiftctrl[2] && osr_empty;
     wire [31:0] out_osr = auto_pull ? tx_data : osr;
-    wire [31:0] input_pins = {30'd0, pins_sync} >> pinctrl[16];
+    wire [31:0] input_pins = {26'd0, inputs_actual} >> input_base;
     reg [31:0] source;
     always @* begin
         case (opcode == 5 ? arg[2:0] : arg[7:5])
@@ -144,7 +171,7 @@ module protocol_core (
 
     reg [31:0] next_x, next_y, next_osr, next_isr;
     reg [5:0] next_out_count, next_in;
-    reg pin_write, inject;
+    reg pin_write, dir_write, inject;
     reg [31:0] pin_value;
     reg [15:0] injected_word;
     reg [7:0] irq_set, irq_clear;
@@ -155,7 +182,7 @@ module protocol_core (
         next_out_count = out_count; next_in = in_count;
         stall = 0; branch = 0; branch_target = arg[4:0];
         tx_pop_request = 0; rx_push_request = 0; rx_push_data = isr;
-        pin_write = 0; pin_value = 0; inject = 0; injected_word = 0;
+        pin_write = 0; dir_write = 0; pin_value = 0; inject = 0; injected_word = 0;
         irq_set = 0; irq_clear = 0; wait_value = 0;
         case (opcode)
             0: begin
@@ -166,14 +193,14 @@ module protocol_core (
                     3: branch = y == 0;
                     4: begin branch = y != 0; next_y = y - 1'b1; end
                     5: branch = x != y;
-                    6: branch = pins_sync[pinctrl[20]];
+                    6: branch = jump_pin < 6 ? inputs_actual[jump_pin] : 1'b0;
                     7: branch = !osr_empty;
                 endcase
             end
             1: begin
                 case (arg[6:5])
-                    0: wait_value = pins_sync[arg[0]];
-                    1: wait_value = input_pins[arg[0]];
+                    0: wait_value = arg[4:0] < 6 ? inputs_actual[arg[4:0]] : 1'b0;
+                    1: wait_value = input_pins[arg[4:0]];
                     2: wait_value = irq[arg[2:0]];
                     default: wait_value = 0;
                 endcase
@@ -196,6 +223,7 @@ module protocol_core (
                 next_out_count = count_add(auto_pull ? 6'd0 : out_count, bit_count);
                 case (arg[7:5])
                     0: begin pin_write = 1; pin_value = out_value; end
+                    4: begin dir_write = 1; pin_value = out_value; end
                     1: next_x = out_value;
                     2: next_y = out_value;
                     5: begin branch = 1; branch_target = out_value[4:0]; end
@@ -238,6 +266,7 @@ module protocol_core (
             7: begin
                 case (arg[7:5])
                     0: begin pin_write = 1; pin_value = {27'd0, arg[4:0]}; end
+                    4: begin dir_write = 1; pin_value = {27'd0, arg[4:0]}; end
                     1: next_x = {27'd0, arg[4:0]};
                     2: next_y = {27'd0, arg[4:0]};
                     default: ;
@@ -246,12 +275,17 @@ module protocol_core (
         endcase
     end
 
-    wire [2:0] pin_base = opcode == 7 ? pinctrl[10:8] : pinctrl[2:0];
-    wire [3:0] configured_count = opcode == 7 ? pinctrl[14:11] : pinctrl[6:3];
-    wire [3:0] pin_count = configured_count == 0 || configured_count > 8 ? 4'd8 : configured_count;
-    wire [7:0] pin_mask = (8'hff >> (4'd8 - pin_count)) << pin_base;
-    wire [7:0] aligned_pins = pin_value[7:0] << pin_base;
-    wire [7:0] mapped_pins = (pins & ~pin_mask) | (aligned_pins & pin_mask);
+    wire [3:0] pin_base = route[0] ? (opcode == 7 ? route[12:9] : route[4:1]) :
+        {1'b0, (opcode == 7 ? pinctrl[10:8] : pinctrl[2:0])};
+    wire [3:0] configured_count = route[0] ? (opcode == 7 ? route[16:13] : route[8:5]) :
+        (opcode == 7 ? pinctrl[14:11] : pinctrl[6:3]);
+    wire [3:0] capacity = route[0] ? 4'd12 : 4'd8;
+    wire [3:0] pin_count = configured_count == 0 || configured_count > capacity ? capacity : configured_count;
+    wire [11:0] pin_mask = ((12'hfff >> (4'd12 - pin_count)) << pin_base) &
+        (route[0] ? 12'hfff : 12'h0ff);
+    wire [11:0] aligned_pins = pin_value[11:0] << pin_base;
+    wire [11:0] mapped_pins = (pins & ~pin_mask) | (aligned_pins & pin_mask);
+    wire [3:0] mapped_dirs = (directions & ~pin_mask[11:8]) | (aligned_pins[11:8] & pin_mask[11:8]);
 
     reg [31:0] selected_data;
     always @* begin
@@ -260,7 +294,7 @@ module protocol_core (
             1: selected_data = y;
             2: selected_data = osr;
             3: selected_data = isr;
-            4: selected_data = {24'd0, pins};
+            4: selected_data = {20'd0, pins};
             5: selected_data = {18'd0, in_count, 2'b0, out_count};
             9: selected_data = rx_data;
             8'h10: selected_data = {18'd0, shiftctrl};
@@ -269,6 +303,10 @@ module protocol_core (
             8'h13: selected_data = {16'd0, divider};
             8'h14: selected_data = {24'd0, irq};
             8'h15: selected_data = {24'd0, 1'b0, rx_level, 1'b0, tx_level};
+            8'h16: selected_data = {4'd0, route};
+            8'h17: selected_data = {20'd0, directions, 8'hff};
+            8'h18: selected_data = {20'd0, open_drain, 8'd0};
+            8'h19: selected_data = {28'd0, filter_enable};
             default: selected_data = 0;
         endcase
         case (host_address)
@@ -287,8 +325,8 @@ module protocol_core (
             11: host_read_data = {1'b0, rx_level, 1'b0, tx_level};
             12: host_read_data = irq;
             13: host_read_data = {4'd0, debug_flags};
-            14: host_read_data = {6'd0, pins_sync};
-            15: host_read_data = 8'h20; // Incompatible PIO V0 host/ISA revision.
+            14: host_read_data = {2'd0, inputs_actual};
+            15: host_read_data = 8'h21; // Four-bit host and general bidirectional PIO.
         endcase
     end
 
@@ -320,7 +358,7 @@ module protocol_core (
             out_count <= 32; in_count <= 0;
             delay_left <= 0; divider <= 1; divider_left <= 0;
             shiftctrl <= 14'h0003; execctrl <= 16'h03e0; pinctrl <= 0;
-            pins <= 1; irq <= 0; irq_waiting <= 0;
+            pins <= 12'hf01; directions <= 0; open_drain <= 0; route <= 0; filter_enable <= 0; irq <= 0; irq_waiting <= 0;
             debug_flags <= 0; exec_pending <= 0; exec_instruction <= 0;
         end else begin
             // Host IRQ clears are live; firmware sets win simultaneous clears.
@@ -342,15 +380,20 @@ module protocol_core (
                     1: y <= write_word;
                     2: begin osr <= write_word; out_count <= 0; end
                     3: begin isr <= write_word; in_count <= 0; end
-                    4: pins <= write_word[7:0];
+                    4: pins <= write_word[11:0];
+                    8'h16: route <= write_word[27:0];
+                    8'h17: directions <= write_word[11:8];
+                    8'h18: open_drain <= write_word[11:8];
+                    8'h19: filter_enable <= write_word[3:0];
                     8'h10: shiftctrl <= write_word[13:0];
                     8'h11: execctrl <= write_word[15:0];
-                    8'h12: pinctrl <= write_word[20:0];
+                    8'h12: pinctrl <= write_word[20:0] & 21'h1f7f7f;
                     8'h13: divider <= write_word[15:0] == 0 ? 16'd1 : write_word[15:0];
                     default: ;
                 endcase
             end
-            if (stop) running <= 0; // Freeze exact state; outputs retain firmware levels.
+            if (abort_release) begin running <= 0; directions <= 0; end
+            else if (stop) running <= 0; // Freeze exact state; outputs retain firmware levels.
             else if (start) begin
                 running <= 1; fault <= 0;
                 x <= 0; y <= 0; osr <= 0; isr <= 0;
@@ -372,6 +415,7 @@ module protocol_core (
                             exec_pending <= inject;
                             if (inject) exec_instruction <= injected_word;
                             if (pin_write) pins <= mapped_pins;
+                            if (dir_write) directions <= mapped_dirs;
                             if (|irq_set || |irq_clear)
                                 irq <= ((irq & ~(host_write_en && host_address == 12 ? host_write_data : 8'd0)) |
                                     (word_write && data_address == 8'h14 ? write_word[7:0] : 8'd0) | irq_set) & ~irq_clear;
@@ -383,7 +427,11 @@ module protocol_core (
                             irq_waiting <= 1;
                         end
                         // Side-set occurs even on a blocked instruction and wins pin overlap.
-                        if (side_write) pins[pinctrl[19:17]] <= side_value;
+                        if (side_write && side_pin < 12) begin
+                            if (route[27]) begin
+                                if (side_pin >= 8) directions[side_pin - 4'd8] <= side_value;
+                            end else pins[side_pin] <= side_value;
+                        end
                     end
                 end
             end

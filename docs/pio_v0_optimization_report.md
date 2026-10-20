@@ -1,3 +1,6 @@
+> Historical revision 0x20 report. Current transport/pad capabilities and results
+> are in [the revision 0x21 report](pio21_verification.md).
+
 # PIO V0 implementation and optimization report
 
 ## Delivered behavior

@@ -22,22 +22,28 @@ module tt_um_shanebri_top (
   wire [7:0] host_write_data;
   wire [7:0] host_read_data;
 
+  wire [11:0] values;
+  wire [3:0] directions, open_drain;
+
   host_interface host (
       .clk(clk), .rst_n(rst_n), .ena(ena), .control(ui_in),
-      .data_in(uio_in), .read_data(host_read_data),
+      .data_in(uio_in[3:0]), .read_data(host_read_data),
       .address(host_address), .write_en(host_write_en),
       .read_en(host_read_en),
-      .write_data(host_write_data), .data_out(uio_out), .data_oe(uio_oe)
+      .write_data(host_write_data), .data_out(uio_out[3:0]), .data_oe(uio_oe[3:0])
   );
 
   protocol_core core (
       .clk(clk), .rst_n(rst_n), .enable(ena),
       .host_address(host_address), .host_write_en(host_write_en),
-      .host_read_en(host_read_en), .pin_in(ui_in[7:6]),
+      .host_read_en(host_read_en), .pin_in({uio_in[7:4], ui_in[7:6]}),
       .host_write_data(host_write_data), .host_read_data(host_read_data),
-      .pins(uo_out)
+      .pins(values), .directions(directions), .open_drain(open_drain)
   );
 
+  pio_pads pads (.rst_n(rst_n), .values(values), .directions(directions),
+      .open_drain(open_drain), .dedicated(uo_out),
+      .pad_data(uio_out[7:4]), .pad_oe(uio_oe[7:4]));
 endmodule
 
 `default_nettype wire

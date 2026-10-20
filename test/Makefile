@@ -6,7 +6,7 @@ SIM ?= icarus
 FST ?= -fst # Use more efficient FST format
 TOPLEVEL_LANG ?= verilog
 SRC_DIR = $(CURDIR)/../src
-PROJECT_SOURCES = project.sv protocol_core.sv host_interface.sv execution_unit.sv pio_fifo.sv \
+PROJECT_SOURCES = project.sv protocol_core.sv host_interface.sv pio_pads.sv execution_unit.sv pio_fifo.sv \
                   frontend/pc.sv frontend/instruction_fetch.sv frontend/decoder.sv
 
 ifneq ($(GATES),yes)
@@ -40,7 +40,7 @@ VERILOG_SOURCES += $(CURDIR)/tb.v
 TOPLEVEL = tb
 
 # List test modules to run, separated by commas and without the .py suffix:
-COCOTB_TEST_MODULES = test
+COCOTB_TEST_MODULES = test,test_pio21,test_i2c
 
 # include cocotb's make rules to take care of the simulator setup
 include $(shell cocotb-config --makefiles)/Makefile.sim

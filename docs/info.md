@@ -18,17 +18,18 @@ The host map and example binaries are incompatible with the earlier accumulator 
 | `ui[3:0]` | Host byte-register address |
 | `ui[4]`, `ui[5]` | WR, RD strobes |
 | `ui[6]`, `ui[7]` | Protocol inputs 0 and 1; independent two-flop synchronizers |
-| `uio[7:0]` | Bidirectional host data bus |
+| `uio[3:0]` | Bidirectional host nibble data |
+| `uio[7:4]` | Independent protocol pads, default SDA/SCL on uio[4:5] |
 | `uo[7:0]` | Programmable output pins 7 through 0; reset value `0x01` |
 | `clk` | Shared synchronous host/core clock, target 50 MHz |
-| `rst_n` | Active-low synchronous reset |
+| `rst_n` | Synchronous state reset; immediate host/protocol OE gating |
 | `ena` | Host/engine enable; keep high during timed protocols |
 
-Protocol outputs are dedicated outputs. There is no protocol pad-direction control
-in this package; SET/OUT PINDIRS fault. The eight bidirectional pads belong to the
-host interface. Input synchronizers run even when `ena=0`; the engine sees the
-previous synchronized value on its execution edge. Synchronization adds latency
-and asynchronous edge detection has clock-phase uncertainty.
+The complete logical correspondence and pad capabilities are defined in the
+[single pin table](pio21_contract.md#ownership-and-transport). Dedicated outputs
+retain indices 0..7. Protocol pads have value indices 8..11 and input indices 2..5.
+All six inputs use two synchronizer stages, even while stopped or disabled.
+Optional per-pad four-sample filters add latency; see the contract and I2C guide.
 
 ### Deterministic execution
 
@@ -57,12 +58,24 @@ to `0x01`. STOP and HALT do not force a UART idle level: firmware owns the pins.
 
 ### Host transactions
 
-All host bus signals must be synchronous to `clk`. Begin with RD=WR=0 for an edge.
-Raise WR with stable address/data for an edge to write, or raise RD after releasing
-the host data drivers to read. Data is latched on the accepted RD edge. Return the
-strobe low for an edge before the next transaction. Held strobes transact only once;
-simultaneous RD/WR do nothing and disable the chip's data drivers. Transactions
-while disabled are discarded; lower strobes before re-enabling.
+All host signals are synchronous to `clk`; there is no asynchronous handshake.
+Each logical byte uses low nibble then high nibble at the same address/direction.
+Sample both strobes low between beats. Holding a strobe high never repeats a
+beat. Write side effects occur only at the second matching beat. The first read
+beat captures one coherent byte and performs its read side effect; the second
+beat returns that same byte's high half. Read data is valid after the accepted
+edge plus clock-to-Q/combinational delay, and stable through held RD.
+
+Idle gaps preserve phase indefinitely. An observed address or direction change
+abandons phase. RD=WR=1 is reserved resynchronization: no core transaction or
+host drive, phase discarded, then both strobes must be sampled low. It does not
+stop the engine or change protocol pads. Reset/disable discard phase; an enabled
+low-strobe edge is required to re-arm. Host drivers only drive uio[3:0], only for
+exclusive enabled reads; idle/write/reset/disable/resync release them.
+
+A byte requires at least four clocks including low gaps: 80 ns at 50 MHz.
+A word is 16 clocks, or 20 including selector (400 ns). Extra polling and host
+service add overhead. FIFO depth buffers bursts, not a sustained bandwidth deficit.
 
 Instruction writes stage the low byte and commit on the high byte, incrementing
 IMEM_ADDR modulo 32. Instruction writes/staging are ignored while running.
@@ -75,7 +88,8 @@ Every writer must supply all four bytes; there is one staging buffer and no byte
 For a **32-bit data read**, select DATA_ADDR and read `6, 7, 9, A` in that order.
 Reading 6 snapshots the entire selected word; the other three registers read that
 snapshot even if the core changes state. When selecting RX, reading 6 also dequeues
-one word. A held RD never dequeues twice. Reading an empty RX returns zero and sets
+one word at its first low-nibble beat. Abandoning that read does not undo the pop;
+clients must complete normal reads. A held RD never dequeues twice. Reading an empty RX returns zero and sets
 underflow. A new read of 6 replaces the snapshot. Separate words are separate
 snapshots; STOP first for a coherent multi-register debug dump.
 
@@ -83,7 +97,7 @@ snapshots; STOP first for a coherent multi-register debug dump.
 
 | Address | Name | Read / write |
 | --- | --- | --- |
-| `0` | CONTROL | Reads zero. W: bit0 START, bit1 STOP, bit2 FIFO_CLEAR, bit3 CLEAR_ERRORS, bit4 RESUME |
+| `0` | CONTROL | Reads zero. W: bit0 START, bit1 STOP, bit2 FIFO_CLEAR, bit3 CLEAR_ERRORS, bit4 RESUME, bit5 ABORT_RELEASE; bits7:6 ignored |
 | `1` | STATUS | R: bit0 running, bit1 delayed/stalled, bit2 fault, bit3 TX full, bit4 RX empty, bit5 any IRQ, bit6 TX overflow, bit7 RX underflow |
 | `2` | IMEM_ADDR | R/W low five bits |
 | `3` | IMEM_LO | R selected instruction low byte; W stage low byte while stopped |
@@ -97,17 +111,20 @@ snapshots; STOP first for a coherent multi-register debug dump.
 | `B` | FIFO_LEVEL | R TX count[2:0], RX count[6:4], remaining bits zero |
 | `C` | IRQ | R eight flags; W one-to-clear, including while running |
 | `D` | DEBUG | R sticky bit0 TX overflow, bit1 RX underflow, bit2 nonblocking PUSH drop, bit3 empty nonblocking PULL fallback; W one-to-clear |
-| `E` | INPUT | R synchronized protocol inputs [1:0] |
-| `F` | VERSION | R `0x20` |
+| `E` | INPUT | R synchronized protocol inputs [5:0], filtered where enabled |
+| `F` | VERSION | R `0x21` |
 
-STOP wins over START/RESUME; START wins over RESUME. START clears X/Y/OSR/ISR,
+ABORT_RELEASE stops and clears all four protocol direction bits, with priority
+over STOP/START/RESUME. It preserves values, dedicated outputs, configuration and
+FIFOs (unless FIFO_CLEAR is also requested). START/RESUME never implicitly re-arm
+directions. STOP wins over START/RESUME; START wins over RESUME. START clears X/Y/OSR/ISR,
 shift counts (OSR=32/empty, ISR=0), delay/divider phase, pending EXEC/IRQ-wait and
 fault. It preserves configuration, output levels, IRQ flags, FIFOs and sticky errors.
 STOP preserves all execution state except running. RESUME only sets running and is
 ignored during fault. It can start host-initialized register state at the current PC.
 HALT holds its PC and clears running. RESUME after HALT executes HALT again.
 
-FIFO_CLEAR clears both queues only when already stopped or combined with STOP;
+FIFO_CLEAR clears both queues only when already stopped or combined with STOP or ABORT_RELEASE;
 it does not clear OSR/ISR or counts. It is ignored while running, including a restart
 of a running engine. CLEAR_ERRORS clears DEBUG; new errors on the same edge win.
 Reset clears registers, queues, flags and host state, but not instruction memory.
@@ -123,7 +140,7 @@ unmapped writes are ignored. Unless stated otherwise, writes require stopped sta
 | `00`, `01` | X, Y | R/W 32-bit scratch; reset 0 |
 | `02` | OSR | R/W; write also clears OUT count; reset 0 with count 32 |
 | `03` | ISR | R/W; write also clears IN count; reset 0 |
-| `04` | PINS | R/W output levels[7:0]; reset 1 |
+| `04` | PINS | R/W programmed output levels[11:0]; reset 0xF01 |
 | `05` | COUNTS | R OUT count[5:0], IN count[13:8]; saturate at 32 |
 | `08` | TX | W enqueue 32-bit word, live while running; R0. Full write rejected with overflow unless same-edge CPU pop makes room |
 | `09` | RX | R snapshot/pop at DATA_0; writes ignored |
@@ -133,6 +150,10 @@ unmapped writes are ignored. Unless stated otherwise, writes require stopped sta
 | `13` | DIVIDER | R/W low 16 bits; reset 1, zero clamps to1 |
 | `14` | IRQ_SET | R IRQ flags; W low8 bits one-to-set, live while running |
 | `15` | FIFO_LEVEL | R same packing as host B |
+| `16` | ROUTE | R/W 28 bits, extended routing, reset 0 |
+| `17` | DIRS | R/W [11:8]; [7:0] fixed output read FF, writes ignored; reset 0x0FF |
+| `18` | OD | R/W [11:8] open drain, others ignored/read zero; reset 0 |
+| `19` | FILTER | R/W [3:0] four-sample pad qualifier enables; reset 0 |
 
 SHIFTCTRL: bit0 OUT right, bit1 IN right, bit2 autopull, bit3 autopush,
 bits[8:4] pull threshold, bits[13:9] push threshold. A zero threshold means 32.
@@ -146,15 +167,34 @@ the five-bit PC increments modulo32. Configure a meaningful reachable wrap regio
 PINCTRL: bits[2:0] OUT/MOV base, bits[6:3] OUT/MOV width; bits[10:8] SET base,
 bits[14:11] SET width; bit16 IN base (0/1); bits[19:17] side-set pin;
 bit20 JMP input pin (0/1). Other bits reserved. Width 0 or >8 means8. Mappings are
-clipped at output 7, not rotated. IN reads the synchronized two-bit input vector
+clipped at output 7, not rotated. IN reads the synchronized six-bit input vector
 shifted right by IN base, zero extended. SET/OUT/MOV preserve unmapped outputs.
-Side-set wins overlaps with instruction pin writes.
+Side-set wins overlaps with instruction writes to the same state. PINCTRL
+reserved bits7/15 and bits31:21 read zero and ignore writes.
+
+ROUTE fields: bit0 extended mapping enable; [4:1] OUT/MOV base; [8:5] width;
+[12:9] SET base; [16:13] width; [19:17] IN base; [23:20] side-set index;
+[26:24] JMP input; bit27 side-set targets directions instead of values. Reset
+zero uses old PINCTRL fields. Extended width 0 or >12 means12, clipping at index11;
+base12..15 writes nothing. IN/JMP indices6..7 read zero; side-set12..15 is ignored.
+Bits31:28 are ignored/read zero. All configuration writes require stopped state;
+live FIFO/IRQ remains available. Other unmapped bits of defined registers read
+zero and ignore writes unless explicitly specified.
+
+DIRS reads programmed capability-masked direction, not electrical OE. Dedicated
+outputs are always outputs. Only the four protocol pads support OD. Push-pull
+uses data=value and OE=direction; open-drain uses data=0 and OE=direction AND NOT
+value. Input readback always samples physical pads. Reset sets pad values one,
+directions input/released, OD disabled, and immediately gates their OEs low.
+Synchronous reset retains dedicated-output reset 0x01. STOP/HALT/fault/disable
+retain pad state and can hold a bus low. Establish data before enabling a
+push-pull driver; atomic logical writes do not establish analog glitch freedom.
 
 ### Instruction set
 
 The current [PIO V0 ISA reference](isa.md) defines the 16-bit encoding, all eight
 opcode groups, operands, shifts, delays, side-set, EXEC, HALT, reserved encodings,
-and assembler syntax. Host VERSION is `0x20`; use only programs for this revision.
+and assembler syntax. Host VERSION is `0x21`; use only programs for this revision.
 
 ### Load and run UART
 
@@ -180,8 +220,8 @@ The [SPI mode-0 guide](spi_mode0.md) describes a full-duplex eight-bit program,
 host configuration, synchronized input timing and its pin-level slave test.
 
 Run `python test/run.py` or `./test/run.ps1`. The FIFO unit test exhausts occupancy
-and simultaneous read/write boundaries. Twelve pin-level tests cover state,
-timing, UART TX/RX waveforms and SPI byte transfers. See [test/README.md](../test/README.md)
+and simultaneous read/write boundaries. Pin-level tests cover state, timing, UART TX/RX, SPI, general pads, host
+framing, and I2C transfers/recovery; see the [verification matrix](pio21_verification.md). See [test/README.md](../test/README.md)
 and [the optimization report](pio_v0_optimization_report.md) for validation scope.
 
 ## External hardware
@@ -190,4 +230,5 @@ Use a synchronous host and compatible logic levels. A logic analyzer can observe
 all programmable outputs; a UART adapter receives the example at 115200 8N1 with
 a 50 MHz core clock. Input0 (`ui[6]`) can receive the RX example at 16 clocks/bit.
 The Arty wrapper currently connects only the TX demo; its UART RX pin is not wired
-to the core. Electrical interfaces for Ethernet/USB remain future integration work.
+to the core. The I2C FPGA bridge exposes real tri-state pads. Ethernet/USB require separate
+hardware architectures and are outside this implementation.

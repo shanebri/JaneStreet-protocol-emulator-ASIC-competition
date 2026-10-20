@@ -60,11 +60,12 @@ Use a separate project for `xc7a100tcsg324-1`, or copy these sources into your
 existing project and select the new top. **No Vivado project has been edited or
 build launched by these tools.**
 
-Add the eight existing ASIC design sources:
+Add all ASIC design sources listed in info.yaml:
 
 ```text
 src/project.sv
 src/host_interface.sv
+src/pio_pads.sv
 src/protocol_core.sv
 src/pio_fifo.sv
 src/execution_unit.sv
@@ -73,11 +74,12 @@ src/frontend/instruction_fetch.sv
 src/frontend/decoder.sv
 ```
 
-Add these three FPGA-only sources:
+Add these four FPGA-only sources:
 
 ```text
 fpga/arty_spi_test_top.sv
 fpga/arty_spi_test_host.sv
+fpga/byte_nibble_host.sv
 fpga/spi_test_uart_tx.sv
 ```
 
@@ -198,3 +200,6 @@ The five checker tests exercise split serial frames, corruption, sequence/data
 errors and the requirement that both endpoints complete. The Nano sketch is
 compile-checked; physical FPGA/Nano interoperability remains to be tested on
 your hardware. No synthesis, implementation, bitstream or upload was performed.
+
+Host revision 0x21 transfers each byte low nibble then high nibble on uio[3:0].
+See [the transport contract](../../docs/pio21_contract.md) for framing, reset and resynchronization.

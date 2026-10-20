@@ -1,6 +1,6 @@
 `default_nettype none
 
-// FPGA-only test host. Loads the unmodified ASIC through its real byte bus.
+// FPGA-only test host. Byte requests use the shared synchronous nibble adapter.
 // One BTN1 press tests TX=0..255, expecting RX=(TX xor A5) from the Nano.
 module arty_spi_test_host #(
     parameter integer SPI_DIVIDER = 32, // 50 MHz / (16*32) = 97.65625 kHz
@@ -152,7 +152,10 @@ module arty_spi_test_host #(
             saw_ready_low <= 0; watch_ready <= 0;
         end else begin
             if (watch_ready && !ready_sync[1]) saw_ready_low <= 1;
-            case (state)
+            // Count real core clocks, including nibble-adapter service time.
+            if (state == POLL || state == POLL_SAMPLE || state == POLL_GAP)
+                timeout_count <= timeout_count + 1'b1;
+            if (!(|control[5:4]) || bus_done) case (state)
                 BOOT_WRITE: state <= BOOT_GAP;
                 BOOT_GAP: begin
                     if (boot_index == 89) begin booted <= 1; state <= IDLE; end
@@ -180,9 +183,9 @@ module arty_spi_test_host #(
                     else if (!read_data[0]) begin
                         if (read_data[4]) begin result_code <= 2; failed <= 1; state <= ABORT; end
                         else state <= RX_SELECT;
-                    end else if (timeout_count >= TIMEOUT_CYCLES - 3) begin
+                    end else if (timeout_count >= TIMEOUT_CYCLES - 1) begin
                         result_code <= 3; failed <= 1; state <= ABORT;
-                    end else begin timeout_count <= timeout_count + 3; state <= POLL_GAP; end
+                    end else state <= POLL_GAP;
                 end
                 POLL_GAP: state <= POLL;
                 RX_SELECT: state <= RX_SEL_GAP;
@@ -220,10 +223,17 @@ module arty_spi_test_host #(
             endcase
         end
     end
+    wire [5:0] nibble_control;
+    wire [3:0] nibble_write;
+    wire [7:0] nibble_read;
+    wire bus_done;
+    byte_nibble_host transport (.clk(clk), .reset(reset),
+        .request(control[5:0]), .write_data(write_data), .nibble_in(nibble_read[3:0]),
+        .control(nibble_control), .nibble_out(nibble_write), .read_data(read_data), .done(bus_done));
     tt_um_shanebri_top emulator (
         .clk(clk), .rst_n(!reset), .ena(1'b1),
-        .ui_in({1'b0, miso, control}), .uio_in(write_data),
-        .uo_out(core_pins), .uio_out(read_data), .uio_oe()
+        .ui_in({1'b0, miso, nibble_control}), .uio_in({4'b0, nibble_write}),
+        .uo_out(core_pins), .uio_out(nibble_read), .uio_oe()
     );
     spi_test_uart_tx #(.BIT_CYCLES(UART_BIT_CYCLES)) reporter (
         .clk(clk), .reset(reset), .start(state == REPORT_START && !uart_busy),

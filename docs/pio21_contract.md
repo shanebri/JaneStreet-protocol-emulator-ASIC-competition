@@ -1,0 +1,82 @@
+# PIO 0x21 architecture contract
+
+This contract precedes implementation. One state machine, 32x16 instruction RAM,
+four-word TX/RX FIFOs, 8x4 tile allocation and 50 MHz target are retained.
+
+## Ownership and transport
+
+| Physical pins | Logical output/value/direction | Logical input |
+| --- | --- | --- |
+| uo[7:0] | 0..7, fixed output | none |
+| uio[4], uio[5], uio[6], uio[7] | 8, 9, 10, 11 | 2, 3, 4, 5 |
+| ui[6], ui[7] | none | 0, 1 |
+| uio[3:0] | host only | host only |
+
+ui[3:0], ui[4], ui[5] remain address, WR, RD. Synchronous transactions
+transfer low then high nibble. Both strobes must be sampled low between beats.
+Held strobes never repeat. Read data is valid after the accepted rising clock
+edge (clock-to-Q plus combinational delay), and held through RD. Only uio[3:0]
+drive during enabled, armed, exclusive RD. Idle/reset/disable/WR/RD+WR release
+host drivers. First write beat stages; second matching beat commits once. First
+read beat captures and accepts one byte read; second returns its saved high half.
+DATA_0 first beat snapshots/pops RX once, even if abandoned: finish normal reads.
+Idle preserves phase indefinitely. Any observed address change or opposite
+direction discards phase. RD+WR discards phase without architectural effects.
+Reset/disable discard phase; a sampled enabled low-strobe cycle re-arms transfers.
+
+A minimum byte uses four clocks including both low gaps (80 ns at 50 MHz).
+A four-byte word uses 16 clocks, or 20 including selector (400 ns, 2.5 Mword/s).
+Reads pop at the first DATA_0 beat; writes commit on DATA_3's second beat.
+FIFO depth absorbs bursts, not a sustained service deficit. The adapter exposes
+the original byte address/data/acceptance interface for future replacement.
+
+## Additive stopped-state configuration
+
+Existing byte addresses and selectors 0x00..0x15 retain meaning, except PINS
+selector 4 expands to 12 bits and INPUT byte E expands to six bits. VERSION=0x21.
+New selectors use the existing little-endian 6,7,9,A staging/snapshot interface.
+
+| Selector | Fields | Reset |
+| --- | --- | --- |
+| 0x16 ROUTE | bit0 extended enable; [4:1] OUT/MOV base; [8:5] width; [12:9] SET base; [16:13] width; [19:17] IN base; [23:20] side-set index; [26:24] JMP input; bit27 side-set targets directions | 0 |
+| 0x17 DIRS | [11:8] programmed pad direction; [7:0] read as FF, writes ignored | 0x0FF |
+| 0x18 OD | [11:8] open drain; other bits read zero, writes ignored | 0 |
+| 0x19 FILTER | [3:0] enable four-sample qualification on pad inputs | 0 |
+
+All listed configuration is writable only stopped; unsupported bits read zero.
+ROUTE=0 uses original PINCTRL fields, width zero/>8 means eight, clipping at
+index 7. Extended width zero/>12 means twelve; ranges clip at index 11; base
+12..15 writes nothing. IN base/JMP 6..7 read zero; side-set 12..15 does nothing.
+WAIT GPIO/PIN encoded indices 0..5 are legal; PIN is base relative, missing bits
+read zero; 6..31 fault. OUT/SET PINDIRS destination=4 uses the respective mapping.
+Side-set wins only on its selected state; value and direction can update together.
+Illegal instructions have no side-set effects. Stalled OUT is atomic.
+
+DIRS is programmed capability-masked direction, not electrical OE: in OD mode
+value one releases even when DIRS=1. Pad layer implements push-pull data=value,
+OE=direction; OD data=0, OE=direction AND NOT value. Readback always uses pads.
+Reset state is PINS=0xF01, DIRS=0x0FF, OD=0. Protocol OE is also gated by rst_n
+immediately, before a resetting edge. State reset is synchronous. STOP/HALT/
+fault/ena=0 preserve state, potentially holding a bus low. START preserves pad
+state/configuration. CONTROL bit5 ABORT_RELEASE stops and clears all four pad
+directions; priority over STOP/START/RESUME; bit2 FIFO clear is permitted with
+abort, otherwise abort preserves queues. Error-clear remains independently valid.
+START/RESUME do not re-arm directions. Live FIFO and IRQ accesses remain available.
+
+All six inputs have two synchronizer stages even stopped/disabled. Instructions
+consume their previous registered result. Enabled pad filters require four equal
+successive synchronized samples, adding four clocks to visibility (5–6 clocks
+from asynchronous transition to observable qualified state). At 50 MHz this
+rejects ideal digital pulses <=50 ns; it is not an analog compliance guarantee.
+Firmware waits long enough after driving SCL low to flush stale high samples.
+Data must be established before enabling push-pull output; atomic RTL updates
+do not prove analog glitch freedom.
+
+## Firmware boundary
+
+I2C uses bounded, FIFO-streamed commands, with waveform sequencing and stretching
+handled by instructions. No protocol FSM or host waveform register writes.
+Default SDA output8/input2, SCL output9/input3; routing is configurable.
+The implementation guide specifies command words, timing, service deadlines,
+status interpretation and bus clear. Physical fit/timing require CMOS5L flow;
+simulation and generic synthesis alone do not establish them.

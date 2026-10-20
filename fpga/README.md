@@ -25,14 +25,13 @@ The script creates `fpga/build/janestreet_arty/janestreet_arty.xpr`, targeting
 `xc7a100tcsg324-1`, with `arty_a7_top` selected as the top module. It does not overwrite
 an existing project. Open the generated project directly on later visits.
 
-Alternatively, add `arty_a7_top.sv` and `arty_demo.sv` alongside all eight existing
-RTL files to your existing project, set `arty_a7_top` as top, and add
+Alternatively, add `arty_a7_top.sv` and `arty_demo.sv` alongside `byte_nibble_host.sv` and all RTL files from `info.yaml` to your existing project, set `arty_a7_top` as top, and add
 `arty_a7_100t.xdc`. Disable/remove `constraints/janestreet.xdc` from that FPGA
 project's active constraints set: it describes the bare core's `clk` input, while
 this wrapper exposes `clk100` and generates 50 MHz internally. Keep the original
 file for standalone core timing analysis.
 
-When updating an older project, remove `uart_tx.sv` and add `pio_fifo.sv`.
+When updating an older project, remove `uart_tx.sv` and add `pio_fifo.sv`, `pio_pads.sv` and `byte_nibble_host.sv`.
 The batch build script performs this source-list migration automatically.
 
 For a command-line build, run from the repository root in a Vivado-enabled shell:
@@ -124,3 +123,16 @@ the loader/core at 50 MHz against the canonical example, UART bit timing, short
 button bounces, held buttons, replay, and reset during transmission. This simulation
 does not model the Xilinx MMCM or physical pins; validate those in Vivado and on
 the board. No Tiny Tapeout submission sources or manifest entries are changed.
+
+## Four-bit host and I2C bridge
+
+UART/SPI loaders now share `byte_nibble_host.sv`; byte requesters hold requests
+until done, then deassert for a cycle. Protocol core clocks never pause while a
+host request waits. Upper UIO inputs are no longer connected to host data.
+
+`arty_i2c_bridge.sv` exposes four real tri-state protocol pads with physical input
+readback and a synchronous byte requester. `./fpga/test_i2c.ps1` loads the actual
+I2C hex, checks wire framing and NACK/STOP, and tests contention/release. The
+[I2C guide](../docs/i2c.md#fpga-wiring-and-limits) gives verified JA pin assignments
+and wiring assumptions. This bridge is not a board programming or interoperability
+claim; integrate its requester and 50 MHz clock before using the constraint fragment.

@@ -10,16 +10,17 @@ The old accumulator and dedicated UART transmitter have been replaced.
 - Independent four-word, 32-bit TX/RX FIFOs with blocking/nonblocking operations,
   automatic pull/push, atomic host access and visible error flags.
 - JMP, WAIT, IN, OUT, PUSH/PULL, MOV, SET, IRQ, EXEC, delay and optional side-set.
-- Eight programmable outputs and two synchronized inputs.
+- Eight dedicated outputs, four general bidirectional pads, six synchronized inputs,
+  per-pad open drain and optional input qualification.
 - One instruction per clock at divider 1, including taken branches and shifts.
   Delays, input/IRQ waits and FIFO backpressure are explicit exceptions.
-- Synchronous 8-bit host bus, plus a small label-aware Python assembler.
+- Synchronous four-bit host transport with byte registers, plus a small label-aware Python assembler.
 
-This is a **breaking ISA/host-map update** (revision register `0xF` reads `0x20`).
+This is a **breaking ISA/host-map update** (revision register `0xF` reads `0x21`).
 Old accumulator firmware must be replaced. It is PIO-inspired, not a binary
-compatible RP2040 implementation. The current package has fixed-direction protocol
-pins; pin-direction instructions, multiple state machines, FIFO joining, fractional
-clock division, and external DMA are not implemented.
+compatible RP2040 implementation. The host transport is low-nibble-first; existing PIO UART/SPI binaries retain
+their meaning. Multiple state machines, FIFO joining, fractional clock division
+and external DMA are not implemented.
 
 ## Run the firmware UART demo
 
@@ -45,8 +46,16 @@ records validation results and priorities for the next version.
 full-duplex SPI transfer using the existing ISA. OUT drives MOSI, side-set drives
 SCLK, and IN samples synchronized MISO; SET controls active-low chip select.
 The [SPI guide](docs/spi_mode0.md) defines configuration, byte packing, pin
-mapping, clock timing and the cocotb slave model. SPI is simulation-tested;
-the Arty wrapper and Vivado project have not been extended for SPI.
+mapping, clock timing and the cocotb slave model. The FPGA SPI host is also migrated to the reusable nibble adapter; see its
+[hardware test guide](tools/spi_hardware/README.md).
+
+## I2C firmware
+
+The [I2C guide](docs/i2c.md) covers a 24-word controller program, Python transaction
+driver, repeated START, ACK/NACK status, stretching and bounded bus recovery.
+Nominal 100/400 kHz configurations target 50 MHz. Host and protocol pads operate
+concurrently. See the [architecture contract](docs/pio21_contract.md),
+[decision record](docs/adr_four_bit_host.md), and [verification matrix](docs/pio21_verification.md).
 
 ## Build and test
 
@@ -57,8 +66,8 @@ python test/run.py
 ```
 
 Icarus Verilog must be on PATH. On Windows, `./test/run.ps1` also finds the optional
-project-local tools. The runner checks FIFO boundary cases and twelve pin-level
-cocotb regressions. See [test/README.md](test/README.md) for synthesis and gate-level
+project-local tools. The runner checks FIFO boundaries, exhaustive adapter/pad unit cases and pin-level
+core/ISA/I2C regressions. See [test/README.md](test/README.md) for synthesis and gate-level
 checks. The [Arty A7 guide](fpga/README.md) covers the updated FPGA loader and
 button-triggered firmware UART demo; `./fpga/test.ps1` verifies its behavior.
 

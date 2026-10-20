@@ -8,7 +8,7 @@ import re
 from pathlib import Path
 
 SOURCES = dict(pins=0, x=1, y=2, null=3, status=5, isr=6, osr=7)
-DESTS = dict(pins=0, x=1, y=2, null=3, pc=5, isr=6, exec=7)
+DESTS = dict(pins=0, x=1, y=2, null=3, pindirs=4, pc=5, isr=6, exec=7)
 CONDS = {"always": 0, "!x": 1, "x--": 2, "!y": 3, "y--": 4,
          "x!=y": 5, "pin": 6, "!osre": 7}
 
@@ -80,7 +80,7 @@ def assemble(text):
                 assert len(operands) == 3
                 polarity, source, index = int(operands[0], 0), operands[1], int(operands[2], 0)
                 assert polarity in (0, 1)
-                assert 0 <= index < (8 if source == "irq" else 2)
+                assert 0 <= index < (8 if source == "irq" else 6)
                 op, arg = 1, (polarity << 7) | ({"gpio": 0, "pin": 1, "irq": 2}[source] << 5) | index
             elif mnemonic in ("in", "out"):
                 assert len(operands) == 2
@@ -111,7 +111,7 @@ def assemble(text):
                 assert len(operands) == 2
                 value = int(operands[1], 0)
                 assert 0 <= value < 32
-                op, arg = 7, ({"pins": 0, "x": 1, "y": 2}[operands[0]] << 5) | value
+                op, arg = 7, ({"pins": 0, "x": 1, "y": 2, "pindirs": 4}[operands[0]] << 5) | value
             else:
                 raise ValueError("unknown mnemonic")
             words.append(encode(op, arg, delay, side, sideset))

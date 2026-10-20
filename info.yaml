@@ -20,6 +20,7 @@ project:
     - "project.sv"
     - "protocol_core.sv"
     - "host_interface.sv"
+    - "pio_pads.sv"
     - "execution_unit.sv"
     - "pio_fifo.sv"
     - "frontend/pc.sv"
@@ -54,10 +55,10 @@ pinout:
   uio[1]: "HOST_DATA[1]"
   uio[2]: "HOST_DATA[2]"
   uio[3]: "HOST_DATA[3]"
-  uio[4]: "HOST_DATA[4]"
-  uio[5]: "HOST_DATA[5]"
-  uio[6]: "HOST_DATA[6]"
-  uio[7]: "HOST_DATA[7]"
+  uio[4]: "PIO_PAD[0] / OUT[8] / IN[2]"
+  uio[5]: "PIO_PAD[1] / OUT[9] / IN[3]"
+  uio[6]: "PIO_PAD[2] / OUT[10] / IN[4]"
+  uio[7]: "PIO_PAD[3] / OUT[11] / IN[5]"
 
 # Do not change!
 yaml_version: 6

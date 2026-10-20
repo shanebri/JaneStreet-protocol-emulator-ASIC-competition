@@ -93,7 +93,7 @@ module arty_demo #(
             config_index <= 0;
             run_after_load <= 0;
         end else begin
-            case (state)
+            if (!(|control[5:4]) || bus_done) case (state)
                 RESET_CORE: begin
                     if (reset_count == 7) begin
                         reset_count <= 0;
@@ -136,10 +136,17 @@ module arty_demo #(
         end
     end
 
+    wire [5:0] nibble_control;
+    wire [3:0] nibble_write;
+    wire [7:0] nibble_read;
+    wire bus_done;
+    byte_nibble_host transport (.clk(clk), .reset(!core_reset_n),
+        .request(control[5:0]), .write_data(write_data), .nibble_in(nibble_read[3:0]),
+        .control(nibble_control), .nibble_out(nibble_write), .read_data(), .done(bus_done));
     tt_um_shanebri_top emulator (
         .clk(clk), .rst_n(core_reset_n), .ena(1'b1),
-        .ui_in(control), .uio_in(write_data), .uo_out(outputs),
-        .uio_out(), .uio_oe()
+        .ui_in({2'b0, nibble_control}), .uio_in({4'b0, nibble_write}), .uo_out(outputs),
+        .uio_out(nibble_read), .uio_oe()
     );
     assign uart_tx = outputs[0];
     assign done = outputs[1];

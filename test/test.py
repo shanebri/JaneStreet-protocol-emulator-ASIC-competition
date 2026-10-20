@@ -23,6 +23,7 @@ class Host:
         self.dut = dut
         self.samples = []
         self.inputs = 0
+        self.host_data = 0
 
     def control(self, value):
         self.dut.ui_in.value = value | (self.inputs << 6)
@@ -39,6 +40,7 @@ class Host:
         self.dut.clk.value = 0
         self.dut.ena.value = 1
         self.inputs = 0
+        self.host_data = 0
         self.control(0)
         self.dut.uio_in.value = 0
         self.dut.rst_n.value = 0
@@ -49,22 +51,25 @@ class Host:
         assert int(self.dut.uio_oe.value) == 0
 
     async def write(self, address, value, held=1):
-        self.control(address | 0x10)
-        self.dut.uio_in.value = value
-        await self.tick(held)
-        assert int(self.dut.uio_oe.value) == 0
-        self.control(address)
-        await self.tick()
+        for nibble in (value & 15, value >> 4):
+            self.host_data = nibble
+            self.control(address | 0x10)
+            self.dut.uio_in.value = (int(self.dut.uio_in.value) & 0xf0) | nibble
+            await self.tick(held)
+            assert int(self.dut.uio_oe.value) & 15 == 0
+            self.control(address)
+            await self.tick()
 
     async def read(self, address, held=1):
-        self.control(address | 0x20)
-        self.dut.uio_in.value = 0
-        await self.tick(held)
-        assert int(self.dut.uio_oe.value) == 255
-        value = int(self.dut.uio_out.value)
-        self.control(address)
-        await self.tick()
-        assert int(self.dut.uio_oe.value) == 0
+        value = 0
+        for shift in (0, 4):
+            self.control(address | 0x20)
+            await self.tick(held)
+            assert int(self.dut.uio_oe.value) & 15 == 15
+            value |= (int(self.dut.uio_out.value) & 15) << shift
+            self.control(address)
+            await self.tick()
+            assert int(self.dut.uio_oe.value) & 15 == 0
         return value
 
     async def load(self, program, address=0):
@@ -120,7 +125,7 @@ def check_frames(samples, payload, clocks):
 async def host_bus_atomic_words_and_reset(dut):
     h = Host(dut)
     await h.reset()
-    assert await h.read(VERSION) == 0x20
+    assert await h.read(VERSION) == 0x21
     assert await h.read(STATUS) == 0x10
     assert await h.read(LEVEL) == 0
     assert await h.read_word(COUNTS) == 32
@@ -139,10 +144,10 @@ async def host_bus_atomic_words_and_reset(dut):
     assert await h.read_word(X) == 0xdeadbeef  # no partial commit
     h.control(IM_ADDR | 0x20)
     await h.tick()
-    assert int(dut.uio_out.value) == 31
+    assert int(dut.uio_out.value) & 15 == 15
     h.control(STATUS | 0x20)
     await h.tick(3)
-    assert int(dut.uio_out.value) == 31
+    assert int(dut.uio_out.value) & 15 == 15
     h.control(0)
     await h.tick()
     h.control(IM_ADDR | 0x30)
@@ -345,7 +350,7 @@ async def deterministic_timing_wrap_delays_and_sideset(dut):
     begin = len(h.samples)
     await h.write(CTRL, 1)
     await h.tick(8)
-    assert h.samples[begin+1:begin+9] == [3, 4]*4  # Zero-cost wrap and entry.
+    assert h.samples[begin+3:begin+11] == [3, 4]*4  # Zero-cost wrap and entry.
     await h.write(CTRL, 2)
     await h.reset()
     await h.write_word(EXEC, (31 << 5) | (1 << 15))
@@ -564,10 +569,11 @@ async def protection_pause_restart_fault_and_natural_wrap(dut):
     h.control(0)
     await h.tick()
     dut.ena.value = 1
+    await h.tick()  # Enabled low-strobe cycle re-arms the adapter.
     assert await h.read(IM_ADDR) == 0
     await h.write(CTRL, 3)
     assert not (await h.read(STATUS)) & 1
-    for invalid in (encode(3, 0x81), encode(5, 0x1b), encode(7, 0x60), encode(1, 0x62), encode(6, 0x81)):
+    for invalid in (encode(7, 0xa1), encode(5, 0x1b), encode(7, 0x60), encode(1, 0x62), encode(6, 0x81)):
         await h.load([invalid])
         await h.write(CTRL, 1)
         await h.tick(2)
@@ -654,7 +660,7 @@ async def freeze_delay_and_irq_wait_semantics(dut):
     await h.tick(50)
     assert h.samples[-1] == 2
     await h.write(CTRL, 16)
-    await h.tick(30)
+    await h.tick(28)
     assert h.samples[-1] == 2
     await h.tick()
     assert h.samples[-1] == 3

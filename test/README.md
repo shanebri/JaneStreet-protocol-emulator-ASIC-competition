@@ -8,8 +8,8 @@ python test/run.py
 
 On Windows, `./test/run.ps1` locates optional `.tools` binaries. The portable runner
 uses the submission source list in `info.yaml`. It first runs `pio_fifo_tb.sv`,
-then twelve pin-only cocotb tests. `make -C test` runs the same cocotb suite; the
-standalone FIFO unit is included by the Python runner only.
+then exhaustive host/pad unit tests and the pin-only core, PIO21 and I2C suite. `make -C test` runs the same cocotb suite; the
+standalone FIFO/host/pad units are included by the Python runner only.
 
 Coverage includes all shift widths 1–32 in both directions, count saturation,
 scratch comparisons/decrement loops, MOV/OUT EXEC and PC writes, atomic 32-bit
@@ -56,9 +56,27 @@ prove setup/hold closure or clock-domain-crossing reliability.
 Generic synthesis/structural check:
 
 ```sh
-yosys -p 'read_verilog -sv src/project.sv src/protocol_core.sv src/host_interface.sv src/execution_unit.sv src/pio_fifo.sv src/frontend/pc.sv src/frontend/decoder.sv src/frontend/instruction_fetch.sv; synth -noabc -top tt_um_shanebri_top; check -assert; stat'
+yosys -p 'read_verilog -sv src/project.sv src/protocol_core.sv src/host_interface.sv src/pio_pads.sv src/execution_unit.sv src/pio_fifo.sv src/frontend/pc.sv src/frontend/decoder.sv src/frontend/instruction_fetch.sv; synth -noabc -top tt_um_shanebri_top; check -assert; stat'
 ```
 
 Use `./fpga/test.ps1` for the Arty loader/debounce/replay/reset simulation. Run the
 Vivado implementation and ASIC physical flows separately to establish timing and
 area. The optimization report records the generic synthesis comparison.
+
+Host revision 0x21 transfers each byte low nibble then high nibble on uio[3:0].
+See [the transport contract](../docs/pio21_contract.md) for framing, reset and resynchronization.
+
+For baseline/final comparable generic synthesis from the actual manifest:
+
+```sh
+python test/synth.py --revision HEAD --name baseline
+python test/synth.py
+```
+
+Use `--yosys path/to/yowasp-yosys.exe` on Windows where appropriate. Both runs use
+`synth -noabc`, `check -assert`, and a no-latches assertion. Reports are below
+`test/sim_build/synth_*`. This is not a CMOS5L area/timing estimate.
+
+Run `./fpga/test_spi.ps1` and `./fpga/test_i2c.ps1` for the migrated SPI and I2C
+wrappers. [The matrix](../docs/pio21_verification.md) records requirement coverage
+and physical checks that remain unavailable.

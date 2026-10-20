@@ -1,8 +1,8 @@
-# PIO V0 instruction set (revision 0x20)
+# PIO V0 instruction set (revision 0x21)
 
 This is the current ISA implemented by `src/frontend/decoder.sv`,
 `src/protocol_core.sv`, and `src/execution_unit.sv`, and assembled by
-`tools/pioasm.py`. The host VERSION register returns `0x20`. This is a local,
+`tools/pioasm.py`. The host VERSION register returns `0x21`. This is a local,
 PIO-inspired ISA, not a binary-compatible RP2040 implementation. Earlier
 accumulator/UART programs cannot run on this engine.
 
@@ -11,8 +11,8 @@ accumulator/UART programs cannot run on this engine.
 There is one state machine, 32 words of 16-bit instruction memory, a five-bit PC,
 four 32-bit registers (X, Y, OSR, ISR), and separate four-word, 32-bit TX/RX FIFOs.
 OSR serializes transmit data; ISR accumulates received data. IN and OUT counts
-saturate at 32 and are separate from register contents. Eight programmable outputs
-and two independently synchronized inputs have fixed directions in this package.
+saturate at 32 and are separate from register contents. Twelve programmed output values include eight dedicated outputs and four
+bidirectional pads; six physical inputs are independently synchronized.
 
 An ordinary instruction takes one state-machine (SM) tick. A tick takes DIVIDER
 core clocks (1–65535, zero clamps to one). The first tick is the clock after START.
@@ -31,7 +31,7 @@ stops execution and retains the outputs and its PC.
 START resets X/Y/OSR/ISR, counts (OUT=32, IN=0), divider/delay state, pending EXEC,
 IRQ-wait state and fault, and sets PC to ENTRY. It preserves output levels,
 configuration, FIFOs and IRQ/error flags. RESUME preserves execution state;
-resuming a HALT executes the HALT again. Reset returns outputs to `0x01`, clears
+resuming a HALT executes the HALT again. Reset returns dedicated outputs to `0x01` and releases the four protocol pads, clears
 queues/registers/configuration, and does not clear instruction memory.
 
 The [host/interface specification](info.md) defines byte transactions, control
@@ -53,7 +53,7 @@ disabled on an instruction still leaves only three delay bits.
 | 4 | PUSH/PULL pull[7], conditional[6], block[5], zero[4:0] | FIFO transfer; see below |
 | 5 | MOV destination[7:5], operation[4:3], source[2:0] | Register/pin transfer, optional inversion or bit reversal |
 | 6 | IRQ zero[7], clear[6], wait[5], zero[4:3], index[2:0] | Set, clear, or set-and-wait for flag acknowledgment |
-| 7 | SET destination[7:5], immediate[4:0] | Zero-extended immediate to pins(0), X(1), Y(2) |
+| 7 | SET destination[7:5], immediate[4:0] | Zero-extended immediate to pins(0), X(1), Y(2), PINDIRS(4) |
 
 `0xC080` is the local HALT extension with timing field zero. Opcode 6 with argument
 `0x80` is HALT for any timing field (for example `halt side 0` is `0xD080` when
@@ -65,7 +65,7 @@ JMP conditions: 0 always, 1 X==0, 2 X--, 3 Y==0, 4 Y--, 5 X!=Y, 6 configured
 input pin high, 7 OSR count below pull threshold. Decrement tests the old value for
 nonzero and always decrements modulo2^32, including zero wrapping to `0xFFFFFFFF`.
 
-WAIT sources: 0 absolute input index0/1; 1 relative to IN base (missing bits read0);
+WAIT sources: 0 absolute input index0..5; 1 relative to IN base (missing bits read0);
 2 local IRQ index0–7. Other indices/sources fault. WAIT 1 IRQ clears that flag on
 successful retirement. WAIT 0 IRQ does not clear it.
 
@@ -75,8 +75,8 @@ shifts left and inserts low source bits at its low end. IN count saturates at 32
 At the autopush threshold, enqueue the newly shifted value and clear ISR/count;
 if RX is full the entire IN stalls before any shift. Autopush only applies to IN.
 
-OUT destinations: pins0, X1, Y2, null3 (discard), PC5, ISR6, EXEC7. Destination 4
-(PINDIRS) faults. Right OUT extracts low bits; left OUT extracts high bits; the
+OUT destinations: pins0, X1, Y2, null3 (discard), PINDIRS4, PC5, ISR6, EXEC7. PINDIRS uses the OUT mapping and normal atomic
+shift/autopull rules; dedicated-output direction writes are ignored. Right OUT extracts low bits; left OUT extracts high bits; the
 extracted result is right-aligned, zero extended, and OSR shifts with zero fill.
 OUT count saturates at 32. OUT ISR replaces ISR and sets IN count to the shift width.
 OUT PC branches using the low five extracted bits. With autopull, an empty OSR
@@ -123,12 +123,11 @@ inputs, not the output latch. `status` is the packed TX/RX FIFO level word.
 | 6 | ISR | ISR | ISR | ISR | — |
 | 7 | OSR | EXEC | OSR | OSR | — |
 
-Illegal encodings include WAIT source 3, WAIT GPIO/PIN indices above 1, WAIT IRQ
+Illegal encodings include WAIT source 3, WAIT GPIO/PIN indices above 5, WAIT IRQ
 indices above 7, unsupported table entries, PUSH/PULL with nonzero argument[4:0],
-MOV operation 3, and SET destinations above 2. IRQ requires argument[4:3]=0 and
+MOV operation 3, and SET destinations other than 0,1,2,4. IRQ requires argument[4:3]=0 and
 does not permit clear and wait together; argument[7]=1 is illegal except HALT's
-argument `0x80`. All JMP condition values 0–7 are valid. There is no PINDIRS
-instruction and no relative IRQ addressing or second state machine.
+argument `0x80`. All JMP condition values 0–7 are valid. There is no relative IRQ addressing or second state machine.
 
 ## Configuration required by assembly
 
@@ -144,7 +143,7 @@ the program. See [the host data map](info.md#32-bit-data-map) for access details
 
 OUT/MOV and SET map the low bits of their result to separate output ranges and
 preserve all other outputs. Width zero or above eight means eight. Ranges clip at
-output 7 rather than wrapping. IN/MOV input sources use the two-bit synchronized
+output 7 rather than wrapping. IN/MOV input sources use the six-bit synchronized
 input vector shifted right by IN base, zero-extended to 32 bits. Side-set writes
 one selected output and wins if it overlaps the instruction's output range.
 
@@ -152,6 +151,15 @@ Inputs pass through two flip-flops clocked by the core clock; instructions see
 the previous synchronized value at their execution edge. They do not sample the
 external pad instantaneously. A protocol must leave time for external propagation,
 two synchronization stages, and clock-phase uncertainty before consuming a bit.
+
+Extended ROUTE, DIRS, OD and FILTER fields are specified in the
+[architecture contract](pio21_contract.md#additive-stopped-state-configuration).
+ROUTE enables 12-output mapping with clipped writes, six-input selection, and
+side-set targeting direction. SET PINDIRS uses SET mapping; OUT PINDIRS uses OUT
+mapping, including atomic autopull/stall behavior. Side-set wins overlaps on its
+selected state and applies even on a stall; illegal instructions apply none.
+Input indices outside the real vector read zero after base mapping; encoded WAIT
+GPIO/PIN indices6..31 fault. Capability masking preserves fixed output directions.
 
 ## Assembler syntax
 
@@ -171,7 +179,7 @@ underscore and contain letters, digits and underscores.
 | PULL | `pull [ifempty] [block/noblock]`; default is unconditional blocking. |
 | MOV | `mov destination, source`, `mov destination, ~source`, `mov destination, ::source` |
 | IRQ | `irq set, index`, `irq clear, index`, `irq wait, index` |
-| SET | `set pins/x/y, immediate`; immediate 0–31. |
+| SET | `set pins/x/y/pindirs, immediate`; immediate 0–31. |
 | Pseudoinstructions | `nop` = MOV Y,Y; `halt` = local HALT extension. |
 
 Append `[d]` for a decimal delay. A program-wide `.sideset` directive changes
@@ -191,3 +199,5 @@ enable EXECCTRL.bit15; the directive does not configure hardware. There are no
 - [SPI mode 0](../examples/spi_mode0.asm): left-shift OSR/ISR for MSB-first full
   duplex, with SCLK on side-set. See [SPI setup and timing](spi_mode0.md).
 
+
+- [I2C controller](i2c.md): 24-word FIFO command firmware, open-drain pads, clock stretching and recovery.

@@ -11,6 +11,10 @@ set obsolete_uart [get_files -quiet */uart_tx.sv]
 if {[llength $obsolete_uart]} { remove_files $obsolete_uart }
 set fifo_source [file join $root src pio_fifo.sv]
 if {![llength [get_files -quiet $fifo_source]]} { add_files $fifo_source }
+foreach source {src/pio_pads.sv fpga/byte_nibble_host.sv} {
+    set source_path [file join $root $source]
+    if {![llength [get_files -quiet $source_path]]} { add_files $source_path }
+}
 update_compile_order -fileset sources_1
 reset_run synth_1
 launch_runs synth_1 -jobs 4

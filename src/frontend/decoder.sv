@@ -24,13 +24,13 @@ module decoder (
             3'd0: ;
             3'd1: begin
                 case (argument[6:5])
-                    0, 1: illegal = argument[4:0] > 1;
+                    0, 1: illegal = argument[4:0] > 5;
                     2: illegal = argument[4:3] != 0;
                     default: illegal = 1;
                 endcase
             end
             3'd2: illegal = argument[7:5] == 4 || argument[7:5] == 5;
-            3'd3: illegal = argument[7:5] == 4; // No bidirectional protocol pads yet.
+            3'd3: ; // All OUT destinations, including PINDIRS, are defined.
             3'd4: illegal = argument[4:0] != 0;
             3'd5: illegal = argument[4:3] == 3 || argument[2:0] == 4 ||
                            argument[7:5] == 3;
@@ -38,7 +38,7 @@ module decoder (
                 if (argument[7]) illegal = argument != 8'h80;
                 else illegal = argument[4:3] != 0 || argument[6:5] == 3;
             end
-            3'd7: illegal = argument[7:5] > 2;
+            3'd7: illegal = argument[7:5] > 2 && argument[7:5] != 4;
             default: illegal = 1;
         endcase
     end

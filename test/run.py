@@ -20,6 +20,12 @@ def main():
     subprocess.run(["iverilog", "-g2012", "-s", "pio_fifo_tb", "-o", str(unit_output),
                     str(ROOT / "src" / "pio_fifo.sv"), str(ROOT / "test" / "pio_fifo_tb.sv")], check=True)
     subprocess.run(["vvp", str(unit_output)], check=True)
+    for unit, modules in (("host_interface", ["host_interface"]), ("pio_pads", ["pio_pads"])):
+        output = unit_output.parent / (unit + ".vvp")
+        subprocess.run(["iverilog", "-g2012", "-Wall", "-Wno-timescale", "-s", unit+"_tb", "-o", str(output),
+                        *[str(ROOT / "src" / (m+".sv")) for m in modules],
+                        str(ROOT / "test" / (unit+"_tb.sv"))], check=True)
+        subprocess.run(["vvp", str(output)], check=True)
     runner = get_runner("icarus")
     runner.build(
         sources=[*sources, ROOT / "test" / "tb.v"],
@@ -33,7 +39,7 @@ def main():
     )
     results = runner.test(
         hdl_toplevel="tb",
-        test_module="test",
+        test_module="test,test_pio21,test_i2c",
         test_dir=ROOT / "test",
         results_xml=ROOT / "test" / "results.xml",
         waves=True,
