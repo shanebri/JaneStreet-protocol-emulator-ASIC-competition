@@ -8,7 +8,8 @@ accumulator/UART programs cannot run on this engine.
 
 ## Machine state and timing
 
-There is one state machine, 32 words of 16-bit instruction memory, a five-bit PC,
+Each of the two independent state machines has 32 words of 16-bit instruction
+memory, a five-bit PC,
 four 32-bit registers (X, Y, OSR, ISR), and separate four-word, 32-bit TX/RX FIFOs.
 OSR serializes transmit data; ISR accumulates received data. IN and OUT counts
 saturate at 32 and are separate from register contents. Twelve programmed output values include eight dedicated outputs and four
@@ -127,7 +128,8 @@ Illegal encodings include WAIT source 3, WAIT GPIO/PIN indices above 5, WAIT IRQ
 indices above 7, unsupported table entries, PUSH/PULL with nonzero argument[4:0],
 MOV operation 3, and SET destinations other than 0,1,2,4. IRQ requires argument[4:3]=0 and
 does not permit clear and wait together; argument[7]=1 is illegal except HALT's
-argument `0x80`. All JMP condition values 0–7 are valid. There is no relative IRQ addressing or second state machine.
+argument `0x80`. All JMP condition values 0–7 are valid. There is no relative IRQ addressing. The [dual-PIO extension](dual_pio.md) keeps
+IRQ indices local to each engine; direct inter-engine IRQs are not implemented.
 
 ## Configuration required by assembly
 

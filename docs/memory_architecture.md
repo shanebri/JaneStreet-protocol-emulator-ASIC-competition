@@ -2,7 +2,11 @@
 
 ## What exists now
 
-The design currently has small, separate storage structures. It does **not** have
+The [dual-PIO extension](dual_pio.md) uses independent program memories and TX/RX
+queues. There is no fetch or FIFO port arbitration between engines. Host access
+is selected and serialized, with separate staging and read snapshots per engine.
+
+Each of the two engines currently has small, separate storage structures. It does **not** have
 a general-purpose RAM address space, stack, cache, or LOAD/STORE instructions.
 
 | Storage | Organization | Capacity | Access |
@@ -12,8 +16,8 @@ a general-purpose RAM address space, stack, cache, or LOAD/STORE instructions.
 | RX FIFO | 4 x 32 bits | 16 bytes | PUSH/autopush produce; host reads consume |
 | X, Y, OSR, ISR | Four 32-bit registers | 16 bytes | Instruction datapath and host debug access |
 
-That is **96 bytes of instruction/FIFO storage**, plus **16 bytes of main data
-registers**. PC, shift counters, configuration, FIFO pointers, IRQ flags, host
+Per engine that is **96 bytes of instruction/FIFO storage**, plus **16 bytes of main
+data registers**; two engines provide 192 bytes and 32 bytes respectively. PC, shift counters, configuration, FIFO pointers, IRQ flags, host
 staging/snapshot registers and other control state are additional storage.
 
 `instruction_fetch.sv` declares `reg [15:0] words [0:31]`. A rising clock edge

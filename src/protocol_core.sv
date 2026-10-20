@@ -5,14 +5,25 @@
 module protocol_core (
     input wire clk, rst_n, enable,
     input wire [3:0] host_address,
-    input wire host_write_en, host_read_en,
+    input wire host_write_en,
     input wire [7:0] host_write_data,
-    input wire [5:0] pin_in,
+    input wire [5:0] pins_sync,
+    input wire [3:0] filtered,
+    input wire [5:0] control_command,
+    input wire word_write, snapshot_read, imem_write,
+    input wire [31:0] write_word,
+    input wire [7:0] data_address,
+    input wire [4:0] imem_address,
+    input wire [15:0] imem_write_data,
+    output wire [15:0] imem_read_data,
+    output reg [31:0] selected_data,
+    output wire [7:0] status, irq_flags,
+    output reg running,
     output reg [7:0] host_read_data,
     output reg [11:0] pins,
     output reg [3:0] directions, open_drain
 );
-    reg running, fault;
+    reg fault;
     reg [31:0] x, y, osr, isr;
     reg [5:0] out_count, in_count;
     reg [4:0] delay_left;
@@ -22,8 +33,6 @@ module protocol_core (
     reg [20:0] pinctrl;
     reg [27:0] route;
     reg [3:0] filter_enable;
-    reg [3:0] filtered;
-    reg [3:0] filter_history [0:2];
     wire [5:0] inputs_actual = {((filtered & filter_enable) |
         (pins_sync[5:2] & ~filter_enable)), pins_sync[1:0]};
     wire [2:0] input_base = route[0] ? route[19:17] : {2'b0, pinctrl[16]};
@@ -34,46 +43,16 @@ module protocol_core (
     reg [3:0] debug_flags;
     reg exec_pending;
     reg [15:0] exec_instruction;
-    (* ASYNC_REG = "TRUE" *) reg [5:0] pins_meta, pins_sync;
-    always @(posedge clk) begin
-        if (!rst_n) begin pins_meta <= 0; pins_sync <= 0; end
-        else begin pins_meta <= pin_in; pins_sync <= pins_meta; end
-    end
-
-    integer f;
-    always @(posedge clk) begin
-        if (!rst_n) begin
-            filtered <= 0;
-            filter_history[0] <= 0; filter_history[1] <= 0; filter_history[2] <= 0;
-        end else begin
-            filter_history[0] <= pins_sync[5:2];
-            filter_history[1] <= filter_history[0];
-            filter_history[2] <= filter_history[1];
-            for (f=0; f<4; f=f+1) begin
-                if (&{pins_sync[f+2], filter_history[0][f], filter_history[1][f], filter_history[2][f]}) filtered[f] <= 1;
-                else if (~|{pins_sync[f+2], filter_history[0][f], filter_history[1][f], filter_history[2][f]}) filtered[f] <= 0;
-            end
-        end
-    end
-
-    reg [4:0] imem_address;
-    reg [7:0] imem_low, data_address;
-    reg [23:0] data_stage;
-    reg [31:0] data_snapshot;
-    wire control_write = host_write_en && host_address == 0;
-    wire abort_release = control_write && host_write_data[5];
-    wire stop = (control_write && host_write_data[1]) || abort_release;
-    wire start = control_write && host_write_data[0] && !stop;
-    wire resume = control_write && host_write_data[4] && !stop && !start && !fault;
-    wire fifo_clear = control_write && host_write_data[2] && (!running || stop);
-    wire clear_errors = control_write && host_write_data[3];
-    wire word_write = host_write_en && host_address == 4'ha;
-    wire [31:0] write_word = {host_write_data, data_stage};
+    wire abort_release = control_command[5];
+    wire stop = control_command[1] || abort_release;
+    wire start = control_command[0] && !stop;
+    wire resume = control_command[4] && !stop && !start && !fault;
+    wire fifo_clear = control_command[2] && (!running || stop);
+    wire clear_errors = control_command[3];
     wire config_write = word_write && !running;
-    wire snapshot_read = host_read_en && host_address == 6;
 
     wire [4:0] current_pc;
-    wire [15:0] fetched_instruction, imem_read_data;
+    wire [15:0] fetched_instruction;
     wire [15:0] instruction = exec_pending ? exec_instruction : fetched_instruction;
     wire [2:0] opcode;
     wire [7:0] arg;
@@ -89,8 +68,8 @@ module protocol_core (
 
     instruction_fetch fetch (
         .clk(clk), .pc_addr(current_pc),
-        .load_we(host_write_en && host_address == 4 && !running),
-        .load_addr(imem_address), .load_data({host_write_data, imem_low}),
+        .load_we(imem_write),
+        .load_addr(imem_address), .load_data(imem_write_data),
         .instr_out(fetched_instruction), .host_read_data(imem_read_data)
     );
     pc program_counter (
@@ -287,7 +266,6 @@ module protocol_core (
     wire [11:0] mapped_pins = (pins & ~pin_mask) | (aligned_pins & pin_mask);
     wire [3:0] mapped_dirs = (directions & ~pin_mask[11:8]) | (aligned_pins[11:8] & pin_mask[11:8]);
 
-    reg [31:0] selected_data;
     always @* begin
         case (data_address)
             0: selected_data = x;
@@ -309,47 +287,20 @@ module protocol_core (
             8'h19: selected_data = {28'd0, filter_enable};
             default: selected_data = 0;
         endcase
+        host_read_data = 0;
         case (host_address)
-            0: host_read_data = 0;
-            1: host_read_data = {debug_flags[1:0], |irq, rx_empty, tx_full, fault,
-                                running && (delay_left != 0 || stall), running};
-            2: host_read_data = {3'd0, imem_address};
-            3: host_read_data = imem_read_data[7:0];
-            4: host_read_data = imem_read_data[15:8];
-            5: host_read_data = data_address;
-            6: host_read_data = selected_data[7:0];
-            7: host_read_data = data_snapshot[15:8];
+            1: host_read_data = status;
             8: host_read_data = {3'd0, current_pc};
-            9: host_read_data = data_snapshot[23:16];
-            10: host_read_data = data_snapshot[31:24];
             11: host_read_data = {1'b0, rx_level, 1'b0, tx_level};
             12: host_read_data = irq;
             13: host_read_data = {4'd0, debug_flags};
             14: host_read_data = {2'd0, inputs_actual};
-            15: host_read_data = 8'h21; // Four-bit host and general bidirectional PIO.
+            default: ;
         endcase
     end
-
-    always @(posedge clk) begin
-        if (!rst_n) begin
-            imem_address <= 0; imem_low <= 0; data_address <= 0;
-            data_stage <= 0; data_snapshot <= 0;
-        end else begin
-            if (snapshot_read) data_snapshot <= selected_data;
-            if (host_write_en) begin
-                case (host_address)
-                    2: imem_address <= host_write_data[4:0];
-                    3: if (!running) imem_low <= host_write_data;
-                    4: if (!running) imem_address <= imem_address + 1'b1;
-                    5: data_address <= host_write_data;
-                    6: data_stage[7:0] <= host_write_data;
-                    7: data_stage[15:8] <= host_write_data;
-                    9: data_stage[23:16] <= host_write_data;
-                    default: ;
-                endcase
-            end
-        end
-    end
+    assign status = {debug_flags[1:0], |irq, rx_empty, tx_full, fault,
+                     running && (delay_left != 0 || stall), running};
+    assign irq_flags = irq;
 
     always @(posedge clk) begin
         if (!rst_n) begin

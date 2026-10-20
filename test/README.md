@@ -8,8 +8,11 @@ python test/run.py
 
 On Windows, `./test/run.ps1` locates optional `.tools` binaries. The portable runner
 uses the submission source list in `info.yaml`. It first runs `pio_fifo_tb.sv`,
-then exhaustive host/pad unit tests and the pin-only core, PIO21 and I2C suite. `make -C test` runs the same cocotb suite; the
-standalone FIFO/host/pad units are included by the Python runner only.
+then exhaustive host/pad units, exact-edge dual-subsystem FIFO tests and the
+pin-only core, PIO21, I2C and dual-PIO suite. The runner also runs host-wrapper
+contention/cancellation tests. `make -C test` runs the same cocotb suite; the
+standalone FIFO/host/pad/subsystem units and host-wrapper tests are included by
+the Python runner only.
 
 Coverage includes all shift widths 1–32 in both directions, count saturation,
 scratch comparisons/decrement loops, MOV/OUT EXEC and PC writes, atomic 32-bit
@@ -93,3 +96,13 @@ Use `--yosys path/to/yowasp-yosys.exe` on Windows where appropriate. Both runs u
 Run `./fpga/test_spi.ps1` and `./fpga/test_i2c.ps1` for the migrated SPI and I2C
 wrappers. [The matrix](../docs/pio21_verification.md) records requirement coverage
 and physical checks that remain unavailable.
+
+## Dual-engine validation
+
+See [the implemented contract](../docs/dual_pio.md) and
+[validation record](../docs/dual_pio_verification.md). `test_dual_pio.py` adds twelve
+pin-only tests, also included in the gate-level Makefile module list. Filter
+with `COCOTB_TEST_FILTER=^test_dual_pio\.` for focused development. The subsystem
+SV unit checks simultaneous operations at the byte interface; it intentionally
+uses RTL hierarchy and is not part of the gate-netlist suite. Host-wrapper tests
+can also run with `python -m unittest discover -s test -p test_pio_host.py -v`.

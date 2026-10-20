@@ -1,3 +1,7 @@
+> Historical single-engine revision 0x21 report. Current dual-engine
+> implementation results and remaining physical qualification are in
+> [dual_pio_verification.md](dual_pio_verification.md).
+
 # Revision 0x21 verification matrix and report
 
 Tests observe the external Tiny Tapeout pins unless explicitly listed as a module

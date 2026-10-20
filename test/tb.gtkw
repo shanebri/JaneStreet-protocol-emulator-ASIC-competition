@@ -36,24 +36,35 @@ tb.user_project.uo_out[7:0]
 @200
 -PIO V0 Execution
 @22
-tb.user_project.core.current_pc[4:0]
-tb.user_project.core.instruction[15:0]
-tb.user_project.core.x[31:0]
-tb.user_project.core.y[31:0]
-tb.user_project.core.osr[31:0]
-tb.user_project.core.isr[31:0]
-tb.user_project.core.delay_left[4:0]
+tb.user_project.pio.engines[0].core.current_pc[4:0]
+tb.user_project.pio.engines[0].core.instruction[15:0]
+tb.user_project.pio.engines[0].core.x[31:0]
+tb.user_project.pio.engines[0].core.y[31:0]
+tb.user_project.pio.engines[0].core.osr[31:0]
+tb.user_project.pio.engines[0].core.isr[31:0]
+tb.user_project.pio.engines[0].core.delay_left[4:0]
 @28
-tb.user_project.core.running
-tb.user_project.core.fault
+tb.user_project.pio.engines[0].core.running
+tb.user_project.pio.engines[0].core.fault
 @200
 -FIFO and Pins
 @28
-tb.user_project.core.stall
-tb.user_project.core.exec_pending
+tb.user_project.pio.engines[0].core.stall
+tb.user_project.pio.engines[0].core.exec_pending
 @22
-tb.user_project.core.tx_level[2:0]
-tb.user_project.core.rx_level[2:0]
-tb.user_project.core.pins[7:0]
+tb.user_project.pio.engines[0].core.tx_level[2:0]
+tb.user_project.pio.engines[0].core.rx_level[2:0]
+tb.user_project.pio.engines[0].core.pins[11:0]
 [pattern_trace] 1
 [pattern_trace] 0
+
+@28
+tb.user_project.pio.selected_engine
+tb.user_project.pio.owner[11:0]
+@22
+tb.user_project.pio.engines[1].core.current_pc[4:0]
+tb.user_project.pio.engines[1].core.x[31:0]
+tb.user_project.pio.engines[1].core.y[31:0]
+tb.user_project.pio.engines[1].core.osr[31:0]
+tb.user_project.pio.engines[1].core.isr[31:0]
+tb.user_project.pio.engines[1].core.pins[11:0]

@@ -33,11 +33,11 @@ module tt_um_shanebri_top (
       .write_data(host_write_data), .data_out(uio_out[3:0]), .data_oe(uio_oe[3:0])
   );
 
-  protocol_core core (
+  pio_subsystem pio (
       .clk(clk), .rst_n(rst_n), .enable(ena),
-      .host_address(host_address), .host_write_en(host_write_en),
-      .host_read_en(host_read_en), .pin_in({uio_in[7:4], ui_in[7:6]}),
+      .host_address(host_address), .host_write_en(host_write_en), .host_read_en(host_read_en),
       .host_write_data(host_write_data), .host_read_data(host_read_data),
+      .pin_in({uio_in[7:4],ui_in[7:6]}),
       .pins(values), .directions(directions), .open_drain(open_drain)
   );
 

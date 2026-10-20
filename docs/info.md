@@ -1,7 +1,8 @@
 ## How it works
 
-PIO V0 replaces the accumulator/UART architecture with one programmable I/O state
-machine. A 32-word instruction memory feeds a combinational decoder and 32-bit
+PIO V0 replaces the accumulator/UART architecture with a programmable I/O state
+machine. The [dual-PIO extension](dual_pio.md) instantiates two independent
+engines; this section describes each engine. A 32-word instruction memory feeds a combinational decoder and 32-bit
 shift/register datapath. OSR serializes TX FIFO data; ISR collects data for the RX
 FIFO. X and Y are independent 32-bit scratch registers for counters, comparisons,
 loop control and default output data. All protocol framing is firmware.
@@ -95,6 +96,10 @@ snapshots; STOP first for a coherent multi-register debug dump.
 
 ### Host byte-register map
 
+Registers 0..E and data selectors 00..19 address the selected engine (reset 0).
+See [the dual-PIO contract](dual_pio.md) for common selectors 1A..1E, banked
+transaction state, GPIO ownership, and simultaneous group commands.
+
 | Address | Name | Read / write |
 | --- | --- | --- |
 | `0` | CONTROL | Reads zero. W: bit0 START, bit1 STOP, bit2 FIFO_CLEAR, bit3 CLEAR_ERRORS, bit4 RESUME, bit5 ABORT_RELEASE; bits7:6 ignored |
@@ -112,7 +117,7 @@ snapshots; STOP first for a coherent multi-register debug dump.
 | `C` | IRQ | R eight flags; W one-to-clear, including while running |
 | `D` | DEBUG | R sticky bit0 TX overflow, bit1 RX underflow, bit2 nonblocking PUSH drop, bit3 empty nonblocking PULL fallback; W one-to-clear |
 | `E` | INPUT | R synchronized protocol inputs [5:0], filtered where enabled |
-| `F` | VERSION | R `0x21` |
+| `F` | VERSION / SM_SELECT | R `0x21`; W 0/1 selects engine, other values ignored |
 
 ABORT_RELEASE stops and clears all four protocol direction bits, with priority
 over STOP/START/RESUME. It preserves values, dedicated outputs, configuration and

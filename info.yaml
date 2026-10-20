@@ -3,7 +3,7 @@ project:
   title:        "Programmable Protocol Emulator"      # Project title
   author:       "Shane Bringhurst"      # Your name
   discord:      ""      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
-  description:  "PIO V0 protocol emulator: 32-bit shifters and scratch registers, TX/RX FIFOs, firmware-defined I/O."
+  description:  "Dual PIO protocol emulator: independent 32-bit engines, TX/RX FIFOs, firmware-defined I/O."
   language:     "SystemVerilog" # other examples include SystemVerilog, Amaranth, VHDL, etc
   clock_hz:     50000000       # Clock frequency in Hz (or 0 if not applicable)
 
@@ -19,6 +19,10 @@ project:
   source_files:
     - "project.sv"
     - "protocol_core.sv"
+    - "pio_inputs.sv"
+    - "pio_host_bank.sv"
+    - "pio_subsystem.sv"
+    - "pio_gpio_owner.sv"
     - "host_interface.sv"
     - "pio_pads.sv"
     - "execution_unit.sv"

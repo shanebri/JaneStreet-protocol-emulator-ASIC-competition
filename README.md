@@ -4,10 +4,10 @@ A PIO-inspired protocol engine for the Jane Street ASIC competition, targeting
 **8×4 Tiny Tapeout tiles on IHP CMOS5L**. Protocol timing and framing are firmware.
 The old accumulator and dedicated UART transmitter have been replaced.
 
-- One state machine, 32 × 16-bit writable instruction memory, programmable entry
-  point and zero-overhead wrap.
+- Two independent state machines, each with 32 words of 16-bit writable
+  instruction memory, programmable entry point and zero-overhead wrap.
 - 32-bit OSR, ISR, X and Y; shifts of 1–32 bits in either direction.
-- Independent four-word, 32-bit TX/RX FIFOs with blocking/nonblocking operations,
+- Per-engine independent four-word, 32-bit TX/RX FIFOs with blocking/nonblocking operations,
   automatic pull/push, atomic host access and visible error flags.
 - JMP, WAIT, IN, OUT, PUSH/PULL, MOV, SET, IRQ, EXEC, delay and optional side-set.
 - Eight dedicated outputs, four general bidirectional pads, six synchronized inputs,
@@ -19,8 +19,9 @@ The old accumulator and dedicated UART transmitter have been replaced.
 This is a **breaking ISA/host-map update** (revision register `0xF` reads `0x21`).
 Old accumulator firmware must be replaced. It is PIO-inspired, not a binary
 compatible RP2040 implementation. The host transport is low-nibble-first; existing PIO UART/SPI binaries retain
-their meaning. Multiple state machines, FIFO joining, fractional clock division
-and external DMA are not implemented.
+their meaning. The [dual-PIO extension](docs/dual_pio.md) adds engine selection, exclusive GPIO
+ownership and group control while retaining VERSION=0x21. FIFO joining, fractional
+clock division and external DMA are not implemented.
 
 ## Run the firmware UART demo
 
@@ -71,11 +72,13 @@ core/ISA/I2C regressions. See [test/README.md](test/README.md) for synthesis and
 checks. The [Arty A7 guide](fpga/README.md) covers the updated FPGA loader and
 button-triggered firmware UART demo; `./fpga/test.ps1` verifies its behavior.
 
-The latest CMOS5L build occupies 15.32% of the 8×4 core before filler, and all
+The recorded **single-engine** CMOS5L build occupies 15.32% of the 8×4 core before filler, and all
 27 functional gate-level tests passed. A slow-corner setup warning means the
 50 MHz target is not yet closed across all corners. The
 [area budget](docs/architecture_area_budget.md) assesses a second PIO engine and
-SRAM IMEM/DMEM candidates, including the gate-job false-failure fix.
+SRAM IMEM/DMEM candidates, including the gate-job false-failure fix. The
+[two-engine implementation and validation](docs/dual_pio_verification.md) still
+requires its own routed CMOS5L area/timing and gate-level qualification.
 
 ## Origin and licensing
 

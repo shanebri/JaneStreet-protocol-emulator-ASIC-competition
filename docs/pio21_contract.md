@@ -1,3 +1,7 @@
+> This contract defines the compatible per-engine revision 0x21 behavior.
+> The implemented [dual-PIO extension](dual_pio.md) adds a second independent
+> instance, bank selection, static output ownership and group commands.
+
 # PIO 0x21 architecture contract
 
 This contract precedes implementation. One state machine, 32x16 instruction RAM,

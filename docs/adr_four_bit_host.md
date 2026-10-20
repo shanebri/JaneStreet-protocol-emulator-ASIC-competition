@@ -19,3 +19,8 @@ is introduced. The 8x4 tile and 50 MHz targets remain subject to physical valida
 
 See [the contract](pio21_contract.md), [I2C ABI](i2c.md), and
 [verification matrix](pio21_verification.md) for exact semantics and evidence.
+
+The approved [dual-PIO extension](dual_pio.md) now adds a second independent
+engine, banked host contexts and static output ownership. It preserves the
+permanent four/four split and the original byte acceptance boundary. Other
+deferred features above remain outside the implementation.

@@ -1,3 +1,8 @@
+> Historical single-engine physical baseline and planning estimates. The second
+> engine is now implemented; see [dual-PIO validation](dual_pio_verification.md)
+> for current generic synthesis results. Two-engine routed area and timing remain
+> unmeasured; none of the estimates below is physical acceptance of that design.
+
 # Area budget for two PIO engines and SRAM
 
 Assessment: 2026-10-20. Baseline: commit `b380b867fb49dfa43f5ff2690f182e17479a2371`,

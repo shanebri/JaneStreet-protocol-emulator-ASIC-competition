@@ -1,6 +1,7 @@
 """Portable alternative to make: python test/run.py (requires Icarus on PATH)."""
 from pathlib import Path
 import subprocess
+import sys
 from xml.etree import ElementTree
 from cocotb_tools.runner import get_runner
 
@@ -8,6 +9,8 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def main():
+    subprocess.run([sys.executable, "-m", "unittest", "discover", "-s", str(ROOT / "test"),
+                    "-p", "test_pio_host.py"], check=True)
     # Read the actual submission manifest so this runner cannot omit a source.
     source_list = (ROOT / "info.yaml").read_text().split("  source_files:\n", 1)[1]
     sources = []
@@ -26,6 +29,11 @@ def main():
                         *[str(ROOT / "src" / (m+".sv")) for m in modules],
                         str(ROOT / "test" / (unit+"_tb.sv"))], check=True)
         subprocess.run(["vvp", str(output)], check=True)
+    output = unit_output.parent / "pio_subsystem.vvp"
+    subprocess.run(["iverilog", "-g2012", "-Wall", "-Wno-timescale", "-s", "pio_subsystem_tb",
+                    "-o", str(output), *map(str, sources),
+                    str(ROOT / "test" / "pio_subsystem_tb.sv")], check=True)
+    subprocess.run(["vvp", str(output)], check=True)
     runner = get_runner("icarus")
     runner.build(
         sources=[*sources, ROOT / "test" / "tb.v"],
@@ -39,7 +47,7 @@ def main():
     )
     results = runner.test(
         hdl_toplevel="tb",
-        test_module="test,test_pio21,test_i2c",
+        test_module="test,test_pio21,test_i2c,test_dual_pio",
         test_dir=ROOT / "test",
         results_xml=ROOT / "test" / "results.xml",
         waves=True,
