@@ -50,8 +50,21 @@ make -C test -B GATES=yes
 ```
 
 That requires `test/gate_level_netlist.v` and the CMOS5L PDK at `PDK_ROOT`.
-No hardened netlist was produced as part of this update. RTL behavior does not
-prove setup/hold closure or clock-domain-crossing reliability.
+The physical build and functional gate-level results for commit `b380b86` are
+recorded in the [area assessment](../docs/architecture_area_budget.md). These
+functional simulations do not prove setup/hold closure or CDC reliability.
+
+### Gate-level CI result naming
+
+The upstream `TinyTapeout/tt-gds-action/gl_test@ihp-cmos5l` action checks results
+with `! grep failure results.xml`, including testcase metadata. In
+[run 39379346181](https://github.com/shanebri/JaneStreet-protocol-emulator-ASIC-competition/actions/runs/39379346181/job/118519148257),
+all 27 tests passed, but the name
+`i2c_reset_mid_byte_and_permanent_scl_clear_failure` triggered that check. It is
+now named `i2c_reset_mid_byte_and_permanent_scl_clear_rejected`; its assertions,
+including the expected `bus_clear_failed` status, are unchanged. Avoid the literal
+word `failure` in passing testcase names while using this upstream action.
+Actual JUnit `<failure>` elements still cause the gate job to fail.
 
 Generic synthesis/structural check:
 

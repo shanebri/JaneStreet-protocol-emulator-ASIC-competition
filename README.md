@@ -71,9 +71,11 @@ core/ISA/I2C regressions. See [test/README.md](test/README.md) for synthesis and
 checks. The [Arty A7 guide](fpga/README.md) covers the updated FPGA loader and
 button-triggered firmware UART demo; `./fpga/test.ps1` verifies its behavior.
 
-The 50 MHz clock and 8×4 tile allocation remain targets. Generic synthesis passes;
-CMOS5L place-and-route, timing closure and physical gate-level validation remain
-necessary before claiming fit or Ethernet/USB capability.
+The latest CMOS5L build occupies 15.32% of the 8×4 core before filler, and all
+27 functional gate-level tests passed. A slow-corner setup warning means the
+50 MHz target is not yet closed across all corners. The
+[area budget](docs/architecture_area_budget.md) assesses a second PIO engine and
+SRAM IMEM/DMEM candidates, including the gate-job false-failure fix.
 
 ## Origin and licensing
 

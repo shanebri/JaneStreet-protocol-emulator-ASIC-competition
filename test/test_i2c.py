@@ -116,8 +116,10 @@ async def i2c_fifo_streaming_starvation_backpressure(dut):
     finally: bus.close()
 
 
+# The upstream GL action greps results.xml for the literal word "failure",
+# including passing testcase names. Keep that word out of this test's name.
 @cocotb.test()
-async def i2c_reset_mid_byte_and_permanent_scl_clear_failure(dut):
+async def i2c_reset_mid_byte_and_permanent_scl_clear_rejected(dut):
     from cocotb.triggers import Timer
     h=Host(dut); await h.reset()
     bus=Bus(dut,host=h)
