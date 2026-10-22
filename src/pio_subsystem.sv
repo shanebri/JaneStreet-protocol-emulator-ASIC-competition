@@ -25,9 +25,11 @@ module pio_subsystem (
     wire [3:0] od [0:1];
     wire [11:0] owner;
     wire [31:0] global_status = {irq[1], irq[0], status[1], status[0]};
-    wire [31:0] command_word = write_word[selected_engine];
-    wire group_write = word_write[selected_engine] && data_address[selected_engine] == 8'h1c;
-    wire owner_write = word_write[selected_engine] && data_address[selected_engine] == 8'h1b;
+    // word_write is already bank-qualified. Decode each source locally rather
+    // than muxing an entire staged word through selected_engine a second time.
+    wire [1:0] group_write, owner_write;
+    wire [11:0] owner_word = ({12{owner_write[0]}} & write_word[0][11:0]) |
+                            ({12{owner_write[1]}} & write_word[1][11:0]);
 
     always @(posedge clk) begin
         if (!rst_n) selected_engine <= 0;
@@ -41,6 +43,8 @@ module pio_subsystem (
     genvar e;
     generate for (e=0; e<2; e=e+1) begin: engines
         wire selected = selected_engine == e;
+        assign group_write[e] = word_write[e] && data_address[e] == 8'h1c;
+        assign owner_write[e] = word_write[e] && data_address[e] == 8'h1b;
         wire byte_write = host_write_en && selected;
         wire byte_read = host_read_en && selected;
         wire [7:0] core_read_data;
@@ -50,9 +54,13 @@ module pio_subsystem (
         wire [4:0] imem_address;
         wire imem_write, snapshot_read;
         wire [5:0] local_control;
-        wire [5:0] group_control = group_write ?
-            {command_word[6+e], command_word[4+e], command_word[10+e],
-             command_word[8+e], command_word[2+e], command_word[e]} : 6'd0;
+        wire [5:0] group_control =
+            ({6{group_write[0]}} &
+             {write_word[0][6+e], write_word[0][4+e], write_word[0][10+e],
+              write_word[0][8+e], write_word[0][2+e], write_word[0][e]}) |
+            ({6{group_write[1]}} &
+             {write_word[1][6+e], write_word[1][4+e], write_word[1][10+e],
+              write_word[1][8+e], write_word[1][2+e], write_word[1][e]});
         wire [7:0] selector = data_address[e];
         wire common_selector = selector >= 8'h1a && selector <= 8'h1e;
         always @* begin
@@ -87,8 +95,8 @@ module pio_subsystem (
             .pins(values[e]), .directions(dirs[e]), .open_drain(od[e]));
     end endgenerate
 
-    pio_gpio_owner ownership (.clk(clk), .rst_n(rst_n), .write_en(owner_write),
-        .write_owner(command_word[11:0]), .running(running), .owner(owner),
+    pio_gpio_owner ownership (.clk(clk), .rst_n(rst_n), .write_en(|owner_write),
+        .write_owner(owner_word), .running(running), .owner(owner),
         .values0(values[0]), .values1(values[1]), .dirs0(dirs[0]), .dirs1(dirs[1]),
         .od0(od[0]), .od1(od[1]), .values(pins), .directions(directions), .open_drain(open_drain));
 endmodule

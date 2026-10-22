@@ -1,0 +1,35 @@
+{
+  "CLOCK_PERIOD": 20,
+  "CLOCK_PORT": "clk",
+  "FALLBACK_SDC": "/nix/store/6a08ghhhzl5a07nr0ly762yh1ah6m5bj-python3-3.13.13-env/lib/python3.13/site-packages/librelane/scripts/base.sdc",
+  "PNR_SDC_FILE": null,
+  "SIGNOFF_SDC_FILE": null,
+  "IO_DELAY_CONSTRAINT": 20,
+  "OUTPUT_CAP_LOAD": 6,
+  "CLOCK_UNCERTAINTY_CONSTRAINT": 0.25,
+  "TIME_DERATING_CONSTRAINT": 5,
+  "SYNTH_DRIVING_CELL": "sg13cmos5l_buf_4/X",
+  "MAX_FANOUT_CONSTRAINT": 10,
+  "SYNTH_STRATEGY": "AREA 0",
+  "STA_CORNERS": [
+    "nom_fast_1p32V_m40C",
+    "nom_slow_1p08V_125C",
+    "nom_typ_1p20V_25C"
+  ],
+  "PNR_CORNERS": null,
+  "RUN_POST_CTS_RESIZER_TIMING": true,
+  "RUN_POST_GRT_RESIZER_TIMING": false,
+  "TIMING_VIOLATION_CORNERS": [
+    "*typ*"
+  ],
+  "SETUP_VIOLATION_CORNERS": null,
+  "HOLD_VIOLATION_CORNERS": [
+    "*"
+  ],
+  "MAX_SLEW_VIOLATION_CORNERS": [
+    ""
+  ],
+  "MAX_CAP_VIOLATION_CORNERS": [
+    ""
+  ]
+}

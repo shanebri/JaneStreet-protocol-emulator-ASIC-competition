@@ -1,0 +1,60 @@
+{
+  "nom_slow_1p08V_125C": {
+    "reported_paths": 1000,
+    "negative_paths": 821,
+    "unique_negative_endpoints": 821,
+    "negative_by_start": {
+      "rst_n": 821
+    },
+    "worst_by_start": [
+      {
+        "start": "rst_n",
+        "end": "_32168_",
+        "q": "\\pio.engines[1].core.isr[3]",
+        "slack": -5.885337
+      },
+      {
+        "start": "_33937_",
+        "end": "_31579_",
+        "q": "uio_out[1]",
+        "slack": 2.705184
+      }
+    ],
+    "worst_path_delay": {
+      "cell_ns": 22.076864,
+      "net_ns": 0.33812899999999996,
+      "input_driver_ns": 0.003887,
+      "buffer_ns": 12.972890000000001,
+      "cell_count": 48,
+      "buffer_count": 26
+    }
+  },
+  "nom_typ_1p20V_25C": {
+    "reported_paths": 1000,
+    "negative_paths": 0,
+    "unique_negative_endpoints": 0,
+    "negative_by_start": {},
+    "worst_by_start": [
+      {
+        "start": "rst_n",
+        "end": "_32168_",
+        "q": "\\pio.engines[1].core.isr[3]",
+        "slack": 2.427593
+      }
+    ]
+  },
+  "nom_fast_1p32V_m40C": {
+    "reported_paths": 1000,
+    "negative_paths": 0,
+    "unique_negative_endpoints": 0,
+    "negative_by_start": {},
+    "worst_by_start": [
+      {
+        "start": "rst_n",
+        "end": "_32168_",
+        "q": "\\pio.engines[1].core.isr[3]",
+        "slack": 7.069545
+      }
+    ]
+  }
+}

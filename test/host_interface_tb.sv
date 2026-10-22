@@ -9,7 +9,10 @@ module host_interface_tb;
     wire [7:0] wd;
     integer writes=0, reads=0;
     reg [7:0] last_write;
-    host_interface dut(clk,rst_n,ena,control,din,source,address,we,re,wd,dout,oe);
+    host_interface dut(.clk(clk), .rst_n(rst_n), .ena(ena), .control(control),
+        .data_in(din), .read_data(source), .address(address), .write_en(we),
+        .read_en(re), .write_data(wd), .data_out(dout), .data_oe(oe),
+        .write_intent(), .read_intent());
     always @(posedge clk) begin
         if (we) begin writes=writes+1; last_write=wd; end
         if (re) reads=reads+1;

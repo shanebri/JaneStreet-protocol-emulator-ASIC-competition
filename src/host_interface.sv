@@ -9,19 +9,24 @@ module host_interface (
     output wire write_en, read_en,
     output wire [7:0] write_data,
     output reg [3:0] data_out,
-    output wire [3:0] data_oe
+    output wire [3:0] data_oe,
+    // Intent is consumed only by synchronous-reset state, with a separate
+    // local reset guard on unreset IMEM. Public acceptance remains qualified.
+    output wire write_intent, read_intent
 );
     reg armed, pending, pending_read, valid_read;
     reg [3:0] pending_address, low;
     reg [7:0] captured;
     wire wr = control[4];
     wire rd = control[5];
-    wire beat = ena && rst_n && armed && (wr ^ rd);
+    wire beat = ena && armed && (wr ^ rd);
     wire matching = pending && pending_address == address && pending_read == rd;
     assign address = control[3:0];
     assign write_data = {data_in, low};
-    assign write_en = beat && wr && matching;
-    assign read_en = beat && rd && !matching;
+    assign write_intent = beat && wr && matching;
+    assign read_intent = beat && rd && !matching;
+    assign write_en = rst_n && write_intent;
+    assign read_en = rst_n && read_intent;
     assign data_oe = {4{ena && rst_n && rd && !wr && (armed || valid_read)}};
     always @(posedge clk) begin
         if (!rst_n || !ena) begin

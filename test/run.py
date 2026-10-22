@@ -10,6 +10,8 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def main():
     subprocess.run([sys.executable, "-m", "unittest", "discover", "-s", str(ROOT / "test"),
+                    "-p", "test_timing_tools.py"], check=True)
+    subprocess.run([sys.executable, "-m", "unittest", "discover", "-s", str(ROOT / "test"),
                     "-p", "test_pio_host.py"], check=True)
     # Read the actual submission manifest so this runner cannot omit a source.
     source_list = (ROOT / "info.yaml").read_text().split("  source_files:\n", 1)[1]
@@ -33,6 +35,12 @@ def main():
     subprocess.run(["iverilog", "-g2012", "-Wall", "-Wno-timescale", "-s", "pio_subsystem_tb",
                     "-o", str(output), *map(str, sources),
                     str(ROOT / "test" / "pio_subsystem_tb.sv")], check=True)
+    subprocess.run(["vvp", str(output)], check=True)
+    output = unit_output.parent / "io_timing.vvp"
+    subprocess.run(["iverilog", "-g2012", "-Wall", "-Wno-timescale", "-s", "io_timing_tb",
+                    "-o", str(output), *map(str, sources),
+                    str(ROOT / "test" / "reference" / "io_timing_37c74dc.v"),
+                    str(ROOT / "test" / "io_timing_tb.sv")], check=True)
     subprocess.run(["vvp", str(output)], check=True)
     runner = get_runner("icarus")
     runner.build(

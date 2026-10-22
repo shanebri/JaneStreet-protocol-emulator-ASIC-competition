@@ -11,7 +11,7 @@ module tt_um_shanebri_top (
     input  wire [7:0] uio_in,   // IOs: Input path
     output wire [7:0] uio_out,  // IOs: Output path
     output wire [7:0] uio_oe,   // IOs: Enable path (active high: 0=input, 1=output)
-    input  wire       ena,      // always 1 when the design is powered, so you can ignore it
+    input  wire       ena,      // dynamic host enable and execution freeze/resume
     input  wire       clk,      // clock
     input  wire       rst_n     // reset_n - low to reset
 );
@@ -28,8 +28,8 @@ module tt_um_shanebri_top (
   host_interface host (
       .clk(clk), .rst_n(rst_n), .ena(ena), .control(ui_in),
       .data_in(uio_in[3:0]), .read_data(host_read_data),
-      .address(host_address), .write_en(host_write_en),
-      .read_en(host_read_en),
+      .address(host_address), .write_en(), .read_en(),
+      .write_intent(host_write_en), .read_intent(host_read_en),
       .write_data(host_write_data), .data_out(uio_out[3:0]), .data_oe(uio_oe[3:0])
   );
 

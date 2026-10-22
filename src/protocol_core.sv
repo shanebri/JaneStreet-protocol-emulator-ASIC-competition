@@ -68,7 +68,9 @@ module protocol_core (
 
     instruction_fetch fetch (
         .clk(clk), .pc_addr(current_pc),
-        .load_we(imem_write),
+        // IMEM has no reset branch: unlike architectural state/FIFO storage,
+        // it must reject reset-edge intent explicitly to retain firmware.
+        .load_we(imem_write && rst_n),
         .load_addr(imem_address), .load_data(imem_write_data),
         .instr_out(fetched_instruction), .host_read_data(imem_read_data)
     );

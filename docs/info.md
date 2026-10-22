@@ -26,6 +26,12 @@ The host map and example binaries are incompatible with the earlier accumulator 
 | `rst_n` | Synchronous state reset; immediate host/protocol OE gating |
 | `ena` | Host/engine enable; keep high during timed protocols |
 
+State reset requires a running clock and at least one rising edge with reset
+low. Keep both host strobes low through release, then sample an enabled idle
+edge before the first beat. Raw reset releases host/protocol OEs even with a
+stopped clock. See the [reset and timing contract](pio21_contract.md#reset-and-timing-qualification)
+for reset retention, re-arm and the unchanged timing budgets/corner requirements.
+
 The complete logical correspondence and pad capabilities are defined in the
 [single pin table](pio21_contract.md#ownership-and-transport). Dedicated outputs
 retain indices 0..7. Protocol pads have value indices 8..11 and input indices 2..5.

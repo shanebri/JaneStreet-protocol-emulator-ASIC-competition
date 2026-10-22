@@ -1,5 +1,6 @@
 `default_nettype none
-// One context per engine. Only complete accepted byte transactions enter here.
+// One context per engine. Complete byte intent enters here. All stored context
+// has a dominant synchronous reset; the core locally guards unreset IMEM writes.
 module pio_host_bank (
     input wire clk, rst_n, running,
     input wire [3:0] address,

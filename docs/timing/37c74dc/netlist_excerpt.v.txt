@@ -1,0 +1,142 @@
+// Evidence excerpt only; not a compilable netlist.
+
+// Source line 184018
+sg13cmos5l_buf_1 input1 (.A(ena),
+    .X(net1));
+
+// Source line 184038
+sg13cmos5l_buf_1 input2 (.A(rst_n),
+    .X(net2));
+
+// Source line 184048
+sg13cmos5l_buf_1 input7 (.A(ui_in[4]),
+    .X(net7));
+
+// Source line 184050
+sg13cmos5l_buf_1 input8 (.A(ui_in[5]),
+    .X(net8));
+
+// Source line 104697
+sg13cmos5l_nand2_1 _17300_ (.Y(_10529_),
+    .A(net1),
+    .B(net2691));
+
+// Source line 104752
+sg13cmos5l_a21oi_1 _17315_ (.A1(net8),
+    .A2(net7),
+    .Y(_10543_),
+    .B1(_10529_));
+
+// Source line 104760
+sg13cmos5l_and3_1 _17317_ (.X(_10545_),
+    .A(net7866),
+    .B(_10533_),
+    .C(_10543_));
+
+// Source line 104768
+sg13cmos5l_and2_1 _17319_ (.A(net1663),
+    .B(_10545_),
+    .X(_10547_));
+
+// Source line 104771
+sg13cmos5l_and2_1 _17320_ (.A(net7),
+    .B(_10547_),
+    .X(_10548_));
+
+// Source line 104863
+sg13cmos5l_nand2_1 _17347_ (.Y(_10575_),
+    .A(net2533),
+    .B(_10548_));
+
+// Source line 104866
+sg13cmos5l_nor2_1 _17348_ (.A(_10573_),
+    .B(_10575_),
+    .Y(_10576_));
+
+// Source line 104881
+sg13cmos5l_a22oi_1 _17352_ (.Y(_10580_),
+    .B1(_10579_),
+    .B2(net1463),
+    .A2(_10576_),
+    .A1(net2763));
+
+// Source line 104900
+sg13cmos5l_and2_1 _17357_ (.A(net1360),
+    .B(_10584_),
+    .X(_10585_));
+
+// Source line 106801
+sg13cmos5l_and2_1 _17828_ (.A(net1289),
+    .B(_11055_),
+    .X(_11056_));
+
+// Source line 109420
+sg13cmos5l_nand2_1 _18522_ (.Y(_11750_),
+    .A(net841),
+    .B(net1266));
+
+// Source line 109426
+sg13cmos5l_nand2_1 _18524_ (.Y(_11752_),
+    .A(net1288),
+    .B(net725));
+
+// Source line 109433
+sg13cmos5l_a221oi_1 _18526_ (.B2(_11216_),
+    .C1(net676),
+    .B1(net815),
+    .A1(_11055_),
+    .Y(_11754_),
+    .A2(_11228_));
+
+// Source line 109443
+sg13cmos5l_nand2_1 _18528_ (.Y(_11756_),
+    .A(net815),
+    .B(_11754_));
+
+// Source line 149002
+sg13cmos5l_nor2_1 _28585_ (.A(net1431),
+    .B(_11756_),
+    .Y(_07673_));
+
+// Source line 149005
+sg13cmos5l_a21oi_1 _28586_ (.A1(net1451),
+    .A2(_11246_),
+    .Y(_07674_),
+    .B1(_07673_));
+
+// Source line 155921
+sg13cmos5l_o21ai_1 _30395_ (.B1(_09364_),
+    .Y(_09365_),
+    .A1(_03081_),
+    .A2(_07674_));
+
+// Source line 163467
+sg13cmos5l_dfrbpq_1 _32168_ (.RESET_B(net4538),
+    .D(_02192_),
+    .Q(\pio.engines[1].core.isr[3] ),
+    .CLK(clknet_leaf_6_clk));
+
+// Source line 163471
+sg13cmos5l_tiehi _32168__4539 (.L_HI(net4538));
+
+// Source line 104245
+sg13cmos5l_inv_1 _17109_ (.Y(_10354_),
+    .A(net2769));
+
+// Source line 130413
+sg13cmos5l_nor3_1 _24087_ (.A(net2653),
+    .B(net5),
+    .C(_03594_),
+    .Y(_03625_));
+
+// Source line 127015
+sg13cmos5l_nor3_1 _23157_ (.A(_10243_),
+    .B(\pio.engines[1].core.tx_fifo.write_ptr[0] ),
+    .C(_02854_),
+    .Y(_02857_));
+
+// Source line 127471
+sg13cmos5l_nor3_1 _23287_ (.A(\pio.engines[1].core.tx_fifo.write_ptr[1] ),
+    .B(_10244_),
+    .C(_02854_),
+    .Y(_02923_));

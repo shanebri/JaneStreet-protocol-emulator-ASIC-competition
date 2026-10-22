@@ -1,5 +1,12 @@
 # Dual PIO implementation and validation
 
+> Physical-status update, 2026-10-21: the completed build for `37c74dc` passed
+> GDS, precheck, viewer and all 39 functional gate tests. Routed non-filler
+> utilization is 30.56%, with unresolved timing/electrical violations. The
+> [I/O timing report](io_timing_report.md) supersedes the historical physical
+> qualification status below; its [implementation plan](io_timing_implementation_plan.md)
+> defines the next work.
+
 Date: 2026-10-20. Compatible ISA/host revision: `0x21`.
 Dual-extension capabilities: `0x50490102` (revision 1, two engines).
 The [implemented contract](dual_pio.md) defines the register map and lifecycle.

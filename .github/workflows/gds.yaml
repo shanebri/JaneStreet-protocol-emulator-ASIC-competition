@@ -18,6 +18,9 @@ jobs:
         with:
           pdk: ihp-sg13cmos5l
 
+      - name: Enforce all-corner post-route timing and electrical checks
+        run: python3 tools/timing/check_signoff.py runs/wokwi
+
   precheck:
     needs: gds
     runs-on: ubuntu-24.04

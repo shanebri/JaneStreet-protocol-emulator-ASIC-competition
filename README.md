@@ -72,13 +72,15 @@ core/ISA/I2C regressions. See [test/README.md](test/README.md) for synthesis and
 checks. The [Arty A7 guide](fpga/README.md) covers the updated FPGA loader and
 button-triggered firmware UART demo; `./fpga/test.ps1` verifies its behavior.
 
-The recorded **single-engine** CMOS5L build occupies 15.32% of the 8×4 core before filler, and all
-27 functional gate-level tests passed. A slow-corner setup warning means the
-50 MHz target is not yet closed across all corners. The
-[area budget](docs/architecture_area_budget.md) assesses a second PIO engine and
-SRAM IMEM/DMEM candidates, including the gate-job false-failure fix. The
-[two-engine implementation and validation](docs/dual_pio_verification.md) still
-requires its own routed CMOS5L area/timing and gate-level qualification.
+The completed **dual-engine** CMOS5L build at `37c74dc` occupies 30.56% of the
+8×4 core before filler, and all 39 functional gate-level tests passed. Its
+slow-corner setup slack is -5.885 ns; the listed failures originate at reset,
+and electrical violations also remain. See the [I/O timing investigation](docs/io_timing_report.md)
+and [implementation plan](docs/io_timing_implementation_plan.md) for the evidence,
+constraint audit and proposed fixes. The 50 MHz target is not yet qualified
+across all required modes/corners. The [area budget](docs/architecture_area_budget.md)
+retains historical single-engine measurements and SRAM planning estimates;
+[dual-PIO validation](docs/dual_pio_verification.md) records the implementation tests.
 
 ## Origin and licensing
 

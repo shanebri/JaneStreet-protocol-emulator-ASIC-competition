@@ -34,6 +34,48 @@ Reads pop at the first DATA_0 beat; writes commit on DATA_3's second beat.
 FIFO depth absorbs bursts, not a sustained service deficit. The adapter exposes
 the original byte address/data/acceptance interface for future replacement.
 
+## Reset and timing qualification
+
+The implementation retains **A1, externally synchronous state reset**. Clock
+must run while reset is low. Hold `rst_n=0` through at least one rising edge
+with valid setup/hold; a pulse entirely between edges is not a state reset.
+Reset is sampled regardless of `ena`. IMEM retains its program and rejects
+writes at every reset edge; all bank staging, FIFO metadata and execution state
+reset. FIFO storage also rejects reset-edge writes, although its old words are
+not architectural state after the level resets to zero.
+
+Hold RD and WR low during reset and release. After release, sample one rising
+edge with `rst_n=1`, `ena=1`, RD=WR=0 to re-arm. The first beat may be accepted
+at the following rising edge. No ready wire or extra command cycle is added.
+START still commits on its final high-nibble edge, and the first execution tick
+is the following enabled edge. Runtime disable discards transport phase and
+requires the same enabled idle re-arm edge; it preserves selection, staging,
+firmware and execution state. RD+WR resynchronization also requires re-arm.
+
+Raw reset immediately disables both host and protocol pad OEs without a clock.
+With a stopped clock, assertion releases drive but does not reset state. Keep
+reset asserted until a clock edge has sampled it before releasing reset and
+re-arming. An asynchronous reset source must be conditioned by the system to
+meet this synchronous contract; this design adds no release synchronizer.
+
+For this timing experiment, keep the existing 20 ns clock, 4 ns input **min and
+max** delays, 4 ns output **min and max** delays, 0.25 ns uncertainty, 0.15 ns
+clock transition, 0.95/1.05 early/late derates, existing input driver and 0.006 pF
+output loads. These are preserved block-boundary budgets, not measured board
+delays. Production continues to use the flow's fallback SDC; no reset, enable,
+host multicycle or asynchronous input exception is installed. The six protocol
+inputs remain timed until mapped first-stage synchronizer endpoints and CDC
+requirements can be qualified. Reset-to-OE paths remain timed. Operational
+case analysis is a separate diagnostic session only.
+
+Required corners are `nom_slow_1p08V_125C`, `nom_typ_1p20V_25C` and
+`nom_fast_1p32V_m40C`, retaining nominal RC. Acceptance requires setup/hold
+slack >= 0 ns, zero TNS/violating endpoints, zero slew/cap/fanout violations and
+zero unexplained parasitic annotation gaps at all three corners. No additional
+engineering margin or unrun RC corner is implied. Preserve DRC/LVS/antenna and
+structural checks. The implementation remains an experiment until routed results
+and independent per-port/register/reset reports satisfy these requirements.
+
 ## Additive stopped-state configuration
 
 Existing byte addresses and selectors 0x00..0x15 retain meaning, except PINS
