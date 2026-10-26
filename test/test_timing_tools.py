@@ -18,6 +18,9 @@ sys.path.insert(0, str(TOOLS))
 import replay
 import physical_trial
 import audit_nor_trial
+import implementation_trial
+import collect_implementation
+import compare_implementation
 sys.path.pop(0)
 
 
@@ -215,6 +218,96 @@ class ReplayWorkflowTests(unittest.TestCase):
             self.invoke("--reference", process=mismatch)
         manifest = json.loads((self.out / "manifest.json").read_text())
         self.assertNotEqual(manifest["status"], "complete")
+
+
+class ImplementationTrialTests(unittest.TestCase):
+    def test_replay_must_match_all_fresh_corners_and_modes(self):
+        sessions = [dict(corner=c, mode=m, setup=0.1, hold=0.1) for c in gate.REQUIRED_CORNERS
+                    for m in ('baseline', 'operational', 'reset_active')]
+        collect_implementation.validate_replay({'status': 'complete', 'sessions': sessions}, passing_metrics())
+        with self.assertRaises(ValueError):
+            collect_implementation.validate_replay({'status': 'complete', 'sessions': sessions[:-1]+sessions[:1]}, passing_metrics())
+        sessions[0]['setup'] = -6.8
+        with self.assertRaises(ValueError):
+            collect_implementation.validate_replay({'status': 'complete', 'sessions': sessions}, passing_metrics())
+
+    def test_comparison_rejects_combined_knobs_or_mismatched_inputs(self):
+        def manifest(name):
+            return dict(implementation_trial.trial_plan(name), trial=name,
+                        source_sha256={'a.sv': 'same'}, input_state_sha256='same',
+                        resolved_config_sha256='same', execution_overrides={'OPENROAD_THREADS': 8})
+        control, candidate = manifest('placement_control'), manifest('placement_timing')
+        before, after = {'PL_TIMING_DRIVEN': False, 'PNR_CORNERS': None}, {'PL_TIMING_DRIVEN': True, 'PNR_CORNERS': None}
+        compare_implementation.audit_pair(control, candidate, before, after)
+        with self.assertRaises(ValueError):
+            compare_implementation.audit_pair(control, candidate, before, dict(after, PNR_CORNERS=['slow']))
+        with self.assertRaises(ValueError):
+            compare_implementation.audit_pair(control, dict(candidate, input_state_sha256='different'), before, after)
+        compare_implementation.audit_pair(candidate, manifest('placement_corners'), after, after)
+
+    def test_collection_rejects_missing_or_invalid_measurements(self):
+        metrics = passing_metrics()
+        metrics.update({'design__instance__area__stdcell': 100,
+                        'design__instance__utilization__stdcell': 0.3})
+        self.assertEqual(collect_implementation.selected_metrics(metrics), metrics)
+        for value in (None, True, math.inf, '0'):
+            with self.subTest(value=value), self.assertRaises(ValueError):
+                collect_implementation.selected_metrics(dict(metrics, design__instance__area__stdcell=value))
+        del metrics['design__instance__area__stdcell']
+        with self.assertRaises(ValueError):
+            collect_implementation.selected_metrics(metrics)
+
+    def test_first_path_preserves_critical_endpoint_and_not_later_paths(self):
+        report = ('Startpoint: a\nEndpoint: b\n -3.25 slack (VIOLATED)\n\n'
+                  'Startpoint: c\nEndpoint: d\n 1.0 slack (MET)\n')
+        self.assertEqual(collect_implementation.path_summary(report),
+                         {'startpoint': 'a', 'endpoint': 'b', 'slack_ns': -3.25})
+        self.assertEqual(collect_implementation.first_path(''), '')
+
+    def test_independent_experiment_changes(self):
+        control = implementation_trial.trial_plan('placement_control')
+        timing = implementation_trial.trial_plan('placement_timing')
+        corners = implementation_trial.trial_plan('placement_corners')
+        self.assertEqual(control['input_stage'], timing['input_stage'])
+        self.assertEqual(timing['input_stage'], corners['input_stage'])
+        self.assertEqual(control['changes'], {})
+        self.assertEqual(timing['changes'], {'PL_TIMING_DRIVEN': True})
+        self.assertEqual(corners['changes'], timing['changes'])
+        self.assertEqual(timing['step_overrides'], {})
+        self.assertEqual(corners['step_overrides'], {'OpenROAD.GlobalPlacement':
+                         {'PNR_CORNERS': list(gate.REQUIRED_CORNERS)}})
+        for strategy in ('4', '0'):
+            plan = implementation_trial.trial_plan('mapping_delay'+strategy)
+            self.assertIsNone(plan['input_stage'])
+            self.assertEqual(plan['changes'], {'SYNTH_STRATEGY': 'DELAY '+strategy})
+            self.assertEqual(plan['step_overrides'], {})
+
+    def test_changed_baseline_or_signoff_rejected(self):
+        base = {'CLOCK_PERIOD': 20, 'PDK': 'ihp-sg13cmos5l', 'SYNTH_STRATEGY': 'AREA 0',
+                'SYNTH_CORNER': None, 'PL_TIMING_DRIVEN': False, 'PNR_CORNERS': None,
+                'STA_CORNERS': list(gate.REQUIRED_CORNERS)}
+        for key in ('SETUP_VIOLATION_CORNERS', 'HOLD_VIOLATION_CORNERS',
+                    'MAX_SLEW_VIOLATION_CORNERS', 'MAX_CAP_VIOLATION_CORNERS'):
+            base[key] = ['*']
+        implementation_trial.validate_baseline(base)
+        for key, value in (('CLOCK_PERIOD', 25), ('SYNTH_STRATEGY', 'DELAY 4'),
+                           ('PL_TIMING_DRIVEN', True), ('PNR_CORNERS', ['typ']),
+                           ('STA_CORNERS', list(gate.REQUIRED_CORNERS)[1:]),
+                           ('MAX_SLEW_VIOLATION_CORNERS', [])):
+            with self.subTest(key=key), self.assertRaises(ValueError):
+                implementation_trial.validate_baseline(dict(base, **{key: value}))
+
+    def test_pin_audit_accepts_status_but_rejects_geometry_changes(self):
+        pins = '\n'.join(f'- p{i} + NET p{i} + DIRECTION INPUT + USE SIGNAL '
+                         '+ PORT + LAYER Metal4 ( -1 -2 ) ( 1 2 ) + PLACED ( 10 20 ) N ;'
+                         for i in range(43))
+        template = 'DIEAREA ( 0 0 ) ( 100 200 ) ; PINS 43 ;\n'+pins+'\nEND PINS'
+        audit = implementation_trial.template_fingerprint
+        self.assertEqual(audit(template), audit(template.replace('PLACED', 'FIXED')))
+        self.assertNotEqual(audit(template), audit(template.replace('( 10 20 )', '( 11 20 )')))
+        self.assertNotEqual(audit(template), audit(template.replace('( 100 200 )', '( 100 201 )')))
+        with self.assertRaises(ValueError):
+            audit('DIEAREA ( 0 0 ) ( 100 200 ) ; PINS 0 ; END PINS')
 
 
 class NorTrialAuditTests(unittest.TestCase):

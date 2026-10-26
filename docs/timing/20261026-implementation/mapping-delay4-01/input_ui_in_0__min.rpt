@@ -1,0 +1,53 @@
+Startpoint: ui_in[0] (input port clocked by clk)
+Endpoint: _32686_ (rising edge-triggered flip-flop clocked by clk)
+Path Group: clk
+Path Type: min
+
+Fanout         Cap        Slew       Delay        Time   Description
+---------------------------------------------------------------------------------------------
+                                  0.000000    0.000000   clock clk (rise edge)
+                                  0.000000    0.000000   clock network delay (propagated)
+                                  4.000000    4.000000 v input external delay
+     1    0.002405    0.026848    0.002667    4.002667 v ui_in[0] (in)
+                                                         ui_in[0] (net)
+                      0.026848    0.000000    4.002667 v input3/A (sg13cmos5l_buf_1)
+     1    0.044287    0.234472    0.234949    4.237616 v input3/X (sg13cmos5l_buf_1)
+                                                         net3 (net)
+                      0.234649    0.005115    4.242731 v fanout1653/A (sg13cmos5l_buf_1)
+     4    0.181715    0.937145    0.754140    4.996871 v fanout1653/X (sg13cmos5l_buf_1)
+                                                         net1653 (net)
+                      0.937235    0.007617    5.004488 v _25273_/A1 (sg13cmos5l_a21oi_1)
+     1    0.003518    0.056851    0.243541    5.248030 ^ _25273_/Y (sg13cmos5l_a21oi_1)
+                                                         _04248_ (net)
+                      0.056851    0.000222    5.248251 ^ _25274_/B (sg13cmos5l_nor2_1)
+     1    0.002110    0.029721    0.046886    5.295138 v _25274_/Y (sg13cmos5l_nor2_1)
+                                                         _01584_ (net)
+                      0.029721    0.000136    5.295274 v _32686_/D (sg13cmos5l_dfrbpq_1)
+                                              5.295274   data arrival time
+
+                                  0.000000    0.000000   clock clk (rise edge)
+                                  0.000000    0.000000   clock source latency
+     1    0.136988    0.224775    0.217820    0.217820 ^ clk (in)
+                                                         clk (net)
+                      0.281946    0.000000    0.217820 ^ clkbuf_0_clk/A (sg13cmos5l_buf_8)
+     4    0.231571    0.182308    0.279956    0.497776 ^ clkbuf_0_clk/X (sg13cmos5l_buf_8)
+                                                         clknet_0_clk (net)
+                      0.314879    0.137318    0.635094 ^ clkbuf_2_1_0_clk/A (sg13cmos5l_buf_8)
+     8    0.281936    0.235871    0.362640    0.997734 ^ clkbuf_2_1_0_clk/X (sg13cmos5l_buf_8)
+                                                         clknet_2_1_0_clk (net)
+                      0.251554    0.049370    1.047104 ^ clkbuf_5_8__f_clk/A (sg13cmos5l_buf_8)
+     6    0.107311    0.107010    0.262597    1.309701 ^ clkbuf_5_8__f_clk/X (sg13cmos5l_buf_8)
+                                                         clknet_5_8__leaf_clk (net)
+                      0.108277    0.009739    1.319440 ^ clkbuf_leaf_38_clk/A (sg13cmos5l_buf_8)
+    15    0.070143    0.074322    0.181447    1.500887 ^ clkbuf_leaf_38_clk/X (sg13cmos5l_buf_8)
+                                                         clknet_leaf_38_clk (net)
+                      0.074672    0.004218    1.505104 ^ _32686_/CLK (sg13cmos5l_dfrbpq_1)
+                                  0.250000    1.755104   clock uncertainty
+                                  0.000000    1.755104   clock reconvergence pessimism
+                                 -0.037219    1.717885   library hold time
+                                              1.717885   data required time
+---------------------------------------------------------------------------------------------
+                                              1.717885   data required time
+                                             -5.295274   data arrival time
+---------------------------------------------------------------------------------------------
+                                              3.577389   slack (MET)

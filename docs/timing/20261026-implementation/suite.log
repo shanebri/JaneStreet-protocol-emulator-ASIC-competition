@@ -1,0 +1,84 @@
+# placement_timing versus placement_control
+
+Vectors: slow / typical / fast. Delta = candidate minus control.
+
+| Metric | Control | Candidate | Delta | Candidate |
+| --- | --- | --- | --- | --- |
+| Setup WS (ns) | -6.809803 / 2.992410 / 7.564806 | -4.019178 / 3.520288 / 7.896596 | 2.790625 / 0.527878 / 0.331790 | FAIL |
+| Hold WS (ns) | 0.666255 / 0.314691 / 0.122530 | 0.672997 / 0.328550 / 0.129108 | 0.006742 / 0.013858 / 0.006579 | PASS |
+| Setup TNS (ns) | -979.921111 / 0 / 0 | -360.433613 / 0 / 0 | 619.487498 / 0 / 0 | FAIL |
+| Hold TNS (ns) | 0 / 0 / 0 | 0 / 0 / 0 | 0 / 0 / 0 | PASS |
+| Setup endpoints | 616 / 0 / 0 | 435 / 0 / 0 | -181 / 0 / 0 | FAIL |
+| Hold endpoints | 0 / 0 / 0 | 0 / 0 / 0 | 0 / 0 / 0 | PASS |
+| Slew violations | 55 / 4 / 0 | 65 / 0 / 0 | 10 / -4 / 0 | FAIL |
+| Cap violations | 0 / 0 / 0 | 0 / 0 / 0 | 0 / 0 / 0 | PASS |
+| Fanout violations | 183 / 183 / 183 | 174 / 174 / 174 | -9 / -9 / -9 | FAIL |
+| Filtered annotation gaps | 0 / 0 / 0 | 0 / 0 / 0 | 0 / 0 / 0 | PASS |
+| Standard-cell area excluding filler (um2) | 369414 | 368697 | -717.000000 | INFO |
+| Standard-cell utilization | 0.305762 | 0.305169 | -0.000593 | INFO |
+| Inferred latches | 0 | 0 | 0.000000 | PASS |
+| Unmapped cells | 0 | 0 | 0.000000 | PASS |
+| Synthesis check errors | 0 | 0 | 0.000000 | PASS |
+
+Strict gate: control FAIL; candidate FAIL.
+
+This is extracted screening evidence. Full GDS/DRC/LVS/antenna/precheck and final gate-level verification remain required before acceptance.
+
+RUN ["/nix/store/lrlpbc4nd373kds32zl72fd8qy2ayah0-devshell-dir/bin/python3", "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/tools/timing/implementation_trial.py", "--archive-root", "/home/shane/eda/timing-20261024/current", "--pdk-root", "/home/shane/eda/pdk-2bbec755", "--design-root", "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition", "--threads", "8", "--trial", "placement_corners", "--out", "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/implementation/placement-corners-01"]
+FINISHED placement-corners-01: exit 1
+# placement_corners versus placement_timing
+
+Vectors: slow / typical / fast. Delta = candidate minus control.
+
+| Metric | Control | Candidate | Delta | Candidate |
+| --- | --- | --- | --- | --- |
+| Setup WS (ns) | -4.019178 / 3.520288 / 7.896596 | -1.440862 / 5.122854 / 8.910012 | 2.578316 / 1.602566 / 1.013416 | FAIL |
+| Hold WS (ns) | 0.672997 / 0.328550 / 0.129108 | 0.656217 / 0.322299 / 0.127587 | -0.016780 / -0.006251 / -0.001522 | PASS |
+| Setup TNS (ns) | -360.433613 / 0 / 0 | -22.343168 / 0 / 0 | 338.090445 / 0 / 0 | FAIL |
+| Hold TNS (ns) | 0 / 0 / 0 | 0 / 0 / 0 | 0 / 0 / 0 | PASS |
+| Setup endpoints | 435 / 0 / 0 | 33 / 0 / 0 | -402 / 0 / 0 | FAIL |
+| Hold endpoints | 0 / 0 / 0 | 0 / 0 / 0 | 0 / 0 / 0 | PASS |
+| Slew violations | 65 / 0 / 0 | 27 / 0 / 0 | -38 / 0 / 0 | FAIL |
+| Cap violations | 0 / 0 / 0 | 0 / 0 / 0 | 0 / 0 / 0 | PASS |
+| Fanout violations | 174 / 174 / 174 | 178 / 178 / 178 | 4 / 4 / 4 | FAIL |
+| Filtered annotation gaps | 0 / 0 / 0 | 1 / 1 / 1 | 1 / 1 / 1 | FAIL |
+| Standard-cell area excluding filler (um2) | 368697 | 369537 | 840.000000 | INFO |
+| Standard-cell utilization | 0.305169 | 0.305864 | 0.000695 | INFO |
+| Inferred latches | 0 | 0 | 0.000000 | PASS |
+| Unmapped cells | 0 | 0 | 0.000000 | PASS |
+| Synthesis check errors | 0 | 0 | 0.000000 | PASS |
+
+Strict gate: control FAIL; candidate FAIL.
+
+This is extracted screening evidence. Full GDS/DRC/LVS/antenna/precheck and final gate-level verification remain required before acceptance.
+
+RUN ["/nix/store/lrlpbc4nd373kds32zl72fd8qy2ayah0-devshell-dir/bin/python3", "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/tools/timing/implementation_trial.py", "--archive-root", "/home/shane/eda/timing-20261024/current", "--pdk-root", "/home/shane/eda/pdk-2bbec755", "--design-root", "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition", "--threads", "8", "--trial", "mapping_control", "--out", "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/implementation/mapping-control-01", "--template", "/home/shane/eda/timing-20261024/parallel-fetch/tt_block_8x4_pgvdd.def"]
+RUN ["/nix/store/lrlpbc4nd373kds32zl72fd8qy2ayah0-devshell-dir/bin/python3", "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/tools/timing/implementation_trial.py", "--archive-root", "/home/shane/eda/timing-20261024/current", "--pdk-root", "/home/shane/eda/pdk-2bbec755", "--design-root", "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition", "--threads", "8", "--trial", "mapping_delay4", "--out", "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/implementation/mapping-delay4-01", "--template", "/home/shane/eda/timing-20261024/parallel-fetch/tt_block_8x4_pgvdd.def"]
+FINISHED mapping-control-01: exit 1
+FINISHED mapping-delay4-01: exit 1
+# mapping_delay4 versus mapping_control
+
+Vectors: slow / typical / fast. Delta = candidate minus control.
+
+| Metric | Control | Candidate | Delta | Candidate |
+| --- | --- | --- | --- | --- |
+| Setup WS (ns) | -6.809803 / 2.992410 / 7.564806 | -1.825343 / 4.644223 / 7.404213 | 4.984459 / 1.651813 / -0.160593 | FAIL |
+| Hold WS (ns) | 0.666255 / 0.314691 / 0.122530 | 0.671722 / 0.320232 / 0.117383 | 0.005467 / 0.005540 / -0.005147 | PASS |
+| Setup TNS (ns) | -979.921111 / 0 / 0 | -32.948461 / 0 / 0 | 946.972650 / 0 / 0 | FAIL |
+| Hold TNS (ns) | 0 / 0 / 0 | 0 / 0 / 0 | 0 / 0 / 0 | PASS |
+| Setup endpoints | 616 / 0 / 0 | 39 / 0 / 0 | -577 / 0 / 0 | FAIL |
+| Hold endpoints | 0 / 0 / 0 | 0 / 0 / 0 | 0 / 0 / 0 | PASS |
+| Slew violations | 55 / 4 / 0 | 141 / 25 / 0 | 86 / 21 / 0 | FAIL |
+| Cap violations | 0 / 0 / 0 | 19 / 20 / 20 | 19 / 20 / 20 | FAIL |
+| Fanout violations | 183 / 183 / 183 | 187 / 187 / 187 | 4 / 4 / 4 | FAIL |
+| Filtered annotation gaps | 0 / 0 / 0 | 0 / 0 / 0 | 0 / 0 / 0 | PASS |
+| Standard-cell area excluding filler (um2) | 369414 | 377158 | 7744.000000 | INFO |
+| Standard-cell utilization | 0.305762 | 0.312172 | 0.006410 | INFO |
+| Inferred latches | 0 | 0 | 0.000000 | PASS |
+| Unmapped cells | 0 | 0 | 0.000000 | PASS |
+| Synthesis check errors | 0 | 0 | 0.000000 | PASS |
+
+Strict gate: control FAIL; candidate FAIL.
+
+This is extracted screening evidence. Full GDS/DRC/LVS/antenna/precheck and final gate-level verification remain required before acceptance.
+

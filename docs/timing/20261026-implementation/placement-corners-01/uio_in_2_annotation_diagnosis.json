@@ -1,0 +1,42 @@
+{
+  "driver": "uio_in[2]",
+  "partial_sinks": [
+    "ANTENNA_34/A",
+    "ANTENNA_36/A",
+    "ANTENNA_38/A",
+    "fanout2572/A"
+  ],
+  "cells": [
+    {
+      "master": "sg13cmos5l_antennanp",
+      "name": "ANTENNA_34",
+      "ports": {
+        "A": "uio_in[2]"
+      }
+    },
+    {
+      "master": "sg13cmos5l_antennanp",
+      "name": "ANTENNA_36",
+      "ports": {
+        "A": "uio_in[2]"
+      }
+    },
+    {
+      "master": "sg13cmos5l_antennanp",
+      "name": "ANTENNA_38",
+      "ports": {
+        "A": "uio_in[2]"
+      }
+    },
+    {
+      "master": "sg13cmos5l_buf_1",
+      "name": "fanout2572",
+      "ports": {
+        "A": "uio_in[2]",
+        "X": "net2572"
+      }
+    }
+  ],
+  "spef_identifier": "*16",
+  "decision": "Unresolved partial parasitic annotation. Preserve rejection; do not exclude this live input net."
+}
