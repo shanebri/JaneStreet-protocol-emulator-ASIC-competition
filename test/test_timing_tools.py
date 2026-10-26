@@ -17,6 +17,7 @@ spec.loader.exec_module(gate)
 sys.path.insert(0, str(TOOLS))
 import replay
 import physical_trial
+import audit_nor_trial
 sys.path.pop(0)
 
 
@@ -214,6 +215,32 @@ class ReplayWorkflowTests(unittest.TestCase):
             self.invoke("--reference", process=mismatch)
         manifest = json.loads((self.out / "manifest.json").read_text())
         self.assertNotEqual(manifest["status"], "complete")
+
+
+class NorTrialAuditTests(unittest.TestCase):
+    control = ('module top; wire n;\n'
+               'sg13cmos5l_nor4_1 _23246_ (.A(a), .B(b), .C(c), .D(d), .Y(n));\n'
+               'sg13cmos5l_buf_1 other (.A(n), .X(out));\nendmodule')
+    candidate = control.replace('nor4_1', 'nor4_2').replace('.D(d), .Y(n)', '.Y(n), .D(d)')
+
+    def test_drive_strength_only_with_reordered_ports(self):
+        self.assertEqual(audit_nor_trial.audit(self.control, self.candidate)['instance_count'], 2)
+
+    def test_rewiring_other_changes_and_missing_change_rejected(self):
+        for candidate in (self.control, self.candidate.replace('.A(a)', '.A(b)'),
+                          self.candidate.replace('buf_1', 'buf_2'),
+                          self.candidate.replace('wire n;', 'wire n, added;'),
+                          self.candidate.replace('_23246_', 'missing')):
+            with self.subTest(candidate=candidate), self.assertRaises(ValueError):
+                audit_nor_trial.audit(self.control, candidate)
+
+    def test_different_or_missing_pdk_model_rejected(self):
+        model = 'module sg13cmos5l_nor4_1(Y,A); not(Y,A); specify endspecify endmodule\n'
+        pair = model + model.replace('nor4_1', 'nor4_2')
+        audit_nor_trial.audit_models(pair)
+        for bad in (model, pair.replace('nor4_2(Y,A); not(Y,A)', 'nor4_2(Y,A); buf(Y,A)')):
+            with self.assertRaises(ValueError):
+                audit_nor_trial.audit_models(bad)
 
 
 class PhysicalTrialRelocationTests(unittest.TestCase):

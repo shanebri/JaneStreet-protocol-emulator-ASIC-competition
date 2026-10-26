@@ -48,7 +48,8 @@ def main():
                         help='Extracted archive containing runs/wokwi and src')
     parser.add_argument('--pdk-root', type=Path, required=True)
     parser.add_argument('--out', type=Path, required=True)
-    parser.add_argument('--trial', choices=('control', 'electrical', 'timing', 'cts', 'cts_branches'), required=True)
+    parser.add_argument('--trial', choices=('control', 'electrical', 'timing', 'cts', 'cts_branches',
+                                          'nor_control', 'nor_size'), required=True)
     parser.add_argument('--cluster-size', type=int, default=8)
     parser.add_argument('--threads', type=int, default=8,
                         help='Shared execution setting for control and candidate')
@@ -82,10 +83,33 @@ def main():
         changes['CTS_SINK_CLUSTERING_SIZE'] = args.cluster_size
     raw.update(changes)
     cts_trial = args.trial in ('cts', 'cts_branches')
-    first_id = 'OpenROAD.CTS' if cts_trial else 'OpenROAD.RepairDesignPostGRT'
+    nor_trial = args.trial in ('nor_control', 'nor_size')
+    first_id = ('OpenROAD.GlobalRouting' if nor_trial else
+                'OpenROAD.CTS' if cts_trial else 'OpenROAD.RepairDesignPostGRT')
     first = next(i for i, step in enumerate(Classic.Steps) if step.id == first_id)
     steps = Classic.Steps[first:]
     extra_steps = {}
+    if nor_trial:
+        from librelane.config import Variable
+        script = Path(__file__).with_name('size_terminal_nor.tcl').resolve()
+
+        class SizeTerminalNor(DetailedPlacement):
+            id = 'OpenROAD.SizeTerminalNor'
+            name = 'Controlled terminal NOR sizing'
+            config_vars = DetailedPlacement.config_vars + [
+                Variable('PIO_SIZE_TERMINAL_NOR', bool,
+                         'Replace only the measured terminal NOR.',
+                         default=args.trial == 'nor_size')]
+
+            def get_script_path(self):
+                return str(script)
+
+        steps.insert(0, SizeTerminalNor)
+        extra_steps[SizeTerminalNor.id] = hashlib.sha256(script.read_bytes()).hexdigest()
+        # Screen a rejected candidate before spending time on DRC/LVS. This is
+        # explicitly not a complete hardening run; no acceptance gate is changed.
+        last = next(i for i, step in enumerate(steps) if step.id == 'OpenROAD.STAPostPNR')
+        steps = steps[:last + 1]
     if args.trial == 'cts_branches':
         script = Path(__file__).with_name('repair_clock_fanout.tcl').resolve()
 
@@ -108,13 +132,18 @@ def main():
     config, _ = Config.load(filtered, flow_config_vars=variables,
                             design_dir=raw['DESIGN_DIR'], pdk_root=str(pdk),
                             _load_pdk_configs=False)
-    input_stage = '34-openroad-detailedplacement' if cts_trial else '39-openroad-globalrouting'
+    input_stage = ('38-openroad-stamidpnr-2' if nor_trial else
+                   '34-openroad-detailedplacement' if cts_trial else '39-openroad-globalrouting')
     source_state = run / input_stage / 'state_out.json'
     state_text = json.dumps(relocate(json.loads(source_state.read_text()), replacements))
     initial = State.loads(state_text)
     initial.validate()
     output.mkdir(parents=True, exist_ok=False)
     manifest = {'trial': args.trial, 'changes': changes,
+                'physical_changes': ({'_23246_': {'from': 'sg13cmos5l_nor4_1',
+                                                   'to': 'sg13cmos5l_nor4_2'}}
+                                     if args.trial == 'nor_size' else {}),
+                'scope': 'post_route_screen' if nor_trial else 'full_flow',
                 'execution_overrides': {'OPENROAD_THREADS': args.threads},
                 'extra_steps_sha256': extra_steps,
                 'archive_root': str(root), 'input_stage': input_stage,
@@ -130,10 +159,10 @@ def main():
         manifest.update(status='rejected_or_failed', error=str(exc))
         raise
     else:
-        manifest['status'] = 'flow_complete'
+        manifest['status'] = 'screen_complete' if nor_trial else 'flow_complete'
     finally:
         manifest['signoff_exit'] = final_gate(output)
-        if manifest['status'] == 'flow_complete' and manifest['signoff_exit']:
+        if manifest['status'] in ('flow_complete', 'screen_complete') and manifest['signoff_exit']:
             manifest['status'] = 'rejected_signoff'
         (output / 'experiment.json').write_text(json.dumps(manifest, indent=2)+'\n')
     if manifest['signoff_exit']:
