@@ -1,0 +1,53 @@
+{
+  "method": "Sorted hidden Yosys netnames reconstruct write_verilog private net numbering. Cell type, D and Q bits checked against synthesis JSON. Full cell-port mapping was also checked during analysis (19349 cells, zero mismatches).",
+  "registers": [
+    {
+      "post_synthesis_cell": "_33835_",
+      "type": "sg13cmos5l_dfrbpq_1",
+      "original_yosys_cell": "$auto$ff.cc:337:slice$8662",
+      "Q_net": "_00019_",
+      "Q_json_bits": [
+        442
+      ],
+      "Q_original_net": "$\\pio.engines[1].core.fetch.words$rdreg[1]$q[0]",
+      "D_net": "_01512_",
+      "verilog_cell": "sg13cmos5l_dfrbpq_1 _33835_ (\n    .CLK(clk),\n    .D(_01512_),\n    .Q(_00019_),\n    .RESET_B(_14556_)\n  );"
+    },
+    {
+      "post_synthesis_cell": "_33839_",
+      "type": "sg13cmos5l_dfrbpq_1",
+      "original_yosys_cell": "$auto$ff.cc:337:slice$8666",
+      "Q_net": "_00023_",
+      "Q_json_bits": [
+        450
+      ],
+      "Q_original_net": "$\\pio.engines[1].core.fetch.words$rdreg[1]$q[4]",
+      "D_net": "_01516_",
+      "verilog_cell": "sg13cmos5l_dfrbpq_1 _33839_ (\n    .CLK(clk),\n    .D(_01516_),\n    .Q(_00023_),\n    .RESET_B(_14552_)\n  );"
+    },
+    {
+      "post_synthesis_cell": "_33851_",
+      "type": "sg13cmos5l_dfrbpq_1",
+      "original_yosys_cell": "$auto$ff.cc:337:slice$8678",
+      "Q_net": "_00007_",
+      "Q_json_bits": [
+        414
+      ],
+      "Q_original_net": "$\\pio.engines[0].core.fetch.words$rdreg[1]$q[2]",
+      "D_net": "_01528_",
+      "verilog_cell": "sg13cmos5l_dfrbpq_1 _33851_ (\n    .CLK(clk),\n    .D(_01528_),\n    .Q(_00007_),\n    .RESET_B(_14540_)\n  );"
+    },
+    {
+      "post_synthesis_cell": "_33852_",
+      "type": "sg13cmos5l_dfrbpq_1",
+      "original_yosys_cell": "$auto$ff.cc:337:slice$8679",
+      "Q_net": "_00008_",
+      "Q_json_bits": [
+        416
+      ],
+      "Q_original_net": "$\\pio.engines[0].core.fetch.words$rdreg[1]$q[3]",
+      "D_net": "_01529_",
+      "verilog_cell": "sg13cmos5l_dfrbpq_1 _33852_ (\n    .CLK(clk),\n    .D(_01529_),\n    .Q(_00008_),\n    .RESET_B(_14539_)\n  );"
+    }
+  ]
+}

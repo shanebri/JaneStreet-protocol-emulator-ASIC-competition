@@ -1,0 +1,15 @@
+{
+  "trial": "electrical",
+  "changes": {
+    "RUN_POST_GRT_DESIGN_REPAIR": true
+  },
+  "execution_overrides": {
+    "OPENROAD_THREADS": 8
+  },
+  "archive_root": "/home/shane/eda/timing-20261024/current",
+  "input_stage": "39-openroad-globalrouting",
+  "input_state_sha256": "43dfe8ed9c3fbba2c8c4dbae7e18e0df67e6465da6e437426dadc98a3ffaa8b1",
+  "resolved_config_sha256": "a547f6fe37a4a9867c7fee6c4896933ed88dc5d3731a6e29420987265228d2b1",
+  "status": "rejected_or_failed",
+  "error": "One or more deferred errors were encountered:\nSetup violations found in the following corners:\n* nom_slow_1p08V_125C\nMax Slew violations found in the following corners:\n* nom_slow_1p08V_125C"
+}

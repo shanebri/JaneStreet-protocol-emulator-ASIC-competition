@@ -1,0 +1,27 @@
+2026-10-22T04:32:06.9152008Z                     documentation for 'VSRC_LOC_FILES'.                         
+2026-10-22T04:32:06.9158119Z [04:32:06] WARNING  [Misc.ReportManufacturability]                   flow.py:701
+2026-10-22T04:32:06.9158790Z                     klayout__drc_error__count not reported.                     
+2026-10-22T04:32:06.9159137Z                     KLayout.DRC may have been skipped.                          
+2026-10-22T04:32:06.9170907Z [04:32:06] ERROR    The following error was encountered while    __main__.py:189
+2026-10-22T04:32:06.9171607Z                     running the flow:                                           
+2026-10-22T04:32:06.9172010Z                     One or more deferred errors were                            
+2026-10-22T04:32:06.9172342Z                     encountered:                                                
+2026-10-22T04:32:06.9172665Z                     Setup violations found in the following                     
+2026-10-22T04:32:06.9172980Z                     corners:                                                    
+2026-10-22T04:32:06.9173293Z                     * nom_slow_1p08V_125C                                       
+2026-10-22T04:32:06.9173631Z                     Max Slew violations found in the following                  
+2026-10-22T04:32:06.9173954Z                     corners:                                                    
+2026-10-22T04:32:06.9174258Z                     * nom_slow_1p08V_125C                                       
+2026-10-22T04:32:06.9174572Z                     * nom_typ_1p20V_25C                                         
+2026-10-22T04:32:06.9177542Z [04:32:06] ERROR    LibreLane will now quit.                     __main__.py:190
+2026-10-22T04:32:08.7734890Z 2026-10-22 04:32:08,773 - project    - ERROR    - harden failed
+2026-10-22T04:32:08.8343488Z ##[error]Process completed with exit code 1.
+2026-10-22T04:32:08.8350197Z ##[end-action id=__TinyTapeout_tt-gds-action.__run_6;outcome=failure;conclusion=failure;duration_ms=9705668]
+2026-10-22T04:32:08.8353407Z ##[start-action display=Show build files (for debugging);id=__TinyTapeout_tt-gds-action.__run_7]
+2026-10-22T04:32:08.8356073Z ##[end-action id=__TinyTapeout_tt-gds-action.__run_7;outcome=skipped;conclusion=skipped;duration_ms=0]
+2026-10-22T04:32:08.8357754Z ##[start-action display=Linter output;id=__TinyTapeout_tt-gds-action.__run_8]
+2026-10-22T04:32:08.8374401Z ##[group]Run LINTER_LOG=(runs/wokwi/*-verilator-lint/verilator-lint.log)
+2026-10-22T04:32:08.8374835Z [36;1mLINTER_LOG=(runs/wokwi/*-verilator-lint/verilator-lint.log)[0m
+2026-10-22T04:32:08.8375156Z [36;1mLINTER_LOG=${LINTER_LOG[0]}[0m
+2026-10-22T04:32:08.8375382Z [36;1m[0m
+2026-10-22T04:32:08.8375719Z [36;1mecho "DEBUG LINTER_LOG *$LINTER_LOG*"[0m
