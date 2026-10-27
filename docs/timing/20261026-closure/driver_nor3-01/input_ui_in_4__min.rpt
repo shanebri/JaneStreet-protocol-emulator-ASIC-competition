@@ -1,0 +1,53 @@
+Startpoint: ui_in[4] (input port clocked by clk)
+Endpoint: _31483_ (rising edge-triggered flip-flop clocked by clk)
+Path Group: clk
+Path Type: min
+
+Fanout         Cap        Slew       Delay        Time   Description
+---------------------------------------------------------------------------------------------
+                                  0.000000    0.000000   clock clk (rise edge)
+                                  0.000000    0.000000   clock network delay (propagated)
+                                  4.000000    4.000000 ^ input external delay
+     1    0.002548    0.032145    0.003197    4.003197 ^ ui_in[4] (in)
+                                                         ui_in[4] (net)
+                      0.032145    0.000000    4.003197 ^ input7293/A (sg13cmos5l_buf_1)
+     5    0.079905    0.509443    0.396589    4.399786 ^ input7293/X (sg13cmos5l_buf_1)
+                                                         net7293 (net)
+                      0.511042    0.022230    4.422016 ^ _24207_/A2 (sg13cmos5l_a21oi_1)
+     1    0.003151    0.121031    0.213976    4.635993 v _24207_/Y (sg13cmos5l_a21oi_1)
+                                                         _03868_ (net)
+                      0.121031    0.000116    4.636108 v _24208_/B1 (sg13cmos5l_o21ai_1)
+     1    0.002379    0.054246    0.077361    4.713470 ^ _24208_/Y (sg13cmos5l_o21ai_1)
+                                                         _03869_ (net)
+                      0.054246    0.000090    4.713560 ^ _24209_/B1 (sg13cmos5l_a21oi_1)
+     1    0.001930    0.028547    0.044994    4.758553 v _24209_/Y (sg13cmos5l_a21oi_1)
+                                                         _01581_ (net)
+                      0.028547    0.000067    4.758620 v _31483_/D (sg13cmos5l_dfrbpq_1)
+                                              4.758620   data arrival time
+
+                                  0.000000    0.000000   clock clk (rise edge)
+                                  0.000000    0.000000   clock source latency
+     1    0.110761    0.189355    0.166801    0.166801 ^ clk (in)
+                                                         clk (net)
+                      0.205154    0.000000    0.166801 ^ clkbuf_0_clk/A (sg13cmos5l_buf_8)
+     4    0.134197    0.126775    0.259353    0.426154 ^ clkbuf_0_clk/X (sg13cmos5l_buf_8)
+                                                         clknet_0_clk (net)
+                      0.128887    0.013732    0.439886 ^ clkbuf_2_1_0_clk/A (sg13cmos5l_buf_8)
+     8    0.232544    0.196729    0.267952    0.707838 ^ clkbuf_2_1_0_clk/X (sg13cmos5l_buf_8)
+                                                         clknet_2_1_0_clk (net)
+                      0.205964    0.034909    0.742747 ^ clkbuf_5_8_0_clk/A (sg13cmos5l_buf_8)
+     6    0.125252    0.119954    0.254797    0.997544 ^ clkbuf_5_8_0_clk/X (sg13cmos5l_buf_8)
+                                                         clknet_5_8_0_clk (net)
+                      0.120691    0.008056    1.005600 ^ clkbuf_leaf_28_clk/A (sg13cmos5l_buf_8)
+    18    0.096322    0.094258    0.203422    1.209022 ^ clkbuf_leaf_28_clk/X (sg13cmos5l_buf_8)
+                                                         clknet_leaf_28_clk (net)
+                      0.094480    0.003895    1.212917 ^ _31483_/CLK (sg13cmos5l_dfrbpq_1)
+                                  0.250000    1.462917   clock uncertainty
+                                  0.000000    1.462917   clock reconvergence pessimism
+                                 -0.031037    1.431880   library hold time
+                                              1.431880   data required time
+---------------------------------------------------------------------------------------------
+                                              1.431880   data required time
+                                             -4.758620   data arrival time
+---------------------------------------------------------------------------------------------
+                                              3.326740   slack (MET)

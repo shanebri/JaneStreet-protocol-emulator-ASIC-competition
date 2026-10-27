@@ -21,6 +21,10 @@ import audit_nor_trial
 import implementation_trial
 import collect_implementation
 import compare_implementation
+import closure_trial
+import check_net_geometry
+import closure_collect
+import audit_clock_tree
 sys.path.pop(0)
 
 
@@ -221,6 +225,29 @@ class ReplayWorkflowTests(unittest.TestCase):
 
 
 class ImplementationTrialTests(unittest.TestCase):
+    def test_closure_recipes_isolate_extraction_and_routing_parameters(self):
+        self.assertEqual(closure_trial.plan('extract_control')['changes'], {})
+        self.assertEqual(closure_trial.plan('extract_no_merge')['changes'], {'RCX_MERGE_VIA_WIRE_RES': False})
+        self.assertEqual(closure_trial.plan('grt_capacity25')['changes'], {'GRT_ADJUSTMENT': 0.25})
+        self.assertEqual(closure_trial.plan('route_seed43')['router_seed'], 43)
+        with self.assertRaises(ValueError):
+            closure_trial.plan('ignore_annotation')
+
+    def test_closure_rejects_changed_timing_contract(self):
+        raw={'CLOCK_PERIOD':20, 'PDK':'ihp-sg13cmos5l', 'STA_CORNERS':list(gate.REQUIRED_CORNERS)}
+        for key in ('SETUP_VIOLATION_CORNERS','HOLD_VIOLATION_CORNERS',
+                    'MAX_SLEW_VIOLATION_CORNERS','MAX_CAP_VIOLATION_CORNERS'):
+            raw[key]=['*']
+        closure_trial.validate_config(raw)
+        for key,value in (('CLOCK_PERIOD',25),('STA_CORNERS',[]),('MAX_SLEW_VIOLATION_CORNERS',[])):
+            with self.subTest(key=key), self.assertRaises(ValueError):
+                closure_trial.validate_config(dict(raw,**{key:value}))
+
+    def test_geometry_contact_includes_edges_but_not_gaps(self):
+        self.assertTrue(check_net_geometry.touches((0,0,10,10),(10,2,20,8)))
+        self.assertTrue(check_net_geometry.touches((0,0,10,10),(2,2,8,8)))
+        self.assertFalse(check_net_geometry.touches((0,0,10,10),(11,0,20,10)))
+
     def test_replay_must_match_all_fresh_corners_and_modes(self):
         sessions = [dict(corner=c, mode=m, setup=0.1, hold=0.1) for c in gate.REQUIRED_CORNERS
                     for m in ('baseline', 'operational', 'reset_active')]
@@ -311,6 +338,17 @@ class ImplementationTrialTests(unittest.TestCase):
 
 
 class NorTrialAuditTests(unittest.TestCase):
+    def test_specialized_nor3_audit_and_rc_corner_keys(self):
+        before = self.control.replace('_23246_', '_19177_').replace('nor4_', 'nor3_')
+        after = before.replace('nor3_1', 'nor3_2')
+        self.assertEqual(audit_nor_trial.audit(before, after, '_19177_',
+            'sg13cmos5l_nor3_1', 'sg13cmos5l_nor3_2')['changed_instance'], '_19177_')
+        for key in ('nom', 'nom_*'):
+            self.assertEqual(closure_collect.nominal_view({key: '/tmp/c.spef'}), Path('/tmp/c.spef'))
+        for corners in ({}, {'slow': '/tmp/a'}, {'nom': '/tmp/a', 'extra': '/tmp/b'}):
+            with self.assertRaises(ValueError):
+                closure_collect.nominal_view(corners)
+
     control = ('module top; wire n;\n'
                'sg13cmos5l_nor4_1 _23246_ (.A(a), .B(b), .C(c), .D(d), .Y(n));\n'
                'sg13cmos5l_buf_1 other (.A(n), .X(out));\nendmodule')
@@ -334,6 +372,42 @@ class NorTrialAuditTests(unittest.TestCase):
         for bad in (model, pair.replace('nor4_2(Y,A); not(Y,A)', 'nor4_2(Y,A); buf(Y,A)')):
             with self.assertRaises(ValueError):
                 audit_nor_trial.audit_models(bad)
+
+
+class ClockInsertionAuditTests(unittest.TestCase):
+    def fixture(self, split=False):
+        cells = {'root': ('sg13cmos5l_buf_8', {'A': 'clk', 'X': 'branch'}),
+                 'ff': ('sg13cmos5l_dfrbpq_1', {'CLK': 'leaf' if split else 'branch', 'D': 'data', 'Q': 'q'})}
+        nets = {'clk', 'branch', 'data', 'q'}
+        loads = {'clk': [('root', 'A')], 'branch': [('ff', 'CLK')]}
+        if split:
+            cells['clkbuf_fanoutfix_0'] = ('sg13cmos5l_buf_8', {'A': 'branch', 'X': 'leaf'})
+            nets.add('leaf')
+            loads['branch'] = [('clkbuf_fanoutfix_0', 'A')]
+            loads['leaf'] = [('ff', 'CLK')]
+        return cells, {'clk': 'clk'}, nets, loads, {('ff', 'CLK')}
+
+    def test_ideal_buffer_preserves_signal_connectivity_and_clock_reachability(self):
+        before, after = self.fixture(), self.fixture(True)
+        self.assertEqual(audit_clock_tree.audit(before, after)['added_buffers'], 1)
+        self.assertEqual(audit_clock_tree.audit(before, before)['added_buffers'], 0)
+        self.assertEqual(audit_clock_tree.topology(before)['sink_buffer_depth_histogram'], {1: 1})
+        self.assertEqual(audit_clock_tree.topology(after)['sink_buffer_depth_histogram'], {2: 1})
+
+    def test_data_rewire_inversion_and_detached_clock_are_rejected(self):
+        for failure in ('data', 'master', 'clock'):
+            after = self.fixture(True)
+            if failure == 'data':
+                after[0]['ff'][1]['D'] = 'q'
+            elif failure == 'master':
+                after[0]['clkbuf_fanoutfix_0'] = ('sg13cmos5l_inv_8', {'A': 'branch', 'Y': 'leaf'})
+            else:
+                after[3]['leaf'] = []
+            with self.subTest(failure=failure), self.assertRaises(ValueError):
+                if failure == 'clock':
+                    audit_clock_tree.topology(after)
+                else:
+                    audit_clock_tree.audit(self.fixture(), after)
 
 
 class PhysicalTrialRelocationTests(unittest.TestCase):

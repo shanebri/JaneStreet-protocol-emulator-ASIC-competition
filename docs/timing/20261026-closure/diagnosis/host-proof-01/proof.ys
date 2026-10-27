@@ -1,0 +1,3 @@
+read_verilog -formal -sv gold.sv gate.sv miter.sv
+prep -top host_miter -flatten
+sat -seq 4 -tempinduct -maxsteps 12 -set-def-inputs -prove mismatch 0 -verify

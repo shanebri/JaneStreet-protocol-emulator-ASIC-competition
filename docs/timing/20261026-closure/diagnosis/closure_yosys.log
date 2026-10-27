@@ -1,0 +1,762 @@
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2026  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.66 (git sha1 86f2ddebce7e98ce7cacc27e8a5c14cb53b51b51, clang++ 21.1.8 -fPIC -O3)
+
+-- Running command `read_verilog -sv /mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/project.sv /mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv /mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_inputs.sv /mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_host_bank.sv /mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv /mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_gpio_owner.sv /mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/host_interface.sv /mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_pads.sv /mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/execution_unit.sv /mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_fifo.sv /mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/frontend/pc.sv /mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/frontend/instruction_fetch.sv /mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/frontend/decoder.sv; hierarchy -check -top tt_um_shanebri_top; proc; check -assert' --
+
+1. Executing Verilog-2005 frontend: /mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/project.sv
+Parsing SystemVerilog input from `/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/project.sv' to AST representation.
+Generating RTLIL representation for module `\tt_um_shanebri_top'.
+Successfully finished Verilog frontend.
+
+2. Executing Verilog-2005 frontend: /mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv
+Parsing SystemVerilog input from `/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv' to AST representation.
+Generating RTLIL representation for module `\protocol_core'.
+Successfully finished Verilog frontend.
+
+3. Executing Verilog-2005 frontend: /mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_inputs.sv
+Parsing SystemVerilog input from `/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_inputs.sv' to AST representation.
+Generating RTLIL representation for module `\pio_inputs'.
+Warning: Replacing memory \history with list of registers. See /mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_inputs.sv:17
+Successfully finished Verilog frontend.
+
+4. Executing Verilog-2005 frontend: /mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_host_bank.sv
+Parsing SystemVerilog input from `/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_host_bank.sv' to AST representation.
+Generating RTLIL representation for module `\pio_host_bank'.
+Successfully finished Verilog frontend.
+
+5. Executing Verilog-2005 frontend: /mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv
+Parsing SystemVerilog input from `/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv' to AST representation.
+Generating RTLIL representation for module `\pio_subsystem'.
+Successfully finished Verilog frontend.
+
+6. Executing Verilog-2005 frontend: /mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_gpio_owner.sv
+Parsing SystemVerilog input from `/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_gpio_owner.sv' to AST representation.
+Generating RTLIL representation for module `\pio_gpio_owner'.
+Successfully finished Verilog frontend.
+
+7. Executing Verilog-2005 frontend: /mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/host_interface.sv
+Parsing SystemVerilog input from `/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/host_interface.sv' to AST representation.
+Generating RTLIL representation for module `\host_interface'.
+Successfully finished Verilog frontend.
+
+8. Executing Verilog-2005 frontend: /mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_pads.sv
+Parsing SystemVerilog input from `/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_pads.sv' to AST representation.
+Generating RTLIL representation for module `\pio_pads'.
+Successfully finished Verilog frontend.
+
+9. Executing Verilog-2005 frontend: /mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/execution_unit.sv
+Parsing SystemVerilog input from `/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/execution_unit.sv' to AST representation.
+Generating RTLIL representation for module `\execution_unit'.
+Successfully finished Verilog frontend.
+
+10. Executing Verilog-2005 frontend: /mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_fifo.sv
+Parsing SystemVerilog input from `/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_fifo.sv' to AST representation.
+Generating RTLIL representation for module `\pio_fifo'.
+Successfully finished Verilog frontend.
+
+11. Executing Verilog-2005 frontend: /mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/frontend/pc.sv
+Parsing SystemVerilog input from `/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/frontend/pc.sv' to AST representation.
+Generating RTLIL representation for module `\pc'.
+Successfully finished Verilog frontend.
+
+12. Executing Verilog-2005 frontend: /mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/frontend/instruction_fetch.sv
+Parsing SystemVerilog input from `/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/frontend/instruction_fetch.sv' to AST representation.
+Generating RTLIL representation for module `\instruction_fetch'.
+Successfully finished Verilog frontend.
+
+13. Executing Verilog-2005 frontend: /mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/frontend/decoder.sv
+Parsing SystemVerilog input from `/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/frontend/decoder.sv' to AST representation.
+Generating RTLIL representation for module `\decoder'.
+Successfully finished Verilog frontend.
+
+14. Executing HIERARCHY pass (managing design hierarchy).
+
+14.1. Analyzing design hierarchy..
+Top module:  \tt_um_shanebri_top
+Used module:     \pio_pads
+Used module:     \pio_subsystem
+Used module:         \protocol_core
+Used module:             \execution_unit
+Used module:             \pio_fifo
+Used module:             \decoder
+Used module:             \pc
+Used module:             \instruction_fetch
+Used module:         \pio_host_bank
+Used module:         \pio_gpio_owner
+Used module:         \pio_inputs
+Used module:     \host_interface
+Reprocessing module pio_subsystem because instantiated module pio_gpio_owner has become available.
+Generating RTLIL representation for module `\pio_subsystem'.
+
+14.2. Analyzing design hierarchy..
+Top module:  \tt_um_shanebri_top
+Used module:     \pio_pads
+Used module:     \pio_subsystem
+Used module:         \protocol_core
+Used module:             \execution_unit
+Used module:             \pio_fifo
+Used module:             \decoder
+Used module:             \pc
+Used module:             \instruction_fetch
+Used module:         \pio_host_bank
+Used module:         \pio_gpio_owner
+Used module:         \pio_inputs
+Used module:     \host_interface
+
+14.3. Analyzing design hierarchy..
+Top module:  \tt_um_shanebri_top
+Used module:     \pio_pads
+Used module:     \pio_subsystem
+Used module:         \protocol_core
+Used module:             \execution_unit
+Used module:             \pio_fifo
+Used module:             \decoder
+Used module:             \pc
+Used module:             \instruction_fetch
+Used module:         \pio_host_bank
+Used module:         \pio_gpio_owner
+Used module:         \pio_inputs
+Used module:     \host_interface
+Removed 0 unused modules.
+
+15. Executing PROC pass (convert processes to netlists).
+
+15.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+15.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Removed 1 dead cases from process $proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv:39$789 in module pio_subsystem.
+Marked 1 switch rules as full_case in process $proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv:39$789 in module pio_subsystem.
+Marked 1 switch rules as full_case in process $proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv:67$784 in module pio_subsystem.
+Marked 1 switch rules as full_case in process $proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv:67$766 in module pio_subsystem.
+Marked 1 switch rules as full_case in process $proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv:34$746 in module pio_subsystem.
+Marked 1 switch rules as full_case in process $proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/frontend/instruction_fetch.sv:16$675 in module instruction_fetch.
+Marked 2 switch rules as full_case in process $proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/frontend/pc.sv:8$669 in module pc.
+Marked 2 switch rules as full_case in process $proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_fifo.sv:20$654 in module pio_fifo.
+Marked 4 switch rules as full_case in process $proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/host_interface.sv:34$600 in module host_interface.
+Marked 1 switch rules as full_case in process $proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_gpio_owner.sv:15$554 in module pio_gpio_owner.
+Removed 1 dead cases from process $proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/frontend/decoder.sv:21$688 in module decoder.
+Marked 3 switch rules as full_case in process $proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/frontend/decoder.sv:21$688 in module decoder.
+Marked 1 switch rules as full_case in process $proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_host_bank.sv:45$450 in module pio_host_bank.
+Marked 1 switch rules as full_case in process $proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_host_bank.sv:29$449 in module pio_host_bank.
+Marked 5 switch rules as full_case in process $proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_inputs.sv:13$424 in module pio_inputs.
+Marked 21 switch rules as full_case in process $proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:307$240 in module protocol_core.
+Marked 2 switch rules as full_case in process $proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:271$232 in module protocol_core.
+Removed 2 dead cases from process $proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:161$120 in module protocol_core.
+Marked 14 switch rules as full_case in process $proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:161$120 in module protocol_core.
+Marked 33 switch rules as full_case in process $proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:146$79 in module protocol_core.
+Marked 1 switch rules as full_case in process $proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:118$76 in module protocol_core.
+Removed a total of 4 dead cases.
+
+15.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 5 redundant assignments.
+Promoted 105 assignments to connections.
+
+15.4. Executing PROC_INIT pass (extract init attributes).
+
+15.5. Executing PROC_ARST pass (detect async resets in processes).
+
+15.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~122 debug messages>
+
+15.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\pio_subsystem.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv:96$807'.
+Creating decoders for process `\pio_subsystem.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv:96$806'.
+Creating decoders for process `\pio_subsystem.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv:95$805'.
+Creating decoders for process `\pio_subsystem.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv:95$804'.
+Creating decoders for process `\pio_subsystem.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv:94$803'.
+Creating decoders for process `\pio_subsystem.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv:85$802'.
+Creating decoders for process `\pio_subsystem.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv:83$801'.
+Creating decoders for process `\pio_subsystem.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv:81$800'.
+Creating decoders for process `\pio_subsystem.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv:96$799'.
+Creating decoders for process `\pio_subsystem.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv:96$798'.
+Creating decoders for process `\pio_subsystem.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv:95$797'.
+Creating decoders for process `\pio_subsystem.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv:95$796'.
+Creating decoders for process `\pio_subsystem.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv:94$795'.
+Creating decoders for process `\pio_subsystem.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv:85$794'.
+Creating decoders for process `\pio_subsystem.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv:83$793'.
+Creating decoders for process `\pio_subsystem.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv:81$792'.
+Creating decoders for process `\pio_subsystem.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv:39$789'.
+     1/1: $1$mem2reg_rd$\bank_read$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv:39$742_DATA[7:0]$791
+Creating decoders for process `\pio_subsystem.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv:67$784'.
+     1/1: $1\engines[1].bank_selected_data[31:0]
+Creating decoders for process `\pio_subsystem.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv:67$766'.
+     1/1: $1\engines[0].bank_selected_data[31:0]
+Creating decoders for process `\pio_subsystem.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv:34$746'.
+     1/1: $0\selected_engine[0:0]
+Creating decoders for process `\instruction_fetch.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/frontend/instruction_fetch.sv:16$675'.
+     1/3: $1$memwr$\words$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/frontend/instruction_fetch.sv:18$674_EN[15:0]$681
+     2/3: $1$memwr$\words$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/frontend/instruction_fetch.sv:18$674_DATA[15:0]$680
+     3/3: $1$memwr$\words$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/frontend/instruction_fetch.sv:18$674_ADDR[4:0]$679
+Creating decoders for process `\pc.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/frontend/pc.sv:8$669'.
+     1/1: $0\pc_out[4:0]
+Creating decoders for process `\pio_fifo.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_fifo.sv:20$654'.
+     1/9: $2$memwr$\words$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_fifo.sv:27$644_EN[31:0]$664
+     2/9: $2$memwr$\words$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_fifo.sv:27$644_DATA[31:0]$663
+     3/9: $2$memwr$\words$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_fifo.sv:27$644_ADDR[1:0]$662
+     4/9: $1$memwr$\words$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_fifo.sv:27$644_EN[31:0]$661
+     5/9: $1$memwr$\words$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_fifo.sv:27$644_DATA[31:0]$660
+     6/9: $1$memwr$\words$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_fifo.sv:27$644_ADDR[1:0]$659
+     7/9: $0\write_ptr[1:0]
+     8/9: $0\read_ptr[1:0]
+     9/9: $0\level[2:0]
+Creating decoders for process `\host_interface.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/host_interface.sv:34$600'.
+     1/9: $0\captured[7:0]
+     2/9: $0\low[3:0]
+     3/9: $0\pending_address[3:0]
+     4/9: $0\pending_word[0:0]
+     5/9: $0\valid_read[0:0]
+     6/9: $0\pending_read[0:0]
+     7/9: $0\pending[0:0]
+     8/9: $0\armed[0:0]
+     9/9: $0\data_out[3:0]
+Creating decoders for process `\pio_gpio_owner.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_gpio_owner.sv:15$554'.
+     1/1: $0\owner[11:0]
+Creating decoders for process `\decoder.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/frontend/decoder.sv:21$688'.
+     1/3: $3\illegal[0:0]
+     2/3: $2\illegal[0:0]
+     3/3: $1\illegal[0:0]
+Creating decoders for process `\pio_host_bank.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_host_bank.sv:45$450'.
+     1/7: $0\data_stage[23:0] [23:16]
+     2/7: $0\data_stage[23:0] [15:8]
+     3/7: $0\data_stage[23:0] [7:0]
+     4/7: $0\data_snapshot[31:0]
+     5/7: $0\imem_low[7:0]
+     6/7: $0\imem_address[4:0]
+     7/7: $0\data_address[7:0]
+Creating decoders for process `\pio_host_bank.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_host_bank.sv:29$449'.
+     1/1: $1\read_data[7:0]
+Creating decoders for process `\pio_inputs.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_inputs.sv:13$424'.
+     1/10: $0\qualified[3:0] [3]
+     2/10: $0\qualified[3:0] [2]
+     3/10: $0\qualified[3:0] [1]
+     4/10: $0\qualified[3:0] [0]
+     5/10: $0\history[1][3:0]
+     6/10: $0\history[0][3:0]
+     7/10: $0\pins_sync[5:0]
+     8/10: $0\pins_meta[5:0]
+     9/10: $1\f[31:0]
+    10/10: $0\history[2][3:0]
+Creating decoders for process `\protocol_core.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:143$414'.
+Creating decoders for process `\protocol_core.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:307$240'.
+     1/102: $16$lookahead\directions$238[3:0]$398
+     2/102: $12$bitselwrite$pos$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:385$8[3:0]$397
+     3/102: $15$lookahead\directions$238[3:0]$394
+     4/102: $11$bitselwrite$pos$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:385$8[3:0]$392
+     5/102: $15$lookahead\pins$239[11:0]$395
+     6/102: $11$bitselwrite$pos$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:386$9[3:0]$393
+     7/102: $14$lookahead\pins$239[11:0]$391
+     8/102: $14$lookahead\directions$238[3:0]$390
+     9/102: $10$bitselwrite$pos$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:386$9[3:0]$389
+    10/102: $10$bitselwrite$pos$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:385$8[3:0]$388
+    11/102: $14$lookahead\irq$237[7:0]$378
+    12/102: $10$bitselwrite$pos$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:379$7[2:0]$377
+    13/102: $13$lookahead\irq$237[7:0]$362
+    14/102: $13$lookahead\directions$238[3:0]$358
+    15/102: $13$lookahead\pins$239[11:0]$357
+    16/102: $12$lookahead\irq$237[7:0]$354
+    17/102: $12$lookahead\directions$238[3:0]$355
+    18/102: $12$lookahead\pins$239[11:0]$356
+    19/102: $11$lookahead\pins$239[11:0]$353
+    20/102: $11$lookahead\directions$238[3:0]$352
+    21/102: $11$lookahead\irq$237[7:0]$351
+    22/102: $9$bitselwrite$pos$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:386$9[3:0]$350
+    23/102: $9$bitselwrite$pos$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:385$8[3:0]$349
+    24/102: $9$bitselwrite$pos$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:379$7[2:0]$348
+    25/102: $10$lookahead\pins$239[11:0]$346
+    26/102: $10$lookahead\directions$238[3:0]$345
+    27/102: $10$lookahead\irq$237[7:0]$344
+    28/102: $8$bitselwrite$pos$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:386$9[3:0]$343
+    29/102: $8$bitselwrite$pos$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:385$8[3:0]$342
+    30/102: $8$bitselwrite$pos$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:379$7[2:0]$341
+    31/102: $9$lookahead\pins$239[11:0]$337
+    32/102: $9$lookahead\directions$238[3:0]$336
+    33/102: $9$lookahead\irq$237[7:0]$335
+    34/102: $7$bitselwrite$pos$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:386$9[3:0]$334
+    35/102: $7$bitselwrite$pos$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:385$8[3:0]$333
+    36/102: $7$bitselwrite$pos$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:379$7[2:0]$332
+    37/102: $8$lookahead\pins$239[11:0]$330
+    38/102: $8$lookahead\directions$238[3:0]$329
+    39/102: $8$lookahead\irq$237[7:0]$328
+    40/102: $6$bitselwrite$pos$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:386$9[3:0]$327
+    41/102: $6$bitselwrite$pos$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:385$8[3:0]$326
+    42/102: $6$bitselwrite$pos$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:379$7[2:0]$325
+    43/102: $7$lookahead\pins$239[11:0]$323
+    44/102: $7$lookahead\directions$238[3:0]$322
+    45/102: $7$lookahead\irq$237[7:0]$321
+    46/102: $5$bitselwrite$pos$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:386$9[3:0]$320
+    47/102: $5$bitselwrite$pos$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:385$8[3:0]$319
+    48/102: $5$bitselwrite$pos$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:379$7[2:0]$318
+    49/102: $6$lookahead\pins$239[11:0]$317
+    50/102: $6$lookahead\directions$238[3:0]$316
+    51/102: $6$lookahead\irq$237[7:0]$315
+    52/102: $4$bitselwrite$pos$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:386$9[3:0]$314
+    53/102: $4$bitselwrite$pos$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:385$8[3:0]$313
+    54/102: $4$bitselwrite$pos$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:379$7[2:0]$312
+    55/102: $5$lookahead\pins$239[11:0]$311
+    56/102: $5$lookahead\directions$238[3:0]$310
+    57/102: $5$lookahead\irq$237[7:0]$309
+    58/102: $3$bitselwrite$pos$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:386$9[3:0]$308
+    59/102: $3$bitselwrite$pos$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:385$8[3:0]$307
+    60/102: $3$bitselwrite$pos$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:379$7[2:0]$306
+    61/102: $4$lookahead\directions$238[3:0]$304
+    62/102: $4$lookahead\pins$239[11:0]$305
+    63/102: $4$lookahead\irq$237[7:0]$303
+    64/102: $2$bitselwrite$pos$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:386$9[3:0]$302
+    65/102: $2$bitselwrite$pos$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:385$8[3:0]$301
+    66/102: $2$bitselwrite$pos$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:379$7[2:0]$300
+    67/102: $3$lookahead\pins$239[11:0]$296
+    68/102: $3$lookahead\directions$238[3:0]$295
+    69/102: $2$lookahead\pins$239[11:0]$294
+    70/102: $2$lookahead\directions$238[3:0]$293
+    71/102: $0\debug_flags[3:0] [3]
+    72/102: $0\debug_flags[3:0] [2]
+    73/102: $0\debug_flags[3:0] [1]
+    74/102: $0\debug_flags[3:0] [0]
+    75/102: $2$lookahead\irq$237[7:0]$256
+    76/102: $1$lookahead\irq$237[7:0]$251
+    77/102: $1$lookahead\directions$238[3:0]$252
+    78/102: $1$lookahead\pins$239[11:0]$253
+    79/102: $1$bitselwrite$pos$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:386$9[3:0]$250
+    80/102: $1$bitselwrite$pos$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:385$8[3:0]$249
+    81/102: $1$bitselwrite$pos$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:379$7[2:0]$248
+    82/102: $0\exec_instruction[15:0]
+    83/102: $0\exec_pending[0:0]
+    84/102: $3$lookahead\irq$237[7:0]$261
+    85/102: $0\irq_waiting[0:0]
+    86/102: $0\filter_enable[3:0]
+    87/102: $0\route[27:0]
+    88/102: $0\pinctrl[20:0]
+    89/102: $0\execctrl[15:0]
+    90/102: $0\shiftctrl[13:0]
+    91/102: $0\divider_left[15:0]
+    92/102: $0\divider[15:0]
+    93/102: $0\delay_left[4:0]
+    94/102: $0\in_count[5:0]
+    95/102: $0\out_count[5:0]
+    96/102: $0\isr[31:0]
+    97/102: $0\osr[31:0]
+    98/102: $0\x[31:0]
+    99/102: $0\fault[0:0]
+   100/102: $0\running[0:0]
+   101/102: $0\open_drain[3:0]
+   102/102: $0\y[31:0]
+Creating decoders for process `\protocol_core.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:271$232'.
+     1/2: $1\host_read_data[7:0]
+     2/2: $1\selected_data[31:0]
+Creating decoders for process `\protocol_core.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:161$120'.
+     1/94: $4\pin_value[31:0]
+     2/94: $4\pin_write[0:0]
+     3/94: $3\dir_write[0:0]
+     4/94: $5\next_y[31:0]
+     5/94: $5\next_x[31:0]
+     6/94: $8\stall[0:0]
+     7/94: $4$bitselwrite$pos$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:245$6[2:0]$192
+     8/94: $4\irq_set[7:0]
+     9/94: $4\irq_clear[7:0]
+    10/94: $3$bitselwrite$pos$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:243$5[2:0]$183
+    11/94: $3$bitselwrite$pos$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:245$6[2:0]$184
+    12/94: $3\irq_set[7:0]
+    13/94: $7\stall[0:0]
+    14/94: $2$bitselwrite$pos$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:245$6[2:0]$182
+    15/94: $2$bitselwrite$pos$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:243$5[2:0]$181
+    16/94: $3\irq_clear[7:0]
+    17/94: $2\irq_set[7:0]
+    18/94: $6\stall[0:0]
+    19/94: $3\pin_value[31:0]
+    20/94: $3\pin_write[0:0]
+    21/94: $3\injected_word[15:0]
+    22/94: $3\inject[0:0]
+    23/94: $6\next_in[5:0]
+    24/94: $4\next_out_count[5:0]
+    25/94: $6\next_isr[31:0]
+    26/94: $4\next_osr[31:0]
+    27/94: $4\next_y[31:0]
+    28/94: $4\next_x[31:0]
+    29/94: $3\branch_target[4:0]
+    30/94: $4\branch[0:0]
+    31/94: $5\next_in[5:0]
+    32/94: $5\next_isr[31:0]
+    33/94: $4\rx_push_request[0:0]
+    34/94: $5\stall[0:0]
+    35/94: $3\next_out_count[5:0]
+    36/94: $3\next_osr[31:0]
+    37/94: $3\tx_pop_request[0:0]
+    38/94: $4\stall[0:0]
+    39/94: $2\next_out_count[5:0]
+    40/94: $2\next_osr[31:0]
+    41/94: $2\tx_pop_request[0:0]
+    42/94: $3\stall[0:0]
+    43/94: $4\next_in[5:0]
+    44/94: $4\next_isr[31:0]
+    45/94: $3\rx_push_request[0:0]
+    46/94: $2\pin_value[31:0]
+    47/94: $2\pin_write[0:0]
+    48/94: $2\injected_word[15:0]
+    49/94: $2\inject[0:0]
+    50/94: $2\dir_write[0:0]
+    51/94: $3\next_in[5:0]
+    52/94: $3\next_isr[31:0]
+    53/94: $3\next_y[31:0]
+    54/94: $3\next_x[31:0]
+    55/94: $2\branch_target[4:0]
+    56/94: $3\branch[0:0]
+    57/94: $2\next_in[5:0]
+    58/94: $2\next_isr[31:0]
+    59/94: $2\rx_push_data[31:0]
+    60/94: $2\rx_push_request[0:0]
+    61/94: $2\stall[0:0]
+    62/94: $2\irq_clear[7:0]
+    63/94: $2$bitselwrite$pos$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:189$3[2:0]$154
+    64/94: $2\wait_value[0:0]
+    65/94: $2\branch[0:0]
+    66/94: $2\next_y[31:0]
+    67/94: $2\next_x[31:0]
+    68/94: $1\next_y[31:0]
+    69/94: $1\next_x[31:0]
+    70/94: $1\branch[0:0]
+    71/94: $1$bitselwrite$pos$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:245$6[2:0]$134
+    72/94: $1$bitselwrite$pos$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:243$5[2:0]$133
+    73/94: $1\count_add$func$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:204$4.sum[6:0]$132
+    74/94: $1\count_add$func$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:204$4.amount[5:0]$131
+    75/94: $1\count_add$func$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:204$4.old_count[5:0]$130
+    76/94: $1\count_add$func$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:204$4.$result[5:0]$129
+    77/94: $1$bitselwrite$pos$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:189$3[2:0]$128
+    78/94: $1\wait_value[0:0]
+    79/94: $1\irq_clear[7:0]
+    80/94: $1\irq_set[7:0]
+    81/94: $1\injected_word[15:0]
+    82/94: $1\pin_value[31:0]
+    83/94: $1\inject[0:0]
+    84/94: $1\dir_write[0:0]
+    85/94: $1\pin_write[0:0]
+    86/94: $1\next_in[5:0]
+    87/94: $1\next_out_count[5:0]
+    88/94: $1\next_isr[31:0]
+    89/94: $1\next_osr[31:0]
+    90/94: $1\rx_push_data[31:0]
+    91/94: $1\rx_push_request[0:0]
+    92/94: $1\tx_pop_request[0:0]
+    93/94: $1\branch_target[4:0]
+    94/94: $1\stall[0:0]
+Creating decoders for process `\protocol_core.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:146$79'.
+     1/33: $33\mov_value[31:31]
+     2/33: $32\mov_value[30:30]
+     3/33: $31\mov_value[29:29]
+     4/33: $30\mov_value[28:28]
+     5/33: $29\mov_value[27:27]
+     6/33: $28\mov_value[26:26]
+     7/33: $27\mov_value[25:25]
+     8/33: $26\mov_value[24:24]
+     9/33: $25\mov_value[23:23]
+    10/33: $24\mov_value[22:22]
+    11/33: $23\mov_value[21:21]
+    12/33: $22\mov_value[20:20]
+    13/33: $21\mov_value[19:19]
+    14/33: $20\mov_value[18:18]
+    15/33: $19\mov_value[17:17]
+    16/33: $18\mov_value[16:16]
+    17/33: $17\mov_value[15:15]
+    18/33: $16\mov_value[14:14]
+    19/33: $15\mov_value[13:13]
+    20/33: $14\mov_value[12:12]
+    21/33: $13\mov_value[11:11]
+    22/33: $12\mov_value[10:10]
+    23/33: $11\mov_value[9:9]
+    24/33: $10\mov_value[8:8]
+    25/33: $9\mov_value[7:7]
+    26/33: $8\mov_value[6:6]
+    27/33: $7\mov_value[5:5]
+    28/33: $6\mov_value[4:4]
+    29/33: $5\mov_value[3:3]
+    30/33: $4\mov_value[2:2]
+    31/33: $3\mov_value[1:1]
+    32/33: $2\mov_value[0:0]
+    33/33: $1\mov_value[31:0]
+Creating decoders for process `\protocol_core.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:118$76'.
+     1/1: $1\source[31:0]
+
+15.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `\pio_subsystem.\od[1]' from process `\pio_subsystem.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv:96$807'.
+No latch inferred for signal `\pio_subsystem.\dirs[1]' from process `\pio_subsystem.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv:96$806'.
+No latch inferred for signal `\pio_subsystem.\values[1]' from process `\pio_subsystem.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv:95$805'.
+No latch inferred for signal `\pio_subsystem.\irq[1]' from process `\pio_subsystem.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv:95$804'.
+No latch inferred for signal `\pio_subsystem.\status[1]' from process `\pio_subsystem.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv:94$803'.
+No latch inferred for signal `\pio_subsystem.\write_word[1]' from process `\pio_subsystem.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv:85$802'.
+No latch inferred for signal `\pio_subsystem.\data_address[1]' from process `\pio_subsystem.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv:83$801'.
+No latch inferred for signal `\pio_subsystem.\bank_read[1]' from process `\pio_subsystem.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv:81$800'.
+No latch inferred for signal `\pio_subsystem.\od[0]' from process `\pio_subsystem.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv:96$799'.
+No latch inferred for signal `\pio_subsystem.\dirs[0]' from process `\pio_subsystem.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv:96$798'.
+No latch inferred for signal `\pio_subsystem.\values[0]' from process `\pio_subsystem.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv:95$797'.
+No latch inferred for signal `\pio_subsystem.\irq[0]' from process `\pio_subsystem.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv:95$796'.
+No latch inferred for signal `\pio_subsystem.\status[0]' from process `\pio_subsystem.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv:94$795'.
+No latch inferred for signal `\pio_subsystem.\write_word[0]' from process `\pio_subsystem.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv:85$794'.
+No latch inferred for signal `\pio_subsystem.\data_address[0]' from process `\pio_subsystem.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv:83$793'.
+No latch inferred for signal `\pio_subsystem.\bank_read[0]' from process `\pio_subsystem.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv:81$792'.
+No latch inferred for signal `\pio_subsystem.$mem2reg_rd$\bank_read$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv:39$742_DATA' from process `\pio_subsystem.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv:39$789'.
+No latch inferred for signal `\pio_subsystem.\engines[1].bank_selected_data' from process `\pio_subsystem.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv:67$784'.
+No latch inferred for signal `\pio_subsystem.\engines[0].bank_selected_data' from process `\pio_subsystem.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv:67$766'.
+No latch inferred for signal `\decoder.\illegal' from process `\decoder.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/frontend/decoder.sv:21$688'.
+No latch inferred for signal `\pio_host_bank.\read_data' from process `\pio_host_bank.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_host_bank.sv:29$449'.
+No latch inferred for signal `\protocol_core.\count_add$func$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:143$2.$result' from process `\protocol_core.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:143$414'.
+No latch inferred for signal `\protocol_core.\host_read_data' from process `\protocol_core.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:271$232'.
+No latch inferred for signal `\protocol_core.\selected_data' from process `\protocol_core.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:271$232'.
+No latch inferred for signal `\protocol_core.\stall' from process `\protocol_core.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:161$120'.
+No latch inferred for signal `\protocol_core.\branch' from process `\protocol_core.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:161$120'.
+No latch inferred for signal `\protocol_core.\branch_target' from process `\protocol_core.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:161$120'.
+No latch inferred for signal `\protocol_core.\tx_pop_request' from process `\protocol_core.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:161$120'.
+No latch inferred for signal `\protocol_core.\rx_push_request' from process `\protocol_core.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:161$120'.
+No latch inferred for signal `\protocol_core.\rx_push_data' from process `\protocol_core.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:161$120'.
+No latch inferred for signal `\protocol_core.\next_x' from process `\protocol_core.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:161$120'.
+No latch inferred for signal `\protocol_core.\next_y' from process `\protocol_core.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:161$120'.
+No latch inferred for signal `\protocol_core.\next_osr' from process `\protocol_core.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:161$120'.
+No latch inferred for signal `\protocol_core.\next_isr' from process `\protocol_core.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:161$120'.
+No latch inferred for signal `\protocol_core.\next_out_count' from process `\protocol_core.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:161$120'.
+No latch inferred for signal `\protocol_core.\next_in' from process `\protocol_core.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:161$120'.
+No latch inferred for signal `\protocol_core.\pin_write' from process `\protocol_core.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:161$120'.
+No latch inferred for signal `\protocol_core.\dir_write' from process `\protocol_core.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:161$120'.
+No latch inferred for signal `\protocol_core.\inject' from process `\protocol_core.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:161$120'.
+No latch inferred for signal `\protocol_core.\pin_value' from process `\protocol_core.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:161$120'.
+No latch inferred for signal `\protocol_core.\injected_word' from process `\protocol_core.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:161$120'.
+No latch inferred for signal `\protocol_core.\irq_set' from process `\protocol_core.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:161$120'.
+No latch inferred for signal `\protocol_core.\irq_clear' from process `\protocol_core.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:161$120'.
+No latch inferred for signal `\protocol_core.\wait_value' from process `\protocol_core.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:161$120'.
+No latch inferred for signal `\protocol_core.\b' from process `\protocol_core.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:146$79'.
+No latch inferred for signal `\protocol_core.\mov_value' from process `\protocol_core.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:146$79'.
+No latch inferred for signal `\protocol_core.\source' from process `\protocol_core.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:118$76'.
+
+15.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\pio_subsystem.\selected_engine' using process `\pio_subsystem.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv:34$746'.
+  created $dff cell `$procdff$4250' with positive edge clock.
+Creating register for signal `\instruction_fetch.$memwr$\words$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/frontend/instruction_fetch.sv:18$674_ADDR' using process `\instruction_fetch.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/frontend/instruction_fetch.sv:16$675'.
+  created $dff cell `$procdff$4251' with positive edge clock.
+Creating register for signal `\instruction_fetch.$memwr$\words$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/frontend/instruction_fetch.sv:18$674_DATA' using process `\instruction_fetch.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/frontend/instruction_fetch.sv:16$675'.
+  created $dff cell `$procdff$4252' with positive edge clock.
+Creating register for signal `\instruction_fetch.$memwr$\words$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/frontend/instruction_fetch.sv:18$674_EN' using process `\instruction_fetch.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/frontend/instruction_fetch.sv:16$675'.
+  created $dff cell `$procdff$4253' with positive edge clock.
+Creating register for signal `\pc.\pc_out' using process `\pc.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/frontend/pc.sv:8$669'.
+  created $dff cell `$procdff$4254' with positive edge clock.
+Creating register for signal `\pio_fifo.\level' using process `\pio_fifo.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_fifo.sv:20$654'.
+  created $dff cell `$procdff$4255' with positive edge clock.
+Creating register for signal `\pio_fifo.\read_ptr' using process `\pio_fifo.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_fifo.sv:20$654'.
+  created $dff cell `$procdff$4256' with positive edge clock.
+Creating register for signal `\pio_fifo.\write_ptr' using process `\pio_fifo.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_fifo.sv:20$654'.
+  created $dff cell `$procdff$4257' with positive edge clock.
+Creating register for signal `\pio_fifo.$memwr$\words$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_fifo.sv:27$644_ADDR' using process `\pio_fifo.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_fifo.sv:20$654'.
+  created $dff cell `$procdff$4258' with positive edge clock.
+Creating register for signal `\pio_fifo.$memwr$\words$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_fifo.sv:27$644_DATA' using process `\pio_fifo.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_fifo.sv:20$654'.
+  created $dff cell `$procdff$4259' with positive edge clock.
+Creating register for signal `\pio_fifo.$memwr$\words$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_fifo.sv:27$644_EN' using process `\pio_fifo.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_fifo.sv:20$654'.
+  created $dff cell `$procdff$4260' with positive edge clock.
+Creating register for signal `\host_interface.\data_out' using process `\host_interface.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/host_interface.sv:34$600'.
+  created $dff cell `$procdff$4261' with positive edge clock.
+Creating register for signal `\host_interface.\armed' using process `\host_interface.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/host_interface.sv:34$600'.
+  created $dff cell `$procdff$4262' with positive edge clock.
+Creating register for signal `\host_interface.\pending' using process `\host_interface.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/host_interface.sv:34$600'.
+  created $dff cell `$procdff$4263' with positive edge clock.
+Creating register for signal `\host_interface.\pending_read' using process `\host_interface.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/host_interface.sv:34$600'.
+  created $dff cell `$procdff$4264' with positive edge clock.
+Creating register for signal `\host_interface.\valid_read' using process `\host_interface.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/host_interface.sv:34$600'.
+  created $dff cell `$procdff$4265' with positive edge clock.
+Creating register for signal `\host_interface.\pending_word' using process `\host_interface.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/host_interface.sv:34$600'.
+  created $dff cell `$procdff$4266' with positive edge clock.
+Creating register for signal `\host_interface.\pending_address' using process `\host_interface.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/host_interface.sv:34$600'.
+  created $dff cell `$procdff$4267' with positive edge clock.
+Creating register for signal `\host_interface.\low' using process `\host_interface.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/host_interface.sv:34$600'.
+  created $dff cell `$procdff$4268' with positive edge clock.
+Creating register for signal `\host_interface.\captured' using process `\host_interface.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/host_interface.sv:34$600'.
+  created $dff cell `$procdff$4269' with positive edge clock.
+Creating register for signal `\pio_gpio_owner.\owner' using process `\pio_gpio_owner.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_gpio_owner.sv:15$554'.
+  created $dff cell `$procdff$4270' with positive edge clock.
+Creating register for signal `\pio_host_bank.\data_address' using process `\pio_host_bank.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_host_bank.sv:45$450'.
+  created $dff cell `$procdff$4271' with positive edge clock.
+Creating register for signal `\pio_host_bank.\imem_address' using process `\pio_host_bank.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_host_bank.sv:45$450'.
+  created $dff cell `$procdff$4272' with positive edge clock.
+Creating register for signal `\pio_host_bank.\imem_low' using process `\pio_host_bank.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_host_bank.sv:45$450'.
+  created $dff cell `$procdff$4273' with positive edge clock.
+Creating register for signal `\pio_host_bank.\data_stage' using process `\pio_host_bank.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_host_bank.sv:45$450'.
+  created $dff cell `$procdff$4274' with positive edge clock.
+Creating register for signal `\pio_host_bank.\data_snapshot' using process `\pio_host_bank.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_host_bank.sv:45$450'.
+  created $dff cell `$procdff$4275' with positive edge clock.
+Creating register for signal `\pio_inputs.\pins_sync' using process `\pio_inputs.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_inputs.sv:13$424'.
+  created $dff cell `$procdff$4276' with positive edge clock.
+Creating register for signal `\pio_inputs.\qualified' using process `\pio_inputs.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_inputs.sv:13$424'.
+  created $dff cell `$procdff$4277' with positive edge clock.
+Creating register for signal `\pio_inputs.\pins_meta' using process `\pio_inputs.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_inputs.sv:13$424'.
+  created $dff cell `$procdff$4278' with positive edge clock.
+Creating register for signal `\pio_inputs.\f' using process `\pio_inputs.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_inputs.sv:13$424'.
+  created $dff cell `$procdff$4279' with positive edge clock.
+Creating register for signal `\pio_inputs.\history[0]' using process `\pio_inputs.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_inputs.sv:13$424'.
+  created $dff cell `$procdff$4280' with positive edge clock.
+Creating register for signal `\pio_inputs.\history[1]' using process `\pio_inputs.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_inputs.sv:13$424'.
+  created $dff cell `$procdff$4281' with positive edge clock.
+Creating register for signal `\pio_inputs.\history[2]' using process `\pio_inputs.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_inputs.sv:13$424'.
+  created $dff cell `$procdff$4282' with positive edge clock.
+Creating register for signal `\protocol_core.\y' using process `\protocol_core.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:307$240'.
+  created $dff cell `$procdff$4283' with positive edge clock.
+Creating register for signal `\protocol_core.\directions' using process `\protocol_core.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:307$240'.
+  created $dff cell `$procdff$4284' with positive edge clock.
+Creating register for signal `\protocol_core.\open_drain' using process `\protocol_core.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:307$240'.
+  created $dff cell `$procdff$4285' with positive edge clock.
+Creating register for signal `\protocol_core.\pins' using process `\protocol_core.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:307$240'.
+  created $dff cell `$procdff$4286' with positive edge clock.
+Creating register for signal `\protocol_core.\running' using process `\protocol_core.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:307$240'.
+  created $dff cell `$procdff$4287' with positive edge clock.
+Creating register for signal `\protocol_core.\fault' using process `\protocol_core.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:307$240'.
+  created $dff cell `$procdff$4288' with positive edge clock.
+Creating register for signal `\protocol_core.\x' using process `\protocol_core.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:307$240'.
+  created $dff cell `$procdff$4289' with positive edge clock.
+Creating register for signal `\protocol_core.\osr' using process `\protocol_core.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:307$240'.
+  created $dff cell `$procdff$4290' with positive edge clock.
+Creating register for signal `\protocol_core.\isr' using process `\protocol_core.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:307$240'.
+  created $dff cell `$procdff$4291' with positive edge clock.
+Creating register for signal `\protocol_core.\out_count' using process `\protocol_core.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:307$240'.
+  created $dff cell `$procdff$4292' with positive edge clock.
+Creating register for signal `\protocol_core.\in_count' using process `\protocol_core.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:307$240'.
+  created $dff cell `$procdff$4293' with positive edge clock.
+Creating register for signal `\protocol_core.\delay_left' using process `\protocol_core.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:307$240'.
+  created $dff cell `$procdff$4294' with positive edge clock.
+Creating register for signal `\protocol_core.\divider' using process `\protocol_core.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:307$240'.
+  created $dff cell `$procdff$4295' with positive edge clock.
+Creating register for signal `\protocol_core.\divider_left' using process `\protocol_core.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:307$240'.
+  created $dff cell `$procdff$4296' with positive edge clock.
+Creating register for signal `\protocol_core.\shiftctrl' using process `\protocol_core.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:307$240'.
+  created $dff cell `$procdff$4297' with positive edge clock.
+Creating register for signal `\protocol_core.\execctrl' using process `\protocol_core.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:307$240'.
+  created $dff cell `$procdff$4298' with positive edge clock.
+Creating register for signal `\protocol_core.\pinctrl' using process `\protocol_core.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:307$240'.
+  created $dff cell `$procdff$4299' with positive edge clock.
+Creating register for signal `\protocol_core.\route' using process `\protocol_core.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:307$240'.
+  created $dff cell `$procdff$4300' with positive edge clock.
+Creating register for signal `\protocol_core.\filter_enable' using process `\protocol_core.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:307$240'.
+  created $dff cell `$procdff$4301' with positive edge clock.
+Creating register for signal `\protocol_core.\irq' using process `\protocol_core.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:307$240'.
+  created $dff cell `$procdff$4302' with positive edge clock.
+Creating register for signal `\protocol_core.\irq_waiting' using process `\protocol_core.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:307$240'.
+  created $dff cell `$procdff$4303' with positive edge clock.
+Creating register for signal `\protocol_core.\debug_flags' using process `\protocol_core.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:307$240'.
+  created $dff cell `$procdff$4304' with positive edge clock.
+Creating register for signal `\protocol_core.\exec_pending' using process `\protocol_core.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:307$240'.
+  created $dff cell `$procdff$4305' with positive edge clock.
+Creating register for signal `\protocol_core.\exec_instruction' using process `\protocol_core.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:307$240'.
+  created $dff cell `$procdff$4306' with positive edge clock.
+Creating register for signal `\protocol_core.$bitselwrite$pos$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:379$7' using process `\protocol_core.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:307$240'.
+  created $dff cell `$procdff$4307' with positive edge clock.
+Creating register for signal `\protocol_core.$bitselwrite$pos$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:385$8' using process `\protocol_core.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:307$240'.
+  created $dff cell `$procdff$4308' with positive edge clock.
+Creating register for signal `\protocol_core.$bitselwrite$pos$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:386$9' using process `\protocol_core.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:307$240'.
+  created $dff cell `$procdff$4309' with positive edge clock.
+Creating register for signal `\protocol_core.$lookahead\irq$237' using process `\protocol_core.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:307$240'.
+  created $dff cell `$procdff$4310' with positive edge clock.
+Creating register for signal `\protocol_core.$lookahead\directions$238' using process `\protocol_core.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:307$240'.
+  created $dff cell `$procdff$4311' with positive edge clock.
+Creating register for signal `\protocol_core.$lookahead\pins$239' using process `\protocol_core.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:307$240'.
+  created $dff cell `$procdff$4312' with positive edge clock.
+
+15.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+15.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Removing empty process `pio_subsystem.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv:96$807'.
+Removing empty process `pio_subsystem.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv:96$806'.
+Removing empty process `pio_subsystem.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv:95$805'.
+Removing empty process `pio_subsystem.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv:95$804'.
+Removing empty process `pio_subsystem.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv:94$803'.
+Removing empty process `pio_subsystem.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv:85$802'.
+Removing empty process `pio_subsystem.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv:83$801'.
+Removing empty process `pio_subsystem.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv:81$800'.
+Removing empty process `pio_subsystem.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv:96$799'.
+Removing empty process `pio_subsystem.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv:96$798'.
+Removing empty process `pio_subsystem.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv:95$797'.
+Removing empty process `pio_subsystem.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv:95$796'.
+Removing empty process `pio_subsystem.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv:94$795'.
+Removing empty process `pio_subsystem.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv:85$794'.
+Removing empty process `pio_subsystem.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv:83$793'.
+Removing empty process `pio_subsystem.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv:81$792'.
+Found and cleaned up 1 empty switch in `\pio_subsystem.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv:39$789'.
+Removing empty process `pio_subsystem.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv:39$789'.
+Found and cleaned up 1 empty switch in `\pio_subsystem.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv:67$784'.
+Removing empty process `pio_subsystem.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv:67$784'.
+Found and cleaned up 1 empty switch in `\pio_subsystem.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv:67$766'.
+Removing empty process `pio_subsystem.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv:67$766'.
+Found and cleaned up 2 empty switches in `\pio_subsystem.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv:34$746'.
+Removing empty process `pio_subsystem.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_subsystem.sv:34$746'.
+Found and cleaned up 1 empty switch in `\instruction_fetch.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/frontend/instruction_fetch.sv:16$675'.
+Removing empty process `instruction_fetch.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/frontend/instruction_fetch.sv:16$675'.
+Found and cleaned up 3 empty switches in `\pc.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/frontend/pc.sv:8$669'.
+Removing empty process `pc.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/frontend/pc.sv:8$669'.
+Found and cleaned up 4 empty switches in `\pio_fifo.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_fifo.sv:20$654'.
+Removing empty process `pio_fifo.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_fifo.sv:20$654'.
+Found and cleaned up 8 empty switches in `\host_interface.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/host_interface.sv:34$600'.
+Removing empty process `host_interface.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/host_interface.sv:34$600'.
+Found and cleaned up 2 empty switches in `\pio_gpio_owner.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_gpio_owner.sv:15$554'.
+Removing empty process `pio_gpio_owner.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_gpio_owner.sv:15$554'.
+Found and cleaned up 3 empty switches in `\decoder.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/frontend/decoder.sv:21$688'.
+Removing empty process `decoder.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/frontend/decoder.sv:21$688'.
+Found and cleaned up 6 empty switches in `\pio_host_bank.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_host_bank.sv:45$450'.
+Removing empty process `pio_host_bank.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_host_bank.sv:45$450'.
+Found and cleaned up 1 empty switch in `\pio_host_bank.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_host_bank.sv:29$449'.
+Removing empty process `pio_host_bank.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_host_bank.sv:29$449'.
+Found and cleaned up 9 empty switches in `\pio_inputs.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_inputs.sv:13$424'.
+Removing empty process `pio_inputs.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/pio_inputs.sv:13$424'.
+Removing empty process `protocol_core.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:143$414'.
+Found and cleaned up 30 empty switches in `\protocol_core.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:307$240'.
+Removing empty process `protocol_core.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:307$240'.
+Found and cleaned up 2 empty switches in `\protocol_core.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:271$232'.
+Removing empty process `protocol_core.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:271$232'.
+Found and cleaned up 14 empty switches in `\protocol_core.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:161$120'.
+Removing empty process `protocol_core.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:161$120'.
+Found and cleaned up 33 empty switches in `\protocol_core.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:146$79'.
+Removing empty process `protocol_core.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:146$79'.
+Found and cleaned up 1 empty switch in `\protocol_core.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:118$76'.
+Removing empty process `protocol_core.$proc$/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/src/protocol_core.sv:118$76'.
+Cleaned up 122 empty switches.
+
+15.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module pio_subsystem.
+<suppressed ~4 debug messages>
+Optimizing module instruction_fetch.
+Optimizing module pc.
+Optimizing module pio_fifo.
+<suppressed ~1 debug messages>
+Optimizing module execution_unit.
+Optimizing module pio_pads.
+Optimizing module host_interface.
+<suppressed ~1 debug messages>
+Optimizing module pio_gpio_owner.
+<suppressed ~1 debug messages>
+Optimizing module decoder.
+<suppressed ~6 debug messages>
+Optimizing module pio_host_bank.
+<suppressed ~11 debug messages>
+Optimizing module pio_inputs.
+<suppressed ~14 debug messages>
+Optimizing module protocol_core.
+<suppressed ~182 debug messages>
+Optimizing module tt_um_shanebri_top.
+
+16. Executing CHECK pass (checking for obvious problems).
+Checking module pio_subsystem...
+Checking module instruction_fetch...
+Checking module pc...
+Checking module pio_fifo...
+Checking module execution_unit...
+Checking module pio_pads...
+Checking module host_interface...
+Checking module pio_gpio_owner...
+Checking module decoder...
+Checking module pio_host_bank...
+Checking module pio_inputs...
+Checking module protocol_core...
+Checking module tt_um_shanebri_top...
+Found and reported 0 problems.
+
+Warnings: 1 unique messages, 1 total
+End of script. Logfile hash: 23880d9d77, time: 0.26s, user: 0.12s, system: 0.03s, MEM: 39.83 MB peak
+Yosys 0.66 (git sha1 86f2ddebce7e98ce7cacc27e8a5c14cb53b51b51, clang++ 21.1.8 -fPIC -O3)
+Time spent: 40% 14x read_verilog (0 sec), 22% 1x proc_mux (0 sec), ...

@@ -1,0 +1,138 @@
+diff --git a/src/host_interface.sv b/src/host_interface.sv
+index e442457..392acca 100644
+--- a/src/host_interface.sv
++++ b/src/host_interface.sv
+@@ -12,9 +12,11 @@ module host_interface (
+     output wire [3:0] data_oe,
+     // Intent is consumed only by synchronous-reset state, with a separate
+     // local reset guard on unreset IMEM. Public acceptance remains qualified.
+-    output wire write_intent, read_intent
++    output wire write_intent, read_intent, word_write_intent
+ );
+     reg armed, pending, pending_read, valid_read;
++    // Redundant pending class, captured on the existing first-nibble edge.
++    reg pending_word;
+     reg [3:0] pending_address, low;
+     reg [7:0] captured;
+     wire wr = control[4];
+@@ -24,24 +26,26 @@ module host_interface (
+     assign address = control[3:0];
+     assign write_data = {data_in, low};
+     assign write_intent = beat && wr && matching;
++    assign word_write_intent = ena && armed && wr && !rd && pending_word && address == 4'ha;
+     assign read_intent = beat && rd && !matching;
+     assign write_en = rst_n && write_intent;
+     assign read_en = rst_n && read_intent;
+     assign data_oe = {4{ena && rst_n && rd && !wr && (armed || valid_read)}};
+     always @(posedge clk) begin
+         if (!rst_n || !ena) begin
+-            armed <= 0; pending <= 0; pending_read <= 0;
++            armed <= 0; pending <= 0; pending_read <= 0; pending_word <= 0;
+             pending_address <= 0; low <= 0; captured <= 0;
+             data_out <= 0; valid_read <= 0;
+         end else if (rd && wr) begin
+-            armed <= 0; pending <= 0; valid_read <= 0;
++            armed <= 0; pending <= 0; valid_read <= 0; pending_word <= 0;
+         end else begin
+             if (!rd && !wr) begin armed <= 1; valid_read <= 0; end
+             if (pending && (address != pending_address ||
+-                ((rd || wr) && rd != pending_read))) pending <= 0;
++                ((rd || wr) && rd != pending_read))) begin pending <= 0; pending_word <= 0; end
+             if (beat) begin
+                 armed <= 0;
+                 pending <= !matching;
++                pending_word <= !matching && wr && address == 4'ha;
+                 pending_address <= address;
+                 pending_read <= rd;
+                 if (rd) begin
+diff --git a/src/pio_subsystem.sv b/src/pio_subsystem.sv
+index b6aa946..1003350 100644
+--- a/src/pio_subsystem.sv
++++ b/src/pio_subsystem.sv
+@@ -3,7 +3,7 @@
+ module pio_subsystem (
+     input wire clk, rst_n, enable,
+     input wire [3:0] host_address,
+-    input wire host_write_en, host_read_en,
++    input wire host_write_en, host_read_en, host_word_write_en,
+     input wire [7:0] host_write_data,
+     input wire [5:0] pin_in,
+     output wire [7:0] host_read_data,
+@@ -46,6 +46,7 @@ module pio_subsystem (
+         assign group_write[e] = word_write[e] && data_address[e] == 8'h1c;
+         assign owner_write[e] = word_write[e] && data_address[e] == 8'h1b;
+         wire byte_write = host_write_en && selected;
++        assign word_write[e] = host_word_write_en && selected;
+         wire byte_read = host_read_en && selected;
+         wire [7:0] core_read_data;
+         wire [15:0] imem_read_data, imem_write_data;
+@@ -80,7 +81,7 @@ module pio_subsystem (
+             .imem_read_data(imem_read_data), .selected_data(bank_selected_data),
+             .read_data(bank_read[e]), .imem_address(imem_address),
+             .imem_write(imem_write), .imem_write_data(imem_write_data),
+-            .data_address(data_address[e]), .word_write(word_write[e]),
++            .data_address(data_address[e]), .word_write(),
+             .snapshot_read(snapshot_read), .write_word(write_word[e]),
+             .control_command(local_control));
+         protocol_core core (.clk(clk), .rst_n(rst_n), .enable(enable),
+diff --git a/src/project.sv b/src/project.sv
+index 96e474b..84c4417 100644
+--- a/src/project.sv
++++ b/src/project.sv
+@@ -18,6 +18,7 @@ module tt_um_shanebri_top (
+ 
+   wire [3:0] host_address;
+   wire host_write_en;
++  wire host_word_write_en;
+   wire host_read_en;
+   wire [7:0] host_write_data;
+   wire [7:0] host_read_data;
+@@ -30,12 +31,14 @@ module tt_um_shanebri_top (
+       .data_in(uio_in[3:0]), .read_data(host_read_data),
+       .address(host_address), .write_en(), .read_en(),
+       .write_intent(host_write_en), .read_intent(host_read_en),
++      .word_write_intent(host_word_write_en),
+       .write_data(host_write_data), .data_out(uio_out[3:0]), .data_oe(uio_oe[3:0])
+   );
+ 
+   pio_subsystem pio (
+       .clk(clk), .rst_n(rst_n), .enable(ena),
+       .host_address(host_address), .host_write_en(host_write_en), .host_read_en(host_read_en),
++      .host_word_write_en(host_word_write_en),
+       .host_write_data(host_write_data), .host_read_data(host_read_data),
+       .pin_in({uio_in[7:4],ui_in[7:6]}),
+       .pins(values), .directions(directions), .open_drain(open_drain)
+diff --git a/test/host_interface_tb.sv b/test/host_interface_tb.sv
+index 393dc05..3235c96 100644
+--- a/test/host_interface_tb.sv
++++ b/test/host_interface_tb.sv
+@@ -6,14 +6,16 @@ module host_interface_tb;
+     reg [3:0] din=0;
+     wire [3:0] address, dout, oe;
+     wire we, re;
++    wire wi, wwi;
+     wire [7:0] wd;
+     integer writes=0, reads=0;
+     reg [7:0] last_write;
+     host_interface dut(.clk(clk), .rst_n(rst_n), .ena(ena), .control(control),
+         .data_in(din), .read_data(source), .address(address), .write_en(we),
+         .read_en(re), .write_data(wd), .data_out(dout), .data_oe(oe),
+-        .write_intent(), .read_intent());
++        .write_intent(wi), .read_intent(), .word_write_intent(wwi));
+     always @(posedge clk) begin
++        if (rst_n && wwi !== (wi && address == 4'ha)) $fatal(1,"word intent edge mismatch");
+         if (we) begin writes=writes+1; last_write=wd; end
+         if (re) reads=reads+1;
+         if (we && re) $fatal(1,"simultaneous core acceptance");
+diff --git a/test/pio_subsystem_tb.sv b/test/pio_subsystem_tb.sv
+index f504caf..4283270 100644
+--- a/test/pio_subsystem_tb.sv
++++ b/test/pio_subsystem_tb.sv
+@@ -13,6 +13,7 @@ module pio_subsystem_tb;
+     wire [3:0] directions, od;
+     pio_subsystem dut(.clk(clk), .rst_n(rst_n), .enable(enable),
+         .host_address(address), .host_write_en(wr), .host_read_en(rd),
++        .host_word_write_en(wr && address == 4'ha),
+         .host_write_data(data), .host_read_data(read_data), .pin_in(pin_in),
+         .pins(pins), .directions(directions), .open_drain(od));
+     task write_byte(input [3:0] a, input [7:0] d);
