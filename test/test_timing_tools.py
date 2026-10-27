@@ -25,6 +25,8 @@ import closure_trial
 import check_net_geometry
 import closure_collect
 import audit_clock_tree
+import audit_data_eco
+import data_eco_suite
 sys.path.pop(0)
 
 
@@ -375,6 +377,16 @@ class NorTrialAuditTests(unittest.TestCase):
 
 
 class ClockInsertionAuditTests(unittest.TestCase):
+    def test_native_clock_antenna_load_is_counted_and_unknown_load_rejected(self):
+        data=self.fixture()
+        data[0]['ANTENNA_0']=('sg13cmos5l_antennanp',{'A':'branch'})
+        data[3]['branch'].append(('ANTENNA_0','A'))
+        result=audit_clock_tree.topology(data)
+        self.assertEqual(result['antenna_clock_load_count'],1)
+        self.assertEqual(result['max_buffer_fanout'],2)
+        data[0]['ANTENNA_0']=('unknown_cell',{'A':'branch'})
+        with self.assertRaises(ValueError): audit_clock_tree.topology(data)
+
     def fixture(self, split=False):
         cells = {'root': ('sg13cmos5l_buf_8', {'A': 'clk', 'X': 'branch'}),
                  'ff': ('sg13cmos5l_dfrbpq_1', {'CLK': 'leaf' if split else 'branch', 'D': 'data', 'Q': 'q'})}
@@ -408,6 +420,51 @@ class ClockInsertionAuditTests(unittest.TestCase):
                     audit_clock_tree.topology(after)
                 else:
                     audit_clock_tree.audit(self.fixture(), after)
+
+
+class DataECOAuditTests(unittest.TestCase):
+    def test_resume_uses_completed_retry_before_allocating_another_attempt(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory)
+            for attempt,status in ((1,'failed'),(2,'rejected_signoff'),(3,'aborted_duplicate_retry')):
+                out=root/f'fanout_uio3-{attempt:02d}'; out.mkdir()
+                (out/'experiment.json').write_text(json.dumps({'status':status}))
+                if attempt==2: (out/'eco_audit.json').write_text('{"status":"pass"}')
+            self.assertEqual(data_eco_suite.choose_attempt(root,'fanout_uio3'),root/'fanout_uio3-02')
+            self.assertEqual(data_eco_suite.choose_attempt(root,'new_case'),root/'new_case-01')
+
+    def fixture(self):
+        cells={'clkroot':('sg13cmos5l_buf_8',{'A':'clk','X':'ctree'}),
+               'gate':('sg13cmos5l_a21oi_1',{'A1':'a','A2':'b','B1':'c','Y':'data'}),
+               'ff':('sg13cmos5l_dfrbpq_1',{'D':'data','CLK':'ctree','Q':'q'})}
+        return cells,{'clk':'clk'},{'clk','ctree','a','b','c','data','q'},\
+            {'clk':[('clkroot','A')],'ctree':[('ff','CLK')],'data':[('ff','D')]},{('ff','CLK')}
+
+    def test_declared_size_and_transparent_buffer(self):
+        before,after=self.fixture(),self.fixture()
+        after[0]['gate']=('sg13cmos5l_a21oi_2',after[0]['gate'][1])
+        size=[dict(kind='size',instance='gate',old='sg13cmos5l_a21oi_1',new='sg13cmos5l_a21oi_2')]
+        self.assertEqual(audit_data_eco.audit(before,after,size)['added_buffers'],0)
+        after=self.fixture()
+        after[0]['eco_data_0']=('sg13cmos5l_buf_4',{'A':'data','X':'new'})
+        after[0]['ff'][1]['D']='new'; after[2].add('new')
+        after[3]['data']=[('eco_data_0','A')]; after[3]['new']=[('ff','D')]
+        op=[dict(kind='buffer',target='gate/Y',old='sg13cmos5l_a21oi_1',max_loads=8)]
+        self.assertEqual(audit_data_eco.audit(before,after,op)['added_buffers'],1)
+
+    def test_undeclared_logic_change_rejected(self):
+        for failure in ('pin','master','port'):
+            after=self.fixture()
+            if failure=='pin': after[0]['ff'][1]['D']='q'
+            elif failure=='master': after[0]['gate']=('sg13cmos5l_nor3_1',after[0]['gate'][1])
+            else: after[1]['clk']='ctree'
+            with self.subTest(failure=failure),self.assertRaises(ValueError):
+                audit_data_eco.audit(self.fixture(),after,[])
+
+    def test_clock_buffering_forbidden_in_data_recipe(self):
+        op=[dict(kind='buffer',target='clkroot/X',old='sg13cmos5l_buf_8',max_loads=8)]
+        with self.assertRaises(ValueError):
+            audit_data_eco.audit(self.fixture(),self.fixture(),op)
 
 
 class PhysicalTrialRelocationTests(unittest.TestCase):

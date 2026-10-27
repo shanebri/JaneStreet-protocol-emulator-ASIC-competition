@@ -1,0 +1,4223 @@
+[
+  {
+    "corner": "nom_slow_1p08V_125C",
+    "mode": "baseline",
+    "setup": -0.971601,
+    "hold": 0.630492,
+    "coverage_issues": false,
+    "paths": {
+      "global_hold.rpt": {
+        "startpoint": "_31487_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "_31483_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 0.630492
+      },
+      "global_setup.rpt": {
+        "startpoint": "ui_in[1] (input port clocked by clk)",
+        "endpoint": "_33836_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": -0.971601
+      },
+      "input_ena_max.rpt": {
+        "startpoint": "ena (input port clocked by clk)",
+        "endpoint": "_33836_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": -0.575321
+      },
+      "input_ena_min.rpt": {
+        "startpoint": "ena (input port clocked by clk)",
+        "endpoint": "_31483_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.695057
+      },
+      "input_rst_n_max.rpt": {
+        "startpoint": "rst_n (input port clocked by clk)",
+        "endpoint": "_33836_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 6.839799
+      },
+      "input_rst_n_min.rpt": {
+        "startpoint": "rst_n (input port clocked by clk)",
+        "endpoint": "_32268_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.136171
+      },
+      "input_uio_in_0__max.rpt": {
+        "startpoint": "uio_in[0] (input port clocked by clk)",
+        "endpoint": "_33836_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 5.070204
+      },
+      "input_uio_in_0__min.rpt": {
+        "startpoint": "uio_in[0] (input port clocked by clk)",
+        "endpoint": "_31490_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.980052
+      },
+      "input_uio_in_1__max.rpt": {
+        "startpoint": "uio_in[1] (input port clocked by clk)",
+        "endpoint": "_33836_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 2.775268
+      },
+      "input_uio_in_1__min.rpt": {
+        "startpoint": "uio_in[1] (input port clocked by clk)",
+        "endpoint": "_31834_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.522863
+      },
+      "input_uio_in_2__max.rpt": {
+        "startpoint": "uio_in[2] (input port clocked by clk)",
+        "endpoint": "_31913_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 11.922413
+      },
+      "input_uio_in_2__min.rpt": {
+        "startpoint": "uio_in[2] (input port clocked by clk)",
+        "endpoint": "_33591_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.316773
+      },
+      "input_uio_in_3__max.rpt": {
+        "startpoint": "uio_in[3] (input port clocked by clk)",
+        "endpoint": "_31922_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 11.199898
+      },
+      "input_uio_in_3__min.rpt": {
+        "startpoint": "uio_in[3] (input port clocked by clk)",
+        "endpoint": "_33496_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.375419
+      },
+      "input_uio_in_4__max.rpt": {
+        "startpoint": "uio_in[4] (input port clocked by clk)",
+        "endpoint": "_32269_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 16.466003
+      },
+      "input_uio_in_4__min.rpt": {
+        "startpoint": "uio_in[4] (input port clocked by clk)",
+        "endpoint": "_32269_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 2.666891
+      },
+      "input_uio_in_5__max.rpt": {
+        "startpoint": "uio_in[5] (input port clocked by clk)",
+        "endpoint": "_32270_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 16.461588
+      },
+      "input_uio_in_5__min.rpt": {
+        "startpoint": "uio_in[5] (input port clocked by clk)",
+        "endpoint": "_32270_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 2.67436
+      },
+      "input_uio_in_6__max.rpt": {
+        "startpoint": "uio_in[6] (input port clocked by clk)",
+        "endpoint": "_32271_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 16.466621
+      },
+      "input_uio_in_6__min.rpt": {
+        "startpoint": "uio_in[6] (input port clocked by clk)",
+        "endpoint": "_32271_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 2.670365
+      },
+      "input_uio_in_7__max.rpt": {
+        "startpoint": "uio_in[7] (input port clocked by clk)",
+        "endpoint": "_32272_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 16.468075
+      },
+      "input_uio_in_7__min.rpt": {
+        "startpoint": "uio_in[7] (input port clocked by clk)",
+        "endpoint": "_32272_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 2.669247
+      },
+      "input_ui_in_0__max.rpt": {
+        "startpoint": "ui_in[0] (input port clocked by clk)",
+        "endpoint": "_33836_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": -0.728756
+      },
+      "input_ui_in_0__min.rpt": {
+        "startpoint": "ui_in[0] (input port clocked by clk)",
+        "endpoint": "_31495_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.780595
+      },
+      "input_ui_in_1__max.rpt": {
+        "startpoint": "ui_in[1] (input port clocked by clk)",
+        "endpoint": "_33836_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": -0.971601
+      },
+      "input_ui_in_1__min.rpt": {
+        "startpoint": "ui_in[1] (input port clocked by clk)",
+        "endpoint": "_31487_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.610335
+      },
+      "input_ui_in_2__max.rpt": {
+        "startpoint": "ui_in[2] (input port clocked by clk)",
+        "endpoint": "_33836_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": -0.887065
+      },
+      "input_ui_in_2__min.rpt": {
+        "startpoint": "ui_in[2] (input port clocked by clk)",
+        "endpoint": "_31488_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.567514
+      },
+      "input_ui_in_3__max.rpt": {
+        "startpoint": "ui_in[3] (input port clocked by clk)",
+        "endpoint": "_33836_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": -0.406173
+      },
+      "input_ui_in_3__min.rpt": {
+        "startpoint": "ui_in[3] (input port clocked by clk)",
+        "endpoint": "_31483_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.538965
+      },
+      "input_ui_in_4__max.rpt": {
+        "startpoint": "ui_in[4] (input port clocked by clk)",
+        "endpoint": "_33836_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": -0.649939
+      },
+      "input_ui_in_4__min.rpt": {
+        "startpoint": "ui_in[4] (input port clocked by clk)",
+        "endpoint": "_31485_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.120281
+      },
+      "input_ui_in_5__max.rpt": {
+        "startpoint": "ui_in[5] (input port clocked by clk)",
+        "endpoint": "_33836_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": -0.725999
+      },
+      "input_ui_in_5__min.rpt": {
+        "startpoint": "ui_in[5] (input port clocked by clk)",
+        "endpoint": "_31483_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.168785
+      },
+      "input_ui_in_6__max.rpt": {
+        "startpoint": "ui_in[6] (input port clocked by clk)",
+        "endpoint": "_32267_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 16.50593
+      },
+      "input_ui_in_6__min.rpt": {
+        "startpoint": "ui_in[6] (input port clocked by clk)",
+        "endpoint": "_32267_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 2.616942
+      },
+      "input_ui_in_7__max.rpt": {
+        "startpoint": "ui_in[7] (input port clocked by clk)",
+        "endpoint": "_32268_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 16.51173
+      },
+      "input_ui_in_7__min.rpt": {
+        "startpoint": "ui_in[7] (input port clocked by clk)",
+        "endpoint": "_32268_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 2.612366
+      },
+      "output_uio_oe_0__max.rpt": {
+        "startpoint": "ui_in[5] (input port clocked by clk)",
+        "endpoint": "uio_oe[0] (output port clocked by clk)",
+        "slack_ns": 9.218349
+      },
+      "output_uio_oe_0__min.rpt": {
+        "startpoint": "_31482_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_oe[0] (output port clocked by clk)",
+        "slack_ns": 6.021906
+      },
+      "output_uio_oe_1__max.rpt": {
+        "startpoint": "ui_in[5] (input port clocked by clk)",
+        "endpoint": "uio_oe[1] (output port clocked by clk)",
+        "slack_ns": 9.215631
+      },
+      "output_uio_oe_1__min.rpt": {
+        "startpoint": "_31482_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_oe[1] (output port clocked by clk)",
+        "slack_ns": 6.024072
+      },
+      "output_uio_oe_2__max.rpt": {
+        "startpoint": "ui_in[5] (input port clocked by clk)",
+        "endpoint": "uio_oe[2] (output port clocked by clk)",
+        "slack_ns": 9.218715
+      },
+      "output_uio_oe_2__min.rpt": {
+        "startpoint": "_31482_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_oe[2] (output port clocked by clk)",
+        "slack_ns": 6.021615
+      },
+      "output_uio_oe_3__max.rpt": {
+        "startpoint": "ui_in[5] (input port clocked by clk)",
+        "endpoint": "uio_oe[3] (output port clocked by clk)",
+        "slack_ns": 9.219324
+      },
+      "output_uio_oe_3__min.rpt": {
+        "startpoint": "_31482_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_oe[3] (output port clocked by clk)",
+        "slack_ns": 6.021124
+      },
+      "output_uio_oe_4__max.rpt": {
+        "startpoint": "rst_n (input port clocked by clk)",
+        "endpoint": "uio_oe[4] (output port clocked by clk)",
+        "slack_ns": 8.766988
+      },
+      "output_uio_oe_4__min.rpt": {
+        "startpoint": "_31600_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_oe[4] (output port clocked by clk)",
+        "slack_ns": 5.923734
+      },
+      "output_uio_oe_5__max.rpt": {
+        "startpoint": "rst_n (input port clocked by clk)",
+        "endpoint": "uio_oe[5] (output port clocked by clk)",
+        "slack_ns": 8.856
+      },
+      "output_uio_oe_5__min.rpt": {
+        "startpoint": "_31601_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_oe[5] (output port clocked by clk)",
+        "slack_ns": 5.875776
+      },
+      "output_uio_oe_6__max.rpt": {
+        "startpoint": "rst_n (input port clocked by clk)",
+        "endpoint": "uio_oe[6] (output port clocked by clk)",
+        "slack_ns": 8.846101
+      },
+      "output_uio_oe_6__min.rpt": {
+        "startpoint": "_31602_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_oe[6] (output port clocked by clk)",
+        "slack_ns": 5.904509
+      },
+      "output_uio_oe_7__max.rpt": {
+        "startpoint": "rst_n (input port clocked by clk)",
+        "endpoint": "uio_oe[7] (output port clocked by clk)",
+        "slack_ns": 8.811179
+      },
+      "output_uio_oe_7__min.rpt": {
+        "startpoint": "_31603_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_oe[7] (output port clocked by clk)",
+        "slack_ns": 5.921805
+      },
+      "output_uio_out_0__max.rpt": {
+        "startpoint": "_31478_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[0] (output port clocked by clk)",
+        "slack_ns": 13.987121
+      },
+      "output_uio_out_0__min.rpt": {
+        "startpoint": "_31478_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[0] (output port clocked by clk)",
+        "slack_ns": 5.297236
+      },
+      "output_uio_out_1__max.rpt": {
+        "startpoint": "_31479_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[1] (output port clocked by clk)",
+        "slack_ns": 13.865322
+      },
+      "output_uio_out_1__min.rpt": {
+        "startpoint": "_31479_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[1] (output port clocked by clk)",
+        "slack_ns": 5.390952
+      },
+      "output_uio_out_2__max.rpt": {
+        "startpoint": "_31480_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[2] (output port clocked by clk)",
+        "slack_ns": 13.991658
+      },
+      "output_uio_out_2__min.rpt": {
+        "startpoint": "_31480_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[2] (output port clocked by clk)",
+        "slack_ns": 5.293176
+      },
+      "output_uio_out_3__max.rpt": {
+        "startpoint": "_31481_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[3] (output port clocked by clk)",
+        "slack_ns": 13.960774
+      },
+      "output_uio_out_3__min.rpt": {
+        "startpoint": "_31481_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[3] (output port clocked by clk)",
+        "slack_ns": 5.317576
+      },
+      "output_uio_out_4__max.rpt": {
+        "startpoint": "_32293_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[4] (output port clocked by clk)",
+        "slack_ns": 12.46585
+      },
+      "output_uio_out_4__min.rpt": {
+        "startpoint": "_31604_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[4] (output port clocked by clk)",
+        "slack_ns": 5.802596
+      },
+      "output_uio_out_5__max.rpt": {
+        "startpoint": "_32294_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[5] (output port clocked by clk)",
+        "slack_ns": 12.026627
+      },
+      "output_uio_out_5__min.rpt": {
+        "startpoint": "_31605_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[5] (output port clocked by clk)",
+        "slack_ns": 5.692327
+      },
+      "output_uio_out_6__max.rpt": {
+        "startpoint": "_32295_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[6] (output port clocked by clk)",
+        "slack_ns": 12.890191
+      },
+      "output_uio_out_6__min.rpt": {
+        "startpoint": "_31606_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[6] (output port clocked by clk)",
+        "slack_ns": 5.781374
+      },
+      "output_uio_out_7__max.rpt": {
+        "startpoint": "_32296_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[7] (output port clocked by clk)",
+        "slack_ns": 11.406118
+      },
+      "output_uio_out_7__min.rpt": {
+        "startpoint": "_31986_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[7] (output port clocked by clk)",
+        "slack_ns": 5.92946
+      },
+      "output_uo_out_0__max.rpt": {
+        "startpoint": "_32285_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[0] (output port clocked by clk)",
+        "slack_ns": 13.424088
+      },
+      "output_uo_out_0__min.rpt": {
+        "startpoint": "_31608_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[0] (output port clocked by clk)",
+        "slack_ns": 5.680289
+      },
+      "output_uo_out_1__max.rpt": {
+        "startpoint": "_31609_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[1] (output port clocked by clk)",
+        "slack_ns": 13.27143
+      },
+      "output_uo_out_1__min.rpt": {
+        "startpoint": "_31988_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[1] (output port clocked by clk)",
+        "slack_ns": 5.693568
+      },
+      "output_uo_out_2__max.rpt": {
+        "startpoint": "_31610_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[2] (output port clocked by clk)",
+        "slack_ns": 13.040727
+      },
+      "output_uo_out_2__min.rpt": {
+        "startpoint": "_31989_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[2] (output port clocked by clk)",
+        "slack_ns": 5.814397
+      },
+      "output_uo_out_3__max.rpt": {
+        "startpoint": "_32288_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[3] (output port clocked by clk)",
+        "slack_ns": 13.33108
+      },
+      "output_uo_out_3__min.rpt": {
+        "startpoint": "_31990_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[3] (output port clocked by clk)",
+        "slack_ns": 5.71117
+      },
+      "output_uo_out_4__max.rpt": {
+        "startpoint": "_32289_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[4] (output port clocked by clk)",
+        "slack_ns": 13.109414
+      },
+      "output_uo_out_4__min.rpt": {
+        "startpoint": "_31991_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[4] (output port clocked by clk)",
+        "slack_ns": 5.792875
+      },
+      "output_uo_out_5__max.rpt": {
+        "startpoint": "_31613_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[5] (output port clocked by clk)",
+        "slack_ns": 13.356842
+      },
+      "output_uo_out_5__min.rpt": {
+        "startpoint": "_32290_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[5] (output port clocked by clk)",
+        "slack_ns": 5.716343
+      },
+      "output_uo_out_6__max.rpt": {
+        "startpoint": "_32291_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[6] (output port clocked by clk)",
+        "slack_ns": 13.407397
+      },
+      "output_uo_out_6__min.rpt": {
+        "startpoint": "_31614_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[6] (output port clocked by clk)",
+        "slack_ns": 5.67827
+      },
+      "output_uo_out_7__max.rpt": {
+        "startpoint": "_32292_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[7] (output port clocked by clk)",
+        "slack_ns": 13.434947
+      },
+      "output_uo_out_7__min.rpt": {
+        "startpoint": "_32292_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[7] (output port clocked by clk)",
+        "slack_ns": 5.695864
+      },
+      "registers_max.rpt": {
+        "startpoint": "_33837_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "_33836_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 0.60392
+      },
+      "registers_min.rpt": {
+        "startpoint": "_31487_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "_31483_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 0.630492
+      },
+      "reset_fall_max.rpt": {
+        "startpoint": "rst_n (input port clocked by clk)",
+        "endpoint": "_33836_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 7.044181
+      },
+      "reset_fall_min.rpt": {
+        "startpoint": "rst_n (input port clocked by clk)",
+        "endpoint": "_32268_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.136171
+      },
+      "reset_rise_max.rpt": {
+        "startpoint": "rst_n (input port clocked by clk)",
+        "endpoint": "_33836_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 6.839799
+      },
+      "reset_rise_min.rpt": {
+        "startpoint": "rst_n (input port clocked by clk)",
+        "endpoint": "_32268_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.297585
+      }
+    }
+  },
+  {
+    "corner": "nom_slow_1p08V_125C",
+    "mode": "operational",
+    "setup": -0.971601,
+    "hold": 0.630492,
+    "coverage_issues": false,
+    "paths": {
+      "global_hold.rpt": {
+        "startpoint": "_31487_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "_31483_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 0.630492
+      },
+      "global_setup.rpt": {
+        "startpoint": "ui_in[1] (input port clocked by clk)",
+        "endpoint": "_33836_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": -0.971601
+      },
+      "input_ena_max.rpt": {
+        "startpoint": "ena (input port clocked by clk)",
+        "endpoint": "_33836_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": -0.575321
+      },
+      "input_ena_min.rpt": {
+        "startpoint": "ena (input port clocked by clk)",
+        "endpoint": "_31483_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.695057
+      },
+      "input_rst_n_max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_rst_n_min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_uio_in_0__max.rpt": {
+        "startpoint": "uio_in[0] (input port clocked by clk)",
+        "endpoint": "_33836_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 5.070204
+      },
+      "input_uio_in_0__min.rpt": {
+        "startpoint": "uio_in[0] (input port clocked by clk)",
+        "endpoint": "_31490_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.980052
+      },
+      "input_uio_in_1__max.rpt": {
+        "startpoint": "uio_in[1] (input port clocked by clk)",
+        "endpoint": "_33836_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 2.775268
+      },
+      "input_uio_in_1__min.rpt": {
+        "startpoint": "uio_in[1] (input port clocked by clk)",
+        "endpoint": "_31834_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.522863
+      },
+      "input_uio_in_2__max.rpt": {
+        "startpoint": "uio_in[2] (input port clocked by clk)",
+        "endpoint": "_31913_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 11.922413
+      },
+      "input_uio_in_2__min.rpt": {
+        "startpoint": "uio_in[2] (input port clocked by clk)",
+        "endpoint": "_33591_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.316773
+      },
+      "input_uio_in_3__max.rpt": {
+        "startpoint": "uio_in[3] (input port clocked by clk)",
+        "endpoint": "_31922_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 11.199898
+      },
+      "input_uio_in_3__min.rpt": {
+        "startpoint": "uio_in[3] (input port clocked by clk)",
+        "endpoint": "_33496_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.375419
+      },
+      "input_uio_in_4__max.rpt": {
+        "startpoint": "uio_in[4] (input port clocked by clk)",
+        "endpoint": "_32269_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 16.468277
+      },
+      "input_uio_in_4__min.rpt": {
+        "startpoint": "uio_in[4] (input port clocked by clk)",
+        "endpoint": "_32269_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 2.666891
+      },
+      "input_uio_in_5__max.rpt": {
+        "startpoint": "uio_in[5] (input port clocked by clk)",
+        "endpoint": "_32270_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 16.463881
+      },
+      "input_uio_in_5__min.rpt": {
+        "startpoint": "uio_in[5] (input port clocked by clk)",
+        "endpoint": "_32270_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 2.67436
+      },
+      "input_uio_in_6__max.rpt": {
+        "startpoint": "uio_in[6] (input port clocked by clk)",
+        "endpoint": "_32271_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 16.468952
+      },
+      "input_uio_in_6__min.rpt": {
+        "startpoint": "uio_in[6] (input port clocked by clk)",
+        "endpoint": "_32271_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 2.670365
+      },
+      "input_uio_in_7__max.rpt": {
+        "startpoint": "uio_in[7] (input port clocked by clk)",
+        "endpoint": "_32272_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 16.470417
+      },
+      "input_uio_in_7__min.rpt": {
+        "startpoint": "uio_in[7] (input port clocked by clk)",
+        "endpoint": "_32272_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 2.669247
+      },
+      "input_ui_in_0__max.rpt": {
+        "startpoint": "ui_in[0] (input port clocked by clk)",
+        "endpoint": "_33836_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": -0.728756
+      },
+      "input_ui_in_0__min.rpt": {
+        "startpoint": "ui_in[0] (input port clocked by clk)",
+        "endpoint": "_31495_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.780595
+      },
+      "input_ui_in_1__max.rpt": {
+        "startpoint": "ui_in[1] (input port clocked by clk)",
+        "endpoint": "_33836_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": -0.971601
+      },
+      "input_ui_in_1__min.rpt": {
+        "startpoint": "ui_in[1] (input port clocked by clk)",
+        "endpoint": "_31487_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.610335
+      },
+      "input_ui_in_2__max.rpt": {
+        "startpoint": "ui_in[2] (input port clocked by clk)",
+        "endpoint": "_33836_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": -0.887065
+      },
+      "input_ui_in_2__min.rpt": {
+        "startpoint": "ui_in[2] (input port clocked by clk)",
+        "endpoint": "_31488_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.567514
+      },
+      "input_ui_in_3__max.rpt": {
+        "startpoint": "ui_in[3] (input port clocked by clk)",
+        "endpoint": "_33836_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": -0.406173
+      },
+      "input_ui_in_3__min.rpt": {
+        "startpoint": "ui_in[3] (input port clocked by clk)",
+        "endpoint": "_31483_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.538965
+      },
+      "input_ui_in_4__max.rpt": {
+        "startpoint": "ui_in[4] (input port clocked by clk)",
+        "endpoint": "_33836_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": -0.649939
+      },
+      "input_ui_in_4__min.rpt": {
+        "startpoint": "ui_in[4] (input port clocked by clk)",
+        "endpoint": "_31485_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.120281
+      },
+      "input_ui_in_5__max.rpt": {
+        "startpoint": "ui_in[5] (input port clocked by clk)",
+        "endpoint": "_33836_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": -0.725999
+      },
+      "input_ui_in_5__min.rpt": {
+        "startpoint": "ui_in[5] (input port clocked by clk)",
+        "endpoint": "_31483_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.168785
+      },
+      "input_ui_in_6__max.rpt": {
+        "startpoint": "ui_in[6] (input port clocked by clk)",
+        "endpoint": "_32267_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 16.516933
+      },
+      "input_ui_in_6__min.rpt": {
+        "startpoint": "ui_in[6] (input port clocked by clk)",
+        "endpoint": "_32267_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 2.616942
+      },
+      "input_ui_in_7__max.rpt": {
+        "startpoint": "ui_in[7] (input port clocked by clk)",
+        "endpoint": "_32268_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 16.522604
+      },
+      "input_ui_in_7__min.rpt": {
+        "startpoint": "ui_in[7] (input port clocked by clk)",
+        "endpoint": "_32268_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 2.612366
+      },
+      "output_uio_oe_0__max.rpt": {
+        "startpoint": "ui_in[5] (input port clocked by clk)",
+        "endpoint": "uio_oe[0] (output port clocked by clk)",
+        "slack_ns": 9.218349
+      },
+      "output_uio_oe_0__min.rpt": {
+        "startpoint": "_31482_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_oe[0] (output port clocked by clk)",
+        "slack_ns": 6.021906
+      },
+      "output_uio_oe_1__max.rpt": {
+        "startpoint": "ui_in[5] (input port clocked by clk)",
+        "endpoint": "uio_oe[1] (output port clocked by clk)",
+        "slack_ns": 9.215631
+      },
+      "output_uio_oe_1__min.rpt": {
+        "startpoint": "_31482_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_oe[1] (output port clocked by clk)",
+        "slack_ns": 6.024072
+      },
+      "output_uio_oe_2__max.rpt": {
+        "startpoint": "ui_in[5] (input port clocked by clk)",
+        "endpoint": "uio_oe[2] (output port clocked by clk)",
+        "slack_ns": 9.218715
+      },
+      "output_uio_oe_2__min.rpt": {
+        "startpoint": "_31482_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_oe[2] (output port clocked by clk)",
+        "slack_ns": 6.021615
+      },
+      "output_uio_oe_3__max.rpt": {
+        "startpoint": "ui_in[5] (input port clocked by clk)",
+        "endpoint": "uio_oe[3] (output port clocked by clk)",
+        "slack_ns": 9.219324
+      },
+      "output_uio_oe_3__min.rpt": {
+        "startpoint": "_31482_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_oe[3] (output port clocked by clk)",
+        "slack_ns": 6.021124
+      },
+      "output_uio_oe_4__max.rpt": {
+        "startpoint": "_32293_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_oe[4] (output port clocked by clk)",
+        "slack_ns": 12.189414
+      },
+      "output_uio_oe_4__min.rpt": {
+        "startpoint": "_31600_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_oe[4] (output port clocked by clk)",
+        "slack_ns": 5.952012
+      },
+      "output_uio_oe_5__max.rpt": {
+        "startpoint": "_32294_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_oe[5] (output port clocked by clk)",
+        "slack_ns": 11.711315
+      },
+      "output_uio_oe_5__min.rpt": {
+        "startpoint": "_31601_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_oe[5] (output port clocked by clk)",
+        "slack_ns": 5.901981
+      },
+      "output_uio_oe_6__max.rpt": {
+        "startpoint": "_32295_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_oe[6] (output port clocked by clk)",
+        "slack_ns": 11.890245
+      },
+      "output_uio_oe_6__min.rpt": {
+        "startpoint": "_31602_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_oe[6] (output port clocked by clk)",
+        "slack_ns": 5.931162
+      },
+      "output_uio_oe_7__max.rpt": {
+        "startpoint": "_32296_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_oe[7] (output port clocked by clk)",
+        "slack_ns": 11.578013
+      },
+      "output_uio_oe_7__min.rpt": {
+        "startpoint": "_31603_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_oe[7] (output port clocked by clk)",
+        "slack_ns": 5.94905
+      },
+      "output_uio_out_0__max.rpt": {
+        "startpoint": "_31478_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[0] (output port clocked by clk)",
+        "slack_ns": 13.987121
+      },
+      "output_uio_out_0__min.rpt": {
+        "startpoint": "_31478_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[0] (output port clocked by clk)",
+        "slack_ns": 5.297236
+      },
+      "output_uio_out_1__max.rpt": {
+        "startpoint": "_31479_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[1] (output port clocked by clk)",
+        "slack_ns": 13.865322
+      },
+      "output_uio_out_1__min.rpt": {
+        "startpoint": "_31479_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[1] (output port clocked by clk)",
+        "slack_ns": 5.390952
+      },
+      "output_uio_out_2__max.rpt": {
+        "startpoint": "_31480_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[2] (output port clocked by clk)",
+        "slack_ns": 13.991658
+      },
+      "output_uio_out_2__min.rpt": {
+        "startpoint": "_31480_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[2] (output port clocked by clk)",
+        "slack_ns": 5.293176
+      },
+      "output_uio_out_3__max.rpt": {
+        "startpoint": "_31481_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[3] (output port clocked by clk)",
+        "slack_ns": 13.960774
+      },
+      "output_uio_out_3__min.rpt": {
+        "startpoint": "_31481_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[3] (output port clocked by clk)",
+        "slack_ns": 5.317576
+      },
+      "output_uio_out_4__max.rpt": {
+        "startpoint": "_32293_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[4] (output port clocked by clk)",
+        "slack_ns": 12.46585
+      },
+      "output_uio_out_4__min.rpt": {
+        "startpoint": "_31604_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[4] (output port clocked by clk)",
+        "slack_ns": 5.802596
+      },
+      "output_uio_out_5__max.rpt": {
+        "startpoint": "_32294_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[5] (output port clocked by clk)",
+        "slack_ns": 12.026627
+      },
+      "output_uio_out_5__min.rpt": {
+        "startpoint": "_31605_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[5] (output port clocked by clk)",
+        "slack_ns": 5.692327
+      },
+      "output_uio_out_6__max.rpt": {
+        "startpoint": "_32295_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[6] (output port clocked by clk)",
+        "slack_ns": 12.890191
+      },
+      "output_uio_out_6__min.rpt": {
+        "startpoint": "_31606_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[6] (output port clocked by clk)",
+        "slack_ns": 5.781374
+      },
+      "output_uio_out_7__max.rpt": {
+        "startpoint": "_32296_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[7] (output port clocked by clk)",
+        "slack_ns": 11.406118
+      },
+      "output_uio_out_7__min.rpt": {
+        "startpoint": "_31986_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[7] (output port clocked by clk)",
+        "slack_ns": 5.92946
+      },
+      "output_uo_out_0__max.rpt": {
+        "startpoint": "_32285_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[0] (output port clocked by clk)",
+        "slack_ns": 13.424088
+      },
+      "output_uo_out_0__min.rpt": {
+        "startpoint": "_31608_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[0] (output port clocked by clk)",
+        "slack_ns": 5.680289
+      },
+      "output_uo_out_1__max.rpt": {
+        "startpoint": "_31609_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[1] (output port clocked by clk)",
+        "slack_ns": 13.27143
+      },
+      "output_uo_out_1__min.rpt": {
+        "startpoint": "_31988_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[1] (output port clocked by clk)",
+        "slack_ns": 5.693568
+      },
+      "output_uo_out_2__max.rpt": {
+        "startpoint": "_31610_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[2] (output port clocked by clk)",
+        "slack_ns": 13.040727
+      },
+      "output_uo_out_2__min.rpt": {
+        "startpoint": "_31989_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[2] (output port clocked by clk)",
+        "slack_ns": 5.814397
+      },
+      "output_uo_out_3__max.rpt": {
+        "startpoint": "_32288_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[3] (output port clocked by clk)",
+        "slack_ns": 13.33108
+      },
+      "output_uo_out_3__min.rpt": {
+        "startpoint": "_31990_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[3] (output port clocked by clk)",
+        "slack_ns": 5.71117
+      },
+      "output_uo_out_4__max.rpt": {
+        "startpoint": "_32289_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[4] (output port clocked by clk)",
+        "slack_ns": 13.109414
+      },
+      "output_uo_out_4__min.rpt": {
+        "startpoint": "_31991_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[4] (output port clocked by clk)",
+        "slack_ns": 5.792875
+      },
+      "output_uo_out_5__max.rpt": {
+        "startpoint": "_31613_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[5] (output port clocked by clk)",
+        "slack_ns": 13.356842
+      },
+      "output_uo_out_5__min.rpt": {
+        "startpoint": "_32290_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[5] (output port clocked by clk)",
+        "slack_ns": 5.716343
+      },
+      "output_uo_out_6__max.rpt": {
+        "startpoint": "_32291_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[6] (output port clocked by clk)",
+        "slack_ns": 13.407397
+      },
+      "output_uo_out_6__min.rpt": {
+        "startpoint": "_31614_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[6] (output port clocked by clk)",
+        "slack_ns": 5.67827
+      },
+      "output_uo_out_7__max.rpt": {
+        "startpoint": "_32292_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[7] (output port clocked by clk)",
+        "slack_ns": 13.434947
+      },
+      "output_uo_out_7__min.rpt": {
+        "startpoint": "_32292_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[7] (output port clocked by clk)",
+        "slack_ns": 5.695864
+      },
+      "registers_max.rpt": {
+        "startpoint": "_33837_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "_33836_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 0.60392
+      },
+      "registers_min.rpt": {
+        "startpoint": "_31487_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "_31483_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 0.630492
+      },
+      "reset_fall_max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "reset_fall_min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "reset_rise_max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "reset_rise_min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      }
+    }
+  },
+  {
+    "corner": "nom_slow_1p08V_125C",
+    "mode": "reset_active",
+    "setup": 11.406118,
+    "hold": 0.753284,
+    "coverage_issues": false,
+    "paths": {
+      "global_hold.rpt": {
+        "startpoint": "_32901_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "_32901_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 0.753284
+      },
+      "global_setup.rpt": {
+        "startpoint": "_32296_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[7] (output port clocked by clk)",
+        "slack_ns": 11.406118
+      },
+      "input_ena_max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_ena_min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_rst_n_max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_rst_n_min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_uio_in_0__max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_uio_in_0__min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_uio_in_1__max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_uio_in_1__min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_uio_in_2__max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_uio_in_2__min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_uio_in_3__max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_uio_in_3__min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_uio_in_4__max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_uio_in_4__min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_uio_in_5__max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_uio_in_5__min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_uio_in_6__max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_uio_in_6__min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_uio_in_7__max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_uio_in_7__min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_ui_in_0__max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_ui_in_0__min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_ui_in_1__max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_ui_in_1__min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_ui_in_2__max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_ui_in_2__min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_ui_in_3__max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_ui_in_3__min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_ui_in_4__max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_ui_in_4__min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_ui_in_5__max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_ui_in_5__min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_ui_in_6__max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_ui_in_6__min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_ui_in_7__max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_ui_in_7__min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "output_uio_oe_0__max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "output_uio_oe_0__min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "output_uio_oe_1__max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "output_uio_oe_1__min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "output_uio_oe_2__max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "output_uio_oe_2__min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "output_uio_oe_3__max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "output_uio_oe_3__min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "output_uio_oe_4__max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "output_uio_oe_4__min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "output_uio_oe_5__max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "output_uio_oe_5__min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "output_uio_oe_6__max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "output_uio_oe_6__min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "output_uio_oe_7__max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "output_uio_oe_7__min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "output_uio_out_0__max.rpt": {
+        "startpoint": "_31478_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[0] (output port clocked by clk)",
+        "slack_ns": 13.987121
+      },
+      "output_uio_out_0__min.rpt": {
+        "startpoint": "_31478_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[0] (output port clocked by clk)",
+        "slack_ns": 5.297236
+      },
+      "output_uio_out_1__max.rpt": {
+        "startpoint": "_31479_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[1] (output port clocked by clk)",
+        "slack_ns": 13.865322
+      },
+      "output_uio_out_1__min.rpt": {
+        "startpoint": "_31479_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[1] (output port clocked by clk)",
+        "slack_ns": 5.390952
+      },
+      "output_uio_out_2__max.rpt": {
+        "startpoint": "_31480_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[2] (output port clocked by clk)",
+        "slack_ns": 13.991658
+      },
+      "output_uio_out_2__min.rpt": {
+        "startpoint": "_31480_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[2] (output port clocked by clk)",
+        "slack_ns": 5.293176
+      },
+      "output_uio_out_3__max.rpt": {
+        "startpoint": "_31481_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[3] (output port clocked by clk)",
+        "slack_ns": 13.960774
+      },
+      "output_uio_out_3__min.rpt": {
+        "startpoint": "_31481_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[3] (output port clocked by clk)",
+        "slack_ns": 5.317576
+      },
+      "output_uio_out_4__max.rpt": {
+        "startpoint": "_32293_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[4] (output port clocked by clk)",
+        "slack_ns": 12.46585
+      },
+      "output_uio_out_4__min.rpt": {
+        "startpoint": "_31604_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[4] (output port clocked by clk)",
+        "slack_ns": 5.802596
+      },
+      "output_uio_out_5__max.rpt": {
+        "startpoint": "_32294_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[5] (output port clocked by clk)",
+        "slack_ns": 12.026627
+      },
+      "output_uio_out_5__min.rpt": {
+        "startpoint": "_31605_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[5] (output port clocked by clk)",
+        "slack_ns": 5.692327
+      },
+      "output_uio_out_6__max.rpt": {
+        "startpoint": "_32295_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[6] (output port clocked by clk)",
+        "slack_ns": 12.890191
+      },
+      "output_uio_out_6__min.rpt": {
+        "startpoint": "_31606_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[6] (output port clocked by clk)",
+        "slack_ns": 5.781374
+      },
+      "output_uio_out_7__max.rpt": {
+        "startpoint": "_32296_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[7] (output port clocked by clk)",
+        "slack_ns": 11.406118
+      },
+      "output_uio_out_7__min.rpt": {
+        "startpoint": "_31986_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[7] (output port clocked by clk)",
+        "slack_ns": 5.92946
+      },
+      "output_uo_out_0__max.rpt": {
+        "startpoint": "_32285_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[0] (output port clocked by clk)",
+        "slack_ns": 13.424088
+      },
+      "output_uo_out_0__min.rpt": {
+        "startpoint": "_31608_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[0] (output port clocked by clk)",
+        "slack_ns": 5.680289
+      },
+      "output_uo_out_1__max.rpt": {
+        "startpoint": "_31609_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[1] (output port clocked by clk)",
+        "slack_ns": 13.27143
+      },
+      "output_uo_out_1__min.rpt": {
+        "startpoint": "_31988_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[1] (output port clocked by clk)",
+        "slack_ns": 5.693568
+      },
+      "output_uo_out_2__max.rpt": {
+        "startpoint": "_31610_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[2] (output port clocked by clk)",
+        "slack_ns": 13.040727
+      },
+      "output_uo_out_2__min.rpt": {
+        "startpoint": "_31989_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[2] (output port clocked by clk)",
+        "slack_ns": 5.814397
+      },
+      "output_uo_out_3__max.rpt": {
+        "startpoint": "_32288_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[3] (output port clocked by clk)",
+        "slack_ns": 13.33108
+      },
+      "output_uo_out_3__min.rpt": {
+        "startpoint": "_31990_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[3] (output port clocked by clk)",
+        "slack_ns": 5.71117
+      },
+      "output_uo_out_4__max.rpt": {
+        "startpoint": "_32289_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[4] (output port clocked by clk)",
+        "slack_ns": 13.109414
+      },
+      "output_uo_out_4__min.rpt": {
+        "startpoint": "_31991_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[4] (output port clocked by clk)",
+        "slack_ns": 5.792875
+      },
+      "output_uo_out_5__max.rpt": {
+        "startpoint": "_31613_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[5] (output port clocked by clk)",
+        "slack_ns": 13.356842
+      },
+      "output_uo_out_5__min.rpt": {
+        "startpoint": "_32290_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[5] (output port clocked by clk)",
+        "slack_ns": 5.716343
+      },
+      "output_uo_out_6__max.rpt": {
+        "startpoint": "_32291_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[6] (output port clocked by clk)",
+        "slack_ns": 13.407397
+      },
+      "output_uo_out_6__min.rpt": {
+        "startpoint": "_31614_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[6] (output port clocked by clk)",
+        "slack_ns": 5.67827
+      },
+      "output_uo_out_7__max.rpt": {
+        "startpoint": "_32292_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[7] (output port clocked by clk)",
+        "slack_ns": 13.434947
+      },
+      "output_uo_out_7__min.rpt": {
+        "startpoint": "_32292_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[7] (output port clocked by clk)",
+        "slack_ns": 5.695864
+      },
+      "registers_max.rpt": {
+        "startpoint": "_33105_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "_33105_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 17.127958
+      },
+      "registers_min.rpt": {
+        "startpoint": "_32901_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "_32901_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 0.753284
+      },
+      "reset_fall_max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "reset_fall_min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "reset_rise_max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "reset_rise_min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      }
+    }
+  },
+  {
+    "corner": "nom_typ_1p20V_25C",
+    "mode": "baseline",
+    "setup": 5.304029,
+    "hold": 0.306643,
+    "coverage_issues": false,
+    "paths": {
+      "global_hold.rpt": {
+        "startpoint": "_31487_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "_31483_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 0.306643
+      },
+      "global_setup.rpt": {
+        "startpoint": "ui_in[1] (input port clocked by clk)",
+        "endpoint": "_31995_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 5.304029
+      },
+      "input_ena_max.rpt": {
+        "startpoint": "ena (input port clocked by clk)",
+        "endpoint": "_31995_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 5.587195
+      },
+      "input_ena_min.rpt": {
+        "startpoint": "ena (input port clocked by clk)",
+        "endpoint": "_31483_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.64781
+      },
+      "input_rst_n_max.rpt": {
+        "startpoint": "rst_n (input port clocked by clk)",
+        "endpoint": "uio_oe[4] (output port clocked by clk)",
+        "slack_ns": 9.884352
+      },
+      "input_rst_n_min.rpt": {
+        "startpoint": "rst_n (input port clocked by clk)",
+        "endpoint": "_32268_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.294011
+      },
+      "input_uio_in_0__max.rpt": {
+        "startpoint": "uio_in[0] (input port clocked by clk)",
+        "endpoint": "_31995_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 9.074972
+      },
+      "input_uio_in_0__min.rpt": {
+        "startpoint": "uio_in[0] (input port clocked by clk)",
+        "endpoint": "_31490_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.812559
+      },
+      "input_uio_in_1__max.rpt": {
+        "startpoint": "uio_in[1] (input port clocked by clk)",
+        "endpoint": "_31995_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 7.651066
+      },
+      "input_uio_in_1__min.rpt": {
+        "startpoint": "uio_in[1] (input port clocked by clk)",
+        "endpoint": "_31834_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.534327
+      },
+      "input_uio_in_2__max.rpt": {
+        "startpoint": "uio_in[2] (input port clocked by clk)",
+        "endpoint": "_31913_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 13.365704
+      },
+      "input_uio_in_2__min.rpt": {
+        "startpoint": "uio_in[2] (input port clocked by clk)",
+        "endpoint": "_33591_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.467895
+      },
+      "input_uio_in_3__max.rpt": {
+        "startpoint": "uio_in[3] (input port clocked by clk)",
+        "endpoint": "_31922_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 12.948606
+      },
+      "input_uio_in_3__min.rpt": {
+        "startpoint": "uio_in[3] (input port clocked by clk)",
+        "endpoint": "_33496_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.494722
+      },
+      "input_uio_in_4__max.rpt": {
+        "startpoint": "uio_in[4] (input port clocked by clk)",
+        "endpoint": "_32269_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 16.249323
+      },
+      "input_uio_in_4__min.rpt": {
+        "startpoint": "uio_in[4] (input port clocked by clk)",
+        "endpoint": "_32269_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.0254
+      },
+      "input_uio_in_5__max.rpt": {
+        "startpoint": "uio_in[5] (input port clocked by clk)",
+        "endpoint": "_32270_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 16.246592
+      },
+      "input_uio_in_5__min.rpt": {
+        "startpoint": "uio_in[5] (input port clocked by clk)",
+        "endpoint": "_32270_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.030102
+      },
+      "input_uio_in_6__max.rpt": {
+        "startpoint": "uio_in[6] (input port clocked by clk)",
+        "endpoint": "_32271_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 16.249617
+      },
+      "input_uio_in_6__min.rpt": {
+        "startpoint": "uio_in[6] (input port clocked by clk)",
+        "endpoint": "_32271_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.02781
+      },
+      "input_uio_in_7__max.rpt": {
+        "startpoint": "uio_in[7] (input port clocked by clk)",
+        "endpoint": "_32272_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 16.250496
+      },
+      "input_uio_in_7__min.rpt": {
+        "startpoint": "uio_in[7] (input port clocked by clk)",
+        "endpoint": "_32272_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.027201
+      },
+      "input_ui_in_0__max.rpt": {
+        "startpoint": "ui_in[0] (input port clocked by clk)",
+        "endpoint": "_31995_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 5.425687
+      },
+      "input_ui_in_0__min.rpt": {
+        "startpoint": "ui_in[0] (input port clocked by clk)",
+        "endpoint": "_31495_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.72174
+      },
+      "input_ui_in_1__max.rpt": {
+        "startpoint": "ui_in[1] (input port clocked by clk)",
+        "endpoint": "_31995_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 5.304029
+      },
+      "input_ui_in_1__min.rpt": {
+        "startpoint": "ui_in[1] (input port clocked by clk)",
+        "endpoint": "_31487_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.598577
+      },
+      "input_ui_in_2__max.rpt": {
+        "startpoint": "ui_in[2] (input port clocked by clk)",
+        "endpoint": "_33836_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 5.466581
+      },
+      "input_ui_in_2__min.rpt": {
+        "startpoint": "ui_in[2] (input port clocked by clk)",
+        "endpoint": "_31488_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.570462
+      },
+      "input_ui_in_3__max.rpt": {
+        "startpoint": "ui_in[3] (input port clocked by clk)",
+        "endpoint": "_31995_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 5.714613
+      },
+      "input_ui_in_3__min.rpt": {
+        "startpoint": "ui_in[3] (input port clocked by clk)",
+        "endpoint": "_31483_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.571069
+      },
+      "input_ui_in_4__max.rpt": {
+        "startpoint": "ui_in[4] (input port clocked by clk)",
+        "endpoint": "_31995_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 5.507642
+      },
+      "input_ui_in_4__min.rpt": {
+        "startpoint": "ui_in[4] (input port clocked by clk)",
+        "endpoint": "_31485_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.297593
+      },
+      "input_ui_in_5__max.rpt": {
+        "startpoint": "ui_in[5] (input port clocked by clk)",
+        "endpoint": "_31995_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 5.465189
+      },
+      "input_ui_in_5__min.rpt": {
+        "startpoint": "ui_in[5] (input port clocked by clk)",
+        "endpoint": "_31485_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.325136
+      },
+      "input_ui_in_6__max.rpt": {
+        "startpoint": "ui_in[6] (input port clocked by clk)",
+        "endpoint": "_32267_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 16.276802
+      },
+      "input_ui_in_6__min.rpt": {
+        "startpoint": "ui_in[6] (input port clocked by clk)",
+        "endpoint": "_32267_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 2.993103
+      },
+      "input_ui_in_7__max.rpt": {
+        "startpoint": "ui_in[7] (input port clocked by clk)",
+        "endpoint": "_32268_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 16.280241
+      },
+      "input_ui_in_7__min.rpt": {
+        "startpoint": "ui_in[7] (input port clocked by clk)",
+        "endpoint": "_32268_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 2.99044
+      },
+      "output_uio_oe_0__max.rpt": {
+        "startpoint": "ui_in[5] (input port clocked by clk)",
+        "endpoint": "uio_oe[0] (output port clocked by clk)",
+        "slack_ns": 10.161896
+      },
+      "output_uio_oe_0__min.rpt": {
+        "startpoint": "_31482_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_oe[0] (output port clocked by clk)",
+        "slack_ns": 5.212194
+      },
+      "output_uio_oe_1__max.rpt": {
+        "startpoint": "ui_in[5] (input port clocked by clk)",
+        "endpoint": "uio_oe[1] (output port clocked by clk)",
+        "slack_ns": 10.160132
+      },
+      "output_uio_oe_1__min.rpt": {
+        "startpoint": "_31482_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_oe[1] (output port clocked by clk)",
+        "slack_ns": 5.213542
+      },
+      "output_uio_oe_2__max.rpt": {
+        "startpoint": "ui_in[5] (input port clocked by clk)",
+        "endpoint": "uio_oe[2] (output port clocked by clk)",
+        "slack_ns": 10.162144
+      },
+      "output_uio_oe_2__min.rpt": {
+        "startpoint": "_31482_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_oe[2] (output port clocked by clk)",
+        "slack_ns": 5.212006
+      },
+      "output_uio_oe_3__max.rpt": {
+        "startpoint": "ui_in[5] (input port clocked by clk)",
+        "endpoint": "uio_oe[3] (output port clocked by clk)",
+        "slack_ns": 10.162525
+      },
+      "output_uio_oe_3__min.rpt": {
+        "startpoint": "_31482_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_oe[3] (output port clocked by clk)",
+        "slack_ns": 5.211713
+      },
+      "output_uio_oe_4__max.rpt": {
+        "startpoint": "rst_n (input port clocked by clk)",
+        "endpoint": "uio_oe[4] (output port clocked by clk)",
+        "slack_ns": 9.884352
+      },
+      "output_uio_oe_4__min.rpt": {
+        "startpoint": "_31600_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_oe[4] (output port clocked by clk)",
+        "slack_ns": 5.137702
+      },
+      "output_uio_oe_5__max.rpt": {
+        "startpoint": "rst_n (input port clocked by clk)",
+        "endpoint": "uio_oe[5] (output port clocked by clk)",
+        "slack_ns": 9.938031
+      },
+      "output_uio_oe_5__min.rpt": {
+        "startpoint": "_31601_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_oe[5] (output port clocked by clk)",
+        "slack_ns": 5.109875
+      },
+      "output_uio_oe_6__max.rpt": {
+        "startpoint": "rst_n (input port clocked by clk)",
+        "endpoint": "uio_oe[6] (output port clocked by clk)",
+        "slack_ns": 9.931951
+      },
+      "output_uio_oe_6__min.rpt": {
+        "startpoint": "_31602_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_oe[6] (output port clocked by clk)",
+        "slack_ns": 5.126813
+      },
+      "output_uio_oe_7__max.rpt": {
+        "startpoint": "rst_n (input port clocked by clk)",
+        "endpoint": "uio_oe[7] (output port clocked by clk)",
+        "slack_ns": 9.909613
+      },
+      "output_uio_oe_7__min.rpt": {
+        "startpoint": "_31603_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_oe[7] (output port clocked by clk)",
+        "slack_ns": 5.138232
+      },
+      "output_uio_out_0__max.rpt": {
+        "startpoint": "_31478_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[0] (output port clocked by clk)",
+        "slack_ns": 14.593347
+      },
+      "output_uio_out_0__min.rpt": {
+        "startpoint": "_31478_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[0] (output port clocked by clk)",
+        "slack_ns": 4.757545
+      },
+      "output_uio_out_1__max.rpt": {
+        "startpoint": "_31479_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[1] (output port clocked by clk)",
+        "slack_ns": 14.515417
+      },
+      "output_uio_out_1__min.rpt": {
+        "startpoint": "_31479_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[1] (output port clocked by clk)",
+        "slack_ns": 4.813902
+      },
+      "output_uio_out_2__max.rpt": {
+        "startpoint": "_31480_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[2] (output port clocked by clk)",
+        "slack_ns": 14.595918
+      },
+      "output_uio_out_2__min.rpt": {
+        "startpoint": "_31480_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[2] (output port clocked by clk)",
+        "slack_ns": 4.755261
+      },
+      "output_uio_out_3__max.rpt": {
+        "startpoint": "_31481_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[3] (output port clocked by clk)",
+        "slack_ns": 14.576265
+      },
+      "output_uio_out_3__min.rpt": {
+        "startpoint": "_31481_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[3] (output port clocked by clk)",
+        "slack_ns": 4.770052
+      },
+      "output_uio_out_4__max.rpt": {
+        "startpoint": "_32293_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[4] (output port clocked by clk)",
+        "slack_ns": 13.64045
+      },
+      "output_uio_out_4__min.rpt": {
+        "startpoint": "_31604_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[4] (output port clocked by clk)",
+        "slack_ns": 5.069795
+      },
+      "output_uio_out_5__max.rpt": {
+        "startpoint": "_32294_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[5] (output port clocked by clk)",
+        "slack_ns": 13.356363
+      },
+      "output_uio_out_5__min.rpt": {
+        "startpoint": "_31605_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[5] (output port clocked by clk)",
+        "slack_ns": 5.00528
+      },
+      "output_uio_out_6__max.rpt": {
+        "startpoint": "_32295_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[6] (output port clocked by clk)",
+        "slack_ns": 13.902189
+      },
+      "output_uio_out_6__min.rpt": {
+        "startpoint": "_31606_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[6] (output port clocked by clk)",
+        "slack_ns": 5.058594
+      },
+      "output_uio_out_7__max.rpt": {
+        "startpoint": "_32296_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[7] (output port clocked by clk)",
+        "slack_ns": 12.974988
+      },
+      "output_uio_out_7__min.rpt": {
+        "startpoint": "_31986_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[7] (output port clocked by clk)",
+        "slack_ns": 5.142109
+      },
+      "output_uo_out_0__max.rpt": {
+        "startpoint": "_32285_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[0] (output port clocked by clk)",
+        "slack_ns": 14.242489
+      },
+      "output_uo_out_0__min.rpt": {
+        "startpoint": "_31608_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[0] (output port clocked by clk)",
+        "slack_ns": 4.996559
+      },
+      "output_uo_out_1__max.rpt": {
+        "startpoint": "_31609_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[1] (output port clocked by clk)",
+        "slack_ns": 14.140065
+      },
+      "output_uo_out_1__min.rpt": {
+        "startpoint": "_31988_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[1] (output port clocked by clk)",
+        "slack_ns": 5.006665
+      },
+      "output_uo_out_2__max.rpt": {
+        "startpoint": "_31610_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[2] (output port clocked by clk)",
+        "slack_ns": 13.981093
+      },
+      "output_uo_out_2__min.rpt": {
+        "startpoint": "_31989_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[2] (output port clocked by clk)",
+        "slack_ns": 5.095901
+      },
+      "output_uo_out_3__max.rpt": {
+        "startpoint": "_32288_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[3] (output port clocked by clk)",
+        "slack_ns": 14.183605
+      },
+      "output_uo_out_3__min.rpt": {
+        "startpoint": "_31990_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[3] (output port clocked by clk)",
+        "slack_ns": 5.012739
+      },
+      "output_uo_out_4__max.rpt": {
+        "startpoint": "_32289_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[4] (output port clocked by clk)",
+        "slack_ns": 14.034835
+      },
+      "output_uo_out_4__min.rpt": {
+        "startpoint": "_31991_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[4] (output port clocked by clk)",
+        "slack_ns": 5.078362
+      },
+      "output_uo_out_5__max.rpt": {
+        "startpoint": "_31613_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[5] (output port clocked by clk)",
+        "slack_ns": 14.193123
+      },
+      "output_uo_out_5__min.rpt": {
+        "startpoint": "_32290_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[5] (output port clocked by clk)",
+        "slack_ns": 5.022091
+      },
+      "output_uo_out_6__max.rpt": {
+        "startpoint": "_32291_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[6] (output port clocked by clk)",
+        "slack_ns": 14.230261
+      },
+      "output_uo_out_6__min.rpt": {
+        "startpoint": "_31614_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[6] (output port clocked by clk)",
+        "slack_ns": 4.995953
+      },
+      "output_uo_out_7__max.rpt": {
+        "startpoint": "_32292_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[7] (output port clocked by clk)",
+        "slack_ns": 14.247678
+      },
+      "output_uo_out_7__min.rpt": {
+        "startpoint": "_32292_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[7] (output port clocked by clk)",
+        "slack_ns": 5.005608
+      },
+      "registers_max.rpt": {
+        "startpoint": "_33837_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "_33836_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 7.795592
+      },
+      "registers_min.rpt": {
+        "startpoint": "_31487_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "_31483_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 0.306643
+      },
+      "reset_fall_max.rpt": {
+        "startpoint": "rst_n (input port clocked by clk)",
+        "endpoint": "uio_oe[4] (output port clocked by clk)",
+        "slack_ns": 10.198788
+      },
+      "reset_fall_min.rpt": {
+        "startpoint": "rst_n (input port clocked by clk)",
+        "endpoint": "_32268_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.294011
+      },
+      "reset_rise_max.rpt": {
+        "startpoint": "rst_n (input port clocked by clk)",
+        "endpoint": "uio_oe[4] (output port clocked by clk)",
+        "slack_ns": 9.884352
+      },
+      "reset_rise_min.rpt": {
+        "startpoint": "rst_n (input port clocked by clk)",
+        "endpoint": "_32268_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.407618
+      }
+    }
+  },
+  {
+    "corner": "nom_typ_1p20V_25C",
+    "mode": "operational",
+    "setup": 5.304029,
+    "hold": 0.306643,
+    "coverage_issues": false,
+    "paths": {
+      "global_hold.rpt": {
+        "startpoint": "_31487_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "_31483_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 0.306643
+      },
+      "global_setup.rpt": {
+        "startpoint": "ui_in[1] (input port clocked by clk)",
+        "endpoint": "_31995_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 5.304029
+      },
+      "input_ena_max.rpt": {
+        "startpoint": "ena (input port clocked by clk)",
+        "endpoint": "_31995_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 5.587195
+      },
+      "input_ena_min.rpt": {
+        "startpoint": "ena (input port clocked by clk)",
+        "endpoint": "_31483_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.64781
+      },
+      "input_rst_n_max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_rst_n_min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_uio_in_0__max.rpt": {
+        "startpoint": "uio_in[0] (input port clocked by clk)",
+        "endpoint": "_31995_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 9.074972
+      },
+      "input_uio_in_0__min.rpt": {
+        "startpoint": "uio_in[0] (input port clocked by clk)",
+        "endpoint": "_31490_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.812559
+      },
+      "input_uio_in_1__max.rpt": {
+        "startpoint": "uio_in[1] (input port clocked by clk)",
+        "endpoint": "_31995_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 7.651066
+      },
+      "input_uio_in_1__min.rpt": {
+        "startpoint": "uio_in[1] (input port clocked by clk)",
+        "endpoint": "_31834_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.534327
+      },
+      "input_uio_in_2__max.rpt": {
+        "startpoint": "uio_in[2] (input port clocked by clk)",
+        "endpoint": "_31913_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 13.365704
+      },
+      "input_uio_in_2__min.rpt": {
+        "startpoint": "uio_in[2] (input port clocked by clk)",
+        "endpoint": "_33591_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.467895
+      },
+      "input_uio_in_3__max.rpt": {
+        "startpoint": "uio_in[3] (input port clocked by clk)",
+        "endpoint": "_31922_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 12.948606
+      },
+      "input_uio_in_3__min.rpt": {
+        "startpoint": "uio_in[3] (input port clocked by clk)",
+        "endpoint": "_33496_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.494722
+      },
+      "input_uio_in_4__max.rpt": {
+        "startpoint": "uio_in[4] (input port clocked by clk)",
+        "endpoint": "_32269_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 16.250492
+      },
+      "input_uio_in_4__min.rpt": {
+        "startpoint": "uio_in[4] (input port clocked by clk)",
+        "endpoint": "_32269_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.0254
+      },
+      "input_uio_in_5__max.rpt": {
+        "startpoint": "uio_in[5] (input port clocked by clk)",
+        "endpoint": "_32270_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 16.247778
+      },
+      "input_uio_in_5__min.rpt": {
+        "startpoint": "uio_in[5] (input port clocked by clk)",
+        "endpoint": "_32270_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.030102
+      },
+      "input_uio_in_6__max.rpt": {
+        "startpoint": "uio_in[6] (input port clocked by clk)",
+        "endpoint": "_32271_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 16.250828
+      },
+      "input_uio_in_6__min.rpt": {
+        "startpoint": "uio_in[6] (input port clocked by clk)",
+        "endpoint": "_32271_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.02781
+      },
+      "input_uio_in_7__max.rpt": {
+        "startpoint": "uio_in[7] (input port clocked by clk)",
+        "endpoint": "_32272_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 16.251711
+      },
+      "input_uio_in_7__min.rpt": {
+        "startpoint": "uio_in[7] (input port clocked by clk)",
+        "endpoint": "_32272_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.027201
+      },
+      "input_ui_in_0__max.rpt": {
+        "startpoint": "ui_in[0] (input port clocked by clk)",
+        "endpoint": "_31995_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 5.425687
+      },
+      "input_ui_in_0__min.rpt": {
+        "startpoint": "ui_in[0] (input port clocked by clk)",
+        "endpoint": "_31495_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.72174
+      },
+      "input_ui_in_1__max.rpt": {
+        "startpoint": "ui_in[1] (input port clocked by clk)",
+        "endpoint": "_31995_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 5.304029
+      },
+      "input_ui_in_1__min.rpt": {
+        "startpoint": "ui_in[1] (input port clocked by clk)",
+        "endpoint": "_31487_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.598577
+      },
+      "input_ui_in_2__max.rpt": {
+        "startpoint": "ui_in[2] (input port clocked by clk)",
+        "endpoint": "_33836_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 5.466581
+      },
+      "input_ui_in_2__min.rpt": {
+        "startpoint": "ui_in[2] (input port clocked by clk)",
+        "endpoint": "_31488_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.570462
+      },
+      "input_ui_in_3__max.rpt": {
+        "startpoint": "ui_in[3] (input port clocked by clk)",
+        "endpoint": "_31995_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 5.714613
+      },
+      "input_ui_in_3__min.rpt": {
+        "startpoint": "ui_in[3] (input port clocked by clk)",
+        "endpoint": "_31483_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.571069
+      },
+      "input_ui_in_4__max.rpt": {
+        "startpoint": "ui_in[4] (input port clocked by clk)",
+        "endpoint": "_31995_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 5.507642
+      },
+      "input_ui_in_4__min.rpt": {
+        "startpoint": "ui_in[4] (input port clocked by clk)",
+        "endpoint": "_31485_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.297593
+      },
+      "input_ui_in_5__max.rpt": {
+        "startpoint": "ui_in[5] (input port clocked by clk)",
+        "endpoint": "_31995_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 5.465189
+      },
+      "input_ui_in_5__min.rpt": {
+        "startpoint": "ui_in[5] (input port clocked by clk)",
+        "endpoint": "_31485_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.325136
+      },
+      "input_ui_in_6__max.rpt": {
+        "startpoint": "ui_in[6] (input port clocked by clk)",
+        "endpoint": "_32267_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 16.282202
+      },
+      "input_ui_in_6__min.rpt": {
+        "startpoint": "ui_in[6] (input port clocked by clk)",
+        "endpoint": "_32267_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 2.993103
+      },
+      "input_ui_in_7__max.rpt": {
+        "startpoint": "ui_in[7] (input port clocked by clk)",
+        "endpoint": "_32268_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 16.285583
+      },
+      "input_ui_in_7__min.rpt": {
+        "startpoint": "ui_in[7] (input port clocked by clk)",
+        "endpoint": "_32268_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 2.99044
+      },
+      "output_uio_oe_0__max.rpt": {
+        "startpoint": "ui_in[5] (input port clocked by clk)",
+        "endpoint": "uio_oe[0] (output port clocked by clk)",
+        "slack_ns": 10.161896
+      },
+      "output_uio_oe_0__min.rpt": {
+        "startpoint": "_31482_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_oe[0] (output port clocked by clk)",
+        "slack_ns": 5.212194
+      },
+      "output_uio_oe_1__max.rpt": {
+        "startpoint": "ui_in[5] (input port clocked by clk)",
+        "endpoint": "uio_oe[1] (output port clocked by clk)",
+        "slack_ns": 10.160132
+      },
+      "output_uio_oe_1__min.rpt": {
+        "startpoint": "_31482_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_oe[1] (output port clocked by clk)",
+        "slack_ns": 5.213542
+      },
+      "output_uio_oe_2__max.rpt": {
+        "startpoint": "ui_in[5] (input port clocked by clk)",
+        "endpoint": "uio_oe[2] (output port clocked by clk)",
+        "slack_ns": 10.162144
+      },
+      "output_uio_oe_2__min.rpt": {
+        "startpoint": "_31482_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_oe[2] (output port clocked by clk)",
+        "slack_ns": 5.212006
+      },
+      "output_uio_oe_3__max.rpt": {
+        "startpoint": "ui_in[5] (input port clocked by clk)",
+        "endpoint": "uio_oe[3] (output port clocked by clk)",
+        "slack_ns": 10.162525
+      },
+      "output_uio_oe_3__min.rpt": {
+        "startpoint": "_31482_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_oe[3] (output port clocked by clk)",
+        "slack_ns": 5.211713
+      },
+      "output_uio_oe_4__max.rpt": {
+        "startpoint": "_32293_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_oe[4] (output port clocked by clk)",
+        "slack_ns": 13.462847
+      },
+      "output_uio_oe_4__min.rpt": {
+        "startpoint": "_31600_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_oe[4] (output port clocked by clk)",
+        "slack_ns": 5.151596
+      },
+      "output_uio_oe_5__max.rpt": {
+        "startpoint": "_32294_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_oe[5] (output port clocked by clk)",
+        "slack_ns": 13.159231
+      },
+      "output_uio_oe_5__min.rpt": {
+        "startpoint": "_31601_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_oe[5] (output port clocked by clk)",
+        "slack_ns": 5.121894
+      },
+      "output_uio_oe_6__max.rpt": {
+        "startpoint": "_32295_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_oe[6] (output port clocked by clk)",
+        "slack_ns": 13.286119
+      },
+      "output_uio_oe_6__min.rpt": {
+        "startpoint": "_31602_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_oe[6] (output port clocked by clk)",
+        "slack_ns": 5.138851
+      },
+      "output_uio_oe_7__max.rpt": {
+        "startpoint": "_32296_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_oe[7] (output port clocked by clk)",
+        "slack_ns": 13.088082
+      },
+      "output_uio_oe_7__min.rpt": {
+        "startpoint": "_31603_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_oe[7] (output port clocked by clk)",
+        "slack_ns": 5.150832
+      },
+      "output_uio_out_0__max.rpt": {
+        "startpoint": "_31478_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[0] (output port clocked by clk)",
+        "slack_ns": 14.593347
+      },
+      "output_uio_out_0__min.rpt": {
+        "startpoint": "_31478_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[0] (output port clocked by clk)",
+        "slack_ns": 4.757545
+      },
+      "output_uio_out_1__max.rpt": {
+        "startpoint": "_31479_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[1] (output port clocked by clk)",
+        "slack_ns": 14.515417
+      },
+      "output_uio_out_1__min.rpt": {
+        "startpoint": "_31479_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[1] (output port clocked by clk)",
+        "slack_ns": 4.813902
+      },
+      "output_uio_out_2__max.rpt": {
+        "startpoint": "_31480_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[2] (output port clocked by clk)",
+        "slack_ns": 14.595918
+      },
+      "output_uio_out_2__min.rpt": {
+        "startpoint": "_31480_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[2] (output port clocked by clk)",
+        "slack_ns": 4.755261
+      },
+      "output_uio_out_3__max.rpt": {
+        "startpoint": "_31481_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[3] (output port clocked by clk)",
+        "slack_ns": 14.576265
+      },
+      "output_uio_out_3__min.rpt": {
+        "startpoint": "_31481_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[3] (output port clocked by clk)",
+        "slack_ns": 4.770052
+      },
+      "output_uio_out_4__max.rpt": {
+        "startpoint": "_32293_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[4] (output port clocked by clk)",
+        "slack_ns": 13.64045
+      },
+      "output_uio_out_4__min.rpt": {
+        "startpoint": "_31604_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[4] (output port clocked by clk)",
+        "slack_ns": 5.069795
+      },
+      "output_uio_out_5__max.rpt": {
+        "startpoint": "_32294_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[5] (output port clocked by clk)",
+        "slack_ns": 13.356363
+      },
+      "output_uio_out_5__min.rpt": {
+        "startpoint": "_31605_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[5] (output port clocked by clk)",
+        "slack_ns": 5.00528
+      },
+      "output_uio_out_6__max.rpt": {
+        "startpoint": "_32295_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[6] (output port clocked by clk)",
+        "slack_ns": 13.902189
+      },
+      "output_uio_out_6__min.rpt": {
+        "startpoint": "_31606_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[6] (output port clocked by clk)",
+        "slack_ns": 5.058594
+      },
+      "output_uio_out_7__max.rpt": {
+        "startpoint": "_32296_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[7] (output port clocked by clk)",
+        "slack_ns": 12.974988
+      },
+      "output_uio_out_7__min.rpt": {
+        "startpoint": "_31986_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[7] (output port clocked by clk)",
+        "slack_ns": 5.142109
+      },
+      "output_uo_out_0__max.rpt": {
+        "startpoint": "_32285_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[0] (output port clocked by clk)",
+        "slack_ns": 14.242489
+      },
+      "output_uo_out_0__min.rpt": {
+        "startpoint": "_31608_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[0] (output port clocked by clk)",
+        "slack_ns": 4.996559
+      },
+      "output_uo_out_1__max.rpt": {
+        "startpoint": "_31609_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[1] (output port clocked by clk)",
+        "slack_ns": 14.140065
+      },
+      "output_uo_out_1__min.rpt": {
+        "startpoint": "_31988_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[1] (output port clocked by clk)",
+        "slack_ns": 5.006665
+      },
+      "output_uo_out_2__max.rpt": {
+        "startpoint": "_31610_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[2] (output port clocked by clk)",
+        "slack_ns": 13.981093
+      },
+      "output_uo_out_2__min.rpt": {
+        "startpoint": "_31989_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[2] (output port clocked by clk)",
+        "slack_ns": 5.095901
+      },
+      "output_uo_out_3__max.rpt": {
+        "startpoint": "_32288_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[3] (output port clocked by clk)",
+        "slack_ns": 14.183605
+      },
+      "output_uo_out_3__min.rpt": {
+        "startpoint": "_31990_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[3] (output port clocked by clk)",
+        "slack_ns": 5.012739
+      },
+      "output_uo_out_4__max.rpt": {
+        "startpoint": "_32289_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[4] (output port clocked by clk)",
+        "slack_ns": 14.034835
+      },
+      "output_uo_out_4__min.rpt": {
+        "startpoint": "_31991_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[4] (output port clocked by clk)",
+        "slack_ns": 5.078362
+      },
+      "output_uo_out_5__max.rpt": {
+        "startpoint": "_31613_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[5] (output port clocked by clk)",
+        "slack_ns": 14.193123
+      },
+      "output_uo_out_5__min.rpt": {
+        "startpoint": "_32290_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[5] (output port clocked by clk)",
+        "slack_ns": 5.022091
+      },
+      "output_uo_out_6__max.rpt": {
+        "startpoint": "_32291_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[6] (output port clocked by clk)",
+        "slack_ns": 14.230261
+      },
+      "output_uo_out_6__min.rpt": {
+        "startpoint": "_31614_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[6] (output port clocked by clk)",
+        "slack_ns": 4.995953
+      },
+      "output_uo_out_7__max.rpt": {
+        "startpoint": "_32292_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[7] (output port clocked by clk)",
+        "slack_ns": 14.247678
+      },
+      "output_uo_out_7__min.rpt": {
+        "startpoint": "_32292_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[7] (output port clocked by clk)",
+        "slack_ns": 5.005608
+      },
+      "registers_max.rpt": {
+        "startpoint": "_33837_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "_33836_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 7.795592
+      },
+      "registers_min.rpt": {
+        "startpoint": "_31487_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "_31483_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 0.306643
+      },
+      "reset_fall_max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "reset_fall_min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "reset_rise_max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "reset_rise_min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      }
+    }
+  },
+  {
+    "corner": "nom_typ_1p20V_25C",
+    "mode": "reset_active",
+    "setup": 12.974988,
+    "hold": 0.37889,
+    "coverage_issues": false,
+    "paths": {
+      "global_hold.rpt": {
+        "startpoint": "_32901_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "_32901_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 0.37889
+      },
+      "global_setup.rpt": {
+        "startpoint": "_32296_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[7] (output port clocked by clk)",
+        "slack_ns": 12.974988
+      },
+      "input_ena_max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_ena_min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_rst_n_max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_rst_n_min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_uio_in_0__max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_uio_in_0__min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_uio_in_1__max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_uio_in_1__min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_uio_in_2__max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_uio_in_2__min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_uio_in_3__max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_uio_in_3__min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_uio_in_4__max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_uio_in_4__min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_uio_in_5__max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_uio_in_5__min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_uio_in_6__max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_uio_in_6__min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_uio_in_7__max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_uio_in_7__min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_ui_in_0__max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_ui_in_0__min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_ui_in_1__max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_ui_in_1__min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_ui_in_2__max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_ui_in_2__min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_ui_in_3__max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_ui_in_3__min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_ui_in_4__max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_ui_in_4__min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_ui_in_5__max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_ui_in_5__min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_ui_in_6__max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_ui_in_6__min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_ui_in_7__max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_ui_in_7__min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "output_uio_oe_0__max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "output_uio_oe_0__min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "output_uio_oe_1__max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "output_uio_oe_1__min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "output_uio_oe_2__max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "output_uio_oe_2__min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "output_uio_oe_3__max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "output_uio_oe_3__min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "output_uio_oe_4__max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "output_uio_oe_4__min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "output_uio_oe_5__max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "output_uio_oe_5__min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "output_uio_oe_6__max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "output_uio_oe_6__min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "output_uio_oe_7__max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "output_uio_oe_7__min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "output_uio_out_0__max.rpt": {
+        "startpoint": "_31478_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[0] (output port clocked by clk)",
+        "slack_ns": 14.593347
+      },
+      "output_uio_out_0__min.rpt": {
+        "startpoint": "_31478_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[0] (output port clocked by clk)",
+        "slack_ns": 4.757545
+      },
+      "output_uio_out_1__max.rpt": {
+        "startpoint": "_31479_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[1] (output port clocked by clk)",
+        "slack_ns": 14.515417
+      },
+      "output_uio_out_1__min.rpt": {
+        "startpoint": "_31479_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[1] (output port clocked by clk)",
+        "slack_ns": 4.813902
+      },
+      "output_uio_out_2__max.rpt": {
+        "startpoint": "_31480_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[2] (output port clocked by clk)",
+        "slack_ns": 14.595918
+      },
+      "output_uio_out_2__min.rpt": {
+        "startpoint": "_31480_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[2] (output port clocked by clk)",
+        "slack_ns": 4.755261
+      },
+      "output_uio_out_3__max.rpt": {
+        "startpoint": "_31481_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[3] (output port clocked by clk)",
+        "slack_ns": 14.576265
+      },
+      "output_uio_out_3__min.rpt": {
+        "startpoint": "_31481_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[3] (output port clocked by clk)",
+        "slack_ns": 4.770052
+      },
+      "output_uio_out_4__max.rpt": {
+        "startpoint": "_32293_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[4] (output port clocked by clk)",
+        "slack_ns": 13.64045
+      },
+      "output_uio_out_4__min.rpt": {
+        "startpoint": "_31604_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[4] (output port clocked by clk)",
+        "slack_ns": 5.069795
+      },
+      "output_uio_out_5__max.rpt": {
+        "startpoint": "_32294_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[5] (output port clocked by clk)",
+        "slack_ns": 13.356363
+      },
+      "output_uio_out_5__min.rpt": {
+        "startpoint": "_31605_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[5] (output port clocked by clk)",
+        "slack_ns": 5.00528
+      },
+      "output_uio_out_6__max.rpt": {
+        "startpoint": "_32295_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[6] (output port clocked by clk)",
+        "slack_ns": 13.902189
+      },
+      "output_uio_out_6__min.rpt": {
+        "startpoint": "_31606_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[6] (output port clocked by clk)",
+        "slack_ns": 5.058594
+      },
+      "output_uio_out_7__max.rpt": {
+        "startpoint": "_32296_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[7] (output port clocked by clk)",
+        "slack_ns": 12.974988
+      },
+      "output_uio_out_7__min.rpt": {
+        "startpoint": "_31986_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[7] (output port clocked by clk)",
+        "slack_ns": 5.142109
+      },
+      "output_uo_out_0__max.rpt": {
+        "startpoint": "_32285_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[0] (output port clocked by clk)",
+        "slack_ns": 14.242489
+      },
+      "output_uo_out_0__min.rpt": {
+        "startpoint": "_31608_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[0] (output port clocked by clk)",
+        "slack_ns": 4.996559
+      },
+      "output_uo_out_1__max.rpt": {
+        "startpoint": "_31609_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[1] (output port clocked by clk)",
+        "slack_ns": 14.140065
+      },
+      "output_uo_out_1__min.rpt": {
+        "startpoint": "_31988_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[1] (output port clocked by clk)",
+        "slack_ns": 5.006665
+      },
+      "output_uo_out_2__max.rpt": {
+        "startpoint": "_31610_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[2] (output port clocked by clk)",
+        "slack_ns": 13.981093
+      },
+      "output_uo_out_2__min.rpt": {
+        "startpoint": "_31989_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[2] (output port clocked by clk)",
+        "slack_ns": 5.095901
+      },
+      "output_uo_out_3__max.rpt": {
+        "startpoint": "_32288_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[3] (output port clocked by clk)",
+        "slack_ns": 14.183605
+      },
+      "output_uo_out_3__min.rpt": {
+        "startpoint": "_31990_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[3] (output port clocked by clk)",
+        "slack_ns": 5.012739
+      },
+      "output_uo_out_4__max.rpt": {
+        "startpoint": "_32289_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[4] (output port clocked by clk)",
+        "slack_ns": 14.034835
+      },
+      "output_uo_out_4__min.rpt": {
+        "startpoint": "_31991_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[4] (output port clocked by clk)",
+        "slack_ns": 5.078362
+      },
+      "output_uo_out_5__max.rpt": {
+        "startpoint": "_31613_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[5] (output port clocked by clk)",
+        "slack_ns": 14.193123
+      },
+      "output_uo_out_5__min.rpt": {
+        "startpoint": "_32290_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[5] (output port clocked by clk)",
+        "slack_ns": 5.022091
+      },
+      "output_uo_out_6__max.rpt": {
+        "startpoint": "_32291_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[6] (output port clocked by clk)",
+        "slack_ns": 14.230261
+      },
+      "output_uo_out_6__min.rpt": {
+        "startpoint": "_31614_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[6] (output port clocked by clk)",
+        "slack_ns": 4.995953
+      },
+      "output_uo_out_7__max.rpt": {
+        "startpoint": "_32292_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[7] (output port clocked by clk)",
+        "slack_ns": 14.247678
+      },
+      "output_uo_out_7__min.rpt": {
+        "startpoint": "_32292_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[7] (output port clocked by clk)",
+        "slack_ns": 5.005608
+      },
+      "registers_max.rpt": {
+        "startpoint": "_33105_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "_33105_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 18.108643
+      },
+      "registers_min.rpt": {
+        "startpoint": "_32901_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "_32901_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 0.37889
+      },
+      "reset_fall_max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "reset_fall_min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "reset_rise_max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "reset_rise_min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      }
+    }
+  },
+  {
+    "corner": "nom_fast_1p32V_m40C",
+    "mode": "baseline",
+    "setup": 9.046896,
+    "hold": 0.118656,
+    "coverage_issues": false,
+    "paths": {
+      "global_hold.rpt": {
+        "startpoint": "_31487_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "_31483_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 0.118656
+      },
+      "global_setup.rpt": {
+        "startpoint": "ui_in[1] (input port clocked by clk)",
+        "endpoint": "_33836_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 9.046896
+      },
+      "input_ena_max.rpt": {
+        "startpoint": "ena (input port clocked by clk)",
+        "endpoint": "_33836_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 9.233737
+      },
+      "input_ena_min.rpt": {
+        "startpoint": "ena (input port clocked by clk)",
+        "endpoint": "_31483_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.653272
+      },
+      "input_rst_n_max.rpt": {
+        "startpoint": "rst_n (input port clocked by clk)",
+        "endpoint": "uio_oe[4] (output port clocked by clk)",
+        "slack_ns": 10.539313
+      },
+      "input_rst_n_min.rpt": {
+        "startpoint": "rst_n (input port clocked by clk)",
+        "endpoint": "_32268_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.406094
+      },
+      "input_uio_in_0__max.rpt": {
+        "startpoint": "uio_in[0] (input port clocked by clk)",
+        "endpoint": "_33836_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 11.472877
+      },
+      "input_uio_in_0__min.rpt": {
+        "startpoint": "uio_in[0] (input port clocked by clk)",
+        "endpoint": "_31833_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.752926
+      },
+      "input_uio_in_1__max.rpt": {
+        "startpoint": "uio_in[1] (input port clocked by clk)",
+        "endpoint": "_33836_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 10.574863
+      },
+      "input_uio_in_1__min.rpt": {
+        "startpoint": "uio_in[1] (input port clocked by clk)",
+        "endpoint": "_31834_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.570803
+      },
+      "input_uio_in_2__max.rpt": {
+        "startpoint": "uio_in[2] (input port clocked by clk)",
+        "endpoint": "_31913_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 14.221438
+      },
+      "input_uio_in_2__min.rpt": {
+        "startpoint": "uio_in[2] (input port clocked by clk)",
+        "endpoint": "_33591_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.573818
+      },
+      "input_uio_in_3__max.rpt": {
+        "startpoint": "uio_in[3] (input port clocked by clk)",
+        "endpoint": "_31922_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 13.955204
+      },
+      "input_uio_in_3__min.rpt": {
+        "startpoint": "uio_in[3] (input port clocked by clk)",
+        "endpoint": "_33496_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.582323
+      },
+      "input_uio_in_4__max.rpt": {
+        "startpoint": "uio_in[4] (input port clocked by clk)",
+        "endpoint": "_32269_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 16.105709
+      },
+      "input_uio_in_4__min.rpt": {
+        "startpoint": "uio_in[4] (input port clocked by clk)",
+        "endpoint": "_32269_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.236131
+      },
+      "input_uio_in_5__max.rpt": {
+        "startpoint": "uio_in[5] (input port clocked by clk)",
+        "endpoint": "_32270_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 16.103878
+      },
+      "input_uio_in_5__min.rpt": {
+        "startpoint": "uio_in[5] (input port clocked by clk)",
+        "endpoint": "_32270_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.239138
+      },
+      "input_uio_in_6__max.rpt": {
+        "startpoint": "uio_in[6] (input port clocked by clk)",
+        "endpoint": "_32271_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 16.105688
+      },
+      "input_uio_in_6__min.rpt": {
+        "startpoint": "uio_in[6] (input port clocked by clk)",
+        "endpoint": "_32271_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.237703
+      },
+      "input_uio_in_7__max.rpt": {
+        "startpoint": "uio_in[7] (input port clocked by clk)",
+        "endpoint": "_32272_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 16.106186
+      },
+      "input_uio_in_7__min.rpt": {
+        "startpoint": "uio_in[7] (input port clocked by clk)",
+        "endpoint": "_32272_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.237341
+      },
+      "input_ui_in_0__max.rpt": {
+        "startpoint": "ui_in[0] (input port clocked by clk)",
+        "endpoint": "_33836_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 9.145526
+      },
+      "input_ui_in_0__min.rpt": {
+        "startpoint": "ui_in[0] (input port clocked by clk)",
+        "endpoint": "_31495_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.691197
+      },
+      "input_ui_in_1__max.rpt": {
+        "startpoint": "ui_in[1] (input port clocked by clk)",
+        "endpoint": "_33836_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 9.046896
+      },
+      "input_ui_in_1__min.rpt": {
+        "startpoint": "ui_in[1] (input port clocked by clk)",
+        "endpoint": "_31487_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.620605
+      },
+      "input_ui_in_2__max.rpt": {
+        "startpoint": "ui_in[2] (input port clocked by clk)",
+        "endpoint": "_33836_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 9.130271
+      },
+      "input_ui_in_2__min.rpt": {
+        "startpoint": "ui_in[2] (input port clocked by clk)",
+        "endpoint": "_31488_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.60205
+      },
+      "input_ui_in_3__max.rpt": {
+        "startpoint": "ui_in[3] (input port clocked by clk)",
+        "endpoint": "_33836_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 9.306822
+      },
+      "input_ui_in_3__min.rpt": {
+        "startpoint": "ui_in[3] (input port clocked by clk)",
+        "endpoint": "_31483_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.591251
+      },
+      "input_ui_in_4__max.rpt": {
+        "startpoint": "ui_in[4] (input port clocked by clk)",
+        "endpoint": "_33836_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 9.181367
+      },
+      "input_ui_in_4__min.rpt": {
+        "startpoint": "ui_in[4] (input port clocked by clk)",
+        "endpoint": "_31485_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.421085
+      },
+      "input_ui_in_5__max.rpt": {
+        "startpoint": "ui_in[5] (input port clocked by clk)",
+        "endpoint": "_33836_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 9.158423
+      },
+      "input_ui_in_5__min.rpt": {
+        "startpoint": "ui_in[5] (input port clocked by clk)",
+        "endpoint": "_31485_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.436434
+      },
+      "input_ui_in_6__max.rpt": {
+        "startpoint": "ui_in[6] (input port clocked by clk)",
+        "endpoint": "_32267_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 16.12467
+      },
+      "input_ui_in_6__min.rpt": {
+        "startpoint": "ui_in[6] (input port clocked by clk)",
+        "endpoint": "_32267_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.214526
+      },
+      "input_ui_in_7__max.rpt": {
+        "startpoint": "ui_in[7] (input port clocked by clk)",
+        "endpoint": "_32268_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 16.126509
+      },
+      "input_ui_in_7__min.rpt": {
+        "startpoint": "ui_in[7] (input port clocked by clk)",
+        "endpoint": "_32268_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.212943
+      },
+      "output_uio_oe_0__max.rpt": {
+        "startpoint": "ui_in[5] (input port clocked by clk)",
+        "endpoint": "uio_oe[0] (output port clocked by clk)",
+        "slack_ns": 10.732402
+      },
+      "output_uio_oe_0__min.rpt": {
+        "startpoint": "_31482_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_oe[0] (output port clocked by clk)",
+        "slack_ns": 4.740367
+      },
+      "output_uio_oe_1__max.rpt": {
+        "startpoint": "ui_in[5] (input port clocked by clk)",
+        "endpoint": "uio_oe[1] (output port clocked by clk)",
+        "slack_ns": 10.731247
+      },
+      "output_uio_oe_1__min.rpt": {
+        "startpoint": "_31482_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_oe[1] (output port clocked by clk)",
+        "slack_ns": 4.741284
+      },
+      "output_uio_oe_2__max.rpt": {
+        "startpoint": "ui_in[5] (input port clocked by clk)",
+        "endpoint": "uio_oe[2] (output port clocked by clk)",
+        "slack_ns": 10.732574
+      },
+      "output_uio_oe_2__min.rpt": {
+        "startpoint": "_31482_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_oe[2] (output port clocked by clk)",
+        "slack_ns": 4.740232
+      },
+      "output_uio_oe_3__max.rpt": {
+        "startpoint": "ui_in[5] (input port clocked by clk)",
+        "endpoint": "uio_oe[3] (output port clocked by clk)",
+        "slack_ns": 10.732809
+      },
+      "output_uio_oe_3__min.rpt": {
+        "startpoint": "_31482_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_oe[3] (output port clocked by clk)",
+        "slack_ns": 4.740044
+      },
+      "output_uio_oe_4__max.rpt": {
+        "startpoint": "rst_n (input port clocked by clk)",
+        "endpoint": "uio_oe[4] (output port clocked by clk)",
+        "slack_ns": 10.539313
+      },
+      "output_uio_oe_4__min.rpt": {
+        "startpoint": "_31600_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_oe[4] (output port clocked by clk)",
+        "slack_ns": 4.695821
+      },
+      "output_uio_oe_5__max.rpt": {
+        "startpoint": "rst_n (input port clocked by clk)",
+        "endpoint": "uio_oe[5] (output port clocked by clk)",
+        "slack_ns": 10.569406
+      },
+      "output_uio_oe_5__min.rpt": {
+        "startpoint": "_31601_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_oe[5] (output port clocked by clk)",
+        "slack_ns": 4.677835
+      },
+      "output_uio_oe_6__max.rpt": {
+        "startpoint": "rst_n (input port clocked by clk)",
+        "endpoint": "uio_oe[6] (output port clocked by clk)",
+        "slack_ns": 10.565173
+      },
+      "output_uio_oe_6__min.rpt": {
+        "startpoint": "_31602_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_oe[6] (output port clocked by clk)",
+        "slack_ns": 4.686999
+      },
+      "output_uio_oe_7__max.rpt": {
+        "startpoint": "rst_n (input port clocked by clk)",
+        "endpoint": "uio_oe[7] (output port clocked by clk)",
+        "slack_ns": 10.551098
+      },
+      "output_uio_oe_7__min.rpt": {
+        "startpoint": "_31603_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_oe[7] (output port clocked by clk)",
+        "slack_ns": 4.696187
+      },
+      "output_uio_out_0__max.rpt": {
+        "startpoint": "_31478_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[0] (output port clocked by clk)",
+        "slack_ns": 14.952037
+      },
+      "output_uio_out_0__min.rpt": {
+        "startpoint": "_31478_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[0] (output port clocked by clk)",
+        "slack_ns": 4.44498
+      },
+      "output_uio_out_1__max.rpt": {
+        "startpoint": "_31479_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[1] (output port clocked by clk)",
+        "slack_ns": 14.902501
+      },
+      "output_uio_out_1__min.rpt": {
+        "startpoint": "_31479_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[1] (output port clocked by clk)",
+        "slack_ns": 4.482595
+      },
+      "output_uio_out_2__max.rpt": {
+        "startpoint": "_31480_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[2] (output port clocked by clk)",
+        "slack_ns": 14.953466
+      },
+      "output_uio_out_2__min.rpt": {
+        "startpoint": "_31480_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[2] (output port clocked by clk)",
+        "slack_ns": 4.443694
+      },
+      "output_uio_out_3__max.rpt": {
+        "startpoint": "_31481_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[3] (output port clocked by clk)",
+        "slack_ns": 14.940864
+      },
+      "output_uio_out_3__min.rpt": {
+        "startpoint": "_31481_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[3] (output port clocked by clk)",
+        "slack_ns": 4.453537
+      },
+      "output_uio_out_4__max.rpt": {
+        "startpoint": "_32293_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[4] (output port clocked by clk)",
+        "slack_ns": 14.352438
+      },
+      "output_uio_out_4__min.rpt": {
+        "startpoint": "_31604_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[4] (output port clocked by clk)",
+        "slack_ns": 4.644159
+      },
+      "output_uio_out_5__max.rpt": {
+        "startpoint": "_32294_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[5] (output port clocked by clk)",
+        "slack_ns": 14.141331
+      },
+      "output_uio_out_5__min.rpt": {
+        "startpoint": "_31605_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[5] (output port clocked by clk)",
+        "slack_ns": 4.60409
+      },
+      "output_uio_out_6__max.rpt": {
+        "startpoint": "_32295_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[6] (output port clocked by clk)",
+        "slack_ns": 14.514574
+      },
+      "output_uio_out_6__min.rpt": {
+        "startpoint": "_31606_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[6] (output port clocked by clk)",
+        "slack_ns": 4.635874
+      },
+      "output_uio_out_7__max.rpt": {
+        "startpoint": "_32296_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[7] (output port clocked by clk)",
+        "slack_ns": 13.91097
+      },
+      "output_uio_out_7__min.rpt": {
+        "startpoint": "_31986_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[7] (output port clocked by clk)",
+        "slack_ns": 4.69329
+      },
+      "output_uo_out_0__max.rpt": {
+        "startpoint": "_32285_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[0] (output port clocked by clk)",
+        "slack_ns": 14.726542
+      },
+      "output_uo_out_0__min.rpt": {
+        "startpoint": "_31608_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[0] (output port clocked by clk)",
+        "slack_ns": 4.601099
+      },
+      "output_uo_out_1__max.rpt": {
+        "startpoint": "_31609_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[1] (output port clocked by clk)",
+        "slack_ns": 14.658898
+      },
+      "output_uo_out_1__min.rpt": {
+        "startpoint": "_31988_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[1] (output port clocked by clk)",
+        "slack_ns": 4.608938
+      },
+      "output_uo_out_2__max.rpt": {
+        "startpoint": "_31610_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[2] (output port clocked by clk)",
+        "slack_ns": 14.554695
+      },
+      "output_uo_out_2__min.rpt": {
+        "startpoint": "_31989_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[2] (output port clocked by clk)",
+        "slack_ns": 4.662284
+      },
+      "output_uo_out_3__max.rpt": {
+        "startpoint": "_32288_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[3] (output port clocked by clk)",
+        "slack_ns": 14.688769
+      },
+      "output_uo_out_3__min.rpt": {
+        "startpoint": "_31990_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[3] (output port clocked by clk)",
+        "slack_ns": 4.608866
+      },
+      "output_uo_out_4__max.rpt": {
+        "startpoint": "_32289_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[4] (output port clocked by clk)",
+        "slack_ns": 14.586017
+      },
+      "output_uo_out_4__min.rpt": {
+        "startpoint": "_31991_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[4] (output port clocked by clk)",
+        "slack_ns": 4.648452
+      },
+      "output_uo_out_5__max.rpt": {
+        "startpoint": "_31613_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[5] (output port clocked by clk)",
+        "slack_ns": 14.694456
+      },
+      "output_uo_out_5__min.rpt": {
+        "startpoint": "_32290_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[5] (output port clocked by clk)",
+        "slack_ns": 4.617217
+      },
+      "output_uo_out_6__max.rpt": {
+        "startpoint": "_32291_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[6] (output port clocked by clk)",
+        "slack_ns": 14.715552
+      },
+      "output_uo_out_6__min.rpt": {
+        "startpoint": "_31614_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[6] (output port clocked by clk)",
+        "slack_ns": 4.598828
+      },
+      "output_uo_out_7__max.rpt": {
+        "startpoint": "_32292_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[7] (output port clocked by clk)",
+        "slack_ns": 14.72998
+      },
+      "output_uo_out_7__min.rpt": {
+        "startpoint": "_32292_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[7] (output port clocked by clk)",
+        "slack_ns": 4.604713
+      },
+      "registers_max.rpt": {
+        "startpoint": "_33837_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "_33836_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 11.964334
+      },
+      "registers_min.rpt": {
+        "startpoint": "_31487_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "_31483_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 0.118656
+      },
+      "reset_fall_max.rpt": {
+        "startpoint": "rst_n (input port clocked by clk)",
+        "endpoint": "uio_oe[7] (output port clocked by clk)",
+        "slack_ns": 10.721957
+      },
+      "reset_fall_min.rpt": {
+        "startpoint": "rst_n (input port clocked by clk)",
+        "endpoint": "_32268_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.406094
+      },
+      "reset_rise_max.rpt": {
+        "startpoint": "rst_n (input port clocked by clk)",
+        "endpoint": "uio_oe[4] (output port clocked by clk)",
+        "slack_ns": 10.539313
+      },
+      "reset_rise_min.rpt": {
+        "startpoint": "rst_n (input port clocked by clk)",
+        "endpoint": "_32268_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.478591
+      }
+    }
+  },
+  {
+    "corner": "nom_fast_1p32V_m40C",
+    "mode": "operational",
+    "setup": 9.046896,
+    "hold": 0.118656,
+    "coverage_issues": false,
+    "paths": {
+      "global_hold.rpt": {
+        "startpoint": "_31487_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "_31483_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 0.118656
+      },
+      "global_setup.rpt": {
+        "startpoint": "ui_in[1] (input port clocked by clk)",
+        "endpoint": "_33836_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 9.046896
+      },
+      "input_ena_max.rpt": {
+        "startpoint": "ena (input port clocked by clk)",
+        "endpoint": "_33836_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 9.233737
+      },
+      "input_ena_min.rpt": {
+        "startpoint": "ena (input port clocked by clk)",
+        "endpoint": "_31483_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.653272
+      },
+      "input_rst_n_max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_rst_n_min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_uio_in_0__max.rpt": {
+        "startpoint": "uio_in[0] (input port clocked by clk)",
+        "endpoint": "_33836_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 11.472877
+      },
+      "input_uio_in_0__min.rpt": {
+        "startpoint": "uio_in[0] (input port clocked by clk)",
+        "endpoint": "_31833_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.757029
+      },
+      "input_uio_in_1__max.rpt": {
+        "startpoint": "uio_in[1] (input port clocked by clk)",
+        "endpoint": "_33836_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 10.574863
+      },
+      "input_uio_in_1__min.rpt": {
+        "startpoint": "uio_in[1] (input port clocked by clk)",
+        "endpoint": "_31834_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.570803
+      },
+      "input_uio_in_2__max.rpt": {
+        "startpoint": "uio_in[2] (input port clocked by clk)",
+        "endpoint": "_31913_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 14.221438
+      },
+      "input_uio_in_2__min.rpt": {
+        "startpoint": "uio_in[2] (input port clocked by clk)",
+        "endpoint": "_33591_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.573818
+      },
+      "input_uio_in_3__max.rpt": {
+        "startpoint": "uio_in[3] (input port clocked by clk)",
+        "endpoint": "_31922_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 13.955204
+      },
+      "input_uio_in_3__min.rpt": {
+        "startpoint": "uio_in[3] (input port clocked by clk)",
+        "endpoint": "_33496_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.582323
+      },
+      "input_uio_in_4__max.rpt": {
+        "startpoint": "uio_in[4] (input port clocked by clk)",
+        "endpoint": "_32269_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 16.10631
+      },
+      "input_uio_in_4__min.rpt": {
+        "startpoint": "uio_in[4] (input port clocked by clk)",
+        "endpoint": "_32269_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.236131
+      },
+      "input_uio_in_5__max.rpt": {
+        "startpoint": "uio_in[5] (input port clocked by clk)",
+        "endpoint": "_32270_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 16.104486
+      },
+      "input_uio_in_5__min.rpt": {
+        "startpoint": "uio_in[5] (input port clocked by clk)",
+        "endpoint": "_32270_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.239138
+      },
+      "input_uio_in_6__max.rpt": {
+        "startpoint": "uio_in[6] (input port clocked by clk)",
+        "endpoint": "_32271_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 16.106308
+      },
+      "input_uio_in_6__min.rpt": {
+        "startpoint": "uio_in[6] (input port clocked by clk)",
+        "endpoint": "_32271_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.237703
+      },
+      "input_uio_in_7__max.rpt": {
+        "startpoint": "uio_in[7] (input port clocked by clk)",
+        "endpoint": "_32272_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 16.106808
+      },
+      "input_uio_in_7__min.rpt": {
+        "startpoint": "uio_in[7] (input port clocked by clk)",
+        "endpoint": "_32272_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.237341
+      },
+      "input_ui_in_0__max.rpt": {
+        "startpoint": "ui_in[0] (input port clocked by clk)",
+        "endpoint": "_33836_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 9.145526
+      },
+      "input_ui_in_0__min.rpt": {
+        "startpoint": "ui_in[0] (input port clocked by clk)",
+        "endpoint": "_31495_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.691197
+      },
+      "input_ui_in_1__max.rpt": {
+        "startpoint": "ui_in[1] (input port clocked by clk)",
+        "endpoint": "_33836_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 9.046896
+      },
+      "input_ui_in_1__min.rpt": {
+        "startpoint": "ui_in[1] (input port clocked by clk)",
+        "endpoint": "_31487_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.620605
+      },
+      "input_ui_in_2__max.rpt": {
+        "startpoint": "ui_in[2] (input port clocked by clk)",
+        "endpoint": "_33836_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 9.130282
+      },
+      "input_ui_in_2__min.rpt": {
+        "startpoint": "ui_in[2] (input port clocked by clk)",
+        "endpoint": "_31488_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.60205
+      },
+      "input_ui_in_3__max.rpt": {
+        "startpoint": "ui_in[3] (input port clocked by clk)",
+        "endpoint": "_33836_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 9.306822
+      },
+      "input_ui_in_3__min.rpt": {
+        "startpoint": "ui_in[3] (input port clocked by clk)",
+        "endpoint": "_31483_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.591251
+      },
+      "input_ui_in_4__max.rpt": {
+        "startpoint": "ui_in[4] (input port clocked by clk)",
+        "endpoint": "_33836_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 9.181367
+      },
+      "input_ui_in_4__min.rpt": {
+        "startpoint": "ui_in[4] (input port clocked by clk)",
+        "endpoint": "_31485_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.421085
+      },
+      "input_ui_in_5__max.rpt": {
+        "startpoint": "ui_in[5] (input port clocked by clk)",
+        "endpoint": "_33836_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 9.158423
+      },
+      "input_ui_in_5__min.rpt": {
+        "startpoint": "ui_in[5] (input port clocked by clk)",
+        "endpoint": "_31485_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.436434
+      },
+      "input_ui_in_6__max.rpt": {
+        "startpoint": "ui_in[6] (input port clocked by clk)",
+        "endpoint": "_32267_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 16.127052
+      },
+      "input_ui_in_6__min.rpt": {
+        "startpoint": "ui_in[6] (input port clocked by clk)",
+        "endpoint": "_32267_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.214526
+      },
+      "input_ui_in_7__max.rpt": {
+        "startpoint": "ui_in[7] (input port clocked by clk)",
+        "endpoint": "_32268_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 16.128866
+      },
+      "input_ui_in_7__min.rpt": {
+        "startpoint": "ui_in[7] (input port clocked by clk)",
+        "endpoint": "_32268_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 3.212943
+      },
+      "output_uio_oe_0__max.rpt": {
+        "startpoint": "ui_in[5] (input port clocked by clk)",
+        "endpoint": "uio_oe[0] (output port clocked by clk)",
+        "slack_ns": 10.732402
+      },
+      "output_uio_oe_0__min.rpt": {
+        "startpoint": "_31482_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_oe[0] (output port clocked by clk)",
+        "slack_ns": 4.740367
+      },
+      "output_uio_oe_1__max.rpt": {
+        "startpoint": "ui_in[5] (input port clocked by clk)",
+        "endpoint": "uio_oe[1] (output port clocked by clk)",
+        "slack_ns": 10.731247
+      },
+      "output_uio_oe_1__min.rpt": {
+        "startpoint": "_31482_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_oe[1] (output port clocked by clk)",
+        "slack_ns": 4.741284
+      },
+      "output_uio_oe_2__max.rpt": {
+        "startpoint": "ui_in[5] (input port clocked by clk)",
+        "endpoint": "uio_oe[2] (output port clocked by clk)",
+        "slack_ns": 10.732574
+      },
+      "output_uio_oe_2__min.rpt": {
+        "startpoint": "_31482_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_oe[2] (output port clocked by clk)",
+        "slack_ns": 4.740232
+      },
+      "output_uio_oe_3__max.rpt": {
+        "startpoint": "ui_in[5] (input port clocked by clk)",
+        "endpoint": "uio_oe[3] (output port clocked by clk)",
+        "slack_ns": 10.732809
+      },
+      "output_uio_oe_3__min.rpt": {
+        "startpoint": "_31482_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_oe[3] (output port clocked by clk)",
+        "slack_ns": 4.740044
+      },
+      "output_uio_oe_4__max.rpt": {
+        "startpoint": "_32293_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_oe[4] (output port clocked by clk)",
+        "slack_ns": 14.239761
+      },
+      "output_uio_oe_4__min.rpt": {
+        "startpoint": "_31600_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_oe[4] (output port clocked by clk)",
+        "slack_ns": 4.705252
+      },
+      "output_uio_oe_5__max.rpt": {
+        "startpoint": "_32294_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_oe[5] (output port clocked by clk)",
+        "slack_ns": 14.021963
+      },
+      "output_uio_oe_5__min.rpt": {
+        "startpoint": "_31601_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_oe[5] (output port clocked by clk)",
+        "slack_ns": 4.686684
+      },
+      "output_uio_oe_6__max.rpt": {
+        "startpoint": "_32295_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_oe[6] (output port clocked by clk)",
+        "slack_ns": 14.098916
+      },
+      "output_uio_oe_6__min.rpt": {
+        "startpoint": "_31602_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_oe[6] (output port clocked by clk)",
+        "slack_ns": 4.695918
+      },
+      "output_uio_oe_7__max.rpt": {
+        "startpoint": "_32296_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_oe[7] (output port clocked by clk)",
+        "slack_ns": 13.975268
+      },
+      "output_uio_oe_7__min.rpt": {
+        "startpoint": "_31603_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_oe[7] (output port clocked by clk)",
+        "slack_ns": 4.705467
+      },
+      "output_uio_out_0__max.rpt": {
+        "startpoint": "_31478_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[0] (output port clocked by clk)",
+        "slack_ns": 14.952037
+      },
+      "output_uio_out_0__min.rpt": {
+        "startpoint": "_31478_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[0] (output port clocked by clk)",
+        "slack_ns": 4.44498
+      },
+      "output_uio_out_1__max.rpt": {
+        "startpoint": "_31479_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[1] (output port clocked by clk)",
+        "slack_ns": 14.902501
+      },
+      "output_uio_out_1__min.rpt": {
+        "startpoint": "_31479_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[1] (output port clocked by clk)",
+        "slack_ns": 4.482595
+      },
+      "output_uio_out_2__max.rpt": {
+        "startpoint": "_31480_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[2] (output port clocked by clk)",
+        "slack_ns": 14.953466
+      },
+      "output_uio_out_2__min.rpt": {
+        "startpoint": "_31480_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[2] (output port clocked by clk)",
+        "slack_ns": 4.443694
+      },
+      "output_uio_out_3__max.rpt": {
+        "startpoint": "_31481_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[3] (output port clocked by clk)",
+        "slack_ns": 14.940864
+      },
+      "output_uio_out_3__min.rpt": {
+        "startpoint": "_31481_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[3] (output port clocked by clk)",
+        "slack_ns": 4.453537
+      },
+      "output_uio_out_4__max.rpt": {
+        "startpoint": "_32293_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[4] (output port clocked by clk)",
+        "slack_ns": 14.352438
+      },
+      "output_uio_out_4__min.rpt": {
+        "startpoint": "_31604_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[4] (output port clocked by clk)",
+        "slack_ns": 4.644159
+      },
+      "output_uio_out_5__max.rpt": {
+        "startpoint": "_32294_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[5] (output port clocked by clk)",
+        "slack_ns": 14.141331
+      },
+      "output_uio_out_5__min.rpt": {
+        "startpoint": "_31605_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[5] (output port clocked by clk)",
+        "slack_ns": 4.60409
+      },
+      "output_uio_out_6__max.rpt": {
+        "startpoint": "_32295_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[6] (output port clocked by clk)",
+        "slack_ns": 14.514574
+      },
+      "output_uio_out_6__min.rpt": {
+        "startpoint": "_31606_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[6] (output port clocked by clk)",
+        "slack_ns": 4.635874
+      },
+      "output_uio_out_7__max.rpt": {
+        "startpoint": "_32296_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[7] (output port clocked by clk)",
+        "slack_ns": 13.91097
+      },
+      "output_uio_out_7__min.rpt": {
+        "startpoint": "_31986_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[7] (output port clocked by clk)",
+        "slack_ns": 4.69329
+      },
+      "output_uo_out_0__max.rpt": {
+        "startpoint": "_32285_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[0] (output port clocked by clk)",
+        "slack_ns": 14.726542
+      },
+      "output_uo_out_0__min.rpt": {
+        "startpoint": "_31608_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[0] (output port clocked by clk)",
+        "slack_ns": 4.601099
+      },
+      "output_uo_out_1__max.rpt": {
+        "startpoint": "_31609_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[1] (output port clocked by clk)",
+        "slack_ns": 14.658898
+      },
+      "output_uo_out_1__min.rpt": {
+        "startpoint": "_31988_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[1] (output port clocked by clk)",
+        "slack_ns": 4.608938
+      },
+      "output_uo_out_2__max.rpt": {
+        "startpoint": "_31610_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[2] (output port clocked by clk)",
+        "slack_ns": 14.554695
+      },
+      "output_uo_out_2__min.rpt": {
+        "startpoint": "_31989_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[2] (output port clocked by clk)",
+        "slack_ns": 4.662284
+      },
+      "output_uo_out_3__max.rpt": {
+        "startpoint": "_32288_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[3] (output port clocked by clk)",
+        "slack_ns": 14.688769
+      },
+      "output_uo_out_3__min.rpt": {
+        "startpoint": "_31990_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[3] (output port clocked by clk)",
+        "slack_ns": 4.608866
+      },
+      "output_uo_out_4__max.rpt": {
+        "startpoint": "_32289_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[4] (output port clocked by clk)",
+        "slack_ns": 14.586017
+      },
+      "output_uo_out_4__min.rpt": {
+        "startpoint": "_31991_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[4] (output port clocked by clk)",
+        "slack_ns": 4.648452
+      },
+      "output_uo_out_5__max.rpt": {
+        "startpoint": "_31613_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[5] (output port clocked by clk)",
+        "slack_ns": 14.694456
+      },
+      "output_uo_out_5__min.rpt": {
+        "startpoint": "_32290_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[5] (output port clocked by clk)",
+        "slack_ns": 4.617217
+      },
+      "output_uo_out_6__max.rpt": {
+        "startpoint": "_32291_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[6] (output port clocked by clk)",
+        "slack_ns": 14.715552
+      },
+      "output_uo_out_6__min.rpt": {
+        "startpoint": "_31614_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[6] (output port clocked by clk)",
+        "slack_ns": 4.598828
+      },
+      "output_uo_out_7__max.rpt": {
+        "startpoint": "_32292_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[7] (output port clocked by clk)",
+        "slack_ns": 14.72998
+      },
+      "output_uo_out_7__min.rpt": {
+        "startpoint": "_32292_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[7] (output port clocked by clk)",
+        "slack_ns": 4.604713
+      },
+      "registers_max.rpt": {
+        "startpoint": "_33837_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "_33836_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 11.964334
+      },
+      "registers_min.rpt": {
+        "startpoint": "_31487_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "_31483_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 0.118656
+      },
+      "reset_fall_max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "reset_fall_min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "reset_rise_max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "reset_rise_min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      }
+    }
+  },
+  {
+    "corner": "nom_fast_1p32V_m40C",
+    "mode": "reset_active",
+    "setup": 13.91097,
+    "hold": 0.17203,
+    "coverage_issues": false,
+    "paths": {
+      "global_hold.rpt": {
+        "startpoint": "_32901_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "_32901_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 0.17203
+      },
+      "global_setup.rpt": {
+        "startpoint": "_32296_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[7] (output port clocked by clk)",
+        "slack_ns": 13.91097
+      },
+      "input_ena_max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_ena_min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_rst_n_max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_rst_n_min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_uio_in_0__max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_uio_in_0__min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_uio_in_1__max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_uio_in_1__min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_uio_in_2__max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_uio_in_2__min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_uio_in_3__max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_uio_in_3__min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_uio_in_4__max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_uio_in_4__min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_uio_in_5__max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_uio_in_5__min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_uio_in_6__max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_uio_in_6__min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_uio_in_7__max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_uio_in_7__min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_ui_in_0__max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_ui_in_0__min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_ui_in_1__max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_ui_in_1__min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_ui_in_2__max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_ui_in_2__min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_ui_in_3__max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_ui_in_3__min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_ui_in_4__max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_ui_in_4__min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_ui_in_5__max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_ui_in_5__min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_ui_in_6__max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_ui_in_6__min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_ui_in_7__max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "input_ui_in_7__min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "output_uio_oe_0__max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "output_uio_oe_0__min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "output_uio_oe_1__max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "output_uio_oe_1__min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "output_uio_oe_2__max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "output_uio_oe_2__min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "output_uio_oe_3__max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "output_uio_oe_3__min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "output_uio_oe_4__max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "output_uio_oe_4__min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "output_uio_oe_5__max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "output_uio_oe_5__min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "output_uio_oe_6__max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "output_uio_oe_6__min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "output_uio_oe_7__max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "output_uio_oe_7__min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "output_uio_out_0__max.rpt": {
+        "startpoint": "_31478_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[0] (output port clocked by clk)",
+        "slack_ns": 14.952037
+      },
+      "output_uio_out_0__min.rpt": {
+        "startpoint": "_31478_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[0] (output port clocked by clk)",
+        "slack_ns": 4.44498
+      },
+      "output_uio_out_1__max.rpt": {
+        "startpoint": "_31479_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[1] (output port clocked by clk)",
+        "slack_ns": 14.902501
+      },
+      "output_uio_out_1__min.rpt": {
+        "startpoint": "_31479_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[1] (output port clocked by clk)",
+        "slack_ns": 4.482595
+      },
+      "output_uio_out_2__max.rpt": {
+        "startpoint": "_31480_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[2] (output port clocked by clk)",
+        "slack_ns": 14.953466
+      },
+      "output_uio_out_2__min.rpt": {
+        "startpoint": "_31480_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[2] (output port clocked by clk)",
+        "slack_ns": 4.443694
+      },
+      "output_uio_out_3__max.rpt": {
+        "startpoint": "_31481_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[3] (output port clocked by clk)",
+        "slack_ns": 14.940864
+      },
+      "output_uio_out_3__min.rpt": {
+        "startpoint": "_31481_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[3] (output port clocked by clk)",
+        "slack_ns": 4.453537
+      },
+      "output_uio_out_4__max.rpt": {
+        "startpoint": "_32293_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[4] (output port clocked by clk)",
+        "slack_ns": 14.352438
+      },
+      "output_uio_out_4__min.rpt": {
+        "startpoint": "_31604_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[4] (output port clocked by clk)",
+        "slack_ns": 4.644159
+      },
+      "output_uio_out_5__max.rpt": {
+        "startpoint": "_32294_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[5] (output port clocked by clk)",
+        "slack_ns": 14.141331
+      },
+      "output_uio_out_5__min.rpt": {
+        "startpoint": "_31605_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[5] (output port clocked by clk)",
+        "slack_ns": 4.60409
+      },
+      "output_uio_out_6__max.rpt": {
+        "startpoint": "_32295_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[6] (output port clocked by clk)",
+        "slack_ns": 14.514574
+      },
+      "output_uio_out_6__min.rpt": {
+        "startpoint": "_31606_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[6] (output port clocked by clk)",
+        "slack_ns": 4.635874
+      },
+      "output_uio_out_7__max.rpt": {
+        "startpoint": "_32296_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[7] (output port clocked by clk)",
+        "slack_ns": 13.91097
+      },
+      "output_uio_out_7__min.rpt": {
+        "startpoint": "_31986_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uio_out[7] (output port clocked by clk)",
+        "slack_ns": 4.69329
+      },
+      "output_uo_out_0__max.rpt": {
+        "startpoint": "_32285_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[0] (output port clocked by clk)",
+        "slack_ns": 14.726542
+      },
+      "output_uo_out_0__min.rpt": {
+        "startpoint": "_31608_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[0] (output port clocked by clk)",
+        "slack_ns": 4.601099
+      },
+      "output_uo_out_1__max.rpt": {
+        "startpoint": "_31609_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[1] (output port clocked by clk)",
+        "slack_ns": 14.658898
+      },
+      "output_uo_out_1__min.rpt": {
+        "startpoint": "_31988_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[1] (output port clocked by clk)",
+        "slack_ns": 4.608938
+      },
+      "output_uo_out_2__max.rpt": {
+        "startpoint": "_31610_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[2] (output port clocked by clk)",
+        "slack_ns": 14.554695
+      },
+      "output_uo_out_2__min.rpt": {
+        "startpoint": "_31989_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[2] (output port clocked by clk)",
+        "slack_ns": 4.662284
+      },
+      "output_uo_out_3__max.rpt": {
+        "startpoint": "_32288_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[3] (output port clocked by clk)",
+        "slack_ns": 14.688769
+      },
+      "output_uo_out_3__min.rpt": {
+        "startpoint": "_31990_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[3] (output port clocked by clk)",
+        "slack_ns": 4.608866
+      },
+      "output_uo_out_4__max.rpt": {
+        "startpoint": "_32289_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[4] (output port clocked by clk)",
+        "slack_ns": 14.586017
+      },
+      "output_uo_out_4__min.rpt": {
+        "startpoint": "_31991_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[4] (output port clocked by clk)",
+        "slack_ns": 4.648452
+      },
+      "output_uo_out_5__max.rpt": {
+        "startpoint": "_31613_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[5] (output port clocked by clk)",
+        "slack_ns": 14.694456
+      },
+      "output_uo_out_5__min.rpt": {
+        "startpoint": "_32290_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[5] (output port clocked by clk)",
+        "slack_ns": 4.617217
+      },
+      "output_uo_out_6__max.rpt": {
+        "startpoint": "_32291_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[6] (output port clocked by clk)",
+        "slack_ns": 14.715552
+      },
+      "output_uo_out_6__min.rpt": {
+        "startpoint": "_31614_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[6] (output port clocked by clk)",
+        "slack_ns": 4.598828
+      },
+      "output_uo_out_7__max.rpt": {
+        "startpoint": "_32292_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[7] (output port clocked by clk)",
+        "slack_ns": 14.72998
+      },
+      "output_uo_out_7__min.rpt": {
+        "startpoint": "_32292_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "uo_out[7] (output port clocked by clk)",
+        "slack_ns": 4.604713
+      },
+      "registers_max.rpt": {
+        "startpoint": "_33105_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "_33105_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 18.646128
+      },
+      "registers_min.rpt": {
+        "startpoint": "_32901_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "_32901_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 0.17203
+      },
+      "reset_fall_max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "reset_fall_min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "reset_rise_max.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      },
+      "reset_rise_min.rpt": {
+        "startpoint": null,
+        "endpoint": null,
+        "slack_ns": null
+      }
+    }
+  }
+]

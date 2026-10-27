@@ -38,7 +38,7 @@ def topology(data):
     if root is None or not clock_pins:
         raise ValueError('Missing clock root or CLK sinks')
     queue = deque([(root, 0)])
-    seen, reached, buffers, depth_hist, dummy_loads = set(), set(), [], Counter(), []
+    seen, reached, buffers, depth_hist, dummy_loads, antenna_loads = set(), set(), [], Counter(), [], []
     while queue:
         net, depth = queue.popleft()
         if net in seen:
@@ -59,12 +59,16 @@ def topology(data):
                     and pin == 'A' and not loads.get(pins.get('Y'), [])):
                 # CTS uses unloaded inverters as explicit capacitance dummies.
                 dummy_loads.append(dict(instance=cell, master=master, depth=depth))
+            elif master == 'sg13cmos5l_antennanp' and pin == 'A' and set(pins) == {'A'}:
+                # Real native antenna loads count toward output fanout above.
+                antenna_loads.append(dict(instance=cell, master=master, depth=depth))
             else:
                 raise ValueError(f'Unsupported non-clock load on clock tree: {cell}/{pin} ({master})')
     if reached != clock_pins:
         raise ValueError(f'{len(clock_pins-reached)} CLK sinks are not reached from clk')
     return dict(clock_sink_count=len(reached), clock_buffer_count=len(buffers),
                 dummy_clock_load_count=len(dummy_loads), dummy_loads=dummy_loads,
+                antenna_clock_load_count=len(antenna_loads), antenna_loads=antenna_loads,
                 root_fanout=len(loads[root]),
                 max_buffer_fanout=max((b['fanout'] for b in buffers), default=0),
                 clock_buffer_outputs_above8=sum(b['fanout'] > 8 for b in buffers),
