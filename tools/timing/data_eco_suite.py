@@ -1,4 +1,4 @@
-"""Finish the critical pair, then run single-source electrical ECOs, four at a time."""
+"""Run an explicit isolated or cumulative ECO suite, at most four cases at a time."""
 import argparse
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import json
@@ -7,15 +7,15 @@ import shutil
 import subprocess
 import sys
 import threading
-import time
-from data_eco_trial import recipes
+from data_eco_trial import SUITES, suite_recipes
 
 
 def choose_attempt(root,name):
     candidates=sorted(root.glob(name+'-[0-9][0-9]'))
     completed=[v for v in candidates if (v/'experiment.json').exists() and
         json.loads((v/'experiment.json').read_text())['status'] in ('screen_complete','rejected_signoff')
-        and (v/'eco_audit.json').exists()]
+        and (v/'eco_audit.json').exists() and
+        json.loads((v/'eco_audit.json').read_text()).get('status') == 'pass']
     if completed:
         return completed[-1]
     attempt=max((int(v.name.rsplit('-',1)[1]) for v in candidates),default=0)+1
@@ -27,17 +27,23 @@ def main():
     for name in ('base','prepared','archive-root','pdk-root','root','evidence'):
         p.add_argument('--'+name,type=Path,required=True)
     p.add_argument('--jobs',type=int,default=4)
+    p.add_argument('--suite',choices=SUITES,default='isolated')
     a=p.parse_args()
     if not 1<=a.jobs<=4:
         p.error('Use one to four workers, each with eight OpenROAD threads')
     tool=Path(__file__).resolve().parent
+    a.root.mkdir(parents=True,exist_ok=True)
     a.evidence.mkdir(parents=True,exist_ok=True)
-    names=list(recipes())
-    critical=names[:3]
-    while any(not (a.root/f'{n}-01/experiment.json').exists() for n in critical) or any(
-              json.loads(path.read_text())['status']=='running'
-              for path in a.root.glob('*-*/experiment.json')):
-        time.sleep(5)
+    names=list(suite_recipes(a.suite))
+    # A fresh suite schedules its own controls. Never wait on unrelated cases.
+    active=[v for n in names for v in a.root.glob(n+'-[0-9][0-9]/experiment.json')
+            if json.loads(v.read_text()).get('status')=='running']
+    if active:
+        p.error('Selected attempts still marked running; inspect before resuming: '+str(active))
+    (a.root/'scheduler.py').write_bytes(Path(__file__).read_bytes())
+    (a.root/'suite_selection.json').write_text(json.dumps(dict(suite=a.suite,cases=names,
+        base=str(a.base.resolve()),prepared=str(a.prepared.resolve()),
+        jobs=a.jobs,threads_per_case=8),indent=2)+'\n')
     state={}; lock=threading.Lock()
 
     def update(name,**values):
@@ -80,7 +86,7 @@ def main():
             future.result()
     if any(v['status']!='complete' for v in state.values()):
         p.exit(1,'Some experiments failed; inspect suite_state.json\n')
-    print('All isolated physical screens and replay collections complete',flush=True)
+    print('All',a.suite,'physical screens and replay collections complete',flush=True)
 
 
 if __name__=='__main__':

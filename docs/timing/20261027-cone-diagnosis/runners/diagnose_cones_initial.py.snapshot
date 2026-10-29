@@ -1,0 +1,172 @@
+"""Collect additional competing paths from an immutable, previously replayed route.
+
+This is diagnostic only. It never changes constraints or qualifies a physical run.
+Run in the pinned Nix environment, with a fresh --out directory.
+"""
+import argparse
+import hashlib
+import json
+import os
+from pathlib import Path
+import re
+import subprocess
+
+
+def sha(path):
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def paths(text):
+    result = []
+    for block in text.split('Startpoint: ')[1:]:
+        endpoint = re.search(r'^Endpoint: (\S+)', block, re.M)
+        slack = re.search(r'([-+\d.]+)\s+slack \(', block)
+        if endpoint and slack:
+            result.append(dict(start=block.splitlines()[0], endpoint=endpoint[1],
+                               slack=float(slack[1]), text='Startpoint: '+block))
+    return result
+
+
+def main():
+    p = argparse.ArgumentParser(description=__doc__)
+    p.add_argument('--trial', type=Path, required=True)
+    p.add_argument('--synthesis', type=Path, required=True)
+    p.add_argument('--out', type=Path, required=True)
+    a = p.parse_args()
+    a.out.mkdir(parents=True, exist_ok=False)
+    replay = json.loads((a.trial/'replay/manifest.json').read_text())
+    if replay['status'] != 'complete':
+        raise ValueError('Incomplete source replay')
+    verified = {}
+    for name, expected in replay['sha256'].items():
+        actual = sha(name)
+        if actual != expected:
+            raise ValueError('Source replay input changed: '+name)
+        verified[name] = actual
+    slow = a.trial/'replay/nom_slow_1p08V_125C-baseline'
+    setup = paths((slow/'global_setup.rpt').read_text())
+    failures = [row for row in setup if row['slack'] < 0]
+    endpoints = sorted({row['endpoint'] for row in failures})
+    netlist = next(a.trial.glob('replay-input/*-openroad-fillinsertion/*.nl.v'))
+    text = netlist.read_text()
+    module = json.loads(a.synthesis.read_text())['modules']['tt_um_shanebri_top']
+    synthesis_verilog = a.synthesis.with_suffix('')
+    synthesized_text = synthesis_verilog.read_text()
+    # Yosys JSON predates write_verilog's generated names. Re-emit both naming
+    # modes, require every renamed cell/pin to match the original artifact,
+    # then use the corresponding named Q wire to locate the JSON state bit.
+    renamed, named = a.out/'renamed.v', a.out/'named.v'
+    command = ['yosys','-Q','-T','-p',f'read_json {a.synthesis}; write_verilog -noattr -noexpr {renamed}; write_verilog -noattr -noexpr -norename {named}']
+    with (a.out/'mapping_yosys.log').open('w') as log:
+        subprocess.run(command, stdout=log, stderr=subprocess.STDOUT, check=True)
+    def cells(source):
+        return [(m,n,re.sub(r'\s+', '',body)) for m,n,body in
+                re.findall(r'^  (sg13cmos5l_\w+)\s+(\S+)\s+\((.*?)\);', source, re.M|re.S)]
+    regenerated = cells(renamed.read_text())
+    if regenerated != cells(synthesized_text):
+        raise ValueError('Re-emitted synthesis cells do not match original')
+    named_cells = cells(named.read_text())
+    if len(named_cells) != len(regenerated) or any(x[0]!=y[0] for x,y in zip(regenerated,named_cells)):
+        raise ValueError('Named emission differs structurally')
+    identities = {x[1]:y for x,y in zip(regenerated,named_cells)}
+    buffers = {}
+    for body in re.findall(r'\bsg13cmos5l_(?:buf_\d+|dlygate4sd[123]_1)\s+[^\s(]+\s*\((.*?)\);',text,re.S):
+        bp = dict(re.findall(r'\.(\w+)\s*\(\s*(.*?)\s*\)',body,re.S))
+        if 'X' in bp and 'A' in bp:  # Unconnected output buffers provide no alias.
+            buffers[re.sub(r'\s+','',bp['X'])] = re.sub(r'\s+','',bp['A'])
+    def root(net):
+        net = re.sub(r'\s+','',net)
+        seen = set()
+        while net in buffers:
+            if net in seen:
+                raise ValueError('Buffer cycle')
+            seen.add(net)
+            net = buffers[net]
+        return net
+    mapping = []
+    for row in failures:
+        cell = row['endpoint']
+        body = re.search(r'\b'+re.escape(cell)+r'\s*\((.*?)\);', text, re.S)[1]
+        pins = dict(re.findall(r'\.(\w+)\s*\(\s*(.*?)\s*\)', body, re.S))
+        original_body = re.search(r'\b'+re.escape(cell)+r'\s*\((.*?)\);', synthesized_text, re.S)[1]
+        original_pins = dict(re.findall(r'\.(\w+)\s*\(\s*(.*?)\s*\)', original_body, re.S))
+        if any(root(pins[k]) != root(original_pins[k]) for k in ('D','Q')):
+            raise ValueError('Synthesis/routed D/Q differ: '+cell)
+        named_body = identities[cell][2]
+        q = re.search(r'\.Q\((.*?)\)',named_body)[1].lstrip('\\')
+        match = re.fullmatch(r'(.*)\[(\d+)\]', q)
+        if q in module['netnames']:
+            qbits = module['netnames'][q]['bits']
+        else:
+            name, index = (match[1],int(match[2])) if match else (q,0)
+            net = module['netnames'][name]
+            qbits = [net['bits'][index-net.get('offset',0)]]
+        candidates = [(n,c) for n,c in module['cells'].items() if c['connections'].get('Q') == qbits]
+        if len(candidates) != 1:
+            raise ValueError('Ambiguous synthesis Q identity: '+cell)
+        synthesis_cell, syn = candidates[0]
+        aliases = {}
+        for pin in ('D', 'Q'):
+            bits = syn['connections'][pin]
+            aliases[pin] = [f'{n}[{i+v.get("offset",0)}]' if len(v['bits']) > 1 else n
+                           for n, v in module['netnames'].items()
+                           for i,b in enumerate(v['bits']) if [b] == bits]
+            routed = re.sub(r'\s+', '', pins[pin].lstrip('\\'))
+            if pin == 'Q' and q not in aliases[pin]:
+                raise ValueError(f'Unverified {cell}/{pin}: {routed}, {aliases[pin]}')
+        mapping.append(dict(endpoint=cell, start=row['start'], slack=row['slack'],
+                            master=syn['type'], synthesis_cell=synthesis_cell,
+                            routed_pins=pins, synthesis_pins=original_pins, synthesis_aliases=aliases))
+    (a.out/'endpoint_mapping.json').write_text(json.dumps(mapping, indent=2)+'\n')
+    # Source the unchanged replay before appending more exhaustive diagnostics.
+    base = Path(__file__).with_name('report_io_paths.tcl').resolve()
+    script = f'source {{{base}}}\n'
+    script += 'set targets [get_pins {'+' '.join(e+'/D' for e in endpoints)+'}]\n'
+    script += '''foreach delay {max min} {
+    report_checks -to $targets -path_delay $delay -sort_by_slack -group_path_count 1000 -endpoint_path_count 16 -fields {slew cap input net fanout} -format full_clock_expanded > [file join $out_dir cone_${delay}.rpt]
+    foreach port [all_inputs] {
+        set name [get_property $port full_name]
+        if {$name eq "clk"} {continue}
+        set safe [string map {[ _ ] _ / _} $name]
+        report_checks -from $port -to $targets -path_delay $delay -sort_by_slack -group_path_count 1000 -endpoint_path_count 4 -fields {slew cap input net fanout} -format full_clock_expanded > [file join $out_dir cone_input_${safe}_${delay}.rpt]
+    }
+    report_checks -from [all_registers -clock_pins] -to $targets -path_delay $delay -sort_by_slack -group_path_count 1000 -endpoint_path_count 8 -fields {slew cap input net fanout} -format full_clock_expanded > [file join $out_dir cone_registers_${delay}.rpt]
+    report_checks -path_delay $delay -sort_by_slack -group_path_count 100 -endpoint_path_count 4 -fields {slew cap input net fanout} -format full_clock_expanded > [file join $out_dir competing_${delay}.rpt]
+}
+foreach driver {_28912_/Y _28923_/Y _17226_/Y _17250_/Y _17236_/X _17262_/X} {
+    set safe [string map {/ _} $driver]
+    report_checks -through [get_pins $driver] -path_delay max -sort_by_slack -group_path_count 200 -endpoint_path_count 4 -fields {slew cap input net fanout} -format full_clock_expanded > [file join $out_dir through_${safe}.rpt]
+    report_net -connections [get_property [get_nets -of_objects [get_pins $driver]] full_name] > [file join $out_dir net_${safe}.rpt]
+}
+'''
+    script_path = (a.out/'queries.tcl').resolve()
+    script_path.write_text(script)
+    manifest = dict(status='running', verified_replay_inputs=verified,
+                    synthesis_sha256=sha(a.synthesis), synthesis=str(a.synthesis),
+                    synthesis_verilog_sha256=sha(synthesis_verilog),
+                    runner_sha256=sha(__file__), script_sha256=sha(script_path), sessions=[])
+    for corner in ('nom_slow_1p08V_125C','nom_fast_1p32V_m40C'):
+        out = (a.out/corner).resolve()
+        env = dict(os.environ, PIO_TIMING_RUN=str((a.trial/'replay-input').resolve()),
+                   PDK_ROOT='/home/shane/eda/pdk-2bbec755', PIO_TIMING_CORNER=corner,
+                   PIO_TIMING_MODE='baseline', PIO_TIMING_TARGET='none', PIO_TIMING_OUT=str(out))
+        with (a.out/(corner+'.log')).open('w') as log:
+            proc = subprocess.run(['sta','-exit',str(script_path)], env=env, stdout=log, stderr=subprocess.STDOUT)
+        contents = (a.out/(corner+'.log')).read_text()
+        if proc.returncode or re.search(r'(?im)^\s*error\b|\[ERROR\]', contents):
+            raise ValueError('STA failed: '+str(a.out/(corner+'.log')))
+        from replay import slack
+        source = next(s for s in replay['sessions'] if s['corner']==corner and s['mode']=='baseline')
+        measured = {key:slack(out/filename) for key,filename in [('setup','worst_setup.rpt'),('hold','worst_hold.rpt')]}
+        if any(abs(measured[key]-source[key]) > .001 for key in measured):
+            raise ValueError('Replay disagreement')
+        if (out/'coverage.rpt').read_text().strip():
+            raise ValueError('Incomplete constraint coverage')
+        manifest['sessions'].append(dict(corner=corner, **measured))
+    manifest['status']='complete'
+    (a.out/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
+    print(json.dumps(dict(endpoints=len(endpoints), mapping=[(r['endpoint'],r['synthesis_aliases']['Q']) for r in mapping], sessions=manifest['sessions']),indent=2))
+
+
+if __name__ == '__main__':
+    main()

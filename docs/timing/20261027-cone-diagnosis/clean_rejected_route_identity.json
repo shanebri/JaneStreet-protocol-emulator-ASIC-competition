@@ -1,0 +1,97 @@
+{
+  "status": "pass",
+  "scope": "clean reproduction of a strict-rejected route; not production closure",
+  "views": {
+    "odb": {
+      "paths": [
+        "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/production_candidate_20261028_02/run/66-odb-cellfrequencytables/tt_um_shanebri_top.odb",
+        "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/data_incremental_tail_20261028/incremental_last_fanout-01/run/11-odb-cellfrequencytables/tt_um_shanebri_top.odb"
+      ],
+      "sha256": "e946157c09382b266a1292069f6afec77dee2b8d576f7a21a4e4d49c2e187d77"
+    },
+    "def": {
+      "paths": [
+        "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/production_candidate_20261028_02/run/66-odb-cellfrequencytables/tt_um_shanebri_top.def",
+        "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/data_incremental_tail_20261028/incremental_last_fanout-01/run/11-odb-cellfrequencytables/tt_um_shanebri_top.def"
+      ],
+      "sha256": "454c604adf5eb53461e7e560e0c745d05ddc3a88c9c34b9bdb4c84d0498a9f9b"
+    },
+    "nl": {
+      "paths": [
+        "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/production_candidate_20261028_02/run/65-openroad-fillinsertion/tt_um_shanebri_top.nl.v",
+        "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/data_incremental_tail_20261028/incremental_last_fanout-01/run/10-openroad-fillinsertion/tt_um_shanebri_top.nl.v"
+      ],
+      "sha256": "e76cd643de28c73458ab44b01ac205925d31e71573f35730e0b2ee8daee9faff"
+    },
+    "sdc": {
+      "paths": [
+        "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/production_candidate_20261028_02/run/65-openroad-fillinsertion/tt_um_shanebri_top.sdc",
+        "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/data_incremental_tail_20261028/incremental_last_fanout-01/run/10-openroad-fillinsertion/tt_um_shanebri_top.sdc"
+      ],
+      "sha256": "7088ce29adb0f7213b0f3ed4b76177f104819061b87b32bf4f166ff50e055d59"
+    },
+    "spef": {
+      "paths": [
+        "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/production_candidate_20261028_02/run/67-openroad-rcx/nom/tt_um_shanebri_top.nom.spef",
+        "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/data_incremental_tail_20261028/incremental_last_fanout-01/run/12-openroad-rcx/nom/tt_um_shanebri_top.nom.spef"
+      ],
+      "sha256": [
+        "4b6bc70f7ff949292dc6fa39193a45f190d664b38376f7df9868926b4dd7a6af",
+        "8a15c80f0759b88dfc40ab9ee53a3567717094ce451af02cfe0a7e8cbbe40b7f"
+      ],
+      "difference": "Only the SPEF *DATE line may differ",
+      "electrical_content_sha256": "798d45ec4ed71b1dc40a0dbdf770027a398f6f7bc9205394aa979687c8fbf556"
+    }
+  },
+  "metrics": {
+    "timing__setup__ws__corner:nom_slow_1p08V_125C": 0.04453326722325109,
+    "timing__hold__ws__corner:nom_slow_1p08V_125C": 0.3718779833775184,
+    "timing__setup__tns__corner:nom_slow_1p08V_125C": 0,
+    "timing__hold__tns__corner:nom_slow_1p08V_125C": 0,
+    "timing__setup_vio__count__corner:nom_slow_1p08V_125C": 0,
+    "timing__hold_vio__count__corner:nom_slow_1p08V_125C": 0,
+    "design__max_slew_violation__count__corner:nom_slow_1p08V_125C": 0,
+    "design__max_cap_violation__count__corner:nom_slow_1p08V_125C": 0,
+    "design__max_fanout_violation__count__corner:nom_slow_1p08V_125C": 4,
+    "timing__unannotated_net_filtered__count__corner:nom_slow_1p08V_125C": 0,
+    "timing__setup__ws__corner:nom_typ_1p20V_25C": 5.964107598821787,
+    "timing__hold__ws__corner:nom_typ_1p20V_25C": 0.1449447269900443,
+    "timing__setup__tns__corner:nom_typ_1p20V_25C": 0,
+    "timing__hold__tns__corner:nom_typ_1p20V_25C": 0,
+    "timing__setup_vio__count__corner:nom_typ_1p20V_25C": 0,
+    "timing__hold_vio__count__corner:nom_typ_1p20V_25C": 0,
+    "design__max_slew_violation__count__corner:nom_typ_1p20V_25C": 0,
+    "design__max_cap_violation__count__corner:nom_typ_1p20V_25C": 0,
+    "design__max_fanout_violation__count__corner:nom_typ_1p20V_25C": 4,
+    "timing__unannotated_net_filtered__count__corner:nom_typ_1p20V_25C": 0,
+    "timing__setup__ws__corner:nom_fast_1p32V_m40C": 9.395180011011192,
+    "timing__hold__ws__corner:nom_fast_1p32V_m40C": 0.0122852842487437,
+    "timing__setup__tns__corner:nom_fast_1p32V_m40C": 0,
+    "timing__hold__tns__corner:nom_fast_1p32V_m40C": 0,
+    "timing__setup_vio__count__corner:nom_fast_1p32V_m40C": 0,
+    "timing__hold_vio__count__corner:nom_fast_1p32V_m40C": 0,
+    "design__max_slew_violation__count__corner:nom_fast_1p32V_m40C": 0,
+    "design__max_cap_violation__count__corner:nom_fast_1p32V_m40C": 0,
+    "design__max_fanout_violation__count__corner:nom_fast_1p32V_m40C": 4,
+    "timing__unannotated_net_filtered__count__corner:nom_fast_1p32V_m40C": 0,
+    "design__instance__area__stdcell": 380966,
+    "design__instance__utilization__stdcell": 0.315324,
+    "design__inferred_latch__count": 0,
+    "design__instance_unmapped__count": 0,
+    "synthesis__check_error__count": 0
+  },
+  "strict_failures": [
+    "design__max_fanout_violation__count__corner:nom_slow_1p08V_125C: 4 outside [0, 0]",
+    "design__max_fanout_violation__count__corner:nom_typ_1p20V_25C: 4 outside [0, 0]",
+    "design__max_fanout_violation__count__corner:nom_fast_1p32V_m40C: 4 outside [0, 0]"
+  ],
+  "reused_replay": "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/data_incremental_tail_20261028/incremental_last_fanout-01/replay/manifest.json",
+  "replay_reuse_basis": "NL/SDC/ODB/DEF byte-identical; SPEF differs only in DATE; same verified six libraries; nine reference sessions validated. This is a rejected-route reproduction, not final qualification.",
+  "replay_manifest_sha256": "022ad37bb370994c07093ebe05c1f2bf05b2277964ce12d5a9467f67c63cccc4",
+  "sha256": {
+    "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/production_candidate_20261028_02/run/68-openroad-stapostpnr/state_out.json": "1908c10614caecca0347c3660f4f5a2ad06ce0cec022a3b8b959e68a8a1fb81e",
+    "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/data_incremental_tail_20261028/incremental_last_fanout-01/run/13-openroad-stapostpnr/state_out.json": "c0fdfb2f4af76593f8edf71e798d48fc24b1717d4ca23ad2c81f1eaa985dbdfb",
+    "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/docs/timing/20261027-cone-diagnosis/record_clean_reproduction.py": "0087e8340e54c31dfafea340b56a906dc5f65de6447cb9525cea096ef3a9c2ce",
+    "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/production_candidate_20261028_02/run/resolved.json": "62570a31036a5dd36f82d002d4c05c51074686efbbf5e73474bc03585bf287a0"
+  }
+}

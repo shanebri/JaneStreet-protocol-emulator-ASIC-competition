@@ -1,0 +1,102 @@
+"""Exact comparison, fixed-endpoint diagnostics and compact invocation snapshots."""
+import hashlib
+import json
+import os
+from pathlib import Path
+import re
+import shutil
+import subprocess
+import sys
+
+repo=Path('/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition')
+root=repo/'test/sim_build/data_critical_path_20261027'
+evidence=repo/'docs/timing/20261027-data-critical-path'
+tool=repo/'tools/timing'
+sys.path.insert(0,str(tool))
+from collect_implementation import path_summary
+from replay import slack
+
+def sha(path):
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+command=[sys.executable,str(tool/'summarize_data_eco.py'),'--suite','critical_path',
+    '--root',str(root),'--evidence',str(evidence),'--reference-metrics',
+    str(repo/'docs/timing/20261026-clock-factors/clock_split8-01/sta/metrics.json')]
+with (evidence/'comparison_validation.log').open('x') as log:
+    subprocess.run(command,stdout=log,stderr=subprocess.STDOUT,check=True)
+result=json.loads((evidence/'comparison.json').read_text())
+prior=json.loads((repo/'docs/timing/20261027-data-integration/comparison.json').read_text())
+control=result['rows'][0]
+prior_control=next(row for row in prior['rows'] if row['trial']==control['trial'])
+keys=('setup_ws_ns','setup_tns_ns','setup_endpoints','slow_slew','fanout','cap','hold_ws_ns','filtered_gaps')
+reproduction=dict(matched_inputs=prior['matched_inputs']==result['matched_inputs'],
+    metrics_exactly_reproduced=all(control[k]==prior_control[k] for k in keys),
+    prior_comparison_sha256=sha(repo/'docs/timing/20261027-data-integration/comparison.json'),
+    fresh_control=control['attempt'],prior_attempt=prior_control['attempt'])
+if not reproduction['matched_inputs']:
+    raise ValueError('Fresh control no longer uses the original prepared input')
+(evidence/'control_reproduction.json').write_text(json.dumps(reproduction,indent=2)+'\n')
+best=next((row for row in result['rows'] if row['trial']==result['best_valid_candidate']),None)
+fixed_target='_31996_/D'
+queries=[(row,fixed_target) for row in result['rows']]
+if best and result['candidate_setup_improves_control']:
+    new_target=best['critical_path']['endpoint'].split()[0]+'/D'
+    if new_target!=fixed_target:
+        queries.extend((row,new_target) for row in result['rows'])
+corner='nom_slow_1p08V_125C'
+diagnostics=[]
+for row,target in queries:
+    trial=root/row['attempt']
+    out=evidence/row['attempt']/'directed'/target.replace('/','_')
+    out.mkdir(parents=True,exist_ok=False)
+    original=json.loads((evidence/row['attempt']/'sta/replay_manifest.json').read_text())
+    hashes={path:sha(path) for path in original['sha256']}
+    if hashes!=original['sha256']:
+        raise ValueError('Directed diagnostic no longer matches replay inputs')
+    env=dict(os.environ,PIO_TIMING_RUN=str(trial/'replay-input'),
+        PDK_ROOT='/home/shane/eda/pdk-2bbec755',PIO_TIMING_CORNER=corner,
+        PIO_TIMING_MODE='baseline',PIO_TIMING_OUT=str(out),PIO_TIMING_TARGET=target)
+    sta_command=['sta','-exit',str(tool/'report_io_paths.tcl')]
+    with (out/'sta.log').open('x') as log:
+        completed=subprocess.run(sta_command,env=env,stdout=log,stderr=subprocess.STDOUT)
+    contents=(out/'sta.log').read_text()
+    if completed.returncode or re.search(
+        r'(?im)^\s*(?:error\b|\[ERROR\])|^.*(?:unresolved|not linked|no liberty cell|does not have a model|not found).*$',contents):
+        raise ValueError('Directed STA failed: '+row['trial'])
+    if (out/'coverage.rpt').read_text().strip():
+        raise ValueError('Directed STA has coverage issues: '+row['trial'])
+    if abs(slack(out/'worst_setup.rpt')-row['setup_ws_ns'])>0.001:
+        raise ValueError('Directed global setup disagrees with extracted state')
+    if abs(slack(out/'worst_hold.rpt')-row['hold_ws_ns'][corner])>0.001:
+        raise ValueError('Directed global hold disagrees with extracted state')
+    setup=path_summary((out/'target_max.rpt').read_text())
+    hold=path_summary((out/'target_min.rpt').read_text())
+    if setup['endpoint'].split()[0]!=target.split('/')[0] or hold['endpoint'].split()[0]!=target.split('/')[0]:
+        raise ValueError('Directed endpoint mismatch')
+    if best and row['trial']==best['trial'] and target==best['critical_path']['endpoint'].split()[0]+'/D':
+        if abs(setup['slack_ns']-row['setup_ws_ns'])>0.001:
+            raise ValueError('Selected endpoint does not reproduce the best candidate global slack')
+    diagnostic=dict(trial=row['trial'],target=target,corner=corner,mode='baseline',status='complete',
+        setup=setup,hold=hold,command=sta_command,screen_valid=row['screen_valid'],
+        environment={k:v for k,v in env.items() if k.startswith('PIO_TIMING_') or k=='PDK_ROOT'},
+        sha256=hashes,strict_gate_pass=row['strict_gate_pass'])
+    (out/'manifest.json').write_text(json.dumps(diagnostic,indent=2)+'\n')
+    diagnostics.append(diagnostic)
+    for path in out.glob('*.rpt'):
+        if path.name.startswith(('input_','output_','registers_','reset_')):
+            path.unlink()
+    print(row['trial'],target,'setup',setup['slack_ns'],'hold',hold['slack_ns'],flush=True)
+(evidence/'directed_endpoint_comparison.json').write_text(json.dumps(dict(
+    status='complete',fixed_target=fixed_target,best_valid_candidate=result['best_valid_candidate'],
+    qualification='directed slow baseline diagnostics; separate from the 27-session replay matrix',
+    sessions=diagnostics),indent=2)+'\n')
+snapshots=evidence/'runners'; snapshots.mkdir(exist_ok=True)
+for name in ('data_eco_trial.py','data_eco_suite.py','audit_data_eco.py','summarize_data_eco.py',
+             'closure_collect.py','check_signoff.py','audit_clock_tree.py','replay.py','report_io_paths.tcl'):
+    shutil.copy2(tool/name,snapshots/(name+'.snapshot'))
+shutil.copy2(repo/'test/test_timing_tools.py',snapshots/'test_timing_tools.py.snapshot')
+shutil.copy2(__file__,snapshots/'finalize_critical_path.py.snapshot')
+for name in ('run_suite_detached.sh','scheduler.py','suite_selection.json','suite_state.json'):
+    shutil.copy2(root/name,evidence/name)
+shutil.copy2(repo/'test/sim_build/data_eco_20261027/input/preparation.json',evidence/'preparation.json')
+print('Three-case comparison and',len(diagnostics),'directed endpoint diagnostics complete',flush=True)

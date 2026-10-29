@@ -11,11 +11,11 @@ from audit_nor_trial import audit_models
 
 def audit(before,after,operations):
     old,ports,nets,loads,_=before
-    new,new_ports,new_nets,_,_=after
+    new,new_ports,new_nets,new_loads,_=after
     if not old.keys()<=new.keys() or ports!=new_ports or not nets<=new_nets:
         raise ValueError('Removed logic/nets or changed ports')
     replacements={o['instance']:(o['old'],o['new']) for o in operations if o['kind']=='size'}
-    roots=[]; expected=0; target_counts={}
+    roots=[]; expected=0; target_counts={}; expected_groups=[]
     for op in operations:
         if op['kind']!='buffer':
             continue
@@ -30,12 +30,17 @@ def audit(before,after,operations):
         if any(pin=='CLK' for _,pin in loads[net]):
             raise ValueError('Data buffer targets a clock')
         count=len(loads[net])
+        if net in roots or count < 1 or op['max_loads'] < 1:
+            raise ValueError('Duplicate buffer source or invalid load group')
         target_counts[target]=count
         roots.append(net); expected+=math.ceil(count/op['max_loads'])
+        sinks=sorted(loads[net],key=lambda sink: '/'.join(sink))
+        expected_groups.extend((net,tuple(sinks[i:i+op['max_loads']]))
+                               for i in range(0,count,op['max_loads']))
     added=sorted(new.keys()-old.keys())
     if len(added)!=expected:
         raise ValueError(f'Expected {expected} added buffers, got {len(added)}')
-    aliases={}
+    aliases={}; actual_groups=[]
     for name in added:
         master,pins=new[name]
         if not name.startswith('eco_data_') or master!='sg13cmos5l_buf_4' or set(pins)!={'A','X'}:
@@ -43,6 +48,10 @@ def audit(before,after,operations):
         if pins['X'] in aliases or pins['A'] not in roots:
             raise ValueError('Unexpected buffer driver or source')
         aliases[pins['X']]=pins['A']
+        actual_groups.append((pins['A'],tuple(sorted(new_loads.get(pins['X'],[]),
+                                                   key=lambda sink: '/'.join(sink)))))
+    if sorted(actual_groups)!=sorted(expected_groups):
+        raise ValueError('Buffer sink groups differ from the declared deterministic recipe')
     if new_nets-nets!=aliases.keys():
         raise ValueError('Unexpected new nets')
     for name,(master,pins) in old.items():

@@ -97,6 +97,14 @@ if {$target_name eq "none"} { set target_name "" }
 if {$mode eq "baseline" && $target_name ne ""} {
     set target [get_pins -quiet $target_name]
     if {[llength $target] != 1} { error "Mapped target pin missing: $target_name" }
+    # All startpoints expose the actual data cone at the rediscovered endpoint.
+    # Reset-only reports below remain separate diagnostics.
+    foreach delay {max min} {
+        report_checks -to $target -path_delay $delay -sort_by_slack \
+            -group_path_count 5 -endpoint_path_count 5 \
+            -fields {slew cap input net fanout} -format full_clock_expanded \
+            > [file join $out_dir target_${delay}.rpt]
+    }
     foreach edge {rise fall} {
         report_checks -${edge}_from [get_ports rst_n] -to $target \
             -path_delay max -group_path_count 5 -endpoint_path_count 5 \

@@ -1,0 +1,61 @@
+{
+  "status": "complete",
+  "branch": "codex/timing-connectivity-electrical",
+  "parent": "9ad7f06",
+  "scope": "five independent cumulative full-reroute screens from the same prepared input",
+  "selection": {
+    "suite": "integration",
+    "cases": [
+      "control",
+      "critical_buffer",
+      "critical_buffer_fanout_32071",
+      "critical_buffer_fanout_32071_16949",
+      "critical_buffer_fanout_32071_16949_slew_29030"
+    ],
+    "base": "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/clock_factors/clock_split8-01",
+    "prepared": "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/data_eco_20261027/input",
+    "jobs": 4,
+    "threads_per_case": 8
+  },
+  "attempts": [
+    "control-01",
+    "critical_buffer-01",
+    "critical_buffer_fanout_32071-01",
+    "critical_buffer_fanout_32071_16949-01",
+    "critical_buffer_fanout_32071_16949_slew_29030-01"
+  ],
+  "matched_inputs": {
+    "input_state_sha256": "96addb7768e663266fbe373d9d563d243a8096e722ee15f47d3b08d8c6e8c9f4",
+    "input_views_sha256": {
+      "odb": "bdc1e924ec24a8c92ee816531dc4b92892b7c12d1ff22483ee75b89b9d4c753a",
+      "def": "eba478657bc3e8198bfabc91e359f2a41c79fbd1efa1321a12f7fc7274704dfa",
+      "nl": "528a9fc5b85875072f3ae5908906517f7b73fc33483c4dc565c5f1bb8ff97353",
+      "sdc": "7088ce29adb0f7213b0f3ed4b76177f104819061b87b32bf4f166ff50e055d59"
+    },
+    "execution_overrides": {
+      "OPENROAD_THREADS": 8
+    }
+  },
+  "replay_sessions": 45,
+  "directed_endpoint_sessions": 3,
+  "strict_signoff_passes": 0,
+  "best_valid_combination": "critical_buffer_fanout_32071",
+  "tool_tests": 46,
+  "production_source_sha256": {
+    "src/config.json": "c99139cd2047b5fd7b6328faf86210676568997baf94db6fd0cfdd71e8b35cde",
+    "src/execution_unit.sv": "dbf598d1b82c94c65261e372c2386e70905a187d3e8662d9715d86cfb8ad90ac",
+    "src/frontend/decoder.sv": "0c3cc5b807c5028959599d70f8ace0b10e3d79f840efdc82a04febcfc723ce7f",
+    "src/frontend/instruction_fetch.sv": "e4a85b9018d5c6d91fef936442e13d0835012e5121b6bd0bb5ee5028a79eb47c",
+    "src/frontend/pc.sv": "ea9f1bc1e4040ae8f3c2edb5249cc219c547b7a85ea5bed57688f6b4a12192f3",
+    "src/host_interface.sv": "c94f32f5358b9b61feaae0d0478f3f20cb768f617c244b1ca67becef14c152bc",
+    "src/pio_fifo.sv": "a39d186a08ed1f4dfafadcc575e200b418116915f84149e4a4824ac1962b9a55",
+    "src/pio_gpio_owner.sv": "629b0060c8c72c76a995a2dd47eacff7790b1ff104c6e614cd2c94bf839b418b",
+    "src/pio_host_bank.sv": "1da7a525ac3f359e22ec8641e0dd12cc614bec9235c06b9fbe9d478d22601953",
+    "src/pio_inputs.sv": "3a2bb4f6757622edb840a33ac30ae868bb3f9f042cca8242bf3a5bee6b799077",
+    "src/pio_pads.sv": "a11b6234e54f3307bba31651bb5973ddcf50e7ceb8946fdbd8ad243d1fb0b043",
+    "src/pio_subsystem.sv": "6dee88733d78885456185615bfb84106e13985b6cccce38791fc24b665b58b81",
+    "src/project.sv": "211f39f898da0fccd91becf85eaafcce0e43e5ac144178ec2597252e1e94f63c",
+    "src/protocol_core.sv": "5b7f4252229140951d7f67c4384b24cd2c05c0fb3d1a4d75b967c22afb65b453"
+  },
+  "qualification": "No implementation adopted; strict signoff and full fabrication qualification remain open"
+}

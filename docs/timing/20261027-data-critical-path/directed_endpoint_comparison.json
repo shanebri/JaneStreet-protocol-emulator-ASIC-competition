@@ -1,0 +1,272 @@
+{
+  "status": "complete",
+  "fixed_target": "_31996_/D",
+  "best_valid_candidate": "critical_buffer_fanout_32071_buf_17250",
+  "qualification": "directed slow baseline diagnostics; separate from the 27-session replay matrix",
+  "sessions": [
+    {
+      "trial": "critical_buffer_fanout_32071",
+      "target": "_31996_/D",
+      "corner": "nom_slow_1p08V_125C",
+      "mode": "baseline",
+      "status": "complete",
+      "setup": {
+        "startpoint": "ui_in[1] (input port clocked by clk)",
+        "endpoint": "_31996_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": -0.680044
+      },
+      "hold": {
+        "startpoint": "_31996_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "_31996_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 1.184617
+      },
+      "command": [
+        "sta",
+        "-exit",
+        "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/tools/timing/report_io_paths.tcl"
+      ],
+      "screen_valid": true,
+      "environment": {
+        "PIO_TIMING_RUN": "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/data_critical_path_20261027/critical_buffer_fanout_32071-01/replay-input",
+        "PDK_ROOT": "/home/shane/eda/pdk-2bbec755",
+        "PIO_TIMING_CORNER": "nom_slow_1p08V_125C",
+        "PIO_TIMING_MODE": "baseline",
+        "PIO_TIMING_OUT": "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/docs/timing/20261027-data-critical-path/critical_buffer_fanout_32071-01/directed/_31996__D",
+        "PIO_TIMING_TARGET": "_31996_/D"
+      },
+      "sha256": {
+        "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/data_critical_path_20261027/critical_buffer_fanout_32071-01/replay-input/input-openroad-fillinsertion/tt_um_shanebri_top.nl.v": "3d107bc387753b3560fc9639296832419fc5b483210688455c022d492b99bf69",
+        "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/data_critical_path_20261027/critical_buffer_fanout_32071-01/replay-input/output-openroad-rcx/nom/tt_um_shanebri_top.nom.spef": "ef57b953a73deb9ff03a4dcc9b61ed347cd96a5658be625801b892777f6b0cf6",
+        "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/data_critical_path_20261027/critical_buffer_fanout_32071-01/replay-input/final/sdc/tt_um_shanebri_top.sdc": "7088ce29adb0f7213b0f3ed4b76177f104819061b87b32bf4f166ff50e055d59",
+        "/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_stdcell/lib/sg13cmos5l_stdcell_slow_1p08V_125C.lib": "3ee222c580ba33acb2131ac2bf224ff8ee9700751835b73aaec72b670bb31d3c",
+        "/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_io/lib/sg13cmos5l_io_slow_1p08V_3p0V_125C.lib": "0dbb628168f9855eb88aee0d557da25c4cefb8c6b727a496fa2a02fd40da5cdb",
+        "/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_stdcell/lib/sg13cmos5l_stdcell_typ_1p20V_25C.lib": "34163f3e7de9f854afac57332ba06f1739b78e7ac35660a8a5ddd39c570124ad",
+        "/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_io/lib/sg13cmos5l_io_typ_1p2V_3p3V_25C.lib": "e6b5adf1ce31db3a0c15e5ca069c62e7d9efb604a710b8f6582700f1721d2d98",
+        "/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_stdcell/lib/sg13cmos5l_stdcell_fast_1p32V_m40C.lib": "af12d75a72d19648fa690027d29843fbae550aa91f4e40dd3339c7116d6e425d",
+        "/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_io/lib/sg13cmos5l_io_fast_1p32V_3p6V_m40C.lib": "f25da27e4cc0c94ffbce99e0654814a3af48d00c4ec571c9db5915208a7bbe07",
+        "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/tools/timing/report_io_paths.tcl": "fc6af6ad170274bac9e6f5cb2b2a47f9e8de30708f2090a714f0d12efc367a2f"
+      },
+      "strict_gate_pass": false
+    },
+    {
+      "trial": "critical_buffer_fanout_32071_buf_28923",
+      "target": "_31996_/D",
+      "corner": "nom_slow_1p08V_125C",
+      "mode": "baseline",
+      "status": "complete",
+      "setup": {
+        "startpoint": "ui_in[1] (input port clocked by clk)",
+        "endpoint": "_31996_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": -0.790418
+      },
+      "hold": {
+        "startpoint": "_31996_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "_31996_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 1.184378
+      },
+      "command": [
+        "sta",
+        "-exit",
+        "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/tools/timing/report_io_paths.tcl"
+      ],
+      "screen_valid": true,
+      "environment": {
+        "PIO_TIMING_RUN": "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/data_critical_path_20261027/critical_buffer_fanout_32071_buf_28923-01/replay-input",
+        "PDK_ROOT": "/home/shane/eda/pdk-2bbec755",
+        "PIO_TIMING_CORNER": "nom_slow_1p08V_125C",
+        "PIO_TIMING_MODE": "baseline",
+        "PIO_TIMING_OUT": "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/docs/timing/20261027-data-critical-path/critical_buffer_fanout_32071_buf_28923-01/directed/_31996__D",
+        "PIO_TIMING_TARGET": "_31996_/D"
+      },
+      "sha256": {
+        "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/data_critical_path_20261027/critical_buffer_fanout_32071_buf_28923-01/replay-input/input-openroad-fillinsertion/tt_um_shanebri_top.nl.v": "91a327116b98bec75ba27ec112e031808be0f994e5dc69aea5cdc591fb9e9d2d",
+        "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/data_critical_path_20261027/critical_buffer_fanout_32071_buf_28923-01/replay-input/output-openroad-rcx/nom/tt_um_shanebri_top.nom.spef": "a15908c1c2b62fbb1a62ff225c48ab37f39dccc049ef354527f4684d9e4cb387",
+        "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/data_critical_path_20261027/critical_buffer_fanout_32071_buf_28923-01/replay-input/final/sdc/tt_um_shanebri_top.sdc": "7088ce29adb0f7213b0f3ed4b76177f104819061b87b32bf4f166ff50e055d59",
+        "/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_stdcell/lib/sg13cmos5l_stdcell_slow_1p08V_125C.lib": "3ee222c580ba33acb2131ac2bf224ff8ee9700751835b73aaec72b670bb31d3c",
+        "/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_io/lib/sg13cmos5l_io_slow_1p08V_3p0V_125C.lib": "0dbb628168f9855eb88aee0d557da25c4cefb8c6b727a496fa2a02fd40da5cdb",
+        "/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_stdcell/lib/sg13cmos5l_stdcell_typ_1p20V_25C.lib": "34163f3e7de9f854afac57332ba06f1739b78e7ac35660a8a5ddd39c570124ad",
+        "/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_io/lib/sg13cmos5l_io_typ_1p2V_3p3V_25C.lib": "e6b5adf1ce31db3a0c15e5ca069c62e7d9efb604a710b8f6582700f1721d2d98",
+        "/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_stdcell/lib/sg13cmos5l_stdcell_fast_1p32V_m40C.lib": "af12d75a72d19648fa690027d29843fbae550aa91f4e40dd3339c7116d6e425d",
+        "/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_io/lib/sg13cmos5l_io_fast_1p32V_3p6V_m40C.lib": "f25da27e4cc0c94ffbce99e0654814a3af48d00c4ec571c9db5915208a7bbe07",
+        "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/tools/timing/report_io_paths.tcl": "fc6af6ad170274bac9e6f5cb2b2a47f9e8de30708f2090a714f0d12efc367a2f"
+      },
+      "strict_gate_pass": false
+    },
+    {
+      "trial": "critical_buffer_fanout_32071_buf_17250",
+      "target": "_31996_/D",
+      "corner": "nom_slow_1p08V_125C",
+      "mode": "baseline",
+      "status": "complete",
+      "setup": {
+        "startpoint": "ui_in[1] (input port clocked by clk)",
+        "endpoint": "_31996_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": -0.657293
+      },
+      "hold": {
+        "startpoint": "_31922_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "_31996_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 0.702103
+      },
+      "command": [
+        "sta",
+        "-exit",
+        "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/tools/timing/report_io_paths.tcl"
+      ],
+      "screen_valid": true,
+      "environment": {
+        "PIO_TIMING_RUN": "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/data_critical_path_20261027/critical_buffer_fanout_32071_buf_17250-01/replay-input",
+        "PDK_ROOT": "/home/shane/eda/pdk-2bbec755",
+        "PIO_TIMING_CORNER": "nom_slow_1p08V_125C",
+        "PIO_TIMING_MODE": "baseline",
+        "PIO_TIMING_OUT": "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/docs/timing/20261027-data-critical-path/critical_buffer_fanout_32071_buf_17250-01/directed/_31996__D",
+        "PIO_TIMING_TARGET": "_31996_/D"
+      },
+      "sha256": {
+        "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/data_critical_path_20261027/critical_buffer_fanout_32071_buf_17250-01/replay-input/input-openroad-fillinsertion/tt_um_shanebri_top.nl.v": "3f177aaca42e1ef636952250015e0f603d62d254bbf578b74b58458804dd467b",
+        "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/data_critical_path_20261027/critical_buffer_fanout_32071_buf_17250-01/replay-input/output-openroad-rcx/nom/tt_um_shanebri_top.nom.spef": "f9839bae00a9a6ce2bb231ea7bc46076e896478c5c5526afeb207c9cdc323d7a",
+        "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/data_critical_path_20261027/critical_buffer_fanout_32071_buf_17250-01/replay-input/final/sdc/tt_um_shanebri_top.sdc": "7088ce29adb0f7213b0f3ed4b76177f104819061b87b32bf4f166ff50e055d59",
+        "/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_stdcell/lib/sg13cmos5l_stdcell_slow_1p08V_125C.lib": "3ee222c580ba33acb2131ac2bf224ff8ee9700751835b73aaec72b670bb31d3c",
+        "/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_io/lib/sg13cmos5l_io_slow_1p08V_3p0V_125C.lib": "0dbb628168f9855eb88aee0d557da25c4cefb8c6b727a496fa2a02fd40da5cdb",
+        "/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_stdcell/lib/sg13cmos5l_stdcell_typ_1p20V_25C.lib": "34163f3e7de9f854afac57332ba06f1739b78e7ac35660a8a5ddd39c570124ad",
+        "/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_io/lib/sg13cmos5l_io_typ_1p2V_3p3V_25C.lib": "e6b5adf1ce31db3a0c15e5ca069c62e7d9efb604a710b8f6582700f1721d2d98",
+        "/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_stdcell/lib/sg13cmos5l_stdcell_fast_1p32V_m40C.lib": "af12d75a72d19648fa690027d29843fbae550aa91f4e40dd3339c7116d6e425d",
+        "/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_io/lib/sg13cmos5l_io_fast_1p32V_3p6V_m40C.lib": "f25da27e4cc0c94ffbce99e0654814a3af48d00c4ec571c9db5915208a7bbe07",
+        "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/tools/timing/report_io_paths.tcl": "fc6af6ad170274bac9e6f5cb2b2a47f9e8de30708f2090a714f0d12efc367a2f"
+      },
+      "strict_gate_pass": false
+    },
+    {
+      "trial": "critical_buffer_fanout_32071",
+      "target": "_31995_/D",
+      "corner": "nom_slow_1p08V_125C",
+      "mode": "baseline",
+      "status": "complete",
+      "setup": {
+        "startpoint": "ui_in[1] (input port clocked by clk)",
+        "endpoint": "_31995_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": -0.640473
+      },
+      "hold": {
+        "startpoint": "_31995_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "_31995_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 1.131886
+      },
+      "command": [
+        "sta",
+        "-exit",
+        "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/tools/timing/report_io_paths.tcl"
+      ],
+      "screen_valid": true,
+      "environment": {
+        "PIO_TIMING_RUN": "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/data_critical_path_20261027/critical_buffer_fanout_32071-01/replay-input",
+        "PDK_ROOT": "/home/shane/eda/pdk-2bbec755",
+        "PIO_TIMING_CORNER": "nom_slow_1p08V_125C",
+        "PIO_TIMING_MODE": "baseline",
+        "PIO_TIMING_OUT": "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/docs/timing/20261027-data-critical-path/critical_buffer_fanout_32071-01/directed/_31995__D",
+        "PIO_TIMING_TARGET": "_31995_/D"
+      },
+      "sha256": {
+        "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/data_critical_path_20261027/critical_buffer_fanout_32071-01/replay-input/input-openroad-fillinsertion/tt_um_shanebri_top.nl.v": "3d107bc387753b3560fc9639296832419fc5b483210688455c022d492b99bf69",
+        "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/data_critical_path_20261027/critical_buffer_fanout_32071-01/replay-input/output-openroad-rcx/nom/tt_um_shanebri_top.nom.spef": "ef57b953a73deb9ff03a4dcc9b61ed347cd96a5658be625801b892777f6b0cf6",
+        "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/data_critical_path_20261027/critical_buffer_fanout_32071-01/replay-input/final/sdc/tt_um_shanebri_top.sdc": "7088ce29adb0f7213b0f3ed4b76177f104819061b87b32bf4f166ff50e055d59",
+        "/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_stdcell/lib/sg13cmos5l_stdcell_slow_1p08V_125C.lib": "3ee222c580ba33acb2131ac2bf224ff8ee9700751835b73aaec72b670bb31d3c",
+        "/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_io/lib/sg13cmos5l_io_slow_1p08V_3p0V_125C.lib": "0dbb628168f9855eb88aee0d557da25c4cefb8c6b727a496fa2a02fd40da5cdb",
+        "/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_stdcell/lib/sg13cmos5l_stdcell_typ_1p20V_25C.lib": "34163f3e7de9f854afac57332ba06f1739b78e7ac35660a8a5ddd39c570124ad",
+        "/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_io/lib/sg13cmos5l_io_typ_1p2V_3p3V_25C.lib": "e6b5adf1ce31db3a0c15e5ca069c62e7d9efb604a710b8f6582700f1721d2d98",
+        "/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_stdcell/lib/sg13cmos5l_stdcell_fast_1p32V_m40C.lib": "af12d75a72d19648fa690027d29843fbae550aa91f4e40dd3339c7116d6e425d",
+        "/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_io/lib/sg13cmos5l_io_fast_1p32V_3p6V_m40C.lib": "f25da27e4cc0c94ffbce99e0654814a3af48d00c4ec571c9db5915208a7bbe07",
+        "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/tools/timing/report_io_paths.tcl": "fc6af6ad170274bac9e6f5cb2b2a47f9e8de30708f2090a714f0d12efc367a2f"
+      },
+      "strict_gate_pass": false
+    },
+    {
+      "trial": "critical_buffer_fanout_32071_buf_28923",
+      "target": "_31995_/D",
+      "corner": "nom_slow_1p08V_125C",
+      "mode": "baseline",
+      "status": "complete",
+      "setup": {
+        "startpoint": "ui_in[1] (input port clocked by clk)",
+        "endpoint": "_31995_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": -0.931022
+      },
+      "hold": {
+        "startpoint": "_31995_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "_31995_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 1.125107
+      },
+      "command": [
+        "sta",
+        "-exit",
+        "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/tools/timing/report_io_paths.tcl"
+      ],
+      "screen_valid": true,
+      "environment": {
+        "PIO_TIMING_RUN": "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/data_critical_path_20261027/critical_buffer_fanout_32071_buf_28923-01/replay-input",
+        "PDK_ROOT": "/home/shane/eda/pdk-2bbec755",
+        "PIO_TIMING_CORNER": "nom_slow_1p08V_125C",
+        "PIO_TIMING_MODE": "baseline",
+        "PIO_TIMING_OUT": "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/docs/timing/20261027-data-critical-path/critical_buffer_fanout_32071_buf_28923-01/directed/_31995__D",
+        "PIO_TIMING_TARGET": "_31995_/D"
+      },
+      "sha256": {
+        "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/data_critical_path_20261027/critical_buffer_fanout_32071_buf_28923-01/replay-input/input-openroad-fillinsertion/tt_um_shanebri_top.nl.v": "91a327116b98bec75ba27ec112e031808be0f994e5dc69aea5cdc591fb9e9d2d",
+        "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/data_critical_path_20261027/critical_buffer_fanout_32071_buf_28923-01/replay-input/output-openroad-rcx/nom/tt_um_shanebri_top.nom.spef": "a15908c1c2b62fbb1a62ff225c48ab37f39dccc049ef354527f4684d9e4cb387",
+        "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/data_critical_path_20261027/critical_buffer_fanout_32071_buf_28923-01/replay-input/final/sdc/tt_um_shanebri_top.sdc": "7088ce29adb0f7213b0f3ed4b76177f104819061b87b32bf4f166ff50e055d59",
+        "/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_stdcell/lib/sg13cmos5l_stdcell_slow_1p08V_125C.lib": "3ee222c580ba33acb2131ac2bf224ff8ee9700751835b73aaec72b670bb31d3c",
+        "/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_io/lib/sg13cmos5l_io_slow_1p08V_3p0V_125C.lib": "0dbb628168f9855eb88aee0d557da25c4cefb8c6b727a496fa2a02fd40da5cdb",
+        "/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_stdcell/lib/sg13cmos5l_stdcell_typ_1p20V_25C.lib": "34163f3e7de9f854afac57332ba06f1739b78e7ac35660a8a5ddd39c570124ad",
+        "/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_io/lib/sg13cmos5l_io_typ_1p2V_3p3V_25C.lib": "e6b5adf1ce31db3a0c15e5ca069c62e7d9efb604a710b8f6582700f1721d2d98",
+        "/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_stdcell/lib/sg13cmos5l_stdcell_fast_1p32V_m40C.lib": "af12d75a72d19648fa690027d29843fbae550aa91f4e40dd3339c7116d6e425d",
+        "/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_io/lib/sg13cmos5l_io_fast_1p32V_3p6V_m40C.lib": "f25da27e4cc0c94ffbce99e0654814a3af48d00c4ec571c9db5915208a7bbe07",
+        "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/tools/timing/report_io_paths.tcl": "fc6af6ad170274bac9e6f5cb2b2a47f9e8de30708f2090a714f0d12efc367a2f"
+      },
+      "strict_gate_pass": false
+    },
+    {
+      "trial": "critical_buffer_fanout_32071_buf_17250",
+      "target": "_31995_/D",
+      "corner": "nom_slow_1p08V_125C",
+      "mode": "baseline",
+      "status": "complete",
+      "setup": {
+        "startpoint": "ui_in[1] (input port clocked by clk)",
+        "endpoint": "_31995_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": -0.679805
+      },
+      "hold": {
+        "startpoint": "_31922_ (rising edge-triggered flip-flop clocked by clk)",
+        "endpoint": "_31995_ (rising edge-triggered flip-flop clocked by clk)",
+        "slack_ns": 0.711676
+      },
+      "command": [
+        "sta",
+        "-exit",
+        "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/tools/timing/report_io_paths.tcl"
+      ],
+      "screen_valid": true,
+      "environment": {
+        "PIO_TIMING_RUN": "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/data_critical_path_20261027/critical_buffer_fanout_32071_buf_17250-01/replay-input",
+        "PDK_ROOT": "/home/shane/eda/pdk-2bbec755",
+        "PIO_TIMING_CORNER": "nom_slow_1p08V_125C",
+        "PIO_TIMING_MODE": "baseline",
+        "PIO_TIMING_OUT": "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/docs/timing/20261027-data-critical-path/critical_buffer_fanout_32071_buf_17250-01/directed/_31995__D",
+        "PIO_TIMING_TARGET": "_31995_/D"
+      },
+      "sha256": {
+        "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/data_critical_path_20261027/critical_buffer_fanout_32071_buf_17250-01/replay-input/input-openroad-fillinsertion/tt_um_shanebri_top.nl.v": "3f177aaca42e1ef636952250015e0f603d62d254bbf578b74b58458804dd467b",
+        "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/data_critical_path_20261027/critical_buffer_fanout_32071_buf_17250-01/replay-input/output-openroad-rcx/nom/tt_um_shanebri_top.nom.spef": "f9839bae00a9a6ce2bb231ea7bc46076e896478c5c5526afeb207c9cdc323d7a",
+        "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/data_critical_path_20261027/critical_buffer_fanout_32071_buf_17250-01/replay-input/final/sdc/tt_um_shanebri_top.sdc": "7088ce29adb0f7213b0f3ed4b76177f104819061b87b32bf4f166ff50e055d59",
+        "/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_stdcell/lib/sg13cmos5l_stdcell_slow_1p08V_125C.lib": "3ee222c580ba33acb2131ac2bf224ff8ee9700751835b73aaec72b670bb31d3c",
+        "/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_io/lib/sg13cmos5l_io_slow_1p08V_3p0V_125C.lib": "0dbb628168f9855eb88aee0d557da25c4cefb8c6b727a496fa2a02fd40da5cdb",
+        "/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_stdcell/lib/sg13cmos5l_stdcell_typ_1p20V_25C.lib": "34163f3e7de9f854afac57332ba06f1739b78e7ac35660a8a5ddd39c570124ad",
+        "/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_io/lib/sg13cmos5l_io_typ_1p2V_3p3V_25C.lib": "e6b5adf1ce31db3a0c15e5ca069c62e7d9efb604a710b8f6582700f1721d2d98",
+        "/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_stdcell/lib/sg13cmos5l_stdcell_fast_1p32V_m40C.lib": "af12d75a72d19648fa690027d29843fbae550aa91f4e40dd3339c7116d6e425d",
+        "/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_io/lib/sg13cmos5l_io_fast_1p32V_3p6V_m40C.lib": "f25da27e4cc0c94ffbce99e0654814a3af48d00c4ec571c9db5915208a7bbe07",
+        "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/tools/timing/report_io_paths.tcl": "fc6af6ad170274bac9e6f5cb2b2a47f9e8de30708f2090a714f0d12efc367a2f"
+      },
+      "strict_gate_pass": false
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-"""One isolated data ECO per full-reroute screen on frozen post-antenna logic."""
+"""Explicit isolated or cumulative data ECOs on frozen post-antenna logic."""
 import argparse
 import json
 from pathlib import Path
@@ -7,6 +7,27 @@ import sys
 
 from closure_trial import sha, unique, validate_config
 from physical_trial import final_gate, relocate
+
+
+INTEGRATION_CASES = (
+    'control',
+    'critical_buffer',
+    'critical_buffer_fanout_32071',
+    'critical_buffer_fanout_32071_16949',
+    'critical_buffer_fanout_32071_16949_slew_29030',
+)
+CRITICAL_PATH_CASES = (
+    'critical_buffer_fanout_32071',
+    'critical_buffer_fanout_32071_buf_28923',
+    'critical_buffer_fanout_32071_buf_17250',
+)
+UPSTREAM_CASES = ('critical_buffer_fanout_32071', 'critical_buffer_fanout_32071_acceptance_drive')
+BALANCED_CASES = (UPSTREAM_CASES[1], 'critical_buffer_fanout_32071_balanced_acceptance')
+ELECTRICAL_CASES = (BALANCED_CASES[1], 'balanced_acceptance_electrical')
+LOCAL_CASES = (ELECTRICAL_CASES[1], 'electrical_sink_local')
+TAIL_CASES = (LOCAL_CASES[1], 'electrical_fanout_tail')
+READ_CASES = (TAIL_CASES[1], 'read_acceptance_fanout_guard')
+SUITES = ('isolated', 'integration', 'critical_path', 'upstream', 'balanced', 'electrical', 'sink_local', 'fanout_tail', 'read_acceptance')
 
 
 def recipes():
@@ -24,7 +45,80 @@ def recipes():
         old='sg13cmos5l_'+master+'_1'
         result['slew_'+name]=[dict(kind='size',instance='_'+name+'_',old=old,new='sg13cmos5l_'+strong)
                               if strong else dict(kind='buffer',target='_'+name+'_/Y',old=old,max_loads=1000)]
+    cumulative = list(result['critical_buffer'])
+    for name, addition in zip(INTEGRATION_CASES[2:], ('fanout_32071', 'fanout_16949', 'slew_29030')):
+        cumulative = cumulative + result[addition]
+        result[name] = cumulative
+    for name, target in zip(CRITICAL_PATH_CASES[1:], ('_28923_/Y', '_17250_/Y')):
+        result[name] = result[CRITICAL_PATH_CASES[0]] + [dict(
+            kind='buffer', target=target, old='sg13cmos5l_a221oi_1', max_loads=1000)]
+    result[UPSTREAM_CASES[1]] = result[UPSTREAM_CASES[0]] + [
+        dict(kind='size', instance=instance, old='sg13cmos5l_'+gate+'_1', new='sg13cmos5l_'+gate+'_2')
+        for instance, gate in (('_17226_', 'nor3'), ('_17236_', 'and2'), ('_17238_', 'nand2'))]
+    result[BALANCED_CASES[1]] = result[BALANCED_CASES[0]] + [
+        dict(kind='size', instance=instance, old='sg13cmos5l_'+gate+'_1', new='sg13cmos5l_'+gate+'_2')
+        for instance, gate in (('_17227_', 'and2'), ('_17229_', 'nand2'))] + [
+        dict(kind='buffer', target='_17250_/Y', old='sg13cmos5l_a221oi_1', max_loads=1000)]
+    electrical = [dict(kind='size', instance='_'+name+'_', old='sg13cmos5l_'+gate+'_1',
+                       new='sg13cmos5l_'+gate+'_2')
+                  for name,gate in (('19177','nor3'),('23752','nor3'),('23931','nor3'),('28038','nor4'))]
+    electrical += [dict(kind='buffer',target='_'+name+'_/Y',old='sg13cmos5l_'+gate+'_1',max_loads=limit)
+                   for name,gate,limit in (('18133','a221oi',1000),('24358','a221oi',1000),('29030','a22oi',4))]
+    electrical += [dict(kind='buffer',target=target,old=master,max_loads=4) for target,master in (
+        ('uio_in[3]',None),('uio_in[2]',None),('_17026_/Y','sg13cmos5l_inv_1'),
+        ('_16949_/Y','sg13cmos5l_inv_1'),('_33838_/Q','sg13cmos5l_dfrbpq_1'),
+        ('_31543_/Q','sg13cmos5l_dfrbpq_1'),('_32068_/Q','sg13cmos5l_dfrbpq_1'),
+        ('place5417/X','sg13cmos5l_buf_1'))]
+    result[ELECTRICAL_CASES[1]] = result[ELECTRICAL_CASES[0]] + electrical
+    local = [dict(op) for op in result[ELECTRICAL_CASES[1]]]
+    for op in local:
+        if op.get('target') == '_17026_/Y':
+            op.update(max_loads=2, location='sink_centroid')
+    local += [dict(kind='size', instance='_'+name+'_', old='sg13cmos5l_'+gate+'_1',
+                   new='sg13cmos5l_'+gate+'_2') for name,gate in (('23874','nor2'),('24620','nor3'))]
+    local += [dict(kind='buffer', target='_24421_/Y', old='sg13cmos5l_o21ai_1', max_loads=1000)]
+    local += [dict(kind='buffer', target=target, old=master, max_loads=4) for target,master in (
+        ('_26939_/Y','sg13cmos5l_nand2_1'),('_31502_/Q','sg13cmos5l_dfrbpq_1'),
+        ('_32072_/Q','sg13cmos5l_dfrbpq_1'),('place6195/X','sg13cmos5l_buf_1'))]
+    result[LOCAL_CASES[1]] = local
+    result[TAIL_CASES[1]] = local + [dict(kind='buffer',target=target,old=master,max_loads=4)
+        for target,master in (('_17916_/Y','sg13cmos5l_nor2b_1'),('_19177_/Y','sg13cmos5l_nor3_1'),
+                              ('place7144/X','sg13cmos5l_buf_1'),('place5579/X','sg13cmos5l_buf_1'))]
+    guarded = [dict(op) for op in result[TAIL_CASES[1]]]
+    for op in guarded:
+        if op.get('target') == '_17026_/Y':
+            op['max_loads'] = 4
+    guarded += [dict(kind='size',instance='_17710_',old='sg13cmos5l_nand3_1',new='sg13cmos5l_nand3_2')]
+    guarded += [dict(kind='buffer',target=target,old=master,max_loads=4) for target,master in (
+        ('_20787_/Y','sg13cmos5l_nor2_1'),('_31493_/Q','sg13cmos5l_dfrbpq_1'),
+        ('place5511/X','sg13cmos5l_buf_1'),('place6915/X','sg13cmos5l_buf_1'))]
+    result[READ_CASES[1]] = guarded
     return result
+
+
+def suite_recipes(suite):
+    """Select only the declared cases; preserve the historical isolated suite."""
+    all_recipes = recipes()
+    if suite == 'isolated':
+        return {name: ops for name, ops in all_recipes.items()
+                if name not in (*INTEGRATION_CASES[2:], *CRITICAL_PATH_CASES[1:], *UPSTREAM_CASES[1:], *BALANCED_CASES[1:], *ELECTRICAL_CASES[1:], *LOCAL_CASES[1:], *TAIL_CASES[1:], *READ_CASES[1:])}
+    if suite == 'integration':
+        return {name: all_recipes[name] for name in INTEGRATION_CASES}
+    if suite == 'critical_path':
+        return {name: all_recipes[name] for name in CRITICAL_PATH_CASES}
+    if suite == 'upstream':
+        return {name: all_recipes[name] for name in UPSTREAM_CASES}
+    if suite == 'balanced':
+        return {name: all_recipes[name] for name in BALANCED_CASES}
+    if suite == 'electrical':
+        return {name: all_recipes[name] for name in ELECTRICAL_CASES}
+    if suite == 'sink_local':
+        return {name: all_recipes[name] for name in LOCAL_CASES}
+    if suite == 'fanout_tail':
+        return {name: all_recipes[name] for name in TAIL_CASES}
+    if suite == 'read_acceptance':
+        return {name: all_recipes[name] for name in READ_CASES}
+    raise ValueError('Unknown ECO suite: ' + suite)
 
 
 def script(operations):
@@ -32,17 +126,20 @@ def script(operations):
 read_current_odb
 set_propagated_clock [all_clocks]
 '''
+    replaced = {}
     for index,op in enumerate(operations):
         if op['old'] is not None:
             name=op.get('instance',op.get('target','').split('/')[0])
+            expected_master = replaced.get(name, op['old'])
             text+=f'''set inst [$::block findInst {{{name}}}]
 if {{$inst eq "NULL"}} {{ error "Measured driver missing" }}
-if {{[[$inst getMaster] getName] ne "{op['old']}"}} {{ error "Unexpected driver master" }}
+if {{[[$inst getMaster] getName] ne "{expected_master}"}} {{ error "Unexpected driver master" }}
 '''
         if op['kind']=='size':
             text+=f'''replace_cell {{{op['instance']}}} {op['new']}
 if {{[[$inst getMaster] getName] ne "{op['new']}"}} {{ error "Replacement failed" }}
 '''
+            replaced[op['instance']] = op['new']
         else:
             target=op['target']
             if '/' in target:
@@ -71,7 +168,18 @@ puts "ECO {target}: $count loads, group maximum {op['max_loads']}"
 set location [list [ord::dbu_to_microns $x] [ord::dbu_to_microns $y]]
 for {{set first 0}} {{$first < $count}} {{incr first {op['max_loads']}}} {{
     set chunk [lrange $loads $first [expr {{$first+{op['max_loads']}-1}}]]
-    insert_buffer -buffer_cell sg13cmos5l_buf_4 -load_pins $chunk -location $location \\
+'''
+            if op.get('location') == 'sink_centroid':
+                text+='''    set sx 0; set sy 0
+    foreach sink $chunk {
+        set sink_inst [$::block findInst [lindex [split $sink /] 0]]
+        if {$sink_inst eq "NULL"} {error "Missing physical sink"}
+        lassign [$sink_inst getLocation] px py
+        incr sx $px; incr sy $py
+    }
+    set location [list [ord::dbu_to_microns [expr {$sx/[llength $chunk]}]] [ord::dbu_to_microns [expr {$sy/[llength $chunk]}]]]
+'''
+            text+=f'''    insert_buffer -buffer_cell sg13cmos5l_buf_4 -load_pins $chunk -location $location \\
         -buffer_name eco_data_{index}_$first -net_name eco_net_{index}_$first
 }}
 '''

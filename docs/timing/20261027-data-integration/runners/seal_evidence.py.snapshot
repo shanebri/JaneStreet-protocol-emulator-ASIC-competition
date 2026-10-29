@@ -1,0 +1,45 @@
+"""Verify referenced evidence, index this suite, and seal compact artifacts."""
+import hashlib
+import json
+from pathlib import Path
+import shutil
+
+repo=Path('/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition')
+evidence=repo/'docs/timing/20261027-data-integration'
+
+def sha(path):
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+validated=[]
+for name in ('20261026-clock-factors','20261027-data-eco'):
+    manifest=repo/'docs/timing'/name/'SHA256SUMS'
+    entries=manifest.read_text().splitlines()
+    for line in entries:
+        digest,path=line.split(None,1)
+        if sha(repo/path)!=digest:
+            raise ValueError('Referenced evidence checksum mismatch: '+path)
+    validated.append(dict(manifest=str(manifest.relative_to(repo)),sha256=sha(manifest),
+                          verified_files=len(entries),status='pass'))
+(evidence/'input_evidence_validation.json').write_text(json.dumps(validated,indent=2)+'\n')
+comparison=json.loads((evidence/'comparison.json').read_text())
+diagnostics=json.loads((evidence/'critical_endpoint_comparison.json').read_text())
+selection=json.loads((evidence/'suite_selection.json').read_text())
+manifest=dict(status='complete',branch='codex/timing-connectivity-electrical',parent='9ad7f06',
+    scope='five independent cumulative full-reroute screens from the same prepared input',
+    selection=selection,attempts=[r['attempt'] for r in comparison['rows']],
+    matched_inputs=comparison['matched_inputs'],
+    replay_sessions=sum(r['replay_sessions'] for r in comparison['rows']),
+    directed_endpoint_sessions=len(diagnostics['sessions']),
+    strict_signoff_passes=sum(r['strict_gate_pass'] for r in comparison['rows']),
+    best_valid_combination=comparison['best_valid_combination'],tool_tests=46,
+    production_source_sha256={str(p.relative_to(repo)):sha(p) for p in sorted((repo/'src').rglob('*')) if p.is_file()},
+    qualification='No implementation adopted; strict signoff and full fabrication qualification remain open')
+(evidence/'suite_manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
+shutil.copy2(__file__,evidence/'runners/seal_evidence.py.snapshot')
+files=[p for p in sorted(evidence.rglob('*')) if p.is_file() and p.name!='SHA256SUMS']
+(evidence/'SHA256SUMS').write_text(''.join(sha(p)+'  '+p.relative_to(repo).as_posix()+'\n' for p in files))
+for line in (evidence/'SHA256SUMS').read_text().splitlines():
+    digest,path=line.split(None,1)
+    if sha(repo/path)!=digest:
+        raise ValueError('New evidence checksum mismatch: '+path)
+print('PASS:',len(files),'new compact evidence files; both referenced evidence manifests verified')

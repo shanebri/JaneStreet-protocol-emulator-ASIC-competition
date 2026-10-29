@@ -27,6 +27,11 @@ import closure_collect
 import audit_clock_tree
 import audit_data_eco
 import data_eco_suite
+import data_eco_trial
+import summarize_data_eco
+import resolve_eco_targets
+import qualify_final_route
+import preserve_routes
 sys.path.pop(0)
 
 
@@ -179,6 +184,7 @@ class ReplayWorkflowTests(unittest.TestCase):
         self.calls.clear()
         self.invoke("--target", "_33839_/D")
         self.assertTrue(all(e["PIO_TIMING_TARGET"] == "_33839_/D" for e in self.calls))
+        self.assertEqual(json.loads((self.out/'manifest.json').read_text())['target'], '_33839_/D')
 
     def test_reset_active_matrix_is_separate(self):
         self.invoke("--reset-active")
@@ -423,6 +429,182 @@ class ClockInsertionAuditTests(unittest.TestCase):
 
 
 class DataECOAuditTests(unittest.TestCase):
+    def test_nonempty_critical_path_control_and_independent_candidate_selection(self):
+        recipes=data_eco_trial.suite_recipes('critical_path')
+        names=list(recipes)
+        base=dict(setup_tns_ns=-6,setup_endpoints=17,slow_slew=44,
+            fanout={c:13 for c in gate.REQUIRED_CORNERS},clock_sink_count=2421,
+            filtered_gaps={c:0 for c in gate.REQUIRED_CORNERS},strict_gate_failures=['setup'],
+            cap={c:0 for c in gate.REQUIRED_CORNERS},clock_buffer_outputs_above8=0,
+            positive_hold_all_sessions=True,route_drc=0,antenna_violations=0)
+        rows=[dict(base,trial=name,operations=recipes[name],setup_ws_ns=ws,fast_hold_ws_ns=hold)
+              for name,ws,hold in zip(names,(-0.68,-0.4,-0.8),(0.0108,0.009,0.015))]
+        with self.assertRaises(ValueError): summarize_data_eco.add_comparisons(rows)
+        summarize_data_eco.add_comparisons(rows,control_name=names[0],
+            control_operations=recipes[names[0]],cumulative=False)
+        self.assertTrue(all('delta_vs_previous_case' not in row for row in rows))
+        self.assertAlmostEqual(rows[1]['delta_vs_matched_control']['setup_ws_ns'],0.28)
+        self.assertAlmostEqual(rows[1]['delta_fast_hold_ns'],-0.0018)
+        self.assertEqual(summarize_data_eco.best_combination(rows,1)['trial'],names[1])
+        rows[1]['positive_hold_all_sessions']=False
+        summarize_data_eco.add_comparisons(rows,control_name=names[0],
+            control_operations=recipes[names[0]],cumulative=False)
+        self.assertEqual(summarize_data_eco.best_combination(rows,1)['trial'],names[2])
+        rows[0]['operations']=[]
+        with self.assertRaises(ValueError):
+            summarize_data_eco.add_comparisons(rows,control_name=names[0],control_operations=recipes[names[0]])
+
+    def test_integration_comparison_rejects_unmatched_inputs_config_and_threads(self):
+        common=dict(input_state_sha256='same',input_views_sha256={'odb':'same'},
+                    execution_overrides={'OPENROAD_THREADS':8})
+        config={'CLOCK_PERIOD':20,'GRT_ADJUSTMENT':0.25}
+        candidate=dict(common,trial='candidate')
+        summarize_data_eco.audit_match(common,config,candidate,config)
+        for key,value in (('input_state_sha256','routed_previous_case'),
+                          ('input_views_sha256',{'odb':'different'}),
+                          ('execution_overrides',{'OPENROAD_THREADS':4})):
+            with self.subTest(key=key),self.assertRaises(ValueError):
+                summarize_data_eco.audit_match(common,config,dict(candidate,**{key:value}),config)
+        with self.assertRaises(ValueError):
+            summarize_data_eco.audit_match(common,config,candidate,dict(config,CLOCK_PERIOD=25))
+
+    def test_ladder_deltas_and_selection_exclude_annotation_and_physical_failures(self):
+        def row(name,ws):
+            return dict(trial=name,operations=[] if name=='control' else ['fixture'],
+                setup_ws_ns=ws,setup_tns_ns=-10,setup_endpoints=22,slow_slew=50,
+                fanout={c:10 for c in gate.REQUIRED_CORNERS},clock_sink_count=2421,
+                filtered_gaps={c:0 for c in gate.REQUIRED_CORNERS},strict_gate_failures=['setup'],
+                cap={c:0 for c in gate.REQUIRED_CORNERS},clock_buffer_outputs_above8=0,
+                positive_hold_all_sessions=True,route_drc=0,antenna_violations=0)
+        rows=[row(name,ws) for name,ws in zip(data_eco_trial.INTEGRATION_CASES,(-1,-0.9,-0.8,-0.7,-0.6))]
+        rows[3]['filtered_gaps'][gate.REQUIRED_CORNERS[0]]=1
+        rows[4]['positive_hold_all_sessions']=False
+        reference=row('old',-1.2)
+        summarize_data_eco.add_comparisons(rows,reference)
+        self.assertAlmostEqual(rows[2]['delta_vs_matched_control']['setup_ws_ns'],0.2)
+        self.assertAlmostEqual(rows[2]['delta_vs_previous_case']['setup_ws_ns'],0.1)
+        self.assertAlmostEqual(rows[2]['delta_vs_old_routed_reference']['setup_ws_ns'],0.4)
+        self.assertFalse(rows[2]['strict_gate_pass'])
+        self.assertEqual(summarize_data_eco.best_combination(rows)['trial'],rows[2]['trial'])
+        for key,value in (('route_drc',1),('antenna_violations',1),('clock_buffer_outputs_above8',1),
+                          ('cap',{c:1 for c in gate.REQUIRED_CORNERS})):
+            old=rows[2][key]; rows[2][key]=value
+            summarize_data_eco.add_comparisons(rows,reference)
+            self.assertIsNone(summarize_data_eco.best_combination(rows))
+            rows[2][key]=old
+
+    def test_integration_is_exact_cumulative_ladder_and_isolated_suite_is_unchanged(self):
+        isolated=data_eco_trial.suite_recipes('isolated')
+        ladder=data_eco_trial.suite_recipes('integration')
+        self.assertEqual(len(isolated),15)
+        self.assertEqual(tuple(ladder),data_eco_trial.INTEGRATION_CASES)
+        expected=[]
+        for name,addition in zip(ladder,(None,'critical_buffer','fanout_32071','fanout_16949','slew_29030')):
+            expected=expected+isolated[addition] if addition else []
+            self.assertEqual(ladder[name],expected)
+            script=data_eco_trial.script(ladder[name])
+            for index in range(len(expected)):
+                self.assertIn(f'-buffer_name eco_data_{index}_$first',script)
+            self.assertEqual(script.count('source $::env(SCRIPTS_DIR)/openroad/common/dpl.tcl'),1)
+        with self.assertRaises(ValueError): data_eco_trial.suite_recipes('all')
+
+    def test_critical_path_candidates_are_independent_additions_to_exact_best_recipe(self):
+        cases=data_eco_trial.suite_recipes('critical_path')
+        self.assertEqual(tuple(cases),data_eco_trial.CRITICAL_PATH_CASES)
+        baseline=cases[data_eco_trial.CRITICAL_PATH_CASES[0]]
+        isolated=data_eco_trial.suite_recipes('isolated')
+        self.assertEqual(baseline,isolated['critical_buffer']+isolated['fanout_32071'])
+        for name,target in zip(data_eco_trial.CRITICAL_PATH_CASES[1:],('_28923_/Y','_17250_/Y')):
+            self.assertEqual(cases[name][:-1],baseline)
+            self.assertEqual(cases[name][-1],dict(kind='buffer',target=target,
+                old='sg13cmos5l_a221oi_1',max_loads=1000))
+            self.assertEqual(len(cases[name]),3)
+            self.assertNotIn(name,isolated)
+
+    def check_fresh_scheduler(self,suite,expected_cases):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory); runs=root/'runs'; evidence=root/'evidence'; calls=[]
+            def run(command,**kwargs):
+                calls.append(command)
+                option=lambda key: Path(command[command.index(key)+1])
+                if command[1].endswith('data_eco_trial.py'):
+                    out=option('--out'); out.mkdir()
+                    (out/'experiment.json').write_text(json.dumps(dict(status='rejected_signoff',signoff_exit=1)))
+                    for file in ('runner.py','eco.tcl','recipe.json','eco_audit.log'):
+                        (out/file).write_text('fixture')
+                    (out/'eco_audit.json').write_text('{"status":"pass"}')
+                else:
+                    out=option('--out'); out.mkdir(parents=True)
+                    (out/'provenance.json').write_text('{}')
+                return Mock(returncode=1 if command[1].endswith('data_eco_trial.py') else 0)
+            argv=['suite','--suite',suite,'--jobs','1']
+            for key,path in (('root',runs),('evidence',evidence),('base',root/'base'),
+                             ('prepared',root/'prepared'),('archive-root',root/'archive'),('pdk-root',root/'pdk')):
+                argv.extend(['--'+key,str(path)])
+            with patch.object(sys,'argv',argv),patch.object(data_eco_suite.subprocess,'run',side_effect=run),contextlib.redirect_stdout(io.StringIO()):
+                data_eco_suite.main()
+            physical=[c for c in calls if c[1].endswith('data_eco_trial.py')]
+            self.assertEqual([c[c.index('--trial')+1] for c in physical],list(expected_cases))
+            self.assertTrue(all(c[c.index('--prepared')+1]==str(root/'prepared') and c[-2:]==['--threads','8'] for c in physical))
+            self.assertEqual(len(list(runs.glob('*-01'))),len(expected_cases))
+            self.assertTrue(all(v['status']=='complete' for v in json.loads((runs/'suite_state.json').read_text()).values()))
+
+    def test_fresh_scheduler_launches_only_five_selected_cases_with_common_input(self):
+        self.check_fresh_scheduler('integration',data_eco_trial.INTEGRATION_CASES)
+
+    def test_fresh_scheduler_launches_only_three_critical_path_cases_with_common_input(self):
+        self.check_fresh_scheduler('critical_path',data_eco_trial.CRITICAL_PATH_CASES)
+
+    def test_cumulative_audit_requires_each_declared_sink_partition(self):
+        before=self.fixture(); after=self.fixture()
+        for data in (before,after):
+            data[0]['gate2']=('sg13cmos5l_inv_1',{'A':'a','Y':'data2'})
+            data[0]['sink2']=('sg13cmos5l_buf_1',{'A':'data2','X':'q2'})
+            data[2].update(('data2','q2'))
+            data[3]['data2']=[('sink2','A')]
+        for index,(net,cell,pin) in enumerate((('data','ff','D'),('data2','sink2','A'))):
+            out=f'new{index}'; buf=f'eco_data_{index}'
+            after[0][buf]=('sg13cmos5l_buf_4',{'A':net,'X':out})
+            after[0][cell][1][pin]=out; after[2].add(out)
+            after[3][net]=[(buf,'A')]; after[3][out]=[(cell,pin)]
+        ops=[dict(kind='buffer',target='gate/Y',old='sg13cmos5l_a21oi_1',max_loads=1000),
+             dict(kind='buffer',target='gate2/Y',old='sg13cmos5l_inv_1',max_loads=8)]
+        self.assertEqual(audit_data_eco.audit(before,after,ops)['added_buffers'],2)
+        # Buffer transparency alone would accept leaving the second target unbuffered.
+        after[0]['sink2'][1]['A']='data2'; after[3]['new1']=[]
+        after[3]['data2'].append(('sink2','A'))
+        with self.assertRaises(ValueError): audit_data_eco.audit(before,after,ops)
+
+    def test_fanout_audit_rejects_transparent_but_different_sink_groups(self):
+        before=self.fixture(); after=self.fixture()
+        for data in (before,after):
+            for index in range(8):
+                name=f'sink{index}'
+                data[0][name]=('sg13cmos5l_buf_1',{'A':'data','X':'q'})
+                data[3]['data'].append((name,'A'))
+        groups=[sorted(before[3]['data'])[:8],sorted(before[3]['data'])[8:]]
+        for index,group in enumerate(groups):
+            name=f'eco_data_{index}'; net=f'new{index}'
+            after[0][name]=('sg13cmos5l_buf_4',{'A':'data','X':net})
+            after[2].add(net); after[3][net]=list(group)
+            for cell,pin in group: after[0][cell][1][pin]=net
+        after[3]['data']=[(f'eco_data_{index}','A') for index in range(2)]
+        ops=[dict(kind='buffer',target='gate/Y',old='sg13cmos5l_a21oi_1',max_loads=8)]
+        self.assertEqual(audit_data_eco.audit(before,after,ops)['added_buffers'],2)
+        first,last=groups[0][0],groups[1][0]
+        after[3]['new0'].remove(first); after[3]['new0'].append(last)
+        after[3]['new1']=[first]
+        after[0][first[0]][1][first[1]]='new1'
+        after[0][last[0]][1][last[1]]='new0'
+        with self.assertRaises(ValueError): audit_data_eco.audit(before,after,ops)
+
+    def test_resume_does_not_reuse_failed_logical_audit(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory); out=root/'control-01'; out.mkdir()
+            (out/'experiment.json').write_text('{"status":"rejected_signoff"}')
+            (out/'eco_audit.json').write_text('{"status":"failed"}')
+            self.assertEqual(data_eco_suite.choose_attempt(root,'control'),root/'control-02')
+
     def test_resume_uses_completed_retry_before_allocating_another_attempt(self):
         with tempfile.TemporaryDirectory() as directory:
             root=Path(directory)
@@ -465,6 +647,92 @@ class DataECOAuditTests(unittest.TestCase):
         op=[dict(kind='buffer',target='clkroot/X',old='sg13cmos5l_buf_8',max_loads=8)]
         with self.assertRaises(ValueError):
             audit_data_eco.audit(self.fixture(),self.fixture(),op)
+
+
+class UpstreamRecipeTests(unittest.TestCase):
+    def test_shared_acceptance_trial_preserves_all_historical_suites(self):
+        cases = data_eco_trial.suite_recipes('upstream')
+        control, candidate = cases.values()
+        self.assertEqual(control, data_eco_trial.suite_recipes('critical_path')['critical_buffer_fanout_32071'])
+        self.assertEqual(candidate[:len(control)], control)
+        changes = candidate[len(control):]
+        self.assertEqual([op['instance'] for op in changes], ['_17226_', '_17236_', '_17238_'])
+        self.assertTrue(all(op['kind'] == 'size' for op in changes))
+        self.assertEqual(len(data_eco_trial.suite_recipes('isolated')), 15)
+        self.assertEqual(len(data_eco_trial.suite_recipes('integration')), 5)
+        self.assertEqual(len(data_eco_trial.suite_recipes('critical_path')), 3)
+
+
+class StructuralTargetTests(unittest.TestCase):
+    @staticmethod
+    def fixture():
+        return ({'n123': ('sg13cmos5l_nor2_1', {'A': 'n1', 'B': 'n2', 'Y': 'n3'}),
+                 'n456': ('sg13cmos5l_inv_1', {'A': 'n3', 'Y': 'n4'})},
+                {'input_a': 'n1', 'input_b': 'n2', 'output': 'n4'},
+                {'n1', 'n2', 'n3', 'n4'}, {}, set())
+
+    def test_resolves_after_all_internal_names_change(self):
+        data = self.fixture()
+        ops = [dict(kind='size', instance='n123', old='sg13cmos5l_nor2_1', new='sg13cmos5l_nor2_2')]
+        contract = resolve_eco_targets.make_contract(data, ops)
+        renamed = ({'renamed_'+name: (master, {pin: 'wire_'+net for pin, net in pins.items()})
+                    for name, (master, pins) in data[0].items()},
+                   {name: 'wire_'+net for name, net in data[1].items()},
+                   {'wire_'+net for net in data[2]}, {}, set())
+        self.assertEqual(resolve_eco_targets.resolve(renamed, contract),
+                         [dict(ops[0], instance='renamed_n123')])
+
+    def test_changed_pin_connection_fails_closed(self):
+        data = self.fixture()
+        ops = [dict(kind='size', instance='n123', old='sg13cmos5l_nor2_1', new='sg13cmos5l_nor2_2')]
+        contract = resolve_eco_targets.make_contract(data, ops)
+        data[0]['n123'][1]['B'] = 'n1'
+        with self.assertRaises(ValueError):
+            resolve_eco_targets.resolve(data, contract)
+
+    def test_ambiguous_graph_fails_closed(self):
+        data = self.fixture()
+        data[0]['duplicate'] = data[0]['n123']
+        with self.assertRaises(ValueError):
+            resolve_eco_targets.make_contract(data, [dict(kind='size', instance='n123',
+                old='sg13cmos5l_nor2_1', new='sg13cmos5l_nor2_2')])
+
+
+class FinalPinGeometryTests(unittest.TestCase):
+    def test_internal_net_rename_allowed_but_pin_or_boundary_changes_detected(self):
+        text = 'DIEAREA ( 0 0 ) ( 10000 20000 ) ;\nPINS 43 ;\n'+''.join(
+            f'- pin{i} + NET net{i} + DIRECTION INPUT + USE SIGNAL\n'
+            ' + PORT + LAYER Metal4 ( -150 -500 ) ( 150 500 ) + FIXED ( 1000 19000 ) N ;\n'
+            for i in range(43))+'END PINS\n'
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory)/'template.def'; path.write_text(text)
+            expected = qualify_final_route.physical_pin_fingerprint(path)
+            path.write_text(text.replace('NET net', 'NET renamed').replace('FIXED', 'PLACED'))
+            self.assertEqual(qualify_final_route.physical_pin_fingerprint(path), expected)
+            for before, after in (('10000 20000', '11000 20000'), ('1000 19000', '1000 18000'),
+                                  ('Metal4', 'Metal3'), ('150 500', '150 400'),
+                                  ('INPUT', 'OUTPUT'), (') N ;', ') S ;')):
+                with self.subTest(change=before):
+                    path.write_text(text.replace(before, after, 1))
+                    self.assertNotEqual(qualify_final_route.physical_pin_fingerprint(path), expected)
+
+
+class PreservedRouteEligibilityTests(unittest.TestCase):
+    def test_changed_connectivity_master_or_location_excludes_incident_wires(self):
+        before = StructuralTargetTests.fixture()
+        locations = {'n123': ((10,20),'R0'), 'n456': ((30,40),'R0')}
+        self.assertEqual(preserve_routes.eligible_nets(before,before,locations,locations), before[2])
+        moved = dict(locations, n456=((31,40),'R0'))
+        self.assertEqual(preserve_routes.eligible_nets(before,before,locations,moved), {'n1','n2'})
+        after = StructuralTargetTests.fixture()
+        after[0]['n123'] = ('sg13cmos5l_nor2_2', after[0]['n123'][1])
+        self.assertEqual(preserve_routes.eligible_nets(before,after,locations,locations), {'n4'})
+        after = StructuralTargetTests.fixture()
+        after[0]['n456'][1]['A'] = 'n1'
+        self.assertEqual(preserve_routes.eligible_nets(before,after,locations,locations), {'n2','n4'})
+        after = StructuralTargetTests.fixture()
+        after[1]['input_a'] = 'n2'
+        self.assertEqual(preserve_routes.eligible_nets(before,after,locations,locations), {'n3','n4'})
 
 
 class PhysicalTrialRelocationTests(unittest.TestCase):

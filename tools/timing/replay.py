@@ -65,7 +65,9 @@ def main():
         hashes = {str(p): hashlib.sha256(p.read_bytes()).hexdigest() for p in files}
         # Never mix reports from different invocations, or accept stale reports.
         args.out.mkdir(parents=True, exist_ok=False)
-        manifest = {"sha256": hashes, "reference": args.reference, "status": "running", "sessions": []}
+        manifest = {"sha256": hashes, "reference": args.reference, "status": "running", "sessions": [],
+                    "target": args.target or ("_32168_/D" if args.reference else "none"),
+                    "reset_active": args.reset_active}
         (args.out / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
         for corner in REQUIRED_CORNERS:
             for mode in (("baseline", "operational", "reset_active") if args.reset_active
