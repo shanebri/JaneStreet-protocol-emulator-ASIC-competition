@@ -72,7 +72,13 @@ core/ISA/I2C regressions. See [test/README.md](test/README.md) for synthesis and
 checks. The [Arty A7 guide](fpga/README.md) covers the updated FPGA loader and
 button-triggered firmware UART demo; `./fpga/test.ps1` verifies its behavior.
 
-The completed **dual-engine** CMOS5L build at `37c74dc` occupies 30.56% of the
+The integrated 50 MHz flow passes the three-corner timing/electrical screen.
+The clean GDS build exposed four physical routing shorts; a localized repair
+passes timing and serialized-wire checks and is undergoing final GDS qualification.
+See the [current LVS closure report](docs/timing_lvs_closure_20261029.md).
+The final baseline is not yet declared qualified for architecture development.
+
+The historical **dual-engine** CMOS5L build at `37c74dc` occupies 30.56% of the
 8×4 core before filler, and all 39 functional gate-level tests passed. Its
 slow-corner setup slack is -5.885 ns; the listed failures originate at reset,
 and electrical violations also remain. See the [I/O timing investigation](docs/io_timing_report.md)

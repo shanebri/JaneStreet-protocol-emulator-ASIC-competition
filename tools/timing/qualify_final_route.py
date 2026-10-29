@@ -50,6 +50,22 @@ def main():
         if physical_pin_fingerprint(template) != physical_pin_fingerprint(state['def']):
             raise ValueError('Die boundary or physical signal-pin geometry changed')
         preservation = []
+        finalizers = sorted(a.run.resolve().glob('*-openroad-finalizeroutes/finalization_audit.json'))
+        if len(finalizers) > 1:
+            raise ValueError('Multiple route finalization audits')
+        protected_state = state
+        finalization = None
+        if finalizers:
+            path = finalizers[0]
+            finalization = json.loads(path.read_text())
+            if finalization['status'] != 'pass' or finalization['wire_contact_groups']:
+                raise ValueError('Invalid serialized route finalization audit')
+            for name, expected in finalization['sha256'].items():
+                if hashlib.sha256(Path(name).read_bytes()).hexdigest() != expected:
+                    raise ValueError('Route finalization artifact changed: '+name)
+            if read_def(Path(finalization['after_def']))[0] != read_def(Path(state['def']))[0]:
+                raise ValueError('Final routes differ from audited native finalization')
+            protected_state = json.loads((path.parent/'state_in.json').read_text())
         for audit_path in sorted(a.run.resolve().glob('*/preserved/audit.json')):
             audit = json.loads(audit_path.read_text())
             if audit['status'] != 'pass' or not audit['fixed_net_count']:
@@ -59,10 +75,14 @@ def main():
                     raise ValueError('Preservation artifact changed: '+path)
             source = json.loads((audit_path.parent.parent/'state_in.json').read_text())
             before_routes = read_def(Path(source['def']))[0]
-            final_routes = read_def(Path(state['def']))[0]
+            final_routes = read_def(Path(protected_state['def']))[0]
             if any(before_routes[net] != final_routes.get(net) for net in audit['fixed_nets']):
                 raise ValueError('Detailed routing changed a protected wire')
-            preservation.append(dict(audit=str(audit_path), fixed_routes_preserved=audit['fixed_net_count']))
+            preservation.append(dict(audit=str(audit_path), fixed_routes_preserved=audit['fixed_net_count'],
+                                     scope='before audited native finalization' if finalizers else 'final route'))
+        command(['openroad','-no_init','-exit','-python',str(tool/'audit_wire_contacts.py'),
+                 '--odb',state['odb'],'--def',state['def'],'--out',str(out/'wire_contacts.json')],
+                'wire_contacts')
         view = out/'replay-input'
         links = {'input-openroad-fillinsertion/tt_um_shanebri_top.nl.v': Path(state['nl']),
                  'output-openroad-rcx/nom/tt_um_shanebri_top.nom.spef': nominal_view(state['spef']),
@@ -88,6 +108,7 @@ def main():
                         sha256={str(v): hashlib.sha256(v.read_bytes()).hexdigest() for v in inputs},
                         metrics=selected_metrics(state['metrics']), clock_topology=topology,
                         route_preservation=preservation,
+                        native_route_finalization=finalization,
                         boundary_and_all_43_signal_pin_geometries_unchanged=True)
     except Exception as exc:
         manifest.update(status='failed', error=str(exc))

@@ -32,6 +32,8 @@ import summarize_data_eco
 import resolve_eco_targets
 import qualify_final_route
 import preserve_routes
+import audit_wire_contacts
+import finalize_routes
 sys.path.pop(0)
 
 
@@ -733,6 +735,42 @@ class PreservedRouteEligibilityTests(unittest.TestCase):
         after = StructuralTargetTests.fixture()
         after[1]['input_a'] = 'n2'
         self.assertEqual(preserve_routes.eligible_nets(before,after,locations,locations), {'n3','n4'})
+
+
+class SerializedRouteTests(unittest.TestCase):
+    def test_contact_index_matches_exhaustive_geometry(self):
+        import random
+        rng = random.Random(29)
+        shapes = []
+        for i in range(200):
+            x,y = rng.randrange(-100,100),rng.randrange(-100,100)
+            shapes.append((str(i % 11),str(i % 3),(x,y,x+rng.randrange(1,80),y+rng.randrange(1,80))))
+        expected = set()
+        for i,(net,layer,box) in enumerate(shapes):
+            for onet,olayer,obox in shapes[:i]:
+                if net != onet and layer == olayer and audit_wire_contacts.touches(box,obox):
+                    expected.add((*sorted((net,onet)),layer))
+        actual = {(*v['nets'],v['layer']) for v in audit_wire_contacts.find_contacts(shapes,17)}
+        self.assertEqual(actual,expected)
+
+    def test_real_clock_data_short_and_boundary_contact(self):
+        shapes = [('clock','Metal2',(844220,251480,844900,251680)),
+                  ('data','Metal2',(844700,239720,844900,251680)),
+                  ('other_layer','Metal3',(844700,239720,844900,251680))]
+        self.assertEqual(len(audit_wire_contacts.find_contacts(shapes)),1)
+        self.assertTrue(audit_wire_contacts.touches((0,0,10,10),(10,0,20,10)))
+        self.assertFalse(audit_wire_contacts.touches((0,0,10,10),(11,0,20,10)))
+
+    def test_finalization_def_changes_only_wire_status(self):
+        text = ('VERSION 5.8 ;\nDESIGN chip ;\nUNITS DISTANCE MICRONS 1000 ;\n'
+                'COMPONENTS 1 ; - a cell + FIXED ( 1 2 ) N ; END COMPONENTS\n'
+                'NETS 1 ;\n- n ( a X ) + FIXED Metal2 ( 1 2 ) ( 1 4 ) ;\nEND NETS\nEND DESIGN\n')
+        result = finalize_routes.unfixed_nets_def(text)
+        self.assertNotIn('COMPONENTS',result)
+        self.assertNotIn('+ FIXED',result)
+        self.assertIn('- n ( a X ) + ROUTED Metal2 ( 1 2 ) ( 1 4 ) ;',result)
+        for invalid in ('',text.replace('DESIGN chip ;',''),text.replace('+ FIXED Metal2','+ COVER Metal2')):
+            with self.assertRaises(ValueError): finalize_routes.unfixed_nets_def(invalid)
 
 
 class PhysicalTrialRelocationTests(unittest.TestCase):

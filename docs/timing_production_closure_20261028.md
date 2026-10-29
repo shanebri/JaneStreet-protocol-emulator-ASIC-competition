@@ -1,6 +1,11 @@
 # 50 MHz production closure and qualification
 
-**Status: route screen passed; clean production qualification is running.**
+**Superseded by the [October 29 LVS closure work](timing_lvs_closure_20261029.md).**
+The clean build reproduced the route screen but failed actual-GDS LVS with
+four physical shorts. The October 29 report records the repair and current
+qualification status. The remainder preserves the earlier checkpoint evidence.
+
+**October 28 status: route screen passed; clean production qualification was running.**
 The active configuration selects the audited repair flow. This document does
 not yet declare a qualified baseline for architecture development.
 

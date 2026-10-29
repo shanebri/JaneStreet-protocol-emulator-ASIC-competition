@@ -1,0 +1,13 @@
+{
+  "status": "pass",
+  "routed_nets": 25361,
+  "metal_rectangles": 557164,
+  "dbu_per_micron": 1000,
+  "scope": "Reject contacts between different signal-net wires in the serialized ODB.\n\nThis independent rectangle check covers default-width rectilinear signal wires,\nvia metal enclosures and patch metal. It does not replace pin connectivity,\nspacing DRC, or GDS LVS. Unsupported geometry fails closed.\nRun with OpenROAD's Python interpreter and the matching DEF.\n",
+  "contacts": [],
+  "sha256": {
+    "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/lvs_repair_20261029_01/run/01-openroad-detailedrouting/tt_um_shanebri_top.odb": "d9327d834841e0a656091390a5e76930d380c4240610764bab59e7b3dfa4e868",
+    "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/lvs_repair_20261029_01/run/01-openroad-detailedrouting/tt_um_shanebri_top.def": "6f621306760def9f23fc4c2e39aaf3fed8ba9ce998782640822c6ee1d92d59ab",
+    "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/tools/timing/audit_wire_contacts.py": "60f476879394acc7cfe7c1924dd9eaa4d718a32da834343f2bd6ca1964cf19a1"
+  }
+}

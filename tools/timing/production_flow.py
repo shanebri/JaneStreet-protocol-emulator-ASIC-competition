@@ -15,13 +15,14 @@ from librelane.flows import Flow
 from librelane.flows.classic import Classic
 from librelane.state import DesignFormat
 from librelane.steps import Step, StepError
-from librelane.steps.openroad import DetailedPlacement, GlobalPlacement, GlobalRouting
+from librelane.steps.openroad import DetailedPlacement, DetailedRouting, GlobalPlacement, GlobalRouting
 from typing import List
 
 from check_signoff import REQUIRED_CORNERS
 from closure_trial import validate_config
 from data_eco_trial import script
 from incremental_trial import incremental_script
+from finalize_routes import unfixed_nets_def
 
 TOOL = Path(__file__).resolve().parent
 
@@ -126,6 +127,28 @@ class LastFanoutRepair(IncrementalRepair):
         return views, metrics
 
 
+class FinalizeRoutes(DetailedRouting):
+    id = 'OpenROAD.FinalizeRoutes'
+    name = 'Native route finalization with serialized-geometry audit'
+
+    def get_script_path(self):
+        return str(Path(self.step_dir)/'finalize.tcl')
+
+    def run(self, state_in, **kwargs):
+        unfixed = Path(self.step_dir)/'unfixed.def'
+        unfixed.write_text(unfixed_nets_def(Path(state_in[DesignFormat.DEF]).read_text()))
+        native = Path(DetailedRouting.get_script_path(self)).read_text()
+        if native.count('read_current_odb') != 1:
+            raise StepError('Native routing entrypoint changed')
+        Path(self.get_script_path()).write_text(native.replace('read_current_odb',
+            'read_current_odb\nread_def -floorplan_initialize {'+str(unfixed)+'}',1))
+        views, metrics = super().run(state_in, **kwargs)
+        run_tool(self, 'finalize_routes.py', ['--before',state_in[DesignFormat.ODB],
+            '--before-def',state_in[DesignFormat.DEF], '--after',views[DesignFormat.ODB],
+            '--after-def',views[DesignFormat.DEF], '--out',Path(self.step_dir)/'finalization_audit.json'])
+        return views, metrics
+
+
 class RouteAcceptance(Step):
     id = 'PIO.RouteAcceptance'
     inputs = [DesignFormat.ODB, DesignFormat.NETLIST, DesignFormat.SDC, DesignFormat.SPEF]
@@ -151,6 +174,8 @@ steps.extend(Classic.Steps[first_grt:first_drt+1])
 steps.extend([IncrementalRepair, Classic.Steps[first_drt], LastFanoutRepair])
 for original in Classic.Steps[first_drt:]:
     steps.append(original)
+    if original.id == 'OpenROAD.DetailedRouting':
+        steps.append(FinalizeRoutes)
     if original.id == 'OpenROAD.STAPostPNR':
         steps.append(RouteAcceptance)
 
