@@ -1,0 +1,36 @@
+{
+  "status": "complete",
+  "branch": "codex/timing-connectivity-electrical",
+  "committed_parent": "12b0f35",
+  "physical_runs": 4,
+  "replay_sessions": 36,
+  "tooling_tests": 34,
+  "source_rtl_byte_identical_to_frozen_baseline": true,
+  "baseline_source_sha256": {
+    "frontend/pc.sv": "ea9f1bc1e4040ae8f3c2edb5249cc219c547b7a85ea5bed57688f6b4a12192f3",
+    "frontend/instruction_fetch.sv": "e4a85b9018d5c6d91fef936442e13d0835012e5121b6bd0bb5ee5028a79eb47c",
+    "host_interface.sv": "c94f32f5358b9b61feaae0d0478f3f20cb768f617c244b1ca67becef14c152bc",
+    "pio_inputs.sv": "3a2bb4f6757622edb840a33ac30ae868bb3f9f042cca8242bf3a5bee6b799077",
+    "protocol_core.sv": "5b7f4252229140951d7f67c4384b24cd2c05c0fb3d1a4d75b967c22afb65b453",
+    "execution_unit.sv": "dbf598d1b82c94c65261e372c2386e70905a187d3e8662d9715d86cfb8ad90ac",
+    "pio_pads.sv": "a11b6234e54f3307bba31651bb5973ddcf50e7ceb8946fdbd8ad243d1fb0b043",
+    "config.json": "c99139cd2047b5fd7b6328faf86210676568997baf94db6fd0cfdd71e8b35cde",
+    "frontend/decoder.sv": "0c3cc5b807c5028959599d70f8ace0b10e3d79f840efdc82a04febcfc723ce7f",
+    "pio_subsystem.sv": "6dee88733d78885456185615bfb84106e13985b6cccce38791fc24b665b58b81",
+    "pio_gpio_owner.sv": "629b0060c8c72c76a995a2dd47eacff7790b1ff104c6e614cd2c94bf839b418b",
+    "project.sv": "211f39f898da0fccd91becf85eaafcce0e43e5ac144178ec2597252e1e94f63c",
+    "pio_fifo.sv": "a39d186a08ed1f4dfafadcc575e200b418116915f84149e4a4824ac1962b9a55",
+    "pio_host_bank.sv": "1da7a525ac3f359e22ec8641e0dd12cc614bec9235c06b9fbe9d478d22601953"
+  },
+  "production_config_and_constraints_unchanged": true,
+  "preferred_experimental_recipe": "clock_split8",
+  "strict_signoff": "all four rejected; setup/slew/data fanout unresolved",
+  "interpretation": "clustering size 8 already eliminates overloaded branches, so combined inserts zero split buffers",
+  "final_clock_buffer_fanout_violations": {
+    "combined": 0,
+    "cluster8": 0,
+    "split8": 0,
+    "control": 166
+  },
+  "scope": "post-route experiment; no accepted fabrication qualification"
+}

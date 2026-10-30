@@ -1,0 +1,14 @@
+OpenROAD dcf36133a369abc8f3c5e5738cd4d82e4903c0e0 
+Features included (+) or not (-): +GPU +GUI +Python
+This program is licensed under the BSD-3 license. See the LICENSE file for details.
+Components of this program may be licensed under more restrictive licenses which must be honored.
+Traceback (most recent call last):
+  File "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/tools/timing/audit_clock_tree.py", line 135, in <module>
+    main()
+    ~~~~^^
+  File "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/tools/timing/audit_clock_tree.py", line 118, in main
+    result = dict(topology=topology(after), input_sha256={str(a.odb): hashlib.sha256(a.odb.read_bytes()).hexdigest()})
+                           ~~~~~~~~^^^^^^^
+  File "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/tools/timing/audit_clock_tree.py", line 59, in topology
+    raise ValueError(f'Unsupported non-clock load on clock tree: {cell}/{pin} ({master})')
+ValueError: Unsupported non-clock load on clock tree: clkload22/A (sg13cmos5l_inv_2)

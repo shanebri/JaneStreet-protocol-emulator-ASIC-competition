@@ -1,0 +1,247 @@
+report_check_types -max_slew -max_cap -max_fanout -violators
+============================================================================
+======================= nom_slow_1p08V_125C Corner ===================================
+
+max slew
+
+Pin                                        Limit        Slew       Slack
+------------------------------------------------------------------------
+_33839_/D                               2.507400    4.917753   -2.410353 (VIOLATED)
+_23246_/Y                               2.507400    4.913474   -2.406074 (VIOLATED)
+_28005_/B                               2.507400    4.259894   -1.752494 (VIOLATED)
+_28004_/Y                               2.507400    4.255886   -1.748485 (VIOLATED)
+_30469_/A1                              2.507400    3.693392   -1.185992 (VIOLATED)
+fanout478/A                             2.507400    3.692553   -1.185153 (VIOLATED)
+_17902_/Y                               2.507400    3.691872   -1.184472 (VIOLATED)
+fanout477/A                             2.507400    3.691872   -1.184472 (VIOLATED)
+_17695_/B                               2.507400    3.653661   -1.146261 (VIOLATED)
+fanout1467/A                            2.507400    3.648542   -1.141142 (VIOLATED)
+_18038_/A                               2.507400    3.648058   -1.140658 (VIOLATED)
+_17689_/Y                               2.507400    3.619981   -1.112581 (VIOLATED)
+_31156_/A                               2.507400    3.274289   -0.766889 (VIOLATED)
+_31154_/Y                               2.507400    3.270587   -0.763187 (VIOLATED)
+_33837_/D                               2.507400    3.182531   -0.675131 (VIOLATED)
+_23207_/Y                               2.507400    3.178401   -0.671001 (VIOLATED)
+_28039_/B                               2.507400    3.131015   -0.623615 (VIOLATED)
+_28038_/Y                               2.507400    3.129686   -0.622286 (VIOLATED)
+_17825_/A                               2.507400    2.950915   -0.443515 (VIOLATED)
+fanout1490/A                            2.507400    2.950914   -0.443514 (VIOLATED)
+_30172_/A1                              2.507400    2.950808   -0.443408 (VIOLATED)
+_17302_/Y                               2.507400    2.945707   -0.438307 (VIOLATED)
+_28055_/A                               2.507400    2.836205   -0.328805 (VIOLATED)
+_28053_/Y                               2.507400    2.834985   -0.327585 (VIOLATED)
+_24363_/A2                              2.507400    2.830585   -0.323185 (VIOLATED)
+_24358_/Y                               2.507400    2.827308   -0.319908 (VIOLATED)
+_27848_/A                               2.507400    2.700346   -0.192946 (VIOLATED)
+_27846_/Y                               2.507400    2.697811   -0.190411 (VIOLATED)
+_24734_/B1                              2.507400    2.686433   -0.179032 (VIOLATED)
+_24733_/Y                               2.507400    2.678321   -0.170921 (VIOLATED)
+
+max fanout
+
+Pin                                   Limit Fanout  Slack
+---------------------------------------------------------
+fanout2503/X                              8     15     -7 (VIOLATED)
+_17051_/Y                                 8     11     -3 (VIOLATED)
+fanout2728/X                              8     11     -3 (VIOLATED)
+_33860_/Q                                 8      9        (VIOLATED)
+fanout1636/X                              8      9        (VIOLATED)
+fanout2502/X                              8      9        (VIOLATED)
+fanout581/X                               8      9        (VIOLATED)
+
+
+
+===========================================================================
+report_parasitic_annotation -report_unannotated
+============================================================================
+Found 179 unannotated drivers.
+ clkload0/Y
+ clkload1/Y
+ clkload10/Y
+ clkload100/X
+ clkload101/Y
+ clkload102/X
+ clkload103/Y
+ clkload104/Y
+ clkload105/Y
+ clkload106/Y
+ clkload107/Y
+ clkload108/X
+ clkload109/Y
+ clkload11/X
+ clkload110/X
+ clkload111/X
+ clkload112/Y
+ clkload113/Y
+ clkload114/Y
+ clkload115/Y
+ clkload116/Y
+ clkload117/Y
+ clkload118/X
+ clkload119/Y
+ clkload12/Y
+ clkload120/Y
+ clkload121/Y
+ clkload122/Y
+ clkload123/Y
+ clkload124/Y
+ clkload125/Y
+ clkload126/Y
+ clkload127/X
+ clkload128/Y
+ clkload129/Y
+ clkload13/Y
+ clkload130/Y
+ clkload131/X
+ clkload132/Y
+ clkload133/Y
+ clkload134/Y
+ clkload135/X
+ clkload136/Y
+ clkload137/X
+ clkload138/Y
+ clkload139/Y
+ clkload14/Y
+ clkload140/Y
+ clkload141/Y
+ clkload142/Y
+ clkload143/Y
+ clkload144/Y
+ clkload145/Y
+ clkload146/X
+ clkload147/Y
+ clkload148/Y
+ clkload149/Y
+ clkload15/X
+ clkload150/Y
+ clkload151/Y
+ clkload152/Y
+ clkload153/Y
+ clkload154/Y
+ clkload155/Y
+ clkload156/Y
+ clkload157/Y
+ clkload158/Y
+ clkload159/Y
+ clkload16/Y
+ clkload160/Y
+ clkload161/Y
+ clkload162/Y
+ clkload163/Y
+ clkload164/Y
+ clkload165/X
+ clkload166/Y
+ clkload167/Y
+ clkload168/Y
+ clkload169/Y
+ clkload17/Y
+ clkload170/Y
+ clkload171/Y
+ clkload172/Y
+ clkload173/Y
+ clkload174/Y
+ clkload175/Y
+ clkload176/Y
+ clkload177/X
+ clkload178/Y
+ clkload18/Y
+ clkload19/Y
+ clkload2/Y
+ clkload20/X
+ clkload21/Y
+ clkload22/Y
+ clkload23/Y
+ clkload24/Y
+ clkload25/Y
+ clkload26/X
+ clkload27/Y
+ clkload28/X
+ clkload29/Y
+ clkload3/Y
+ clkload30/X
+ clkload31/Y
+ clkload32/X
+ clkload33/Y
+ clkload34/Y
+ clkload35/X
+ clkload36/Y
+ clkload37/Y
+ clkload38/Y
+ clkload39/Y
+ clkload4/Y
+ clkload40/Y
+ clkload41/Y
+ clkload42/Y
+ clkload43/X
+ clkload44/Y
+ clkload45/Y
+ clkload46/Y
+ clkload47/Y
+ clkload48/X
+ clkload49/Y
+ clkload5/Y
+ clkload50/Y
+ clkload51/Y
+ clkload52/Y
+ clkload53/Y
+ clkload54/X
+ clkload55/Y
+ clkload56/Y
+ clkload57/X
+ clkload58/Y
+ clkload59/Y
+ clkload6/X
+ clkload60/Y
+ clkload61/Y
+ clkload62/Y
+ clkload63/Y
+ clkload64/Y
+ clkload65/Y
+ clkload66/Y
+ clkload67/X
+ clkload68/Y
+ clkload69/Y
+ clkload7/Y
+ clkload70/Y
+ clkload71/X
+ clkload72/Y
+ clkload73/X
+ clkload74/X
+ clkload75/Y
+ clkload76/Y
+ clkload77/Y
+ clkload78/Y
+ clkload79/Y
+ clkload8/X
+ clkload80/X
+ clkload81/Y
+ clkload82/Y
+ clkload83/Y
+ clkload84/Y
+ clkload85/Y
+ clkload86/X
+ clkload87/Y
+ clkload88/Y
+ clkload89/Y
+ clkload9/Y
+ clkload90/X
+ clkload91/Y
+ clkload92/Y
+ clkload93/Y
+ clkload94/Y
+ clkload95/Y
+ clkload96/X
+ clkload97/Y
+ clkload98/Y
+ clkload99/X
+Found 0 partially unannotated drivers.
+
+===========================================================================
+max slew violation count 30
+max fanout violation count 7
+max cap violation count 0
+============================================================================
+
+===========================================================================
+check_setup -verbose -unconstrained_endpoints -multiple_clock -no_clock -no_input_delay -loops -generated_clocks
+===========================================================================

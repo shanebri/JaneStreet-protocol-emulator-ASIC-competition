@@ -1,0 +1,29 @@
+[
+  {
+    "endpoint": "_31995_",
+    "start": "ui_in[5] (input port clocked by clk)",
+    "slack": -0.070353,
+    "master": "sg13cmos5l_dfrbpq_1",
+    "synthesis_cell": "$auto$ff.cc:337:slice$12376",
+    "routed_pins": {
+      "RESET_B": "net9420",
+      "D": "_02093_",
+      "Q": "\\pio.engines[1].core.pins[8]",
+      "CLK": "clknet_fanoutfix_2309951"
+    },
+    "synthesis_pins": {
+      "CLK": "clk",
+      "D": "_02093_",
+      "Q": "\\pio.engines[1].core.pins[8]",
+      "RESET_B": "_16635_"
+    },
+    "synthesis_aliases": {
+      "D": [
+        "$abc$68979$auto$rtlil.cc:3501:MuxGate$67744"
+      ],
+      "Q": [
+        "pio.engines[1].core.pins[8]"
+      ]
+    }
+  }
+]

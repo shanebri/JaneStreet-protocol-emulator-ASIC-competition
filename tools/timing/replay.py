@@ -27,7 +27,7 @@ def unique(run, pattern):
 
 
 def slack(path):
-    match = re.search(r"^\s*worst slack\s+(\S+)", path.read_text(), re.I | re.M)
+    match = re.search(r"^\s*worst slack\s+(?:(?:max|min)\s+)?(\S+)", path.read_text(), re.I | re.M)
     if not match:
         raise ValueError(f"Missing numeric worst slack in {path}")
     value = float(match[1])
@@ -43,6 +43,8 @@ def main():
     parser.add_argument("--out", type=Path, required=True)
     parser.add_argument("--sta", default="sta")
     parser.add_argument("--reference", action="store_true")
+    parser.add_argument("--reset-active", action="store_true",
+                        help="Also run diagnostic sessions with reset held low")
     parser.add_argument("--target", help="Rediscovered candidate endpoint pin (optional)")
     args = parser.parse_args()
     args.run = args.run.resolve()
@@ -63,10 +65,13 @@ def main():
         hashes = {str(p): hashlib.sha256(p.read_bytes()).hexdigest() for p in files}
         # Never mix reports from different invocations, or accept stale reports.
         args.out.mkdir(parents=True, exist_ok=False)
-        manifest = {"sha256": hashes, "reference": args.reference, "status": "running", "sessions": []}
+        manifest = {"sha256": hashes, "reference": args.reference, "status": "running", "sessions": [],
+                    "target": args.target or ("_32168_/D" if args.reference else "none"),
+                    "reset_active": args.reset_active}
         (args.out / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
         for corner in REQUIRED_CORNERS:
-            for mode in ("baseline", "operational"):
+            for mode in (("baseline", "operational", "reset_active") if args.reset_active
+                         else ("baseline", "operational")):
                 output = args.out / f"{corner}-{mode}"
                 env = dict(os.environ, PIO_TIMING_RUN=str(args.run), PDK_ROOT=str(args.pdk_root),
                            PIO_TIMING_CORNER=corner, PIO_TIMING_MODE=mode, PIO_TIMING_OUT=str(output),

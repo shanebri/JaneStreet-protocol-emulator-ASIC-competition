@@ -1,0 +1,76 @@
+Startpoint: _31487_ (rising edge-triggered flip-flop clocked by clk)
+Endpoint: _31483_ (rising edge-triggered flip-flop clocked by clk)
+Path Group: clk
+Path Type: min
+
+Fanout         Cap        Slew       Delay        Time   Description
+---------------------------------------------------------------------------------------------
+                                  0.000000    0.000000   clock clk (rise edge)
+                                  0.000000    0.000000   clock source latency
+     1    0.106692    0.183087    0.144580    0.144580 ^ clk (in)
+                                                         clk (net)
+                      0.196627    0.000000    0.144580 ^ clkbuf_0_clk/A (sg13cmos5l_buf_8)
+     4    0.131881    0.124629    0.230773    0.375353 ^ clkbuf_0_clk/X (sg13cmos5l_buf_8)
+                                                         clknet_0_clk (net)
+                      0.126583    0.011854    0.387207 ^ clkbuf_2_1_0_clk/A (sg13cmos5l_buf_8)
+     8    0.216405    0.183372    0.242542    0.629749 ^ clkbuf_2_1_0_clk/X (sg13cmos5l_buf_8)
+                                                         clknet_2_1_0_clk (net)
+                      0.185802    0.016194    0.645943 ^ clkbuf_5_8_0_clk/A (sg13cmos5l_buf_8)
+     6    0.118393    0.114568    0.218519    0.864462 ^ clkbuf_5_8_0_clk/X (sg13cmos5l_buf_8)
+                                                         clknet_5_8_0_clk (net)
+                      0.115458    0.007810    0.872272 ^ clkbuf_leaf_28_clk/A (sg13cmos5l_buf_8)
+     3    0.027199    0.044379    0.143805    1.016077 ^ clkbuf_leaf_28_clk/X (sg13cmos5l_buf_8)
+                                                         clknet_leaf_28_clk (net)
+                      0.044400    0.001577    1.017653 ^ clkbuf_fanoutfix_2059927/A (sg13cmos5l_buf_8)
+     8    0.043001    0.052543    0.116801    1.134455 ^ clkbuf_fanoutfix_2059927/X (sg13cmos5l_buf_8)
+                                                         clknet_fanoutfix_2059926 (net)
+                      0.052558    0.000738    1.135193 ^ _31487_/CLK (sg13cmos5l_dfrbpq_1)
+     2    0.005428    0.042754    0.263723    1.398916 v _31487_/Q (sg13cmos5l_dfrbpq_1)
+                                                         host.pending_address[1] (net)
+                      0.042754    0.000309    1.399225 v _17221_/A1 (sg13cmos5l_o21ai_1)
+     1    0.003794    0.051456    0.130799    1.530024 ^ _17221_/Y (sg13cmos5l_o21ai_1)
+                                                         _10501_ (net)
+                      0.051456    0.000244    1.530268 ^ _17222_/C1 (sg13cmos5l_a221oi_1)
+     1    0.003548    0.040442    0.056127    1.586395 v _17222_/Y (sg13cmos5l_a221oi_1)
+                                                         _10502_ (net)
+                      0.040442    0.000227    1.586623 v _17223_/D (sg13cmos5l_and4_1)
+     3    0.014002    0.087558    0.171928    1.758551 v _17223_/X (sg13cmos5l_and4_1)
+                                                         _10503_ (net)
+                      0.087612    0.001892    1.760443 v _24206_/A2 (sg13cmos5l_a21oi_1)
+     1    0.003886    0.085246    0.131443    1.891886 ^ _24206_/Y (sg13cmos5l_a21oi_1)
+                                                         _03867_ (net)
+                      0.085247    0.000248    1.892133 ^ _24209_/A2 (sg13cmos5l_a21oi_1)
+     1    0.002039    0.029304    0.098785    1.990919 v _24209_/Y (sg13cmos5l_a21oi_1)
+                                                         _01581_ (net)
+                      0.029304    0.000073    1.990992 v _31483_/D (sg13cmos5l_dfrbpq_1)
+                                              1.990992   data arrival time
+
+                                  0.000000    0.000000   clock clk (rise edge)
+                                  0.000000    0.000000   clock source latency
+     1    0.107781    0.184748    0.161478    0.161478 ^ clk (in)
+                                                         clk (net)
+                      0.198675    0.000000    0.161478 ^ clkbuf_0_clk/A (sg13cmos5l_buf_8)
+     4    0.136240    0.128108    0.258169    0.419647 ^ clkbuf_0_clk/X (sg13cmos5l_buf_8)
+                                                         clknet_0_clk (net)
+                      0.130201    0.013753    0.433401 ^ clkbuf_2_1_0_clk/A (sg13cmos5l_buf_8)
+     8    0.225123    0.189989    0.273611    0.707011 ^ clkbuf_2_1_0_clk/X (sg13cmos5l_buf_8)
+                                                         clknet_2_1_0_clk (net)
+                      0.192556    0.018743    0.725754 ^ clkbuf_5_8_0_clk/A (sg13cmos5l_buf_8)
+     6    0.124931    0.119871    0.247648    0.973402 ^ clkbuf_5_8_0_clk/X (sg13cmos5l_buf_8)
+                                                         clknet_5_8_0_clk (net)
+                      0.120828    0.009179    0.982581 ^ clkbuf_leaf_28_clk/A (sg13cmos5l_buf_8)
+     3    0.030468    0.046824    0.163359    1.145940 ^ clkbuf_leaf_28_clk/X (sg13cmos5l_buf_8)
+                                                         clknet_leaf_28_clk (net)
+                      0.046851    0.001962    1.147902 ^ clkbuf_fanoutfix_2059927/A (sg13cmos5l_buf_8)
+     8    0.046097    0.054860    0.132450    1.280352 ^ clkbuf_fanoutfix_2059927/X (sg13cmos5l_buf_8)
+                                                         clknet_fanoutfix_2059926 (net)
+                      0.054931    0.000782    1.281134 ^ _31483_/CLK (sg13cmos5l_dfrbpq_1)
+                                  0.250000    1.531134   clock uncertainty
+                                 -0.145897    1.385236   clock reconvergence pessimism
+                                 -0.042742    1.342495   library hold time
+                                              1.342495   data required time
+---------------------------------------------------------------------------------------------
+                                              1.342495   data required time
+                                             -1.990992   data arrival time
+---------------------------------------------------------------------------------------------
+                                              0.648498   slack (MET)

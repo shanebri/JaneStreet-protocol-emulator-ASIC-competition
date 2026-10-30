@@ -1,0 +1,139 @@
+{
+  "baseline_commit": "37c74dc17c3803d30d7b225aa51da10f0809330c",
+  "candidate_commit": "85506c60783641f7f0a14e13a7e099c9a9b9603f",
+  "baseline_run": 39495891524,
+  "candidate_run": 39707891759,
+  "candidate_artifact_id": 12401887733,
+  "candidate_zip_sha256": "cadefda210b3853e4c90882acfd9b80a17bed253aab08dc146f21a114952a3c4",
+  "results": {
+    "baseline": {
+      "corners": {
+        "nom_slow_1p08V_125C": {
+          "timing__setup__ws": -5.885336828907633,
+          "timing__setup__tns": -2071.4824717428805,
+          "timing__setup_vio__count": 821,
+          "timing__hold__ws": 0.6460195894417343,
+          "timing__hold__tns": 0,
+          "timing__hold_vio__count": 0,
+          "design__max_slew_violation__count": 19,
+          "design__max_cap_violation__count": 1,
+          "design__max_fanout_violation__count": 178,
+          "timing__unannotated_net_filtered__count": 0
+        },
+        "nom_typ_1p20V_25C": {
+          "timing__setup__ws": 2.427592418020297,
+          "timing__setup__tns": 0,
+          "timing__setup_vio__count": 0,
+          "timing__hold__ws": 0.30112224677172117,
+          "timing__hold__tns": 0,
+          "timing__hold_vio__count": 0,
+          "design__max_slew_violation__count": 0,
+          "design__max_cap_violation__count": 1,
+          "design__max_fanout_violation__count": 178,
+          "timing__unannotated_net_filtered__count": 0
+        },
+        "nom_fast_1p32V_m40C": {
+          "timing__setup__ws": 7.069545149385508,
+          "timing__setup__tns": 0,
+          "timing__setup_vio__count": 0,
+          "timing__hold__ws": 0.11277712416479307,
+          "timing__hold__tns": 0,
+          "timing__hold_vio__count": 0,
+          "design__max_slew_violation__count": 0,
+          "design__max_cap_violation__count": 1,
+          "design__max_fanout_violation__count": 178,
+          "timing__unannotated_net_filtered__count": 0
+        }
+      },
+      "stdcell_area_um2": 369174,
+      "sdc_sha256": "7088ce29adb0f7213b0f3ed4b76177f104819061b87b32bf4f166ff50e055d59",
+      "reported_failing_startpoints": {
+        "rst_n (input port clocked by clk)": 821
+      },
+      "fanout_clock_buffer_outputs": 171,
+      "fanout_other_outputs": 7
+    },
+    "candidate": {
+      "corners": {
+        "nom_slow_1p08V_125C": {
+          "timing__setup__ws": -6.809802692268707,
+          "timing__setup__tns": -979.9211106582635,
+          "timing__setup_vio__count": 616,
+          "timing__hold__ws": 0.666254847927752,
+          "timing__hold__tns": 0,
+          "timing__hold_vio__count": 0,
+          "design__max_slew_violation__count": 55,
+          "design__max_cap_violation__count": 0,
+          "design__max_fanout_violation__count": 183,
+          "timing__unannotated_net_filtered__count": 0
+        },
+        "nom_typ_1p20V_25C": {
+          "timing__setup__ws": 2.992409960077489,
+          "timing__setup__tns": 0,
+          "timing__setup_vio__count": 0,
+          "timing__hold__ws": 0.3146912819401459,
+          "timing__hold__tns": 0,
+          "timing__hold_vio__count": 0,
+          "design__max_slew_violation__count": 4,
+          "design__max_cap_violation__count": 0,
+          "design__max_fanout_violation__count": 183,
+          "timing__unannotated_net_filtered__count": 0
+        },
+        "nom_fast_1p32V_m40C": {
+          "timing__setup__ws": 7.564805884715104,
+          "timing__setup__tns": 0,
+          "timing__setup_vio__count": 0,
+          "timing__hold__ws": 0.12252960104467549,
+          "timing__hold__tns": 0,
+          "timing__hold_vio__count": 0,
+          "design__max_slew_violation__count": 0,
+          "design__max_cap_violation__count": 0,
+          "design__max_fanout_violation__count": 183,
+          "timing__unannotated_net_filtered__count": 0
+        }
+      },
+      "stdcell_area_um2": 369414,
+      "sdc_sha256": "7088ce29adb0f7213b0f3ed4b76177f104819061b87b32bf4f166ff50e055d59",
+      "reported_failing_startpoints": {
+        "_33835_ (rising edge-triggered flip-flop clocked by clk)": 306,
+        "_33851_ (rising edge-triggered flip-flop clocked by clk)": 280,
+        "_33852_ (rising edge-triggered flip-flop clocked by clk)": 2,
+        "ui_in[2] (input port clocked by clk)": 28
+      },
+      "fanout_clock_buffer_outputs": 174,
+      "fanout_other_outputs": 9
+    }
+  },
+  "resolved_config_diff": {
+    "MAX_CAP_VIOLATION_CORNERS": {
+      "baseline": [
+        ""
+      ],
+      "candidate": [
+        "*"
+      ]
+    },
+    "MAX_SLEW_VIOLATION_CORNERS": {
+      "baseline": [
+        ""
+      ],
+      "candidate": [
+        "*"
+      ]
+    },
+    "SETUP_VIOLATION_CORNERS": {
+      "baseline": null,
+      "candidate": [
+        "*"
+      ]
+    },
+    "TIMING_VIOLATION_CORNERS": {
+      "baseline": [
+        "*typ*"
+      ],
+      "candidate": [
+        "*"
+      ]
+    }
+  }
+}

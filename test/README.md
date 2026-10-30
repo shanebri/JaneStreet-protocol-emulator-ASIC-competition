@@ -1,5 +1,11 @@
 # PIO V0 verification
 
+Timing investigation guardrails now include `frontend_timing_tb.sv`, run by the
+normal runner: all-address branch/fetch and host reads, restart priority, freeze,
+wrap, write collisions and program retention. `test_timing_tools.py` also checks
+replay orchestration with a fake STA process; those tests do not measure timing.
+See [the test-only diagnosis and hypotheses](../docs/timing_hypotheses_85506c6.md).
+
 Install Python 3.11+, Icarus Verilog and `test/requirements.txt`, then run:
 
 ```sh
@@ -53,6 +59,10 @@ make -C test -B GATES=yes
 ```
 
 That requires `test/gate_level_netlist.v` and the CMOS5L PDK at `PDK_ROOT`.
+Use Icarus **13.0** for this PDK revision's gate models, matching the pinned
+[Tiny Tapeout gate-test action](https://github.com/TinyTapeout/tt-gds-action/blob/3412659307918422f3f0727917cf9b499aaca588/gl_test/action.yml).
+Ubuntu's Icarus 11 left the models' delayed flip-flop signals unknown during
+local verification; the same routed netlist passed all 39 tests with version 13.
 The physical build and functional gate-level results for commit `b380b86` are
 recorded in the [area assessment](../docs/architecture_area_budget.md). These
 functional simulations do not prove setup/hold closure or CDC reliability.

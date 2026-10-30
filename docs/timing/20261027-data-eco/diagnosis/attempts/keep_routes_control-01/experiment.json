@@ -1,0 +1,20 @@
+{
+  "trial": "control",
+  "status": "diagnostic_aborted",
+  "scope": "post_antenna_full_reroute_screen",
+  "base_trial": "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/clock_factors/clock_split8-01",
+  "operations": [],
+  "input_state_sha256": "d9d2024070595ce676ad7d17c5e68dc8b2562bd7e098b6fa77638e48fba48ee0",
+  "input_views_sha256": {
+    "odb": "c639650bfdb24bc94f952f8e919e2ad2b6cca686c34c110987875e5252c7999c",
+    "def": "63106d10d5643dc2e778288623be33ca04c8e6a7444880d78270ac5d0abfa689",
+    "nl": "528a9fc5b85875072f3ae5908906517f7b73fc33483c4dc565c5f1bb8ff97353",
+    "sdc": "7088ce29adb0f7213b0f3ed4b76177f104819061b87b32bf4f166ff50e055d59"
+  },
+  "runner_sha256": "bcec5815166f8719217598747877bad56083b622866a82c259e47f384a6d04d7",
+  "eco_script_sha256": "3c37964bee91dd85a74ae9080229d8f2a933f449a3adc9a44c48c614637fa5cd",
+  "execution_overrides": {
+    "OPENROAD_THREADS": 8
+  },
+  "reason": "Existing routed shapes did not survive the native global/detailed reroute path cleanly. This diagnostic was stopped and supplies no timing result; matched full-reroute experiments continue."
+}

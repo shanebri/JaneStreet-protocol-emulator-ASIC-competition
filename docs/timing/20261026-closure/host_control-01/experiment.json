@@ -1,0 +1,40 @@
+{
+  "trial": "host_control",
+  "status": "rejected_signoff",
+  "scope": "fresh_synthesis_post_route_screen",
+  "source_sha256": {
+    "project.sv": "211f39f898da0fccd91becf85eaafcce0e43e5ac144178ec2597252e1e94f63c",
+    "protocol_core.sv": "5b7f4252229140951d7f67c4384b24cd2c05c0fb3d1a4d75b967c22afb65b453",
+    "pio_inputs.sv": "3a2bb4f6757622edb840a33ac30ae868bb3f9f042cca8242bf3a5bee6b799077",
+    "pio_host_bank.sv": "1da7a525ac3f359e22ec8641e0dd12cc614bec9235c06b9fbe9d478d22601953",
+    "pio_subsystem.sv": "6dee88733d78885456185615bfb84106e13985b6cccce38791fc24b665b58b81",
+    "pio_gpio_owner.sv": "629b0060c8c72c76a995a2dd47eacff7790b1ff104c6e614cd2c94bf839b418b",
+    "host_interface.sv": "c94f32f5358b9b61feaae0d0478f3f20cb768f617c244b1ca67becef14c152bc",
+    "pio_pads.sv": "a11b6234e54f3307bba31651bb5973ddcf50e7ceb8946fdbd8ad243d1fb0b043",
+    "execution_unit.sv": "dbf598d1b82c94c65261e372c2386e70905a187d3e8662d9715d86cfb8ad90ac",
+    "pio_fifo.sv": "a39d186a08ed1f4dfafadcc575e200b418116915f84149e4a4824ac1962b9a55",
+    "frontend/pc.sv": "ea9f1bc1e4040ae8f3c2edb5249cc219c547b7a85ea5bed57688f6b4a12192f3",
+    "frontend/instruction_fetch.sv": "e4a85b9018d5c6d91fef936442e13d0835012e5121b6bd0bb5ee5028a79eb47c",
+    "frontend/decoder.sv": "0c3cc5b807c5028959599d70f8ace0b10e3d79f840efdc82a04febcfc723ce7f"
+  },
+  "runner_sha256": "dd29588a77791825c11a0783d80f5e19bfb8260131f80ef0b9711ddb662681b5",
+  "template_sha256": "64b52f2150f699edc7fb500c2f486a51eca66fd91d3efb7347200bd2cf83a2ee",
+  "resolved_config_sha256": "a547f6fe37a4a9867c7fee6c4896933ed88dc5d3731a6e29420987265228d2b1",
+  "changes": {
+    "PL_TIMING_DRIVEN": true,
+    "GRT_ADJUSTMENT": 0.25
+  },
+  "step_overrides": {
+    "OpenROAD.GlobalPlacement": {
+      "PNR_CORNERS": [
+        "nom_slow_1p08V_125C",
+        "nom_typ_1p20V_25C",
+        "nom_fast_1p32V_m40C"
+      ]
+    }
+  },
+  "execution_overrides": {
+    "OPENROAD_THREADS": 8
+  },
+  "signoff_exit": 1
+}

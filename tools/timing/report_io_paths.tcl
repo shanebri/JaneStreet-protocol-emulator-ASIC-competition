@@ -9,7 +9,7 @@ foreach name {PIO_TIMING_RUN PDK_ROOT PIO_TIMING_CORNER PIO_TIMING_MODE PIO_TIMI
 set run_dir [file normalize $::env(PIO_TIMING_RUN)]
 set out_dir [file normalize $::env(PIO_TIMING_OUT)]
 set mode $::env(PIO_TIMING_MODE)
-if {$mode ni {baseline operational}} { error "Mode must be baseline or operational" }
+if {$mode ni {baseline operational reset_active}} { error "Unsupported diagnostic mode" }
 switch -- $::env(PIO_TIMING_CORNER) {
     nom_slow_1p08V_125C { set std_suffix slow_1p08V_125C; set io_suffix slow_1p08V_3p0V_125C }
     nom_typ_1p20V_25C { set std_suffix typ_1p20V_25C; set io_suffix typ_1p2V_3p3V_25C }
@@ -44,6 +44,7 @@ set sta_report_default_digits 6
 # It is not a reset exception or a replacement for startup/release qualification.
 # Keep ena dynamic: the RTL gives it runtime freeze/resume semantics.
 if {$mode eq "operational"} { set_case_analysis 1 [get_ports rst_n] }
+if {$mode eq "reset_active"} { set_case_analysis 0 [get_ports rst_n] }
 puts "Diagnostic replay: $::env(PIO_TIMING_CORNER), $mode"
 report_units
 report_worst_slack -max > [file join $out_dir worst_setup.rpt]
@@ -96,6 +97,14 @@ if {$target_name eq "none"} { set target_name "" }
 if {$mode eq "baseline" && $target_name ne ""} {
     set target [get_pins -quiet $target_name]
     if {[llength $target] != 1} { error "Mapped target pin missing: $target_name" }
+    # All startpoints expose the actual data cone at the rediscovered endpoint.
+    # Reset-only reports below remain separate diagnostics.
+    foreach delay {max min} {
+        report_checks -to $target -path_delay $delay -sort_by_slack \
+            -group_path_count 5 -endpoint_path_count 5 \
+            -fields {slew cap input net fanout} -format full_clock_expanded \
+            > [file join $out_dir target_${delay}.rpt]
+    }
     foreach edge {rise fall} {
         report_checks -${edge}_from [get_ports rst_n] -to $target \
             -path_delay max -group_path_count 5 -endpoint_path_count 5 \

@@ -1,0 +1,22 @@
+{
+  "status": "complete",
+  "branch": "codex/timing-connectivity-electrical",
+  "parent": "9ebc659",
+  "primary_completed_screens": 15,
+  "sta_replay_sessions": 135,
+  "direct_same_endpoint_diagnostics": 3,
+  "tooling_tests": 39,
+  "source_rtl_byte_identical_to_committed_reference": true,
+  "production_config_and_constraints_unchanged": true,
+  "complete_annotation_screens": 12,
+  "annotation_rejected_screens": [
+    "fanout_uio3",
+    "fanout_17026",
+    "slew_18133"
+  ],
+  "strict_signoff": "all fifteen rejected; no production implementation accepted",
+  "clock_buffer_fanout_violations_all_screens": 0,
+  "source_clock_pins_all_screens": 2421,
+  "common_input": "post-antenna signal wires removed for matched full reroute; compare gains with fresh control",
+  "scope": "isolated experiments only; no unmeasured combination adopted"
+}

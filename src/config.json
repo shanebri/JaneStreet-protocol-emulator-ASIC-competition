@@ -19,6 +19,18 @@
   "//": "The value is in nanoseconds, so 20ns == 50MHz.",
   "CLOCK_PERIOD": 20,
 
+  "//": "Audited 50 MHz closure flow; each repair target is resolved structurally for this build.",
+  "meta": {"flow": "PIOClosure"},
+  "PL_TIMING_DRIVEN": true,
+  "GRT_ADJUSTMENT": 0.25,
+  "OPENROAD_THREADS": 8,
+  "MAGIC_EXT_USE_GDS": true,
+  "PIO_ECO_CONTRACT": "dir::../tools/timing/production/sink-local.json",
+  "PIO_INCREMENTAL_ECO_CONTRACTS": [
+    "dir::../tools/timing/production/fanout.json",
+    "dir::../tools/timing/production/last-fanout.json"
+  ],
+
   "//": "Release checks cover all nominal-RC cell corners, including slow setup.",
   "TIMING_VIOLATION_CORNERS": ["*"],
   "SETUP_VIOLATION_CORNERS": ["*"],

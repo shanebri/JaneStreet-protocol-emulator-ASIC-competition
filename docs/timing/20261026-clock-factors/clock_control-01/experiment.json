@@ -1,0 +1,28 @@
+{
+  "changes": {},
+  "scope": "post_route_screen",
+  "first": "OpenROAD.CTS",
+  "input": "pre_cts",
+  "mechanism": "matched post-CTS legalization without clock repair",
+  "trial": "clock_control",
+  "base_trial": "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/closure/grt_capacity25-01",
+  "status": "rejected_signoff",
+  "input_state": "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/implementation/placement-corners-01/run/08-openroad-cts/state_in.json",
+  "input_state_sha256": "133a1f5e923b4ca0e4f7f0f26a69809533c11f5117eff0501b3a196b05d1c63f",
+  "input_views_sha256": {
+    "odb": "9aca21fa8de1a17290d0a566a0e175f2b4e0d198df93a49f659353e1d2fefac3",
+    "def": "2b80c002b1587069c1f85c4c7f84476a73b8db09d0c39df32a9253e83fd11ce6",
+    "nl": "58e13dcb302266930f8e2509a787481b4c153c7d587362df798693619e17139d",
+    "sdc": "7088ce29adb0f7213b0f3ed4b76177f104819061b87b32bf4f166ff50e055d59"
+  },
+  "runner_sha256": "90d3169ea7e5af59896b98788f64aefe1c2e25dfeef3478cf165a18cab49ce86",
+  "extra_script_sha256": "4c8c610b5181985be0a094606d688f8435fcefaba16206b3cac3215df1622310",
+  "execution_overrides": {
+    "OPENROAD_THREADS": 8
+  },
+  "clock_factors": {
+    "sink_clustering_size": null,
+    "branch_split_max_loads": null
+  },
+  "signoff_exit": 1
+}

@@ -1,0 +1,22 @@
+{
+  "state": "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/implementation/placement-control-01/run/28-openroad-stapostpnr/state_out.json",
+  "state_sha256": "f45bb9d8e23a0008d834df75d103556b3225445e7ecf218966a418df2be62cf5",
+  "gate_failures": [
+    "timing__setup__ws__corner:nom_slow_1p08V_125C: -6.809802692268707 outside [0, inf]",
+    "timing__setup__tns__corner:nom_slow_1p08V_125C: -979.9211106582635 outside [0, 0]",
+    "timing__setup_vio__count__corner:nom_slow_1p08V_125C: 616 outside [0, 0]",
+    "design__max_slew_violation__count__corner:nom_slow_1p08V_125C: 55 outside [0, 0]",
+    "design__max_fanout_violation__count__corner:nom_slow_1p08V_125C: 183 outside [0, 0]",
+    "design__max_slew_violation__count__corner:nom_typ_1p20V_25C: 4 outside [0, 0]",
+    "design__max_fanout_violation__count__corner:nom_typ_1p20V_25C: 183 outside [0, 0]",
+    "design__max_fanout_violation__count__corner:nom_fast_1p32V_m40C: 183 outside [0, 0]"
+  ],
+  "coverage_issues": [],
+  "placement_views_observed": [
+    "nom_typ_1p20V_25C"
+  ],
+  "placement_views_expected": [
+    "nom_typ_1p20V_25C"
+  ],
+  "qualification": "screen_only; final GDS/DRC/LVS/precheck/gate-level verification incomplete"
+}

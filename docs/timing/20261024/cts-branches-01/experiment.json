@@ -1,0 +1,18 @@
+{
+  "trial": "cts_branches",
+  "changes": {
+    "CTS_SINK_CLUSTERING_SIZE": 8
+  },
+  "execution_overrides": {
+    "OPENROAD_THREADS": 8
+  },
+  "extra_steps_sha256": {
+    "OpenROAD.RepairClockFanout": "1f2e16edef46da4b4783ead242b92b08cf31618f055f0658b7127f07a4133ad4"
+  },
+  "archive_root": "/home/shane/eda/timing-20261024/current",
+  "input_stage": "34-openroad-detailedplacement",
+  "input_state_sha256": "7e098ad8ed8e9b740136a6d9dd4924d415de6153161d3b7dd9f01419c3f1955c",
+  "resolved_config_sha256": "a547f6fe37a4a9867c7fee6c4896933ed88dc5d3731a6e29420987265228d2b1",
+  "status": "rejected_or_failed",
+  "error": "Odb.CheckDesignAntennaProperties failed with an unexpected error. Please check '../timing-20261024/cts-branches-01/run/28-odb-checkdesignantennaproperties/odb-checkdesignantennaproperties.log' and unless you wrote the step yourself, file an issue.\nLast 10 lines:\n\t    function(**kwargs)\n\t    ~~~~~~~~^^^^^^^^^^\n\t  File \"/nix/store/6a08ghhhzl5a07nr0ly762yh1ah6m5bj-python3-3.13.13-env/lib/python3.13/site-packages/librelane/scripts/odbpy/check_antenna_properties.py\", line 107, in check_antenna_properties\n\t    cells.append(get_top_level_cell(input_lefs, design_lef, cell_name))\n\t                 ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\t  File \"/nix/store/6a08ghhhzl5a07nr0ly762yh1ah6m5bj-python3-3.13.13-env/lib/python3.13/site-packages/librelane/scripts/odbpy/check_antenna_properties.py\", line 91, in get_top_level_cell\n\t    top_level_cell = next(\n\t        filter(lambda cell: cell.getName() in cell_name, cells.keys())\n\t    )\n\tStopIteration\n"
+}

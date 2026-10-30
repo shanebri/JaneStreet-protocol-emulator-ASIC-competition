@@ -1,0 +1,15 @@
+{
+  "trial": "cts",
+  "changes": {
+    "CTS_SINK_CLUSTERING_SIZE": 8
+  },
+  "execution_overrides": {
+    "OPENROAD_THREADS": 8
+  },
+  "archive_root": "/home/shane/eda/timing-20261024/current",
+  "input_stage": "34-openroad-detailedplacement",
+  "input_state_sha256": "7e098ad8ed8e9b740136a6d9dd4924d415de6153161d3b7dd9f01419c3f1955c",
+  "resolved_config_sha256": "a547f6fe37a4a9867c7fee6c4896933ed88dc5d3731a6e29420987265228d2b1",
+  "status": "rejected_or_failed",
+  "error": "One or more deferred errors were encountered:\nSetup violations found in the following corners:\n* nom_slow_1p08V_125C\nMax Slew violations found in the following corners:\n* nom_slow_1p08V_125C\n* nom_typ_1p20V_25C\nMax Cap violations found in the following corners:\n* nom_fast_1p32V_m40C\n* nom_slow_1p08V_125C\n* nom_typ_1p20V_25C"
+}

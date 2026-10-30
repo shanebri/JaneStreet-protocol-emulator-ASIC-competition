@@ -1,0 +1,157 @@
+...............................
+----------------------------------------------------------------------
+Ran 31 tests in 0.381s
+
+OK
+...
+----------------------------------------------------------------------
+Ran 3 tests in 0.033s
+
+OK
+PASS: FIFO occupancy, full/empty simultaneous traffic, clear and wrap
+/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/pio_fifo_tb.sv:52: $finish called at 11010000 (1ps)
+PASS: frontend all-address branch/read, restart, freeze, wrap, write collision and retention
+/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/frontend_timing_tb.sv:58: $finish called at 22571000 (1ps)
+PASS: host all 4096 address/byte combinations, coherence, holds, gaps, abort/reset/disable/resync
+/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/host_interface_tb.sv:87: $finish called at 1637271000 (1ps)
+PASS: all 4096 mixed value/direction/electrical-mode combinations
+/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/pio_pads_tb.sv:26: $finish called at 8192000 (1ps)
+PASS: subsystem simultaneous FIFO edges and group isolation
+/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/pio_subsystem_tb.sv:111: $finish called at 4360000 (1ps)
+PASS: IO timing differential reference, reset-edge IMEM retention, 27391 cycles
+/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/io_timing_tb.sv:128: $finish called at 547812000 (1ps)
+     -.--ns INFO     gpi                                ..mbed/gpi_embed.cpp:93   in _embed_init_python              Using Python 3.12.4 interpreter at /home/shane/eda/pio-test-venv/bin/python
+     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:79   in gpi_print_registered_impl       VPI registered
+     0.00ns INFO     cocotb                             Running on Icarus Verilog version 12.0 (stable)
+     0.00ns INFO     cocotb                             Seeding Python random module with 1793066022
+     0.00ns INFO     cocotb                             Initialized cocotb v2.0.1 from /home/shane/eda/pio-test-venv/lib/python3.12/site-packages/cocotb
+     0.00ns INFO     cocotb                             Running tests
+     0.00ns INFO     cocotb.regression                  running test.host_bus_atomic_words_and_reset (1/39)
+  6660.00ns INFO     cocotb.regression                  test.host_bus_atomic_words_and_reset passed
+  6660.00ns INFO     cocotb.regression                  running test.variable_shifts_all_widths_both_directions (2/39)
+243700.00ns INFO     cocotb.regression                  test.variable_shifts_all_widths_both_directions passed
+243700.00ns INFO     cocotb.regression                  running test.scratch_branches_mov_and_exec (3/39)
+255620.00ns INFO     cocotb.regression                  test.scratch_branches_mov_and_exec passed
+255620.00ns INFO     cocotb.regression                  running test.fifo_order_backpressure_and_nonblocking (4/39)
+265040.00ns INFO     cocotb.regression                  test.fifo_order_backpressure_and_nonblocking passed
+265040.00ns INFO     cocotb.regression                  running test.autopull_autopush_and_atomic_stall (5/39)
+275640.00ns INFO     cocotb.regression                  test.autopull_autopush_and_atomic_stall passed
+275640.00ns INFO     cocotb.regression                  running test.deterministic_timing_wrap_delays_and_sideset (6/39)
+339380.01ns INFO     cocotb.regression                  test.deterministic_timing_wrap_delays_and_sideset passed
+339380.01ns INFO     cocotb.regression                  running test.input_wait_irq_and_firmware_receive (7/39)
+363520.01ns INFO     cocotb.regression                  test.input_wait_irq_and_firmware_receive passed
+363520.01ns INFO     cocotb.regression                  running test.firmware_uart_full_waveforms_and_example (8/39)
+865360.01ns INFO     cocotb.regression                  test.firmware_uart_full_waveforms_and_example passed
+865360.01ns INFO     cocotb.regression                  running test.firmware_spi_mode0_byte_transfer (9/39)
+                                                            Pin-level SPI slave: launch MISO after falling edges, sample MOSI on rising.
+1603440.01ns INFO     cocotb.regression                  test.firmware_spi_mode0_byte_transfer passed
+1603440.01ns INFO     cocotb.regression                  running test.protection_pause_restart_fault_and_natural_wrap (10/39)
+1616140.01ns INFO     cocotb.regression                  test.protection_pause_restart_fault_and_natural_wrap passed
+1616140.01ns INFO     cocotb.regression                  running test.conditional_transfers_nonblocking_drop_and_snapshot (11/39)
+1625100.01ns INFO     cocotb.regression                  test.conditional_transfers_nonblocking_drop_and_snapshot passed
+1625100.01ns INFO     cocotb.regression                  running test.freeze_delay_and_irq_wait_semantics (12/39)
+1631940.01ns INFO     cocotb.regression                  test.freeze_delay_and_irq_wait_semantics passed
+1631940.01ns INFO     cocotb.regression                  running test_pio21.directions_mapping_counts_autopull_and_exec (13/39)
+2085380.01ns INFO     cocotb.regression                  test_pio21.directions_mapping_counts_autopull_and_exec passed
+2085380.01ns INFO     cocotb.regression                  running test_pio21.input_namespaces_sync_filter_and_physical_readback (14/39)
+2111680.01ns INFO     cocotb.regression                  test_pio21.input_namespaces_sync_filter_and_physical_readback passed
+2111680.01ns INFO     cocotb.regression                  running test_pio21.side_direction_priority_lifecycle_abort (15/39)
+2133682.01ns INFO     cocotb.regression                  test_pio21.side_direction_priority_lifecycle_abort passed
+2133682.01ns INFO     cocotb.regression                  running test_pio21.assembler_revision_and_checked_examples (16/39)
+2133682.02ns INFO     cocotb.regression                  test_pio21.assembler_revision_and_checked_examples passed
+2133682.02ns INFO     cocotb.regression                  running test_pio21.partial_host_commits_and_abandoned_rx_snapshot (17/39)
+2137442.02ns INFO     cocotb.regression                  test_pio21.partial_host_commits_and_abandoned_rx_snapshot passed
+2137442.02ns INFO     cocotb.regression                  running test_pio21.abort_wait_fifo_partial_transport_and_rearm (18/39)
+2153922.02ns INFO     cocotb.regression                  test_pio21.abort_wait_fifo_partial_transport_and_rearm passed
+2153922.02ns INFO     cocotb.regression                  running test_pio21.expanded_value_mov_out_mapping_and_sideset (19/39)
+2284482.02ns INFO     cocotb.regression                  test_pio21.expanded_value_mov_out_mapping_and_sideset passed
+2284482.02ns INFO     cocotb.regression                  running test_pio21.synchronization_latency_and_relative_wait_indices (20/39)
+2294822.02ns INFO     cocotb.regression                  test_pio21.synchronization_latency_and_relative_wait_indices passed
+2294822.02ns INFO     cocotb.regression                  running test_pio21.sideset_all_indices_halt_capabilities_and_invalid_routing (21/39)
+2386982.02ns INFO     cocotb.regression                  test_pio21.sideset_all_indices_halt_capabilities_and_invalid_routing passed
+2386982.02ns INFO     cocotb.regression                  running test_i2c.i2c_rates_payloads_repeated_start_and_remap (22/39)
+3581702.02ns INFO     cocotb.tb                          I2C 400000 Hz pads (0, 1): minimum low/high 1395/1225 ns
+7958422.02ns INFO     cocotb.tb                          I2C 100000 Hz pads (0, 1): minimum low/high 5575/4505 ns
+21594822.02ns INFO     cocotb.tb                          I2C 10000 Hz pads (2, 3): minimum low/high 53095/47705 ns
+22789542.02ns INFO     cocotb.tb                          I2C 400000 Hz pads (3, 1): minimum low/high 1395/1225 ns
+22789542.02ns INFO     cocotb.regression                  test_i2c.i2c_rates_payloads_repeated_start_and_remap passed
+22789542.02ns INFO     cocotb.regression                  running test_i2c.i2c_nacks_at_every_position (23/39)
+23630742.02ns INFO     cocotb.regression                  test_i2c.i2c_nacks_at_every_position passed
+23630742.02ns INFO     cocotb.regression                  running test_i2c.i2c_busy_clear_timeout_abort_and_recovery (24/39)
+25839862.02ns INFO     cocotb.regression                  test_i2c.i2c_busy_clear_timeout_abort_and_recovery passed
+25839862.02ns INFO     cocotb.regression                  running test_i2c.i2c_fifo_streaming_starvation_backpressure (25/39)
+26525702.02ns INFO     cocotb.regression                  test_i2c.i2c_fifo_streaming_starvation_backpressure passed
+26525702.02ns INFO     cocotb.regression                  running test_i2c.i2c_reset_mid_byte_and_permanent_scl_clear_rejected (26/39)
+27713623.02ns INFO     cocotb.regression                  test_i2c.i2c_reset_mid_byte_and_permanent_scl_clear_rejected passed
+27713623.02ns INFO     cocotb.regression                  running test_i2c.i2c_asynchronous_target_phases_and_rise_budget (27/39)
+28185543.03ns INFO     cocotb.regression                  test_i2c.i2c_asynchronous_target_phases_and_rise_budget passed
+28185543.03ns INFO     cocotb.regression                  running test_dual_pio.dual_discovery_and_banked_transactions (28/39)
+28249943.03ns INFO     cocotb.regression                  test_dual_pio.dual_discovery_and_banked_transactions passed
+28249943.03ns INFO     cocotb.regression                  running test_dual_pio.dual_partial_transport_and_disable (29/39)
+28253043.03ns INFO     cocotb.regression                  test_dual_pio.dual_partial_transport_and_disable passed
+28253043.03ns INFO     cocotb.regression                  running test_dual_pio.dual_group_start_zero_cycle_wrap_and_branch (30/39)
+28262523.03ns INFO     cocotb.regression                  test_dual_pio.dual_group_start_zero_cycle_wrap_and_branch passed
+28262523.03ns INFO     cocotb.regression                  running test_dual_pio.dual_independent_dividers_exec_and_load (31/39)
+28271263.03ns INFO     cocotb.regression                  test_dual_pio.dual_independent_dividers_exec_and_load passed
+28271263.03ns INFO     cocotb.regression                  running test_dual_pio.dual_gpio_owner_values_directions_od_and_abort (32/39)
+28342304.03ns INFO     cocotb.regression                  test_dual_pio.dual_gpio_owner_values_directions_od_and_abort passed
+28342304.03ns INFO     cocotb.regression                  running test_dual_pio.dual_conflicting_pin_instructions_and_local_irqs (33/39)
+28350544.03ns INFO     cocotb.regression                  test_dual_pio.dual_conflicting_pin_instructions_and_local_irqs passed
+28350544.03ns INFO     cocotb.regression                  running test_dual_pio.dual_fifo_isolation_clear_and_rx_snapshots (34/39)
+28363344.03ns INFO     cocotb.regression                  test_dual_pio.dual_fifo_isolation_clear_and_rx_snapshots passed
+28363344.03ns INFO     cocotb.regression                  running test_dual_pio.dual_shared_sampling_independent_filters (35/39)
+28369444.03ns INFO     cocotb.regression                  test_dual_pio.dual_shared_sampling_independent_filters passed
+28369444.03ns INFO     cocotb.regression                  running test_dual_pio.dual_i2c_uart_concurrent_roles (36/39)
+28627684.04ns INFO     cocotb.regression                  test_dual_pio.dual_i2c_uart_concurrent_roles passed
+28627684.04ns INFO     cocotb.regression                  running test_dual_pio.dual_all_shift_widths_simultaneous (37/39)
+29068004.04ns INFO     cocotb.regression                  test_dual_pio.dual_all_shift_widths_simultaneous passed
+29068004.04ns INFO     cocotb.regression                  running test_dual_pio.dual_fault_group_priority_and_enable_freeze (38/39)
+29076364.04ns INFO     cocotb.regression                  test_dual_pio.dual_fault_group_priority_and_enable_freeze passed
+29076364.04ns INFO     cocotb.regression                  running test_dual_pio.dual_spi_uart_concurrent (39/39)
+29184444.04ns INFO     cocotb.regression                  test_dual_pio.dual_spi_uart_concurrent passed
+29184444.04ns INFO     cocotb.regression                  ******************************************************************************************************************************
+                                                          ** TEST                                                                  STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
+                                                          ******************************************************************************************************************************
+                                                          ** test.host_bus_atomic_words_and_reset                                   PASS        6660.00           0.03     249031.07  **
+                                                          ** test.variable_shifts_all_widths_both_directions                        PASS      237040.00           0.60     395017.76  **
+                                                          ** test.scratch_branches_mov_and_exec                                     PASS       11920.00           0.03     410976.42  **
+                                                          ** test.fifo_order_backpressure_and_nonblocking                           PASS        9420.00           0.02     406418.12  **
+                                                          ** test.autopull_autopush_and_atomic_stall                                PASS       10600.00           0.04     248875.53  **
+                                                          ** test.deterministic_timing_wrap_delays_and_sideset                      PASS       63740.00           0.12     530614.75  **
+                                                          ** test.input_wait_irq_and_firmware_receive                               PASS       24140.00           0.05     439462.92  **
+                                                          ** test.firmware_uart_full_waveforms_and_example                          PASS      501840.00           0.93     540715.86  **
+                                                          ** test.firmware_spi_mode0_byte_transfer                                  PASS      738080.00           1.72     429443.26  **
+                                                          ** test.protection_pause_restart_fault_and_natural_wrap                   PASS       12700.00           0.03     423152.14  **
+                                                          ** test.conditional_transfers_nonblocking_drop_and_snapshot               PASS        8960.00           0.03     319329.78  **
+                                                          ** test.freeze_delay_and_irq_wait_semantics                               PASS        6840.00           0.02     285551.16  **
+                                                          ** test_pio21.directions_mapping_counts_autopull_and_exec                 PASS      453440.00           1.24     364669.78  **
+                                                          ** test_pio21.input_namespaces_sync_filter_and_physical_readback          PASS       26300.00           0.07     365669.96  **
+                                                          ** test_pio21.side_direction_priority_lifecycle_abort                     PASS       22002.00           0.05     429967.56  **
+                                                          ** test_pio21.assembler_revision_and_checked_examples                     PASS           0.00           0.03          0.00  **
+                                                          ** test_pio21.partial_host_commits_and_abandoned_rx_snapshot              PASS        3760.00           0.01     265127.57  **
+                                                          ** test_pio21.abort_wait_fifo_partial_transport_and_rearm                 PASS       16480.00           0.04     388054.06  **
+                                                          ** test_pio21.expanded_value_mov_out_mapping_and_sideset                  PASS      130560.00           0.32     407085.33  **
+                                                          ** test_pio21.synchronization_latency_and_relative_wait_indices           PASS       10340.00           0.03     358022.89  **
+                                                          ** test_pio21.sideset_all_indices_halt_capabilities_and_invalid_routing   PASS       92160.00           0.24     384415.86  **
+                                                          ** test_i2c.i2c_rates_payloads_repeated_start_and_remap                   PASS    20402560.00         147.59     138241.77  **
+                                                          ** test_i2c.i2c_nacks_at_every_position                                   PASS      841200.00           7.24     116173.32  **
+                                                          ** test_i2c.i2c_busy_clear_timeout_abort_and_recovery                     PASS     2209120.00          18.03     122522.11  **
+                                                          ** test_i2c.i2c_fifo_streaming_starvation_backpressure                    PASS      685840.00           5.34     128463.39  **
+                                                          ** test_i2c.i2c_reset_mid_byte_and_permanent_scl_clear_rejected           PASS     1187921.00          10.26     115833.26  **
+                                                          ** test_i2c.i2c_asynchronous_target_phases_and_rise_budget                PASS      471920.00           3.39     139373.35  **
+                                                          ** test_dual_pio.dual_discovery_and_banked_transactions                   PASS       64400.00           0.18     362051.43  **
+                                                          ** test_dual_pio.dual_partial_transport_and_disable                       PASS        3100.00           0.01     320278.40  **
+                                                          ** test_dual_pio.dual_group_start_zero_cycle_wrap_and_branch              PASS        9480.00           0.03     303017.85  **
+                                                          ** test_dual_pio.dual_independent_dividers_exec_and_load                  PASS        8740.00           0.02     354583.08  **
+                                                          ** test_dual_pio.dual_gpio_owner_values_directions_od_and_abort           PASS       71041.00           0.21     335479.91  **
+                                                          ** test_dual_pio.dual_conflicting_pin_instructions_and_local_irqs         PASS        8240.00           0.02     355844.74  **
+                                                          ** test_dual_pio.dual_fifo_isolation_clear_and_rx_snapshots               PASS       12800.00           0.03     376968.44  **
+                                                          ** test_dual_pio.dual_shared_sampling_independent_filters                 PASS        6100.00           0.02     309685.11  **
+                                                          ** test_dual_pio.dual_i2c_uart_concurrent_roles                           PASS      258240.00           1.69     152620.96  **
+                                                          ** test_dual_pio.dual_all_shift_widths_simultaneous                       PASS      440320.00           1.51     291983.64  **
+                                                          ** test_dual_pio.dual_fault_group_priority_and_enable_freeze              PASS        8360.00           0.04     206557.54  **
+                                                          ** test_dual_pio.dual_spi_uart_concurrent                                 PASS      108080.00           0.26     408208.08  **
+                                                          ******************************************************************************************************************************
+                                                          ** TESTS=39 PASS=39 FAIL=0 SKIP=0                                                 29184444.04         201.67     144712.67  **
+                                                          ******************************************************************************************************************************
+FST info: dumpfile tb.fst opened for output.

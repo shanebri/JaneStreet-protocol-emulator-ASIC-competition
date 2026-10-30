@@ -1,0 +1,98 @@
+{
+  "status": "fail",
+  "routed_nets": 25361,
+  "metal_rectangles": 557155,
+  "dbu_per_micron": 1000,
+  "scope": "Reject contacts between different signal-net wires in the serialized ODB.\n\nThis independent rectangle check covers default-width rectilinear signal wires,\nvia metal enclosures and patch metal. It does not replace pin connectivity,\nspacing DRC, or GDS LVS. Unsupported geometry fails closed.\nRun with OpenROAD's Python interpreter and the matching DEF.\n",
+  "contacts": [
+    {
+      "nets": [
+        "_02546_",
+        "pio.engines\\[0\\].core.fetch.words\\[18\\]\\[14\\]"
+      ],
+      "layer": "Metal2",
+      "rectangles": [
+        [
+          841340,
+          251480,
+          842500,
+          251680
+        ],
+        [
+          842300,
+          250640,
+          842500,
+          251680
+        ]
+      ]
+    },
+    {
+      "nets": [
+        "_02559_",
+        "net6525"
+      ],
+      "layer": "Metal2",
+      "rectangles": [
+        [
+          834620,
+          228380,
+          834820,
+          288640
+        ],
+        [
+          834620,
+          259460,
+          834820,
+          260920
+        ]
+      ]
+    },
+    {
+      "nets": [
+        "clknet_fanoutfix_1069827",
+        "net6629"
+      ],
+      "layer": "Metal2",
+      "rectangles": [
+        [
+          844220,
+          251480,
+          844900,
+          251680
+        ],
+        [
+          844700,
+          239720,
+          844900,
+          251680
+        ]
+      ]
+    },
+    {
+      "nets": [
+        "net10260",
+        "pio.engines\\[0\\].core.fetch.words\\[18\\]\\[14\\]"
+      ],
+      "layer": "Metal2",
+      "rectangles": [
+        [
+          843260,
+          249380,
+          843460,
+          251680
+        ],
+        [
+          843260,
+          247700,
+          843460,
+          251680
+        ]
+      ]
+    }
+  ],
+  "sha256": {
+    "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/production_final_20261028_01/run/57-openroad-detailedrouting-3/tt_um_shanebri_top.odb": "c506f16bdde280ef3cd6d2894f961afc63df0d319fe7f67fca9b9a3db2bf771d",
+    "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/production_final_20261028_01/run/57-openroad-detailedrouting-3/tt_um_shanebri_top.def": "ce75fa6e37f66ff4e3023883e3a8c8839704911bf5032ca87bba133e59335618",
+    "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/tools/timing/audit_wire_contacts.py": "60f476879394acc7cfe7c1924dd9eaa4d718a32da834343f2bd6ca1964cf19a1"
+  }
+}

@@ -1,0 +1,529 @@
+{
+  "status": "complete",
+  "rows": [
+    {
+      "trial": "clock_control",
+      "factors": {
+        "sink_clustering_size": null,
+        "branch_split_max_loads": null
+      },
+      "setup_ws_ns": -0.9818421908964152,
+      "setup_tns_ns": -13.117230339864813,
+      "setup_endpoints": 19,
+      "slow_slew": 30,
+      "fanout_per_corner": {
+        "nom_slow_1p08V_125C": 172,
+        "nom_typ_1p20V_25C": 172,
+        "nom_fast_1p32V_m40C": 172
+      },
+      "cap_per_corner": {
+        "nom_slow_1p08V_125C": 0,
+        "nom_typ_1p20V_25C": 0,
+        "nom_fast_1p32V_m40C": 0
+      },
+      "filtered_gaps_per_corner": {
+        "nom_slow_1p08V_125C": 0,
+        "nom_typ_1p20V_25C": 0,
+        "nom_fast_1p32V_m40C": 0
+      },
+      "hold_ws_per_corner": {
+        "nom_slow_1p08V_125C": 0.650191807686274,
+        "nom_typ_1p20V_25C": 0.3185308773571007,
+        "nom_fast_1p32V_m40C": 0.12454559958095741
+      },
+      "added_split_buffers": 0,
+      "post_cts_topology": {
+        "clock_sink_count": 2421,
+        "clock_buffer_count": 250,
+        "dummy_clock_load_count": 104,
+        "root_fanout": 1,
+        "max_buffer_fanout": 19,
+        "clock_buffer_outputs_above8": 166,
+        "sink_buffer_depth_histogram": {
+          "4": 2421
+        },
+        "clock_buffer_fanout_histogram": {
+          "0": 43,
+          "4": 1,
+          "6": 33,
+          "8": 7,
+          "10": 5,
+          "11": 6,
+          "12": 10,
+          "13": 11,
+          "14": 13,
+          "15": 32,
+          "16": 45,
+          "17": 38,
+          "18": 5,
+          "19": 1
+        }
+      },
+      "postroute_topology": {
+        "clock_sink_count": 2421,
+        "clock_buffer_count": 250,
+        "dummy_clock_load_count": 104,
+        "root_fanout": 1,
+        "max_buffer_fanout": 19,
+        "clock_buffer_outputs_above8": 166,
+        "sink_buffer_depth_histogram": {
+          "4": 2421
+        },
+        "clock_buffer_fanout_histogram": {
+          "0": 43,
+          "4": 1,
+          "6": 33,
+          "8": 7,
+          "10": 5,
+          "11": 6,
+          "12": 10,
+          "13": 11,
+          "14": 13,
+          "15": 32,
+          "16": 45,
+          "17": 38,
+          "18": 5,
+          "19": 1
+        }
+      },
+      "clock_latency": {
+        "nom_slow_1p08V_125C": {
+          "rise": {
+            "min_ns": 0.990803,
+            "max_ns": 1.29122,
+            "spread_ns": 0.30041700000000005
+          },
+          "fall": {
+            "min_ns": 0.946187,
+            "max_ns": 1.225909,
+            "spread_ns": 0.2797219999999999
+          }
+        },
+        "nom_typ_1p20V_25C": {
+          "rise": {
+            "min_ns": 0.641639,
+            "max_ns": 0.842635,
+            "spread_ns": 0.20099600000000006
+          },
+          "fall": {
+            "min_ns": 0.607792,
+            "max_ns": 0.788738,
+            "spread_ns": 0.18094600000000005
+          }
+        },
+        "nom_fast_1p32V_m40C": {
+          "rise": {
+            "min_ns": 0.430047,
+            "max_ns": 0.572268,
+            "spread_ns": 0.142221
+          },
+          "fall": {
+            "min_ns": 0.414466,
+            "max_ns": 0.549538,
+            "spread_ns": 0.13507199999999997
+          }
+        }
+      },
+      "replay_sessions": 9,
+      "final_route_drc": 0,
+      "antenna_violations": 0,
+      "strict_signoff_failures": [
+        "timing__setup__ws__corner:nom_slow_1p08V_125C: -0.9818421908964152 outside [0, inf]",
+        "timing__setup__tns__corner:nom_slow_1p08V_125C: -13.117230339864813 outside [0, 0]",
+        "timing__setup_vio__count__corner:nom_slow_1p08V_125C: 19 outside [0, 0]",
+        "design__max_slew_violation__count__corner:nom_slow_1p08V_125C: 30 outside [0, 0]",
+        "design__max_fanout_violation__count__corner:nom_slow_1p08V_125C: 172 outside [0, 0]",
+        "design__max_fanout_violation__count__corner:nom_typ_1p20V_25C: 172 outside [0, 0]",
+        "design__max_fanout_violation__count__corner:nom_fast_1p32V_m40C: 172 outside [0, 0]"
+      ]
+    },
+    {
+      "trial": "clock_cluster8",
+      "factors": {
+        "sink_clustering_size": 8,
+        "branch_split_max_loads": null
+      },
+      "setup_ws_ns": -1.5911006296185972,
+      "setup_tns_ns": -22.32437231596637,
+      "setup_endpoints": 28,
+      "slow_slew": 32,
+      "fanout_per_corner": {
+        "nom_slow_1p08V_125C": 8,
+        "nom_typ_1p20V_25C": 8,
+        "nom_fast_1p32V_m40C": 8
+      },
+      "cap_per_corner": {
+        "nom_slow_1p08V_125C": 0,
+        "nom_typ_1p20V_25C": 0,
+        "nom_fast_1p32V_m40C": 0
+      },
+      "filtered_gaps_per_corner": {
+        "nom_slow_1p08V_125C": 0,
+        "nom_typ_1p20V_25C": 0,
+        "nom_fast_1p32V_m40C": 0
+      },
+      "hold_ws_per_corner": {
+        "nom_slow_1p08V_125C": 0.6505387523912817,
+        "nom_typ_1p20V_25C": 0.3125081393227795,
+        "nom_fast_1p32V_m40C": 0.12234102965860974
+      },
+      "added_split_buffers": 0,
+      "post_cts_topology": {
+        "clock_sink_count": 2421,
+        "clock_buffer_count": 493,
+        "dummy_clock_load_count": 107,
+        "root_fanout": 1,
+        "max_buffer_fanout": 8,
+        "clock_buffer_outputs_above8": 0,
+        "sink_buffer_depth_histogram": {
+          "4": 10,
+          "5": 2411
+        },
+        "clock_buffer_fanout_histogram": {
+          "0": 40,
+          "2": 32,
+          "3": 11,
+          "4": 25,
+          "5": 21,
+          "6": 85,
+          "7": 24,
+          "8": 255
+        }
+      },
+      "postroute_topology": {
+        "clock_sink_count": 2421,
+        "clock_buffer_count": 493,
+        "dummy_clock_load_count": 107,
+        "root_fanout": 1,
+        "max_buffer_fanout": 8,
+        "clock_buffer_outputs_above8": 0,
+        "sink_buffer_depth_histogram": {
+          "4": 10,
+          "5": 2411
+        },
+        "clock_buffer_fanout_histogram": {
+          "0": 40,
+          "2": 32,
+          "3": 11,
+          "4": 25,
+          "5": 21,
+          "6": 85,
+          "7": 24,
+          "8": 255
+        }
+      },
+      "clock_latency": {
+        "nom_slow_1p08V_125C": {
+          "rise": {
+            "min_ns": 0.923733,
+            "max_ns": 1.312809,
+            "spread_ns": 0.38907599999999987
+          },
+          "fall": {
+            "min_ns": 0.888716,
+            "max_ns": 1.260213,
+            "spread_ns": 0.3714970000000001
+          }
+        },
+        "nom_typ_1p20V_25C": {
+          "rise": {
+            "min_ns": 0.599803,
+            "max_ns": 0.854476,
+            "spread_ns": 0.25467300000000004
+          },
+          "fall": {
+            "min_ns": 0.571686,
+            "max_ns": 0.814164,
+            "spread_ns": 0.24247799999999997
+          }
+        },
+        "nom_fast_1p32V_m40C": {
+          "rise": {
+            "min_ns": 0.403805,
+            "max_ns": 0.57578,
+            "spread_ns": 0.17197499999999993
+          },
+          "fall": {
+            "min_ns": 0.391214,
+            "max_ns": 0.556933,
+            "spread_ns": 0.165719
+          }
+        }
+      },
+      "replay_sessions": 9,
+      "final_route_drc": 0,
+      "antenna_violations": 0,
+      "strict_signoff_failures": [
+        "timing__setup__ws__corner:nom_slow_1p08V_125C: -1.5911006296185972 outside [0, inf]",
+        "timing__setup__tns__corner:nom_slow_1p08V_125C: -22.32437231596637 outside [0, 0]",
+        "timing__setup_vio__count__corner:nom_slow_1p08V_125C: 28 outside [0, 0]",
+        "design__max_slew_violation__count__corner:nom_slow_1p08V_125C: 32 outside [0, 0]",
+        "design__max_fanout_violation__count__corner:nom_slow_1p08V_125C: 8 outside [0, 0]",
+        "design__max_fanout_violation__count__corner:nom_typ_1p20V_25C: 8 outside [0, 0]",
+        "design__max_fanout_violation__count__corner:nom_fast_1p32V_m40C: 8 outside [0, 0]"
+      ]
+    },
+    {
+      "trial": "clock_split8",
+      "factors": {
+        "sink_clustering_size": null,
+        "branch_split_max_loads": 8
+      },
+      "setup_ws_ns": -1.1847607674705534,
+      "setup_tns_ns": -16.385711029588666,
+      "setup_endpoints": 23,
+      "slow_slew": 28,
+      "fanout_per_corner": {
+        "nom_slow_1p08V_125C": 6,
+        "nom_typ_1p20V_25C": 6,
+        "nom_fast_1p32V_m40C": 6
+      },
+      "cap_per_corner": {
+        "nom_slow_1p08V_125C": 0,
+        "nom_typ_1p20V_25C": 0,
+        "nom_fast_1p32V_m40C": 0
+      },
+      "filtered_gaps_per_corner": {
+        "nom_slow_1p08V_125C": 0,
+        "nom_typ_1p20V_25C": 0,
+        "nom_fast_1p32V_m40C": 0
+      },
+      "hold_ws_per_corner": {
+        "nom_slow_1p08V_125C": 0.6484976073027808,
+        "nom_typ_1p20V_25C": 0.3172349139838034,
+        "nom_fast_1p32V_m40C": 0.11736334458692431
+      },
+      "added_split_buffers": 376,
+      "post_cts_topology": {
+        "clock_sink_count": 2421,
+        "clock_buffer_count": 626,
+        "dummy_clock_load_count": 104,
+        "root_fanout": 1,
+        "max_buffer_fanout": 8,
+        "clock_buffer_outputs_above8": 0,
+        "sink_buffer_depth_histogram": {
+          "4": 28,
+          "5": 2393
+        },
+        "clock_buffer_fanout_histogram": {
+          "0": 43,
+          "1": 38,
+          "2": 132,
+          "3": 51,
+          "4": 11,
+          "5": 11,
+          "6": 46,
+          "7": 32,
+          "8": 262
+        }
+      },
+      "postroute_topology": {
+        "clock_sink_count": 2421,
+        "clock_buffer_count": 626,
+        "dummy_clock_load_count": 104,
+        "root_fanout": 1,
+        "max_buffer_fanout": 8,
+        "clock_buffer_outputs_above8": 0,
+        "sink_buffer_depth_histogram": {
+          "4": 28,
+          "5": 2393
+        },
+        "clock_buffer_fanout_histogram": {
+          "0": 43,
+          "1": 38,
+          "2": 132,
+          "3": 51,
+          "4": 11,
+          "5": 11,
+          "6": 46,
+          "7": 32,
+          "8": 262
+        }
+      },
+      "clock_latency": {
+        "nom_slow_1p08V_125C": {
+          "rise": {
+            "min_ns": 0.970103,
+            "max_ns": 1.377784,
+            "spread_ns": 0.40768099999999985
+          },
+          "fall": {
+            "min_ns": 0.92824,
+            "max_ns": 1.320498,
+            "spread_ns": 0.392258
+          }
+        },
+        "nom_typ_1p20V_25C": {
+          "rise": {
+            "min_ns": 0.62836,
+            "max_ns": 0.897148,
+            "spread_ns": 0.2687879999999999
+          },
+          "fall": {
+            "min_ns": 0.596946,
+            "max_ns": 0.852276,
+            "spread_ns": 0.25533000000000006
+          }
+        },
+        "nom_fast_1p32V_m40C": {
+          "rise": {
+            "min_ns": 0.422587,
+            "max_ns": 0.610448,
+            "spread_ns": 0.187861
+          },
+          "fall": {
+            "min_ns": 0.408378,
+            "max_ns": 0.592466,
+            "spread_ns": 0.18408800000000003
+          }
+        }
+      },
+      "replay_sessions": 9,
+      "final_route_drc": 0,
+      "antenna_violations": 0,
+      "strict_signoff_failures": [
+        "timing__setup__ws__corner:nom_slow_1p08V_125C: -1.1847607674705534 outside [0, inf]",
+        "timing__setup__tns__corner:nom_slow_1p08V_125C: -16.385711029588666 outside [0, 0]",
+        "timing__setup_vio__count__corner:nom_slow_1p08V_125C: 23 outside [0, 0]",
+        "design__max_slew_violation__count__corner:nom_slow_1p08V_125C: 28 outside [0, 0]",
+        "design__max_fanout_violation__count__corner:nom_slow_1p08V_125C: 6 outside [0, 0]",
+        "design__max_fanout_violation__count__corner:nom_typ_1p20V_25C: 6 outside [0, 0]",
+        "design__max_fanout_violation__count__corner:nom_fast_1p32V_m40C: 6 outside [0, 0]"
+      ]
+    },
+    {
+      "trial": "clock_cap8",
+      "factors": {
+        "sink_clustering_size": 8,
+        "branch_split_max_loads": 8
+      },
+      "setup_ws_ns": -1.5911006296185972,
+      "setup_tns_ns": -22.32437231596637,
+      "setup_endpoints": 28,
+      "slow_slew": 32,
+      "fanout_per_corner": {
+        "nom_slow_1p08V_125C": 8,
+        "nom_typ_1p20V_25C": 8,
+        "nom_fast_1p32V_m40C": 8
+      },
+      "cap_per_corner": {
+        "nom_slow_1p08V_125C": 0,
+        "nom_typ_1p20V_25C": 0,
+        "nom_fast_1p32V_m40C": 0
+      },
+      "filtered_gaps_per_corner": {
+        "nom_slow_1p08V_125C": 0,
+        "nom_typ_1p20V_25C": 0,
+        "nom_fast_1p32V_m40C": 0
+      },
+      "hold_ws_per_corner": {
+        "nom_slow_1p08V_125C": 0.6505387523912817,
+        "nom_typ_1p20V_25C": 0.3125081393227795,
+        "nom_fast_1p32V_m40C": 0.12234102965860974
+      },
+      "added_split_buffers": 0,
+      "post_cts_topology": {
+        "clock_sink_count": 2421,
+        "clock_buffer_count": 493,
+        "dummy_clock_load_count": 107,
+        "root_fanout": 1,
+        "max_buffer_fanout": 8,
+        "clock_buffer_outputs_above8": 0,
+        "sink_buffer_depth_histogram": {
+          "4": 10,
+          "5": 2411
+        },
+        "clock_buffer_fanout_histogram": {
+          "0": 40,
+          "2": 32,
+          "3": 11,
+          "4": 25,
+          "5": 21,
+          "6": 85,
+          "7": 24,
+          "8": 255
+        }
+      },
+      "postroute_topology": {
+        "clock_sink_count": 2421,
+        "clock_buffer_count": 493,
+        "dummy_clock_load_count": 107,
+        "root_fanout": 1,
+        "max_buffer_fanout": 8,
+        "clock_buffer_outputs_above8": 0,
+        "sink_buffer_depth_histogram": {
+          "4": 10,
+          "5": 2411
+        },
+        "clock_buffer_fanout_histogram": {
+          "0": 40,
+          "2": 32,
+          "3": 11,
+          "4": 25,
+          "5": 21,
+          "6": 85,
+          "7": 24,
+          "8": 255
+        }
+      },
+      "clock_latency": {
+        "nom_slow_1p08V_125C": {
+          "rise": {
+            "min_ns": 0.923733,
+            "max_ns": 1.312809,
+            "spread_ns": 0.38907599999999987
+          },
+          "fall": {
+            "min_ns": 0.888716,
+            "max_ns": 1.260213,
+            "spread_ns": 0.3714970000000001
+          }
+        },
+        "nom_typ_1p20V_25C": {
+          "rise": {
+            "min_ns": 0.599803,
+            "max_ns": 0.854476,
+            "spread_ns": 0.25467300000000004
+          },
+          "fall": {
+            "min_ns": 0.571686,
+            "max_ns": 0.814164,
+            "spread_ns": 0.24247799999999997
+          }
+        },
+        "nom_fast_1p32V_m40C": {
+          "rise": {
+            "min_ns": 0.403805,
+            "max_ns": 0.57578,
+            "spread_ns": 0.17197499999999993
+          },
+          "fall": {
+            "min_ns": 0.391214,
+            "max_ns": 0.556933,
+            "spread_ns": 0.165719
+          }
+        }
+      },
+      "replay_sessions": 9,
+      "final_route_drc": 0,
+      "antenna_violations": 0,
+      "strict_signoff_failures": [
+        "timing__setup__ws__corner:nom_slow_1p08V_125C: -1.5911006296185972 outside [0, inf]",
+        "timing__setup__tns__corner:nom_slow_1p08V_125C: -22.32437231596637 outside [0, 0]",
+        "timing__setup_vio__count__corner:nom_slow_1p08V_125C: 28 outside [0, 0]",
+        "design__max_slew_violation__count__corner:nom_slow_1p08V_125C: 32 outside [0, 0]",
+        "design__max_fanout_violation__count__corner:nom_slow_1p08V_125C: 8 outside [0, 0]",
+        "design__max_fanout_violation__count__corner:nom_typ_1p20V_25C: 8 outside [0, 0]",
+        "design__max_fanout_violation__count__corner:nom_fast_1p32V_m40C: 8 outside [0, 0]"
+      ]
+    }
+  ],
+  "setup_ws_effects_ns": {
+    "cluster8_vs_control": -0.609258438722182,
+    "split8_vs_control": -0.20291857657413814,
+    "split8_after_cluster8": 0.0,
+    "interaction": 0.20291857657413814
+  },
+  "effect_sign": "positive means improved setup slack; attribution requires complete annotation",
+  "qualification": "controlled post-route screens; strict signoff and full qualification still apply"
+}

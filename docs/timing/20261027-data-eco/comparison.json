@@ -1,0 +1,964 @@
+{
+  "status": "complete",
+  "rows": [
+    {
+      "trial": "control",
+      "attempt": "control-01",
+      "operations": [],
+      "setup_ws_ns": -0.971601493427646,
+      "setup_tns_ns": -13.406668155105711,
+      "setup_endpoints": 22,
+      "slow_slew": 62,
+      "fanout": {
+        "nom_slow_1p08V_125C": 12,
+        "nom_typ_1p20V_25C": 12,
+        "nom_fast_1p32V_m40C": 12
+      },
+      "cap": {
+        "nom_slow_1p08V_125C": 0,
+        "nom_typ_1p20V_25C": 0,
+        "nom_fast_1p32V_m40C": 0
+      },
+      "hold_ws_ns": {
+        "nom_slow_1p08V_125C": 0.6304916767132601,
+        "nom_typ_1p20V_25C": 0.30664338602933056,
+        "nom_fast_1p32V_m40C": 0.11865636586912313
+      },
+      "filtered_gaps": {
+        "nom_slow_1p08V_125C": 0,
+        "nom_typ_1p20V_25C": 0,
+        "nom_fast_1p32V_m40C": 0
+      },
+      "clock_sink_count": 2421,
+      "clock_buffer_outputs_above8": 0,
+      "added_buffers": 0,
+      "replacements": {},
+      "route_drc": 0,
+      "antenna_violations": 0,
+      "strict_gate_failures": [
+        "timing__setup__ws__corner:nom_slow_1p08V_125C: -0.971601493427646 outside [0, inf]",
+        "timing__setup__tns__corner:nom_slow_1p08V_125C: -13.406668155105711 outside [0, 0]",
+        "timing__setup_vio__count__corner:nom_slow_1p08V_125C: 22 outside [0, 0]",
+        "design__max_slew_violation__count__corner:nom_slow_1p08V_125C: 62 outside [0, 0]",
+        "design__max_fanout_violation__count__corner:nom_slow_1p08V_125C: 12 outside [0, 0]",
+        "design__max_fanout_violation__count__corner:nom_typ_1p20V_25C: 12 outside [0, 0]",
+        "design__max_fanout_violation__count__corner:nom_fast_1p32V_m40C: 12 outside [0, 0]"
+      ],
+      "replay_sessions": 9,
+      "annotation_complete": true,
+      "strict_gate_pass": false,
+      "delta_vs_matched_control": {
+        "setup_ws_ns": 0.0,
+        "setup_tns_ns": 0.0,
+        "setup_endpoints": 0,
+        "slow_slew": 0,
+        "fanout": 0
+      }
+    },
+    {
+      "trial": "critical_size",
+      "attempt": "critical_size-01",
+      "operations": [
+        {
+          "kind": "size",
+          "instance": "_23190_",
+          "old": "sg13cmos5l_a21oi_1",
+          "new": "sg13cmos5l_a21oi_2"
+        }
+      ],
+      "setup_ws_ns": -1.1518093471677489,
+      "setup_tns_ns": -16.413562529261316,
+      "setup_endpoints": 24,
+      "slow_slew": 60,
+      "fanout": {
+        "nom_slow_1p08V_125C": 10,
+        "nom_typ_1p20V_25C": 10,
+        "nom_fast_1p32V_m40C": 10
+      },
+      "cap": {
+        "nom_slow_1p08V_125C": 0,
+        "nom_typ_1p20V_25C": 0,
+        "nom_fast_1p32V_m40C": 0
+      },
+      "hold_ws_ns": {
+        "nom_slow_1p08V_125C": 0.6329564829199399,
+        "nom_typ_1p20V_25C": 0.3080833453329942,
+        "nom_fast_1p32V_m40C": 0.11959045203730927
+      },
+      "filtered_gaps": {
+        "nom_slow_1p08V_125C": 0,
+        "nom_typ_1p20V_25C": 0,
+        "nom_fast_1p32V_m40C": 0
+      },
+      "clock_sink_count": 2421,
+      "clock_buffer_outputs_above8": 0,
+      "added_buffers": 0,
+      "replacements": {
+        "_23190_": [
+          "sg13cmos5l_a21oi_1",
+          "sg13cmos5l_a21oi_2"
+        ]
+      },
+      "route_drc": 0,
+      "antenna_violations": 0,
+      "strict_gate_failures": [
+        "timing__setup__ws__corner:nom_slow_1p08V_125C: -1.1518093471677489 outside [0, inf]",
+        "timing__setup__tns__corner:nom_slow_1p08V_125C: -16.413562529261316 outside [0, 0]",
+        "timing__setup_vio__count__corner:nom_slow_1p08V_125C: 24 outside [0, 0]",
+        "design__max_slew_violation__count__corner:nom_slow_1p08V_125C: 60 outside [0, 0]",
+        "design__max_fanout_violation__count__corner:nom_slow_1p08V_125C: 10 outside [0, 0]",
+        "design__max_fanout_violation__count__corner:nom_typ_1p20V_25C: 10 outside [0, 0]",
+        "design__max_fanout_violation__count__corner:nom_fast_1p32V_m40C: 10 outside [0, 0]"
+      ],
+      "replay_sessions": 9,
+      "annotation_complete": true,
+      "strict_gate_pass": false,
+      "delta_vs_matched_control": {
+        "setup_ws_ns": -0.18020785374010284,
+        "setup_tns_ns": -3.006894374155605,
+        "setup_endpoints": 2,
+        "slow_slew": -2,
+        "fanout": -2
+      }
+    },
+    {
+      "trial": "critical_buffer",
+      "attempt": "critical_buffer-01",
+      "operations": [
+        {
+          "kind": "buffer",
+          "target": "_23190_/Y",
+          "old": "sg13cmos5l_a21oi_1",
+          "max_loads": 1000
+        }
+      ],
+      "setup_ws_ns": -0.8576339881021836,
+      "setup_tns_ns": -9.45085636500315,
+      "setup_endpoints": 20,
+      "slow_slew": 51,
+      "fanout": {
+        "nom_slow_1p08V_125C": 11,
+        "nom_typ_1p20V_25C": 11,
+        "nom_fast_1p32V_m40C": 11
+      },
+      "cap": {
+        "nom_slow_1p08V_125C": 0,
+        "nom_typ_1p20V_25C": 0,
+        "nom_fast_1p32V_m40C": 0
+      },
+      "hold_ws_ns": {
+        "nom_slow_1p08V_125C": 0.6373957098094535,
+        "nom_typ_1p20V_25C": 0.3105659151085704,
+        "nom_fast_1p32V_m40C": 0.12100915056945005
+      },
+      "filtered_gaps": {
+        "nom_slow_1p08V_125C": 0,
+        "nom_typ_1p20V_25C": 0,
+        "nom_fast_1p32V_m40C": 0
+      },
+      "clock_sink_count": 2421,
+      "clock_buffer_outputs_above8": 0,
+      "added_buffers": 1,
+      "replacements": {},
+      "route_drc": 0,
+      "antenna_violations": 0,
+      "strict_gate_failures": [
+        "timing__setup__ws__corner:nom_slow_1p08V_125C: -0.8576339881021836 outside [0, inf]",
+        "timing__setup__tns__corner:nom_slow_1p08V_125C: -9.45085636500315 outside [0, 0]",
+        "timing__setup_vio__count__corner:nom_slow_1p08V_125C: 20 outside [0, 0]",
+        "design__max_slew_violation__count__corner:nom_slow_1p08V_125C: 51 outside [0, 0]",
+        "design__max_fanout_violation__count__corner:nom_slow_1p08V_125C: 11 outside [0, 0]",
+        "design__max_fanout_violation__count__corner:nom_typ_1p20V_25C: 11 outside [0, 0]",
+        "design__max_fanout_violation__count__corner:nom_fast_1p32V_m40C: 11 outside [0, 0]"
+      ],
+      "replay_sessions": 9,
+      "annotation_complete": true,
+      "strict_gate_pass": false,
+      "delta_vs_matched_control": {
+        "setup_ws_ns": 0.1139675053254624,
+        "setup_tns_ns": 3.955811790102562,
+        "setup_endpoints": -2,
+        "slow_slew": -11,
+        "fanout": -1
+      }
+    },
+    {
+      "trial": "fanout_uio3",
+      "attempt": "fanout_uio3-02",
+      "operations": [
+        {
+          "kind": "buffer",
+          "target": "uio_in[3]",
+          "old": null,
+          "max_loads": 8
+        }
+      ],
+      "setup_ws_ns": -1.3128840608495493,
+      "setup_tns_ns": -16.79550235317328,
+      "setup_endpoints": 28,
+      "slow_slew": 52,
+      "fanout": {
+        "nom_slow_1p08V_125C": 7,
+        "nom_typ_1p20V_25C": 7,
+        "nom_fast_1p32V_m40C": 7
+      },
+      "cap": {
+        "nom_slow_1p08V_125C": 0,
+        "nom_typ_1p20V_25C": 0,
+        "nom_fast_1p32V_m40C": 0
+      },
+      "hold_ws_ns": {
+        "nom_slow_1p08V_125C": 0.6398654009975798,
+        "nom_typ_1p20V_25C": 0.31191983212539215,
+        "nom_fast_1p32V_m40C": 0.12181384024045655
+      },
+      "filtered_gaps": {
+        "nom_slow_1p08V_125C": 1,
+        "nom_typ_1p20V_25C": 1,
+        "nom_fast_1p32V_m40C": 1
+      },
+      "clock_sink_count": 2421,
+      "clock_buffer_outputs_above8": 0,
+      "added_buffers": 3,
+      "replacements": {},
+      "route_drc": 0,
+      "antenna_violations": 0,
+      "strict_gate_failures": [
+        "timing__setup__ws__corner:nom_slow_1p08V_125C: -1.3128840608495493 outside [0, inf]",
+        "timing__setup__tns__corner:nom_slow_1p08V_125C: -16.79550235317328 outside [0, 0]",
+        "timing__setup_vio__count__corner:nom_slow_1p08V_125C: 28 outside [0, 0]",
+        "design__max_slew_violation__count__corner:nom_slow_1p08V_125C: 52 outside [0, 0]",
+        "design__max_fanout_violation__count__corner:nom_slow_1p08V_125C: 7 outside [0, 0]",
+        "timing__unannotated_net_filtered__count__corner:nom_slow_1p08V_125C: 1 outside [0, 0]",
+        "design__max_fanout_violation__count__corner:nom_typ_1p20V_25C: 7 outside [0, 0]",
+        "timing__unannotated_net_filtered__count__corner:nom_typ_1p20V_25C: 1 outside [0, 0]",
+        "design__max_fanout_violation__count__corner:nom_fast_1p32V_m40C: 7 outside [0, 0]",
+        "timing__unannotated_net_filtered__count__corner:nom_fast_1p32V_m40C: 1 outside [0, 0]"
+      ],
+      "replay_sessions": 9,
+      "annotation_complete": false,
+      "strict_gate_pass": false,
+      "delta_vs_matched_control": {
+        "setup_ws_ns": -0.3412825674219033,
+        "setup_tns_ns": -3.3888341980675687,
+        "setup_endpoints": 6,
+        "slow_slew": -10,
+        "fanout": -5
+      }
+    },
+    {
+      "trial": "fanout_uio2",
+      "attempt": "fanout_uio2-02",
+      "operations": [
+        {
+          "kind": "buffer",
+          "target": "uio_in[2]",
+          "old": null,
+          "max_loads": 8
+        }
+      ],
+      "setup_ws_ns": -0.9791900900601841,
+      "setup_tns_ns": -11.336263804097145,
+      "setup_endpoints": 23,
+      "slow_slew": 33,
+      "fanout": {
+        "nom_slow_1p08V_125C": 12,
+        "nom_typ_1p20V_25C": 12,
+        "nom_fast_1p32V_m40C": 12
+      },
+      "cap": {
+        "nom_slow_1p08V_125C": 0,
+        "nom_typ_1p20V_25C": 0,
+        "nom_fast_1p32V_m40C": 0
+      },
+      "hold_ws_ns": {
+        "nom_slow_1p08V_125C": 0.6354162931228676,
+        "nom_typ_1p20V_25C": 0.3091648136118676,
+        "nom_fast_1p32V_m40C": 0.12011214585133513
+      },
+      "filtered_gaps": {
+        "nom_slow_1p08V_125C": 0,
+        "nom_typ_1p20V_25C": 0,
+        "nom_fast_1p32V_m40C": 0
+      },
+      "clock_sink_count": 2421,
+      "clock_buffer_outputs_above8": 0,
+      "added_buffers": 2,
+      "replacements": {},
+      "route_drc": 0,
+      "antenna_violations": 0,
+      "strict_gate_failures": [
+        "timing__setup__ws__corner:nom_slow_1p08V_125C: -0.9791900900601841 outside [0, inf]",
+        "timing__setup__tns__corner:nom_slow_1p08V_125C: -11.336263804097145 outside [0, 0]",
+        "timing__setup_vio__count__corner:nom_slow_1p08V_125C: 23 outside [0, 0]",
+        "design__max_slew_violation__count__corner:nom_slow_1p08V_125C: 33 outside [0, 0]",
+        "design__max_fanout_violation__count__corner:nom_slow_1p08V_125C: 12 outside [0, 0]",
+        "design__max_fanout_violation__count__corner:nom_typ_1p20V_25C: 12 outside [0, 0]",
+        "design__max_fanout_violation__count__corner:nom_fast_1p32V_m40C: 12 outside [0, 0]"
+      ],
+      "replay_sessions": 9,
+      "annotation_complete": true,
+      "strict_gate_pass": false,
+      "delta_vs_matched_control": {
+        "setup_ws_ns": -0.0075885966325380805,
+        "setup_tns_ns": 2.070404351008566,
+        "setup_endpoints": 1,
+        "slow_slew": -29,
+        "fanout": 0
+      }
+    },
+    {
+      "trial": "fanout_17026",
+      "attempt": "fanout_17026-02",
+      "operations": [
+        {
+          "kind": "buffer",
+          "target": "_17026_/Y",
+          "old": "sg13cmos5l_inv_1",
+          "max_loads": 8
+        }
+      ],
+      "setup_ws_ns": -1.165377161090812,
+      "setup_tns_ns": -16.679094133481453,
+      "setup_endpoints": 26,
+      "slow_slew": 42,
+      "fanout": {
+        "nom_slow_1p08V_125C": 10,
+        "nom_typ_1p20V_25C": 10,
+        "nom_fast_1p32V_m40C": 10
+      },
+      "cap": {
+        "nom_slow_1p08V_125C": 0,
+        "nom_typ_1p20V_25C": 0,
+        "nom_fast_1p32V_m40C": 0
+      },
+      "hold_ws_ns": {
+        "nom_slow_1p08V_125C": 0.6442537796711275,
+        "nom_typ_1p20V_25C": 0.3141644811000623,
+        "nom_fast_1p32V_m40C": 0.12293139076865071
+      },
+      "filtered_gaps": {
+        "nom_slow_1p08V_125C": 1,
+        "nom_typ_1p20V_25C": 1,
+        "nom_fast_1p32V_m40C": 1
+      },
+      "clock_sink_count": 2421,
+      "clock_buffer_outputs_above8": 0,
+      "added_buffers": 2,
+      "replacements": {},
+      "route_drc": 0,
+      "antenna_violations": 0,
+      "strict_gate_failures": [
+        "timing__setup__ws__corner:nom_slow_1p08V_125C: -1.165377161090812 outside [0, inf]",
+        "timing__setup__tns__corner:nom_slow_1p08V_125C: -16.679094133481453 outside [0, 0]",
+        "timing__setup_vio__count__corner:nom_slow_1p08V_125C: 26 outside [0, 0]",
+        "design__max_slew_violation__count__corner:nom_slow_1p08V_125C: 42 outside [0, 0]",
+        "design__max_fanout_violation__count__corner:nom_slow_1p08V_125C: 10 outside [0, 0]",
+        "timing__unannotated_net_filtered__count__corner:nom_slow_1p08V_125C: 1 outside [0, 0]",
+        "design__max_fanout_violation__count__corner:nom_typ_1p20V_25C: 10 outside [0, 0]",
+        "timing__unannotated_net_filtered__count__corner:nom_typ_1p20V_25C: 1 outside [0, 0]",
+        "design__max_fanout_violation__count__corner:nom_fast_1p32V_m40C: 10 outside [0, 0]",
+        "timing__unannotated_net_filtered__count__corner:nom_fast_1p32V_m40C: 1 outside [0, 0]"
+      ],
+      "replay_sessions": 9,
+      "annotation_complete": false,
+      "strict_gate_pass": false,
+      "delta_vs_matched_control": {
+        "setup_ws_ns": -0.1937756676631659,
+        "setup_tns_ns": -3.2724259783757415,
+        "setup_endpoints": 4,
+        "slow_slew": -20,
+        "fanout": -2
+      }
+    },
+    {
+      "trial": "fanout_16949",
+      "attempt": "fanout_16949-02",
+      "operations": [
+        {
+          "kind": "buffer",
+          "target": "_16949_/Y",
+          "old": "sg13cmos5l_inv_1",
+          "max_loads": 8
+        }
+      ],
+      "setup_ws_ns": -0.96055788264476,
+      "setup_tns_ns": -12.279937414505886,
+      "setup_endpoints": 21,
+      "slow_slew": 37,
+      "fanout": {
+        "nom_slow_1p08V_125C": 10,
+        "nom_typ_1p20V_25C": 10,
+        "nom_fast_1p32V_m40C": 10
+      },
+      "cap": {
+        "nom_slow_1p08V_125C": 0,
+        "nom_typ_1p20V_25C": 0,
+        "nom_fast_1p32V_m40C": 0
+      },
+      "hold_ws_ns": {
+        "nom_slow_1p08V_125C": 0.6335255832584581,
+        "nom_typ_1p20V_25C": 0.308137302173517,
+        "nom_fast_1p32V_m40C": 0.11942858151574091
+      },
+      "filtered_gaps": {
+        "nom_slow_1p08V_125C": 0,
+        "nom_typ_1p20V_25C": 0,
+        "nom_fast_1p32V_m40C": 0
+      },
+      "clock_sink_count": 2421,
+      "clock_buffer_outputs_above8": 0,
+      "added_buffers": 2,
+      "replacements": {},
+      "route_drc": 0,
+      "antenna_violations": 0,
+      "strict_gate_failures": [
+        "timing__setup__ws__corner:nom_slow_1p08V_125C: -0.96055788264476 outside [0, inf]",
+        "timing__setup__tns__corner:nom_slow_1p08V_125C: -12.279937414505886 outside [0, 0]",
+        "timing__setup_vio__count__corner:nom_slow_1p08V_125C: 21 outside [0, 0]",
+        "design__max_slew_violation__count__corner:nom_slow_1p08V_125C: 37 outside [0, 0]",
+        "design__max_fanout_violation__count__corner:nom_slow_1p08V_125C: 10 outside [0, 0]",
+        "design__max_fanout_violation__count__corner:nom_typ_1p20V_25C: 10 outside [0, 0]",
+        "design__max_fanout_violation__count__corner:nom_fast_1p32V_m40C: 10 outside [0, 0]"
+      ],
+      "replay_sessions": 9,
+      "annotation_complete": true,
+      "strict_gate_pass": false,
+      "delta_vs_matched_control": {
+        "setup_ws_ns": 0.01104361078288596,
+        "setup_tns_ns": 1.1267307405998253,
+        "setup_endpoints": -1,
+        "slow_slew": -25,
+        "fanout": -2
+      }
+    },
+    {
+      "trial": "fanout_32068",
+      "attempt": "fanout_32068-02",
+      "operations": [
+        {
+          "kind": "buffer",
+          "target": "_32068_/Q",
+          "old": "sg13cmos5l_dfrbpq_1",
+          "max_loads": 8
+        }
+      ],
+      "setup_ws_ns": -1.8022615021606605,
+      "setup_tns_ns": -28.8080270015129,
+      "setup_endpoints": 42,
+      "slow_slew": 38,
+      "fanout": {
+        "nom_slow_1p08V_125C": 7,
+        "nom_typ_1p20V_25C": 7,
+        "nom_fast_1p32V_m40C": 7
+      },
+      "cap": {
+        "nom_slow_1p08V_125C": 0,
+        "nom_typ_1p20V_25C": 0,
+        "nom_fast_1p32V_m40C": 0
+      },
+      "hold_ws_ns": {
+        "nom_slow_1p08V_125C": 0.36799719868518505,
+        "nom_typ_1p20V_25C": 0.1442442872639985,
+        "nom_fast_1p32V_m40C": 0.012518098023592017
+      },
+      "filtered_gaps": {
+        "nom_slow_1p08V_125C": 0,
+        "nom_typ_1p20V_25C": 0,
+        "nom_fast_1p32V_m40C": 0
+      },
+      "clock_sink_count": 2421,
+      "clock_buffer_outputs_above8": 0,
+      "added_buffers": 2,
+      "replacements": {},
+      "route_drc": 0,
+      "antenna_violations": 0,
+      "strict_gate_failures": [
+        "timing__setup__ws__corner:nom_slow_1p08V_125C: -1.8022615021606605 outside [0, inf]",
+        "timing__setup__tns__corner:nom_slow_1p08V_125C: -28.8080270015129 outside [0, 0]",
+        "timing__setup_vio__count__corner:nom_slow_1p08V_125C: 42 outside [0, 0]",
+        "design__max_slew_violation__count__corner:nom_slow_1p08V_125C: 38 outside [0, 0]",
+        "design__max_fanout_violation__count__corner:nom_slow_1p08V_125C: 7 outside [0, 0]",
+        "design__max_fanout_violation__count__corner:nom_typ_1p20V_25C: 7 outside [0, 0]",
+        "design__max_fanout_violation__count__corner:nom_fast_1p32V_m40C: 7 outside [0, 0]"
+      ],
+      "replay_sessions": 9,
+      "annotation_complete": true,
+      "strict_gate_pass": false,
+      "delta_vs_matched_control": {
+        "setup_ws_ns": -0.8306600087330145,
+        "setup_tns_ns": -15.40135884640719,
+        "setup_endpoints": 20,
+        "slow_slew": -24,
+        "fanout": -5
+      }
+    },
+    {
+      "trial": "fanout_32071",
+      "attempt": "fanout_32071-02",
+      "operations": [
+        {
+          "kind": "buffer",
+          "target": "_32071_/Q",
+          "old": "sg13cmos5l_dfrbpq_1",
+          "max_loads": 8
+        }
+      ],
+      "setup_ws_ns": -0.9620056135098158,
+      "setup_tns_ns": -9.198402300204537,
+      "setup_endpoints": 20,
+      "slow_slew": 46,
+      "fanout": {
+        "nom_slow_1p08V_125C": 9,
+        "nom_typ_1p20V_25C": 9,
+        "nom_fast_1p32V_m40C": 9
+      },
+      "cap": {
+        "nom_slow_1p08V_125C": 0,
+        "nom_typ_1p20V_25C": 0,
+        "nom_fast_1p32V_m40C": 0
+      },
+      "hold_ws_ns": {
+        "nom_slow_1p08V_125C": 0.373081132103332,
+        "nom_typ_1p20V_25C": 0.14577028885450405,
+        "nom_fast_1p32V_m40C": 0.012810863843465654
+      },
+      "filtered_gaps": {
+        "nom_slow_1p08V_125C": 0,
+        "nom_typ_1p20V_25C": 0,
+        "nom_fast_1p32V_m40C": 0
+      },
+      "clock_sink_count": 2421,
+      "clock_buffer_outputs_above8": 0,
+      "added_buffers": 2,
+      "replacements": {},
+      "route_drc": 0,
+      "antenna_violations": 0,
+      "strict_gate_failures": [
+        "timing__setup__ws__corner:nom_slow_1p08V_125C: -0.9620056135098158 outside [0, inf]",
+        "timing__setup__tns__corner:nom_slow_1p08V_125C: -9.198402300204537 outside [0, 0]",
+        "timing__setup_vio__count__corner:nom_slow_1p08V_125C: 20 outside [0, 0]",
+        "design__max_slew_violation__count__corner:nom_slow_1p08V_125C: 46 outside [0, 0]",
+        "design__max_fanout_violation__count__corner:nom_slow_1p08V_125C: 9 outside [0, 0]",
+        "design__max_fanout_violation__count__corner:nom_typ_1p20V_25C: 9 outside [0, 0]",
+        "design__max_fanout_violation__count__corner:nom_fast_1p32V_m40C: 9 outside [0, 0]"
+      ],
+      "replay_sessions": 9,
+      "annotation_complete": true,
+      "strict_gate_pass": false,
+      "delta_vs_matched_control": {
+        "setup_ws_ns": 0.009595879917830175,
+        "setup_tns_ns": 4.208265854901175,
+        "setup_endpoints": -2,
+        "slow_slew": -16,
+        "fanout": -3
+      }
+    },
+    {
+      "trial": "slew_19177",
+      "attempt": "slew_19177-01",
+      "operations": [
+        {
+          "kind": "size",
+          "instance": "_19177_",
+          "old": "sg13cmos5l_nor3_1",
+          "new": "sg13cmos5l_nor3_2"
+        }
+      ],
+      "setup_ws_ns": -1.1837215986901144,
+      "setup_tns_ns": -14.287270437790927,
+      "setup_endpoints": 23,
+      "slow_slew": 29,
+      "fanout": {
+        "nom_slow_1p08V_125C": 10,
+        "nom_typ_1p20V_25C": 10,
+        "nom_fast_1p32V_m40C": 10
+      },
+      "cap": {
+        "nom_slow_1p08V_125C": 0,
+        "nom_typ_1p20V_25C": 0,
+        "nom_fast_1p32V_m40C": 0
+      },
+      "hold_ws_ns": {
+        "nom_slow_1p08V_125C": 0.6385235854120688,
+        "nom_typ_1p20V_25C": 0.31107584055820237,
+        "nom_fast_1p32V_m40C": 0.11443263327478387
+      },
+      "filtered_gaps": {
+        "nom_slow_1p08V_125C": 0,
+        "nom_typ_1p20V_25C": 0,
+        "nom_fast_1p32V_m40C": 0
+      },
+      "clock_sink_count": 2421,
+      "clock_buffer_outputs_above8": 0,
+      "added_buffers": 0,
+      "replacements": {
+        "_19177_": [
+          "sg13cmos5l_nor3_1",
+          "sg13cmos5l_nor3_2"
+        ]
+      },
+      "route_drc": 0,
+      "antenna_violations": 0,
+      "strict_gate_failures": [
+        "timing__setup__ws__corner:nom_slow_1p08V_125C: -1.1837215986901144 outside [0, inf]",
+        "timing__setup__tns__corner:nom_slow_1p08V_125C: -14.287270437790927 outside [0, 0]",
+        "timing__setup_vio__count__corner:nom_slow_1p08V_125C: 23 outside [0, 0]",
+        "design__max_slew_violation__count__corner:nom_slow_1p08V_125C: 29 outside [0, 0]",
+        "design__max_fanout_violation__count__corner:nom_slow_1p08V_125C: 10 outside [0, 0]",
+        "design__max_fanout_violation__count__corner:nom_typ_1p20V_25C: 10 outside [0, 0]",
+        "design__max_fanout_violation__count__corner:nom_fast_1p32V_m40C: 10 outside [0, 0]"
+      ],
+      "replay_sessions": 9,
+      "annotation_complete": true,
+      "strict_gate_pass": false,
+      "delta_vs_matched_control": {
+        "setup_ws_ns": -0.21212010526246838,
+        "setup_tns_ns": -0.8806022826852153,
+        "setup_endpoints": 1,
+        "slow_slew": -33,
+        "fanout": -2
+      }
+    },
+    {
+      "trial": "slew_24358",
+      "attempt": "slew_24358-01",
+      "operations": [
+        {
+          "kind": "buffer",
+          "target": "_24358_/Y",
+          "old": "sg13cmos5l_a221oi_1",
+          "max_loads": 1000
+        }
+      ],
+      "setup_ws_ns": -1.4404815525892123,
+      "setup_tns_ns": -23.454876038599792,
+      "setup_endpoints": 41,
+      "slow_slew": 34,
+      "fanout": {
+        "nom_slow_1p08V_125C": 9,
+        "nom_typ_1p20V_25C": 9,
+        "nom_fast_1p32V_m40C": 9
+      },
+      "cap": {
+        "nom_slow_1p08V_125C": 0,
+        "nom_typ_1p20V_25C": 0,
+        "nom_fast_1p32V_m40C": 0
+      },
+      "hold_ws_ns": {
+        "nom_slow_1p08V_125C": 0.6413769696883571,
+        "nom_typ_1p20V_25C": 0.3128716263513219,
+        "nom_fast_1p32V_m40C": 0.1164581797293476
+      },
+      "filtered_gaps": {
+        "nom_slow_1p08V_125C": 0,
+        "nom_typ_1p20V_25C": 0,
+        "nom_fast_1p32V_m40C": 0
+      },
+      "clock_sink_count": 2421,
+      "clock_buffer_outputs_above8": 0,
+      "added_buffers": 1,
+      "replacements": {},
+      "route_drc": 0,
+      "antenna_violations": 0,
+      "strict_gate_failures": [
+        "timing__setup__ws__corner:nom_slow_1p08V_125C: -1.4404815525892123 outside [0, inf]",
+        "timing__setup__tns__corner:nom_slow_1p08V_125C: -23.454876038599792 outside [0, 0]",
+        "timing__setup_vio__count__corner:nom_slow_1p08V_125C: 41 outside [0, 0]",
+        "design__max_slew_violation__count__corner:nom_slow_1p08V_125C: 34 outside [0, 0]",
+        "design__max_fanout_violation__count__corner:nom_slow_1p08V_125C: 9 outside [0, 0]",
+        "design__max_fanout_violation__count__corner:nom_typ_1p20V_25C: 9 outside [0, 0]",
+        "design__max_fanout_violation__count__corner:nom_fast_1p32V_m40C: 9 outside [0, 0]"
+      ],
+      "replay_sessions": 9,
+      "annotation_complete": true,
+      "strict_gate_pass": false,
+      "delta_vs_matched_control": {
+        "setup_ws_ns": -0.4688800591615663,
+        "setup_tns_ns": -10.048207883494081,
+        "setup_endpoints": 19,
+        "slow_slew": -28,
+        "fanout": -3
+      }
+    },
+    {
+      "trial": "slew_28038",
+      "attempt": "slew_28038-02",
+      "operations": [
+        {
+          "kind": "size",
+          "instance": "_28038_",
+          "old": "sg13cmos5l_nor4_1",
+          "new": "sg13cmos5l_nor4_2"
+        }
+      ],
+      "setup_ws_ns": -1.084149689598287,
+      "setup_tns_ns": -16.142158289164033,
+      "setup_endpoints": 24,
+      "slow_slew": 58,
+      "fanout": {
+        "nom_slow_1p08V_125C": 11,
+        "nom_typ_1p20V_25C": 11,
+        "nom_fast_1p32V_m40C": 11
+      },
+      "cap": {
+        "nom_slow_1p08V_125C": 0,
+        "nom_typ_1p20V_25C": 0,
+        "nom_fast_1p32V_m40C": 0
+      },
+      "hold_ws_ns": {
+        "nom_slow_1p08V_125C": 0.6306915168633446,
+        "nom_typ_1p20V_25C": 0.30676295705246437,
+        "nom_fast_1p32V_m40C": 0.11872547725436065
+      },
+      "filtered_gaps": {
+        "nom_slow_1p08V_125C": 0,
+        "nom_typ_1p20V_25C": 0,
+        "nom_fast_1p32V_m40C": 0
+      },
+      "clock_sink_count": 2421,
+      "clock_buffer_outputs_above8": 0,
+      "added_buffers": 0,
+      "replacements": {
+        "_28038_": [
+          "sg13cmos5l_nor4_1",
+          "sg13cmos5l_nor4_2"
+        ]
+      },
+      "route_drc": 0,
+      "antenna_violations": 0,
+      "strict_gate_failures": [
+        "timing__setup__ws__corner:nom_slow_1p08V_125C: -1.084149689598287 outside [0, inf]",
+        "timing__setup__tns__corner:nom_slow_1p08V_125C: -16.142158289164033 outside [0, 0]",
+        "timing__setup_vio__count__corner:nom_slow_1p08V_125C: 24 outside [0, 0]",
+        "design__max_slew_violation__count__corner:nom_slow_1p08V_125C: 58 outside [0, 0]",
+        "design__max_fanout_violation__count__corner:nom_slow_1p08V_125C: 11 outside [0, 0]",
+        "design__max_fanout_violation__count__corner:nom_typ_1p20V_25C: 11 outside [0, 0]",
+        "design__max_fanout_violation__count__corner:nom_fast_1p32V_m40C: 11 outside [0, 0]"
+      ],
+      "replay_sessions": 9,
+      "annotation_complete": true,
+      "strict_gate_pass": false,
+      "delta_vs_matched_control": {
+        "setup_ws_ns": -0.11254819617064094,
+        "setup_tns_ns": -2.735490134058322,
+        "setup_endpoints": 2,
+        "slow_slew": -4,
+        "fanout": -1
+      }
+    },
+    {
+      "trial": "slew_29030",
+      "attempt": "slew_29030-02",
+      "operations": [
+        {
+          "kind": "buffer",
+          "target": "_29030_/Y",
+          "old": "sg13cmos5l_a22oi_1",
+          "max_loads": 1000
+        }
+      ],
+      "setup_ws_ns": -0.9158611905876621,
+      "setup_tns_ns": -11.916253210348744,
+      "setup_endpoints": 26,
+      "slow_slew": 16,
+      "fanout": {
+        "nom_slow_1p08V_125C": 9,
+        "nom_typ_1p20V_25C": 9,
+        "nom_fast_1p32V_m40C": 9
+      },
+      "cap": {
+        "nom_slow_1p08V_125C": 0,
+        "nom_typ_1p20V_25C": 0,
+        "nom_fast_1p32V_m40C": 0
+      },
+      "hold_ws_ns": {
+        "nom_slow_1p08V_125C": 0.6300568023422154,
+        "nom_typ_1p20V_25C": 0.30598957567163776,
+        "nom_fast_1p32V_m40C": 0.11812778867214992
+      },
+      "filtered_gaps": {
+        "nom_slow_1p08V_125C": 0,
+        "nom_typ_1p20V_25C": 0,
+        "nom_fast_1p32V_m40C": 0
+      },
+      "clock_sink_count": 2421,
+      "clock_buffer_outputs_above8": 0,
+      "added_buffers": 1,
+      "replacements": {},
+      "route_drc": 0,
+      "antenna_violations": 0,
+      "strict_gate_failures": [
+        "timing__setup__ws__corner:nom_slow_1p08V_125C: -0.9158611905876621 outside [0, inf]",
+        "timing__setup__tns__corner:nom_slow_1p08V_125C: -11.916253210348744 outside [0, 0]",
+        "timing__setup_vio__count__corner:nom_slow_1p08V_125C: 26 outside [0, 0]",
+        "design__max_slew_violation__count__corner:nom_slow_1p08V_125C: 16 outside [0, 0]",
+        "design__max_fanout_violation__count__corner:nom_slow_1p08V_125C: 9 outside [0, 0]",
+        "design__max_fanout_violation__count__corner:nom_typ_1p20V_25C: 9 outside [0, 0]",
+        "design__max_fanout_violation__count__corner:nom_fast_1p32V_m40C: 9 outside [0, 0]"
+      ],
+      "replay_sessions": 9,
+      "annotation_complete": true,
+      "strict_gate_pass": false,
+      "delta_vs_matched_control": {
+        "setup_ws_ns": 0.05574030283998388,
+        "setup_tns_ns": 1.4904149447569672,
+        "setup_endpoints": 4,
+        "slow_slew": -46,
+        "fanout": -3
+      }
+    },
+    {
+      "trial": "slew_18133",
+      "attempt": "slew_18133-02",
+      "operations": [
+        {
+          "kind": "buffer",
+          "target": "_18133_/Y",
+          "old": "sg13cmos5l_a221oi_1",
+          "max_loads": 1000
+        }
+      ],
+      "setup_ws_ns": -1.4004708900069822,
+      "setup_tns_ns": -21.734467285556807,
+      "setup_endpoints": 31,
+      "slow_slew": 47,
+      "fanout": {
+        "nom_slow_1p08V_125C": 13,
+        "nom_typ_1p20V_25C": 13,
+        "nom_fast_1p32V_m40C": 13
+      },
+      "cap": {
+        "nom_slow_1p08V_125C": 0,
+        "nom_typ_1p20V_25C": 0,
+        "nom_fast_1p32V_m40C": 0
+      },
+      "hold_ws_ns": {
+        "nom_slow_1p08V_125C": 0.6364212670331809,
+        "nom_typ_1p20V_25C": 0.30981340592119705,
+        "nom_fast_1p32V_m40C": 0.1082757247841421
+      },
+      "filtered_gaps": {
+        "nom_slow_1p08V_125C": 1,
+        "nom_typ_1p20V_25C": 1,
+        "nom_fast_1p32V_m40C": 1
+      },
+      "clock_sink_count": 2421,
+      "clock_buffer_outputs_above8": 0,
+      "added_buffers": 1,
+      "replacements": {},
+      "route_drc": 0,
+      "antenna_violations": 0,
+      "strict_gate_failures": [
+        "timing__setup__ws__corner:nom_slow_1p08V_125C: -1.4004708900069822 outside [0, inf]",
+        "timing__setup__tns__corner:nom_slow_1p08V_125C: -21.734467285556807 outside [0, 0]",
+        "timing__setup_vio__count__corner:nom_slow_1p08V_125C: 31 outside [0, 0]",
+        "design__max_slew_violation__count__corner:nom_slow_1p08V_125C: 47 outside [0, 0]",
+        "design__max_fanout_violation__count__corner:nom_slow_1p08V_125C: 13 outside [0, 0]",
+        "timing__unannotated_net_filtered__count__corner:nom_slow_1p08V_125C: 1 outside [0, 0]",
+        "design__max_fanout_violation__count__corner:nom_typ_1p20V_25C: 13 outside [0, 0]",
+        "timing__unannotated_net_filtered__count__corner:nom_typ_1p20V_25C: 1 outside [0, 0]",
+        "design__max_fanout_violation__count__corner:nom_fast_1p32V_m40C: 13 outside [0, 0]",
+        "timing__unannotated_net_filtered__count__corner:nom_fast_1p32V_m40C: 1 outside [0, 0]"
+      ],
+      "replay_sessions": 9,
+      "annotation_complete": false,
+      "strict_gate_pass": false,
+      "delta_vs_matched_control": {
+        "setup_ws_ns": -0.4288693965793362,
+        "setup_tns_ns": -8.327799130451096,
+        "setup_endpoints": 9,
+        "slow_slew": -15,
+        "fanout": 1
+      }
+    },
+    {
+      "trial": "slew_23931",
+      "attempt": "slew_23931-02",
+      "operations": [
+        {
+          "kind": "size",
+          "instance": "_23931_",
+          "old": "sg13cmos5l_nor3_1",
+          "new": "sg13cmos5l_nor3_2"
+        }
+      ],
+      "setup_ws_ns": -1.092097110322532,
+      "setup_tns_ns": -16.088570930874294,
+      "setup_endpoints": 24,
+      "slow_slew": 59,
+      "fanout": {
+        "nom_slow_1p08V_125C": 9,
+        "nom_typ_1p20V_25C": 9,
+        "nom_fast_1p32V_m40C": 9
+      },
+      "cap": {
+        "nom_slow_1p08V_125C": 0,
+        "nom_typ_1p20V_25C": 0,
+        "nom_fast_1p32V_m40C": 0
+      },
+      "hold_ws_ns": {
+        "nom_slow_1p08V_125C": 0.6304903444455929,
+        "nom_typ_1p20V_25C": 0.30664238682858014,
+        "nom_fast_1p32V_m40C": 0.11829471070862319
+      },
+      "filtered_gaps": {
+        "nom_slow_1p08V_125C": 0,
+        "nom_typ_1p20V_25C": 0,
+        "nom_fast_1p32V_m40C": 0
+      },
+      "clock_sink_count": 2421,
+      "clock_buffer_outputs_above8": 0,
+      "added_buffers": 0,
+      "replacements": {
+        "_23931_": [
+          "sg13cmos5l_nor3_1",
+          "sg13cmos5l_nor3_2"
+        ]
+      },
+      "route_drc": 0,
+      "antenna_violations": 0,
+      "strict_gate_failures": [
+        "timing__setup__ws__corner:nom_slow_1p08V_125C: -1.092097110322532 outside [0, inf]",
+        "timing__setup__tns__corner:nom_slow_1p08V_125C: -16.088570930874294 outside [0, 0]",
+        "timing__setup_vio__count__corner:nom_slow_1p08V_125C: 24 outside [0, 0]",
+        "design__max_slew_violation__count__corner:nom_slow_1p08V_125C: 59 outside [0, 0]",
+        "design__max_fanout_violation__count__corner:nom_slow_1p08V_125C: 9 outside [0, 0]",
+        "design__max_fanout_violation__count__corner:nom_typ_1p20V_25C: 9 outside [0, 0]",
+        "design__max_fanout_violation__count__corner:nom_fast_1p32V_m40C: 9 outside [0, 0]"
+      ],
+      "replay_sessions": 9,
+      "annotation_complete": true,
+      "strict_gate_pass": false,
+      "delta_vs_matched_control": {
+        "setup_ws_ns": -0.12049561689488608,
+        "setup_tns_ns": -2.6819027757685827,
+        "setup_endpoints": 2,
+        "slow_slew": -3,
+        "fanout": -3
+      }
+    }
+  ],
+  "matched_inputs": {
+    "input_state_sha256": "96addb7768e663266fbe373d9d563d243a8096e722ee15f47d3b08d8c6e8c9f4",
+    "input_views_sha256": {
+      "odb": "bdc1e924ec24a8c92ee816531dc4b92892b7c12d1ff22483ee75b89b9d4c753a",
+      "def": "eba478657bc3e8198bfabc91e359f2a41c79fbd1efa1321a12f7fc7274704dfa",
+      "nl": "528a9fc5b85875072f3ae5908906517f7b73fc33483c4dc565c5f1bb8ff97353",
+      "sdc": "7088ce29adb0f7213b0f3ed4b76177f104819061b87b32bf4f166ff50e055d59"
+    },
+    "execution_overrides": {
+      "OPENROAD_THREADS": 8
+    }
+  },
+  "pdk_models_sha256": {
+    "/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_stdcell/lib/sg13cmos5l_stdcell_slow_1p08V_125C.lib": "3ee222c580ba33acb2131ac2bf224ff8ee9700751835b73aaec72b670bb31d3c",
+    "/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_io/lib/sg13cmos5l_io_slow_1p08V_3p0V_125C.lib": "0dbb628168f9855eb88aee0d557da25c4cefb8c6b727a496fa2a02fd40da5cdb",
+    "/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_stdcell/lib/sg13cmos5l_stdcell_typ_1p20V_25C.lib": "34163f3e7de9f854afac57332ba06f1739b78e7ac35660a8a5ddd39c570124ad",
+    "/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_io/lib/sg13cmos5l_io_typ_1p2V_3p3V_25C.lib": "e6b5adf1ce31db3a0c15e5ca069c62e7d9efb604a710b8f6582700f1721d2d98",
+    "/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_stdcell/lib/sg13cmos5l_stdcell_fast_1p32V_m40C.lib": "af12d75a72d19648fa690027d29843fbae550aa91f4e40dd3339c7116d6e425d",
+    "/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_io/lib/sg13cmos5l_io_fast_1p32V_3p6V_m40C.lib": "f25da27e4cc0c94ffbce99e0654814a3af48d00c4ec571c9db5915208a7bbe07"
+  },
+  "setup_delta_sign": "positive means improved slack",
+  "qualification": "matched full reroute of post-antenna logic; compare with control, not the old routed reference; no accepted fabrication qualification"
+}

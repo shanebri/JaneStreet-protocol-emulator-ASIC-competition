@@ -1,0 +1,27 @@
+diff --git a/src/frontend/instruction_fetch.sv b/src/frontend/instruction_fetch.sv
+index 400cf4b..b062afe 100644
+--- a/src/frontend/instruction_fetch.sv
++++ b/src/frontend/instruction_fetch.sv
+@@ -18,7 +18,21 @@ module instruction_fetch (
+             words[load_addr] <= load_data;
+     end
+ 
+-    assign instr_out = words[pc_addr];
++    // Decode the execution address once, then combine selected words through
++    // a balanced tree. The independent host port keeps its binary read mux.
++    // This is combinational: instruction visibility and retirement gain no
++    // clock of latency. Physical timing must decide whether to retain it.
++    wire [15:0] read_tree [0:62];
++    genvar i;
++    generate
++        for (i=0; i<32; i=i+1) begin: instruction_select
++            assign read_tree[31+i] = words[i] & {16{pc_addr == 5'(i)}};
++        end
++        for (i=0; i<31; i=i+1) begin: instruction_combine
++            assign read_tree[i] = read_tree[2*i+1] | read_tree[2*i+2];
++        end
++    endgenerate
++    assign instr_out = read_tree[0];
+     assign host_read_data = words[load_addr];
+ endmodule
+ 

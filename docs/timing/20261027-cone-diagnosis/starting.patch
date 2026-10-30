@@ -1,0 +1,787 @@
+diff --git a/docs/timing_handoff_20261027.md b/docs/timing_handoff_20261027.md
+index 3bd6749..6973d52 100644
+--- a/docs/timing_handoff_20261027.md
++++ b/docs/timing_handoff_20261027.md
+@@ -6,7 +6,11 @@ qualified physical implementation has been adopted. Timing closure remains open.
+ 
+ Read these first:
+ 
+-- [Latest data ECO report](timing_data_eco_experiments_20261027.md)
++- [Latest critical-cone buffer report](timing_critical_path_experiments_20261027.md)
++- [Three-case matched buffer comparison](timing/20261027-data-critical-path/comparison.md)
++- [Integration ladder report](timing_data_integration_experiments_20261027.md)
++- [Five-case integration comparison](timing/20261027-data-integration/comparison.md)
++- [Isolated data ECO report](timing_data_eco_experiments_20261027.md)
+ - [Fifteen-case comparison](timing/20261027-data-eco/comparison.md)
+ - [Clock factor report](timing_clock_factor_experiments_20261026.md)
+ - [Connectivity and earlier rejected trials](timing_closure_repairs_20261026.md)
+@@ -41,12 +45,13 @@ All fifteen screens completed logical ECO audits and nine-session STA matrices
+ positive hold, zero cap violations and zero final native DRC/antenna violations.
+ Reject `fanout_uio3`, `fanout_17026`, and `slew_18133` for live `uio_in[2]`
+ parasitic annotation gaps; do not use their raw timing as qualified improvement.
+-The final tooling suite has 39 passing tests. No combinations have been measured.
++The isolated suite had 39 passing tooling tests. The integration extension had
++46; the latest independent critical-cone suite has 49 passing tests.
+ 
+-## Recommended next work, not yet started
++## Five-case integration ladder, now complete
+ 
+-Implement a five-case cumulative integration ladder from the **same prepared
+-input**, not successively routed outputs:
++All five cases started independently from the **same prepared input**, with
++fresh controls, identical native routing settings and eight threads per worker:
+ 
+ 1. No-ECO matched control.
+ 2. `critical_buffer` only.
+@@ -54,12 +59,77 @@ input**, not successively routed outputs:
+ 4. Add `fanout_16949` to case 3.
+ 5. Add `slew_29030` to case 4; watch its increased failing-endpoint count.
+ 
+-Use new output directories, identical native routing settings, and the same
+-eight-thread execution setting. Extend the explicit recipes/runner for these
+-combinations and adapt the bounded scheduler to select only the intended five
+-cases. Do not assume isolated improvements add. Keep all existing timing,
+-electrical, annotation and acceptance gates; test the best valid combination's
+-new critical path before further repairs or architecture additions.
++The explicit runner recipes and `--suite integration` scheduler selection are
++implemented. All five physical attempts and their 45-session replay matrix
++completed in new directories. All logical/routed-clock audits pass; all retain
++2,421 clock pins, zero clock-buffer overloads, positive hold, zero capacitance
++violations and zero native final DRC/antenna violations. Strict signoff remains
++unchanged and rejects every case.
++
++Case 3, `critical_buffer_fanout_32071`, is the best valid combination by setup:
++WS -0.680044484 ns, TNS -6.082395204 ns, 17 setup endpoints, 44 slew and 13
++fanout violations. WS improves by 0.291557009 ns versus the fresh no-ECO control,
++but fanout increases from 12 to 13 and fast hold falls to +0.010796087 ns.
++It is not adopted; it also has more slew/fanout failures than the old routed
++reference. The fresh no-ECO and critical-buffer-only controls reproduce the
++isolated suite's corresponding measurements exactly.
++
++Adding `fanout_16949` in case 4 lowers fanout to eight but worsens WS to
++-1.077669540 ns and increases setup endpoints to 31. Case 5's added `slew_29030`
++produces a live `uio_in[2]` annotation gap in every corner; reject its raw timing.
++The branch includes `fanout2572/A` and three antenna pins, matching the earlier
++annotation signature without a new independent GDS connectivity diagnosis.
++
++The best combination's new `ui_in[1] -> _31996_/D` critical path was tested in
++three additional directed slow-corner baseline sessions against both fresh
++controls. Same-endpoint slack is -0.861540 ns (no ECO), -0.727132 ns (critical
++buffer), and -0.680044 ns (best combination). The new cone includes a 1.482684 ns
++increment at `_28923_` (`a221oi_1`); its final `_29289_` (`nand2b_1`) contributes
++only 0.136843 ns. See the integration report for full paths and hold margins.
++
++The independent critical-cone buffer followup below now tests two targets from
++that cone. No architecture addition was made.
++
++## Three-case critical-cone buffer experiment, now complete
++
++The fresh control applies `critical_buffer` + `fanout_32071`. Candidate A adds
++one `buf_4` at `_28923_/Y`; candidate B instead adds one at `_17250_/Y`. All
++three start independently from the original prepared input with the same native
++routing settings and eight threads. No A+B combination was run.
++
++| Case | Slow WS ns | Slow TNS ns | Endpoints | Slew | Fanout/corner | Fast hold ns |
++| --- | ---: | ---: | ---: | ---: | ---: | ---: |
++| Fresh control | -0.680044484 | -6.082395204 | 17 | 44 | 13 | +0.010796087 |
++| A: `_28923_/Y` buffer | -0.931022397 | -10.658388251 | 19 | 39 | 14 | +0.012216617 |
++| B: `_17250_/Y` buffer | -0.679804676 | -6.656352102 | 17 | 37 | 8 | +0.012199797 |
++
++The control exactly reproduces the prior integration measurement. Reject A as
++a setup repair. B offers fewer electrical violations, but its WS gain is only
++0.239808 ps and its TNS worsens by 0.573956898 ns. Retain B as an electrical
++tradeoff; do not claim meaningful setup closure or adopt it as a full physical
++implementation. Keep the prior recipe as the setup reference.
++
++All three have passing logical/routed-clock audits, complete annotation,
++2,421 clock pins, zero overloaded clock-buffer outputs, positive all-required-
++corner/all-mode hold, zero cap violations and zero native final DRC/antenna
++violations. All fail strict signoff. The 27 replay sessions and six additional
++directed slow baseline endpoint checks completed without a restart.
++
++Both candidates' global critical endpoint becomes `_31995_/D` from `ui_in[1]`.
++Same-endpoint setup at `_31996_/D` is -0.680044 ns (control), -0.790418 ns (A),
++and -0.657293 ns (B); at `_31995_/D` it is -0.640473 ns, -0.931022 ns and
++-0.679805 ns respectively. B's improvement at one endpoint is offset by the
++other endpoint becoming limiting. All fast hold margins remain only about
++11–12 ps; B also reduces slow target-specific hold despite that slight global
++fast-minimum gain.
++
++An alternate `_28912_` (`a221oi_1`) branch is now limiting in the inspected
++candidate paths, bypassing `_28923_`: A's original-endpoint report has
++1.663226 ns delay and 1.830549 ns output slew there; B's new global path has
++1.712598 ns and 1.891274 ns. Next diagnose competing branches and multiple
++near-critical endpoints together before choosing another bounded repair.
++Preserve both physical references and every acceptance gate. No further ECO
++or repair combination was applied.
+ 
+ ## Local runtime and assets
+ 
+@@ -79,6 +149,10 @@ Existing physical runs:
+ - `test/sim_build/clock_factors/clock_split8-01/`
+ - `test/sim_build/data_eco_20261027/`
+ - Shared prepared input: `test/sim_build/data_eco_20261027/input/`
++- Completed integration ladder: `test/sim_build/data_integration_20261027/`
++- Integration compact evidence: `docs/timing/20261027-data-integration/`
++- Critical-cone buffer runs: `test/sim_build/data_critical_path_20261027/`
++- Critical-cone evidence: `docs/timing/20261027-data-critical-path/`
+ - Selected successful attempts are named in
+   `docs/timing/20261027-data-eco/comparison.json`; several are attempt 02.
+ 
+@@ -89,7 +163,7 @@ allocating another attempt. Keep long batches detached: killing/restarting the
+ original WSL invocation terminated its child physical workers. Interrupted,
+ failed API and stopped duplicate attempts are preserved and excluded from results.
+ 
+-Compact evidence and exact invocation snapshots are committed under
++Compact evidence and exact invocation snapshots are retained under
+ `docs/timing/`; large ODB/DEF/netlist/SPEF artifacts remain in ignored local
+ build directories. Verify `SHA256SUMS` before reusing compact evidence. Keep
+ 20 ns, 8x4 boundary/pins, both PIOs, all required corners/models, dynamic enable,
+diff --git a/test/test_timing_tools.py b/test/test_timing_tools.py
+index 7f621ca..02d6954 100644
+--- a/test/test_timing_tools.py
++++ b/test/test_timing_tools.py
+@@ -27,6 +27,8 @@ import closure_collect
+ import audit_clock_tree
+ import audit_data_eco
+ import data_eco_suite
++import data_eco_trial
++import summarize_data_eco
+ sys.path.pop(0)
+ 
+ 
+@@ -179,6 +181,7 @@ class ReplayWorkflowTests(unittest.TestCase):
+         self.calls.clear()
+         self.invoke("--target", "_33839_/D")
+         self.assertTrue(all(e["PIO_TIMING_TARGET"] == "_33839_/D" for e in self.calls))
++        self.assertEqual(json.loads((self.out/'manifest.json').read_text())['target'], '_33839_/D')
+ 
+     def test_reset_active_matrix_is_separate(self):
+         self.invoke("--reset-active")
+@@ -423,6 +426,182 @@ class ClockInsertionAuditTests(unittest.TestCase):
+ 
+ 
+ class DataECOAuditTests(unittest.TestCase):
++    def test_nonempty_critical_path_control_and_independent_candidate_selection(self):
++        recipes=data_eco_trial.suite_recipes('critical_path')
++        names=list(recipes)
++        base=dict(setup_tns_ns=-6,setup_endpoints=17,slow_slew=44,
++            fanout={c:13 for c in gate.REQUIRED_CORNERS},clock_sink_count=2421,
++            filtered_gaps={c:0 for c in gate.REQUIRED_CORNERS},strict_gate_failures=['setup'],
++            cap={c:0 for c in gate.REQUIRED_CORNERS},clock_buffer_outputs_above8=0,
++            positive_hold_all_sessions=True,route_drc=0,antenna_violations=0)
++        rows=[dict(base,trial=name,operations=recipes[name],setup_ws_ns=ws,fast_hold_ws_ns=hold)
++              for name,ws,hold in zip(names,(-0.68,-0.4,-0.8),(0.0108,0.009,0.015))]
++        with self.assertRaises(ValueError): summarize_data_eco.add_comparisons(rows)
++        summarize_data_eco.add_comparisons(rows,control_name=names[0],
++            control_operations=recipes[names[0]],cumulative=False)
++        self.assertTrue(all('delta_vs_previous_case' not in row for row in rows))
++        self.assertAlmostEqual(rows[1]['delta_vs_matched_control']['setup_ws_ns'],0.28)
++        self.assertAlmostEqual(rows[1]['delta_fast_hold_ns'],-0.0018)
++        self.assertEqual(summarize_data_eco.best_combination(rows,1)['trial'],names[1])
++        rows[1]['positive_hold_all_sessions']=False
++        summarize_data_eco.add_comparisons(rows,control_name=names[0],
++            control_operations=recipes[names[0]],cumulative=False)
++        self.assertEqual(summarize_data_eco.best_combination(rows,1)['trial'],names[2])
++        rows[0]['operations']=[]
++        with self.assertRaises(ValueError):
++            summarize_data_eco.add_comparisons(rows,control_name=names[0],control_operations=recipes[names[0]])
++
++    def test_integration_comparison_rejects_unmatched_inputs_config_and_threads(self):
++        common=dict(input_state_sha256='same',input_views_sha256={'odb':'same'},
++                    execution_overrides={'OPENROAD_THREADS':8})
++        config={'CLOCK_PERIOD':20,'GRT_ADJUSTMENT':0.25}
++        candidate=dict(common,trial='candidate')
++        summarize_data_eco.audit_match(common,config,candidate,config)
++        for key,value in (('input_state_sha256','routed_previous_case'),
++                          ('input_views_sha256',{'odb':'different'}),
++                          ('execution_overrides',{'OPENROAD_THREADS':4})):
++            with self.subTest(key=key),self.assertRaises(ValueError):
++                summarize_data_eco.audit_match(common,config,dict(candidate,**{key:value}),config)
++        with self.assertRaises(ValueError):
++            summarize_data_eco.audit_match(common,config,candidate,dict(config,CLOCK_PERIOD=25))
++
++    def test_ladder_deltas_and_selection_exclude_annotation_and_physical_failures(self):
++        def row(name,ws):
++            return dict(trial=name,operations=[] if name=='control' else ['fixture'],
++                setup_ws_ns=ws,setup_tns_ns=-10,setup_endpoints=22,slow_slew=50,
++                fanout={c:10 for c in gate.REQUIRED_CORNERS},clock_sink_count=2421,
++                filtered_gaps={c:0 for c in gate.REQUIRED_CORNERS},strict_gate_failures=['setup'],
++                cap={c:0 for c in gate.REQUIRED_CORNERS},clock_buffer_outputs_above8=0,
++                positive_hold_all_sessions=True,route_drc=0,antenna_violations=0)
++        rows=[row(name,ws) for name,ws in zip(data_eco_trial.INTEGRATION_CASES,(-1,-0.9,-0.8,-0.7,-0.6))]
++        rows[3]['filtered_gaps'][gate.REQUIRED_CORNERS[0]]=1
++        rows[4]['positive_hold_all_sessions']=False
++        reference=row('old',-1.2)
++        summarize_data_eco.add_comparisons(rows,reference)
++        self.assertAlmostEqual(rows[2]['delta_vs_matched_control']['setup_ws_ns'],0.2)
++        self.assertAlmostEqual(rows[2]['delta_vs_previous_case']['setup_ws_ns'],0.1)
++        self.assertAlmostEqual(rows[2]['delta_vs_old_routed_reference']['setup_ws_ns'],0.4)
++        self.assertFalse(rows[2]['strict_gate_pass'])
++        self.assertEqual(summarize_data_eco.best_combination(rows)['trial'],rows[2]['trial'])
++        for key,value in (('route_drc',1),('antenna_violations',1),('clock_buffer_outputs_above8',1),
++                          ('cap',{c:1 for c in gate.REQUIRED_CORNERS})):
++            old=rows[2][key]; rows[2][key]=value
++            summarize_data_eco.add_comparisons(rows,reference)
++            self.assertIsNone(summarize_data_eco.best_combination(rows))
++            rows[2][key]=old
++
++    def test_integration_is_exact_cumulative_ladder_and_isolated_suite_is_unchanged(self):
++        isolated=data_eco_trial.suite_recipes('isolated')
++        ladder=data_eco_trial.suite_recipes('integration')
++        self.assertEqual(len(isolated),15)
++        self.assertEqual(tuple(ladder),data_eco_trial.INTEGRATION_CASES)
++        expected=[]
++        for name,addition in zip(ladder,(None,'critical_buffer','fanout_32071','fanout_16949','slew_29030')):
++            expected=expected+isolated[addition] if addition else []
++            self.assertEqual(ladder[name],expected)
++            script=data_eco_trial.script(ladder[name])
++            for index in range(len(expected)):
++                self.assertIn(f'-buffer_name eco_data_{index}_$first',script)
++            self.assertEqual(script.count('source $::env(SCRIPTS_DIR)/openroad/common/dpl.tcl'),1)
++        with self.assertRaises(ValueError): data_eco_trial.suite_recipes('all')
++
++    def test_critical_path_candidates_are_independent_additions_to_exact_best_recipe(self):
++        cases=data_eco_trial.suite_recipes('critical_path')
++        self.assertEqual(tuple(cases),data_eco_trial.CRITICAL_PATH_CASES)
++        baseline=cases[data_eco_trial.CRITICAL_PATH_CASES[0]]
++        isolated=data_eco_trial.suite_recipes('isolated')
++        self.assertEqual(baseline,isolated['critical_buffer']+isolated['fanout_32071'])
++        for name,target in zip(data_eco_trial.CRITICAL_PATH_CASES[1:],('_28923_/Y','_17250_/Y')):
++            self.assertEqual(cases[name][:-1],baseline)
++            self.assertEqual(cases[name][-1],dict(kind='buffer',target=target,
++                old='sg13cmos5l_a221oi_1',max_loads=1000))
++            self.assertEqual(len(cases[name]),3)
++            self.assertNotIn(name,isolated)
++
++    def check_fresh_scheduler(self,suite,expected_cases):
++        with tempfile.TemporaryDirectory() as directory:
++            root=Path(directory); runs=root/'runs'; evidence=root/'evidence'; calls=[]
++            def run(command,**kwargs):
++                calls.append(command)
++                option=lambda key: Path(command[command.index(key)+1])
++                if command[1].endswith('data_eco_trial.py'):
++                    out=option('--out'); out.mkdir()
++                    (out/'experiment.json').write_text(json.dumps(dict(status='rejected_signoff',signoff_exit=1)))
++                    for file in ('runner.py','eco.tcl','recipe.json','eco_audit.log'):
++                        (out/file).write_text('fixture')
++                    (out/'eco_audit.json').write_text('{"status":"pass"}')
++                else:
++                    out=option('--out'); out.mkdir(parents=True)
++                    (out/'provenance.json').write_text('{}')
++                return Mock(returncode=1 if command[1].endswith('data_eco_trial.py') else 0)
++            argv=['suite','--suite',suite,'--jobs','1']
++            for key,path in (('root',runs),('evidence',evidence),('base',root/'base'),
++                             ('prepared',root/'prepared'),('archive-root',root/'archive'),('pdk-root',root/'pdk')):
++                argv.extend(['--'+key,str(path)])
++            with patch.object(sys,'argv',argv),patch.object(data_eco_suite.subprocess,'run',side_effect=run),contextlib.redirect_stdout(io.StringIO()):
++                data_eco_suite.main()
++            physical=[c for c in calls if c[1].endswith('data_eco_trial.py')]
++            self.assertEqual([c[c.index('--trial')+1] for c in physical],list(expected_cases))
++            self.assertTrue(all(c[c.index('--prepared')+1]==str(root/'prepared') and c[-2:]==['--threads','8'] for c in physical))
++            self.assertEqual(len(list(runs.glob('*-01'))),len(expected_cases))
++            self.assertTrue(all(v['status']=='complete' for v in json.loads((runs/'suite_state.json').read_text()).values()))
++
++    def test_fresh_scheduler_launches_only_five_selected_cases_with_common_input(self):
++        self.check_fresh_scheduler('integration',data_eco_trial.INTEGRATION_CASES)
++
++    def test_fresh_scheduler_launches_only_three_critical_path_cases_with_common_input(self):
++        self.check_fresh_scheduler('critical_path',data_eco_trial.CRITICAL_PATH_CASES)
++
++    def test_cumulative_audit_requires_each_declared_sink_partition(self):
++        before=self.fixture(); after=self.fixture()
++        for data in (before,after):
++            data[0]['gate2']=('sg13cmos5l_inv_1',{'A':'a','Y':'data2'})
++            data[0]['sink2']=('sg13cmos5l_buf_1',{'A':'data2','X':'q2'})
++            data[2].update(('data2','q2'))
++            data[3]['data2']=[('sink2','A')]
++        for index,(net,cell,pin) in enumerate((('data','ff','D'),('data2','sink2','A'))):
++            out=f'new{index}'; buf=f'eco_data_{index}'
++            after[0][buf]=('sg13cmos5l_buf_4',{'A':net,'X':out})
++            after[0][cell][1][pin]=out; after[2].add(out)
++            after[3][net]=[(buf,'A')]; after[3][out]=[(cell,pin)]
++        ops=[dict(kind='buffer',target='gate/Y',old='sg13cmos5l_a21oi_1',max_loads=1000),
++             dict(kind='buffer',target='gate2/Y',old='sg13cmos5l_inv_1',max_loads=8)]
++        self.assertEqual(audit_data_eco.audit(before,after,ops)['added_buffers'],2)
++        # Buffer transparency alone would accept leaving the second target unbuffered.
++        after[0]['sink2'][1]['A']='data2'; after[3]['new1']=[]
++        after[3]['data2'].append(('sink2','A'))
++        with self.assertRaises(ValueError): audit_data_eco.audit(before,after,ops)
++
++    def test_fanout_audit_rejects_transparent_but_different_sink_groups(self):
++        before=self.fixture(); after=self.fixture()
++        for data in (before,after):
++            for index in range(8):
++                name=f'sink{index}'
++                data[0][name]=('sg13cmos5l_buf_1',{'A':'data','X':'q'})
++                data[3]['data'].append((name,'A'))
++        groups=[sorted(before[3]['data'])[:8],sorted(before[3]['data'])[8:]]
++        for index,group in enumerate(groups):
++            name=f'eco_data_{index}'; net=f'new{index}'
++            after[0][name]=('sg13cmos5l_buf_4',{'A':'data','X':net})
++            after[2].add(net); after[3][net]=list(group)
++            for cell,pin in group: after[0][cell][1][pin]=net
++        after[3]['data']=[(f'eco_data_{index}','A') for index in range(2)]
++        ops=[dict(kind='buffer',target='gate/Y',old='sg13cmos5l_a21oi_1',max_loads=8)]
++        self.assertEqual(audit_data_eco.audit(before,after,ops)['added_buffers'],2)
++        first,last=groups[0][0],groups[1][0]
++        after[3]['new0'].remove(first); after[3]['new0'].append(last)
++        after[3]['new1']=[first]
++        after[0][first[0]][1][first[1]]='new1'
++        after[0][last[0]][1][last[1]]='new0'
++        with self.assertRaises(ValueError): audit_data_eco.audit(before,after,ops)
++
++    def test_resume_does_not_reuse_failed_logical_audit(self):
++        with tempfile.TemporaryDirectory() as directory:
++            root=Path(directory); out=root/'control-01'; out.mkdir()
++            (out/'experiment.json').write_text('{"status":"rejected_signoff"}')
++            (out/'eco_audit.json').write_text('{"status":"failed"}')
++            self.assertEqual(data_eco_suite.choose_attempt(root,'control'),root/'control-02')
++
+     def test_resume_uses_completed_retry_before_allocating_another_attempt(self):
+         with tempfile.TemporaryDirectory() as directory:
+             root=Path(directory)
+diff --git a/tools/timing/__pycache__/replay.cpython-312.pyc b/tools/timing/__pycache__/replay.cpython-312.pyc
+index 863459bdbf5a69dfdfa2bc79fff5fd644835d359..dc92e832fae3a5fd8fb1532042ab290a5d29778f 100644
+GIT binary patch
+delta 1027
+zcmbVJOH30{6rDFSo&GD8QcAT&prw3l22d!L1b;vfk)XCwOrX|wgcdr3)4>J7--3jt
+z$#tPo<3cw^H`;~9jUh3S#803>t+OyDE_69cqLD=7dyvNH%J>%N+;iV~pYz_m&V`+}
+zXI86;!h`woJ{>N*XPad_$N7w?@CiPe733_R9gB+sKPXFSA)#b>xXT1>ydp^xSzbwH
+zQsO9|`^eZC`o0NHvDLZF`hJ$3LFop_TbhlPB1&$-YAak|OPQ)`988!iYO1Hr6qV-5
+zv40Mwxu`)iI|gTr$(p;qJM?-p>7T~M9ki|xrED*nyQquwa3w{ZF_EK+-QO(J$y$7o
+z09Y*ks=68TRq8rJu5iYpgo-Yuy;#Ab#Q`TR<7h2{ZY=^BtN~P)YqCB-C<LEu9sio4
+z<nIiS-tgi77hfv5iTt^C`*XT<+8Eo`(%jY_<GWN=ltiJP1J2=hs+<y+M+HT-$U;_7
+zV)2BMIxRq>BkYjdaK?IC4r7u#Fsz~=fI~v7z?8kKA@5nws$4>nML|~CjFc2q9o}PV
+zQf0@aiKH9`)_DkR%N=p*5Nd|u@@jJn*{hX68=Nn%DplEJDxs*flvVYDcseCZBFvXR
+zDcwgbeHc_uno=gG6uAd3yK1=oq~8zot`J&*@2;<?3ABnHvqsadZuEs>js4K!-o+3;
+z>ke{-fy1xu5y-jy%pzvh9cU<ct8a{78P9u<K8!pbc{Fl+eDUCsg0Jq4uXV}S`dLRi
+zLURU<qf9mkdul74wJVg%m_c(rh2H)*y+irlp{0thf_KLXQ*O;5=-YJ50K*zZ+oK4y
+zO)czN;otnzM5Z-{tc6C;fsNgW+89OOwvhSH>-Jes_*^7FJ=O1~BW3J@vD=5$i(qHO
+zt$*3LSC7Tgb{)ZvCXD&u?f|CcGSXUh>mok$a;1UPfele7v)ty4+L>2&9j;YFES8C<
+z#8|A}ArF!#8z69uK#YKkzzGb{=?$VdOn5{1S8sVIJ)NjU+e1^VWo|mpRJ>&kvppI^
+Kv2M8pyMF;33I9X@
+
+delta 909
+zcmb`ET}V@57{||h&dxsChnaKVIdyGo#MYeXbS_P%wm!6IiU`N%atGVWbL5<(7ovGn
+z;6()SbXU<u5rthOBZ?sDBFN~2bVhcdg1QO35e&O3IxjM$d*6%S^Z!5Z^FHtU@GiE^
+zx0>D<jk^eCb+KRa56ttX%aol-#F##j6+}inm*H6El)&fNVM%1*5fwBs63<@{87ViK
+z<3^am8dXlAvxPruUZu*qZ>r#h-riq5sV9j10o?chB?U`9A1bNsIHk+hJgl7~w=!AJ
+zq$1|fmP3RThOnX18QHEcDS^!H<51QMLk6$MH>JNp+@kOcrVUa<sYYrnseBXMH%y}#
+zjOpuWzjAIrFh)P}6)qW{Ak+ZyvX&z|Gyp7={n)WyKX>0jp2C&#w<H-*!FjV6?wMmD
+z*&whYE2T5TQf`6`kU~_MQ)p5kqu``2T_34yY)T*OkX0PdvGB{xBN?)lUr{|IEHx+!
+ztmQO{6rNgWgu<|3twnXPX053fnsEzNHa9HEBrnPumYc{4JSVHAj4;AV;I_T2NaDMW
+z;zBh)E{%;#LMLq6JnCaOe;nNQD0&9{_DvLm9!D3wL6Wvkxa~Mh;rQJV)PC+s70Y{H
+zvry^ul8Y=Ha{9GP6(h6SRh<#8I=!xM7T*VpZ?<bSdE!%YU^zLkWbat5YTlrbBL+q1
+zUGn-M%(x;HVe!CY*I%uYUZ)7FAD-{+Hnt;TPapd2QZ}y*f~zVvlWHSgY1+wDP_?M*
+zh%4?L-I|JM-ct#UVwMavW<^-xGTrW1LNSO_#R#2>>x)q>)@^0IA!@~B=?zdT0b0?r
+yHk}^L<hXP?U=~i|(YrAQFwS7uFft0@V^t6h0p*S=pU~nSQ^!$c{UU;SxAh-m!qry*
+
+diff --git a/tools/timing/audit_data_eco.py b/tools/timing/audit_data_eco.py
+index 09d6447..1747a32 100644
+--- a/tools/timing/audit_data_eco.py
++++ b/tools/timing/audit_data_eco.py
+@@ -11,11 +11,11 @@ from audit_nor_trial import audit_models
+ 
+ def audit(before,after,operations):
+     old,ports,nets,loads,_=before
+-    new,new_ports,new_nets,_,_=after
++    new,new_ports,new_nets,new_loads,_=after
+     if not old.keys()<=new.keys() or ports!=new_ports or not nets<=new_nets:
+         raise ValueError('Removed logic/nets or changed ports')
+     replacements={o['instance']:(o['old'],o['new']) for o in operations if o['kind']=='size'}
+-    roots=[]; expected=0; target_counts={}
++    roots=[]; expected=0; target_counts={}; expected_groups=[]
+     for op in operations:
+         if op['kind']!='buffer':
+             continue
+@@ -30,12 +30,17 @@ def audit(before,after,operations):
+         if any(pin=='CLK' for _,pin in loads[net]):
+             raise ValueError('Data buffer targets a clock')
+         count=len(loads[net])
++        if net in roots or count < 1 or op['max_loads'] < 1:
++            raise ValueError('Duplicate buffer source or invalid load group')
+         target_counts[target]=count
+         roots.append(net); expected+=math.ceil(count/op['max_loads'])
++        sinks=sorted(loads[net],key=lambda sink: '/'.join(sink))
++        expected_groups.extend((net,tuple(sinks[i:i+op['max_loads']]))
++                               for i in range(0,count,op['max_loads']))
+     added=sorted(new.keys()-old.keys())
+     if len(added)!=expected:
+         raise ValueError(f'Expected {expected} added buffers, got {len(added)}')
+-    aliases={}
++    aliases={}; actual_groups=[]
+     for name in added:
+         master,pins=new[name]
+         if not name.startswith('eco_data_') or master!='sg13cmos5l_buf_4' or set(pins)!={'A','X'}:
+@@ -43,6 +48,10 @@ def audit(before,after,operations):
+         if pins['X'] in aliases or pins['A'] not in roots:
+             raise ValueError('Unexpected buffer driver or source')
+         aliases[pins['X']]=pins['A']
++        actual_groups.append((pins['A'],tuple(sorted(new_loads.get(pins['X'],[]),
++                                                   key=lambda sink: '/'.join(sink)))))
++    if sorted(actual_groups)!=sorted(expected_groups):
++        raise ValueError('Buffer sink groups differ from the declared deterministic recipe')
+     if new_nets-nets!=aliases.keys():
+         raise ValueError('Unexpected new nets')
+     for name,(master,pins) in old.items():
+diff --git a/tools/timing/data_eco_suite.py b/tools/timing/data_eco_suite.py
+index 364e922..747ed03 100644
+--- a/tools/timing/data_eco_suite.py
++++ b/tools/timing/data_eco_suite.py
+@@ -1,4 +1,4 @@
+-"""Finish the critical pair, then run single-source electrical ECOs, four at a time."""
++"""Run an explicit isolated or cumulative ECO suite, at most four cases at a time."""
+ import argparse
+ from concurrent.futures import ThreadPoolExecutor, as_completed
+ import json
+@@ -7,15 +7,15 @@ import shutil
+ import subprocess
+ import sys
+ import threading
+-import time
+-from data_eco_trial import recipes
++from data_eco_trial import SUITES, suite_recipes
+ 
+ 
+ def choose_attempt(root,name):
+     candidates=sorted(root.glob(name+'-[0-9][0-9]'))
+     completed=[v for v in candidates if (v/'experiment.json').exists() and
+         json.loads((v/'experiment.json').read_text())['status'] in ('screen_complete','rejected_signoff')
+-        and (v/'eco_audit.json').exists()]
++        and (v/'eco_audit.json').exists() and
++        json.loads((v/'eco_audit.json').read_text()).get('status') == 'pass']
+     if completed:
+         return completed[-1]
+     attempt=max((int(v.name.rsplit('-',1)[1]) for v in candidates),default=0)+1
+@@ -27,17 +27,23 @@ def main():
+     for name in ('base','prepared','archive-root','pdk-root','root','evidence'):
+         p.add_argument('--'+name,type=Path,required=True)
+     p.add_argument('--jobs',type=int,default=4)
++    p.add_argument('--suite',choices=SUITES,default='isolated')
+     a=p.parse_args()
+     if not 1<=a.jobs<=4:
+         p.error('Use one to four workers, each with eight OpenROAD threads')
+     tool=Path(__file__).resolve().parent
++    a.root.mkdir(parents=True,exist_ok=True)
+     a.evidence.mkdir(parents=True,exist_ok=True)
+-    names=list(recipes())
+-    critical=names[:3]
+-    while any(not (a.root/f'{n}-01/experiment.json').exists() for n in critical) or any(
+-              json.loads(path.read_text())['status']=='running'
+-              for path in a.root.glob('*-*/experiment.json')):
+-        time.sleep(5)
++    names=list(suite_recipes(a.suite))
++    # A fresh suite schedules its own controls. Never wait on unrelated cases.
++    active=[v for n in names for v in a.root.glob(n+'-[0-9][0-9]/experiment.json')
++            if json.loads(v.read_text()).get('status')=='running']
++    if active:
++        p.error('Selected attempts still marked running; inspect before resuming: '+str(active))
++    (a.root/'scheduler.py').write_bytes(Path(__file__).read_bytes())
++    (a.root/'suite_selection.json').write_text(json.dumps(dict(suite=a.suite,cases=names,
++        base=str(a.base.resolve()),prepared=str(a.prepared.resolve()),
++        jobs=a.jobs,threads_per_case=8),indent=2)+'\n')
+     state={}; lock=threading.Lock()
+ 
+     def update(name,**values):
+@@ -80,7 +86,7 @@ def main():
+             future.result()
+     if any(v['status']!='complete' for v in state.values()):
+         p.exit(1,'Some experiments failed; inspect suite_state.json\n')
+-    print('All isolated physical screens and replay collections complete',flush=True)
++    print('All',a.suite,'physical screens and replay collections complete',flush=True)
+ 
+ 
+ if __name__=='__main__':
+diff --git a/tools/timing/data_eco_trial.py b/tools/timing/data_eco_trial.py
+index 6c2f042..0dafcaf 100644
+--- a/tools/timing/data_eco_trial.py
++++ b/tools/timing/data_eco_trial.py
+@@ -1,4 +1,4 @@
+-"""One isolated data ECO per full-reroute screen on frozen post-antenna logic."""
++"""Explicit isolated or cumulative data ECOs on frozen post-antenna logic."""
+ import argparse
+ import json
+ from pathlib import Path
+@@ -9,6 +9,21 @@ from closure_trial import sha, unique, validate_config
+ from physical_trial import final_gate, relocate
+ 
+ 
++INTEGRATION_CASES = (
++    'control',
++    'critical_buffer',
++    'critical_buffer_fanout_32071',
++    'critical_buffer_fanout_32071_16949',
++    'critical_buffer_fanout_32071_16949_slew_29030',
++)
++CRITICAL_PATH_CASES = (
++    'critical_buffer_fanout_32071',
++    'critical_buffer_fanout_32071_buf_28923',
++    'critical_buffer_fanout_32071_buf_17250',
++)
++SUITES = ('isolated', 'integration', 'critical_path')
++
++
+ def recipes():
+     result={'control': []}
+     result['critical_size']=[dict(kind='size', instance='_23190_', old='sg13cmos5l_a21oi_1', new='sg13cmos5l_a21oi_2')]
+@@ -24,9 +39,29 @@ def recipes():
+         old='sg13cmos5l_'+master+'_1'
+         result['slew_'+name]=[dict(kind='size',instance='_'+name+'_',old=old,new='sg13cmos5l_'+strong)
+                               if strong else dict(kind='buffer',target='_'+name+'_/Y',old=old,max_loads=1000)]
++    cumulative = list(result['critical_buffer'])
++    for name, addition in zip(INTEGRATION_CASES[2:], ('fanout_32071', 'fanout_16949', 'slew_29030')):
++        cumulative = cumulative + result[addition]
++        result[name] = cumulative
++    for name, target in zip(CRITICAL_PATH_CASES[1:], ('_28923_/Y', '_17250_/Y')):
++        result[name] = result[CRITICAL_PATH_CASES[0]] + [dict(
++            kind='buffer', target=target, old='sg13cmos5l_a221oi_1', max_loads=1000)]
+     return result
+ 
+ 
++def suite_recipes(suite):
++    """Select only the declared cases; preserve the historical isolated suite."""
++    all_recipes = recipes()
++    if suite == 'isolated':
++        return {name: ops for name, ops in all_recipes.items()
++                if name not in (*INTEGRATION_CASES[2:], *CRITICAL_PATH_CASES[1:])}
++    if suite == 'integration':
++        return {name: all_recipes[name] for name in INTEGRATION_CASES}
++    if suite == 'critical_path':
++        return {name: all_recipes[name] for name in CRITICAL_PATH_CASES}
++    raise ValueError('Unknown ECO suite: ' + suite)
++
++
+ def script(operations):
+     text='''source $::env(SCRIPTS_DIR)/openroad/common/io.tcl
+ read_current_odb
+diff --git a/tools/timing/replay.py b/tools/timing/replay.py
+index e5a15d4..f216a86 100644
+--- a/tools/timing/replay.py
++++ b/tools/timing/replay.py
+@@ -65,7 +65,9 @@ def main():
+         hashes = {str(p): hashlib.sha256(p.read_bytes()).hexdigest() for p in files}
+         # Never mix reports from different invocations, or accept stale reports.
+         args.out.mkdir(parents=True, exist_ok=False)
+-        manifest = {"sha256": hashes, "reference": args.reference, "status": "running", "sessions": []}
++        manifest = {"sha256": hashes, "reference": args.reference, "status": "running", "sessions": [],
++                    "target": args.target or ("_32168_/D" if args.reference else "none"),
++                    "reset_active": args.reset_active}
+         (args.out / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
+         for corner in REQUIRED_CORNERS:
+             for mode in (("baseline", "operational", "reset_active") if args.reset_active
+diff --git a/tools/timing/report_io_paths.tcl b/tools/timing/report_io_paths.tcl
+index 491c467..737d3e8 100644
+--- a/tools/timing/report_io_paths.tcl
++++ b/tools/timing/report_io_paths.tcl
+@@ -97,6 +97,14 @@ if {$target_name eq "none"} { set target_name "" }
+ if {$mode eq "baseline" && $target_name ne ""} {
+     set target [get_pins -quiet $target_name]
+     if {[llength $target] != 1} { error "Mapped target pin missing: $target_name" }
++    # All startpoints expose the actual data cone at the rediscovered endpoint.
++    # Reset-only reports below remain separate diagnostics.
++    foreach delay {max min} {
++        report_checks -to $target -path_delay $delay -sort_by_slack \
++            -group_path_count 5 -endpoint_path_count 5 \
++            -fields {slew cap input net fanout} -format full_clock_expanded \
++            > [file join $out_dir target_${delay}.rpt]
++    }
+     foreach edge {rise fall} {
+         report_checks -${edge}_from [get_ports rst_n] -to $target \
+             -path_delay max -group_path_count 5 -endpoint_path_count 5 \
+diff --git a/tools/timing/summarize_data_eco.py b/tools/timing/summarize_data_eco.py
+index 097841d..89e38bf 100644
+--- a/tools/timing/summarize_data_eco.py
++++ b/tools/timing/summarize_data_eco.py
+@@ -1,22 +1,115 @@
+-"""Validate isolated data ECOs and compare them only with their matched reroute control."""
++"""Validate data ECO suites against their matched reroute control."""
+ import argparse
+ import json
+ from pathlib import Path
+-import shutil
+ import subprocess
+-from closure_trial import sha, unique
+-from check_signoff import REQUIRED_CORNERS, find_state
+-from collect_implementation import validate_replay
+-from data_eco_trial import recipes, script
++from closure_trial import sha
++from check_signoff import REQUIRED_CORNERS, check_metrics, find_state
++from collect_implementation import selected_metrics, validate_replay, path_summary
++from data_eco_trial import SUITES, suite_recipes, script
++
++
++def audit_match(common, config0, manifest, config):
++    inputs={k:manifest[k] for k in ('input_state_sha256','input_views_sha256','execution_overrides')}
++    if inputs!=common or config!=config0:
++        raise ValueError('Unmatched input/configuration: '+manifest['trial'])
++
++
++def delta(row, reference):
++    return {key: row[key]-reference[key] for key in
++            ('setup_ws_ns','setup_tns_ns','setup_endpoints','slow_slew')} | {
++        'fanout': row['fanout'][REQUIRED_CORNERS[0]]-reference['fanout'][REQUIRED_CORNERS[0]]}
++
++
++def add_comparisons(rows, reference=None, *, control_name='control', control_operations=None, cumulative=True):
++    control=rows[0]
++    expected_operations=[] if control_operations is None else control_operations
++    if control['trial']!=control_name or control['operations']!=expected_operations:
++        raise ValueError('First row must be the exact declared matched control')
++    for index,row in enumerate(rows):
++        if row['clock_sink_count']!=control['clock_sink_count']:
++            raise ValueError('Native flow changed the clock sink count')
++        row['annotation_complete']=all(v==0 for v in row['filtered_gaps'].values())
++        row['strict_gate_pass']=not row['strict_gate_failures']
++        row['screen_valid']=(row['annotation_complete'] and row['positive_hold_all_sessions'] and
++            all(v==0 for v in row['cap'].values()) and row['clock_buffer_outputs_above8']==0 and
++            row['route_drc']==0 and row['antenna_violations']==0)
++        row['delta_vs_matched_control']=delta(row,control)
++        if cumulative:
++            row['delta_vs_previous_case']=delta(row,rows[max(0,index-1)])
++        if 'fast_hold_ws_ns' in row:
++            row['delta_fast_hold_ns']=row['fast_hold_ws_ns']-control['fast_hold_ws_ns']
++        if reference is not None:
++            row['delta_vs_old_routed_reference']=delta(row,reference)
++
++
++def reference_row(metrics):
++    selected_metrics(metrics)
++    slow=REQUIRED_CORNERS[0]
++    return dict(setup_ws_ns=metrics['timing__setup__ws__corner:'+slow],
++        setup_tns_ns=metrics['timing__setup__tns__corner:'+slow],
++        setup_endpoints=metrics['timing__setup_vio__count__corner:'+slow],
++        slow_slew=metrics['design__max_slew_violation__count__corner:'+slow],
++        fanout={c:metrics['design__max_fanout_violation__count__corner:'+c] for c in REQUIRED_CORNERS})
++
++
++def best_combination(rows, start_index=2):
++    return max((r for r in rows[start_index:] if r['screen_valid']),
++               key=lambda r:(r['setup_ws_ns'],r['setup_tns_ns'],-r['setup_endpoints']),default=None)
++
++
++def comparison_markdown(result):
++    previous='delta_vs_previous_case' in result['rows'][0]
++    headers=['Case','WS ns','Delta control']+(['Delta previous'] if previous else [])+[
++        'TNS ns','Endpoints','Slew','Fanout','Fast hold ns','Delta fast hold ns','Annotation','Valid screen']
++    lines=['# '+result['suite'].capitalize()+' data ECO comparison', '',
++        'All cases start from the same prepared input and use a matched full reroute. '
++        'Positive slack deltas mean improvement. Screen validity does not imply strict signoff.', '',
++        '| '+' | '.join(headers)+' |','| '+' | '.join(['---']*len(headers))+' |']
++    for index,row in enumerate(result['rows'],1):
++        cells=[f"[{index}]({row['attempt']}/sta/metrics.json)",f"{row['setup_ws_ns']:.6f}",
++            f"{row['delta_vs_matched_control']['setup_ws_ns']:+.6f}"]
++        if previous: cells.append(f"{row['delta_vs_previous_case']['setup_ws_ns']:+.6f}")
++        cells += [f"{row['setup_tns_ns']:.6f}",str(row['setup_endpoints']),str(row['slow_slew']),
++            str(row['fanout'][REQUIRED_CORNERS[0]]),f"{row['fast_hold_ws_ns']:+.9f}",
++            f"{row['delta_fast_hold_ns']:+.9f}",
++            'complete' if row['annotation_complete'] else 'REJECT','yes' if row['screen_valid'] else 'NO']
++        lines.append('| '+' | '.join(cells)+' |')
++    lines.append('')
++    for index,row in enumerate(result['rows'],1):
++        path=row['critical_path']
++        lines.append(f"{index}. `{row['trial']}`: `{path['startpoint']}` to `{path['endpoint']}`. "
++                     f"Strict signoff: {'PASS' if row['strict_gate_pass'] else 'FAIL'}.")
++    selected=result['best_valid_candidate'] if result['suite']=='critical_path' else result['best_valid_combination']
++    lines+=['', 'Best valid '+('candidate' if result['suite']=='critical_path' else 'combination')+
++            ' by global setup WS: `'+str(selected)+'`.']
++    if result['suite']=='critical_path':
++        lines+=['', 'Each candidate adds one separate buffer to the declared control; the candidates are not cumulative.',
++                'Best valid candidate improves control setup WS: '+str(result['candidate_setup_improves_control'])+'.']
++    if result['old_routed_reference']:
++        reference=result['old_routed_reference']['metrics']
++        lines+=['',f"Old routed reference: WS {reference['setup_ws_ns']:.6f} ns, "
++            f"TNS {reference['setup_tns_ns']:.6f} ns, {reference['setup_endpoints']} endpoints, "
++            f"{reference['slow_slew']} slew and {reference['fanout'][REQUIRED_CORNERS[0]]} fanout violations. "
++            'Per-case deltas against this different routing history are retained in comparison.json.']
++    return '\n'.join(lines)+'\n'
+ 
+ 
+ def main():
+     p=argparse.ArgumentParser(description=__doc__)
+     p.add_argument('--root',type=Path,required=True)
+     p.add_argument('--evidence',type=Path,required=True)
++    p.add_argument('--suite',choices=SUITES,default='isolated')
++    p.add_argument('--reference-metrics',type=Path,
++                   help='Old splitting-only routed metrics (required for integration comparison)')
+     a=p.parse_args()
++    if a.suite=='integration' and a.reference_metrics is None:
++        p.error('Integration comparison requires --reference-metrics for the old routed reference')
++    reference=reference_row(json.loads(a.reference_metrics.read_text())) if a.reference_metrics else None
+     common=None; config0=None; model0=None; rows=[]
+-    for name,operations in recipes().items():
++    selected=suite_recipes(a.suite)
++    control_name=next(iter(selected))
++    for name,operations in selected.items():
+         choices=[v for v in sorted(a.root.glob(name+'-[0-9][0-9]'))
+                  if (v/'eco_audit.json').exists() and
+                  json.loads((v/'experiment.json').read_text())['status'] in ('screen_complete','rejected_signoff')]
+@@ -26,13 +119,14 @@ def main():
+         manifest=json.loads((trial/'experiment.json').read_text())
+         config=json.loads((trial/'resolved_input.json').read_text())
+         if manifest['operations']!=operations or (trial/'eco.tcl').read_text()!=script(operations):
+-            raise ValueError('Applied ECO differs from the declared isolated recipe')
++            raise ValueError('Applied ECO differs from the declared recipe')
+         if manifest['runner_sha256']!=sha(trial/'runner.py') or manifest['eco_script_sha256']!=sha(trial/'eco.tcl'):
+             raise ValueError('Invocation runner/script checksum mismatch')
+         inputs={k:manifest[k] for k in ('input_state_sha256','input_views_sha256','execution_overrides')}
+         if common is None: common=inputs; config0=config
+-        if inputs!=common or config!=config0:
+-            raise ValueError('Unmatched input/configuration: '+name)
++        audit_match(common,config0,manifest,config)
++        if a.suite in ('integration','critical_path') and inputs['execution_overrides']!={'OPENROAD_THREADS':8}:
++            raise ValueError('Matched suites require eight OpenROAD threads')
+         audit=json.loads((trial/'eco_audit.json').read_text())
+         if audit['status']!='pass' or not audit['clock_topology_unchanged']:
+             raise ValueError('Invalid logical/clock audit')
+@@ -40,6 +134,8 @@ def main():
+         metrics=json.loads((out/'sta/metrics.json').read_text())
+         replay=json.loads((out/'sta/replay_manifest.json').read_text())
+         provenance=json.loads((out/'sta/provenance.json').read_text())
++        if metrics!=selected_metrics(state['metrics']) or provenance['gate_failures']!=check_metrics(state['metrics']):
++            raise ValueError('Collected metrics/gate results differ from actual post-route state')
+         validate_replay(replay,metrics)
+         if provenance['coverage_issues'] or provenance['state_sha256']!=sha(state_path):
+             raise ValueError('STA coverage or state provenance mismatch')
+@@ -70,24 +166,28 @@ def main():
+             route_drc=state['metrics'].get('route__drc_errors'),
+             antenna_violations=state['metrics'].get('route__antenna_violation__count'),
+             strict_gate_failures=provenance['gate_failures'],replay_sessions=len(replay['sessions']))
++        row['positive_hold_all_sessions']=all(s['hold']>0 for s in replay['sessions'])
++        row['min_hold_all_sessions_ns']=min(s['hold'] for s in replay['sessions'])
++        row['fast_hold_ws_ns']=m('timing__hold__ws',REQUIRED_CORNERS[-1])
++        row['critical_path']=path_summary((out/'sta/global_setup.rpt').read_text())
+         rows.append(row)
+-    control=rows[0]
+-    for row in rows:
+-        if row['clock_sink_count']!=control['clock_sink_count']:
+-            raise ValueError('Native flow changed the clock sink count')
+-        row['annotation_complete']=all(v==0 for v in row['filtered_gaps'].values())
+-        row['strict_gate_pass']=not row['strict_gate_failures']
+-        row['delta_vs_matched_control']=dict(setup_ws_ns=row['setup_ws_ns']-control['setup_ws_ns'],
+-            setup_tns_ns=row['setup_tns_ns']-control['setup_tns_ns'],
+-            setup_endpoints=row['setup_endpoints']-control['setup_endpoints'],
+-            slow_slew=row['slow_slew']-control['slow_slew'],
+-            fanout=row['fanout'][REQUIRED_CORNERS[0]]-control['fanout'][REQUIRED_CORNERS[0]])
+-    result=dict(status='complete',rows=rows,matched_inputs=common,pdk_models_sha256=model0,
++    add_comparisons(rows,reference,control_name=control_name,control_operations=selected[control_name],
++                    cumulative=a.suite!='critical_path')
++    best=best_combination(rows,1 if a.suite=='critical_path' else 2) if a.suite!='isolated' else None
++    result=dict(status='complete',suite=a.suite,rows=rows,matched_inputs=common,pdk_models_sha256=model0,
++        control_trial=control_name,
++        best_valid_combination=best['trial'] if best and a.suite=='integration' else None,
++        best_valid_candidate=best['trial'] if best and a.suite=='critical_path' else None,
++        candidate_setup_improves_control=bool(best and best['setup_ws_ns']>rows[0]['setup_ws_ns']),
++        best_selection='Highest global slow setup WS, then TNS, then fewer endpoints; valid screen is not strict signoff',
++        old_routed_reference=dict(metrics=reference,sha256=sha(a.reference_metrics)) if reference else None,
+         setup_delta_sign='positive means improved slack',
+         qualification='matched full reroute of post-antenna logic; compare with control, not the old routed reference; no accepted fabrication qualification')
+     with (a.evidence/'comparison.json').open('x') as f:
+         json.dump(result,f,indent=2); f.write('\n')
+-    print('PASS:',len(rows),'isolated audited screens;',sum(r['replay_sessions'] for r in rows),'STA replay sessions')
++    with (a.evidence/'comparison.md').open('x') as f:
++        f.write(comparison_markdown(result))
++    print('PASS:',len(rows),a.suite,'audited screens;',sum(r['replay_sessions'] for r in rows),'STA replay sessions')
+ 
+ 
+ if __name__=='__main__':
