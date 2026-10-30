@@ -1,6 +1,9 @@
 .DS_Store
 .idea
 .tools/
+# Python bytecode is generated locally, including by the timing utilities.
+__pycache__/
+*.py[cod]
 *.vcd
 *.fst
 *.fst.hier

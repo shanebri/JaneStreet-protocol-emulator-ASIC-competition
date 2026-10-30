@@ -1,0 +1,176 @@
++ define_corners nom_slow_1p08V_125C
+Reading timing models for corner nom_slow_1p08V_125C…
+Reading cell library for the 'nom_slow_1p08V_125C' corner at '/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_stdcell/lib/sg13cmos5l_stdcell_slow_1p08V_125C.lib'…
+Reading cell library for the 'nom_slow_1p08V_125C' corner at '/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_io/lib/sg13cmos5l_io_slow_1p08V_3p0V_125C.lib'…
+Reading cell library for the 'nom_slow_1p08V_125C' corner at '/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_sram/lib/RM_IHPSG13_1P_64x16_c2_slow_1p08V_125C.lib'…
+Reading top-level netlist at '/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/packet_sram_buffered_control_20261030_01/run/15-openroad-fillinsertion/tt_um_shanebri_top.nl.v'…
+Linking design 'tt_um_shanebri_top' from netlist…
+Reading design constraints file at '/nix/store/6a08ghhhzl5a07nr0ly762yh1ah6m5bj-python3-3.13.13-env/lib/python3.13/site-packages/librelane/scripts/base.sdc'…
+[INFO] Using clock clk…
+[INFO] Setting output delay to: 4.0
+[INFO] Setting input delay to: 4.0
+[INFO] Setting load to: 0.006
+[INFO] Setting clock uncertainty to: 0.25
+[INFO] Setting clock transition to: 0.1499999999999999944488848768742172978818416595458984375
+[INFO] Setting timing derate to: 5.0%
+Reading top-level design parasitics for the 'nom_slow_1p08V_125C' corner at '/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/packet_sram_buffered_control_20261030_01/run/17-openroad-rcx/nom/tt_um_shanebri_top.nom.spef'…
+%OL_CREATE_REPORT min.rpt
+
+===========================================================================
+report_checks -path_delay min (Hold)
+============================================================================
+======================= nom_slow_1p08V_125C Corner ===================================
+
+Startpoint: _34561_ (rising edge-triggered flip-flop clocked by clk)
+Endpoint: pio.packet.storage.memory
+          (rising edge-triggered flip-flop clocked by clk)
+Path Group: clk
+Path Type: min
+
+Fanout         Cap        Slew       Delay        Time   Description
+---------------------------------------------------------------------------------------------
+                                  0.000000    0.000000   clock clk (rise edge)
+                                  0.000000    0.000000   clock source latency
+     2    0.109210    0.187095    0.147010    0.147010 ^ clk (in)
+                                                         clk (net)
+                      0.199167    0.000000    0.147010 ^ clkbuf_regs_0_clk/A (sg13cmos5l_buf_8)
+     1    0.009021    0.036895    0.165452    0.312462 ^ clkbuf_regs_0_clk/X (sg13cmos5l_buf_8)
+                                                         clk_regs (net)
+                      0.036898    0.000692    0.313154 ^ clkbuf_0_clk_regs/A (sg13cmos5l_buf_8)
+     4    0.137483    0.125999    0.159472    0.472626 ^ clkbuf_0_clk_regs/X (sg13cmos5l_buf_8)
+                                                         clknet_0_clk_regs (net)
+                      0.130224    0.017319    0.489945 ^ clkbuf_2_2_0_clk_regs/A (sg13cmos5l_buf_8)
+     8    0.178053    0.161833    0.216000    0.705945 ^ clkbuf_2_2_0_clk_regs/X (sg13cmos5l_buf_8)
+                                                         clknet_2_2_0_clk_regs (net)
+                      0.177773    0.036994    0.742939 ^ clkbuf_5_18_0_clk_regs/A (sg13cmos5l_buf_8)
+     6    0.111738    0.109898    0.207607    0.950546 ^ clkbuf_5_18_0_clk_regs/X (sg13cmos5l_buf_8)
+                                                         clknet_5_18_0_clk_regs (net)
+                      0.110785    0.007754    0.958299 ^ clkbuf_leaf_146_clk_regs/A (sg13cmos5l_buf_8)
+     2    0.017613    0.037713    0.136579    1.094878 ^ clkbuf_leaf_146_clk_regs/X (sg13cmos5l_buf_8)
+                                                         clknet_leaf_146_clk_regs (net)
+                      0.037720    0.001052    1.095930 ^ clkbuf_fanoutfix_11110755/A (sg13cmos5l_buf_8)
+     4    0.022914    0.038544    0.102090    1.198020 ^ clkbuf_fanoutfix_11110755/X (sg13cmos5l_buf_8)
+                                                         clknet_fanoutfix_11110754 (net)
+                      0.038544    0.000569    1.198589 ^ _34561_/CLK (sg13cmos5l_dfrbpq_1)
+     1    0.007488    0.062675    0.268179    1.466768 ^ _34561_/Q (sg13cmos5l_dfrbpq_1)
+                                                         pio.packet.storage.wdata_q[10] (net)
+                      0.062679    0.000524    1.467293 ^ hold14061/A (sg13cmos5l_dlygate4sd3_1)
+     1    0.003571    0.059964    0.549496    2.016789 ^ hold14061/X (sg13cmos5l_dlygate4sd3_1)
+                                                         net14060 (net)
+                      0.059964    0.000171    2.016960 ^ hold11045/A (sg13cmos5l_dlygate4sd3_1)
+     2    0.018200    0.146280    0.625096    2.642056 ^ hold11045/X (sg13cmos5l_dlygate4sd3_1)
+                                                         net11044 (net)
+                      0.195041    0.000551    2.642607 ^ pio.packet.storage.memory/A_DIN[10] (RM_IHPSG13_1P_64x16_c2)
+                                              2.642607   data arrival time
+
+                                  0.000000    0.000000   clock clk (rise edge)
+                                  0.000000    0.000000   clock source latency
+     2    0.111389    0.190487    0.137226    0.137226 ^ clk (in)
+                                                         clk (net)
+                      0.191329    0.000000    0.137226 ^ delaybuf_0_clk/A (sg13cmos5l_buf_8)
+     1    0.025934    0.047633    0.190641    0.327867 ^ delaybuf_0_clk/X (sg13cmos5l_buf_8)
+                                                         delaynet_0_clk (net)
+                      0.047669    0.002900    0.330767 ^ delaybuf_1_clk/A (sg13cmos5l_buf_8)
+     1    0.026788    0.041400    0.120318    0.451086 ^ delaybuf_1_clk/X (sg13cmos5l_buf_8)
+                                                         delaynet_1_clk (net)
+                      0.041661    0.004099    0.455184 ^ delaybuf_2_clk/A (sg13cmos5l_buf_8)
+     1    0.027501    0.041608    0.116884    0.572068 ^ delaybuf_2_clk/X (sg13cmos5l_buf_8)
+                                                         delaynet_2_clk (net)
+                      0.042140    0.005099    0.577167 ^ delaybuf_3_clk/A (sg13cmos5l_buf_8)
+     1    0.025859    0.040626    0.116596    0.693763 ^ delaybuf_3_clk/X (sg13cmos5l_buf_8)
+                                                         delaynet_3_clk (net)
+                      0.040803    0.003749    0.697512 ^ delaybuf_4_clk/A (sg13cmos5l_buf_8)
+     1    0.023838    0.039267    0.114885    0.812397 ^ delaybuf_4_clk/X (sg13cmos5l_buf_8)
+                                                         delaynet_4_clk (net)
+                      0.039314    0.002497    0.814894 ^ delaybuf_5_clk/A (sg13cmos5l_buf_8)
+     1    0.038572    0.048981    0.121836    0.936730 ^ delaybuf_5_clk/X (sg13cmos5l_buf_8)
+                                                         delaynet_5_clk (net)
+                      0.050315    0.006515    0.943245 ^ clkbuf_0_clk/A (sg13cmos5l_buf_8)
+     1    0.010953    0.030750    0.112799    1.056043 ^ clkbuf_0_clk/X (sg13cmos5l_buf_8)
+                                                         clknet_0_clk (net)
+                      0.030756    0.000911    1.056955 ^ clkbuf_1_0__f_clk/A (sg13cmos5l_buf_8)
+     1    0.008526    0.028351    0.099651    1.156606 ^ clkbuf_1_0__f_clk/X (sg13cmos5l_buf_8)
+                                                         clknet_1_0__leaf_clk (net)
+                      0.037805    0.000555    1.157161 ^ pio.packet.storage.memory/A_CLK (RM_IHPSG13_1P_64x16_c2)
+                                  0.250000    1.407161   clock uncertainty
+                                  0.000000    1.407161   clock reconvergence pessimism
+                                  0.574491    1.981652   library hold time
+                                              1.981652   data required time
+---------------------------------------------------------------------------------------------
+                                              1.981652   data required time
+                                             -2.642607   data arrival time
+---------------------------------------------------------------------------------------------
+                                              0.660955   slack (MET)
+
+
+[Middle omitted; complete source identified by SHA256]
+%OL_CREATE_REPORT wns.max.rpt
+
+===========================================================================
+Worst Negative Slack (Setup)
+============================================================================
+%OL_METRIC_F timing__setup__wns__corner:nom_slow_1p08V_125C 0.0
+nom_slow_1p08V_125C: 0.0
+%OL_END_REPORT
+%OL_CREATE_REPORT violator_list.rpt
+
+===========================================================================
+Violator List
+============================================================================
+%OL_METRIC_I timing__hold_vio__count__corner:nom_slow_1p08V_125C 0
+%OL_METRIC_F timing__hold_r2r__ws__corner:nom_slow_1p08V_125C 0.660955
+%OL_METRIC_I timing__hold_r2r_vio__count__corner:nom_slow_1p08V_125C 0
+%OL_METRIC_I timing__setup_vio__count__corner:nom_slow_1p08V_125C 0
+%OL_METRIC_F timing__setup_r2r__ws__corner:nom_slow_1p08V_125C 17.412603
+%OL_METRIC_I timing__setup_r2r_vio__count__corner:nom_slow_1p08V_125C 0
+%OL_END_REPORT
+%OL_CREATE_REPORT unpropagated.rpt
+%OL_END_REPORT
+%OL_CREATE_REPORT clock.rpt
+Clock: clk
+Sources: clk 
+Generated: no
+Virtual: yes
+Propagated: no
+Period: 20.000000
+
+===========================================================================
+report_clock_properties
+============================================================================
+Clock                   Period          Waveform
+----------------------------------------------------
+clk                  20.000000    0.000000 10.000000
+
+===========================================================================
+report_clock_latency
+============================================================================
+Clock clk
+rise -> rise
+    min     max
+0.000000 0.000000 source latency
+1.035256         network latency pio.packet.storage.memory/A_CLK
+        1.482801 network latency _33807_/CLK
+---------------
+1.035256 1.482801 latency
+        0.447546 skew
+
+fall -> fall
+    min     max
+0.000000 0.000000 source latency
+1.046079         network latency _35580_/CLK
+        1.434018 network latency _33807_/CLK
+---------------
+1.046079 1.434018 latency
+        0.387939 skew
+
+
+
+===========================================================================
+report_clock_min_period
+============================================================================
+clk period_min = 18.32 fmax = 54.59
+%OL_END_REPORT
+Writing SDF files for all corners…
+Removing Clock latencies before writing libs…
+Writing timing models for all corners…
+Writing timing models for the nom_slow_1p08V_125C corner to /mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/packet_sram_buffered_control_20261030_01/run/18-openroad-stapostpnr/nom_slow_1p08V_125C/tt_um_shanebri_top__nom_slow_1p08V_125C.lib…

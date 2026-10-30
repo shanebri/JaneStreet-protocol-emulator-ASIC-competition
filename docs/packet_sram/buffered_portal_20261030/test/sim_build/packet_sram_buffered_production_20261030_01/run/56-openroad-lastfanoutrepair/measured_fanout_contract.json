@@ -1,0 +1,44 @@
+{
+  "schema": 1,
+  "identity": "bidirectional pin-labelled graph; internal names excluded",
+  "entries": [
+    {
+      "operation": {
+        "kind": "buffer",
+        "target": "_33834_/Q",
+        "old": "sg13cmos5l_dfrbpq_1",
+        "max_loads": 4,
+        "location": "sink_centroid"
+      },
+      "rounds": 4,
+      "fingerprint": "d81ca28dc3280694ffe1b5c99306cf12619bc04e88a94bea153f2e4c9650386b",
+      "reference_name": "_33834_"
+    },
+    {
+      "operation": {
+        "kind": "buffer",
+        "target": "place7836/X",
+        "old": "sg13cmos5l_buf_1",
+        "max_loads": 4,
+        "location": "sink_centroid"
+      },
+      "rounds": 4,
+      "fingerprint": "615d50b0cd370b1293a8b972bea524add5dc09aae905d07c2e32916061e3bc98",
+      "reference_name": "place7836"
+    }
+  ],
+  "reference_odb_sha256": "a4a78c85a81e5b1718f87a4527237c328bd7614e681e0dea72a21e12f9b6a868",
+  "policy": "Only measured non-clock sources above eight actual loads; buffered partitions at most four",
+  "measurements": [
+    {
+      "target": "_33834_/Q",
+      "actual_input_loads": 9,
+      "includes_antenna_pins": true
+    },
+    {
+      "target": "place7836/X",
+      "actual_input_loads": 9,
+      "includes_antenna_pins": true
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "status": "pass",
+  "connectivity_cells_and_placement_unchanged": true,
+  "routing_delta": {
+    "scope": "DEF serialization comparison, not physical equivalence/LVS",
+    "original_signal_nets": 27096,
+    "unchanged_signal_routes": 27070,
+    "changed_signal_routes": [
+      "_00000_",
+      "_02510_",
+      "_11088_",
+      "_11355_",
+      "clk",
+      "clk_regs",
+      "clknet_0_clk",
+      "clknet_0_clk_regs",
+      "delaynet_0_clk",
+      "delaynet_1_clk",
+      "delaynet_2_clk",
+      "delaynet_3_clk",
+      "delaynet_4_clk",
+      "delaynet_5_clk",
+      "net10622",
+      "net11356",
+      "net13927",
+      "net6349",
+      "net6878",
+      "net6912",
+      "net8138",
+      "pio.engines\\[0\\].bank.packet_result\\[6\\]",
+      "pio.engines\\[0\\].core.irq\\[7\\]",
+      "pio.engines\\[0\\].core.isr\\[7\\]",
+      "pio.engines\\[0\\].core.osr\\[8\\]",
+      "pio.engines\\[1\\].core.divider_left\\[1\\]"
+    ],
+    "new_signal_nets": [],
+    "missing_signal_nets": [],
+    "changed_clock_routes": [
+      "clk",
+      "clknet_0_clk",
+      "clknet_0_clk_regs"
+    ],
+    "moved_or_changed_original_cells": [],
+    "removed_original_cells": [],
+    "boundary_and_signal_pins_unchanged": true,
+    "sha256": {
+      "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/packet_sram_buffered_production_20261030_01/run/57-openroad-detailedrouting-3/tt_um_shanebri_top.def": "5f5d158bf417da0fc701bb453ed115e5346db238573235480242af7ee26d1c20",
+      "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/packet_sram_buffered_production_20261030_01/run/58-openroad-finalizeroutes/tt_um_shanebri_top.def": "32fe50c9e98b01c7c95588be566a18bc690a2ea2a72fa60d262d7154381847ba"
+    }
+  },
+  "wire_contact_groups": [],
+  "routed_nets": 27096,
+  "after_def": "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/packet_sram_buffered_production_20261030_01/run/58-openroad-finalizeroutes/tt_um_shanebri_top.def",
+  "sha256": {
+    "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/packet_sram_buffered_production_20261030_01/run/57-openroad-detailedrouting-3/tt_um_shanebri_top.odb": "9ba644fe081fe274ba9b8328e840f74cd11ac2c9231baf92232b79ae1e0826b0",
+    "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/packet_sram_buffered_production_20261030_01/run/57-openroad-detailedrouting-3/tt_um_shanebri_top.def": "5f5d158bf417da0fc701bb453ed115e5346db238573235480242af7ee26d1c20",
+    "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/packet_sram_buffered_production_20261030_01/run/58-openroad-finalizeroutes/tt_um_shanebri_top.odb": "f181eea4d2e4a06ca605ae2a138aecf915348823034f2ae37ab56c7347fbd05d",
+    "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/packet_sram_buffered_production_20261030_01/run/58-openroad-finalizeroutes/tt_um_shanebri_top.def": "32fe50c9e98b01c7c95588be566a18bc690a2ea2a72fa60d262d7154381847ba",
+    "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/packet_sram_buffered_production_20261030_01/tools/timing/finalize_routes.py": "7a3a4e11005c8a6ce98cec7815a7191e2450191ecefd9e036c19090fed413265",
+    "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/packet_sram_buffered_production_20261030_01/tools/timing/audit_wire_contacts.py": "3fb1fc972a20d656daf976ce290e8ae945b5cddbad02e0491d07d0daef395b4d"
+  }
+}

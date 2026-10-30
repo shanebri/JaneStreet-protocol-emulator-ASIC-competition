@@ -1,0 +1,58 @@
+{
+  "status": "rejected",
+  "scope": "timing/electrical comparison only; full physical qualification required",
+  "margins": {
+    "nom_slow_1p08V_125C": {
+      "setup": {
+        "parent_ns": 0.30343373117436395,
+        "candidate_ns": 0.07038814175194752,
+        "consumed_ns": 0.23304558942241643
+      },
+      "hold": {
+        "parent_ns": 0.37312010093259845,
+        "candidate_ns": 0.662694584631693,
+        "consumed_ns": -0.2895744836990945
+      }
+    },
+    "nom_typ_1p20V_25C": {
+      "setup": {
+        "parent_ns": 6.1209865575302596,
+        "candidate_ns": 5.9497413124768315,
+        "consumed_ns": 0.17124524505342809
+      },
+      "hold": {
+        "parent_ns": 0.1457503048394956,
+        "candidate_ns": 0.31783243603255573,
+        "consumed_ns": -0.17208213119306012
+      }
+    },
+    "nom_fast_1p32V_m40C": {
+      "setup": {
+        "parent_ns": 9.516461665829743,
+        "candidate_ns": 9.435841708393475,
+        "consumed_ns": 0.0806199574362676
+      },
+      "hold": {
+        "parent_ns": 0.012811418954993667,
+        "candidate_ns": 0.1234858916739821,
+        "consumed_ns": -0.11067447271898843
+      }
+    }
+  },
+  "errors": [
+    "candidate: design__max_slew_violation__count__corner:nom_slow_1p08V_125C: 20 outside [0, 0]",
+    "candidate: design__max_cap_violation__count__corner:nom_slow_1p08V_125C: 1 outside [0, 0]",
+    "candidate: design__max_fanout_violation__count__corner:nom_slow_1p08V_125C: 15 outside [0, 0]",
+    "candidate: design__max_cap_violation__count__corner:nom_typ_1p20V_25C: 1 outside [0, 0]",
+    "candidate: design__max_fanout_violation__count__corner:nom_typ_1p20V_25C: 15 outside [0, 0]",
+    "candidate: design__max_cap_violation__count__corner:nom_fast_1p32V_m40C: 1 outside [0, 0]",
+    "candidate: design__max_fanout_violation__count__corner:nom_fast_1p32V_m40C: 15 outside [0, 0]",
+    "nom_slow_1p08V_125C setup: consumed 0.233045589422 ns of headroom",
+    "nom_typ_1p20V_25C setup: consumed 0.171245245053 ns of headroom",
+    "nom_fast_1p32V_m40C setup: consumed 0.0806199574363 ns of headroom"
+  ],
+  "sha256": {
+    "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/github_analysis_40938542430/runs/wokwi/69-openroad-stapostpnr/state_out.json": "af8ced2439790ea47598651acacfbb0eb9d9848a858972a1124358e074ec0ae5",
+    "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/packet_sram_buffered_20261030_01/extracted_diagnostic_01/run/3-openroad-stapostpnr/state_out.json": "63ee87779da7b78ab6254a242adae71b70073fa6a1b5e6e4fdfa22cf7484942d"
+  }
+}

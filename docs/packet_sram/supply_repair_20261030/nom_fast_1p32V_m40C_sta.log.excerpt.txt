@@ -1,0 +1,101 @@
++ define_corners nom_fast_1p32V_m40C
+Reading timing models for corner nom_fast_1p32V_m40C…
+Reading cell library for the 'nom_fast_1p32V_m40C' corner at '/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_stdcell/lib/sg13cmos5l_stdcell_fast_1p32V_m40C.lib'…
+Reading cell library for the 'nom_fast_1p32V_m40C' corner at '/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_io/lib/sg13cmos5l_io_fast_1p32V_3p6V_m40C.lib'…
+Reading cell library for the 'nom_fast_1p32V_m40C' corner at '/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_sram/lib/RM_IHPSG13_1P_64x16_c2_fast_1p32V_m55C.lib'…
+Reading top-level netlist at '/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/packet_sram_repair_20261030_04/extracted_diagnostic_01/run/1-openroad-fillinsertion/tt_um_shanebri_top.nl.v'…
+Linking design 'tt_um_shanebri_top' from netlist…
+Reading design constraints file at '/nix/store/6a08ghhhzl5a07nr0ly762yh1ah6m5bj-python3-3.13.13-env/lib/python3.13/site-packages/librelane/scripts/base.sdc'…
+[INFO] Using clock clk…
+[INFO] Setting output delay to: 4.0
+[INFO] Setting input delay to: 4.0
+[INFO] Setting load to: 0.006
+[INFO] Setting clock uncertainty to: 0.25
+[INFO] Setting clock transition to: 0.1499999999999999944488848768742172978818416595458984375
+[INFO] Setting timing derate to: 5.0%
+Reading top-level design parasitics for the 'nom_fast_1p32V_m40C' corner at '/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/packet_sram_repair_20261030_04/extracted_diagnostic_01/run/2-openroad-rcx/nom/tt_um_shanebri_top.nom.spef'…
+%OL_CREATE_REPORT min.rpt
+
+===========================================================================
+report_checks -path_delay min (Hold)
+============================================================================
+======================= nom_fast_1p32V_m40C Corner ===================================
+
+Startpoint: _34135_ (rising edge-triggered flip-flop clocked by clk)
+Endpoint: _34210_ (rising edge-triggered flip-flop clocked by clk)
+Path Group: clk
+Path Type: min
+
+Fanout         Cap        Slew       Delay        Time   Description
+---------------------------------------------------------------------------------------------
+                                  0.000000    0.000000   clock clk (rise edge)
+                                  0.000000    0.000000   clock source latency
+     2    0.107030    0.075457    0.065443    0.065443 ^ clk (in)
+                                                         clk (net)
+                      0.091773    0.000000    0.065443 ^ clkbuf_regs_0_clk/A (sg13cmos5l_buf_8)
+     1    0.009532    0.016523    0.066755    0.132198 ^ clkbuf_regs_0_clk/X (sg13cmos5l_buf_8)
+                                                         clk_regs (net)
+                      0.016532    0.000725    0.132922 ^ clkbuf_0_clk_regs/A (sg13cmos5l_buf_8)
+     4    0.119791    0.047771    0.060121    0.193043 ^ clkbuf_0_clk_regs/X (sg13cmos5l_buf_8)
+                                                         clknet_0_clk_regs (net)
+                      0.050785    0.008721    0.201764 ^ clkbuf_2_1_0_clk_regs/A (sg13cmos5l_buf_8)
+     8    0.251176    0.086522    0.091430    0.293194 ^ clkbuf_2_1_0_clk_regs/X (sg13cmos5l_buf_8)
+                                                         clknet_2_1_0_clk_regs (net)
+                      0.096072    0.020370    0.313565 ^ clkbuf_5_13__f_clk_regs/A (sg13cmos5l_buf_8)
+     6    0.104328    0.044659    0.089533    0.403098 ^ clkbuf_5_13__f_clk_regs/X (sg13cmos5l_buf_8)
+                                                         clknet_5_13__leaf_clk_regs (net)
+                      0.046129    0.006067    0.409164 ^ clkbuf_leaf_22_clk_regs/A (sg13cmos5l_buf_8)
+     2    0.018226    0.016696    0.052607    0.461771 ^ clkbuf_leaf_22_clk_regs/X (sg13cmos5l_buf_8)
+                                                         clknet_leaf_22_clk_regs (net)
+                      0.016700    0.000564    0.462336 ^ clkbuf_fanoutfix_20110432/A (sg13cmos5l_buf_8)
+[Middle of full log omitted; see source hash]
+%OL_CREATE_REPORT unpropagated.rpt
+%OL_END_REPORT
+%OL_CREATE_REPORT clock.rpt
+Clock: clk
+Sources: clk 
+Generated: no
+Virtual: yes
+Propagated: no
+Period: 20.000000
+
+===========================================================================
+report_clock_properties
+============================================================================
+Clock                   Period          Waveform
+----------------------------------------------------
+clk                  20.000000    0.000000 10.000000
+
+===========================================================================
+report_clock_latency
+============================================================================
+Clock clk
+rise -> rise
+    min     max
+0.000000 0.000000 source latency
+0.449384         network latency pio.packet.storage.memory/A_CLK
+        0.656594 network latency _33404_/CLK
+---------------
+0.449384 0.656594 latency
+        0.207210 skew
+
+fall -> fall
+    min     max
+0.000000 0.000000 source latency
+0.447860         network latency _34043_/CLK
+        0.640754 network latency _33404_/CLK
+---------------
+0.447860 0.640754 latency
+        0.192895 skew
+
+
+
+===========================================================================
+report_clock_min_period
+============================================================================
+clk period_min = 7.58 fmax = 131.94
+%OL_END_REPORT
+Writing SDF files for all corners…
+Removing Clock latencies before writing libs…
+Writing timing models for all corners…
+Writing timing models for the nom_fast_1p32V_m40C corner to /mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/packet_sram_repair_20261030_04/extracted_diagnostic_01/run/3-openroad-stapostpnr/nom_fast_1p32V_m40C/tt_um_shanebri_top__nom_fast_1p32V_m40C.lib…

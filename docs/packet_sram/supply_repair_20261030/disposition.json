@@ -1,0 +1,31 @@
+{
+  "disposition": "rejected; no candidate promotion; active production matches qualified parent",
+  "production_code_diff": "",
+  "rtl_regression": {
+    "passed": 39,
+    "failed": 0,
+    "skipped": 0,
+    "tested_snapshot": "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/packet_sram_repair_20261030_01",
+    "final_snapshot_rtl_identical": true,
+    "source_sha256": {
+      "project.sv": "211f39f898da0fccd91becf85eaafcce0e43e5ac144178ec2597252e1e94f63c",
+      "packet/packet_sram.sv": "01ac16a4f48998b0651a5ed3f67c4708a4373e73cceedaee5bd619e45fc6dcab",
+      "packet/packet_sram_portal.sv": "894f437b388fc197269027c380b46f85c29eb7c29b5c341d54d90422f2ba0ade",
+      "protocol_core.sv": "5b7f4252229140951d7f67c4384b24cd2c05c0fb3d1a4d75b967c22afb65b453",
+      "pio_inputs.sv": "3a2bb4f6757622edb840a33ac30ae868bb3f9f042cca8242bf3a5bee6b799077",
+      "pio_host_bank.sv": "1da7a525ac3f359e22ec8641e0dd12cc614bec9235c06b9fbe9d478d22601953",
+      "pio_subsystem.sv": "4df9cb1820310db6f5f558b2bce6a9699f1cce9afe5475b8f932bd2e814d2269",
+      "pio_gpio_owner.sv": "629b0060c8c72c76a995a2dd47eacff7790b1ff104c6e614cd2c94bf839b418b",
+      "host_interface.sv": "c94f32f5358b9b61feaae0d0478f3f20cb768f617c244b1ca67becef14c152bc",
+      "pio_pads.sv": "a11b6234e54f3307bba31651bb5973ddcf50e7ceb8946fdbd8ad243d1fb0b043",
+      "execution_unit.sv": "dbf598d1b82c94c65261e372c2386e70905a187d3e8662d9715d86cfb8ad90ac",
+      "pio_fifo.sv": "a39d186a08ed1f4dfafadcc575e200b418116915f84149e4a4824ac1962b9a55",
+      "frontend/pc.sv": "ea9f1bc1e4040ae8f3c2edb5249cc219c547b7a85ea5bed57688f6b4a12192f3",
+      "frontend/instruction_fetch.sv": "e4a85b9018d5c6d91fef936442e13d0835012e5121b6bd0bb5ee5028a79eb47c",
+      "frontend/decoder.sv": "0c3cc5b807c5028959599d70f8ace0b10e3d79f840efdc82a04febcfc723ce7f",
+      "packet/macro_blackbox.v": "940f0247dd3b55fa847756c29b98a607551dc208d1439aef2a6724df05d05b85"
+    }
+  },
+  "physical_result": "native supply connectivity and initial route pass; production ECO identity fails; extracted diagnostic timing/electrical gate fails",
+  "exact_fast_sram_characterization_available": false
+}

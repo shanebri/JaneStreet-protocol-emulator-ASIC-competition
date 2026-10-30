@@ -1,0 +1,35 @@
+max slew
+
+Pin                                        Limit        Slew       Slack
+------------------------------------------------------------------------
+pio.packet.storage.memory/A_MEN         0.476000    0.630853   -0.154853 (VIOLATED)
+
+max fanout
+
+Pin                                   Limit Fanout  Slack
+---------------------------------------------------------
+place7601/X                               8     14     -6 (VIOLATED)
+fanout2724/X                              8     12     -4 (VIOLATED)
+fanout2732/X                              8     11     -3 (VIOLATED)
+fanout2737/X                              8     11     -3 (VIOLATED)
+uio_in[0]                                 8     10     -2 (VIOLATED)
+uio_in[1]                                 8     10     -2 (VIOLATED)
+uio_in[3]                                 8     10     -2 (VIOLATED)
+place7545/X                               8     10     -2 (VIOLATED)
+_22672_/Y                                 8      9        (VIOLATED)
+_33458_/Q                                 8      9        (VIOLATED)
+_33661_/Q                                 8      9        (VIOLATED)
+place6888/X                               8      9        (VIOLATED)
+place7493/X                               8      9        (VIOLATED)
+
+max capacitance
+
+Pin                                        Limit         Cap       Slack
+------------------------------------------------------------------------
+pio.packet.storage.memory/A_DOUT[8]     0.064000    0.103534   -0.039534 (VIOLATED)
+pio.packet.storage.memory/A_DOUT[11]    0.064000    0.089909   -0.025909 (VIOLATED)
+pio.packet.storage.memory/A_DOUT[12]    0.064000    0.088688   -0.024688 (VIOLATED)
+pio.packet.storage.memory/A_DOUT[9]     0.064000    0.087458   -0.023458 (VIOLATED)
+pio.packet.storage.memory/A_DOUT[10]    0.064000    0.075052   -0.011052 (VIOLATED)
+pio.packet.storage.memory/A_DOUT[7]     0.064000    0.073662   -0.009662 (VIOLATED)
+

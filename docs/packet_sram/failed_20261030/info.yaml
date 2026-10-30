@@ -1,0 +1,70 @@
+# Tiny Tapeout project information
+project:
+  title:        "Programmable Protocol Emulator"      # Project title
+  author:       "Shane Bringhurst"      # Your name
+  discord:      ""      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
+  description:  "Dual PIO protocol emulator: independent 32-bit engines, TX/RX FIFOs, firmware-defined I/O."
+  language:     "SystemVerilog" # other examples include SystemVerilog, Amaranth, VHDL, etc
+  clock_hz:     50000000       # Clock frequency in Hz (or 0 if not applicable)
+
+  # How many tiles your design occupies? A single tile is about 167x108 uM.
+  tiles: "8x4"          # Updated Jane Street competition allocation (CMOS5L)
+
+  # Your top module name must start with "tt_um_". Make it unique by including your github username:
+  top_module:  "tt_um_shanebri_top"
+
+  # List your project's source files here.
+  # Source files must be in ./src and you must list each source file separately, one per line.
+  # Don't forget to also update `PROJECT_SOURCES` in test/Makefile.
+  source_files:
+    - "project.sv"
+    - "packet/packet_sram.sv"
+    - "packet/packet_sram_portal.sv"
+    - "protocol_core.sv"
+    - "pio_inputs.sv"
+    - "pio_host_bank.sv"
+    - "pio_subsystem.sv"
+    - "pio_gpio_owner.sv"
+    - "host_interface.sv"
+    - "pio_pads.sv"
+    - "execution_unit.sv"
+    - "pio_fifo.sv"
+    - "frontend/pc.sv"
+    - "frontend/instruction_fetch.sv"
+    - "frontend/decoder.sv"
+
+# The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
+# This section is for the datasheet/website. Use descriptive names (e.g., RX, TX, MOSI, SCL, SEG_A, etc.).
+pinout:
+  # Inputs
+  ui[0]: "HOST_ADDR[0]"
+  ui[1]: "HOST_ADDR[1]"
+  ui[2]: "HOST_ADDR[2]"
+  ui[3]: "HOST_ADDR[3]"
+  ui[4]: "HOST_WR"
+  ui[5]: "HOST_RD"
+  ui[6]: "PIO_IN[0]"
+  ui[7]: "PIO_IN[1]"
+
+  # Outputs
+  uo[0]: "PIO_OUT[0] / firmware UART TX"
+  uo[1]: "PIO_OUT[1]"
+  uo[2]: "PIO_OUT[2]"
+  uo[3]: "PIO_OUT[3]"
+  uo[4]: "PIO_OUT[4]"
+  uo[5]: "PIO_OUT[5]"
+  uo[6]: "PIO_OUT[6]"
+  uo[7]: "PIO_OUT[7]"
+
+  # Bidirectional pins
+  uio[0]: "HOST_DATA[0]"
+  uio[1]: "HOST_DATA[1]"
+  uio[2]: "HOST_DATA[2]"
+  uio[3]: "HOST_DATA[3]"
+  uio[4]: "PIO_PAD[0] / OUT[8] / IN[2]"
+  uio[5]: "PIO_PAD[1] / OUT[9] / IN[3]"
+  uio[6]: "PIO_PAD[2] / OUT[10] / IN[4]"
+  uio[7]: "PIO_PAD[3] / OUT[11] / IN[5]"
+
+# Do not change!
+yaml_version: 6

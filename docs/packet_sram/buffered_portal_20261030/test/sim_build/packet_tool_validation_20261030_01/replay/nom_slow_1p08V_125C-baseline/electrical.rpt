@@ -1,0 +1,62 @@
+max slew
+
+Pin                                        Limit        Slew       Slack
+------------------------------------------------------------------------
+pio.packet.storage.memory/A_MEN         0.595200    0.971224   -0.376024 (VIOLATED)
+_26668_/A                               2.507400    2.785941   -0.278541 (VIOLATED)
+_27192_/A                               2.507400    2.785884   -0.278484 (VIOLATED)
+place6756/A                             2.507400    2.785674   -0.278274 (VIOLATED)
+_26366_/A                               2.507400    2.785495   -0.278095 (VIOLATED)
+_27112_/A                               2.507400    2.785494   -0.278094 (VIOLATED)
+_26976_/A                               2.507400    2.785487   -0.278087 (VIOLATED)
+_25800_/B1                              2.507400    2.785293   -0.277893 (VIOLATED)
+_21898_/Y                               2.507400    2.785131   -0.277731 (VIOLATED)
+pio.packet.storage.memory/A_DIN[10]     0.595200    0.716141   -0.120941 (VIOLATED)
+place6584/A                             2.507400    2.575553   -0.068153 (VIOLATED)
+_18740_/A_N                             2.507400    2.575539   -0.068139 (VIOLATED)
+_18748_/B_N                             2.507400    2.575490   -0.068090 (VIOLATED)
+_18900_/B                               2.507400    2.575420   -0.068020 (VIOLATED)
+_18899_/B                               2.507400    2.575411   -0.068011 (VIOLATED)
+_18739_/A                               2.507400    2.575303   -0.067902 (VIOLATED)
+_30975_/A1                              2.507400    2.574348   -0.066948 (VIOLATED)
+_20543_/A                               2.507400    2.574112   -0.066712 (VIOLATED)
+_18738_/Y                               2.507400    2.570405   -0.063005 (VIOLATED)
+place5843/A                             2.507400    2.515133   -0.007733 (VIOLATED)
+place5837/A                             2.507400    2.514998   -0.007598 (VIOLATED)
+_31015_/A1                              2.507400    2.514987   -0.007587 (VIOLATED)
+_30978_/A1                              2.507400    2.514986   -0.007585 (VIOLATED)
+_31001_/A1                              2.507400    2.514970   -0.007570 (VIOLATED)
+_19074_/A                               2.507400    2.514896   -0.007496 (VIOLATED)
+_19075_/A                               2.507400    2.514596   -0.007195 (VIOLATED)
+place5825/A                             2.507400    2.514454   -0.007054 (VIOLATED)
+_18385_/Y                               2.507400    2.514401   -0.007001 (VIOLATED)
+
+max fanout
+
+Pin                                   Limit Fanout  Slack
+---------------------------------------------------------
+place7601/X                               8     14     -6 (VIOLATED)
+fanout2724/X                              8     12     -4 (VIOLATED)
+fanout2732/X                              8     11     -3 (VIOLATED)
+fanout2737/X                              8     11     -3 (VIOLATED)
+uio_in[0]                                 8     10     -2 (VIOLATED)
+uio_in[1]                                 8     10     -2 (VIOLATED)
+uio_in[3]                                 8     10     -2 (VIOLATED)
+place7545/X                               8     10     -2 (VIOLATED)
+_22672_/Y                                 8      9        (VIOLATED)
+_33458_/Q                                 8      9        (VIOLATED)
+_33661_/Q                                 8      9        (VIOLATED)
+place6888/X                               8      9        (VIOLATED)
+place7493/X                               8      9        (VIOLATED)
+
+max capacitance
+
+Pin                                        Limit         Cap       Slack
+------------------------------------------------------------------------
+pio.packet.storage.memory/A_DOUT[8]     0.064000    0.103300   -0.039300 (VIOLATED)
+pio.packet.storage.memory/A_DOUT[11]    0.064000    0.089675   -0.025675 (VIOLATED)
+pio.packet.storage.memory/A_DOUT[12]    0.064000    0.088454   -0.024454 (VIOLATED)
+pio.packet.storage.memory/A_DOUT[9]     0.064000    0.087224   -0.023224 (VIOLATED)
+pio.packet.storage.memory/A_DOUT[10]    0.064000    0.074818   -0.010818 (VIOLATED)
+pio.packet.storage.memory/A_DOUT[7]     0.064000    0.073428   -0.009428 (VIOLATED)
+

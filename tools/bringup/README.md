@@ -43,8 +43,10 @@ command using its generated `fixture.json`. You can run that command after
 programming. Review `check_timing.rpt`, `exceptions.rpt` and `cdc.rpt`; automatic
 setup/hold/DRC checks do not establish board-level electrical timing.
 
-The Python build orchestration has mocked success/failure tests. The Tcl flow
-has not yet been executed with Vivado here, so a passing FPGA build is not claimed.
+The Python build orchestration has mocked success/failure tests. The
+[October 30 baseline](../../docs/fpga_baseline_20261030.md) records a passing
+Vivado 2026.1 implementation and 100 complete physical Arty smoke iterations.
+External protocol peers and measured waveforms remain unqualified.
 
 ### Manual project setup
 
@@ -62,8 +64,8 @@ fpga/arty_bringup_top.sv
 Select `arty_bringup_top`; enable only `fpga/arty_bringup.xdc`. The MMCM supplies
 50 MHz, and USB UART operates at approximately 115200 8N1. Build/program the
 bitstream and inspect Vivado timing, DRC and exception endpoint resolution.
-FPGA place-and-route and hardware operation have **not** been performed here.
-Do not treat the simulation result as FPGA timing qualification. The pin mapping
+The October 30 baseline records place-and-route and physical smoke evidence for
+its exact image; a changed build requires fresh checks. The pin mapping
 is derived from [Digilent's master constraints](https://github.com/Digilent/digilent-xdc/blob/master/Arty-A7-100-Master.xdc).
 
 | Signal | Connector |
@@ -213,5 +215,5 @@ Vivado. Logs are retained under `test/sim_build/bringup-*.log`.
 No files in `src/`, `info.yaml`, production timing tooling or GDS workflow were
 changed. Thus no ASIC timing cone/register boundary changes or consumed ASIC
 timing headroom are introduced. The qualified ASIC baseline is retained; a new
-extracted ASIC timing run is not claimed. The added FPGA-only bridge still needs
-its own Vivado implementation checks before board use.
+extracted ASIC timing run is not claimed. The October 30 FPGA implementation and
+physical smoke evidence are preserved separately from the ASIC qualification.

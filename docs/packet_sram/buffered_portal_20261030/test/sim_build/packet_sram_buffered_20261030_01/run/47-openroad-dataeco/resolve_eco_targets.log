@@ -1,0 +1,13 @@
+OpenROAD dcf36133a369abc8f3c5e5738cd4d82e4903c0e0 
+Features included (+) or not (-): +GPU +GUI +Python
+This program is licensed under the BSD-3 license. See the LICENSE file for details.
+Components of this program may be licensed under more restrictive licenses which must be honored.
+Traceback (most recent call last):
+  File "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/packet_sram_buffered_20261030_01/tools/timing/resolve_eco_targets.py", line 128, in <module>
+    main()
+    ~~~~^^
+  File "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/packet_sram_buffered_20261030_01/tools/timing/resolve_eco_targets.py", line 121, in main
+    result = resolve(data, json.loads(a.contract.read_text()))
+  File "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/packet_sram_buffered_20261030_01/tools/timing/resolve_eco_targets.py", line 90, in resolve
+    raise ValueError(f"Target {entry['reference_name']} has {len(matches)} structural matches")
+ValueError: Target _23190_ has 0 structural matches

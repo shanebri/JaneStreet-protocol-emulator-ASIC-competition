@@ -1,0 +1,95 @@
+{
+  "//": "Only export pin area in LEF (without any connected nets)",
+  "PL_TARGET_DENSITY_PCT": 60,
+  "CLOCK_PERIOD": 20,
+  "meta": {
+    "flow": "PIOClosure"
+  },
+  "PL_TIMING_DRIVEN": true,
+  "GRT_ADJUSTMENT": 0.25,
+  "OPENROAD_THREADS": 8,
+  "MAGIC_EXT_USE_GDS": true,
+  "PIO_ECO_CONTRACT": "dir::../tools/timing/production/sink-local.json",
+  "PIO_INCREMENTAL_ECO_CONTRACTS": [
+    "dir::../tools/timing/production/fanout.json",
+    "dir::../tools/timing/production/last-fanout.json"
+  ],
+  "TIMING_VIOLATION_CORNERS": [
+    "*"
+  ],
+  "SETUP_VIOLATION_CORNERS": [
+    "*"
+  ],
+  "HOLD_VIOLATION_CORNERS": [
+    "*"
+  ],
+  "MAX_SLEW_VIOLATION_CORNERS": [
+    "*"
+  ],
+  "MAX_CAP_VIOLATION_CORNERS": [
+    "*"
+  ],
+  "PL_RESIZER_HOLD_SLACK_MARGIN": 0.1,
+  "GRT_RESIZER_HOLD_SLACK_MARGIN": 0.05,
+  "RUN_LINTER": 1,
+  "LINTER_INCLUDE_PDK_MODELS": 1,
+  "CLOCK_PORT": "clk",
+  "RUN_KLAYOUT_XOR": 0,
+  "RUN_KLAYOUT_DRC": 0,
+  "DESIGN_REPAIR_BUFFER_OUTPUT_PORTS": 0,
+  "TOP_MARGIN_MULT": 1,
+  "BOTTOM_MARGIN_MULT": 1,
+  "LEFT_MARGIN_MULT": 6,
+  "RIGHT_MARGIN_MULT": 6,
+  "FP_SIZING": "absolute",
+  "GRT_ALLOW_CONGESTION": 1,
+  "FP_IO_HLENGTH": 2,
+  "FP_IO_VLENGTH": 2,
+  "FP_PDN_VPITCH": 50.0,
+  "FP_PDN_VWIDTH": 2.1,
+  "RUN_CTS": 1,
+  "FP_PDN_MULTILAYER": 0,
+  "MAGIC_DEF_LABELS": 0,
+  "MAGIC_WRITE_LEF_PINONLY": 1,
+  "MACROS": {
+    "RM_IHPSG13_1P_64x16_c2": {
+      "lef": [
+        "/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_sram/lef/RM_IHPSG13_1P_64x16_c2.lef"
+      ],
+      "gds": [
+        "/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_sram/gds/RM_IHPSG13_1P_64x16_c2.gds"
+      ],
+      "spice": [
+        "/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_sram/cdl/RM_IHPSG13_1P_64x16_c2.cdl"
+      ],
+      "vh": [
+        "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/packet_sram_production_20261030_03/src/packet/macro_blackbox.v"
+      ],
+      "lib": {
+        "nom_slow_1p08V_125C": [
+          "/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_sram/lib/RM_IHPSG13_1P_64x16_c2_slow_1p08V_125C.lib"
+        ],
+        "nom_typ_1p20V_25C": [
+          "/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_sram/lib/RM_IHPSG13_1P_64x16_c2_typ_1p20V_25C.lib"
+        ],
+        "nom_fast_1p32V_m40C": [
+          "/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_sram/lib/RM_IHPSG13_1P_64x16_c2_fast_1p32V_m55C.lib"
+        ]
+      },
+      "instances": {
+        "pio.packet.storage.memory": {
+          "location": [
+            740,
+            310
+          ],
+          "orientation": "N"
+        }
+      }
+    }
+  },
+  "PDN_MACRO_CONNECTIONS": [
+    "pio\\.packet\\.storage\\.memory VPWR VGND VDD! VSS!"
+  ],
+  "FP_MACRO_HORIZONTAL_HALO": 10,
+  "FP_MACRO_VERTICAL_HALO": 10
+}

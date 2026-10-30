@@ -1,6 +1,6 @@
 # Project status and qualification
 
-Updated 2026-10-29. This page is the current status reference; dated experiment
+Updated 2026-10-30. This page is the current status reference; dated experiment
 reports retain their original measurements and checkpoint decisions.
 
 ## Implemented design
@@ -81,6 +81,29 @@ assume the documented synchronous timing contract. They do not establish
 arbitrary asynchronous reset release, synchronizer MTBF, board-level electrical
 compliance, or successful silicon operation.
 
+## Experimental packet SRAM
+
+The [October 30 SRAM production trial](packet_sram/failed_production_20261030.md)
+was rejected after power-grid generation failed. SRAM remains outside the active
+production implementation. No extracted candidate timing or electrical result
+was produced in that first attempt. The subsequent
+[supply repair](packet_sram/supply_repair_20261030.md) passes native power
+connectivity and initial routing DRC/antenna checks, but the production ECO
+identity gate rejects the changed netlist. Extracted diagnostics of its routed
+artifact also fail: slow setup slack -0.756343 ns, consuming 1.059776 ns versus
+the qualified parent, with new slew/capacitance/fanout violations. The repaired
+candidate was not promoted; the qualified production implementation is unchanged.
+
+The subsequent [registered portal repair](packet_sram/buffered_portal_20261030.md)
+preserves host/macro issue cycles and removes the extracted electrical errors,
+but its clean normal production run is also **rejected**. Slow setup slack is
+0.110301 ns, consuming 0.193133 ns versus the passing parent; typical setup
+consumes 0.148349 ns and fast diagnostic setup consumes 0.067181 ns. Hold margins
+improve, and native routing DRC/antenna counts are zero. The parent-margin gate
+stops the flow before GDS signoff and final gate tests. No SRAM integration is
+approved or active. All 30 available pinned-PDK SRAM fast libraries are -55 C,
+so changing macros in that inventory would not supply the required -40 C model.
+
 ## FPGA and repeatable bring-up
 
 The fixed UART demo, standalone UART diagnostic, fixed SPI/Nano tester and
@@ -98,9 +121,15 @@ Local validation passed the six smoke cases through package pins and through
 UART/adapter/core, hardware-divisor link checks, four transport tests, five
 existing SPI-checker tests, three host-API tests and the original 39 RTL tests.
 The Arty top has syntax/elaboration checks with clock primitives black-boxed.
-The new bridge has **not** been qualified by Vivado implementation or operated
-on connected boards. UART/SPI/I2C peer profiles are implemented but not physically
-validated here. Automated waveform acquisition and electrical characterization
+The [October 30 physical FPGA baseline](fpga_baseline_20261030.md) now records a
+successful Vivado 2026.1 build and Arty USB-host/core operation: six initial
+smoke checks plus 600 checks across 100 endurance iterations passed. Setup/hold
+slack is +4.618/+0.040 ns; routed DRC reports zero violations. The preserved
+archive and checksum receipt identify the exact image, sources, reports and raw
+host packets. These checks do not establish sustained dual-engine execution
+during host traffic, complete FIFO boundaries or electrical pad ownership.
+UART/SPI/I2C peer profiles remain physically unvalidated. Measured waveforms
+were not acquired. Automated waveform acquisition and electrical characterization
 are not implemented. A silicon fixture must still implement physical chip-pin
 driving; the current FPGA bridge instantiates the emulated ASIC core.
 
@@ -111,11 +140,12 @@ not a new extracted signoff measurement.
 ## Next qualification work
 
 1. Preserve the qualified artifacts and confirm CI for the exact release revision.
-2. Build the bring-up FPGA image, inspect timing/DRC/exception endpoints and
-   program the board.
-3. Run hardware smoke and separately wired UART/SPI/I2C profiles, retaining logs.
-4. Add measured waveforms, electrical checks and physical recovery/concurrency
-   tests before making hardware interoperability claims.
+2. Back up the preserved FPGA image, source snapshot and hardware evidence archive
+   outside this checkout; retain its checksums for future comparisons.
+3. Extend physical tests for sustained dual-engine host traffic, RX-full and error
+   boundaries, reset/disable recovery and bidirectional pad ownership.
+4. Run separately wired UART/SPI/I2C profiles and acquire measured waveforms and
+   electrical checks before making hardware interoperability claims.
 
 SRAM and further architecture changes remain separate proposals. Area headroom
 alone is not timing closure or a justification to change cycle behavior.

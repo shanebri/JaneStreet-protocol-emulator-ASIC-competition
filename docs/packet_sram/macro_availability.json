@@ -1,0 +1,69 @@
+{
+  "status": "blocked",
+  "qualification": "availability only; not physical signoff",
+  "pdk_revision": "2bbec755dc67ca3db0261c3d6163e15735d66710",
+  "macro": "RM_IHPSG13_1P_64x16_c2",
+  "capacity_bytes": 128,
+  "organization": "64x16",
+  "ports": "one synchronous read/write port",
+  "dimensions_um": [
+    236.8,
+    64.36
+  ],
+  "power_pins": [
+    "VDD!",
+    "VSS!"
+  ],
+  "views": {
+    "lef": {
+      "path": "/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_sram/lef/RM_IHPSG13_1P_64x16_c2.lef",
+      "sha256": "c4f569509aabce950785903cc835312539e504a94d3a03579405e5b84b984bc3"
+    },
+    "gds": {
+      "path": "/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_sram/gds/RM_IHPSG13_1P_64x16_c2.gds",
+      "sha256": "0cc794e39c7c6006a7df329c97f73cb38ae6c94feb8761e7756b378cda4302a7"
+    },
+    "cdl": {
+      "path": "/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_sram/cdl/RM_IHPSG13_1P_64x16_c2.cdl",
+      "sha256": "240ef98547a85fa24378a13d5dbd46099b0f23962e953903ad60a81d98b3702b"
+    },
+    "verilog": {
+      "path": "/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_sram/verilog/RM_IHPSG13_1P_64x16_c2.v",
+      "sha256": "63a682d02cc35a69cb06468c8813ec114dfa8abed505bd1d7cafc84b7a6ed806"
+    },
+    "behavioral": {
+      "path": "/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_sram/verilog/RM_IHPSG13_1P_core_behavioral.v",
+      "sha256": "5aa61ac427a9c7253f5bcfbc4bf0717a6ffb28db514b1d5cad0ecb52a11d5790"
+    }
+  },
+  "libraries": [
+    {
+      "path": "/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_sram/lib/RM_IHPSG13_1P_64x16_c2_fast_1p32V_m55C.lib",
+      "sha256": "9f67d502554b015a48a63d08b09102b3ba61c1dd1d345b4532795f9396b30ef6",
+      "process": "fast",
+      "voltage": 1.32,
+      "temperature": -55.0
+    },
+    {
+      "path": "/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_sram/lib/RM_IHPSG13_1P_64x16_c2_slow_1p08V_125C.lib",
+      "sha256": "17c7ba8a5ea84c2a18a591052ba02d5e1008f6f8a4d2584692b9d9a01dcd6411",
+      "process": "slow",
+      "voltage": 1.08,
+      "temperature": 125.0
+    },
+    {
+      "path": "/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_sram/lib/RM_IHPSG13_1P_64x16_c2_typ_1p20V_25C.lib",
+      "sha256": "4969c236a1fd96f2652d980c9b967798e2e0b3588c79c42fa90966f8926eac44",
+      "process": "typ",
+      "voltage": 1.2,
+      "temperature": 25.0
+    }
+  ],
+  "exact_production_libraries": {
+    "nom_slow_1p08V_125C": "/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_sram/lib/RM_IHPSG13_1P_64x16_c2_slow_1p08V_125C.lib",
+    "nom_typ_1p20V_25C": "/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_sram/lib/RM_IHPSG13_1P_64x16_c2_typ_1p20V_25C.lib"
+  },
+  "errors": [
+    "nom_fast_1p32V_m40C: expected one exact fast / 1.32 V / -40 C library; found 0"
+  ]
+}

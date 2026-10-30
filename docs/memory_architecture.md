@@ -1,5 +1,12 @@
 # Memory in the PIO engine: current storage and an SRAM path
 
+The [packet SRAM increment record](packet_sram/implementation.md) defines the
+128-byte buffered candidate, access contract and qualification gates. Its isolated
+functional model tests pass, but exact fast-corner macro availability is blocked;
+it is not connected to the production design or physically qualified.
+The [buffered-portal repair record](packet_sram/buffered_portal_20261030.md)
+contains the subsequent host/control diagnosis and physical qualification work.
+
 ## What exists now
 
 The [dual-PIO extension](dual_pio.md) uses independent program memories and TX/RX
@@ -79,7 +86,9 @@ Flash, or deliberately designed ROM/bootloader remains necessary for startup.
 An SRAM macro is a physical memory block with a specific depth, width, port count,
 timing and read/write behavior. Integration needs its functional model, timing
 library and physical views, along with an RTL wrapper and physical-flow support.
-No macro, capacity or final memory layout has been selected for this project.
+The isolated packet candidate selects a 64x16 macro (128 bytes), but its
+exact-corner availability gate is blocked and no final physical memory layout
+has been qualified. See the increment record linked above.
 
 For these tiny existing arrays, macro overhead could outweigh the savings. SRAM
 becomes more attractive as program or packet storage grows, but actual mapped

@@ -1,0 +1,1327 @@
+{
+  "failing_paths": [
+    {
+      "start": "ui_in[5] (input port clocked by clk)",
+      "endpoint": "_34147_",
+      "slack_ns": 0.223915,
+      "source_aliases": [
+        "pio.dirs[1][2]"
+      ]
+    },
+    {
+      "start": "ui_in[5] (input port clocked by clk)",
+      "endpoint": "_34161_",
+      "slack_ns": 0.564553,
+      "source_aliases": [
+        "pio.engines[1].core.pins[8]"
+      ]
+    },
+    {
+      "start": "ui_in[5] (input port clocked by clk)",
+      "endpoint": "_36111_",
+      "slack_ns": 0.6257,
+      "source_aliases": [
+        "$\\pio.engines[1].core.fetch.words$rdreg[1]$q[2]"
+      ]
+    },
+    {
+      "start": "ui_in[5] (input port clocked by clk)",
+      "endpoint": "_34163_",
+      "slack_ns": 0.69215,
+      "source_aliases": [
+        "pio.engines[1].core.pins[10]"
+      ]
+    },
+    {
+      "start": "ui_in[5] (input port clocked by clk)",
+      "endpoint": "_34145_",
+      "slack_ns": 0.899302,
+      "source_aliases": [
+        "pio.dirs[1][0]"
+      ]
+    },
+    {
+      "start": "ui_in[5] (input port clocked by clk)",
+      "endpoint": "_34162_",
+      "slack_ns": 0.902926,
+      "source_aliases": [
+        "pio.engines[1].core.pins[9]"
+      ]
+    },
+    {
+      "start": "ui_in[5] (input port clocked by clk)",
+      "endpoint": "_34148_",
+      "slack_ns": 0.939435,
+      "source_aliases": [
+        "pio.dirs[1][3]"
+      ]
+    },
+    {
+      "start": "ui_in[5] (input port clocked by clk)",
+      "endpoint": "_34164_",
+      "slack_ns": 0.941998,
+      "source_aliases": [
+        "pio.engines[1].core.pins[11]"
+      ]
+    },
+    {
+      "start": "ui_in[5] (input port clocked by clk)",
+      "endpoint": "_34159_",
+      "slack_ns": 0.955902,
+      "source_aliases": [
+        "pio.engines[1].core.pins[6]"
+      ]
+    }
+  ],
+  "electrical": [
+    {
+      "pin": "ANTENNA_3/A",
+      "master": "sg13cmos5l_antennanp",
+      "net": "_07739_",
+      "loads": [
+        {
+          "pin": "ANTENNA_3/A",
+          "master": "sg13cmos5l_antennanp",
+          "location": [
+            72960,
+            703080
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "_29997_/B1",
+          "master": "sg13cmos5l_a21o_1",
+          "location": [
+            74400,
+            703080
+          ],
+          "source_state": []
+        }
+      ],
+      "drivers": [
+        {
+          "pin": "_29996_/Y",
+          "master": "sg13cmos5l_nor3_1",
+          "location": [
+            625920,
+            559440
+          ],
+          "source_state": []
+        }
+      ]
+    },
+    {
+      "pin": "_18162_/Y",
+      "master": "sg13cmos5l_inv_1",
+      "net": "_11030_",
+      "loads": [
+        {
+          "pin": "ANTENNA_144/A",
+          "master": "sg13cmos5l_antennanp",
+          "location": [
+            255840,
+            446040
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "ANTENNA_143/A",
+          "master": "sg13cmos5l_antennanp",
+          "location": [
+            262080,
+            434700
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "ANTENNA_142/A",
+          "master": "sg13cmos5l_antennanp",
+          "location": [
+            252480,
+            446040
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "ANTENNA_141/A",
+          "master": "sg13cmos5l_antennanp",
+          "location": [
+            260640,
+            434700
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "_20427_/A1",
+          "master": "sg13cmos5l_a21oi_1",
+          "location": [
+            802080,
+            521640
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "_25412_/A1",
+          "master": "sg13cmos5l_a21oi_1",
+          "location": [
+            853920,
+            578340
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "place7179/A",
+          "master": "sg13cmos5l_buf_1",
+          "location": [
+            253920,
+            446040
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "place7178/A",
+          "master": "sg13cmos5l_buf_1",
+          "location": [
+            258720,
+            434700
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "place7173/A",
+          "master": "sg13cmos5l_buf_1",
+          "location": [
+            924000,
+            442260
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "_20389_/A1",
+          "master": "sg13cmos5l_a21oi_1",
+          "location": [
+            789120,
+            449820
+          ],
+          "source_state": []
+        }
+      ],
+      "drivers": [
+        {
+          "pin": "_18162_/Y",
+          "master": "sg13cmos5l_inv_1",
+          "location": [
+            676800,
+            434700
+          ],
+          "source_state": []
+        }
+      ]
+    },
+    {
+      "pin": "_29581_/Y",
+      "master": "sg13cmos5l_nor4_1",
+      "net": "_07327_",
+      "loads": [
+        {
+          "pin": "eco_data_41_014134/A",
+          "master": "sg13cmos5l_buf_4",
+          "location": [
+            89280,
+            695520
+          ],
+          "source_state": []
+        }
+      ],
+      "drivers": [
+        {
+          "pin": "_29581_/Y",
+          "master": "sg13cmos5l_nor4_1",
+          "location": [
+            623040,
+            567000
+          ],
+          "source_state": []
+        }
+      ]
+    },
+    {
+      "pin": "_29996_/Y",
+      "master": "sg13cmos5l_nor3_1",
+      "net": "_07739_",
+      "loads": [
+        {
+          "pin": "ANTENNA_3/A",
+          "master": "sg13cmos5l_antennanp",
+          "location": [
+            72960,
+            703080
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "_29997_/B1",
+          "master": "sg13cmos5l_a21o_1",
+          "location": [
+            74400,
+            703080
+          ],
+          "source_state": []
+        }
+      ],
+      "drivers": [
+        {
+          "pin": "_29996_/Y",
+          "master": "sg13cmos5l_nor3_1",
+          "location": [
+            625920,
+            559440
+          ],
+          "source_state": []
+        }
+      ]
+    },
+    {
+      "pin": "_29997_/B1",
+      "master": "sg13cmos5l_a21o_1",
+      "net": "_07739_",
+      "loads": [
+        {
+          "pin": "ANTENNA_3/A",
+          "master": "sg13cmos5l_antennanp",
+          "location": [
+            72960,
+            703080
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "_29997_/B1",
+          "master": "sg13cmos5l_a21o_1",
+          "location": [
+            74400,
+            703080
+          ],
+          "source_state": []
+        }
+      ],
+      "drivers": [
+        {
+          "pin": "_29996_/Y",
+          "master": "sg13cmos5l_nor3_1",
+          "location": [
+            625920,
+            559440
+          ],
+          "source_state": []
+        }
+      ]
+    },
+    {
+      "pin": "_33974_/Q",
+      "master": "sg13cmos5l_dfrbpq_1",
+      "net": "pio.engines\\[0\\].core.irq\\[4\\]",
+      "loads": [
+        {
+          "pin": "ANTENNA_119/A",
+          "master": "sg13cmos5l_antennanp",
+          "location": [
+            426720,
+            468720
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "ANTENNA_118/A",
+          "master": "sg13cmos5l_antennanp",
+          "location": [
+            497760,
+            476280
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "ANTENNA_117/A",
+          "master": "sg13cmos5l_antennanp",
+          "location": [
+            583680,
+            495180
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "ANTENNA_116/A",
+          "master": "sg13cmos5l_antennanp",
+          "location": [
+            542400,
+            506520
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "ANTENNA_115/A",
+          "master": "sg13cmos5l_antennanp",
+          "location": [
+            848640,
+            461160
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "ANTENNA_114/A",
+          "master": "sg13cmos5l_antennanp",
+          "location": [
+            447360,
+            279720
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "_30787_/B2",
+          "master": "sg13cmos5l_a22oi_1",
+          "location": [
+            428160,
+            468720
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "_30152_/A",
+          "master": "sg13cmos5l_nor4_1",
+          "location": [
+            499200,
+            476280
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "_30081_/A1",
+          "master": "sg13cmos5l_a22oi_1",
+          "location": [
+            585120,
+            495180
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "_30028_/A1",
+          "master": "sg13cmos5l_a22oi_1",
+          "location": [
+            543840,
+            506520
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "_21277_/A",
+          "master": "sg13cmos5l_nand2_1",
+          "location": [
+            850080,
+            461160
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "_19318_/B2",
+          "master": "sg13cmos5l_a22oi_1",
+          "location": [
+            507360,
+            260820
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "_19180_/A1",
+          "master": "sg13cmos5l_o21ai_1",
+          "location": [
+            448800,
+            279720
+          ],
+          "source_state": []
+        }
+      ],
+      "drivers": [
+        {
+          "pin": "_33974_/Q",
+          "master": "sg13cmos5l_dfrbpq_1",
+          "location": [
+            511200,
+            260820
+          ],
+          "source_state": [
+            "pio.engines[0].core.irq[4]"
+          ]
+        }
+      ]
+    },
+    {
+      "pin": "_33976_/Q",
+      "master": "sg13cmos5l_dfrbpq_1",
+      "net": "pio.engines\\[0\\].core.irq\\[6\\]",
+      "loads": [
+        {
+          "pin": "ANTENNA_129/A",
+          "master": "sg13cmos5l_antennanp",
+          "location": [
+            154560,
+            464940
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "ANTENNA_128/A",
+          "master": "sg13cmos5l_antennanp",
+          "location": [
+            603360,
+            491400
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "ANTENNA_127/A",
+          "master": "sg13cmos5l_antennanp",
+          "location": [
+            542880,
+            495180
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "ANTENNA_126/A",
+          "master": "sg13cmos5l_antennanp",
+          "location": [
+            496320,
+            476280
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "ANTENNA_125/A",
+          "master": "sg13cmos5l_antennanp",
+          "location": [
+            856320,
+            457380
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "ANTENNA_124/A",
+          "master": "sg13cmos5l_antennanp",
+          "location": [
+            149280,
+            464940
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "ANTENNA_123/A",
+          "master": "sg13cmos5l_antennanp",
+          "location": [
+            598080,
+            491400
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "ANTENNA_122/A",
+          "master": "sg13cmos5l_antennanp",
+          "location": [
+            538560,
+            495180
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "ANTENNA_121/A",
+          "master": "sg13cmos5l_antennanp",
+          "location": [
+            502080,
+            476280
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "ANTENNA_120/A",
+          "master": "sg13cmos5l_antennanp",
+          "location": [
+            851040,
+            457380
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "_30804_/B2",
+          "master": "sg13cmos5l_a221oi_1",
+          "location": [
+            150720,
+            464940
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "_30403_/A1",
+          "master": "sg13cmos5l_a221oi_1",
+          "location": [
+            599520,
+            491400
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "_30353_/A1",
+          "master": "sg13cmos5l_a22oi_1",
+          "location": [
+            540000,
+            495180
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "_30152_/C",
+          "master": "sg13cmos5l_nor4_1",
+          "location": [
+            499200,
+            476280
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "_21293_/B2",
+          "master": "sg13cmos5l_a221oi_1",
+          "location": [
+            852480,
+            457380
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "_19334_/B2",
+          "master": "sg13cmos5l_a22oi_1",
+          "location": [
+            486720,
+            294840
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "_19174_/A_N",
+          "master": "sg13cmos5l_nand2b_1",
+          "location": [
+            454560,
+            268380
+          ],
+          "source_state": []
+        }
+      ],
+      "drivers": [
+        {
+          "pin": "_33976_/Q",
+          "master": "sg13cmos5l_dfrbpq_1",
+          "location": [
+            487680,
+            287280
+          ],
+          "source_state": [
+            "pio.engines[0].core.irq[6]"
+          ]
+        }
+      ]
+    },
+    {
+      "pin": "_34375_/Q",
+      "master": "sg13cmos5l_dfrbpq_1",
+      "net": "pio.engines\\[1\\].core.irq\\[1\\]",
+      "loads": [
+        {
+          "pin": "ANTENNA_154/A",
+          "master": "sg13cmos5l_antennanp",
+          "location": [
+            215040,
+            468720
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "ANTENNA_153/A",
+          "master": "sg13cmos5l_antennanp",
+          "location": [
+            762720,
+            495180
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "ANTENNA_152/A",
+          "master": "sg13cmos5l_antennanp",
+          "location": [
+            210720,
+            468720
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "ANTENNA_151/A",
+          "master": "sg13cmos5l_antennanp",
+          "location": [
+            758400,
+            495180
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "_30831_/B2",
+          "master": "sg13cmos5l_a22oi_1",
+          "location": [
+            212160,
+            468720
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "_29640_/A1",
+          "master": "sg13cmos5l_a22oi_1",
+          "location": [
+            759840,
+            495180
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "_29596_/B2",
+          "master": "sg13cmos5l_a221oi_1",
+          "location": [
+            768000,
+            578340
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "_21321_/B2",
+          "master": "sg13cmos5l_a22oi_1",
+          "location": [
+            924960,
+            472500
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "_21192_/B",
+          "master": "sg13cmos5l_nor3_1",
+          "location": [
+            858720,
+            532980
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "_18330_/A",
+          "master": "sg13cmos5l_inv_1",
+          "location": [
+            905760,
+            570780
+          ],
+          "source_state": []
+        }
+      ],
+      "drivers": [
+        {
+          "pin": "_34375_/Q",
+          "master": "sg13cmos5l_dfrbpq_1",
+          "location": [
+            889440,
+            551880
+          ],
+          "source_state": [
+            "pio.engines[1].core.irq[1]"
+          ]
+        }
+      ]
+    },
+    {
+      "pin": "eco_data_41_014134/A",
+      "master": "sg13cmos5l_buf_4",
+      "net": "_07327_",
+      "loads": [
+        {
+          "pin": "eco_data_41_014134/A",
+          "master": "sg13cmos5l_buf_4",
+          "location": [
+            89280,
+            695520
+          ],
+          "source_state": []
+        }
+      ],
+      "drivers": [
+        {
+          "pin": "_29581_/Y",
+          "master": "sg13cmos5l_nor4_1",
+          "location": [
+            623040,
+            567000
+          ],
+          "source_state": []
+        }
+      ]
+    },
+    {
+      "pin": "place7148/X",
+      "master": "sg13cmos5l_buf_1",
+      "net": "net7148",
+      "loads": [
+        {
+          "pin": "ANTENNA_134/A",
+          "master": "sg13cmos5l_antennanp",
+          "location": [
+            120960,
+            400680
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "ANTENNA_133/A",
+          "master": "sg13cmos5l_antennanp",
+          "location": [
+            155520,
+            430920
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "ANTENNA_132/A",
+          "master": "sg13cmos5l_antennanp",
+          "location": [
+            136800,
+            510300
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "ANTENNA_131/A",
+          "master": "sg13cmos5l_antennanp",
+          "location": [
+            120960,
+            506520
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "place7147/A",
+          "master": "sg13cmos5l_buf_1",
+          "location": [
+            874080,
+            446040
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "_32999_/A1",
+          "master": "sg13cmos5l_o21ai_1",
+          "location": [
+            122400,
+            400680
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "_32649_/A",
+          "master": "sg13cmos5l_nor2_1",
+          "location": [
+            156960,
+            430920
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "_32203_/A1",
+          "master": "sg13cmos5l_o21ai_1",
+          "location": [
+            138240,
+            510300
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "_31333_/A1",
+          "master": "sg13cmos5l_o21ai_1",
+          "location": [
+            122400,
+            506520
+          ],
+          "source_state": []
+        }
+      ],
+      "drivers": [
+        {
+          "pin": "place7148/X",
+          "master": "sg13cmos5l_buf_1",
+          "location": [
+            979200,
+            468720
+          ],
+          "source_state": []
+        }
+      ]
+    },
+    {
+      "pin": "place7176/X",
+      "master": "sg13cmos5l_buf_1",
+      "net": "net7176",
+      "loads": [
+        {
+          "pin": "ANTENNA_158/A",
+          "master": "sg13cmos5l_antennanp",
+          "location": [
+            706080,
+            147420
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "ANTENNA_157/A",
+          "master": "sg13cmos5l_antennanp",
+          "location": [
+            657600,
+            154980
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "ANTENNA_156/A",
+          "master": "sg13cmos5l_antennanp",
+          "location": [
+            704640,
+            154980
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "place7174/A",
+          "master": "sg13cmos5l_buf_1",
+          "location": [
+            659040,
+            154980
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "place7175/A",
+          "master": "sg13cmos5l_buf_1",
+          "location": [
+            707520,
+            147420
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "_30614_/A1",
+          "master": "sg13cmos5l_a21oi_1",
+          "location": [
+            653280,
+            559440
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "_30546_/A1",
+          "master": "sg13cmos5l_a21oi_1",
+          "location": [
+            625440,
+            430920
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "_28663_/A1",
+          "master": "sg13cmos5l_o21ai_1",
+          "location": [
+            706080,
+            154980
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "_21454_/A",
+          "master": "sg13cmos5l_and4_1",
+          "location": [
+            678720,
+            430920
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "_20462_/A1",
+          "master": "sg13cmos5l_a21oi_1",
+          "location": [
+            690720,
+            555660
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "_18573_/A1",
+          "master": "sg13cmos5l_a21oi_1",
+          "location": [
+            434880,
+            555660
+          ],
+          "source_state": []
+        }
+      ],
+      "drivers": [
+        {
+          "pin": "place7176/X",
+          "master": "sg13cmos5l_buf_1",
+          "location": [
+            654240,
+            415800
+          ],
+          "source_state": []
+        }
+      ]
+    },
+    {
+      "pin": "place7625/X",
+      "master": "sg13cmos5l_buf_1",
+      "net": "net7625",
+      "loads": [
+        {
+          "pin": "ANTENNA_135/A",
+          "master": "sg13cmos5l_antennanp",
+          "location": [
+            704160,
+            612360
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "_30217_/B2",
+          "master": "sg13cmos5l_a22oi_1",
+          "location": [
+            705600,
+            612360
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "_25623_/A_N",
+          "master": "sg13cmos5l_nand2b_1",
+          "location": [
+            1148640,
+            427140
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "_25616_/B_N",
+          "master": "sg13cmos5l_nor2b_1",
+          "location": [
+            1143360,
+            427140
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "_23741_/A1",
+          "master": "sg13cmos5l_a21oi_1",
+          "location": [
+            1095360,
+            657720
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "_23267_/A1",
+          "master": "sg13cmos5l_o21ai_1",
+          "location": [
+            1000320,
+            650160
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "_23261_/A",
+          "master": "sg13cmos5l_xor2_1",
+          "location": [
+            1036320,
+            650160
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "_23258_/A1",
+          "master": "sg13cmos5l_a21oi_1",
+          "location": [
+            1013760,
+            653940
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "_22066_/B2",
+          "master": "sg13cmos5l_a221oi_1",
+          "location": [
+            1039680,
+            604800
+          ],
+          "source_state": []
+        }
+      ],
+      "drivers": [
+        {
+          "pin": "place7625/X",
+          "master": "sg13cmos5l_buf_1",
+          "location": [
+            1043040,
+            650160
+          ],
+          "source_state": []
+        }
+      ]
+    },
+    {
+      "pin": "place7888/X",
+      "master": "sg13cmos5l_buf_1",
+      "net": "net7888",
+      "loads": [
+        {
+          "pin": "ANTENNA_160/A",
+          "master": "sg13cmos5l_antennanp",
+          "location": [
+            1095840,
+            374220
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "place7886/A",
+          "master": "sg13cmos5l_buf_1",
+          "location": [
+            918240,
+            226800
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "place7887/A",
+          "master": "sg13cmos5l_buf_1",
+          "location": [
+            1107360,
+            374220
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "_27240_/A1",
+          "master": "sg13cmos5l_o21ai_1",
+          "location": [
+            794400,
+            189000
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "_27215_/A1",
+          "master": "sg13cmos5l_o21ai_1",
+          "location": [
+            839040,
+            181440
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "_27190_/A1",
+          "master": "sg13cmos5l_o21ai_1",
+          "location": [
+            815520,
+            185220
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "_26851_/A1",
+          "master": "sg13cmos5l_o21ai_1",
+          "location": [
+            935040,
+            177660
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "_26826_/A1",
+          "master": "sg13cmos5l_o21ai_1",
+          "location": [
+            922560,
+            185220
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "_26801_/A1",
+          "master": "sg13cmos5l_o21ai_1",
+          "location": [
+            953280,
+            170100
+          ],
+          "source_state": []
+        }
+      ],
+      "drivers": [
+        {
+          "pin": "place7888/X",
+          "master": "sg13cmos5l_buf_1",
+          "location": [
+            755520,
+            173880
+          ],
+          "source_state": []
+        }
+      ]
+    },
+    {
+      "pin": "place8045/X",
+      "master": "sg13cmos5l_buf_1",
+      "net": "net8045",
+      "loads": [
+        {
+          "pin": "ANTENNA_166/A",
+          "master": "sg13cmos5l_antennanp",
+          "location": [
+            497280,
+            230580
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "ANTENNA_165/A",
+          "master": "sg13cmos5l_antennanp",
+          "location": [
+            483840,
+            219240
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "ANTENNA_164/A",
+          "master": "sg13cmos5l_antennanp",
+          "location": [
+            489120,
+            238140
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "ANTENNA_163/A",
+          "master": "sg13cmos5l_antennanp",
+          "location": [
+            178560,
+            215460
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "ANTENNA_162/A",
+          "master": "sg13cmos5l_antennanp",
+          "location": [
+            176160,
+            238140
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "ANTENNA_161/A",
+          "master": "sg13cmos5l_antennanp",
+          "location": [
+            188640,
+            234360
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "place8044/A",
+          "master": "sg13cmos5l_buf_1",
+          "location": [
+            490560,
+            230580
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "_28427_/A0",
+          "master": "sg13cmos5l_mux2_1",
+          "location": [
+            479040,
+            219240
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "_28410_/A0",
+          "master": "sg13cmos5l_mux2_1",
+          "location": [
+            484320,
+            238140
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "_27427_/A0",
+          "master": "sg13cmos5l_mux2_1",
+          "location": [
+            166560,
+            215460
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "_27394_/A0",
+          "master": "sg13cmos5l_mux2_1",
+          "location": [
+            155520,
+            234360
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "_27295_/A0",
+          "master": "sg13cmos5l_mux2_1",
+          "location": [
+            174720,
+            234360
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "_21413_/B",
+          "master": "sg13cmos5l_nor3_1",
+          "location": [
+            497760,
+            442260
+          ],
+          "source_state": []
+        },
+        {
+          "pin": "_19333_/A",
+          "master": "sg13cmos5l_nand2_1",
+          "location": [
+            484800,
+            294840
+          ],
+          "source_state": []
+        }
+      ],
+      "drivers": [
+        {
+          "pin": "place8045/X",
+          "master": "sg13cmos5l_buf_1",
+          "location": [
+            172320,
+            517860
+          ],
+          "source_state": []
+        }
+      ]
+    }
+  ],
+  "synthesis_sha256": "fb8e1ee090845921786d3ea7b61e04fad6bf41b32b6d61d36982d4aa7f573098"
+}

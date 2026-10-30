@@ -11,8 +11,9 @@
 | `arty_bringup_top` | Python-driven host access | Bidirectional USB UART commands |
 
 For runtime program loading and repeatable smoke/peer profiles, use the
-[bring-up guide](../tools/bringup/README.md). The new bridge is simulation-tested;
-Vivado timing/DRC and board operation remain unverified. The fixed demos below
+[bring-up guide](../tools/bringup/README.md). The bridge has a
+[preserved Vivado build and physical Arty smoke baseline](../docs/fpga_baseline_20261030.md);
+external protocol peer operation remains unverified. The fixed demos below
 remain available and use different tops/constraints. Do not combine their XDCs.
 ASIC qualification is tracked separately in [project status](../docs/project_status.md).
 

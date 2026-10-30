@@ -1,0 +1,141 @@
+[08:50:32] INFO     Loading the design configuration file has      config.py:738
+                    generated the following warnings:                           
+[08:50:32] WARNING  The configuration variable 'FP_PDN_MULTILAYER' config.py:742
+                    is deprecated. Please check the docs for the                
+                    usage on the replacement variable                           
+                    'PDN_MULTILAYER'.                                           
+[08:50:32] WARNING  The configuration variable 'FP_PDN_VWIDTH' is  config.py:742
+                    deprecated. Please check the docs for the                   
+                    usage on the replacement variable                           
+                    'PDN_VWIDTH'.                                               
+[08:50:32] WARNING  The configuration variable 'FP_PDN_VPITCH' is  config.py:742
+                    deprecated. Please check the docs for the                   
+                    usage on the replacement variable                           
+                    'PDN_VPITCH'.                                               
+[08:50:32] WARNING  The configuration variable 'FP_IO_VLENGTH' is  config.py:742
+                    deprecated. Please check the docs for the                   
+                    usage on the replacement variable                           
+                    'IO_PIN_V_LENGTH'.                                          
+[08:50:32] WARNING  The configuration variable 'FP_IO_HLENGTH' is  config.py:742
+                    deprecated. Please check the docs for the                   
+                    usage on the replacement variable                           
+                    'IO_PIN_H_LENGTH'.                                          
+[08:50:32] INFO     Starting a new run of the 'PIOClosure' flow with flow.py:654
+                    the tag 'sram'.                                             
+[08:50:32] INFO     Starting…                                  sequential.py:339
+──────────────────────────────── Verilator Lint ────────────────────────────────
+[08:50:32] VERBOSE  Running 'Verilator.Lint' at                     step.py:1138
+                    'run/01-verilator-lint'…                                    
+[08:50:33] VERBOSE  Logging subprocess to                           step.py:1338
+                    'run/01-verilator-lint/verilator-lint.log'…                 
+%Warning-PINCONNECTEMPTY:                                                       
+/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/s
+im_build/packet_sram_buffered_20261030_01/src/project.sv:31:32: Instance pin    
+connected by name with empty reference: 'write_en'                              
+   31 |       .address(host_address), .write_en(), .read_en(),                  
+      |                                ^~~~~~~~                                 
+                          ... For warning description see                       
+https://verilator.org/warn/PINCONNECTEMPTY?v=5.046                              
+                          ... Use "/* verilator lint_off PINCONNECTEMPTY */" and
+lint_on around source to disable this message.                                  
+%Warning-PINCONNECTEMPTY:                                                       
+/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/s
+im_build/packet_sram_buffered_20261030_01/src/project.sv:31:45: Instance pin    
+connected by name with empty reference: 'read_en'                               
+   31 |       .address(host_address), .write_en(), .read_en(),                  
+      |                                             ^~~~~~~                     
+%Warning-WIDTHTRUNC:                                                            
+/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/s
+im_build/packet_sram_buffered_20261030_01/src/protocol_core.sv:183:65: Bit      
+extraction of var[5:0] requires 3 bit index, not 5 bits.                        
+                                                                                
+                                                                                
+          : ... note: In instance 'tt_um_shanebri_top.pio.engines[1].core'      
+  183 |                     0: wait_value = arg[4:0] < 6 ?                      
+inputs_actual[arg[4:0]] : 1'b0;                                                 
+      |                                                                 ^       
+                     ... For warning description see                            
+https://verilator.org/warn/WIDTHTRUNC?v=5.046                                   
+                     ... Use "/* verilator lint_off WIDTHTRUNC */" and lint_on  
+around source to disable this message.                                          
+%Warning-WIDTHTRUNC:                                                            
+/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/s
+im_build/packet_sram_buffered_20261030_01/src/protocol_core.sv:385:62: Bit      
+extraction of var[3:0] requires 2 bit index, not 4 bits.                        
+                                                                                
+                                                                                
+          : ... note: In instance 'tt_um_shanebri_top.pio.engines[1].core'      
+  385 |                                 if (side_pin >= 8) directions[side_pin -
+4'd8] <= side_value;                                                            
+      |                                                              ^          
+[Middle omitted; complete source identified by SHA256]
+  Total                                 27176  414466.51                        
+Writing OpenROAD database to                                                    
+'/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/
+sim_build/packet_sram_buffered_20261030_01/run/45-openroad-detailedrouting/tt_um
+_shanebri_top.odb'…                                                             
+Writing netlist to                                                              
+'/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/
+sim_build/packet_sram_buffered_20261030_01/run/45-openroad-detailedrouting/tt_um
+_shanebri_top.nl.v'…                                                            
+Writing powered netlist to                                                      
+'/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/
+sim_build/packet_sram_buffered_20261030_01/run/45-openroad-detailedrouting/tt_um
+_shanebri_top.pnl.v'…                                                           
+Writing layout to                                                               
+'/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/
+sim_build/packet_sram_buffered_20261030_01/run/45-openroad-detailedrouting/tt_um
+_shanebri_top.def'…                                                             
+Writing timing constraints to                                                   
+'/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/
+sim_build/packet_sram_buffered_20261030_01/run/45-openroad-detailedrouting/tt_um
+_shanebri_top.sdc'…                                                             
+───────────────────────────── PrepareSignalRoutes ──────────────────────────────
+[09:04:03] VERBOSE  Running 'PIO.PrepareSignalRoutes' at            step.py:1138
+                    'run/46-pio-preparesignalroutes'…                           
+─────────────── Structurally identified and audited data repair ────────────────
+[09:04:07] VERBOSE  Running 'OpenROAD.DataECO' at                   step.py:1138
+                    'run/47-openroad-dataeco'…                                  
+PIOClosure - Stage 50 - Structurally identified and audited data repair ━  … 0:…
+[09:04:09] WARNING  The following warnings were generated by the     flow.py:699
+                    flow:                                                       
+[09:04:09] WARNING  [Checker.LintWarnings] 8 Lint warnings found.    flow.py:701
+[09:04:09] WARNING  [OpenROAD.CheckSDCFiles] 'PNR_SDC_FILE' is not   flow.py:701
+                    defined. Using generic fallback SDC for OpenROAD            
+                    PnR steps.                                                  
+[09:04:09] WARNING  [OpenROAD.CheckSDCFiles] 'SIGNOFF_SDC_FILE' is   flow.py:701
+                    not defined. Using generic fallback SDC for                 
+                    OpenROAD PnR steps.                                         
+[09:04:09] WARNING  [Odb.ApplyDEFTemplate] Bterm VPWR is declared as flow.py:701
+                    a 'POWER' pin. It will be ignored. (and 1                   
+                    similar warnings)                                           
+[09:04:09] WARNING  [OpenROAD.GlobalPlacement] [GRT-0281] Net clk    flow.py:701
+                    has a large fanout of 2581 terminals.                       
+[09:04:09] WARNING  [OpenROAD.DetailedRouting] [DRT-0349]            flow.py:701
+                    LEF58_ENCLOSURE with no CUTCLASS is not                     
+                    supported. Skipping for layer Cont (and 6                   
+                    similar warnings)                                           
+[09:04:09] ERROR    The following error was encountered while    __main__.py:189
+                    running the flow:                                           
+                    Structurally identified and audited data                    
+                    repair: subprocess (1, ['openroad',                         
+                    '-no_init', '-exit', '-python',                             
+                    '/mnt/c/Users/shane/Projects/JaneStreet-prot                
+                    ocol-emulator-ASIC-competition/test/sim_buil                
+                    d/packet_sram_buffered_20261030_01/tools/tim                
+                    ing/resolve_eco_targets.py', '--odb',                       
+                    '/mnt/c/Users/shane/Projects/JaneStreet-prot                
+                    ocol-emulator-ASIC-competition/test/sim_buil                
+                    d/packet_sram_buffered_20261030_01/run/46-pi                
+                    o-preparesignalroutes/prepared/unrouted.odb'                
+                    , '--contract',                                             
+                    '/mnt/c/Users/shane/Projects/JaneStreet-prot                
+                    ocol-emulator-ASIC-competition/test/sim_buil                
+                    d/packet_sram_buffered_20261030_01/tools/tim                
+                    ing/production/sink-local.json', '--out',                   
+                    '/mnt/c/Users/shane/Projects/JaneStreet-prot                
+                    ocol-emulator-ASIC-competition/test/sim_buil                
+                    d/packet_sram_buffered_20261030_01/run/47-op                
+                    enroad-dataeco/resolved_recipe.json'])                      
+                    failed                                                      
+[09:04:09] ERROR    LibreLane will now quit.                     __main__.py:190

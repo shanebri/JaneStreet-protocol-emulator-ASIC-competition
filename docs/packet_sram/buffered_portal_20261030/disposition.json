@@ -1,0 +1,54 @@
+{
+  "disposition": "Experimental SRAM is not promoted; active production matches qualified parent",
+  "exact_fast_sram_model_available": false,
+  "frozen_inputs_unchanged": 115,
+  "tests": {
+    "test/sim_build/packet_sram_buffered_20261030_01/test/packet_results.xml": {
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "test/sim_build/packet_sram_buffered_20261030_01/test/results.xml": {
+      "tests": 39,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "test/sim_build/packet_sram_buffered_production_20261030_01/mapped_packet_check_02/test/packet_results.xml": {
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "production_job": {
+    "status": "failed",
+    "commands": [
+      [
+        "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/production_tooling/venv/bin/python",
+        "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/packet_sram_buffered_production_20261030_01/tt/tt_tool.py",
+        "--create-user-config",
+        "--ihp"
+      ],
+      [
+        "/nix/store/lrlpbc4nd373kds32zl72fd8qy2ayah0-devshell-dir/bin/python3",
+        "-m",
+        "librelane",
+        "--pdk",
+        "ihp-sg13cmos5l",
+        "--manual-pdk",
+        "--pdk-root",
+        "/home/shane/eda/pdk-2bbec755",
+        "--run-tag",
+        "packet",
+        "--force-run-dir",
+        "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/packet_sram_buffered_production_20261030_01/run",
+        "src/config_merged.json"
+      ]
+    ],
+    "candidate_promoted": false,
+    "exact_fast_sram_model_available": false,
+    "error": "Command '['/nix/store/lrlpbc4nd373kds32zl72fd8qy2ayah0-devshell-dir/bin/python3', '-m', 'librelane', '--pdk', 'ihp-sg13cmos5l', '--manual-pdk', '--pdk-root', '/home/shane/eda/pdk-2bbec755', '--run-tag', 'packet', '--force-run-dir', '/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/packet_sram_buffered_production_20261030_01/run', 'src/config_merged.json']' returned non-zero exit status 2."
+  }
+}

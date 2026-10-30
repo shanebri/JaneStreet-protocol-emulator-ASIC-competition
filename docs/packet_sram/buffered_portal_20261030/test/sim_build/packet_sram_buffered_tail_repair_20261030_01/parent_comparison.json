@@ -1,0 +1,51 @@
+{
+  "status": "rejected",
+  "scope": "timing/electrical comparison only; full physical qualification required",
+  "margins": {
+    "nom_slow_1p08V_125C": {
+      "setup": {
+        "parent_ns": 0.30343373117436395,
+        "candidate_ns": 0.44910920697988355,
+        "consumed_ns": -0.1456754758055196
+      },
+      "hold": {
+        "parent_ns": 0.37312010093259845,
+        "candidate_ns": 0.6648816130297555,
+        "consumed_ns": -0.291761512097157
+      }
+    },
+    "nom_typ_1p20V_25C": {
+      "setup": {
+        "parent_ns": 6.1209865575302596,
+        "candidate_ns": 6.1773556907091765,
+        "consumed_ns": -0.0563691331789169
+      },
+      "hold": {
+        "parent_ns": 0.1457503048394956,
+        "candidate_ns": 0.3204990807908208,
+        "consumed_ns": -0.17474877595132518
+      }
+    },
+    "nom_fast_1p32V_m40C": {
+      "setup": {
+        "parent_ns": 9.516461665829743,
+        "candidate_ns": 9.560391859888963,
+        "consumed_ns": -0.04393019405921983
+      },
+      "hold": {
+        "parent_ns": 0.012811418954993667,
+        "candidate_ns": 0.12004408917800084,
+        "consumed_ns": -0.10723267022300717
+      }
+    }
+  },
+  "errors": [
+    "candidate: design__max_fanout_violation__count__corner:nom_slow_1p08V_125C: 2 outside [0, 0]",
+    "candidate: design__max_fanout_violation__count__corner:nom_typ_1p20V_25C: 2 outside [0, 0]",
+    "candidate: design__max_fanout_violation__count__corner:nom_fast_1p32V_m40C: 2 outside [0, 0]"
+  ],
+  "sha256": {
+    "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/github_analysis_40938542430/runs/wokwi/69-openroad-stapostpnr/state_out.json": "af8ced2439790ea47598651acacfbb0eb9d9848a858972a1124358e074ec0ae5",
+    "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/packet_sram_buffered_tail_repair_20261030_01/run/18-openroad-stapostpnr/state_out.json": "9406541917c1a1f1e811b57deef79b89d2e3fca0e67b4912e04796f3a42d47c2"
+  }
+}

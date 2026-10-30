@@ -1,0 +1,29 @@
+{
+  "status": "failed",
+  "commands": [
+    [
+      "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/production_tooling/venv/bin/python",
+      "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/packet_sram_repair_20261030_04/tt/tt_tool.py",
+      "--create-user-config",
+      "--ihp"
+    ],
+    [
+      "/nix/store/lrlpbc4nd373kds32zl72fd8qy2ayah0-devshell-dir/bin/python3",
+      "-m",
+      "librelane",
+      "--pdk",
+      "ihp-sg13cmos5l",
+      "--manual-pdk",
+      "--pdk-root",
+      "/home/shane/eda/pdk-2bbec755",
+      "--run-tag",
+      "sram",
+      "--force-run-dir",
+      "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/packet_sram_repair_20261030_04/run",
+      "src/config_merged.json"
+    ]
+  ],
+  "physical_signoff": false,
+  "error": "Command '['/nix/store/lrlpbc4nd373kds32zl72fd8qy2ayah0-devshell-dir/bin/python3', '-m', 'librelane', '--pdk', 'ihp-sg13cmos5l', '--manual-pdk', '--pdk-root', '/home/shane/eda/pdk-2bbec755', '--run-tag', 'sram', '--force-run-dir', '/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/packet_sram_repair_20261030_04/run', 'src/config_merged.json']' returned non-zero exit status 2.",
+  "candidate_promoted": false
+}

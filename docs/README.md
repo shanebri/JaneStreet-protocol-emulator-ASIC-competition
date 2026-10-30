@@ -12,6 +12,8 @@ The root [README](../README.md) is the entry point for users.
 - [Dual-engine selection, ownership and group commands](dual_pio.md)
 - [Host split decision](adr_four_bit_host.md)
 - [Memory architecture and future SRAM options](memory_architecture.md)
+- [Packet SRAM candidate, interface and qualification gate](packet_sram/implementation.md)
+- [Buffered SRAM portal diagnosis and physical repair evidence](packet_sram/buffered_portal_20261030.md)
 - [UART example](../examples/uart_v0.asm), [SPI guide](spi_mode0.md), [I2C guide](i2c.md)
 
 ## Build, verification and board use
@@ -19,6 +21,7 @@ The root [README](../README.md) is the entry point for users.
 - [Simulation, unit tests and gate-netlist instructions](../test/README.md)
 - [FPGA demos and integration options](../fpga/README.md)
 - [Repeatable Python bring-up suite and its limits](../tools/bringup/README.md)
+- [October 30 physical FPGA smoke baseline and evidence receipt](fpga_baseline_20261030.md)
 - [Fixed SPI/Nano hardware harness](../tools/spi_hardware/README.md)
 - [Fixed UART demo monitor](../tools/UART_CLIENT.md)
 - [Final route/LVS repair](timing_lvs_closure_20261029.md)
