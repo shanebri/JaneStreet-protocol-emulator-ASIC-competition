@@ -30,6 +30,7 @@ def main():
     image = Path(fixture['image']).resolve()
     image_hash = hashlib.sha256(image.read_bytes()).hexdigest()
     a.out.mkdir(parents=True, exist_ok=False)
+    (a.out/'.gitignore').write_text('*\n')
     manifest = dict(status='RUNNING', fixture=fixture, image_sha256=image_hash,
                     suite=a.suite, seed=a.seed, repeat=a.repeat, started=datetime.now(timezone.utc).isoformat(),
                     commit=subprocess.check_output(['git','rev-parse','HEAD'], cwd=ROOT, text=True).strip(),

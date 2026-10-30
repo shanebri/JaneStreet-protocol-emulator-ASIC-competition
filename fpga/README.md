@@ -18,6 +18,11 @@ ASIC qualification is tracked separately in [project status](../docs/project_sta
 
 ## Fixed firmware UART demo
 
+For the programmable image, `py tools/bringup/build.py` runs the isolated build
+and prints its bitstream and post-programming smoke command. See the
+[build and firmware CLI instructions](../tools/bringup/README.md#one-command-build).
+The scripts below continue to build the fixed UART demo.
+
 For the FPGA SPI master test with an Arduino Nano 33 BLE slave, use the
 [SPI hardware test guide](../tools/spi_hardware/README.md). It has a separate top,
 constraints, sketch and PC checker; the instructions below describe the UART demo.

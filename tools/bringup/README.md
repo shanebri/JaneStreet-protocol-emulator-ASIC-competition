@@ -14,6 +14,40 @@ build. A passing smoke run is neither full regression coverage nor timing signof
 
 ## FPGA preparation (Arty A7-100 Rev D/E)
 
+### One-command build
+
+With Vivado installed, run from the repository root:
+
+```powershell
+py tools/bringup/build.py --port COM3
+```
+
+If discovery cannot find Vivado, give its installed executable explicitly:
+
+```powershell
+py tools/bringup/build.py --vivado "C:/Xilinx/Vivado/2025.1/bin/vivado.bat" --port COM3
+```
+
+The version/path above is an example; use your installation. `--check` checks
+prerequisites without building. Builds use a fresh timestamped directory under
+`fpga/build/bringup/`, leaving existing projects and images alone. The script
+reads `info.yaml`, adds the bridge sources and XDC, runs synthesis/routing,
+reports timing/DRC/CDC/exceptions, checks setup/hold and exception endpoints,
+and writes `arty_bringup_top.bit`. It does not program hardware. Full Vivado
+output is saved in `console.log`; build metadata and hashes are in `build.json`.
+An unsuccessful build exits nonzero and preserves its logs.
+
+On success, open Hardware Manager, connect to the Arty, choose **Program Device**
+and select the printed `.bit` file. The builder prints a ready-to-run smoke
+command using its generated `fixture.json`. You can run that command after
+programming. Review `check_timing.rpt`, `exceptions.rpt` and `cdc.rpt`; automatic
+setup/hold/DRC checks do not establish board-level electrical timing.
+
+The Python build orchestration has mocked success/failure tests. The Tcl flow
+has not yet been executed with Vivado here, so a passing FPGA build is not claimed.
+
+### Manual project setup
+
 Build a separate Vivado project for `xc7a100tcsg324-1`. Add **all** current
 SystemVerilog sources listed by `info.yaml`, plus:
 
@@ -46,6 +80,16 @@ normal suite execution requires no button presses.
 
 ## Run
 
+Keep personal fixtures named `fixture.json` or `*.local.json`; these are ignored.
+The public `fixture.example.json` stays tracked. Standard `fpga/build/`,
+`test/output/`, `.bringup/` and `bringup-results/` directories are ignored.
+The builder and suite runner also create an ignore-all `.gitignore` inside each
+new output directory, including custom `--out` locations, so bitstreams, local
+paths, fixture copies and captured payloads do not appear as untracked changes.
+Use those tools for generated run bundles; arbitrary manually saved captures
+outside ignored paths still need their own ignore rule. Do not force-add local
+fixtures or output bundles.
+
 From the repository root:
 
 ```powershell
@@ -76,7 +120,30 @@ successful retry. Press BTN0 to recover from a truncated/corrupt serial session
 before starting a new run. A COM timeout is a failure, not permission to replay a
 possibly committed register/FIFO transaction.
 
-### Optional peer profiles
+### Load your own firmware from the command prompt
+
+Install `requirements.txt` once, then, after programming the bridge image:
+
+```powershell
+py tools/bringup/firmware.py --port COM3 --program examples/uart_v0.asm --preset uart --tx 0x55 --start
+```
+
+This assembles the program, resets the core, selects engine 0, loads and reads
+back the instructions, applies UART settings, queues a word and starts execution.
+The PIO UART waveform appears on **JA1**, not the board's USB control UART.
+The latter carries bridge commands and replies. A separate UART receiver is
+required to receive the emitted byte physically.
+
+Use `--engine 1` to select the peer, `--set 0x13=31` (repeatable) for explicit
+data-selector configuration and repeated `--tx` options for up to four words.
+`--rx N` drains and prints N RX words while waiting for HALT. Without `--start`
+the command only loads/configures. `--start` expects a finite program to halt;
+`--timeout` bounds the wait. Reset affects both engines by default; `--no-reset`
+preserves the peer but still stops/clears the selected engine. Presets are only
+for the documented examples, not arbitrary program pin mappings. This is an
+ad-hoc loader; use the suite runner when a saved qualification bundle is needed.
+
+### Hardware peer profiles
 
 Run each with a fresh output directory, e.g. `--suite spi --out test/output/spi-001`.
 
