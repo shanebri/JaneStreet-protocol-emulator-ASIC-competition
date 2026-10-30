@@ -1,3 +1,7 @@
+> Historical checkpoint or task record. Status statements and next steps below
+> apply to the named revision/date. See [current project status](project_status.md)
+> for the qualified dual-engine build and remaining hardware work.
+
 # Connectivity, electrical repair and conditional host-decode experiments
 
 Date: 2026-10-26 (America/Los_Angeles). Parent: `12b0f35`.

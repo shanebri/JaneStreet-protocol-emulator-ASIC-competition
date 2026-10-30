@@ -1,4 +1,4 @@
-# Programmable Protocol Emulator — PIO V0
+# Programmable Protocol Emulator — dual PIO revision 0x21
 
 A PIO-inspired protocol engine for the Jane Street ASIC competition, targeting
 **8×4 Tiny Tapeout tiles on IHP CMOS5L**. Protocol timing and framing are firmware.
@@ -25,8 +25,8 @@ clock division and external DMA are not implemented.
 
 ## Run the firmware UART demo
 
-Load [uart_v0.hex](examples/uart_v0.hex), configure `DIVIDER=31` and
-`PINCTRL=0x1008`, enqueue `0x55` in the TX FIFO, and issue START. The
+Load [uart_v0.hex](examples/uart_v0.hex), configure `DIVIDER=31`,
+`PINCTRL=0x1008` and `SHIFTCTRL=3`, enqueue `0x55` in the TX FIFO, and issue START. The
 [eight-instruction program](examples/uart_v0.asm) drives an 8N1 `U` frame on
 `uo[0]`, raises `uo[1]` after the stop bit, and halts. Each bit lasts exactly
 434 clocks: approximately 115200 baud at 50 MHz. Replay requires enqueuing another
@@ -38,8 +38,9 @@ It is a minimal receive example without framing-error/break handling.
 
 The [datasheet](docs/info.md) defines timing, logical pin assignments and every
 host transaction. The [ISA reference](docs/isa.md) defines the current instructions
-and assembler syntax. The [optimization report](docs/pio_v0_optimization_report.md)
-records validation results and priorities for the next version.
+and assembler syntax. The [historical optimization report](docs/pio_v0_optimization_report.md)
+records the original revision-0x20 work; use [project status](docs/project_status.md)
+for current results and next qualification steps.
 
 ## SPI mode-0 firmware
 
@@ -60,6 +61,11 @@ concurrently. See the [architecture contract](docs/pio21_contract.md),
 
 ## Build and test
 
+The [repeatable bring-up suite](tools/bringup/README.md) provides Python-driven
+host-interface smoke tests, an FPGA serial bridge, saved run bundles and optional
+UART/SPI/I2C peer profiles. The bridge is simulation-tested; board implementation
+and physical peer qualification remain required.
+
 ```sh
 python tools/pioasm.py examples/uart_v0.asm
 python -m pip install -r test/requirements.txt
@@ -72,21 +78,26 @@ core/ISA/I2C regressions. See [test/README.md](test/README.md) for synthesis and
 checks. The [Arty A7 guide](fpga/README.md) covers the updated FPGA loader and
 button-triggered firmware UART demo; `./fpga/test.ps1` verifies its behavior.
 
-The integrated 50 MHz flow passes the three-corner timing/electrical screen.
-The clean GDS build exposed four physical routing shorts; a localized repair
-passes timing and serialized-wire checks and is undergoing final GDS qualification.
-See the [current LVS closure report](docs/timing_lvs_closure_20261029.md).
-The final baseline is not yet declared qualified for architecture development.
+## Qualified implementation and current work
 
-The historical **dual-engine** CMOS5L build at `37c74dc` occupies 30.56% of the
-8×4 core before filler, and all 39 functional gate-level tests passed. Its
-slow-corner setup slack is -5.885 ns; the listed failures originate at reset,
-and electrical violations also remain. See the [I/O timing investigation](docs/io_timing_report.md)
-and [implementation plan](docs/io_timing_implementation_plan.md) for the evidence,
-constraint audit and proposed fixes. The 50 MHz target is not yet qualified
-across all required modes/corners. The [area budget](docs/architecture_area_budget.md)
-retains historical single-engine measurements and SRAM planning estimates;
-[dual-PIO validation](docs/dual_pio_verification.md) records the implementation tests.
+The 50 MHz dual-engine ASIC baseline at `bb7c5ef` passes extracted three-corner
+timing/electrical checks, routing/Magic DRC, antenna, LVS, Tiny Tapeout precheck
+and all **39 functional gate-level tests** in
+[Actions run 40938542430](https://github.com/shanebri/JaneStreet-protocol-emulator-ASIC-competition/actions/runs/40938542430).
+Core utilization excluding filler is **31.52%**. Worst overall setup margin is
+**0.303 ns**; worst hold margin is **0.0128 ns**, so implementation changes still
+require full requalification. KLayout DRC was disabled in this flow.
+
+See [project status](docs/project_status.md) for exact evidence, physical-check
+scope and timing margins; the [coverage audit](docs/timing_coverage_audit_20261029.md)
+explains the misleading native register-setup `Infinity` metric. The
+[documentation guide](docs/README.md) separates current contracts and commands
+from historical experiments and architecture proposals.
+
+The repeatable bring-up tooling is simulation-tested. Vivado implementation of
+the new bridge and physical UART/SPI/I2C peer tests remain outstanding. Its smoke
+tests provide repeatable board access to behavior already covered more deeply by
+simulation; they do not establish ASIC timing or hardware interoperability.
 
 ## Origin and licensing
 

@@ -1,5 +1,10 @@
-> Historical revision 0x20 report. Current transport/pad capabilities and results
-> are in [the revision 0x21 report](pio21_verification.md).
+> Historical checkpoint or task record. Status statements and next steps below
+> apply to the named revision/date. See [current project status](project_status.md)
+> for the qualified dual-engine build and remaining hardware work.
+
+> This report describes revision 0x20. Current transport/pad semantics are in
+> [the implemented contract](pio21_contract.md); current results are in
+> [project status](project_status.md).
 
 # PIO V0 implementation and optimization report
 

@@ -1,4 +1,10 @@
-# Arty PIO SPI master + Arduino Nano 33 BLE test
+# Fixed Arty PIO SPI master + Arduino Nano 33 BLE test
+
+For the programmable, button-free SPI profile, use the separate
+[Python bring-up suite](../bringup/README.md) and `arty_bringup_top`. The Nano
+sketch and SPI wiring below are reused, but the fixed tester image, UART report
+protocol and button instructions are not. Physical peer runs remain unverified
+unless accompanied by a saved hardware result.
 
 This setup uses the **Arty A7-100T FPGA, Nano 33 BLE, and your PC**. No Raspberry
 Pi is involved. The FPGA runs the existing `examples/spi_mode0.asm` on the
@@ -60,19 +66,9 @@ Use a separate project for `xc7a100tcsg324-1`, or copy these sources into your
 existing project and select the new top. **No Vivado project has been edited or
 build launched by these tools.**
 
-Add all ASIC design sources listed in info.yaml:
-
-```text
-src/project.sv
-src/host_interface.sv
-src/pio_pads.sv
-src/protocol_core.sv
-src/pio_fifo.sv
-src/execution_unit.sv
-src/frontend/pc.sv
-src/frontend/instruction_fetch.sv
-src/frontend/decoder.sv
-```
+Add every ASIC source listed under `project.source_files` in `info.yaml`,
+preserving paths under `src/`. Do not reuse a pre-dual-engine source list: it
+omits the subsystem, input sampler, bank and ownership modules.
 
 Add these four FPGA-only sources:
 
@@ -173,7 +169,7 @@ clock, data and sampling all come from the PIO assembly running on the ASIC core
 - **Nano does not answer PING:** wrong COM port, wrong sketch, or another serial
   monitor owns the port. Confirm Nano 33 BLE board selection and upload success.
 - **LD7 off:** check the FPGA clock, power, selected device and bitstream.
-- **LD4 never lights:** verify all eight current ASIC sources and the new test
+- **LD4 never lights:** verify all current manifest ASIC sources and the new test
   top/host are included, then rebuild the correct top.
 - **READY timeout/status 4:** check JA7 to Nano D2, shared ground, successful ARM,
   and that both endpoints started from sequence zero.

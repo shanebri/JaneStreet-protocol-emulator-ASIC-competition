@@ -26,6 +26,12 @@ jobs:
       - name: Run tests
         run: python test/run.py
 
+      - name: Bring-up transport and complete UART bridge regression
+        run: |
+          python -m unittest discover -s tools/bringup -p test_transport.py -v
+          python tools/bringup/simulate.py
+          python tools/bringup/simulate.py --default-baud-link
+
       - name: Test Summary
         uses: test-summary/action@v2.4
         with:
@@ -41,3 +47,5 @@ jobs:
             test/tb.fst
             test/results.xml
             test/output/*
+            test/bringup-serial.xml
+            test/bringup-default-baud.xml

@@ -1,0 +1,16 @@
+{
+  "bridge_protocol": 1,
+  "clock_hz": 50000000,
+  "port": "COM3",
+  "baud": 115200,
+  "image": "fpga/build/arty_bringup_top.bit",
+  "nano_port": "COM5",
+  "uart_peer_port": "COM6",
+  "i2c": {
+    "address": 80,
+    "rate": 100000,
+    "write_hex": "00",
+    "expected_hex": "50494f",
+    "timeout": 5
+  }
+}

@@ -1,3 +1,7 @@
+> Historical checkpoint or task record. Status statements and next steps below
+> apply to the named revision/date. See [current project status](project_status.md)
+> for the qualified dual-engine build and remaining hardware work.
+
 # Dual-PIO I/O timing investigation
 
 Assessment date: 2026-10-21. Design: `37c74dc17c3803d30d7b225aa51da10f0809330c`.

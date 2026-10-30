@@ -1,3 +1,7 @@
+> Historical checkpoint or task record. Status statements and next steps below
+> apply to the named revision/date. See [current project status](project_status.md)
+> for the qualified dual-engine build and remaining hardware work.
+
 # Implementation prompt: four-bit host and general bidirectional PIO
 
 Implement the architecture and I2C support described below in this repository. This is an implementation request: complete the RTL, assembler, firmware, host tooling, FPGA integration migration, documentation, and meaningful verification. Inspect the current repository and applicable AGENTS.md instructions first. Preserve unrelated user changes. Do not deploy, program a board, or claim physical validation without actually performing it.

@@ -1,3 +1,7 @@
+> Historical checkpoint or task record. Status statements and next steps below
+> apply to the named revision/date. See [current project status](project_status.md)
+> for the qualified dual-engine build and remaining hardware work.
+
 # Shared acceptance cone investigation (in progress, updated October 28)
 
 Starting checkout: `codex/timing-connectivity-electrical`, commit

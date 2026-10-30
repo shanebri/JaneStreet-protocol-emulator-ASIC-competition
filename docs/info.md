@@ -1,3 +1,10 @@
+## Current implementation status
+
+The dual-engine 8x4 CMOS5L baseline `bb7c5ef` is qualified at 50 MHz by extracted
+STA/electrical checks, physical checks and 39 functional gate tests. See
+[project status](project_status.md) for the exact run, margins and DRC scope.
+Board interoperability and silicon operation are separate from that evidence.
+
 ## How it works
 
 PIO V0 replaces the accumulator/UART architecture with a programmable I/O state
@@ -233,13 +240,17 @@ host configuration, synchronized input timing and its pin-level slave test.
 Run `python test/run.py` or `./test/run.ps1`. The FIFO unit test exhausts occupancy
 and simultaneous read/write boundaries. Pin-level tests cover state, timing, UART TX/RX, SPI, general pads, host
 framing, and I2C transfers/recovery; see the [verification matrix](pio21_verification.md). See [test/README.md](../test/README.md)
-and [the optimization report](pio_v0_optimization_report.md) for validation scope.
+and [project status](project_status.md) for current validation scope. The optimization
+report and single-engine matrix are historical records.
 
 ## External hardware
 
 Use a synchronous host and compatible logic levels. A logic analyzer can observe
 all programmable outputs; a UART adapter receives the example at 115200 8N1 with
 a 50 MHz core clock. Input0 (`ui[6]`) can receive the RX example at 16 clocks/bit.
-The Arty wrapper currently connects only the TX demo; its UART RX pin is not wired
-to the core. The I2C FPGA bridge exposes real tri-state pads. Ethernet/USB require separate
-hardware architectures and are outside this implementation.
+The fixed Arty UART demo uses a transmit-only USB connection. The separate
+[programmable bring-up top](../tools/bringup/README.md) uses USB UART for host
+commands and exposes protocol pins independently. Its I2C pads are on JC1/2;
+the older reusable I2C wrapper's JA fragment is a different integration. None of
+these instructions establishes board interoperability without running the tests.
+Ethernet/USB require separate architectures and are outside this implementation.

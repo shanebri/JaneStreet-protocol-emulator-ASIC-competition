@@ -1,8 +1,16 @@
 # LVS closure of the 50 MHz production flow
 
-Status: the localized routing repair passes all-corner timing/electrical checks
-and the independent serialized-wire contact check. GDS qualification and a fresh
-integrated RTL-to-GDS build are running. This is not yet a release declaration.
+Status update, 2026-10-29: the production repair at `bb7c5ef` is qualified by
+[Actions run 40938542430](https://github.com/shanebri/JaneStreet-protocol-emulator-ASIC-competition/actions/runs/40938542430).
+GDS, strict three-corner extracted timing/electrical checks, routing/Magic DRC,
+antenna, LVS, Tiny Tapeout precheck, viewer and all 39 functional gate tests pass.
+KLayout DRC was disabled. The [project status page](project_status.md) gives the
+current margins and scope; the [coverage audit](timing_coverage_audit_20261029.md)
+resolves the optional native register-setup `Infinity` metric.
+
+The sections below retain the diagnosis and trial sequence. Intermediate
+qualification states are historical; the completed CI build is the acceptance
+evidence, not a claim that every local trial/launcher succeeded.
 
 ## Exact failure and cause
 
@@ -87,7 +95,7 @@ ISA, reset/ena behavior and cycle-level priorities are unchanged.
 Timing tooling: 58 tests pass, including spatial-index comparison against
 exhaustive geometry and a regression using the actual clock/data short.
 
-Current retained work:
+Retained local trial/build directories (historical work products):
 
 - Failing clean baseline: `test/sim_build/production_final_20261028_01/`.
 - Localized routing trial: `test/sim_build/lvs_repair_20261029_01/`.
@@ -96,6 +104,16 @@ Current retained work:
 - Durable clean launcher: `timing/20261029-lvs-closure/launch_production.py`.
 
 Independent GDS LVS, Tiny Tapeout precheck, all 39 exact-netlist gate tests and
-the fresh integrated production result remain mandatory before readiness is
-declared. No architecture implementation should rely on the earlier route-only
-screen as a physically qualified baseline.
+the integrated production result were mandatory acceptance gates. The completed
+CI run now supplies the production result. The earlier route-only screen alone
+was not a physically qualified baseline.
+
+Independent LVS has now completed in `test/sim_build/lvs_independent_20261029_01/`
+using the exact GDS from the repaired trial's KLayout stream-out. All seven LVS
+metric fields are zero, and Netgen reports that circuits match uniquely.
+`timing/20261029-lvs-closure/repaired-lvs.rpt` retains the report. This early
+independent check does not substitute for the ongoing full production checks.
+Repair commit `bb7c5ef3c54a7ae2733bbfae82aa940016375007` completed successfully in
+[Tiny Tapeout Actions](https://github.com/shanebri/JaneStreet-protocol-emulator-ASIC-competition/actions/runs/40938542430),
+including the previously pending precheck job. Preserve the exact artifacts;
+qualify subsequent ASIC implementation changes independently.

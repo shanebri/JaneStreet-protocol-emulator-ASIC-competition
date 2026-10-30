@@ -1,4 +1,10 @@
-# PIO V0 verification
+# Dual-PIO verification
+
+The qualified ASIC baseline passes all 39 functional gate tests and strict
+three-corner extracted timing/electrical checks. See [project status](../docs/project_status.md)
+for the exact run and physical scope. Functional simulation alone is not timing
+signoff. The added bring-up bridge is separately simulation-tested; board use
+still requires FPGA implementation and physical peer tests.
 
 Timing investigation guardrails now include `frontend_timing_tb.sv`, run by the
 normal runner: all-address branch/fetch and host reads, restart priority, freeze,
@@ -63,8 +69,9 @@ Use Icarus **13.0** for this PDK revision's gate models, matching the pinned
 [Tiny Tapeout gate-test action](https://github.com/TinyTapeout/tt-gds-action/blob/3412659307918422f3f0727917cf9b499aaca588/gl_test/action.yml).
 Ubuntu's Icarus 11 left the models' delayed flip-flop signals unknown during
 local verification; the same routed netlist passed all 39 tests with version 13.
-The physical build and functional gate-level results for commit `b380b86` are
-recorded in the [area assessment](../docs/architecture_area_budget.md). These
+The qualified dual-engine physical and functional gate results for `bb7c5ef` are
+recorded in [project status](../docs/project_status.md). The area assessment
+retains older single-engine planning measurements. These
 functional simulations do not prove setup/hold closure or CDC reliability.
 
 ### Gate-level CI result naming
@@ -82,7 +89,7 @@ Actual JUnit `<failure>` elements still cause the gate job to fail.
 Generic synthesis/structural check:
 
 ```sh
-yosys -p 'read_verilog -sv src/project.sv src/protocol_core.sv src/host_interface.sv src/pio_pads.sv src/execution_unit.sv src/pio_fifo.sv src/frontend/pc.sv src/frontend/decoder.sv src/frontend/instruction_fetch.sv; synth -noabc -top tt_um_shanebri_top; check -assert; stat'
+python test/synth.py --yosys yosys
 ```
 
 Use `./fpga/test.ps1` for the Arty loader/debounce/replay/reset simulation. Run the
@@ -105,7 +112,38 @@ Use `--yosys path/to/yowasp-yosys.exe` on Windows where appropriate. Both runs u
 
 Run `./fpga/test_spi.ps1` and `./fpga/test_i2c.ps1` for the migrated SPI and I2C
 wrappers. [The matrix](../docs/pio21_verification.md) records requirement coverage
-and physical checks that remain unavailable.
+for the historical per-engine coverage map; [project status](../docs/project_status.md)
+records completed physical qualification.
+
+## Repeatable bring-up versus design verification
+
+The [bring-up suite](../tools/bringup/README.md) primarily makes a small subset
+of existing core checks repeatable on a programmable host path. It is not a
+replacement for the 39-test ISA/protocol/recovery regression. Its six cases
+cover discovery, banked/partial word access, both instruction memories, FIFO
+execution/isolation, reset/disable recovery and dedicated GPIO ownership.
+
+```sh
+python -m unittest discover -s tools/bringup -p test_transport.py -v
+python tools/bringup/simulate.py
+python tools/bringup/simulate.py --default-baud-link
+make -C test COCOTB_TEST_MODULES=test_bringup
+```
+
+The serial simulation exercises actual UART RTL, the byte-to-nibble adapter and
+the submission core. It also checks corrupt/unsupported commands, truncated
+frames and disabled-host rejection. The accelerated full run and actual-baud
+link-only run are separate checks. Python transport tests check split replies,
+sequence wrap, stale/checksum/status rejection and deadlines. The test workflow
+runs these in separate steps after `python test/run.py`; the latter alone does
+not run the new bridge checks. Results are `test/bringup-serial.xml` and
+`test/bringup-default-baud.xml`.
+
+Hardware `smoke`, `uart`, `spi` and `i2c` profiles save their own result bundles.
+They need the new FPGA image and the named fixtures; they have not been executed
+on connected equipment here. GPIO sampling reads core output nets, not an
+independent electrical measurement. Waveform capture, electrical compliance and
+hardware equivalents of all simulation fault/concurrency cases remain separate.
 
 ## Dual-engine validation
 

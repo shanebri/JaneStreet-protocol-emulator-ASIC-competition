@@ -4,8 +4,11 @@
 
 # PIO 0x21 architecture contract
 
-This contract precedes implementation. One state machine, 32x16 instruction RAM,
-four-word TX/RX FIFOs, 8x4 tile allocation and 50 MHz target are retained.
+This is the implemented per-engine contract: each of two independent engines
+has 32x16 instruction memory and four-word TX/RX FIFOs. The dual-engine extension
+defines shared host selection, GPIO ownership and group commands. The allocation
+is 8x4 tiles and the qualified baseline operates at 50 MHz; see
+[project status](project_status.md) for the exact build and qualification limits.
 
 ## Ownership and transport
 

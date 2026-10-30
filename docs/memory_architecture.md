@@ -24,7 +24,8 @@ staging/snapshot registers and other control state are additional storage.
 writes one word. Reads are combinational: `words[pc_addr]` feeds the decoder and
 `words[load_addr]` feeds host readback. Thus it logically has two read paths and
 one write path. Declaring a Verilog array does not select an ASIC SRAM macro.
-The generic ASIC synthesis baseline uses ordinary storage cells and muxes. An
+The qualified ASIC build uses ordinary standard cells and muxes, with no memory
+macros; see [measured implementation results](project_status.md). An
 FPGA tool may use distributed RAM or registers depending on inference; the
 actual implementation report is authoritative. No physical SRAM macro is
 instantiated in the current RTL.
@@ -61,7 +62,9 @@ normal core reset preserves instruction-memory contents but resets register
 state and FIFO occupancy. FIFO storage bits themselves are not reset; old words
 become inaccessible because the queues are empty.
 
-The FPGA test wrapper contains a hardcoded loader ROM. After reset it writes the
+The fixed FPGA UART/SPI demo wrappers contain hardcoded loader ROMs. The newer
+[programmable bring-up bridge](../tools/bringup/README.md) instead accepts runtime
+program/register commands from Python. After reset, each fixed loader writes its
 program/configuration through the same host bus that an external controller
 would use. That loader is **FPGA test infrastructure**, not an embedded boot ROM
 in the ASIC core. In a standalone ASIC system, an MCU or other host must provide

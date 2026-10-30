@@ -170,9 +170,11 @@ queues absorb bursts and cannot correct a sustained bandwidth deficit.
 
 ## Validation and physical status
 
-The current validation record is in [dual_pio_verification.md](dual_pio_verification.md).
-RTL cycle guarantees require the physical design to meet timing. Generic
-synthesis and functional simulations do not establish 8x4 CMOS5L fit or 50 MHz
-closure. Keep the allocation at 8x4 and CLOCK_PERIOD=20 ns; obtain routed area,
-setup/hold at all required corners, pad/OE timing, DRC/LVS and functional gate-level
-results on the two-engine netlist before physical acceptance.
+The current qualified ASIC baseline is `bb7c5ef`: its 8x4 CMOS5L build passes
+extracted three-corner timing/electrical checks, routing/Magic DRC, antenna, LVS,
+precheck and all 39 functional gate tests. See [project status](project_status.md)
+for exact evidence, margins and check scope; the
+[implementation record](dual_pio_verification.md) preserves the development tests.
+Keep CLOCK_PERIOD=20 ns and the specified cycle behavior. Any ASIC change must
+repeat the physical acceptance checks against its passing parent. Generic
+synthesis, simulation and FPGA smoke tests do not qualify a changed ASIC layout.

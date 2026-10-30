@@ -1,5 +1,9 @@
+> Historical checkpoint or task record. Status statements and next steps below
+> apply to the named revision/date. See [current project status](project_status.md)
+> for the qualified dual-engine build and remaining hardware work.
+
 > Historical single-engine revision 0x21 report. Current dual-engine
-> implementation results and remaining physical qualification are in
+> implementation results and completed physical qualification are in
 > [dual_pio_verification.md](dual_pio_verification.md).
 
 # Revision 0x21 verification matrix and report

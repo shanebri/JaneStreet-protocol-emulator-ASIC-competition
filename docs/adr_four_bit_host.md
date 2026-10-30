@@ -14,8 +14,9 @@ Open-drain and filtered physical readback support I2C without a protocol FSM.
 The cost is two host beats per byte and extra routing/input state. Four-word FIFO
 depth does not fix sustained service deficits. Future burst transports can replace
 the byte adapter; future FIFO/state-machine/pad changes require separate designs.
-No crossbar, DMA, new memory architecture, multiple state machines or Ethernet/USB
-is introduced. The 8x4 tile and 50 MHz targets remain subject to physical validation.
+The original split decision introduced no crossbar, DMA, SRAM macro or Ethernet/USB.
+The later dual-engine extension and its qualified 8x4, 50 MHz implementation are
+recorded in [project status](project_status.md).
 
 See [the contract](pio21_contract.md), [I2C ABI](i2c.md), and
 [verification matrix](pio21_verification.md) for exact semantics and evidence.

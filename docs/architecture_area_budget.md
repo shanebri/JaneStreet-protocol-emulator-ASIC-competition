@@ -1,7 +1,8 @@
-> Historical single-engine physical baseline and planning estimates. The second
-> engine is now implemented; see [dual-PIO validation](dual_pio_verification.md)
-> for current generic synthesis results. Two-engine routed area and timing remain
-> unmeasured; none of the estimates below is physical acceptance of that design.
+> Historical single-engine measurements and architecture planning estimates.
+> The dual-engine ASIC is implemented and qualified at 50 MHz, with 31.52%
+> non-filler core utilization. See [current measured results](project_status.md).
+> The second-engine and SRAM estimates below retain their 2026-10-20 context;
+> they are not measurements of an implemented SRAM design.
 
 # Area budget for two PIO engines and SRAM
 

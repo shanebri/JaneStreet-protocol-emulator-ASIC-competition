@@ -112,3 +112,12 @@ Run the complete suite with `python test/run.py` or `./test/run.ps1`.
 
 Host revision 0x21 transfers each byte low nibble then high nibble on uio[3:0].
 See [the transport contract](pio21_contract.md) for framing, reset and resynchronization.
+
+## Repeatable hardware profile
+
+The [Python bring-up suite](../tools/bringup/README.md) loads this firmware through
+the programmable FPGA host bridge and runs the existing 256-byte Nano peer
+checker without buttons. It is separate from the fixed `arty_spi_test_top` image.
+The profile checks both endpoints' payloads and completion; it does not acquire
+waveforms or establish electrical timing. Physical execution of that new profile
+has not been recorded here. ASIC qualification is in [project status](project_status.md).

@@ -1,4 +1,9 @@
-# Windows UART test client
+# Windows UART demo monitor
+
+This GUI monitors the fixed transmit-only UART demo; it is not the programmable
+host client. Use the [bring-up suite](bringup/README.md) with `arty_bringup_top`
+for runtime loading, register access and automated peer tests. The two FPGA images
+use different wire protocols; select the matching tool/image.
 
 Copy `uart_client.py` and `uart-requirements.txt` into a folder on your PC.
 Install Python 3.9 or newer with Tcl/Tk support (included in the standard Windows

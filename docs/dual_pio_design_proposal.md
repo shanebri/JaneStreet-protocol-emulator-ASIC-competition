@@ -1,8 +1,12 @@
+> Historical checkpoint or task record. Status statements and next steps below
+> apply to the named revision/date. See [current project status](project_status.md)
+> for the qualified dual-engine build and remaining hardware work.
+
 # Second independent PIO engine: design proposal
 
-Status: **recommended design approved for implementation by the user on 2026-10-20**.
+Status: **implemented**; the original design was approved on 2026-10-20.
 The current implemented contract is [dual_pio.md](dual_pio.md); validation and
-remaining physical qualification are in [dual_pio_verification.md](dual_pio_verification.md).
+completed physical qualification are in [dual_pio_verification.md](dual_pio_verification.md).
 The review findings and staged plan below record the pre-implementation assessment.
 Review date: 2026-10-20.
 Reviewed checkout: `54a6ff25a568b7a32a9fad6cef11812e5628345e`.

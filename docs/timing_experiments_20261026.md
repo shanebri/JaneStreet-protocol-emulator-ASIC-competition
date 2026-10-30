@@ -1,3 +1,7 @@
+> Historical checkpoint or task record. Status statements and next steps below
+> apply to the named revision/date. See [current project status](project_status.md)
+> for the qualified dual-engine build and remaining hardware work.
+
 # Phase C: isolated terminal-NOR sizing
 
 Date: 2026-10-26 (America/Phoenix). Branch: `codex/timing-phase-c-nor-sizing`.

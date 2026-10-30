@@ -1,11 +1,10 @@
 # Dual PIO implementation and validation
 
-> Physical-status update, 2026-10-21: the completed build for `37c74dc` passed
-> GDS, precheck, viewer and all 39 functional gate tests. Routed non-filler
-> utilization is 30.56%, with unresolved timing/electrical violations. The
-> [I/O timing report](io_timing_report.md) supersedes the historical physical
-> qualification status below; its [implementation plan](io_timing_implementation_plan.md)
-> defines the next work.
+> Current qualification update, 2026-10-29: the dual-engine baseline `bb7c5ef`
+> passes extracted three-corner timing/electrical checks, DRC/antenna/LVS,
+> precheck and 39 functional gate tests. Non-filler core utilization is 31.52%.
+> See [project status](project_status.md) for exact results and limits.
+> The implementation/synthesis history below is the 2026-10-20 snapshot.
 
 Date: 2026-10-20. Compatible ISA/host revision: `0x21`.
 Dual-extension capabilities: `0x50490102` (revision 1, two engines).
@@ -110,21 +109,17 @@ No percentage of the physical tile budget can be derived directly from these
 counts. The historical single-engine routed utilization and doubled-area planning
 reference remain documented in [the area budget](architecture_area_budget.md).
 
-## Remaining physical qualification
+## Physical qualification and subsequent tooling
 
-This host has no installed WSL distribution, Docker, Librelane, OpenROAD or
-KLayout available on PATH. `PDK_ROOT` is unset and there is no local gate-level
-netlist. Consequently the two-engine CMOS5L place-and-route, all-corner STA,
-DRC/LVS and functional gate-level run have **not** been performed. No new FPGA
-bitstream or board interoperability result is claimed.
+The 2026-10-20 implementation session did not run a dual-engine physical flow.
+That limitation is historical: [run 40938542430](https://github.com/shanebri/JaneStreet-protocol-emulator-ASIC-competition/actions/runs/40938542430)
+subsequently passed GDS, strict extracted STA/electrical checks, precheck and
+39 gate tests for `bb7c5ef`. The [status page](project_status.md) records exact
+corners, area, DRC scope and tight fast-corner hold margin. Earlier failing
+`37c74dc` timing is retained in the dated I/O investigation, not the release result.
 
-The existing `.github/workflows/gds.yaml` remains the physical build entrypoint;
-it consumes the updated submission manifest, and its gate suite uses all 39
-pin-level tests. Physical qualification requires running it on the implemented
-revision and inspecting actual area/congestion, setup/hold at all required
-corners, clock distribution, and dedicated-output/pad-OE timing. The historical
-single-engine slow-corner setup warning is still relevant and is not resolved
-by the functional tests or generic synthesis in this update.
-
-The RTL implementation is functionally validated. Release acceptance at 50 MHz
-within the 8x4 allocation remains pending physical evidence.
+The [bring-up suite](../tools/bringup/README.md) now provides six repeatable smoke
+cases and an FPGA UART-to-host control path. Its simulation coverage and bridge
+error checks supplement the existing tests; FPGA implementation and physical
+peer interoperability are still unverified. ASIC qualification does not qualify
+the added FPGA wrapper or a future silicon fixture.

@@ -1,3 +1,7 @@
+> Historical checkpoint or task record. Status statements and next steps below
+> apply to the named revision/date. See [current project status](project_status.md)
+> for the qualified dual-engine build and remaining hardware work.
+
 # Controlled placement and mapping experiments
 
 Date: 2026-10-26 (America/Phoenix). Branch: `codex/timing-placement-mapping`.

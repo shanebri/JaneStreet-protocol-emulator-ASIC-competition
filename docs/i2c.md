@@ -158,3 +158,11 @@ Proposed default wiring is JA1 SDA, JA2 SCL, common ground, with external pull-u
 to 3.3 V chosen for measured capacitance/rise time. JA3/4 remain available.
 Use voltage-compatible targets. The fragment does not constrain the requester
 ports or clock of a larger design; do not treat it as a complete board top.
+
+For a complete programmable control path, the separate
+[bring-up suite](../tools/bringup/README.md) supplies `arty_bringup_top` and a
+Python I2C profile using this driver. Its pads are **JC1/2/3/4**, not the JA
+mapping of the reusable wrapper above. Configure a target's address, write data
+and known expected response in the fixture file. This basic hardware profile
+does not reproduce all simulation fault-injection tests. The bridge is
+simulation-tested; physical target operation remains unverified here.

@@ -1,3 +1,7 @@
+> Historical checkpoint or task record. Status statements and next steps below
+> apply to the named revision/date. See [current project status](project_status.md)
+> for the qualified dual-engine build and remaining hardware work.
+
 # I/O timing implementation plan
 
 Date: 2026-10-21. Baseline: `37c74dc17c3803d30d7b225aa51da10f0809330c`.

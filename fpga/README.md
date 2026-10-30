@@ -1,4 +1,22 @@
-# Arty A7-100T hardware demo
+# Arty A7-100T FPGA integration
+
+## Choose the image
+
+| Image/top | Purpose | Host control |
+| --- | --- | --- |
+| `arty_a7_top` | Fixed firmware UART demo | Buttons; transmit-only USB UART |
+| `arty_spi_test_top` | Fixed SPI/Nano checker | Button-triggered 256-byte batch |
+| `arty_uart_diagnostic` | USB UART path diagnostic | Repeated fixed byte |
+| `arty_i2c_bridge` | Reusable pad/byte-requester module | Requires top-level integration |
+| `arty_bringup_top` | Python-driven host access | Bidirectional USB UART commands |
+
+For runtime program loading and repeatable smoke/peer profiles, use the
+[bring-up guide](../tools/bringup/README.md). The new bridge is simulation-tested;
+Vivado timing/DRC and board operation remain unverified. The fixed demos below
+remain available and use different tops/constraints. Do not combine their XDCs.
+ASIC qualification is tracked separately in [project status](../docs/project_status.md).
+
+## Fixed firmware UART demo
 
 For the FPGA SPI master test with an Arduino Nano 33 BLE slave, use the
 [SPI hardware test guide](../tools/spi_hardware/README.md). It has a separate top,
@@ -84,7 +102,8 @@ cover only the asynchronous button boundaries and indicator/UART outputs, not
 internal core paths.
 
 This is a fixed demonstration loader, not a serial command interface. Typing in
-the terminal does not load programs. A future UART-to-host bridge can provide that.
+the terminal does not load programs. Use `arty_bringup_top` and the
+[Python runner](../tools/bringup/README.md) for programmable host access.
 Loading the FPGA over JTAG is volatile; reprogram after power cycling.
 
 ## Simulation
