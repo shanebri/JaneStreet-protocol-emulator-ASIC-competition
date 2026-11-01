@@ -26,6 +26,7 @@ The root [README](../README.md) is the entry point for users.
 - [Fixed UART demo monitor](../tools/UART_CLIENT.md)
 - [Final route/LVS repair](timing_lvs_closure_20261029.md)
 - [Register timing coverage audit](timing_coverage_audit_20261029.md)
+- [Isolated host-control and hold timing increments](control_refactor_20261030.md)
 
 ## Historical records and design proposals
 

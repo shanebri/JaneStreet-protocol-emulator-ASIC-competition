@@ -84,6 +84,7 @@ def main():
             shutil.copy2(source,target)
         shutil.copytree(a.support_tools/'precheck', out/'precheck',
                         ignore=shutil.ignore_patterns('reports','__pycache__','.pytest_cache'))
+        (out/'precheck/reports').mkdir(parents=True, exist_ok=True)
         (out/'tech').symlink_to((a.support_tools/'tech').resolve(), target_is_directory=True)
         env = dict(os.environ, PDK_ROOT=str(a.pdk_root.resolve()), PDK='ihp-sg13cmos5l',
                    PYTHONPATH='', PYTHONDONTWRITEBYTECODE='1')
@@ -98,6 +99,9 @@ def main():
         shutil.copy2(nl,test/'gate_level_netlist.v')
         # tb.v includes definitions from the submission source directory.
         shutil.copytree(a.test_source.resolve().parent/'src',out/'src')
+        support = a.test_source.resolve().parent
+        shutil.copytree(support/'tools', out/'tools', ignore=shutil.ignore_patterns('__pycache__'))
+        shutil.copytree(support/'examples', out/'examples')
         gate_env = dict(env, PATH=str(a.test_python.absolute().parent)+':'+env['PATH'], GATES='yes')
         version = subprocess.run(['iverilog','-V'],env=gate_env,capture_output=True,text=True,check=True)
         (out/'iverilog-version.log').write_text(version.stdout+version.stderr)

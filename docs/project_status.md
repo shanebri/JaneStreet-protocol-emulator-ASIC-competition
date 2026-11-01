@@ -1,6 +1,6 @@
 # Project status and qualification
 
-Updated 2026-10-30. This page is the current status reference; dated experiment
+Updated 2026-10-31 (America/Phoenix). This page is the current status reference; dated experiment
 reports retain their original measurements and checkpoint decisions.
 
 ## Implemented design
@@ -47,8 +47,8 @@ experiment instructions.
 | Typical, 1.20 V, 25 C | 6.120987 | 0.145750 | 8.026990 |
 | Fast, 1.32 V, -40 C | 9.516462 | 0.012811 | 12.118178 |
 
-Setup/hold TNS and violation counts are zero. Fast hold has only **12.8 ps**
-margin; slow overall setup has **303 ps**. Any ASIC implementation change must
+At that CI baseline, setup/hold TNS and violation counts are zero. Fast hold
+has **12.8 ps** margin; slow overall setup has **303 ps**. Any ASIC implementation change must
 be compared against its passing parent and repeat the full required checks.
 The optional native register-setup `Infinity` summary is a path-selection
 artifact, not absent timing coverage; see the [coverage audit](timing_coverage_audit_20261029.md).
@@ -72,10 +72,52 @@ identify the qualified output. Artifact retention is finite; preserve release
 copies and hashes. A source merge does not independently qualify a different
 merge commit's output: inspect the workflow for the exact revision being released.
 
-## Scope of that evidence
+## Locally qualified active physical recipe
 
-KLayout DRC was disabled in the qualified flow; the reported DRC acceptance is
-for routing DRC and Magic DRC. Gate simulation uses functional cell models,
+The [control/hold increments](control_refactor_20261030.md) are both fully
+qualified locally, and their exact tested recipe is active. The first increment
+adds ISR[6] minimum delay; the second retains it, isolates host-control load
+groups with two local buffers, and adds ISR[3] minimum delay. There are four
+new transparent buffers beyond the existing repair, with no added registers
+or changed ISA, host acceptance/commit, stop/abort or retirement cycles. FPGA
+sources and the preserved programmed image are untouched by this work.
+
+Each increment passes a fresh normal production build, extracted timing and
+electrical checks in all three required corners, nine independent STA sessions,
+clock/contact/pin checks, final routing and Magic DRC, antenna, actual-GDS LVS,
+all nine Tiny Tapeout prechecks and all 39 exact-netlist functional gate tests.
+Each improves all six required worst-corner margins against its fully qualified
+immediate parent. Final values and total consumption against the CI baseline are:
+
+| Corner | Setup ns | Hold ns | Setup consumed ns | Hold consumed ns |
+| --- | ---: | ---: | ---: | ---: |
+| Slow, 1.08 V / 125 C | 0.393477262 | 0.474639452 | -0.090043531 | -0.101519351 |
+| Typical, 1.20 V / 25 C | 6.138193239 | 0.205702239 | -0.017206681 | -0.059951934 |
+| Fast, 1.32 V / -40 C | 9.624813219 | 0.048140215 | -0.108351553 | -0.035328796 |
+
+Negative consumption means increased margin. Local path budgets can still be
+used: ISR[6] slow setup consumes 177.634 ps across both increments and retains
+2.845521 ns; the second increment consumes 2.664 ps of ISR[7] fast hold against
+its immediate parent. The report itemizes all measured local costs and remaining
+budgets. Worst setup/hold remain narrow at **393.477 / 48.140 ps**.
+
+The [activation receipt](timing/20261030-control-refactor/activation.json)
+binds both qualifications, active source/configuration comparisons, pinned timing
+inputs and the recipe SHA256
+`e6048d0c1a3a0c1944b444452ec645807f02c183895f9f343b99f2e41043ce2f`.
+Failed attempts and original qualification jobs remain intact. This is local
+qualification of the working implementation; no new GitHub CI result is claimed.
+The qualified combined state
+`8cda1271b19e0395f15568ac628639ba6d55d0930d80f31e93b502bd3ea26074`
+is the passing parent for the next increment. New features must preserve its
+six required margins and repeat full qualification.
+
+## Scope of qualification evidence
+
+The native KLayout DRC step remains disabled as in the CI baseline. Both new
+local increments pass the full SG13CMOS5L KLayout deck through Tiny Tapeout
+precheck, alongside native routing DRC and Magic DRC. Gate simulation uses
+functional cell models,
 without SDF annotation; timing evidence comes from extracted STA. I/O checks
 assume the documented synchronous timing contract. They do not establish
 arbitrary asynchronous reset release, synchronizer MTBF, board-level electrical

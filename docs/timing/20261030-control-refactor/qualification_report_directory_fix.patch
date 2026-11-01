@@ -1,0 +1,10 @@
+--- original_frozen_qualifier.py
++++ retry_qualifier.py
+@@ -84,6 +84,7 @@
+             shutil.copy2(source,target)
+         shutil.copytree(a.support_tools/'precheck', out/'precheck',
+                         ignore=shutil.ignore_patterns('reports','__pycache__','.pytest_cache'))
++        (out/'precheck/reports').mkdir(parents=True, exist_ok=True)
+         (out/'tech').symlink_to((a.support_tools/'tech').resolve(), target_is_directory=True)
+         env = dict(os.environ, PDK_ROOT=str(a.pdk_root.resolve()), PDK='ihp-sg13cmos5l',
+                    PYTHONPATH='', PYTHONDONTWRITEBYTECODE='1')

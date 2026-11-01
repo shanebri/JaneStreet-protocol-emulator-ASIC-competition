@@ -3,3 +3,10 @@
 docs/packet_sram/buffered_portal_20261030/** -text
 docs/packet_sram/supply_repair_20261030/** -text
 docs/packet_sram/failed_20261030/** -text
+
+# Preserve the qualified control/hold evidence and hash-bound active recipe.
+docs/timing/20261030-control-refactor/** -text
+# Native STA records retain their original separator blank lines at EOF.
+docs/timing/20261030-control-refactor/local-endpoints/*.rpt whitespace=-blank-at-eof
+tools/timing/*refactor*.py -text
+tools/timing/production/last-fanout.json -text

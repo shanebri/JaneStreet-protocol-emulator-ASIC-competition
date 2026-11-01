@@ -1,0 +1,41 @@
+{
+  "scope": "Reference binding only; no candidate physical qualification",
+  "parent_state_sha256": "af8ced2439790ea47598651acacfbb0eb9d9848a858972a1124358e074ec0ae5",
+  "reference_state_sha256": "e2fcbee867cc5335c59a89059eb0783bbec2897704081087aba3eb5c92f06892",
+  "reference_odb_sha256": "0a0da10821c774b55784b5327dfc14f440432683351f226600cb1c4672a595e9",
+  "operations": {
+    "hold": [
+      {
+        "kind": "buffer",
+        "target": "place6629/X",
+        "old": "sg13cmos5l_buf_1",
+        "max_loads": 4
+      },
+      {
+        "kind": "buffer",
+        "target": "_30253_/Y",
+        "old": "sg13cmos5l_a21oi_1",
+        "max_loads": 1,
+        "location": "sink_centroid"
+      }
+    ],
+    "host_drive": [
+      {
+        "kind": "buffer",
+        "target": "place6629/X",
+        "old": "sg13cmos5l_buf_1",
+        "max_loads": 4
+      },
+      {
+        "kind": "size",
+        "instance": "_17710_",
+        "old": "sg13cmos5l_nand3_1",
+        "new": "sg13cmos5l_nand3_2"
+      }
+    ]
+  },
+  "boundaries": {
+    "hold": "ISR[6] D; same clock and cycles",
+    "host_drive": "Existing live HOST_RD acceptance/control cone; identical gate function"
+  }
+}

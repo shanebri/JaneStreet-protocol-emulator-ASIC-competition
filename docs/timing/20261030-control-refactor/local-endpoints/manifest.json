@@ -1,0 +1,435 @@
+{
+  "status": "complete",
+  "scope": "Local endpoint diagnostics; required worst-corner gates remain unchanged",
+  "sources": {
+    "qualified_baseline": {
+      "state_sha256": "af8ced2439790ea47598651acacfbb0eb9d9848a858972a1124358e074ec0ae5",
+      "netlist_sha256": "e8b6d27e39f07d93716b8fce8f9cd7f961a1778fb4e62f596ff09c3a93a36490",
+      "report_sha256": {
+        "nom_slow_1p08V_125C/max.rpt": "f0157b4a568968c95d6324cbd88b5e6cdd4585bbb2f6a4ea400eef5868a1fe57",
+        "nom_slow_1p08V_125C/min.rpt": "e65e90a20587ff8e0c4a54beb8c256c19ea634fb07755d6b57ee1dce59a288d4",
+        "nom_typ_1p20V_25C/max.rpt": "c9cf5405496f8523c7b49773b12b6e525d5613005cf87de2399a0bdf9689eb3a",
+        "nom_typ_1p20V_25C/min.rpt": "36e50a4e1d4f79e9c3c27c6cacc947bc13577cd499ad7e5549b468671cc2c851",
+        "nom_fast_1p32V_m40C/max.rpt": "8bba5780626ffecb67b3c62f0d66cf4827e902d3642f131e1705423f6ef20833",
+        "nom_fast_1p32V_m40C/min.rpt": "a7c816fb8b52fb072a2b4e3cddd7e1dc917dd17a2d3174120994203133b1e159"
+      },
+      "registers": {
+        "pio.engines[1].core.isr[3]": {
+          "cell": "_32068_",
+          "corners": {
+            "nom_slow_1p08V_125C": {
+              "setup": 2.516171,
+              "hold": 0.401571
+            },
+            "nom_typ_1p20V_25C": {
+              "setup": 7.506928,
+              "hold": 0.165001
+            },
+            "nom_fast_1p32V_m40C": {
+              "setup": 10.393867,
+              "hold": 0.025715
+            }
+          }
+        },
+        "pio.engines[1].core.isr[6]": {
+          "cell": "_32071_",
+          "corners": {
+            "nom_slow_1p08V_125C": {
+              "setup": 3.023155,
+              "hold": 0.37312
+            },
+            "nom_typ_1p20V_25C": {
+              "setup": 7.890559,
+              "hold": 0.14575
+            },
+            "nom_fast_1p32V_m40C": {
+              "setup": 10.583286,
+              "hold": 0.012811
+            }
+          }
+        },
+        "pio.engines[1].core.isr[7]": {
+          "cell": "_32072_",
+          "corners": {
+            "nom_slow_1p08V_125C": {
+              "setup": 1.498265,
+              "hold": 0.481676
+            },
+            "nom_typ_1p20V_25C": {
+              "setup": 6.887049,
+              "hold": 0.20986
+            },
+            "nom_fast_1p32V_m40C": {
+              "setup": 9.951198,
+              "hold": 0.050787
+            }
+          }
+        }
+      }
+    },
+    "hold": {
+      "state_sha256": "e2734950272a286da0b07ed2fb44ce857731e60b6eb14642e99dc9ddb867a7a1",
+      "netlist_sha256": "0eff5ef8b23b21632d9c1a7500326f44e2b20012036a21789615c561b1abb28b",
+      "report_sha256": {
+        "nom_slow_1p08V_125C/max.rpt": "ab095320b94bc0686724f6876386afd5a22d20f5b62af9b186ddaecc267c7aaa",
+        "nom_slow_1p08V_125C/min.rpt": "18d263ad4be30292b394051ccaf72bfab61b06af40643e8d9e777e410023c8e0",
+        "nom_typ_1p20V_25C/max.rpt": "1000ec34b7a0bb7c630fda9c9c5442d866046b88e2203c5861481de971dd8744",
+        "nom_typ_1p20V_25C/min.rpt": "92a4972714691d03beed99ba677f6e0c78aef59eb31aa9121b7cf88ace240cc0",
+        "nom_fast_1p32V_m40C/max.rpt": "6d12639e0a468fbd71626ec265c9c7635be8bf982bdaa03e768d19d6727cb1f9",
+        "nom_fast_1p32V_m40C/min.rpt": "32a1bf2125463d38d7be023ae6669ddfd4da792d32a309493e57bcc3bc608f09"
+      },
+      "registers": {
+        "pio.engines[1].core.isr[3]": {
+          "cell": "_32068_",
+          "corners": {
+            "nom_slow_1p08V_125C": {
+              "setup": 2.517227,
+              "hold": 0.401619
+            },
+            "nom_typ_1p20V_25C": {
+              "setup": 7.507651,
+              "hold": 0.165034
+            },
+            "nom_fast_1p32V_m40C": {
+              "setup": 10.394328,
+              "hold": 0.025732
+            }
+          }
+        },
+        "pio.engines[1].core.isr[6]": {
+          "cell": "_32071_",
+          "corners": {
+            "nom_slow_1p08V_125C": {
+              "setup": 2.851186,
+              "hold": 0.475341
+            },
+            "nom_typ_1p20V_25C": {
+              "setup": 7.78264,
+              "hold": 0.21156
+            },
+            "nom_fast_1p32V_m40C": {
+              "setup": 10.53068,
+              "hold": 0.056837
+            }
+          }
+        },
+        "pio.engines[1].core.isr[7]": {
+          "cell": "_32072_",
+          "corners": {
+            "nom_slow_1p08V_125C": {
+              "setup": 1.499217,
+              "hold": 0.481725
+            },
+            "nom_typ_1p20V_25C": {
+              "setup": 6.887708,
+              "hold": 0.209892
+            },
+            "nom_fast_1p32V_m40C": {
+              "setup": 9.951625,
+              "hold": 0.050804
+            }
+          }
+        }
+      }
+    },
+    "combined": {
+      "state_sha256": "8cda1271b19e0395f15568ac628639ba6d55d0930d80f31e93b502bd3ea26074",
+      "netlist_sha256": "65b0578413c1f1b8c0ce836d2efedcded21ab807d69f7fe26bdd584cbbcdfaff",
+      "report_sha256": {
+        "nom_slow_1p08V_125C/max.rpt": "7c587981aa7caffdefc1571531724f422b0239896c7100892c0a717467d84f73",
+        "nom_slow_1p08V_125C/min.rpt": "8887548bc47d600690779db78b26c2dad55d8e8e977744f42a2e4214e7032c66",
+        "nom_typ_1p20V_25C/max.rpt": "ff7b7a68729c64405a14d8ae6d6ae0da26994cc2d55866a7c5174ef8fa55e8b1",
+        "nom_typ_1p20V_25C/min.rpt": "0e1a82e63871549cd8e03dd6450a7b9644b9d9df8873f3a47d279a63c5818e08",
+        "nom_fast_1p32V_m40C/max.rpt": "0e808d248d0e99b4983cc1cbc58625ba808f988111031f1c93ac03c1f681b3df",
+        "nom_fast_1p32V_m40C/min.rpt": "060d282ab73994a53c4cd0d5df35fd26ca39ac5bbcc21b40bfa34a2198dbd047"
+      },
+      "registers": {
+        "pio.engines[1].core.isr[3]": {
+          "cell": "_32068_",
+          "corners": {
+            "nom_slow_1p08V_125C": {
+              "setup": 2.571717,
+              "hold": 0.514544
+            },
+            "nom_typ_1p20V_25C": {
+              "setup": 7.511494,
+              "hold": 0.237107
+            },
+            "nom_fast_1p32V_m40C": {
+              "setup": 10.460436,
+              "hold": 0.073728
+            }
+          }
+        },
+        "pio.engines[1].core.isr[6]": {
+          "cell": "_32071_",
+          "corners": {
+            "nom_slow_1p08V_125C": {
+              "setup": 2.845521,
+              "hold": 0.475174
+            },
+            "nom_typ_1p20V_25C": {
+              "setup": 7.77899,
+              "hold": 0.211467
+            },
+            "nom_fast_1p32V_m40C": {
+              "setup": 10.638451,
+              "hold": 0.05679
+            }
+          }
+        },
+        "pio.engines[1].core.isr[7]": {
+          "cell": "_32072_",
+          "corners": {
+            "nom_slow_1p08V_125C": {
+              "setup": 1.721887,
+              "hold": 0.474639
+            },
+            "nom_typ_1p20V_25C": {
+              "setup": 6.974095,
+              "hold": 0.205702
+            },
+            "nom_fast_1p32V_m40C": {
+              "setup": 10.116714,
+              "hold": 0.04814
+            }
+          }
+        }
+      }
+    }
+  },
+  "comparisons": {
+    "hold_vs_qualified_baseline": {
+      "pio.engines[1].core.isr[3]": {
+        "nom_slow_1p08V_125C": {
+          "setup": {
+            "parent_ns": 2.516171,
+            "candidate_ns": 2.517227,
+            "consumed_ns": -0.001056000000000168
+          },
+          "hold": {
+            "parent_ns": 0.401571,
+            "candidate_ns": 0.401619,
+            "consumed_ns": -4.799999999999249e-05
+          }
+        },
+        "nom_typ_1p20V_25C": {
+          "setup": {
+            "parent_ns": 7.506928,
+            "candidate_ns": 7.507651,
+            "consumed_ns": -0.0007229999999998071
+          },
+          "hold": {
+            "parent_ns": 0.165001,
+            "candidate_ns": 0.165034,
+            "consumed_ns": -3.299999999997749e-05
+          }
+        },
+        "nom_fast_1p32V_m40C": {
+          "setup": {
+            "parent_ns": 10.393867,
+            "candidate_ns": 10.394328,
+            "consumed_ns": -0.0004609999999996006
+          },
+          "hold": {
+            "parent_ns": 0.025715,
+            "candidate_ns": 0.025732,
+            "consumed_ns": -1.7000000000003124e-05
+          }
+        }
+      },
+      "pio.engines[1].core.isr[6]": {
+        "nom_slow_1p08V_125C": {
+          "setup": {
+            "parent_ns": 3.023155,
+            "candidate_ns": 2.851186,
+            "consumed_ns": 0.17196899999999982
+          },
+          "hold": {
+            "parent_ns": 0.37312,
+            "candidate_ns": 0.475341,
+            "consumed_ns": -0.102221
+          }
+        },
+        "nom_typ_1p20V_25C": {
+          "setup": {
+            "parent_ns": 7.890559,
+            "candidate_ns": 7.78264,
+            "consumed_ns": 0.10791899999999988
+          },
+          "hold": {
+            "parent_ns": 0.14575,
+            "candidate_ns": 0.21156,
+            "consumed_ns": -0.06581000000000001
+          }
+        },
+        "nom_fast_1p32V_m40C": {
+          "setup": {
+            "parent_ns": 10.583286,
+            "candidate_ns": 10.53068,
+            "consumed_ns": 0.05260599999999904
+          },
+          "hold": {
+            "parent_ns": 0.012811,
+            "candidate_ns": 0.056837,
+            "consumed_ns": -0.044025999999999996
+          }
+        }
+      },
+      "pio.engines[1].core.isr[7]": {
+        "nom_slow_1p08V_125C": {
+          "setup": {
+            "parent_ns": 1.498265,
+            "candidate_ns": 1.499217,
+            "consumed_ns": -0.0009520000000000639
+          },
+          "hold": {
+            "parent_ns": 0.481676,
+            "candidate_ns": 0.481725,
+            "consumed_ns": -4.900000000002125e-05
+          }
+        },
+        "nom_typ_1p20V_25C": {
+          "setup": {
+            "parent_ns": 6.887049,
+            "candidate_ns": 6.887708,
+            "consumed_ns": -0.0006589999999997431
+          },
+          "hold": {
+            "parent_ns": 0.20986,
+            "candidate_ns": 0.209892,
+            "consumed_ns": -3.200000000000425e-05
+          }
+        },
+        "nom_fast_1p32V_m40C": {
+          "setup": {
+            "parent_ns": 9.951198,
+            "candidate_ns": 9.951625,
+            "consumed_ns": -0.00042700000000017724
+          },
+          "hold": {
+            "parent_ns": 0.050787,
+            "candidate_ns": 0.050804,
+            "consumed_ns": -1.7000000000003124e-05
+          }
+        }
+      }
+    },
+    "combined_vs_hold": {
+      "pio.engines[1].core.isr[3]": {
+        "nom_slow_1p08V_125C": {
+          "setup": {
+            "parent_ns": 2.517227,
+            "candidate_ns": 2.571717,
+            "consumed_ns": -0.05448999999999993
+          },
+          "hold": {
+            "parent_ns": 0.401619,
+            "candidate_ns": 0.514544,
+            "consumed_ns": -0.112925
+          }
+        },
+        "nom_typ_1p20V_25C": {
+          "setup": {
+            "parent_ns": 7.507651,
+            "candidate_ns": 7.511494,
+            "consumed_ns": -0.003842999999999819
+          },
+          "hold": {
+            "parent_ns": 0.165034,
+            "candidate_ns": 0.237107,
+            "consumed_ns": -0.07207300000000003
+          }
+        },
+        "nom_fast_1p32V_m40C": {
+          "setup": {
+            "parent_ns": 10.394328,
+            "candidate_ns": 10.460436,
+            "consumed_ns": -0.06610799999999983
+          },
+          "hold": {
+            "parent_ns": 0.025732,
+            "candidate_ns": 0.073728,
+            "consumed_ns": -0.047996
+          }
+        }
+      },
+      "pio.engines[1].core.isr[6]": {
+        "nom_slow_1p08V_125C": {
+          "setup": {
+            "parent_ns": 2.851186,
+            "candidate_ns": 2.845521,
+            "consumed_ns": 0.005665000000000031
+          },
+          "hold": {
+            "parent_ns": 0.475341,
+            "candidate_ns": 0.475174,
+            "consumed_ns": 0.00016700000000002824
+          }
+        },
+        "nom_typ_1p20V_25C": {
+          "setup": {
+            "parent_ns": 7.78264,
+            "candidate_ns": 7.77899,
+            "consumed_ns": 0.003649999999999487
+          },
+          "hold": {
+            "parent_ns": 0.21156,
+            "candidate_ns": 0.211467,
+            "consumed_ns": 9.300000000000974e-05
+          }
+        },
+        "nom_fast_1p32V_m40C": {
+          "setup": {
+            "parent_ns": 10.53068,
+            "candidate_ns": 10.638451,
+            "consumed_ns": -0.10777099999999962
+          },
+          "hold": {
+            "parent_ns": 0.056837,
+            "candidate_ns": 0.05679,
+            "consumed_ns": 4.699999999999843e-05
+          }
+        }
+      },
+      "pio.engines[1].core.isr[7]": {
+        "nom_slow_1p08V_125C": {
+          "setup": {
+            "parent_ns": 1.499217,
+            "candidate_ns": 1.721887,
+            "consumed_ns": -0.22266999999999992
+          },
+          "hold": {
+            "parent_ns": 0.481725,
+            "candidate_ns": 0.474639,
+            "consumed_ns": 0.007086000000000037
+          }
+        },
+        "nom_typ_1p20V_25C": {
+          "setup": {
+            "parent_ns": 6.887708,
+            "candidate_ns": 6.974095,
+            "consumed_ns": -0.08638700000000021
+          },
+          "hold": {
+            "parent_ns": 0.209892,
+            "candidate_ns": 0.205702,
+            "consumed_ns": 0.004189999999999999
+          }
+        },
+        "nom_fast_1p32V_m40C": {
+          "setup": {
+            "parent_ns": 9.951625,
+            "candidate_ns": 10.116714,
+            "consumed_ns": -0.16508900000000004
+          },
+          "hold": {
+            "parent_ns": 0.050804,
+            "candidate_ns": 0.04814,
+            "consumed_ns": 0.0026639999999999997
+          }
+        }
+      }
+    }
+  }
+}
