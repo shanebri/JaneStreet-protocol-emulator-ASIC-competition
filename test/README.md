@@ -12,6 +12,13 @@ wrap, write collisions and program retention. `test_timing_tools.py` also checks
 replay orchestration with a fake STA process; those tests do not measure timing.
 See [the test-only diagnosis and hypotheses](../docs/timing_hypotheses_85506c6.md).
 
+The [bounded headroom campaign](../docs/timing_headroom_20261104.md) adds
+`test_headroom_campaign.py` to the normal runner. Its eleven checks reject
+undeclared delay-cell functions, rewiring and clock changes, and ensure that
+numerical comparison tolerance cannot waive negative slack or electrical errors.
+Release evidence additionally requires nine distinct precheck cases with no
+failures, errors or skips.
+
 Install Python 3.11+, Icarus Verilog and `test/requirements.txt`, then run:
 
 ```sh

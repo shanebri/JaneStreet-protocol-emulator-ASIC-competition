@@ -1,0 +1,54 @@
+{
+  "status": "complete",
+  "commands": [
+    {
+      "args": [
+        "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/production_tooling/precheck-venv/bin/python",
+        "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/timing_headroom_20261104_01/production/qualification/precheck/precheck.py",
+        "--gds",
+        "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/timing_headroom_20261104_01/production/qualification/project/tt_um_shanebri_top.gds",
+        "--tech",
+        "ihp-sg13cmos5l"
+      ],
+      "cwd": "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/timing_headroom_20261104_01/production/qualification/precheck"
+    },
+    {
+      "args": [
+        "make",
+        "-B",
+        "GATES=yes"
+      ],
+      "cwd": "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/timing_headroom_20261104_01/production/qualification/test"
+    }
+  ],
+  "checks": {
+    "strict_metrics": "pass",
+    "native_routing_drc_antenna": "pass",
+    "independent_gds_lvs": "pass",
+    "final_view_identity": "pass",
+    "pin_geometry": "pass",
+    "route_acceptance": "pass",
+    "tt_precheck": {
+      "status": "pass",
+      "tests": 9
+    },
+    "gate_tests": {
+      "status": "pass",
+      "tests": 39,
+      "netlist_sha256": "49687f75688eb8870bd2b3eb2dfafdc23fb0b4c637b69a82dff289244f78589c"
+    }
+  },
+  "sha256": {
+    "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/timing_headroom_20261104_01/production/run/final/gds/tt_um_shanebri_top.gds": "d8bf7ec0d57b6a5ea6235848b372338148e272ed93c1d28ecdef4a0056e2e3d8",
+    "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/timing_headroom_20261104_01/production/run/final/nl/tt_um_shanebri_top.nl.v": "49687f75688eb8870bd2b3eb2dfafdc23fb0b4c637b69a82dff289244f78589c",
+    "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/timing_headroom_20261104_01/production/run/final/lef/tt_um_shanebri_top.lef": "af821fe55167af0002a90276fe6c16a907e4cde0bcfd3260fe13976f3a4492bc",
+    "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/timing_headroom_20261104_01/production/run/final/sdc/tt_um_shanebri_top.sdc": "7088ce29adb0f7213b0f3ed4b76177f104819061b87b32bf4f166ff50e055d59",
+    "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/timing_headroom_20261104_01/production/run/final/spef/nom/tt_um_shanebri_top.nom.spef": "c8f7622323ebb80e6c9f4f6abd3e335d6987573c96ed954f8927aa6515a70503",
+    "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/timing_headroom_20261104_01/production/run/69-openroad-stapostpnr/state_out.json": "aecf268e7bda1242683b19d238f0f99ea469bf9b00b6df963e042b2d71802062",
+    "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/timing_headroom_20261104_01/production/run/79-magic-spiceextraction/config.json": "1d09ff122523aec26d1b1e51ef515d02ab10c38fd9753baae649f0dfd7b16881",
+    "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/timing_headroom_20261104_01/production/run/79-magic-spiceextraction/state_in.json": "a4daa35e33a8d5bb0e1275166810277c60d1d8de5670017b8b2af5f698670522",
+    "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/timing_headroom_20261104_01/production/run/final/metrics.json": "0cce0414ff7b493a2f3e439058f93c98036dcce6b82cd9491aea0a4d466178d8",
+    "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/timing_headroom_20261104_01/production/run/resolved.json": "e6325d5b6f8a5075e80f044899cb5ff20a17c0cdeb39098b7ea777833b1cf5e2",
+    "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/timing_headroom_20261104_01/production/run/70-pio-routeacceptance/qualification/manifest.json": "3d0f2ea2ca81d2580cba550da1ff9fa503eced64916e607f8b463a6ebc368c79"
+  }
+}

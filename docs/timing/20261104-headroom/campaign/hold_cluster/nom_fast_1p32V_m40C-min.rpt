@@ -1,0 +1,72 @@
+Startpoint: _31502_ (rising edge-triggered flip-flop clocked by clk)
+Endpoint: _33857_ (rising edge-triggered flip-flop clocked by clk)
+Path Group: clk
+Path Type: min
+
+Fanout         Cap        Slew       Delay        Time   Description
+---------------------------------------------------------------------------------------------
+                                  0.000000    0.000000   clock clk (rise edge)
+                                  0.000000    0.000000   clock source latency
+     1    0.121135    0.079366    0.080849    0.080849 ^ clk (in)
+                                                         clk (net)
+                      0.115924    0.000000    0.080849 ^ clkbuf_0_clk/A (sg13cmos5l_buf_8)
+     4    0.137940    0.057352    0.097002    0.177851 ^ clkbuf_0_clk/X (sg13cmos5l_buf_8)
+                                                         clknet_0_clk (net)
+                      0.063538    0.013591    0.191443 ^ clkbuf_2_2_0_clk/A (sg13cmos5l_buf_8)
+     8    0.195488    0.067277    0.079796    0.271239 ^ clkbuf_2_2_0_clk/X (sg13cmos5l_buf_8)
+                                                         clknet_2_2_0_clk (net)
+                      0.086053    0.025101    0.296340 ^ clkbuf_5_17_0_clk/A (sg13cmos5l_buf_8)
+     6    0.086674    0.039038    0.080004    0.376344 ^ clkbuf_5_17_0_clk/X (sg13cmos5l_buf_8)
+                                                         clknet_5_17_0_clk (net)
+                      0.039942    0.004312    0.380656 ^ clkbuf_leaf_104_clk/A (sg13cmos5l_buf_8)
+     3    0.026746    0.018775    0.052294    0.432950 ^ clkbuf_leaf_104_clk/X (sg13cmos5l_buf_8)
+                                                         clknet_leaf_104_clk (net)
+                      0.018804    0.001213    0.434163 ^ clkbuf_fanoutfix_129734/A (sg13cmos5l_buf_8)
+     8    0.038714    0.021040    0.047181    0.481345 ^ clkbuf_fanoutfix_129734/X (sg13cmos5l_buf_8)
+                                                         clknet_fanoutfix_129733 (net)
+                      0.021597    0.002524    0.483869 ^ _31502_/CLK (sg13cmos5l_dfrbpq_1)
+     2    0.008778    0.024530    0.113676    0.597545 v _31502_/Q (sg13cmos5l_dfrbpq_1)
+                                                         pio.engines[0].bank.imem_address[3] (net)
+                      0.024544    0.000516    0.598061 v eco_data_27_013131/A (sg13cmos5l_buf_4)
+     4    0.027123    0.023650    0.054527    0.652588 v eco_data_27_013131/X (sg13cmos5l_buf_4)
+                                                         eco_net_27_013130 (net)
+                      0.023865    0.001634    0.654221 v _17115_/A (sg13cmos5l_inv_1)
+     6    0.039033    0.104276    0.081179    0.735401 ^ _17115_/Y (sg13cmos5l_inv_1)
+                                                         _10412_ (net)
+                      0.104527    0.003976    0.739376 ^ _23536_/A1 (sg13cmos5l_a221oi_1)
+     1    0.001792    0.026271    0.065920    0.805296 v _23536_/Y (sg13cmos5l_a221oi_1)
+                                                         _01534_ (net)
+                      0.026271    0.000065    0.805361 v _33857_/D (sg13cmos5l_dfrbpq_1)
+                                              0.805361   data arrival time
+
+                                  0.000000    0.000000   clock clk (rise edge)
+                                  0.000000    0.000000   clock source latency
+     1    0.122702    0.080066    0.090721    0.090721 ^ clk (in)
+                                                         clk (net)
+                      0.118056    0.000000    0.090721 ^ clkbuf_0_clk/A (sg13cmos5l_buf_8)
+     4    0.144209    0.059424    0.108604    0.199325 ^ clkbuf_0_clk/X (sg13cmos5l_buf_8)
+                                                         clknet_0_clk (net)
+                      0.066155    0.015918    0.215242 ^ clkbuf_2_2_0_clk/A (sg13cmos5l_buf_8)
+     8    0.208025    0.071109    0.090670    0.305912 ^ clkbuf_2_2_0_clk/X (sg13cmos5l_buf_8)
+                                                         clknet_2_2_0_clk (net)
+                      0.091335    0.029695    0.335607 ^ clkbuf_5_17_0_clk/A (sg13cmos5l_buf_8)
+     6    0.096077    0.042303    0.092379    0.427986 ^ clkbuf_5_17_0_clk/X (sg13cmos5l_buf_8)
+                                                         clknet_5_17_0_clk (net)
+                      0.043321    0.005340    0.433326 ^ clkbuf_leaf_104_clk/A (sg13cmos5l_buf_8)
+     3    0.031448    0.020230    0.060301    0.493627 ^ clkbuf_leaf_104_clk/X (sg13cmos5l_buf_8)
+                                                         clknet_leaf_104_clk (net)
+                      0.020242    0.000920    0.494547 ^ clkbuf_fanoutfix_139735/A (sg13cmos5l_buf_8)
+     8    0.045483    0.023159    0.054514    0.549061 ^ clkbuf_fanoutfix_139735/X (sg13cmos5l_buf_8)
+                                                         clknet_fanoutfix_139734 (net)
+                      0.023203    0.000659    0.549720 ^ _33857_/CLK (sg13cmos5l_dfrbpq_1)
+                                  0.250000    0.799720   clock uncertainty
+                                 -0.060677    0.739043   clock reconvergence pessimism
+                                 -0.023048    0.715995   library hold time
+                                              0.715995   data required time
+---------------------------------------------------------------------------------------------
+                                              0.715995   data required time
+                                             -0.805361   data arrival time
+---------------------------------------------------------------------------------------------
+                                              0.089366   slack (MET)
+
+

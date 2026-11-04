@@ -1,0 +1,235 @@
+{
+  "status": "complete",
+  "input_state": "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/control_refactor_combined_production_20261031_01/run/56-openroad-lastfanoutrepair/state_in.json",
+  "input_state_sha256": "9f243513c3208ba6e58a8d93cd76c208d52b4a3b91595cca8238f3da5d5fc9c9",
+  "input_odb_sha256": "0a0da10821c774b55784b5327dfc14f440432683351f226600cb1c4672a595e9",
+  "parent_recipe_sha256": "e6048d0c1a3a0c1944b444452ec645807f02c183895f9f343b99f2e41043ce2f",
+  "hold_changes": [
+    {
+      "register": "engine1 ISR[3]",
+      "kind": "transparent-buffer-to-delay",
+      "target": "_30219_/Y"
+    },
+    {
+      "register": "engine1 ISR[6]",
+      "kind": "transparent-buffer-to-delay",
+      "target": "_30253_/Y"
+    },
+    {
+      "register": "pio.engines[1].core.isr[7]",
+      "kind": "transparent-D-delay",
+      "target": "_30264_/Y"
+    },
+    {
+      "register": "pio.engines[0].core.fetch.words[20][11]",
+      "kind": "transparent-D-delay",
+      "target": "_22356_/Y"
+    },
+    {
+      "register": "pio.engines[0].core.fetch.words[20][12]",
+      "kind": "transparent-D-delay",
+      "target": "_22358_/Y"
+    }
+  ],
+  "setup_targets": [
+    {
+      "instance": "_28912_",
+      "master": "sg13cmos5l_a221oi_1",
+      "location_dbu": [
+        829920,
+        574560
+      ],
+      "loads": [
+        {
+          "pin": "_28913_/A",
+          "location_dbu": [
+            509760,
+            570780
+          ]
+        },
+        {
+          "pin": "_29069_/B",
+          "location_dbu": [
+            514080,
+            574560
+          ]
+        }
+      ]
+    },
+    {
+      "instance": "_17920_",
+      "master": "sg13cmos5l_a221oi_1",
+      "location_dbu": [
+        592320,
+        423360
+      ],
+      "loads": [
+        {
+          "pin": "_17924_/B",
+          "location_dbu": [
+            738240,
+            517860
+          ]
+        },
+        {
+          "pin": "_17928_/A2",
+          "location_dbu": [
+            593760,
+            540540
+          ]
+        },
+        {
+          "pin": "_17937_/C",
+          "location_dbu": [
+            744000,
+            514080
+          ]
+        },
+        {
+          "pin": "_23020_/B",
+          "location_dbu": [
+            681600,
+            449820
+          ]
+        },
+        {
+          "pin": "_23021_/A_N",
+          "location_dbu": [
+            727200,
+            423360
+          ]
+        },
+        {
+          "pin": "_29317_/A2",
+          "location_dbu": [
+            747360,
+            480060
+          ]
+        },
+        {
+          "pin": "_30648_/A2",
+          "location_dbu": [
+            749760,
+            480060
+          ]
+        }
+      ]
+    },
+    {
+      "instance": "_17925_",
+      "master": "sg13cmos5l_nor2_1",
+      "location_dbu": [
+        737280,
+        521640
+      ],
+      "loads": [
+        {
+          "pin": "_17945_/A",
+          "location_dbu": [
+            992640,
+            578340
+          ]
+        },
+        {
+          "pin": "_18059_/A",
+          "location_dbu": [
+            995520,
+            578340
+          ]
+        },
+        {
+          "pin": "_30617_/A1",
+          "location_dbu": [
+            651840,
+            540540
+          ]
+        },
+        {
+          "pin": "_30627_/A1",
+          "location_dbu": [
+            655200,
+            521640
+          ]
+        },
+        {
+          "pin": "_30635_/A1",
+          "location_dbu": [
+            665760,
+            529200
+          ]
+        },
+        {
+          "pin": "_30642_/A1",
+          "location_dbu": [
+            642240,
+            517860
+          ]
+        }
+      ]
+    },
+    {
+      "instance": "_17215_",
+      "master": "sg13cmos5l_nand2_1",
+      "location_dbu": [
+        480960,
+        453600
+      ],
+      "loads": [
+        {
+          "pin": "_17217_/A",
+          "location_dbu": [
+            523680,
+            412020
+          ]
+        },
+        {
+          "pin": "_17705_/A",
+          "location_dbu": [
+            483840,
+            449820
+          ]
+        },
+        {
+          "pin": "_17706_/A",
+          "location_dbu": [
+            552960,
+            434700
+          ]
+        },
+        {
+          "pin": "_23247_/A",
+          "location_dbu": [
+            871200,
+            400680
+          ]
+        },
+        {
+          "pin": "_23248_/A1",
+          "location_dbu": [
+            873120,
+            400680
+          ]
+        },
+        {
+          "pin": "_23718_/A",
+          "location_dbu": [
+            532800,
+            427140
+          ]
+        },
+        {
+          "pin": "_23868_/B",
+          "location_dbu": [
+            491040,
+            427140
+          ]
+        }
+      ]
+    }
+  ],
+  "required_transparent_models": [
+    "sg13cmos5l_buf_4",
+    "sg13cmos5l_dlygate4sd1_1"
+  ],
+  "scope": "Fresh structural contracts; no registers, clocks or architectural cycles changed"
+}

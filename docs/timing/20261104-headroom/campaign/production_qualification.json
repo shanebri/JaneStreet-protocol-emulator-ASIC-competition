@@ -1,0 +1,168 @@
+{
+  "state": "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/timing_headroom_20261104_01/production/run/69-openroad-stapostpnr/state_out.json",
+  "state_sha256": "aecf268e7bda1242683b19d238f0f99ea469bf9b00b6df963e042b2d71802062",
+  "qualification_manifest": "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/timing_headroom_20261104_01/production/qualification/manifest.json",
+  "qualification_manifest_sha256": "fe057cccd527e17d5283669e37d56ba93233b0f1fc9f42b20db7452b5837b524",
+  "parent": "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/control_refactor_combined_production_20261031_01",
+  "parent_state": "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/control_refactor_combined_production_20261031_01/run/69-openroad-stapostpnr/state_out.json",
+  "parent_state_sha256": "8cda1271b19e0395f15568ac628639ba6d55d0930d80f31e93b502bd3ea26074",
+  "parent_qualification_sha256": "77b09143e970229294d2b10cc92d11ec6bf83625d1fe7051a336fa9b2a9d68e5",
+  "parent_comparison": {
+    "status": "pass",
+    "margins": {
+      "nom_slow_1p08V_125C": {
+        "setup": {
+          "parent_ns": 0.39347726191016763,
+          "candidate_ns": 0.5329496994570676,
+          "consumed_ns": -0.13947243754689997
+        },
+        "hold": {
+          "parent_ns": 0.47463945228699844,
+          "candidate_ns": 0.5610247980532017,
+          "consumed_ns": -0.08638534576620327
+        }
+      },
+      "nom_typ_1p20V_25C": {
+        "setup": {
+          "parent_ns": 6.138193238541748,
+          "candidate_ns": 6.2494118315804945,
+          "consumed_ns": -0.11121859303874615
+        },
+        "hold": {
+          "parent_ns": 0.2057022388425081,
+          "candidate_ns": 0.26424629898817603,
+          "consumed_ns": -0.05854406014566793
+        }
+      },
+      "nom_fast_1p32V_m40C": {
+        "setup": {
+          "parent_ns": 9.624813218848612,
+          "candidate_ns": 9.689972654095907,
+          "consumed_ns": -0.0651594352472955
+        },
+        "hold": {
+          "parent_ns": 0.048140215398815994,
+          "candidate_ns": 0.08936585058240636,
+          "consumed_ns": -0.04122563518359036
+        }
+      }
+    },
+    "errors": [],
+    "numeric_tie_tolerance_ns": 1e-06
+  },
+  "fixed_ci_release_comparison": {
+    "status": "pass",
+    "margins": {
+      "nom_slow_1p08V_125C": {
+        "setup": {
+          "parent_ns": 0.30343373117436395,
+          "candidate_ns": 0.5329496994570676,
+          "consumed_ns": -0.22951596828270365
+        },
+        "hold": {
+          "parent_ns": 0.37312010093259845,
+          "candidate_ns": 0.5610247980532017,
+          "consumed_ns": -0.18790469712060326
+        }
+      },
+      "nom_typ_1p20V_25C": {
+        "setup": {
+          "parent_ns": 6.1209865575302596,
+          "candidate_ns": 6.2494118315804945,
+          "consumed_ns": -0.12842527405023496
+        },
+        "hold": {
+          "parent_ns": 0.1457503048394956,
+          "candidate_ns": 0.26424629898817603,
+          "consumed_ns": -0.11849599414868042
+        }
+      },
+      "nom_fast_1p32V_m40C": {
+        "setup": {
+          "parent_ns": 9.516461665829743,
+          "candidate_ns": 9.689972654095907,
+          "consumed_ns": -0.1735109882661643
+        },
+        "hold": {
+          "parent_ns": 0.012811418954993667,
+          "candidate_ns": 0.08936585058240636,
+          "consumed_ns": -0.07655443162741268
+        }
+      }
+    },
+    "errors": [],
+    "numeric_tie_tolerance_ns": 1e-06
+  },
+  "precheck_evidence": {
+    "report": "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/timing_headroom_20261104_01/production/qualification/precheck/reports/results.xml",
+    "sha256": "b71fd8785dc7ff5d6b1cb6e834187ea15f6c9cf4069f0ef4c510635913ca8af7",
+    "tests": 9,
+    "names": [
+      [
+        "",
+        "KLayout pin label overlapping drawing"
+      ],
+      [
+        "",
+        "KLayout SG13CMOS5L DRC"
+      ],
+      [
+        "",
+        "KLayout zero area"
+      ],
+      [
+        "",
+        "KLayout Checks"
+      ],
+      [
+        "",
+        "Pin check"
+      ],
+      [
+        "",
+        "Boundary check"
+      ],
+      [
+        "",
+        "Layer check"
+      ],
+      [
+        "",
+        "Cell name check"
+      ],
+      [
+        "",
+        "Analog pin check"
+      ]
+    ]
+  },
+  "timing_replay_input_sha256": {
+    "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/timing_headroom_20261104_01/production/run/70-pio-routeacceptance/qualification/replay-input/input-openroad-fillinsertion/tt_um_shanebri_top.nl.v": "49687f75688eb8870bd2b3eb2dfafdc23fb0b4c637b69a82dff289244f78589c",
+    "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/timing_headroom_20261104_01/production/run/70-pio-routeacceptance/qualification/replay-input/output-openroad-rcx/nom/tt_um_shanebri_top.nom.spef": "c8f7622323ebb80e6c9f4f6abd3e335d6987573c96ed954f8927aa6515a70503",
+    "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/timing_headroom_20261104_01/production/run/70-pio-routeacceptance/qualification/replay-input/final/sdc/tt_um_shanebri_top.sdc": "7088ce29adb0f7213b0f3ed4b76177f104819061b87b32bf4f166ff50e055d59",
+    "/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_stdcell/lib/sg13cmos5l_stdcell_slow_1p08V_125C.lib": "3ee222c580ba33acb2131ac2bf224ff8ee9700751835b73aaec72b670bb31d3c",
+    "/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_io/lib/sg13cmos5l_io_slow_1p08V_3p0V_125C.lib": "0dbb628168f9855eb88aee0d557da25c4cefb8c6b727a496fa2a02fd40da5cdb",
+    "/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_stdcell/lib/sg13cmos5l_stdcell_typ_1p20V_25C.lib": "34163f3e7de9f854afac57332ba06f1739b78e7ac35660a8a5ddd39c570124ad",
+    "/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_io/lib/sg13cmos5l_io_typ_1p2V_3p3V_25C.lib": "e6b5adf1ce31db3a0c15e5ca069c62e7d9efb604a710b8f6582700f1721d2d98",
+    "/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_stdcell/lib/sg13cmos5l_stdcell_fast_1p32V_m40C.lib": "af12d75a72d19648fa690027d29843fbae550aa91f4e40dd3339c7116d6e425d",
+    "/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_io/lib/sg13cmos5l_io_fast_1p32V_3p6V_m40C.lib": "f25da27e4cc0c94ffbce99e0654814a3af48d00c4ec571c9db5915208a7bbe07",
+    "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/timing_headroom_20261104_01/production/tools/timing/report_io_paths.tcl": "fc6af6ad170274bac9e6f5cb2b2a47f9e8de30708f2090a714f0d12efc367a2f"
+  },
+  "checks": {
+    "strict_metrics": "pass",
+    "native_routing_drc_antenna": "pass",
+    "independent_gds_lvs": "pass",
+    "final_view_identity": "pass",
+    "pin_geometry": "pass",
+    "route_acceptance": "pass",
+    "tt_precheck": {
+      "status": "pass",
+      "tests": 9
+    },
+    "gate_tests": {
+      "status": "pass",
+      "tests": 39,
+      "netlist_sha256": "49687f75688eb8870bd2b3eb2dfafdc23fb0b4c637b69a82dff289244f78589c"
+    }
+  }
+}

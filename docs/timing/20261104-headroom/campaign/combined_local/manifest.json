@@ -1,0 +1,82 @@
+{
+  "status": "complete",
+  "state": "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/timing_headroom_20261104_01/combined/run/14-openroad-stapostpnr/state_out.json",
+  "state_sha256": "dd466ac891a1e2b9dbd057acc9c2086024b2ca16a5d30971cefa1856d4fec14c",
+  "original_script_sha256": "fc6af6ad170274bac9e6f5cb2b2a47f9e8de30708f2090a714f0d12efc367a2f",
+  "script_sha256": "dcd9e1c296f5a39c7d0f070768350a0fa7ba3f60eb3b724ea67f4134d920cda4",
+  "registers": {
+    "pio.engines[1].core.isr[3]": "_32068_",
+    "pio.engines[1].core.isr[6]": "_32071_",
+    "pio.engines[1].core.isr[7]": "_32072_",
+    "pio.engines[0].core.fetch.words[20][11]": "_33380_",
+    "pio.engines[0].core.fetch.words[20][12]": "_33381_"
+  },
+  "corners": {
+    "nom_slow_1p08V_125C": {
+      "pio.engines[1].core.isr[3]": {
+        "setup": 2.529276,
+        "hold": 0.609184
+      },
+      "pio.engines[1].core.isr[6]": {
+        "setup": 2.789896,
+        "hold": 0.581348
+      },
+      "pio.engines[1].core.isr[7]": {
+        "setup": 1.504178,
+        "hold": 0.68492
+      },
+      "pio.engines[0].core.fetch.words[20][11]": {
+        "setup": 10.534848,
+        "hold": 0.738087
+      },
+      "pio.engines[0].core.fetch.words[20][12]": {
+        "setup": 10.527334,
+        "hold": 0.747465
+      }
+    },
+    "nom_typ_1p20V_25C": {
+      "pio.engines[1].core.isr[3]": {
+        "setup": 7.489967,
+        "hold": 0.294614
+      },
+      "pio.engines[1].core.isr[6]": {
+        "setup": 7.749106,
+        "hold": 0.275845
+      },
+      "pio.engines[1].core.isr[7]": {
+        "setup": 6.839151,
+        "hold": 0.336963
+      },
+      "pio.engines[0].core.fetch.words[20][11]": {
+        "setup": 12.537999,
+        "hold": 0.369222
+      },
+      "pio.engines[0].core.fetch.words[20][12]": {
+        "setup": 12.53634,
+        "hold": 0.370252
+      }
+    },
+    "nom_fast_1p32V_m40C": {
+      "pio.engines[1].core.isr[3]": {
+        "setup": 10.446441,
+        "hold": 0.110939
+      },
+      "pio.engines[1].core.isr[6]": {
+        "setup": 10.619766,
+        "hold": 0.098276
+      },
+      "pio.engines[1].core.isr[7]": {
+        "setup": 10.02791,
+        "hold": 0.13442
+      },
+      "pio.engines[0].core.fetch.words[20][11]": {
+        "setup": 13.647684,
+        "hold": 0.150802
+      },
+      "pio.engines[0].core.fetch.words[20][12]": {
+        "setup": 13.650064,
+        "hold": 0.146845
+      }
+    }
+  }
+}

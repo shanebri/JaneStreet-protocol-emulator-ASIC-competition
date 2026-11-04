@@ -22,6 +22,7 @@ from check_signoff import REQUIRED_CORNERS
 from closure_trial import validate_config
 from data_eco_trial import script
 from incremental_trial import incremental_script
+from headroom_eco import render_script as headroom_script
 from finalize_routes import unfixed_nets_def
 
 TOOL = Path(__file__).resolve().parent
@@ -91,7 +92,7 @@ class DataRepair(DetailedPlacement):
         Path(self.get_script_path()).write_text(self.render_script(operations))
         views, metrics = super().run(state_in, **kwargs)
         model = Path(self.config['PDK_ROOT'])/'ihp-sg13cmos5l/libs.ref/sg13cmos5l_stdcell/verilog/sg13cmos5l_stdcell.v'
-        run_tool(self, 'audit_data_eco.py', ['--before', state_in[DesignFormat.ODB],
+        run_tool(self, 'headroom_eco.py' if isinstance(self, LastFanoutRepair) else 'audit_data_eco.py', ['--before', state_in[DesignFormat.ODB],
                  '--odb', views[DesignFormat.ODB], '--recipe', recipe, '--pdk-model', model,
                  '--out', Path(self.step_dir)/'eco_audit.json'])
         return views, metrics
@@ -115,6 +116,9 @@ class IncrementalRepair(DataRepair):
 class LastFanoutRepair(IncrementalRepair):
     id = 'OpenROAD.LastFanoutRepair'
     contract_index = 1
+
+    def render_script(self, operations):
+        return headroom_script(operations)
 
     def run(self, state_in, **kwargs):
         views, metrics = super().run(state_in, **kwargs)

@@ -88,15 +88,17 @@ and all **39 functional gate-level tests** in
 At that CI baseline, core utilization excluding filler is **31.52%**, worst
 overall setup margin is **0.303 ns**, and worst hold margin is **0.0128 ns**.
 
-The active physical recipe now includes two
-[locally qualified control/hold increments](docs/control_refactor_20261030.md).
-Each passes the full production checks, all nine prechecks and all 39 gate tests,
-with improved required corner minima against its passing parent. Worst setup
-and hold margins are now **0.393477 / 0.048140 ns**. Local setup/hold costs are
-itemized in the report. ASIC RTL and cycle behavior are unchanged, and no new
-GitHub CI result is claimed. Native KLayout DRC remains disabled; the full SG13
-KLayout deck passes through precheck. Implementation changes require comparison
-against the new passing parent and complete requalification.
+The active physical recipe includes the
+[November 4 timing-headroom repair](docs/timing_headroom_20261104.md), following
+the [qualified control/hold increments](docs/control_refactor_20261030.md).
+The fresh production build passes all required checks, all nine prechecks and
+all 39 gate tests. Worst setup/hold margins improve from **0.393477 / 0.048140 ns**
+to **0.532950 / 0.089366 ns**; all six corner minima improve. Local endpoint
+costs are itemized in the report. ASIC RTL and architectural cycles are unchanged.
+No new GitHub CI result is claimed. Native KLayout DRC remains disabled; the
+full SG13 KLayout deck passes through precheck. Implementation changes require
+comparison against the current passing parent, explicit margin budgets and
+complete requalification.
 
 See [project status](docs/project_status.md) for exact evidence, physical-check
 scope and timing margins; the [coverage audit](docs/timing_coverage_audit_20261029.md)

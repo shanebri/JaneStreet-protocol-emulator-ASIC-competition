@@ -1,0 +1,49 @@
+{
+  "status": "pass",
+  "exact_synthesis_cells_reproduced": 19349,
+  "numerical_cell": "_33857_",
+  "original_cell": "\\$auto$ff.cc:337:slice$8684",
+  "original_q": "\\$\\pio.engines[0].core.fetch.words$rdreg[0]$q[3]",
+  "synthesis_cell": {
+    "hide_name": 1,
+    "type": "sg13cmos5l_dfrbpq_1",
+    "parameters": {},
+    "attributes": {},
+    "port_directions": {
+      "CLK": "input",
+      "D": "input",
+      "Q": "output",
+      "RESET_B": "input"
+    },
+    "connections": {
+      "CLK": [
+        43
+      ],
+      "D": [
+        8784
+      ],
+      "Q": [
+        480
+      ],
+      "RESET_B": [
+        19366
+      ]
+    }
+  },
+  "aliases": {
+    "$\\pio.engines[0].core.fetch.words$rdreg[0]$q[3]": {
+      "hide_name": 1,
+      "bits": [
+        480
+      ],
+      "offset": 3,
+      "attributes": {}
+    }
+  },
+  "sha256": {
+    "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/control_refactor_combined_production_20261031_01/run/06-yosys-synthesis/tt_um_shanebri_top.nl.v.json": "0f58dd25e7b1555613406aa737bd099319ddea33f8fa52eb7e171efa6c6ac3fb",
+    "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/control_refactor_combined_production_20261031_01/run/06-yosys-synthesis/tt_um_shanebri_top.nl.v": "486466d6abe660eec5b2ad08bd880d5bd08568334e8979a401b367fa1a687e4d",
+    "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/timing_headroom_20261104_01/remaining_endpoint_mapping/renamed.v": "486466d6abe660eec5b2ad08bd880d5bd08568334e8979a401b367fa1a687e4d",
+    "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/timing_headroom_20261104_01/remaining_endpoint_mapping/named.v": "cdf29dfdd96b1f85ea572de3bab102eab64b36e24f9dc70a5d2d9dcd491d3602"
+  }
+}

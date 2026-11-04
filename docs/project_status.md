@@ -1,6 +1,6 @@
 # Project status and qualification
 
-Updated 2026-10-31 (America/Phoenix). This page is the current status reference; dated experiment
+Updated 2026-11-04 (America/Phoenix). This page is the current status reference; dated experiment
 reports retain their original measurements and checkpoint decisions.
 
 ## Implemented design
@@ -72,10 +72,49 @@ identify the qualified output. Artifact retention is finite; preserve release
 copies and hashes. A source merge does not independently qualify a different
 merge commit's output: inspect the workflow for the exact revision being released.
 
-## Locally qualified active physical recipe
+## Locally qualified active physical recipe — November 4
+
+The [bounded timing-headroom campaign](timing_headroom_20261104.md) is fully
+qualified locally and activated. It isolates a measured host-control load and
+adds transparent minimum delay to the five leading hold endpoints. Relative
+to the October 31 parent, the recipe adds four cells and replaces two existing
+buffers with characterized delay cells. All 2,421 sequential cells, ASIC RTL,
+architectural cycles and FPGA images are unchanged.
+
+| Corner | Active setup ns | Active hold ns | Setup gained ps | Hold gained ps |
+| --- | ---: | ---: | ---: | ---: |
+| Slow, 1.08 V / 125 C | 0.532949699 | 0.561024798 | 139.472 | 86.385 |
+| Typical, 1.20 V / 25 C | 6.249411832 | 0.264246299 | 111.219 | 58.544 |
+| Fast, 1.32 V / -40 C | 9.689972654 | 0.089365851 | 65.159 | 41.226 |
+
+Worst setup/hold are **532.950 / 89.366 ps**, improvements of about 35% / 86%.
+Local setup costs remain explicit: ISR[7] consumes 217.709 ps of slow setup and
+retains 1.504178 ns. Standard-cell area excluding filler grows by 58 um2, about
+0.015%. The fresh normal production run passes strict three-corner timing and
+electrical checks, nine independent STA sessions and coverage, clock/contact/pin
+audits, final routing and Magic DRC, antenna, actual-GDS LVS, all nine distinct
+prechecks without skips and all 39 exact-netlist functional gate tests. The
+58 existing and 11 new timing-tool tests pass. No new GitHub CI result is claimed.
+
+The [current activation receipt](timing/20261104-headroom/activation.json) binds
+the exact qualified artifacts, source/configuration comparisons, pinned models,
+the old-parent and fixed-CI-baseline comparisons, and the active recipe SHA256
+`8ec22791eba9c3cf59f2aa815c5b4b3ca8ddfe7132919d9b6932c25a95ac383a`.
+The previous receipt and active-file backups remain intact. Verify this current
+state using `tools/timing/headroom_release.py --verify-active` with that receipt.
+
+This timing-only campaign preserved all six immediate-parent reserves. Future
+architecture additions need explicit setup/hold budgets and full qualification;
+a local path loss or small WNS change alone is not a correctness failure. The
+new passing production state is
+`aecf268e7bda1242683b19d238f0f99ea469bf9b00b6df963e042b2d71802062`.
+The campaign stops after three candidate hypotheses.
+
+## October 31 locally qualified physical parent
 
 The [control/hold increments](control_refactor_20261030.md) are both fully
-qualified locally, and their exact tested recipe is active. The first increment
+qualified locally. Their exact tested recipe was active at the start of the
+November 4 campaign and is now the historical parent. The first increment
 adds ISR[6] minimum delay; the second retains it, isolates host-control load
 groups with two local buffers, and adds ISR[3] minimum delay. There are four
 new transparent buffers beyond the existing repair, with no added registers
@@ -99,7 +138,7 @@ Negative consumption means increased margin. Local path budgets can still be
 used: ISR[6] slow setup consumes 177.634 ps across both increments and retains
 2.845521 ns; the second increment consumes 2.664 ps of ISR[7] fast hold against
 its immediate parent. The report itemizes all measured local costs and remaining
-budgets. Worst setup/hold remain narrow at **393.477 / 48.140 ps**.
+budgets. At that checkpoint, worst setup/hold were **393.477 / 48.140 ps**.
 
 The [activation receipt](timing/20261030-control-refactor/activation.json)
 binds both qualifications, active source/configuration comparisons, pinned timing
@@ -109,13 +148,13 @@ Failed attempts and original qualification jobs remain intact. This is local
 qualification of the working implementation; no new GitHub CI result is claimed.
 The qualified combined state
 `8cda1271b19e0395f15568ac628639ba6d55d0930d80f31e93b502bd3ea26074`
-is the passing parent for the next increment. New features must preserve its
-six required margins and repeat full qualification.
+was the passing parent for the November 4 repair. Current implementation changes
+use the new active state and explicit margin budgets described above.
 
 ## Scope of qualification evidence
 
-The native KLayout DRC step remains disabled as in the CI baseline. Both new
-local increments pass the full SG13CMOS5L KLayout deck through Tiny Tapeout
+The native KLayout DRC step remains disabled as in the CI baseline. All three
+locally qualified increments pass the full SG13CMOS5L KLayout deck through Tiny Tapeout
 precheck, alongside native routing DRC and Magic DRC. Gate simulation uses
 functional cell models,
 without SDF annotation; timing evidence comes from extracted STA. I/O checks

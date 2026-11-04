@@ -1,0 +1,748 @@
+{
+  "scope": "Bounded diagnostic comparison; production qualification is separate",
+  "reference": {
+    "activation_sha256": "ed0d80c42672ddfacbdc62d7dbb59d615ab4e27948c521d66014165a0f86825c",
+    "parent": "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/control_refactor_combined_production_20261031_01",
+    "state": "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/control_refactor_combined_production_20261031_01/run/69-openroad-stapostpnr/state_out.json",
+    "state_sha256": "8cda1271b19e0395f15568ac628639ba6d55d0930d80f31e93b502bd3ea26074",
+    "qualification": "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/control_refactor_combined_production_20261031_01/qualification/manifest.json",
+    "qualification_sha256": "77b09143e970229294d2b10cc92d11ec6bf83625d1fe7051a336fa9b2a9d68e5",
+    "active_inputs_checked": 60,
+    "active_recipe_sha256": "e6048d0c1a3a0c1944b444452ec645807f02c183895f9f343b99f2e41043ce2f"
+  },
+  "baseline_validation": {
+    "status": "pass",
+    "manifest_sha256": "43e78cdfd7bdca66dc06ac0e18dc8ec0fa5da37f6ca1d6f761b836f8266b939d",
+    "all_nine_sessions_equal_qualified_parent": true,
+    "coverage_complete": true
+  },
+  "candidates": {
+    "control": {
+      "experiment": {
+        "status": "screen_complete",
+        "scope": "Diagnostic physical tail; not production qualification",
+        "case": "control",
+        "parent_state": "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/control_refactor_combined_production_20261031_01/run/69-openroad-stapostpnr/state_out.json",
+        "parent_state_sha256": "8cda1271b19e0395f15568ac628639ba6d55d0930d80f31e93b502bd3ea26074",
+        "contract": "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/timing_headroom_20261104_01/contracts/control.json",
+        "contract_sha256": "e6048d0c1a3a0c1944b444452ec645807f02c183895f9f343b99f2e41043ce2f",
+        "source_state_sha256": "9f243513c3208ba6e58a8d93cd76c208d52b4a3b91595cca8238f3da5d5fc9c9",
+        "source_odb_sha256": "0a0da10821c774b55784b5327dfc14f440432683351f226600cb1c4672a595e9",
+        "runner_sha256": "8b8c3bffbfe1490a1035e1a938f0d60f048f44cff99d5feb9c09e0d811eb0395",
+        "strict_errors": [],
+        "margins": {
+          "nom_slow_1p08V_125C": {
+            "setup": {
+              "parent_ns": 0.39347726191016763,
+              "candidate_ns": 0.39347726191016763,
+              "consumed_ns": 0.0
+            },
+            "hold": {
+              "parent_ns": 0.47463945228699844,
+              "candidate_ns": 0.47463945228699844,
+              "consumed_ns": 0.0
+            }
+          },
+          "nom_typ_1p20V_25C": {
+            "setup": {
+              "parent_ns": 6.138193238541748,
+              "candidate_ns": 6.138193238541748,
+              "consumed_ns": 0.0
+            },
+            "hold": {
+              "parent_ns": 0.2057022388425081,
+              "candidate_ns": 0.2057022388425081,
+              "consumed_ns": 0.0
+            }
+          },
+          "nom_fast_1p32V_m40C": {
+            "setup": {
+              "parent_ns": 9.624813218848612,
+              "candidate_ns": 9.624813218848612,
+              "consumed_ns": 0.0
+            },
+            "hold": {
+              "parent_ns": 0.048140215398815994,
+              "candidate_ns": 0.048140215398815994,
+              "consumed_ns": 0.0
+            }
+          }
+        },
+        "state": "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/timing_headroom_20261104_01/control/run/14-openroad-stapostpnr/state_out.json",
+        "state_sha256": "9bc790775708b74f4db9041cc643e804e32fd19d34c2c0fd0f56712265c47ba5",
+        "route_drc": 0,
+        "antenna": 0
+      },
+      "area_um2": 380893,
+      "all_six_parent_reserves_preserved": true,
+      "limiting_paths": {
+        "nom_slow_1p08V_125C-setup": {
+          "start": "ui_in[0] (input port clocked by clk)",
+          "endpoint": "_31995_",
+          "architectural_q": "pio.engines[1].core.pins[8]",
+          "slack_ns": 0.393477
+        },
+        "nom_slow_1p08V_125C-hold": {
+          "start": "_32072_ (rising edge-triggered flip-flop clocked by clk)",
+          "endpoint": "_32072_",
+          "architectural_q": "pio.engines[1].core.isr[7]",
+          "slack_ns": 0.474639
+        },
+        "nom_typ_1p20V_25C-setup": {
+          "start": "ui_in[0] (input port clocked by clk)",
+          "endpoint": "_31995_",
+          "architectural_q": "pio.engines[1].core.pins[8]",
+          "slack_ns": 6.138193
+        },
+        "nom_typ_1p20V_25C-hold": {
+          "start": "_32072_ (rising edge-triggered flip-flop clocked by clk)",
+          "endpoint": "_32072_",
+          "architectural_q": "pio.engines[1].core.isr[7]",
+          "slack_ns": 0.205702
+        },
+        "nom_fast_1p32V_m40C-setup": {
+          "start": "ui_in[0] (input port clocked by clk)",
+          "endpoint": "_31995_",
+          "architectural_q": "pio.engines[1].core.pins[8]",
+          "slack_ns": 9.624813
+        },
+        "nom_fast_1p32V_m40C-hold": {
+          "start": "_32072_ (rising edge-triggered flip-flop clocked by clk)",
+          "endpoint": "_32072_",
+          "architectural_q": "pio.engines[1].core.isr[7]",
+          "slack_ns": 0.04814
+        }
+      },
+      "local_endpoint_margins": {
+        "pio.engines[1].core.isr[3]": {
+          "nom_slow_1p08V_125C": {
+            "setup": 2.571717,
+            "hold": 0.514544
+          },
+          "nom_typ_1p20V_25C": {
+            "setup": 7.511494,
+            "hold": 0.237107
+          },
+          "nom_fast_1p32V_m40C": {
+            "setup": 10.460436,
+            "hold": 0.073728
+          }
+        },
+        "pio.engines[1].core.isr[6]": {
+          "nom_slow_1p08V_125C": {
+            "setup": 2.845521,
+            "hold": 0.475174
+          },
+          "nom_typ_1p20V_25C": {
+            "setup": 7.77899,
+            "hold": 0.211467
+          },
+          "nom_fast_1p32V_m40C": {
+            "setup": 10.638451,
+            "hold": 0.05679
+          }
+        },
+        "pio.engines[1].core.isr[7]": {
+          "nom_slow_1p08V_125C": {
+            "setup": 1.721887,
+            "hold": 0.474639
+          },
+          "nom_typ_1p20V_25C": {
+            "setup": 6.974095,
+            "hold": 0.205702
+          },
+          "nom_fast_1p32V_m40C": {
+            "setup": 10.116714,
+            "hold": 0.04814
+          }
+        },
+        "pio.engines[0].core.fetch.words[20][11]": {
+          "nom_slow_1p08V_125C": {
+            "hold": 0.52757
+          },
+          "nom_typ_1p20V_25C": {
+            "hold": 0.237272
+          },
+          "nom_fast_1p32V_m40C": {
+            "hold": 0.063943
+          }
+        },
+        "pio.engines[0].core.fetch.words[20][12]": {
+          "nom_slow_1p08V_125C": {
+            "hold": 0.534445
+          },
+          "nom_typ_1p20V_25C": {
+            "hold": 0.23669
+          },
+          "nom_fast_1p32V_m40C": {
+            "hold": 0.058938
+          }
+        }
+      },
+      "gain_vs_matched_control_ns": {
+        "nom_slow_1p08V_125C": {
+          "setup": 0.0,
+          "hold": 0.0
+        },
+        "nom_typ_1p20V_25C": {
+          "setup": 0.0,
+          "hold": 0.0
+        },
+        "nom_fast_1p32V_m40C": {
+          "setup": 0.0,
+          "hold": 0.0
+        }
+      }
+    },
+    "hold_cluster": {
+      "experiment": {
+        "status": "screen_complete",
+        "scope": "Diagnostic physical tail; not production qualification",
+        "case": "hold_cluster",
+        "parent_state": "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/control_refactor_combined_production_20261031_01/run/69-openroad-stapostpnr/state_out.json",
+        "parent_state_sha256": "8cda1271b19e0395f15568ac628639ba6d55d0930d80f31e93b502bd3ea26074",
+        "contract": "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/timing_headroom_20261104_01/contracts/hold_cluster.json",
+        "contract_sha256": "f51ac33f854e9f3ec558eee7964ac440bd909847c83d6fe8818fa18b3afc1909",
+        "source_state_sha256": "9f243513c3208ba6e58a8d93cd76c208d52b4a3b91595cca8238f3da5d5fc9c9",
+        "source_odb_sha256": "0a0da10821c774b55784b5327dfc14f440432683351f226600cb1c4672a595e9",
+        "runner_sha256": "a2542a2d71804c56434dca4e382769858fa90701cf48fbc5fc624f023d241d11",
+        "baseline_validation": {
+          "status": "pass",
+          "manifest_sha256": "43e78cdfd7bdca66dc06ac0e18dc8ec0fa5da37f6ca1d6f761b836f8266b939d",
+          "all_nine_sessions_equal_qualified_parent": true,
+          "coverage_complete": true
+        },
+        "strict_errors": [],
+        "margins": {
+          "nom_slow_1p08V_125C": {
+            "setup": {
+              "parent_ns": 0.39347726191016763,
+              "candidate_ns": 0.3938751658534468,
+              "consumed_ns": -0.00039790394327915424
+            },
+            "hold": {
+              "parent_ns": 0.47463945228699844,
+              "candidate_ns": 0.561024687030896,
+              "consumed_ns": -0.08638523474389759
+            }
+          },
+          "nom_typ_1p20V_25C": {
+            "setup": {
+              "parent_ns": 6.138193238541748,
+              "candidate_ns": 6.138428605829626,
+              "consumed_ns": -0.00023536728787743044
+            },
+            "hold": {
+              "parent_ns": 0.2057022388425081,
+              "candidate_ns": 0.2642464100104816,
+              "consumed_ns": -0.0585441711679735
+            }
+          },
+          "nom_fast_1p32V_m40C": {
+            "setup": {
+              "parent_ns": 9.624813218848612,
+              "candidate_ns": 9.625013947177141,
+              "consumed_ns": -0.00020072832852946476
+            },
+            "hold": {
+              "parent_ns": 0.048140215398815994,
+              "candidate_ns": 0.08936585058240636,
+              "consumed_ns": -0.04122563518359036
+            }
+          }
+        },
+        "state": "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/timing_headroom_20261104_01/hold_cluster/run/14-openroad-stapostpnr/state_out.json",
+        "state_sha256": "54daae2749ee5fca4ec703f53078fde33b629434fff807c8ec43611c76ef05b1",
+        "route_drc": 0,
+        "antenna": 0
+      },
+      "area_um2": 380937,
+      "all_six_parent_reserves_preserved": true,
+      "limiting_paths": {
+        "nom_slow_1p08V_125C-setup": {
+          "start": "ui_in[0] (input port clocked by clk)",
+          "endpoint": "_31995_",
+          "architectural_q": "pio.engines[1].core.pins[8]",
+          "slack_ns": 0.393875
+        },
+        "nom_slow_1p08V_125C-hold": {
+          "start": "_31502_ (rising edge-triggered flip-flop clocked by clk)",
+          "endpoint": "_33857_",
+          "architectural_q": "_00003_",
+          "slack_ns": 0.561025
+        },
+        "nom_typ_1p20V_25C-setup": {
+          "start": "ui_in[0] (input port clocked by clk)",
+          "endpoint": "_31995_",
+          "architectural_q": "pio.engines[1].core.pins[8]",
+          "slack_ns": 6.138429
+        },
+        "nom_typ_1p20V_25C-hold": {
+          "start": "_31502_ (rising edge-triggered flip-flop clocked by clk)",
+          "endpoint": "_33857_",
+          "architectural_q": "_00003_",
+          "slack_ns": 0.264246
+        },
+        "nom_fast_1p32V_m40C-setup": {
+          "start": "ui_in[0] (input port clocked by clk)",
+          "endpoint": "_31995_",
+          "architectural_q": "pio.engines[1].core.pins[8]",
+          "slack_ns": 9.625014
+        },
+        "nom_fast_1p32V_m40C-hold": {
+          "start": "_31502_ (rising edge-triggered flip-flop clocked by clk)",
+          "endpoint": "_33857_",
+          "architectural_q": "_00003_",
+          "slack_ns": 0.089366
+        }
+      },
+      "local_endpoint_margins": {
+        "pio.engines[1].core.isr[3]": {
+          "nom_slow_1p08V_125C": {
+            "setup": 2.528353,
+            "hold": 0.609183
+          },
+          "nom_typ_1p20V_25C": {
+            "setup": 7.489301,
+            "hold": 0.294616
+          },
+          "nom_fast_1p32V_m40C": {
+            "setup": 10.446003,
+            "hold": 0.110943
+          }
+        },
+        "pio.engines[1].core.isr[6]": {
+          "nom_slow_1p08V_125C": {
+            "setup": 2.784974,
+            "hold": 0.581348
+          },
+          "nom_typ_1p20V_25C": {
+            "setup": 7.745984,
+            "hold": 0.275845
+          },
+          "nom_fast_1p32V_m40C": {
+            "setup": 10.617801,
+            "hold": 0.098275
+          }
+        },
+        "pio.engines[1].core.isr[7]": {
+          "nom_slow_1p08V_125C": {
+            "setup": 1.483572,
+            "hold": 0.695977
+          },
+          "nom_typ_1p20V_25C": {
+            "setup": 6.826345,
+            "hold": 0.34338
+          },
+          "nom_fast_1p32V_m40C": {
+            "setup": 10.019647,
+            "hold": 0.137831
+          }
+        },
+        "pio.engines[0].core.fetch.words[20][11]": {
+          "nom_slow_1p08V_125C": {
+            "hold": 0.734498
+          },
+          "nom_typ_1p20V_25C": {
+            "hold": 0.367115
+          },
+          "nom_fast_1p32V_m40C": {
+            "hold": 0.149417
+          }
+        },
+        "pio.engines[0].core.fetch.words[20][12]": {
+          "nom_slow_1p08V_125C": {
+            "hold": 0.743978
+          },
+          "nom_typ_1p20V_25C": {
+            "hold": 0.368195
+          },
+          "nom_fast_1p32V_m40C": {
+            "hold": 0.14547
+          }
+        }
+      },
+      "gain_vs_matched_control_ns": {
+        "nom_slow_1p08V_125C": {
+          "setup": 0.00039790394327915424,
+          "hold": 0.08638523474389759
+        },
+        "nom_typ_1p20V_25C": {
+          "setup": 0.00023536728787743044,
+          "hold": 0.0585441711679735
+        },
+        "nom_fast_1p32V_m40C": {
+          "setup": 0.00020072832852946476,
+          "hold": 0.04122563518359036
+        }
+      }
+    },
+    "setup_local": {
+      "experiment": {
+        "status": "screen_complete",
+        "scope": "Diagnostic physical tail; not production qualification",
+        "case": "setup_local",
+        "parent_state": "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/control_refactor_combined_production_20261031_01/run/69-openroad-stapostpnr/state_out.json",
+        "parent_state_sha256": "8cda1271b19e0395f15568ac628639ba6d55d0930d80f31e93b502bd3ea26074",
+        "contract": "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/timing_headroom_20261104_01/contracts/setup_local.json",
+        "contract_sha256": "1fc7383088ea94fad59e7d9c3365795b8df6a0666e2c59f76f586f470feb18ec",
+        "source_state_sha256": "9f243513c3208ba6e58a8d93cd76c208d52b4a3b91595cca8238f3da5d5fc9c9",
+        "source_odb_sha256": "0a0da10821c774b55784b5327dfc14f440432683351f226600cb1c4672a595e9",
+        "runner_sha256": "a2542a2d71804c56434dca4e382769858fa90701cf48fbc5fc624f023d241d11",
+        "baseline_validation": {
+          "status": "pass",
+          "manifest_sha256": "43e78cdfd7bdca66dc06ac0e18dc8ec0fa5da37f6ca1d6f761b836f8266b939d",
+          "all_nine_sessions_equal_qualified_parent": true,
+          "coverage_complete": true
+        },
+        "strict_errors": [],
+        "margins": {
+          "nom_slow_1p08V_125C": {
+            "setup": {
+              "parent_ns": 0.39347726191016763,
+              "candidate_ns": 0.5829896730381998,
+              "consumed_ns": -0.1895124111280322
+            },
+            "hold": {
+              "parent_ns": 0.47463945228699844,
+              "candidate_ns": 0.4747224969715891,
+              "consumed_ns": -8.304468459063852e-05
+            }
+          },
+          "nom_typ_1p20V_25C": {
+            "setup": {
+              "parent_ns": 6.138193238541748,
+              "candidate_ns": 6.281355169348429,
+              "consumed_ns": -0.14316193080668072
+            },
+            "hold": {
+              "parent_ns": 0.2057022388425081,
+              "candidate_ns": 0.20570945529237225,
+              "consumed_ns": -7.216449864150265e-06
+            }
+          },
+          "nom_fast_1p32V_m40C": {
+            "setup": {
+              "parent_ns": 9.624813218848612,
+              "candidate_ns": 9.708874867758556,
+              "consumed_ns": -0.08406164890994461
+            },
+            "hold": {
+              "parent_ns": 0.048140215398815994,
+              "candidate_ns": 0.04809930367920149,
+              "consumed_ns": 4.0911719614504516e-05
+            }
+          }
+        },
+        "state": "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/timing_headroom_20261104_01/setup_local/run/14-openroad-stapostpnr/state_out.json",
+        "state_sha256": "68cf51f0b1c8db42368ee50869180f7c0a6dcc43f000dcfb65ef0b8c5b2338a0",
+        "route_drc": 0,
+        "antenna": 0
+      },
+      "area_um2": 380908,
+      "all_six_parent_reserves_preserved": false,
+      "limiting_paths": {
+        "nom_slow_1p08V_125C-setup": {
+          "start": "ui_in[0] (input port clocked by clk)",
+          "endpoint": "_31995_",
+          "architectural_q": "pio.engines[1].core.pins[8]",
+          "slack_ns": 0.58299
+        },
+        "nom_slow_1p08V_125C-hold": {
+          "start": "_32072_ (rising edge-triggered flip-flop clocked by clk)",
+          "endpoint": "_32072_",
+          "architectural_q": "pio.engines[1].core.isr[7]",
+          "slack_ns": 0.474723
+        },
+        "nom_typ_1p20V_25C-setup": {
+          "start": "ui_in[0] (input port clocked by clk)",
+          "endpoint": "_31995_",
+          "architectural_q": "pio.engines[1].core.pins[8]",
+          "slack_ns": 6.281355
+        },
+        "nom_typ_1p20V_25C-hold": {
+          "start": "_32072_ (rising edge-triggered flip-flop clocked by clk)",
+          "endpoint": "_32072_",
+          "architectural_q": "pio.engines[1].core.isr[7]",
+          "slack_ns": 0.205709
+        },
+        "nom_fast_1p32V_m40C-setup": {
+          "start": "ui_in[5] (input port clocked by clk)",
+          "endpoint": "_31995_",
+          "architectural_q": "pio.engines[1].core.pins[8]",
+          "slack_ns": 9.708875
+        },
+        "nom_fast_1p32V_m40C-hold": {
+          "start": "_32072_ (rising edge-triggered flip-flop clocked by clk)",
+          "endpoint": "_32072_",
+          "architectural_q": "pio.engines[1].core.isr[7]",
+          "slack_ns": 0.048099
+        }
+      },
+      "local_endpoint_margins": {
+        "pio.engines[1].core.isr[3]": {
+          "nom_slow_1p08V_125C": {
+            "setup": 2.572953,
+            "hold": 0.515038
+          },
+          "nom_typ_1p20V_25C": {
+            "setup": 7.512294,
+            "hold": 0.237385
+          },
+          "nom_fast_1p32V_m40C": {
+            "setup": 10.460959,
+            "hold": 0.073862
+          }
+        },
+        "pio.engines[1].core.isr[6]": {
+          "nom_slow_1p08V_125C": {
+            "setup": 2.845349,
+            "hold": 0.475476
+          },
+          "nom_typ_1p20V_25C": {
+            "setup": 7.778955,
+            "hold": 0.211622
+          },
+          "nom_fast_1p32V_m40C": {
+            "setup": 10.638437,
+            "hold": 0.056872
+          }
+        },
+        "pio.engines[1].core.isr[7]": {
+          "nom_slow_1p08V_125C": {
+            "setup": 1.717856,
+            "hold": 0.474723
+          },
+          "nom_typ_1p20V_25C": {
+            "setup": 6.971403,
+            "hold": 0.205709
+          },
+          "nom_fast_1p32V_m40C": {
+            "setup": 10.114701,
+            "hold": 0.048099
+          }
+        },
+        "pio.engines[0].core.fetch.words[20][11]": {
+          "nom_slow_1p08V_125C": {
+            "hold": 0.527734
+          },
+          "nom_typ_1p20V_25C": {
+            "hold": 0.237366
+          },
+          "nom_fast_1p32V_m40C": {
+            "hold": 0.064009
+          }
+        },
+        "pio.engines[0].core.fetch.words[20][12]": {
+          "nom_slow_1p08V_125C": {
+            "hold": 0.534746
+          },
+          "nom_typ_1p20V_25C": {
+            "hold": 0.236868
+          },
+          "nom_fast_1p32V_m40C": {
+            "hold": 0.059055
+          }
+        }
+      },
+      "gain_vs_matched_control_ns": {
+        "nom_slow_1p08V_125C": {
+          "setup": 0.1895124111280322,
+          "hold": 8.304468459063852e-05
+        },
+        "nom_typ_1p20V_25C": {
+          "setup": 0.14316193080668072,
+          "hold": 7.216449864150265e-06
+        },
+        "nom_fast_1p32V_m40C": {
+          "setup": 0.08406164890994461,
+          "hold": -4.0911719614504516e-05
+        }
+      }
+    },
+    "combined": {
+      "experiment": {
+        "status": "screen_complete",
+        "scope": "Diagnostic physical tail; not production qualification",
+        "case": "combined",
+        "parent_state": "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/control_refactor_combined_production_20261031_01/run/69-openroad-stapostpnr/state_out.json",
+        "parent_state_sha256": "8cda1271b19e0395f15568ac628639ba6d55d0930d80f31e93b502bd3ea26074",
+        "contract": "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/timing_headroom_20261104_01/contracts/combined.json",
+        "contract_sha256": "8ec22791eba9c3cf59f2aa815c5b4b3ca8ddfe7132919d9b6932c25a95ac383a",
+        "source_state_sha256": "9f243513c3208ba6e58a8d93cd76c208d52b4a3b91595cca8238f3da5d5fc9c9",
+        "source_odb_sha256": "0a0da10821c774b55784b5327dfc14f440432683351f226600cb1c4672a595e9",
+        "runner_sha256": "5726e5e5c180d9061c727f845f70347c9ff285316c63db3bb1d7100ba4eebed3",
+        "baseline_validation": {
+          "status": "pass",
+          "manifest_sha256": "43e78cdfd7bdca66dc06ac0e18dc8ec0fa5da37f6ca1d6f761b836f8266b939d",
+          "all_nine_sessions_equal_qualified_parent": true,
+          "coverage_complete": true
+        },
+        "strict_errors": [],
+        "margins": {
+          "nom_slow_1p08V_125C": {
+            "setup": {
+              "parent_ns": 0.39347726191016763,
+              "candidate_ns": 0.5329496994570676,
+              "consumed_ns": -0.13947243754689997
+            },
+            "hold": {
+              "parent_ns": 0.47463945228699844,
+              "candidate_ns": 0.5610247980532017,
+              "consumed_ns": -0.08638534576620327
+            }
+          },
+          "nom_typ_1p20V_25C": {
+            "setup": {
+              "parent_ns": 6.138193238541748,
+              "candidate_ns": 6.2494118315804945,
+              "consumed_ns": -0.11121859303874615
+            },
+            "hold": {
+              "parent_ns": 0.2057022388425081,
+              "candidate_ns": 0.26424629898817603,
+              "consumed_ns": -0.05854406014566793
+            }
+          },
+          "nom_fast_1p32V_m40C": {
+            "setup": {
+              "parent_ns": 9.624813218848612,
+              "candidate_ns": 9.689972654095907,
+              "consumed_ns": -0.0651594352472955
+            },
+            "hold": {
+              "parent_ns": 0.048140215398815994,
+              "candidate_ns": 0.08936585058240636,
+              "consumed_ns": -0.04122563518359036
+            }
+          }
+        },
+        "state": "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/timing_headroom_20261104_01/combined/run/14-openroad-stapostpnr/state_out.json",
+        "state_sha256": "dd466ac891a1e2b9dbd057acc9c2086024b2ca16a5d30971cefa1856d4fec14c",
+        "route_drc": 0,
+        "antenna": 0
+      },
+      "area_um2": 380951,
+      "all_six_parent_reserves_preserved": true,
+      "limiting_paths": {
+        "nom_slow_1p08V_125C-setup": {
+          "start": "ui_in[0] (input port clocked by clk)",
+          "endpoint": "_31995_",
+          "architectural_q": "pio.engines[1].core.pins[8]",
+          "slack_ns": 0.53295
+        },
+        "nom_slow_1p08V_125C-hold": {
+          "start": "_31502_ (rising edge-triggered flip-flop clocked by clk)",
+          "endpoint": "_33857_",
+          "architectural_q": "_00003_",
+          "slack_ns": 0.561025
+        },
+        "nom_typ_1p20V_25C-setup": {
+          "start": "ui_in[0] (input port clocked by clk)",
+          "endpoint": "_31995_",
+          "architectural_q": "pio.engines[1].core.pins[8]",
+          "slack_ns": 6.249412
+        },
+        "nom_typ_1p20V_25C-hold": {
+          "start": "_31502_ (rising edge-triggered flip-flop clocked by clk)",
+          "endpoint": "_33857_",
+          "architectural_q": "_00003_",
+          "slack_ns": 0.264246
+        },
+        "nom_fast_1p32V_m40C-setup": {
+          "start": "ui_in[0] (input port clocked by clk)",
+          "endpoint": "_31995_",
+          "architectural_q": "pio.engines[1].core.pins[8]",
+          "slack_ns": 9.689973
+        },
+        "nom_fast_1p32V_m40C-hold": {
+          "start": "_31502_ (rising edge-triggered flip-flop clocked by clk)",
+          "endpoint": "_33857_",
+          "architectural_q": "_00003_",
+          "slack_ns": 0.089366
+        }
+      },
+      "local_endpoint_margins": {
+        "pio.engines[1].core.isr[3]": {
+          "nom_slow_1p08V_125C": {
+            "setup": 2.529276,
+            "hold": 0.609184
+          },
+          "nom_typ_1p20V_25C": {
+            "setup": 7.489967,
+            "hold": 0.294614
+          },
+          "nom_fast_1p32V_m40C": {
+            "setup": 10.446441,
+            "hold": 0.110939
+          }
+        },
+        "pio.engines[1].core.isr[6]": {
+          "nom_slow_1p08V_125C": {
+            "setup": 2.789896,
+            "hold": 0.581348
+          },
+          "nom_typ_1p20V_25C": {
+            "setup": 7.749106,
+            "hold": 0.275845
+          },
+          "nom_fast_1p32V_m40C": {
+            "setup": 10.619766,
+            "hold": 0.098276
+          }
+        },
+        "pio.engines[1].core.isr[7]": {
+          "nom_slow_1p08V_125C": {
+            "setup": 1.504178,
+            "hold": 0.68492
+          },
+          "nom_typ_1p20V_25C": {
+            "setup": 6.839151,
+            "hold": 0.336963
+          },
+          "nom_fast_1p32V_m40C": {
+            "setup": 10.02791,
+            "hold": 0.13442
+          }
+        },
+        "pio.engines[0].core.fetch.words[20][11]": {
+          "nom_slow_1p08V_125C": {
+            "hold": 0.738087
+          },
+          "nom_typ_1p20V_25C": {
+            "hold": 0.369222
+          },
+          "nom_fast_1p32V_m40C": {
+            "hold": 0.150802
+          }
+        },
+        "pio.engines[0].core.fetch.words[20][12]": {
+          "nom_slow_1p08V_125C": {
+            "hold": 0.747465
+          },
+          "nom_typ_1p20V_25C": {
+            "hold": 0.370252
+          },
+          "nom_fast_1p32V_m40C": {
+            "hold": 0.146845
+          }
+        }
+      },
+      "gain_vs_matched_control_ns": {
+        "nom_slow_1p08V_125C": {
+          "setup": 0.13947243754689997,
+          "hold": 0.08638534576620327
+        },
+        "nom_typ_1p20V_25C": {
+          "setup": 0.11121859303874615,
+          "hold": 0.05854406014566793
+        },
+        "nom_fast_1p32V_m40C": {
+          "setup": 0.0651594352472955,
+          "hold": 0.04122563518359036
+        }
+      }
+    }
+  },
+  "matched_control_reproduces_parent": true
+}

@@ -1,0 +1,169 @@
+{
+  "parent": {
+    "start": "ui_in[0] (input port clocked by clk)",
+    "endpoint": "_31995_",
+    "slack_ns": 0.393477,
+    "original_target_on_worst_path": true,
+    "targeted_arcs": [
+      {
+        "pin": "_28912_/Y",
+        "master": "sg13cmos5l_a221oi_1",
+        "delay_ns": 1.742016,
+        "fanout": 2,
+        "cap_pf": 0.096333
+      }
+    ],
+    "largest_data_arcs": [
+      {
+        "pin": "_28912_/Y",
+        "master": "sg13cmos5l_a221oi_1",
+        "delay_ns": 1.742016,
+        "fanout": 2,
+        "cap_pf": 0.096333
+      },
+      {
+        "pin": "_17920_/Y",
+        "master": "sg13cmos5l_a221oi_1",
+        "delay_ns": 1.53813,
+        "fanout": 7,
+        "cap_pf": 0.089308
+      },
+      {
+        "pin": "_17925_/Y",
+        "master": "sg13cmos5l_nor2_1",
+        "delay_ns": 1.305034,
+        "fanout": 6,
+        "cap_pf": 0.110375
+      },
+      {
+        "pin": "_17946_/Y",
+        "master": "sg13cmos5l_nor3_1",
+        "delay_ns": 0.869565,
+        "fanout": 8,
+        "cap_pf": 0.041588
+      },
+      {
+        "pin": "_17215_/Y",
+        "master": "sg13cmos5l_nand2_1",
+        "delay_ns": 0.716872,
+        "fanout": 7,
+        "cap_pf": 0.1211
+      },
+      {
+        "pin": "_17217_/Y",
+        "master": "sg13cmos5l_nor2_1",
+        "delay_ns": 0.716051,
+        "fanout": 5,
+        "cap_pf": 0.062634
+      }
+    ],
+    "source": "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/control_refactor_combined_production_20261031_01/run/69-openroad-stapostpnr/nom_slow_1p08V_125C/max.rpt",
+    "sha256": "7c587981aa7caffdefc1571531724f422b0239896c7100892c0a717467d84f73"
+  },
+  "setup_local": {
+    "start": "ui_in[0] (input port clocked by clk)",
+    "endpoint": "_31995_",
+    "slack_ns": 0.58299,
+    "original_target_on_worst_path": false,
+    "targeted_arcs": [],
+    "largest_data_arcs": [
+      {
+        "pin": "_28923_/Y",
+        "master": "sg13cmos5l_a221oi_1",
+        "delay_ns": 1.47771,
+        "fanout": 3,
+        "cap_pf": 0.079968
+      },
+      {
+        "pin": "_17217_/Y",
+        "master": "sg13cmos5l_nor2_1",
+        "delay_ns": 1.11738,
+        "fanout": 5,
+        "cap_pf": 0.06273
+      },
+      {
+        "pin": "_17215_/Y",
+        "master": "sg13cmos5l_nand2_1",
+        "delay_ns": 1.026683,
+        "fanout": 7,
+        "cap_pf": 0.121596
+      },
+      {
+        "pin": "_17262_/X",
+        "master": "sg13cmos5l_and2_1",
+        "delay_ns": 0.720333,
+        "fanout": 6,
+        "cap_pf": 0.121136
+      },
+      {
+        "pin": "_17969_/Y",
+        "master": "sg13cmos5l_a21oi_1",
+        "delay_ns": 0.716756,
+        "fanout": 7,
+        "cap_pf": 0.059105
+      },
+      {
+        "pin": "_17235_/Y",
+        "master": "sg13cmos5l_nor2_1",
+        "delay_ns": 0.711541,
+        "fanout": 4,
+        "cap_pf": 0.050318
+      }
+    ],
+    "source": "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/timing_headroom_20261104_01/setup_local/run/14-openroad-stapostpnr/nom_slow_1p08V_125C/max.rpt",
+    "sha256": "bf63311360d81ad91153241ca358e191a9c2e057a30fdaa8821f387f3932800b"
+  },
+  "combined": {
+    "start": "ui_in[0] (input port clocked by clk)",
+    "endpoint": "_31995_",
+    "slack_ns": 0.53295,
+    "original_target_on_worst_path": false,
+    "targeted_arcs": [],
+    "largest_data_arcs": [
+      {
+        "pin": "_28923_/Y",
+        "master": "sg13cmos5l_a221oi_1",
+        "delay_ns": 1.521507,
+        "fanout": 3,
+        "cap_pf": 0.083022
+      },
+      {
+        "pin": "_17217_/Y",
+        "master": "sg13cmos5l_nor2_1",
+        "delay_ns": 1.117384,
+        "fanout": 5,
+        "cap_pf": 0.06273
+      },
+      {
+        "pin": "_17215_/Y",
+        "master": "sg13cmos5l_nand2_1",
+        "delay_ns": 1.026694,
+        "fanout": 7,
+        "cap_pf": 0.121598
+      },
+      {
+        "pin": "_17262_/X",
+        "master": "sg13cmos5l_and2_1",
+        "delay_ns": 0.720193,
+        "fanout": 6,
+        "cap_pf": 0.121098
+      },
+      {
+        "pin": "_17969_/Y",
+        "master": "sg13cmos5l_a21oi_1",
+        "delay_ns": 0.716756,
+        "fanout": 7,
+        "cap_pf": 0.059105
+      },
+      {
+        "pin": "_17235_/Y",
+        "master": "sg13cmos5l_nor2_1",
+        "delay_ns": 0.711541,
+        "fanout": 4,
+        "cap_pf": 0.050318
+      }
+    ],
+    "source": "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/timing_headroom_20261104_01/combined/run/14-openroad-stapostpnr/nom_slow_1p08V_125C/max.rpt",
+    "sha256": "b50d46737759bf02dbcf37ff80592bb0059564b344371083a4b0b7b907e5ce0e"
+  }
+}

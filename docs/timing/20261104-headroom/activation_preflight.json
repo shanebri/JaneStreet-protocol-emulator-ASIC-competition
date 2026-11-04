@@ -1,0 +1,484 @@
+{
+  "status": "qualified_ready_for_activation",
+  "activated": false,
+  "scope": "Locally qualified physical-only successor; no new GitHub CI or hardware claim",
+  "candidate": "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/timing_headroom_20261104_01/production",
+  "supersedes_receipt": "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/docs/timing/20261030-control-refactor/activation.json",
+  "supersedes_receipt_sha256": "ed0d80c42672ddfacbdc62d7dbb59d615ab4e27948c521d66014165a0f86825c",
+  "original_active_binding": {
+    "activation_sha256": "ed0d80c42672ddfacbdc62d7dbb59d615ab4e27948c521d66014165a0f86825c",
+    "parent": "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/control_refactor_combined_production_20261031_01",
+    "state": "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/control_refactor_combined_production_20261031_01/run/69-openroad-stapostpnr/state_out.json",
+    "state_sha256": "8cda1271b19e0395f15568ac628639ba6d55d0930d80f31e93b502bd3ea26074",
+    "qualification": "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/control_refactor_combined_production_20261031_01/qualification/manifest.json",
+    "qualification_sha256": "77b09143e970229294d2b10cc92d11ec6bf83625d1fe7051a336fa9b2a9d68e5",
+    "active_inputs_checked": 60,
+    "active_recipe_sha256": "e6048d0c1a3a0c1944b444452ec645807f02c183895f9f343b99f2e41043ce2f"
+  },
+  "source_comparisons": {
+    ".github/workflows/gds.yaml": {
+      "active_sha256": "54957d91f70fc0171dea859eb441d89c3c413846c8c402eb9af6534a746c31f7",
+      "tested_sha256": "42b067d15318ae5bf509c413d538d83732aaee017c8a7be9e5756fa4965bc456",
+      "newline_normalized_match": true
+    },
+    "info.yaml": {
+      "active_sha256": "e8fb795f6ed45f688f6b57259da3ceac0619007c9d269057d7f6b99958217168",
+      "tested_sha256": "07e6408f724f021bef91abd4bf02295ab4583029d0549964aff34b42e9348786",
+      "newline_normalized_match": true
+    },
+    "librelane_plugin_pio.py": {
+      "active_sha256": "ee8fc2e84b7fc4430cf8b3fff7067c2156e150dcb490aba3323d153493909717",
+      "tested_sha256": "ee8fc2e84b7fc4430cf8b3fff7067c2156e150dcb490aba3323d153493909717",
+      "newline_normalized_match": true
+    },
+    "src/config.json": {
+      "active_sha256": "82802c114a93c0c37e16874f282d78c7243adece3972858f9e5a562352a31d48",
+      "tested_sha256": "9daef331d950e19fa9dc7e522376be9b9a65b64ddf1b2d353367ac6617939004",
+      "newline_normalized_match": true
+    },
+    "src/execution_unit.sv": {
+      "active_sha256": "dbf598d1b82c94c65261e372c2386e70905a187d3e8662d9715d86cfb8ad90ac",
+      "tested_sha256": "dbf598d1b82c94c65261e372c2386e70905a187d3e8662d9715d86cfb8ad90ac",
+      "newline_normalized_match": true
+    },
+    "src/frontend/decoder.sv": {
+      "active_sha256": "0c3cc5b807c5028959599d70f8ace0b10e3d79f840efdc82a04febcfc723ce7f",
+      "tested_sha256": "185d127ff5a17fb912ca5228fad7662dfd59ed2ce42666f4927436b50d601f9f",
+      "newline_normalized_match": true
+    },
+    "src/frontend/instruction_fetch.sv": {
+      "active_sha256": "e4a85b9018d5c6d91fef936442e13d0835012e5121b6bd0bb5ee5028a79eb47c",
+      "tested_sha256": "99f79764540abd91e29959a1854b51a1cd4e0af7821a0c63efb45146e0f587bb",
+      "newline_normalized_match": true
+    },
+    "src/frontend/pc.sv": {
+      "active_sha256": "ea9f1bc1e4040ae8f3c2edb5249cc219c547b7a85ea5bed57688f6b4a12192f3",
+      "tested_sha256": "ea9f1bc1e4040ae8f3c2edb5249cc219c547b7a85ea5bed57688f6b4a12192f3",
+      "newline_normalized_match": true
+    },
+    "src/host_interface.sv": {
+      "active_sha256": "c94f32f5358b9b61feaae0d0478f3f20cb768f617c244b1ca67becef14c152bc",
+      "tested_sha256": "e5349dfaa8ca113fad344873970089f080fcb2fd1ae161a9b952ca8d8a157ac5",
+      "newline_normalized_match": true
+    },
+    "src/pio_fifo.sv": {
+      "active_sha256": "a39d186a08ed1f4dfafadcc575e200b418116915f84149e4a4824ac1962b9a55",
+      "tested_sha256": "a39d186a08ed1f4dfafadcc575e200b418116915f84149e4a4824ac1962b9a55",
+      "newline_normalized_match": true
+    },
+    "src/pio_gpio_owner.sv": {
+      "active_sha256": "629b0060c8c72c76a995a2dd47eacff7790b1ff104c6e614cd2c94bf839b418b",
+      "tested_sha256": "629b0060c8c72c76a995a2dd47eacff7790b1ff104c6e614cd2c94bf839b418b",
+      "newline_normalized_match": true
+    },
+    "src/pio_host_bank.sv": {
+      "active_sha256": "1da7a525ac3f359e22ec8641e0dd12cc614bec9235c06b9fbe9d478d22601953",
+      "tested_sha256": "1da7a525ac3f359e22ec8641e0dd12cc614bec9235c06b9fbe9d478d22601953",
+      "newline_normalized_match": true
+    },
+    "src/pio_inputs.sv": {
+      "active_sha256": "3a2bb4f6757622edb840a33ac30ae868bb3f9f042cca8242bf3a5bee6b799077",
+      "tested_sha256": "3a2bb4f6757622edb840a33ac30ae868bb3f9f042cca8242bf3a5bee6b799077",
+      "newline_normalized_match": true
+    },
+    "src/pio_pads.sv": {
+      "active_sha256": "a11b6234e54f3307bba31651bb5973ddcf50e7ceb8946fdbd8ad243d1fb0b043",
+      "tested_sha256": "a5b892f7321945d99f05d8f5a1558c0473e33350b061495667199237624b54c9",
+      "newline_normalized_match": true
+    },
+    "src/pio_subsystem.sv": {
+      "active_sha256": "6dee88733d78885456185615bfb84106e13985b6cccce38791fc24b665b58b81",
+      "tested_sha256": "74cb12473ed7a42eaa2a3d9365f2dfede7c3439968219af4307ee24a044a7fe6",
+      "newline_normalized_match": true
+    },
+    "src/project.sv": {
+      "active_sha256": "211f39f898da0fccd91becf85eaafcce0e43e5ac144178ec2597252e1e94f63c",
+      "tested_sha256": "edca9fc7b8c5089f3ef7e94bcb08c2f8e59611a523c3dce3f64738d6fc5b1ba3",
+      "newline_normalized_match": true
+    },
+    "src/protocol_core.sv": {
+      "active_sha256": "5b7f4252229140951d7f67c4384b24cd2c05c0fb3d1a4d75b967c22afb65b453",
+      "tested_sha256": "4bebbe91c787f8b2570697bb73560d6915c714169437d7a0eb7d286c67ff3db2",
+      "newline_normalized_match": true
+    },
+    "tools/timing/audit_clock_tree.py": {
+      "active_sha256": "c8cacceedb48eba842b0d89c38bb17baed34f6125a12ceadff4e5a911bdebae6",
+      "tested_sha256": "c8cacceedb48eba842b0d89c38bb17baed34f6125a12ceadff4e5a911bdebae6",
+      "newline_normalized_match": true
+    },
+    "tools/timing/audit_data_eco.py": {
+      "active_sha256": "095bccd06ebcbe13cbc9a695eeb24cd8e347b5f75b219b5353af14ed9323d322",
+      "tested_sha256": "095bccd06ebcbe13cbc9a695eeb24cd8e347b5f75b219b5353af14ed9323d322",
+      "newline_normalized_match": true
+    },
+    "tools/timing/audit_nor_trial.py": {
+      "active_sha256": "2c79f055e4e026a514adc986d10e37139e3dbb66eccf435dde566a0ccbb5b960",
+      "tested_sha256": "2c79f055e4e026a514adc986d10e37139e3dbb66eccf435dde566a0ccbb5b960",
+      "newline_normalized_match": true
+    },
+    "tools/timing/audit_wire_contacts.py": {
+      "active_sha256": "3fb1fc972a20d656daf976ce290e8ae945b5cddbad02e0491d07d0daef395b4d",
+      "tested_sha256": "3fb1fc972a20d656daf976ce290e8ae945b5cddbad02e0491d07d0daef395b4d",
+      "newline_normalized_match": true
+    },
+    "tools/timing/check_net_geometry.py": {
+      "active_sha256": "7b4fe71a8d51d47fd42487d1f6bc4b5d3e8a790bf1436f01129fd0101bb9e6dc",
+      "tested_sha256": "7b4fe71a8d51d47fd42487d1f6bc4b5d3e8a790bf1436f01129fd0101bb9e6dc",
+      "newline_normalized_match": true
+    },
+    "tools/timing/check_signoff.py": {
+      "active_sha256": "10f4a437f1709e7ceb0e7082bc5d231848f99faf2990b6c80ede78cccbd093c2",
+      "tested_sha256": "10f4a437f1709e7ceb0e7082bc5d231848f99faf2990b6c80ede78cccbd093c2",
+      "newline_normalized_match": true
+    },
+    "tools/timing/clock_legalize_control.tcl": {
+      "active_sha256": "4c8c610b5181985be0a094606d688f8435fcefaba16206b3cac3215df1622310",
+      "tested_sha256": "4c8c610b5181985be0a094606d688f8435fcefaba16206b3cac3215df1622310",
+      "newline_normalized_match": true
+    },
+    "tools/timing/closure_collect.py": {
+      "active_sha256": "e6c02e2a102c1698c83e5815c52c805da5dc5277c68191591ce5bb40ef2d0ac6",
+      "tested_sha256": "e6c02e2a102c1698c83e5815c52c805da5dc5277c68191591ce5bb40ef2d0ac6",
+      "newline_normalized_match": true
+    },
+    "tools/timing/closure_rtl_trial.py": {
+      "active_sha256": "dd29588a77791825c11a0783d80f5e19bfb8260131f80ef0b9711ddb662681b5",
+      "tested_sha256": "dd29588a77791825c11a0783d80f5e19bfb8260131f80ef0b9711ddb662681b5",
+      "newline_normalized_match": true
+    },
+    "tools/timing/closure_trial.py": {
+      "active_sha256": "90d3169ea7e5af59896b98788f64aefe1c2e25dfeef3478cf165a18cab49ce86",
+      "tested_sha256": "90d3169ea7e5af59896b98788f64aefe1c2e25dfeef3478cf165a18cab49ce86",
+      "newline_normalized_match": true
+    },
+    "tools/timing/collect_implementation.py": {
+      "active_sha256": "7a7e1e89007e1db247dd069d3175073cb2989fec950fca2d97b8e8eb053b4d68",
+      "tested_sha256": "7a7e1e89007e1db247dd069d3175073cb2989fec950fca2d97b8e8eb053b4d68",
+      "newline_normalized_match": true
+    },
+    "tools/timing/compare_implementation.py": {
+      "active_sha256": "80217c62377a0f717443612e1b083267d5c5ccf091020d7fa69531d65e88bc1c",
+      "tested_sha256": "80217c62377a0f717443612e1b083267d5c5ccf091020d7fa69531d65e88bc1c",
+      "newline_normalized_match": true
+    },
+    "tools/timing/data_eco_suite.py": {
+      "active_sha256": "969a45cb49156f48782b6122d177e38a26d59265adb10a85dc1d0142f39d9be8",
+      "tested_sha256": "969a45cb49156f48782b6122d177e38a26d59265adb10a85dc1d0142f39d9be8",
+      "newline_normalized_match": true
+    },
+    "tools/timing/data_eco_trial.py": {
+      "active_sha256": "78a410e430955b8cb1f97a5f07cb3e532f913c7099f3eac343f542a8768d2971",
+      "tested_sha256": "78a410e430955b8cb1f97a5f07cb3e532f913c7099f3eac343f542a8768d2971",
+      "newline_normalized_match": true
+    },
+    "tools/timing/diagnose_cones.py": {
+      "active_sha256": "8cb3a372d9f7a3bf9133ae24d97725162a19b6ba2ad3f5d9c34bc30521d514c9",
+      "tested_sha256": "8cb3a372d9f7a3bf9133ae24d97725162a19b6ba2ad3f5d9c34bc30521d514c9",
+      "newline_normalized_match": true
+    },
+    "tools/timing/finalize_routes.py": {
+      "active_sha256": "7a3a4e11005c8a6ce98cec7815a7191e2450191ecefd9e036c19090fed413265",
+      "tested_sha256": "7a3a4e11005c8a6ce98cec7815a7191e2450191ecefd9e036c19090fed413265",
+      "newline_normalized_match": true
+    },
+    "tools/timing/headroom_eco.py": {
+      "active_sha256": "d9457258eb1066f57fb48db65533a3c75390675803011264ffd8a5361d258eb8",
+      "tested_sha256": "d9457258eb1066f57fb48db65533a3c75390675803011264ffd8a5361d258eb8",
+      "newline_normalized_match": true
+    },
+    "tools/timing/implementation_trial.py": {
+      "active_sha256": "8fa11403bb2114db41ce679b2e49ea0eed73e9656fab2776f807618e16ca51da",
+      "tested_sha256": "8fa11403bb2114db41ce679b2e49ea0eed73e9656fab2776f807618e16ca51da",
+      "newline_normalized_match": true
+    },
+    "tools/timing/incremental_trial.py": {
+      "active_sha256": "85f65dcaea8e66094007787bb4ea25bdf414346ae03b7fc91ba1059b430a8c38",
+      "tested_sha256": "8a8261ca9a46c5317822dc908114482a04acc2f2bc468389059d11110c0b9e71",
+      "newline_normalized_match": true
+    },
+    "tools/timing/path_delay_breakdown.py": {
+      "active_sha256": "dbbd4dd353a790f3218a68809557b43f451a09803548cb8dbbe54a6184c9e6ac",
+      "tested_sha256": "dbbd4dd353a790f3218a68809557b43f451a09803548cb8dbbe54a6184c9e6ac",
+      "newline_normalized_match": true
+    },
+    "tools/timing/physical_trial.py": {
+      "active_sha256": "9180ae612eec620864e8758bc2118a41449867d879a72e017e25f4703044f9b0",
+      "tested_sha256": "9180ae612eec620864e8758bc2118a41449867d879a72e017e25f4703044f9b0",
+      "newline_normalized_match": true
+    },
+    "tools/timing/prepare_data_eco.py": {
+      "active_sha256": "f06d6da4c793da9097e2fff3a1624fc830fc754ab6b63f763840292154217d78",
+      "tested_sha256": "f06d6da4c793da9097e2fff3a1624fc830fc754ab6b63f763840292154217d78",
+      "newline_normalized_match": true
+    },
+    "tools/timing/preserve_routes.py": {
+      "active_sha256": "13815f177fa57babd21cc964b48f7dedf8e9648ca622f03f7e6d45d884920d0f",
+      "tested_sha256": "13815f177fa57babd21cc964b48f7dedf8e9648ca622f03f7e6d45d884920d0f",
+      "newline_normalized_match": true
+    },
+    "tools/timing/production/fanout.json": {
+      "active_sha256": "2eb79848044169df4c64d06f18ed8b7d9641c86f04850f0dfa7dc42295f810aa",
+      "tested_sha256": "2eb79848044169df4c64d06f18ed8b7d9641c86f04850f0dfa7dc42295f810aa",
+      "newline_normalized_match": true
+    },
+    "tools/timing/production/sink-local.json": {
+      "active_sha256": "c1bd685218135e5a345154cef7aeca40b7836b0933163952194f473bc30fbac3",
+      "tested_sha256": "c1bd685218135e5a345154cef7aeca40b7836b0933163952194f473bc30fbac3",
+      "newline_normalized_match": true
+    },
+    "tools/timing/prove_host_pending.py": {
+      "active_sha256": "a703167ae9c2703959c6ac25cc5a1b6dc71360d0f2d52de77790d1bb5cf3b91a",
+      "tested_sha256": "a703167ae9c2703959c6ac25cc5a1b6dc71360d0f2d52de77790d1bb5cf3b91a",
+      "newline_normalized_match": true
+    },
+    "tools/timing/qualify_final_route.py": {
+      "active_sha256": "57673c553cbe532761f7be4a9fa2db99d354c209e21d1535d689365e648cdf4c",
+      "tested_sha256": "57673c553cbe532761f7be4a9fa2db99d354c209e21d1535d689365e648cdf4c",
+      "newline_normalized_match": true
+    },
+    "tools/timing/qualify_gds_artifact.py": {
+      "active_sha256": "62b4e42d9e3ad9ddf7b23b96295ff508eb3d6fe745b29d5883f4a03cf92230f8",
+      "tested_sha256": "62b4e42d9e3ad9ddf7b23b96295ff508eb3d6fe745b29d5883f4a03cf92230f8",
+      "newline_normalized_match": true
+    },
+    "tools/timing/rcx_fine.tcl": {
+      "active_sha256": "6abdac5f1f60aface5bd720cc29d6dd56e46637a28eca5e94010c0cee9b23d46",
+      "tested_sha256": "6abdac5f1f60aface5bd720cc29d6dd56e46637a28eca5e94010c0cee9b23d46",
+      "newline_normalized_match": true
+    },
+    "tools/timing/rcx_from_odb.tcl": {
+      "active_sha256": "b85b504df0a18eee95da6ff2a3d0d9c1715bfaabb2cdfbe72c8075b08fbee048",
+      "tested_sha256": "b85b504df0a18eee95da6ff2a3d0d9c1715bfaabb2cdfbe72c8075b08fbee048",
+      "newline_normalized_match": true
+    },
+    "tools/timing/repair_clock_fanout.tcl": {
+      "active_sha256": "1f2e16edef46da4b4783ead242b92b08cf31618f055f0658b7127f07a4133ad4",
+      "tested_sha256": "1f2e16edef46da4b4783ead242b92b08cf31618f055f0658b7127f07a4133ad4",
+      "newline_normalized_match": true
+    },
+    "tools/timing/replay.py": {
+      "active_sha256": "8a8b0688fd2087b1cc9f012ba452f211a368f70408138b7e7caa4e1296e25b74",
+      "tested_sha256": "8a8b0688fd2087b1cc9f012ba452f211a368f70408138b7e7caa4e1296e25b74",
+      "newline_normalized_match": true
+    },
+    "tools/timing/report_io_paths.tcl": {
+      "active_sha256": "fc6af6ad170274bac9e6f5cb2b2a47f9e8de30708f2090a714f0d12efc367a2f",
+      "tested_sha256": "fc6af6ad170274bac9e6f5cb2b2a47f9e8de30708f2090a714f0d12efc367a2f",
+      "newline_normalized_match": true
+    },
+    "tools/timing/resolve_eco_targets.py": {
+      "active_sha256": "d3cbd645fe3f3b641b6a9ab7c143349337a78cb76500cdcd795cc1b7c95a6fe3",
+      "tested_sha256": "d3cbd645fe3f3b641b6a9ab7c143349337a78cb76500cdcd795cc1b7c95a6fe3",
+      "newline_normalized_match": true
+    },
+    "tools/timing/routing_delta.py": {
+      "active_sha256": "8dc05c01a792f455826b720291cec89b9843fadde1195551c03883432ac2af99",
+      "tested_sha256": "8dc05c01a792f455826b720291cec89b9843fadde1195551c03883432ac2af99",
+      "newline_normalized_match": true
+    },
+    "tools/timing/rtl_trial.py": {
+      "active_sha256": "69ce5ca01ab152c6e9ceed3473f3a0d560a17e29ea0fd0ac24bf68af1bb92a69",
+      "tested_sha256": "69ce5ca01ab152c6e9ceed3473f3a0d560a17e29ea0fd0ac24bf68af1bb92a69",
+      "newline_normalized_match": true
+    },
+    "tools/timing/size_slew_nor3.tcl": {
+      "active_sha256": "7d4caac4e7deea7d61b66c50622105c6fac1860426f573e5febb6b891d739c83",
+      "tested_sha256": "7d4caac4e7deea7d61b66c50622105c6fac1860426f573e5febb6b891d739c83",
+      "newline_normalized_match": true
+    },
+    "tools/timing/size_terminal_nor.tcl": {
+      "active_sha256": "c838206fa5b3c74070a1de44344a28ad8580fede9429a39ee9573aec35c2364f",
+      "tested_sha256": "c838206fa5b3c74070a1de44344a28ad8580fede9429a39ee9573aec35c2364f",
+      "newline_normalized_match": true
+    },
+    "tools/timing/summarize_clock_factors.py": {
+      "active_sha256": "2134259be00cdc45a26182021089e749f6138ea28aaf2fe3972e81ddca747bd2",
+      "tested_sha256": "2134259be00cdc45a26182021089e749f6138ea28aaf2fe3972e81ddca747bd2",
+      "newline_normalized_match": true
+    },
+    "tools/timing/summarize_cones.py": {
+      "active_sha256": "0461228267fd24b61a101bfc846bddd3da4aa3ef62bed1110518a8f1e18bfe68",
+      "tested_sha256": "0461228267fd24b61a101bfc846bddd3da4aa3ef62bed1110518a8f1e18bfe68",
+      "newline_normalized_match": true
+    },
+    "tools/timing/summarize_data_eco.py": {
+      "active_sha256": "ed1d09fd122972d6b5426f5aec85533357d220f2e1e923d1c3c1b2c6206258a8",
+      "tested_sha256": "ed1d09fd122972d6b5426f5aec85533357d220f2e1e923d1c3c1b2c6206258a8",
+      "newline_normalized_match": true
+    },
+    "tools/timing/summarize_incremental.py": {
+      "active_sha256": "9695f5e536417bad81f3c2e66194ed26330e296ee1346f00bc5985a483c1706f",
+      "tested_sha256": "9695f5e536417bad81f3c2e66194ed26330e296ee1346f00bc5985a483c1706f",
+      "newline_normalized_match": true
+    }
+  },
+  "qualification": {
+    "state": "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/timing_headroom_20261104_01/production/run/69-openroad-stapostpnr/state_out.json",
+    "state_sha256": "aecf268e7bda1242683b19d238f0f99ea469bf9b00b6df963e042b2d71802062",
+    "qualification_manifest": "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/timing_headroom_20261104_01/production/qualification/manifest.json",
+    "qualification_manifest_sha256": "fe057cccd527e17d5283669e37d56ba93233b0f1fc9f42b20db7452b5837b524",
+    "parent": "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/control_refactor_combined_production_20261031_01",
+    "parent_state": "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/control_refactor_combined_production_20261031_01/run/69-openroad-stapostpnr/state_out.json",
+    "parent_state_sha256": "8cda1271b19e0395f15568ac628639ba6d55d0930d80f31e93b502bd3ea26074",
+    "parent_qualification_sha256": "77b09143e970229294d2b10cc92d11ec6bf83625d1fe7051a336fa9b2a9d68e5",
+    "parent_comparison": {
+      "status": "pass",
+      "margins": {
+        "nom_slow_1p08V_125C": {
+          "setup": {
+            "parent_ns": 0.39347726191016763,
+            "candidate_ns": 0.5329496994570676,
+            "consumed_ns": -0.13947243754689997
+          },
+          "hold": {
+            "parent_ns": 0.47463945228699844,
+            "candidate_ns": 0.5610247980532017,
+            "consumed_ns": -0.08638534576620327
+          }
+        },
+        "nom_typ_1p20V_25C": {
+          "setup": {
+            "parent_ns": 6.138193238541748,
+            "candidate_ns": 6.2494118315804945,
+            "consumed_ns": -0.11121859303874615
+          },
+          "hold": {
+            "parent_ns": 0.2057022388425081,
+            "candidate_ns": 0.26424629898817603,
+            "consumed_ns": -0.05854406014566793
+          }
+        },
+        "nom_fast_1p32V_m40C": {
+          "setup": {
+            "parent_ns": 9.624813218848612,
+            "candidate_ns": 9.689972654095907,
+            "consumed_ns": -0.0651594352472955
+          },
+          "hold": {
+            "parent_ns": 0.048140215398815994,
+            "candidate_ns": 0.08936585058240636,
+            "consumed_ns": -0.04122563518359036
+          }
+        }
+      },
+      "errors": [],
+      "numeric_tie_tolerance_ns": 1e-06
+    },
+    "fixed_ci_release_comparison": {
+      "status": "pass",
+      "margins": {
+        "nom_slow_1p08V_125C": {
+          "setup": {
+            "parent_ns": 0.30343373117436395,
+            "candidate_ns": 0.5329496994570676,
+            "consumed_ns": -0.22951596828270365
+          },
+          "hold": {
+            "parent_ns": 0.37312010093259845,
+            "candidate_ns": 0.5610247980532017,
+            "consumed_ns": -0.18790469712060326
+          }
+        },
+        "nom_typ_1p20V_25C": {
+          "setup": {
+            "parent_ns": 6.1209865575302596,
+            "candidate_ns": 6.2494118315804945,
+            "consumed_ns": -0.12842527405023496
+          },
+          "hold": {
+            "parent_ns": 0.1457503048394956,
+            "candidate_ns": 0.26424629898817603,
+            "consumed_ns": -0.11849599414868042
+          }
+        },
+        "nom_fast_1p32V_m40C": {
+          "setup": {
+            "parent_ns": 9.516461665829743,
+            "candidate_ns": 9.689972654095907,
+            "consumed_ns": -0.1735109882661643
+          },
+          "hold": {
+            "parent_ns": 0.012811418954993667,
+            "candidate_ns": 0.08936585058240636,
+            "consumed_ns": -0.07655443162741268
+          }
+        }
+      },
+      "errors": [],
+      "numeric_tie_tolerance_ns": 1e-06
+    },
+    "precheck_evidence": {
+      "report": "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/timing_headroom_20261104_01/production/qualification/precheck/reports/results.xml",
+      "sha256": "b71fd8785dc7ff5d6b1cb6e834187ea15f6c9cf4069f0ef4c510635913ca8af7",
+      "tests": 9,
+      "names": [
+        [
+          "",
+          "KLayout pin label overlapping drawing"
+        ],
+        [
+          "",
+          "KLayout SG13CMOS5L DRC"
+        ],
+        [
+          "",
+          "KLayout zero area"
+        ],
+        [
+          "",
+          "KLayout Checks"
+        ],
+        [
+          "",
+          "Pin check"
+        ],
+        [
+          "",
+          "Boundary check"
+        ],
+        [
+          "",
+          "Layer check"
+        ],
+        [
+          "",
+          "Cell name check"
+        ],
+        [
+          "",
+          "Analog pin check"
+        ]
+      ]
+    },
+    "timing_replay_input_sha256": {
+      "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/timing_headroom_20261104_01/production/run/70-pio-routeacceptance/qualification/replay-input/input-openroad-fillinsertion/tt_um_shanebri_top.nl.v": "49687f75688eb8870bd2b3eb2dfafdc23fb0b4c637b69a82dff289244f78589c",
+      "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/timing_headroom_20261104_01/production/run/70-pio-routeacceptance/qualification/replay-input/output-openroad-rcx/nom/tt_um_shanebri_top.nom.spef": "c8f7622323ebb80e6c9f4f6abd3e335d6987573c96ed954f8927aa6515a70503",
+      "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/timing_headroom_20261104_01/production/run/70-pio-routeacceptance/qualification/replay-input/final/sdc/tt_um_shanebri_top.sdc": "7088ce29adb0f7213b0f3ed4b76177f104819061b87b32bf4f166ff50e055d59",
+      "/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_stdcell/lib/sg13cmos5l_stdcell_slow_1p08V_125C.lib": "3ee222c580ba33acb2131ac2bf224ff8ee9700751835b73aaec72b670bb31d3c",
+      "/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_io/lib/sg13cmos5l_io_slow_1p08V_3p0V_125C.lib": "0dbb628168f9855eb88aee0d557da25c4cefb8c6b727a496fa2a02fd40da5cdb",
+      "/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_stdcell/lib/sg13cmos5l_stdcell_typ_1p20V_25C.lib": "34163f3e7de9f854afac57332ba06f1739b78e7ac35660a8a5ddd39c570124ad",
+      "/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_io/lib/sg13cmos5l_io_typ_1p2V_3p3V_25C.lib": "e6b5adf1ce31db3a0c15e5ca069c62e7d9efb604a710b8f6582700f1721d2d98",
+      "/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_stdcell/lib/sg13cmos5l_stdcell_fast_1p32V_m40C.lib": "af12d75a72d19648fa690027d29843fbae550aa91f4e40dd3339c7116d6e425d",
+      "/home/shane/eda/pdk-2bbec755/ihp-sg13cmos5l/libs.ref/sg13cmos5l_io/lib/sg13cmos5l_io_fast_1p32V_3p6V_m40C.lib": "f25da27e4cc0c94ffbce99e0654814a3af48d00c4ec571c9db5915208a7bbe07",
+      "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/timing_headroom_20261104_01/production/tools/timing/report_io_paths.tcl": "fc6af6ad170274bac9e6f5cb2b2a47f9e8de30708f2090a714f0d12efc367a2f"
+    },
+    "checks": {
+      "strict_metrics": "pass",
+      "native_routing_drc_antenna": "pass",
+      "independent_gds_lvs": "pass",
+      "final_view_identity": "pass",
+      "pin_geometry": "pass",
+      "route_acceptance": "pass",
+      "tt_precheck": {
+        "status": "pass",
+        "tests": 9
+      },
+      "gate_tests": {
+        "status": "pass",
+        "tests": 39,
+        "netlist_sha256": "49687f75688eb8870bd2b3eb2dfafdc23fb0b4c637b69a82dff289244f78589c"
+      }
+    }
+  },
+  "release_runner_sha256": "2c6a1118d8dd6a053f051bd1fdfefcf03baa1eb49f246e970fe6d12807476dac"
+}

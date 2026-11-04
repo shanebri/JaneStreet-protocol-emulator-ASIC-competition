@@ -12,6 +12,8 @@ def main():
     subprocess.run([sys.executable, "-m", "unittest", "discover", "-s", str(ROOT / "test"),
                     "-p", "test_timing_tools.py"], check=True)
     subprocess.run([sys.executable, "-m", "unittest", "discover", "-s", str(ROOT / "test"),
+                    "-p", "test_headroom_campaign.py"], check=True)
+    subprocess.run([sys.executable, "-m", "unittest", "discover", "-s", str(ROOT / "test"),
                     "-p", "test_pio_host.py"], check=True)
     # Read the actual submission manifest so this runner cannot omit a source.
     source_list = (ROOT / "info.yaml").read_text().split("  source_files:\n", 1)[1]

@@ -1,0 +1,51 @@
+{
+  "status": "complete",
+  "physical_signoff": true,
+  "candidate_promoted": false,
+  "commands": [
+    [
+      "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/production_tooling/venv/bin/python",
+      "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/timing_headroom_20261104_01/production/tt/tt_tool.py",
+      "--create-user-config",
+      "--ihp"
+    ],
+    [
+      "/nix/store/lrlpbc4nd373kds32zl72fd8qy2ayah0-devshell-dir/bin/python3",
+      "-m",
+      "librelane",
+      "--pdk",
+      "ihp-sg13cmos5l",
+      "--manual-pdk",
+      "--pdk-root",
+      "/home/shane/eda/pdk-2bbec755",
+      "--run-tag",
+      "refactor",
+      "--force-run-dir",
+      "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/timing_headroom_20261104_01/production/run",
+      "src/config_merged.json"
+    ],
+    [
+      "/nix/store/lrlpbc4nd373kds32zl72fd8qy2ayah0-devshell-dir/bin/python3",
+      "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/timing_headroom_20261104_01/production/tools/timing/qualify_gds_artifact.py",
+      "--run",
+      "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/timing_headroom_20261104_01/production/run",
+      "--out",
+      "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/timing_headroom_20261104_01/production/qualification",
+      "--pdk-root",
+      "/home/shane/eda/pdk-2bbec755",
+      "--support-tools",
+      "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/production_tooling/tt",
+      "--precheck-python",
+      "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/production_tooling/precheck-venv/bin/python",
+      "--test-python",
+      "/home/shane/eda/pio-test-venv/bin/python",
+      "--test-source",
+      "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/timing_headroom_20261104_01/production/test"
+    ]
+  ],
+  "gate_runtime_library": {
+    "path": "/nix/store/d8927sznk6qnqln6hl9p4d42h8pq49vg-expat-2.8.0/lib/libexpat.so.1.12.0",
+    "sha256": "5a376e737c7a8c5010d5350e2905ce5b314f51f720909cbcafc40d570bdb1686"
+  },
+  "frozen_input_changes": []
+}

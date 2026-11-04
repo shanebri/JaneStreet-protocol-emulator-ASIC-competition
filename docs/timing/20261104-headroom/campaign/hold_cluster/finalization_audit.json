@@ -1,0 +1,56 @@
+{
+  "status": "pass",
+  "connectivity_cells_and_placement_unchanged": true,
+  "routing_delta": {
+    "scope": "DEF serialization comparison, not physical equivalence/LVS",
+    "original_signal_nets": 25368,
+    "unchanged_signal_routes": 25348,
+    "changed_signal_routes": [
+      "_02535_",
+      "_02540_",
+      "_02546_",
+      "_02559_",
+      "_03700_",
+      "_04129_",
+      "_09328_",
+      "_09350_",
+      "_09351_",
+      "clk",
+      "clknet_0_clk",
+      "clknet_fanoutfix_1069827",
+      "eco_net_4_013155",
+      "net10260",
+      "net5024",
+      "net5947",
+      "net6525",
+      "net6629",
+      "net7795",
+      "pio.engines\\[0\\].core.fetch.words\\[18\\]\\[14\\]"
+    ],
+    "new_signal_nets": [],
+    "missing_signal_nets": [],
+    "changed_clock_routes": [
+      "clk",
+      "clknet_0_clk",
+      "clknet_fanoutfix_1069827"
+    ],
+    "moved_or_changed_original_cells": [],
+    "removed_original_cells": [],
+    "boundary_and_signal_pins_unchanged": true,
+    "sha256": {
+      "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/timing_headroom_20261104_01/hold_cluster/run/02-openroad-detailedrouting/tt_um_shanebri_top.def": "f8f947fe37f96e0e76cf5934a5a1336ac96288570f31ac2301d1ef22c50769e6",
+      "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/timing_headroom_20261104_01/hold_cluster/run/03-openroad-finalizeroutes/tt_um_shanebri_top.def": "48c1cd14a3dc638ebabafd5a0e1b72803f41025bcc900c915d94be219ad4d17e"
+    }
+  },
+  "wire_contact_groups": [],
+  "routed_nets": 25368,
+  "after_def": "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/timing_headroom_20261104_01/hold_cluster/run/03-openroad-finalizeroutes/tt_um_shanebri_top.def",
+  "sha256": {
+    "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/timing_headroom_20261104_01/hold_cluster/run/02-openroad-detailedrouting/tt_um_shanebri_top.odb": "e44e479c7fc02b3247dad58f78676d4dd38fb2d854d2f9ffb9a7c1b5dba63d64",
+    "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/timing_headroom_20261104_01/hold_cluster/run/02-openroad-detailedrouting/tt_um_shanebri_top.def": "f8f947fe37f96e0e76cf5934a5a1336ac96288570f31ac2301d1ef22c50769e6",
+    "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/timing_headroom_20261104_01/hold_cluster/run/03-openroad-finalizeroutes/tt_um_shanebri_top.odb": "6233d065bdbb30c09eab4685da20b6e4a4da0bf7c042ebbee91d9ee5bff730f9",
+    "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/test/sim_build/timing_headroom_20261104_01/hold_cluster/run/03-openroad-finalizeroutes/tt_um_shanebri_top.def": "48c1cd14a3dc638ebabafd5a0e1b72803f41025bcc900c915d94be219ad4d17e",
+    "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/tools/timing/finalize_routes.py": "7a3a4e11005c8a6ce98cec7815a7191e2450191ecefd9e036c19090fed413265",
+    "/mnt/c/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/tools/timing/audit_wire_contacts.py": "3fb1fc972a20d656daf976ce290e8ae945b5cddbad02e0491d07d0daef395b4d"
+  }
+}
