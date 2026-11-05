@@ -1,0 +1,18 @@
+{
+  "status": "PROVISIONAL_PENDING_PHYSICAL_SERVICE_MEASUREMENTS",
+  "existing_fifo_useful_bytes": 16,
+  "packet_length_bytes_max": 65536,
+  "usb_ls": {
+    "payload_bytes_max": 8,
+    "symbols_upper_bound": 115,
+    "script_bytes_including_header": 120,
+    "descriptor_bytes": 8,
+    "proposed_command_slot_bytes": 128,
+    "proposed_slots": 2,
+    "proposed_total_bytes": 256,
+    "location": "future FPGA-side autonomous feeder; no ASIC SRAM added",
+    "launch_rule": "complete immutable script and descriptor before enabling TX",
+    "local_service_requirement": "refill before OSR/FIFO exhaustion; no mid-packet starvation"
+  },
+  "decision": "retain four-word ASIC queues for measured packed/batched workload; defer deeper FIFO promotion"
+}

@@ -15,12 +15,15 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y iverilog
           pip install -r test/requirements.txt
-      - name: Host and transport contracts
+      - name: Host, transport and codec contracts
         run: |
           python -B -m unittest discover -s test -p test_streaming_host.py -v
           python -B -m unittest discover -s test -p test_streaming_transport.py -v
+          python -B -m unittest discover -s test -p test_usb_ls_tools.py -v
       - name: Packed streaming pins
         run: python -B tools/streaming/run_sim.py --out test/sim_build/streaming-ci
+      - name: USB digital timing prototype
+        run: python -B tools/streaming/run_sim.py --module test_usb_ls_tx --out test/sim_build/usb-symbol-ci
       - uses: actions/upload-artifact@v7
         if: always()
         with:
@@ -28,3 +31,6 @@ jobs:
           path: |
             test/sim_build/streaming-ci/receipt.json
             test/sim_build/streaming-ci/results.xml
+            test/sim_build/usb-symbol-ci/receipt.json
+            test/sim_build/usb-symbol-ci/results.xml
+            test/sim_build/usb-symbol-ci/measurements.json

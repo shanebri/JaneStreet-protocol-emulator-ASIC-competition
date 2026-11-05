@@ -65,3 +65,24 @@ bytes in both directions and 256 UART bytes, terminal queues and error flags.
 It records raw bridge traffic and peer results. It reports waveforms as
 `NOT_ACQUIRED`; full waveform/electrical qualification needs separate captures.
 No physical peer pass has been recorded yet.
+
+## Digital USB low-speed prototype
+
+`usb_ls_tx_symbols.asm` is an opt-in laboratory logical-line transmitter.
+Host-generated DATA0/DATA1 packets include CRC, stuffing and NRZI, represented
+as timed J/K/SE0 commands. The program demonstrates 33/34-clock scheduling at
+50 MHz with a TX-enable test marker. It provides no USB connector/PHY, receiver,
+token/handshake implementation or enumeration. Its inspector rejects packets
+stretched by host starvation.
+
+```sh
+python -B -m unittest discover -s test -p test_usb_ls_tools.py -v
+python -B tools/streaming/run_sim.py --module test_usb_ls_tx --out test/sim_build/NEW/usb
+python -B tools/streaming/verify_evidence.py
+```
+
+The [combined campaign report](../../docs/streaming_20261104.md) and
+[provisional packet interface](../../docs/packet_stream_interface_20261104.md)
+retain measured results, inherited timing budgets and pending hardware work.
+Historical receipts retain their original machine-local paths and measured
+source snapshots. `verify_evidence.py` checks their bytes after relocation.
