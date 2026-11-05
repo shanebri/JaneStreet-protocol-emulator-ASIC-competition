@@ -1,0 +1,30 @@
+name: Packed streaming
+on: [push, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  firmware:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Install simulation tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y iverilog
+          pip install -r test/requirements.txt
+      - name: Host and transport contracts
+        run: |
+          python -B -m unittest discover -s test -p test_streaming_host.py -v
+          python -B -m unittest discover -s test -p test_streaming_transport.py -v
+      - name: Packed streaming pins
+        run: python -B tools/streaming/run_sim.py --out test/sim_build/streaming-ci
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: streaming-results
+          path: |
+            test/sim_build/streaming-ci/receipt.json
+            test/sim_build/streaming-ci/results.xml

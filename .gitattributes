@@ -10,3 +10,11 @@ docs/timing/20261030-control-refactor/** -text
 docs/timing/20261030-control-refactor/local-endpoints/*.rpt whitespace=-blank-at-eof
 tools/timing/*refactor*.py -text
 tools/timing/production/last-fanout.json -text
+
+# Keep streaming receipts and their source identities byte-stable on Windows.
+docs/streaming/** -text whitespace=cr-at-eol
+tools/streaming/** -text
+test/test_streaming*.py -text
+test/test_usb_ls*.py -text
+examples/*packed_stream.* -text
+examples/usb_ls_tx_symbols.* -text
