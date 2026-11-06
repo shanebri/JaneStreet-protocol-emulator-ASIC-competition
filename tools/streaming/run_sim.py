@@ -18,7 +18,7 @@ def main():
     p.add_argument('--gates',action='store_true')
     p.add_argument('--benchmark',action='store_true')
     p.add_argument('--depth',type=int,choices=(4,8),default=4)
-    modules=['test_streaming','test_streaming_long']
+    modules=['test_streaming','test_streaming_long','test_packet_feeder']
     if (ROOT/'test/test_usb_ls_tx.py').exists():modules.append('test_usb_ls_tx')
     p.add_argument('--module',choices=modules,default='test_streaming')
     p.add_argument('--qualified-root',type=Path,default=ACTIVE,
@@ -27,6 +27,7 @@ def main():
                    help='Isolated eight-word source directory; never a qualified release')
     a=p.parse_args(); out=a.out.resolve();out.mkdir(parents=True,exist_ok=False)
     if a.gates and a.depth!=4: p.error('Only the active four-word netlist is qualified')
+    if a.module=='test_packet_feeder' and a.depth!=4: p.error('The feeder prototype uses four-word FIFOs')
     from cocotb_tools.runner import get_runner
     os.environ['STREAM_DEPTH']=str(a.depth)
     os.environ['STREAM_RESULTS']=str(out/'measurements.json')
@@ -37,7 +38,8 @@ def main():
               ROOT/'examples/uart_packed_stream.asm',ROOT/'examples/spi_packed_stream.asm',
               ROOT/'test'/(a.module+'.py'),
               ROOT/'test/test.py',ROOT/'tools/pio_host.py',ROOT/'tools/pioasm.py']
-    if a.module=='test_usb_ls_tx':software.append(ROOT/'examples/usb_ls_tx_symbols.asm')
+    feeder=a.module=='test_packet_feeder'
+    if feeder or a.module=='test_usb_ls_tx':software.append(ROOT/'examples/usb_ls_tx_symbols.asm')
     software=sorted(set([*software,ROOT/'test/test_streaming.py']))
     hashes={str(s.relative_to(ROOT)):hashlib.sha256(s.read_bytes()).hexdigest() for s in software}
     for source in software:
@@ -56,12 +58,17 @@ def main():
         design=ROOT if a.depth==4 else (a.diagnostic_design or ROOT/'test/sim_build/deep_fifo_20261104_01/depth8')
         lines=(design/'info.yaml').read_text().split('  source_files:\n',1)[1].splitlines()
         sources=[design/'src'/s.split('"')[1] for s in lines if s.startswith('    - ')]
-    sources.append(ROOT/'test/tb.v')
+    top='tb_packet_feeder' if feeder else 'tb'
+    if feeder:
+        sources.extend(ROOT/'fpga'/name for name in ('byte_nibble_host.sv','packet_feeder.sv'))
+        sources.append(ROOT/'test/tb_packet_feeder.sv')
+    else:
+        sources.append(ROOT/'test/tb.v')
     sys.path.insert(0,str(ROOT/'test'));sys.path.insert(0,str(ROOT/'tools'))
     runner=get_runner('icarus')
-    runner.build(sources=sources,hdl_toplevel='tb',build_dir=out/'build',
+    runner.build(sources=sources,hdl_toplevel=top,build_dir=out/'build',
                  defines=defines,timescale=('1ns','1ps'),always=True)
-    results=runner.test(hdl_toplevel='tb',test_module=a.module,test_dir=out,results_xml=out/'results.xml')
+    results=runner.test(hdl_toplevel=top,test_module=a.module,test_dir=out,results_xml=out/'results.xml')
     report=ET.parse(results)
     receipt=dict(kind='functional_gate_simulation' if a.gates else 'rtl_simulation',
         tests=len(report.findall('.//testcase')),failures=len(report.findall('.//failure')),
