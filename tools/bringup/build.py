@@ -12,7 +12,7 @@ import sys
 
 ROOT=Path(__file__).resolve().parents[2]
 EXTRA=('byte_nibble_host.sv','spi_test_uart_tx.sv','bringup_uart_rx.sv',
-       'bringup_bridge.sv','arty_bringup_top.sv')
+       'bringup_trace.sv','bringup_bridge.sv','arty_bringup_top.sv')
 
 
 def sources(root=ROOT):
@@ -89,7 +89,7 @@ def main(argv=None):
             image=out/'arty_bringup_top.bit'
             if not image.is_file() or not image.stat().st_size: raise RuntimeError('Vivado produced no bitstream')
             record.update(status='PASS',image_sha256=hashlib.sha256(image.read_bytes()).hexdigest())
-            fixture=dict(bridge_protocol=1,clock_hz=50000000,port=a.port,baud=115200,image=str(image))
+            fixture=dict(bridge_protocol=2,clock_hz=50000000,port=a.port,baud=115200,image=str(image))
             (out/'fixture.json').write_text(json.dumps(fixture,indent=2)+'\n')
             print(f'Build passed. Program this file in Hardware Manager:\n{image}\n')
             print('After programming, run:\n'+subprocess.list2cmdline([sys.executable,str(ROOT/'tools/bringup/run.py'),

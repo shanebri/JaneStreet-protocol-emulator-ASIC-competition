@@ -166,3 +166,76 @@ mapping of the reusable wrapper above. Configure a target's address, write data
 and known expected response in the fixture file. This basic hardware profile
 does not reproduce all simulation fault-injection tests. The bridge is
 simulation-tested; physical target operation remains unverified here.
+
+### Nano 33 IoT board test
+
+Use the preserved `20261101-v2-18` image and the Arty's onboard USB control port.
+Upload the [I2C target sketch](../tools/bringup/nano33iot_i2c_target/nano33iot_i2c_target.ino)
+with the Arduino SAMD Boards core and the **Arduino Nano 33 IoT** board selected.
+This replaces the SPI sketch on that Nano until you upload the SPI sketch again.
+
+Disconnect the other protocol fixtures. Wire **Arty JC1 → Nano A4/SDA**,
+**Arty JC2 → Nano A5/SCL**, and share ground. Verify SDA and SCL each have a
+pull-up to 3.3 V. Power the boards through their own USB cables. The PC uses the
+Arty COM port for this test.
+[Arduino Nano 33 IoT pinout](https://docs.arduino.cc/resources/pinouts/ABX00027-full-pinout.pdf)
+
+Program the v2 image with Vivado Hardware Manager. From the repository root,
+substitute the actual Arty COM port and use fresh output directories.
+
+```powershell
+py tools/bringup/prepare.py --list-ports
+py tools/bringup/prepare.py --i2c-only --image .bringup/candidates/20261101-v2-18/arty_bringup_top.bit --bridge-port COM3 --out .bringup/campaigns/i2c-001
+py tools/bringup/run.py --fixture .bringup/campaigns/i2c-001/i2c.json --suite i2c --out .bringup/runs/i2c-001
+```
+
+At 100 kHz, the fixture writes `00` to `0x50`, issues a repeated START, and reads
+`50 49 4F` (`PIO`). The Nano returns fixed bytes; it does not use the written
+value to select its response. The runner then probes `0x51` and requires
+`address_nack`, zero completed bytes and both lines high after STOP. Keep
+`0x51` unused on this bus. For a different target, set its address, write data,
+and expected response, and choose a known unused address for `nack_address`.
+Older fixtures may omit that field for a positive-only run.
+
+### Verify the waveform and rise time
+
+Use an external logic analyzer or scope with enough memory for the entire
+transaction, including pauses while the host services the FIFOs. Export digital
+0/1 SDA and SCL samples at 10 MS/s or higher. Keep idle before START and after
+STOP. If the instrument captured both cases, export each as a separate CSV.
+Use case 0 for the write/repeated-START/read and case 1 for the wrong address.
+The analyzer checks the actual address, direction, bytes, ACKs, repeated
+START, final read NACK, STOP and idle against the saved fixture.
+
+Use a separate oscilloscope export for rise time. Capture several representative
+open-drain releases on both SDA and SCL with the same wiring and pull-ups.
+Export voltage samples as `time_s,sda_v,scl_v` and measure the bus pull-up
+voltage for `rise_supply_v`. Use a sample interval of 30 ns or shorter so the
+export can also resolve the Fast-mode limit. The analyzer interpolates the
+30% and 70% crossings and reports the longest observed rise on each line.
+Standard-mode's maximum is 1000 ns and Fast-mode's maximum is 300 ns. Check
+against 300 ns before trying 400 kHz, then repeat the measurement at 400 kHz.
+[NXP UM10204, Table 11](https://www.nxp.com/docs/en/user-guide/UM10204.pdf)
+
+Save a mapping JSON with the exact image hash from the run's `manifest.json`,
+your instrument details, and the actual CSV column names.
+
+```json
+{
+  "instrument": "instrument model, sample rate and threshold",
+  "image_sha256": "COPY FROM THE RUN MANIFEST",
+  "time_column": "Time [s]",
+  "time_unit": "s",
+  "channels": {"sda": "D0", "scl": "D1"},
+  "rise_supply_v": 3.3
+}
+```
+
+```powershell
+py tools/bringup/analyze.py --run .bringup/runs/i2c-001 --out .bringup/analysis/i2c-read-001 --import-csv read.csv --mapping i2c-map.json --case 0 --rise-csv scope.csv --require-physical-waveforms
+py tools/bringup/analyze.py --run .bringup/runs/i2c-001 --out .bringup/analysis/i2c-nack-001 --import-csv nack.csv --mapping i2c-map.json --case 1 --require-physical-waveforms
+```
+
+Omit `--rise-csv` for digital-only evidence. The report then marks rise time
+as `NOT_MEASURED`. The run and analysis bundles keep the raw serial traffic,
+capture CSVs, and decoded results for comparison.

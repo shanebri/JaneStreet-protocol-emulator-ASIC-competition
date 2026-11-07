@@ -1,13 +1,30 @@
 {
-  "bridge_protocol": 1,
+  "bridge_protocol": 2,
   "clock_hz": 50000000,
   "port": "COM3",
   "baud": 115200,
   "image": "fpga/build/arty_bringup_top.bit",
   "nano_port": "COM5",
   "uart_peer_port": "COM6",
+  "nano_board": "nano33ble",
+  "capture": {"mode": "none"},
+  "uart_rx": {"baud": 115200, "wiring_confirmed": false},
+  "concurrent": {
+    "transfers": 256,
+    "uart_baud": 1200,
+    "spi_divider": 8192,
+    "capture_rounds": [85, 170],
+    "timeout_seconds": 5
+  },
+  "pads": {
+    "pullups_confirmed": false,
+    "active_peers_disconnected": false,
+    "pullup_ohms": [4700, 4700, 4700, 4700],
+    "supply_v": 3.3
+  },
   "i2c": {
     "address": 80,
+    "nack_address": 81,
     "rate": 100000,
     "write_hex": "00",
     "expected_hex": "50494f",
