@@ -7,9 +7,10 @@ from cocotb.utils import get_sim_time
 class Bus:
     def __init__(self, dut, *, host, sda=0, scl=1, address=0x48, data=b"\x12\x34",
                  nack_address=False, nack_data=None, rise_ns=60, data_delay_ns=40,
-                 stretches=None, rate=400_000, phase_ns=0):
+                 stretches=None, rate=400_000, phase_ns=0, drive_levels=None):
         self.dut, self.sda, self.scl = dut, sda, scl
         self.host = host
+        self.drive_levels = drive_levels or self.drive_package_inputs
         self.address, self.data = address, bytes(data)
         self.nack_address, self.nack_data = nack_address, nack_data
         self.rise_ns, self.data_delay_ns = rise_ns, data_delay_ns
@@ -151,8 +152,10 @@ class Bus:
                 self.rising(sda, now)
             if old_scl and not scl:
                 self.falling(now)
-            incoming = self.host.host_data
-            self.dut.uio_in.value = incoming | sum(v << (p+4) for p,v in enumerate(self.levels))
+            self.drive_levels(self.levels)
+
+    def drive_package_inputs(self, levels):
+        self.dut.uio_in.value = self.host.host_data | sum(v << (p+4) for p, v in enumerate(levels))
 
     def check_timing(self):
         standard = self.rate <= 100_000

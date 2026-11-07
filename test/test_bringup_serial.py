@@ -8,7 +8,7 @@ import cocotb
 from cocotb.clock import Clock
 from cocotb.triggers import Timer, FallingEdge, with_timeout
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]/'tools'))
-from bringup.transport import SerialTransport
+from bringup.transport import SerialTransport, WIDE_REPLIES
 from bringup.scenarios import run, SCENARIOS
 
 BIT_NS=20*int(os.environ.get('BRINGUP_BIT_CYCLES','8'))
@@ -44,7 +44,7 @@ class WireTransport(SerialTransport):
         assert reply[:3]==bytes((0xc3,self.sequence,status)), reply.hex()
         assert reduce(xor,reply)==0
         self.sequence=(self.sequence+1)&255
-        return reply[3]
+        return bytes(reply[3:7]) if op in WIDE_REPLIES else reply[3]
 
 
 @cocotb.test()

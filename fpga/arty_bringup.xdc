@@ -29,5 +29,7 @@ set_property -dict {PACKAGE_PIN V10 IOSTANDARD LVCMOS33} [get_ports {protocol_pa
 set_property -dict {PACKAGE_PIN V11 IOSTANDARD LVCMOS33} [get_ports {protocol_pad[3]}]
 # External protocol pins are asynchronous. Only synchronizer first stages exempt.
 set_false_path -from [get_ports {dedicated_in[*] protocol_pad[*]}] -to [get_pins {bridge/emulator/pio/inputs_shared/pins_meta_reg[*]/D}]
+# The FPGA-only digital observer has its own six two-stage input samplers.
+set_false_path -from [get_ports {dedicated_in[*] protocol_pad[*]}] -to [get_pins {bridge/trace_inputs_meta_reg[*]/D}]
 # Slow observable outputs; this does not qualify board-level protocol timing.
 set_false_path -to [get_ports {uart_tx locked_led dedicated_out[*] protocol_pad[*]}]

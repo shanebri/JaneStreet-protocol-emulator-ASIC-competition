@@ -28,15 +28,19 @@ jobs:
 
       - name: Bring-up transport and complete UART bridge regression
         run: |
-          python -m unittest discover -s tools/bringup -p test_transport.py -v
-          python -m unittest discover -s tools/bringup -p test_build.py -v
+          python -m unittest discover -s tools/bringup -p 'test_*.py' -v
           python tools/bringup/simulate.py
           python tools/bringup/simulate.py --default-baud-link
+          python tools/bringup/simulate.py --extended
 
       - name: Test Summary
         uses: test-summary/action@v2.4
         with:
-          paths: "test/results.xml"
+          paths: |
+            test/results.xml
+            test/bringup-serial.xml
+            test/bringup-default-baud.xml
+            test/bringup-extended.xml
         if: always()
 
       - name: upload waveform and test results
@@ -50,3 +54,10 @@ jobs:
             test/output/*
             test/bringup-serial.xml
             test/bringup-default-baud.xml
+            test/bringup-extended.xml
+            test/sim_build/bringup-*/**/run.json
+            test/sim_build/bringup-*/**/simulator.log
+            test/sim_build/bringup-*/**/build.log
+            test/sim_build/bringup-*/**/results.xml
+            test/sim_build/bringup-*/**/records.json
+            test/sim_build/bringup-*/**/captures/**
