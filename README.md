@@ -67,6 +67,10 @@ UART/SPI/I2C peer profiles. The bridge has a
 [preserved Arty smoke baseline](docs/fpga_baseline_20261030.md);
 physical UART/SPI/I2C peer qualification remains required.
 
+The opt-in [autonomous FPGA packet feeder](docs/fpga_packet_feeder.md) uploads
+complete USB logical-line scripts and feeds both PIO engines without PC service
+after launch. Its routed FPGA image is built; physical validation is pending.
+
 ```sh
 python tools/pioasm.py examples/uart_v0.asm
 python -m pip install -r test/requirements.txt

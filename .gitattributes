@@ -20,3 +20,7 @@ test/test_streaming*.py -text
 test/test_usb_ls*.py -text
 examples/*packed_stream.* -text
 examples/usb_ls_tx_symbols.* -text
+
+# Routed feeder reports and measured source snapshots retain their exact bytes.
+docs/fpga_packet_feeder/** -text whitespace=cr-at-eol
+docs/fpga_packet_feeder/**/*.rpt whitespace=-blank-at-eol,-blank-at-eof,cr-at-eol

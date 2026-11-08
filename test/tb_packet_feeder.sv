@@ -11,6 +11,8 @@ module tb_packet_feeder;
     reg [2:0] cmd;
     reg [31:0] cmd_data;
     reg [15:0] cmd_length_minus_one;
+    reg cmd_engine=0;
+    wire engine, bus_atomic;
     wire cmd_ready;
     wire [2:0] slot_state;
     wire [31:0] completion_sequence;

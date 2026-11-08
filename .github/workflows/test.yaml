@@ -32,6 +32,7 @@ jobs:
           python tools/bringup/simulate.py
           python tools/bringup/simulate.py --default-baud-link
           python tools/bringup/simulate.py --extended
+          python tools/bringup/simulate.py --packet-feeder
 
       - name: Test Summary
         uses: test-summary/action@v2.4
@@ -41,6 +42,7 @@ jobs:
             test/bringup-serial.xml
             test/bringup-default-baud.xml
             test/bringup-extended.xml
+            test/bringup-feeder.xml
         if: always()
 
       - name: upload waveform and test results
@@ -55,9 +57,12 @@ jobs:
             test/bringup-serial.xml
             test/bringup-default-baud.xml
             test/bringup-extended.xml
+            test/bringup-feeder.xml
             test/sim_build/bringup-*/**/run.json
             test/sim_build/bringup-*/**/simulator.log
             test/sim_build/bringup-*/**/build.log
             test/sim_build/bringup-*/**/results.xml
             test/sim_build/bringup-*/**/records.json
             test/sim_build/bringup-*/**/captures/**
+            test/sim_build/bringup-feeder/**/*.csv
+            test/sim_build/bringup-feeder/**/*.json

@@ -1,0 +1,1135 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2026 Advanced Micro Devices, Inc. All Rights Reserved.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2026.1 (win64) Build 6511674 Tue Jun 16 11:02:23 MDT 2026
+| Date         : Sat Nov  7 16:34:25 2026
+| Host         : ShanesPC running 64-bit major release  (build 9200)
+| Command      : report_timing -delay_type min -max_paths 20 -nworst 1 -file C:/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/.bringup/feeder-builds/20261107-01/hold_paths.rpt
+| Design       : arty_bringup_top
+| Device       : 7a100t-csg324
+| Speed File   : -1  PRODUCTION 1.23 2018-06-13
+| Design State : Routed
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack (MET) :             0.049ns  (arrival time - required time)
+  Source:                 bridge/feeder_data_reg[7]/C
+                            (rising edge-triggered cell FDRE clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            bridge/packet_queue.bank/slots[1].worker/completion_sequence_reg[7]/D
+                            (rising edge-triggered cell FDRE clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk50_raw
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (clk50_raw rise@0.000ns - clk50_raw rise@0.000ns)
+  Data Path Delay:        0.384ns  (logic 0.164ns (42.688%)  route 0.220ns (57.312%))
+  Logic Levels:           0  
+  Clock Path Skew:        0.263ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    -0.805ns
+    Source Clock Delay      (SCD):    -0.559ns
+    Clock Pessimism Removal (CPR):    -0.509ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk50_raw rise edge)
+                                                      0.000     0.000 r  <hidden>
+    E3                                                0.000     0.000 r  clk100
+                         net (fo=0)                   0.000     0.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         0.250     0.250 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           0.440     0.690    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -2.379    -1.689 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           0.499    -1.190    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.026    -1.164 r  core_clock_buf/O
+                         net (fo=2049, routed)        0.605    -0.559    bridge/clk50
+    SLICE_X2Y99          FDRE                                         r  bridge/feeder_data_reg[7]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X2Y99          FDRE (Prop_fdre_C_Q)         0.164    -0.395 r  bridge/feeder_data_reg[7]/Q
+                         net (fo=4, routed)           0.220    -0.175    bridge/packet_queue.bank/slots[1].worker/Q[7]
+    SLICE_X5Y104         FDRE                                         r  bridge/packet_queue.bank/slots[1].worker/completion_sequence_reg[7]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk50_raw rise edge)
+                                                      0.000     0.000 r  <hidden>
+    E3                                                0.000     0.000 r  clk100
+                         net (fo=0)                   0.000     0.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         0.438     0.438 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           0.480     0.918    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -3.163    -2.245 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           0.544    -1.702    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.029    -1.673 r  core_clock_buf/O
+                         net (fo=2049, routed)        0.867    -0.805    bridge/packet_queue.bank/slots[1].worker/clk50
+    SLICE_X5Y104         FDRE                                         r  bridge/packet_queue.bank/slots[1].worker/completion_sequence_reg[7]/C
+                         clock pessimism              0.509    -0.296    <hidden>
+    SLICE_X5Y104         FDRE (Hold_fdre_C_D)         0.072    -0.224    bridge/packet_queue.bank/slots[1].worker/completion_sequence_reg[7]
+  -------------------------------------------------------------------
+                         required time                          0.224    <hidden>
+                         arrival time                          -0.175    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  0.049    <hidden>
+
+Slack (MET) :             0.066ns  (arrival time - required time)
+  Source:                 bridge/trace_address_reg[5]/C
+                            (rising edge-triggered cell FDRE clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            bridge/observer/memory_reg_0/ADDRBWRADDR[7]
+                            (rising edge-triggered cell RAMB36E1 clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk50_raw
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (clk50_raw rise@0.000ns - clk50_raw rise@0.000ns)
+  Data Path Delay:        0.504ns  (logic 0.148ns (29.337%)  route 0.356ns (70.663%))
+  Logic Levels:           0  
+  Clock Path Skew:        0.308ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    -0.790ns
+    Source Clock Delay      (SCD):    -0.589ns
+    Clock Pessimism Removal (CPR):    -0.509ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk50_raw rise edge)
+                                                      0.000     0.000 r  <hidden>
+    E3                                                0.000     0.000 r  clk100
+                         net (fo=0)                   0.000     0.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         0.250     0.250 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           0.440     0.690    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -2.379    -1.689 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           0.499    -1.190    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.026    -1.164 r  core_clock_buf/O
+                         net (fo=2049, routed)        0.575    -0.589    bridge/clk50
+    SLICE_X10Y93         FDRE                                         r  bridge/trace_address_reg[5]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X10Y93         FDRE (Prop_fdre_C_Q)         0.148    -0.441 r  bridge/trace_address_reg[5]/Q
+                         net (fo=7, routed)           0.356    -0.085    bridge/observer/memory_reg_0_0[5]
+    RAMB36_X0Y20         RAMB36E1                                     r  bridge/observer/memory_reg_0/ADDRBWRADDR[7]
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk50_raw rise edge)
+                                                      0.000     0.000 r  <hidden>
+    E3                                                0.000     0.000 r  clk100
+                         net (fo=0)                   0.000     0.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         0.438     0.438 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           0.480     0.918    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -3.163    -2.245 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           0.544    -1.702    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.029    -1.673 r  core_clock_buf/O
+                         net (fo=2049, routed)        0.883    -0.790    bridge/observer/clk50
+    RAMB36_X0Y20         RAMB36E1                                     r  bridge/observer/memory_reg_0/CLKBWRCLK
+                         clock pessimism              0.509    -0.281    <hidden>
+    RAMB36_X0Y20         RAMB36E1 (Hold_ramb36e1_CLKBWRCLK_ADDRBWRADDR[7])
+                                                      0.130    -0.151    bridge/observer/memory_reg_0
+  -------------------------------------------------------------------
+                         required time                          0.151    <hidden>
+                         arrival time                          -0.085    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  0.066    <hidden>
+
+Slack (MET) :             0.068ns  (arrival time - required time)
+  Source:                 bridge/emulator/pio/engines[0].bank/data_stage_reg[14]/C
+                            (rising edge-triggered cell FDRE clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            bridge/emulator/pio/engines[0].core/divider_reg[14]/D
+                            (rising edge-triggered cell FDRE clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk50_raw
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (clk50_raw rise@0.000ns - clk50_raw rise@0.000ns)
+  Data Path Delay:        0.393ns  (logic 0.141ns (35.912%)  route 0.252ns (64.088%))
+  Logic Levels:           0  
+  Clock Path Skew:        0.259ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    -0.860ns
+    Source Clock Delay      (SCD):    -0.615ns
+    Clock Pessimism Removal (CPR):    -0.504ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk50_raw rise edge)
+                                                      0.000     0.000 r  <hidden>
+    E3                                                0.000     0.000 r  clk100
+                         net (fo=0)                   0.000     0.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         0.250     0.250 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           0.440     0.690    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -2.379    -1.689 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           0.499    -1.190    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.026    -1.164 r  core_clock_buf/O
+                         net (fo=2049, routed)        0.549    -0.615    bridge/emulator/pio/engines[0].bank/clk50
+    SLICE_X51Y121        FDRE                                         r  bridge/emulator/pio/engines[0].bank/data_stage_reg[14]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X51Y121        FDRE (Prop_fdre_C_Q)         0.141    -0.474 r  bridge/emulator/pio/engines[0].bank/data_stage_reg[14]/Q
+                         net (fo=8, routed)           0.252    -0.223    bridge/emulator/pio/engines[0].core/Q[14]
+    SLICE_X52Y123        FDRE                                         r  bridge/emulator/pio/engines[0].core/divider_reg[14]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk50_raw rise edge)
+                                                      0.000     0.000 r  <hidden>
+    E3                                                0.000     0.000 r  clk100
+                         net (fo=0)                   0.000     0.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         0.438     0.438 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           0.480     0.918    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -3.163    -2.245 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           0.544    -1.702    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.029    -1.673 r  core_clock_buf/O
+                         net (fo=2049, routed)        0.812    -0.860    bridge/emulator/pio/engines[0].core/clk50
+    SLICE_X52Y123        FDRE                                         r  bridge/emulator/pio/engines[0].core/divider_reg[14]/C
+                         clock pessimism              0.504    -0.356    <hidden>
+    SLICE_X52Y123        FDRE (Hold_fdre_C_D)         0.066    -0.290    bridge/emulator/pio/engines[0].core/divider_reg[14]
+  -------------------------------------------------------------------
+                         required time                          0.290    <hidden>
+                         arrival time                          -0.223    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  0.068    <hidden>
+
+Slack (MET) :             0.070ns  (arrival time - required time)
+  Source:                 bridge/trace_address_reg[10]/C
+                            (rising edge-triggered cell FDRE clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            bridge/observer/memory_reg_0/ADDRBWRADDR[12]
+                            (rising edge-triggered cell RAMB36E1 clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk50_raw
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (clk50_raw rise@0.000ns - clk50_raw rise@0.000ns)
+  Data Path Delay:        0.563ns  (logic 0.141ns (25.051%)  route 0.422ns (74.949%))
+  Logic Levels:           0  
+  Clock Path Skew:        0.309ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    -0.790ns
+    Source Clock Delay      (SCD):    -0.590ns
+    Clock Pessimism Removal (CPR):    -0.509ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk50_raw rise edge)
+                                                      0.000     0.000 r  <hidden>
+    E3                                                0.000     0.000 r  clk100
+                         net (fo=0)                   0.000     0.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         0.250     0.250 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           0.440     0.690    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -2.379    -1.689 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           0.499    -1.190    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.026    -1.164 r  core_clock_buf/O
+                         net (fo=2049, routed)        0.574    -0.590    bridge/clk50
+    SLICE_X9Y92          FDRE                                         r  bridge/trace_address_reg[10]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X9Y92          FDRE (Prop_fdre_C_Q)         0.141    -0.449 r  bridge/trace_address_reg[10]/Q
+                         net (fo=7, routed)           0.422    -0.027    bridge/observer/memory_reg_0_0[10]
+    RAMB36_X0Y20         RAMB36E1                                     r  bridge/observer/memory_reg_0/ADDRBWRADDR[12]
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk50_raw rise edge)
+                                                      0.000     0.000 r  <hidden>
+    E3                                                0.000     0.000 r  clk100
+                         net (fo=0)                   0.000     0.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         0.438     0.438 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           0.480     0.918    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -3.163    -2.245 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           0.544    -1.702    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.029    -1.673 r  core_clock_buf/O
+                         net (fo=2049, routed)        0.883    -0.790    bridge/observer/clk50
+    RAMB36_X0Y20         RAMB36E1                                     r  bridge/observer/memory_reg_0/CLKBWRCLK
+                         clock pessimism              0.509    -0.281    <hidden>
+    RAMB36_X0Y20         RAMB36E1 (Hold_ramb36e1_CLKBWRCLK_ADDRBWRADDR[12])
+                                                      0.183    -0.098    bridge/observer/memory_reg_0
+  -------------------------------------------------------------------
+                         required time                          0.098    <hidden>
+                         arrival time                          -0.027    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  0.070    <hidden>
+
+Slack (MET) :             0.071ns  (arrival time - required time)
+  Source:                 bridge/trace_address_reg[4]/C
+                            (rising edge-triggered cell FDRE clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            bridge/observer/memory_reg_4/ADDRBWRADDR[6]
+                            (rising edge-triggered cell RAMB36E1 clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk50_raw
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (clk50_raw rise@0.000ns - clk50_raw rise@0.000ns)
+  Data Path Delay:        0.312ns  (logic 0.141ns (45.156%)  route 0.171ns (54.844%))
+  Logic Levels:           0  
+  Clock Path Skew:        0.058ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    -0.786ns
+    Source Clock Delay      (SCD):    -0.590ns
+    Clock Pessimism Removal (CPR):    -0.254ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk50_raw rise edge)
+                                                      0.000     0.000 r  <hidden>
+    E3                                                0.000     0.000 r  clk100
+                         net (fo=0)                   0.000     0.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         0.250     0.250 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           0.440     0.690    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -2.379    -1.689 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           0.499    -1.190    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.026    -1.164 r  core_clock_buf/O
+                         net (fo=2049, routed)        0.574    -0.590    bridge/clk50
+    SLICE_X9Y92          FDRE                                         r  bridge/trace_address_reg[4]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X9Y92          FDRE (Prop_fdre_C_Q)         0.141    -0.449 r  bridge/trace_address_reg[4]/Q
+                         net (fo=7, routed)           0.171    -0.278    bridge/observer/memory_reg_0_0[4]
+    RAMB36_X0Y18         RAMB36E1                                     r  bridge/observer/memory_reg_4/ADDRBWRADDR[6]
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk50_raw rise edge)
+                                                      0.000     0.000 r  <hidden>
+    E3                                                0.000     0.000 r  clk100
+                         net (fo=0)                   0.000     0.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         0.438     0.438 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           0.480     0.918    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -3.163    -2.245 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           0.544    -1.702    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.029    -1.673 r  core_clock_buf/O
+                         net (fo=2049, routed)        0.887    -0.786    bridge/observer/clk50
+    RAMB36_X0Y18         RAMB36E1                                     r  bridge/observer/memory_reg_4/CLKBWRCLK
+                         clock pessimism              0.254    -0.532    <hidden>
+    RAMB36_X0Y18         RAMB36E1 (Hold_ramb36e1_CLKBWRCLK_ADDRBWRADDR[6])
+                                                      0.183    -0.349    bridge/observer/memory_reg_4
+  -------------------------------------------------------------------
+                         required time                          0.349    <hidden>
+                         arrival time                          -0.278    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  0.071    <hidden>
+
+Slack (MET) :             0.071ns  (arrival time - required time)
+  Source:                 bridge/emulator/pio/engines[1].core/rx_fifo/write_ptr_reg[1]/C
+                            (rising edge-triggered cell FDRE clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            bridge/emulator/pio/engines[1].core/rx_fifo/words_reg_0_3_0_5/RAMA/WADR1
+                            (rising edge-triggered cell RAMD32 clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk50_raw
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (clk50_raw rise@0.000ns - clk50_raw rise@0.000ns)
+  Data Path Delay:        0.415ns  (logic 0.141ns (33.986%)  route 0.274ns (66.014%))
+  Logic Levels:           0  
+  Clock Path Skew:        0.035ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    -0.841ns
+    Source Clock Delay      (SCD):    -0.601ns
+    Clock Pessimism Removal (CPR):    -0.275ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk50_raw rise edge)
+                                                      0.000     0.000 r  <hidden>
+    E3                                                0.000     0.000 r  clk100
+                         net (fo=0)                   0.000     0.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         0.250     0.250 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           0.440     0.690    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -2.379    -1.689 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           0.499    -1.190    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.026    -1.164 r  core_clock_buf/O
+                         net (fo=2049, routed)        0.563    -0.601    bridge/emulator/pio/engines[1].core/rx_fifo/clk50
+    SLICE_X40Y147        FDRE                                         r  bridge/emulator/pio/engines[1].core/rx_fifo/write_ptr_reg[1]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X40Y147        FDRE (Prop_fdre_C_Q)         0.141    -0.460 r  bridge/emulator/pio/engines[1].core/rx_fifo/write_ptr_reg[1]/Q
+                         net (fo=47, routed)          0.274    -0.186    bridge/emulator/pio/engines[1].core/rx_fifo/words_reg_0_3_0_5/ADDRD1
+    SLICE_X42Y146        RAMD32                                       r  bridge/emulator/pio/engines[1].core/rx_fifo/words_reg_0_3_0_5/RAMA/WADR1
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk50_raw rise edge)
+                                                      0.000     0.000 r  <hidden>
+    E3                                                0.000     0.000 r  clk100
+                         net (fo=0)                   0.000     0.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         0.438     0.438 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           0.480     0.918    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -3.163    -2.245 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           0.544    -1.702    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.029    -1.673 r  core_clock_buf/O
+                         net (fo=2049, routed)        0.831    -0.841    bridge/emulator/pio/engines[1].core/rx_fifo/words_reg_0_3_0_5/WCLK
+    SLICE_X42Y146        RAMD32                                       r  bridge/emulator/pio/engines[1].core/rx_fifo/words_reg_0_3_0_5/RAMA/CLK
+                         clock pessimism              0.275    -0.566    <hidden>
+    SLICE_X42Y146        RAMD32 (Hold_ramd32_CLK_WADR1)
+                                                      0.309    -0.257    bridge/emulator/pio/engines[1].core/rx_fifo/words_reg_0_3_0_5/RAMA
+  -------------------------------------------------------------------
+                         required time                          0.257    <hidden>
+                         arrival time                          -0.186    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  0.071    <hidden>
+
+Slack (MET) :             0.071ns  (arrival time - required time)
+  Source:                 bridge/emulator/pio/engines[1].core/rx_fifo/write_ptr_reg[1]/C
+                            (rising edge-triggered cell FDRE clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            bridge/emulator/pio/engines[1].core/rx_fifo/words_reg_0_3_0_5/RAMA_D1/WADR1
+                            (rising edge-triggered cell RAMD32 clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk50_raw
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (clk50_raw rise@0.000ns - clk50_raw rise@0.000ns)
+  Data Path Delay:        0.415ns  (logic 0.141ns (33.986%)  route 0.274ns (66.014%))
+  Logic Levels:           0  
+  Clock Path Skew:        0.035ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    -0.841ns
+    Source Clock Delay      (SCD):    -0.601ns
+    Clock Pessimism Removal (CPR):    -0.275ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk50_raw rise edge)
+                                                      0.000     0.000 r  <hidden>
+    E3                                                0.000     0.000 r  clk100
+                         net (fo=0)                   0.000     0.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         0.250     0.250 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           0.440     0.690    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -2.379    -1.689 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           0.499    -1.190    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.026    -1.164 r  core_clock_buf/O
+                         net (fo=2049, routed)        0.563    -0.601    bridge/emulator/pio/engines[1].core/rx_fifo/clk50
+    SLICE_X40Y147        FDRE                                         r  bridge/emulator/pio/engines[1].core/rx_fifo/write_ptr_reg[1]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X40Y147        FDRE (Prop_fdre_C_Q)         0.141    -0.460 r  bridge/emulator/pio/engines[1].core/rx_fifo/write_ptr_reg[1]/Q
+                         net (fo=47, routed)          0.274    -0.186    bridge/emulator/pio/engines[1].core/rx_fifo/words_reg_0_3_0_5/ADDRD1
+    SLICE_X42Y146        RAMD32                                       r  bridge/emulator/pio/engines[1].core/rx_fifo/words_reg_0_3_0_5/RAMA_D1/WADR1
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk50_raw rise edge)
+                                                      0.000     0.000 r  <hidden>
+    E3                                                0.000     0.000 r  clk100
+                         net (fo=0)                   0.000     0.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         0.438     0.438 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           0.480     0.918    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -3.163    -2.245 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           0.544    -1.702    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.029    -1.673 r  core_clock_buf/O
+                         net (fo=2049, routed)        0.831    -0.841    bridge/emulator/pio/engines[1].core/rx_fifo/words_reg_0_3_0_5/WCLK
+    SLICE_X42Y146        RAMD32                                       r  bridge/emulator/pio/engines[1].core/rx_fifo/words_reg_0_3_0_5/RAMA_D1/CLK
+                         clock pessimism              0.275    -0.566    <hidden>
+    SLICE_X42Y146        RAMD32 (Hold_ramd32_CLK_WADR1)
+                                                      0.309    -0.257    bridge/emulator/pio/engines[1].core/rx_fifo/words_reg_0_3_0_5/RAMA_D1
+  -------------------------------------------------------------------
+                         required time                          0.257    <hidden>
+                         arrival time                          -0.186    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  0.071    <hidden>
+
+Slack (MET) :             0.071ns  (arrival time - required time)
+  Source:                 bridge/emulator/pio/engines[1].core/rx_fifo/write_ptr_reg[1]/C
+                            (rising edge-triggered cell FDRE clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            bridge/emulator/pio/engines[1].core/rx_fifo/words_reg_0_3_0_5/RAMB/WADR1
+                            (rising edge-triggered cell RAMD32 clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk50_raw
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (clk50_raw rise@0.000ns - clk50_raw rise@0.000ns)
+  Data Path Delay:        0.415ns  (logic 0.141ns (33.986%)  route 0.274ns (66.014%))
+  Logic Levels:           0  
+  Clock Path Skew:        0.035ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    -0.841ns
+    Source Clock Delay      (SCD):    -0.601ns
+    Clock Pessimism Removal (CPR):    -0.275ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk50_raw rise edge)
+                                                      0.000     0.000 r  <hidden>
+    E3                                                0.000     0.000 r  clk100
+                         net (fo=0)                   0.000     0.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         0.250     0.250 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           0.440     0.690    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -2.379    -1.689 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           0.499    -1.190    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.026    -1.164 r  core_clock_buf/O
+                         net (fo=2049, routed)        0.563    -0.601    bridge/emulator/pio/engines[1].core/rx_fifo/clk50
+    SLICE_X40Y147        FDRE                                         r  bridge/emulator/pio/engines[1].core/rx_fifo/write_ptr_reg[1]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X40Y147        FDRE (Prop_fdre_C_Q)         0.141    -0.460 r  bridge/emulator/pio/engines[1].core/rx_fifo/write_ptr_reg[1]/Q
+                         net (fo=47, routed)          0.274    -0.186    bridge/emulator/pio/engines[1].core/rx_fifo/words_reg_0_3_0_5/ADDRD1
+    SLICE_X42Y146        RAMD32                                       r  bridge/emulator/pio/engines[1].core/rx_fifo/words_reg_0_3_0_5/RAMB/WADR1
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk50_raw rise edge)
+                                                      0.000     0.000 r  <hidden>
+    E3                                                0.000     0.000 r  clk100
+                         net (fo=0)                   0.000     0.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         0.438     0.438 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           0.480     0.918    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -3.163    -2.245 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           0.544    -1.702    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.029    -1.673 r  core_clock_buf/O
+                         net (fo=2049, routed)        0.831    -0.841    bridge/emulator/pio/engines[1].core/rx_fifo/words_reg_0_3_0_5/WCLK
+    SLICE_X42Y146        RAMD32                                       r  bridge/emulator/pio/engines[1].core/rx_fifo/words_reg_0_3_0_5/RAMB/CLK
+                         clock pessimism              0.275    -0.566    <hidden>
+    SLICE_X42Y146        RAMD32 (Hold_ramd32_CLK_WADR1)
+                                                      0.309    -0.257    bridge/emulator/pio/engines[1].core/rx_fifo/words_reg_0_3_0_5/RAMB
+  -------------------------------------------------------------------
+                         required time                          0.257    <hidden>
+                         arrival time                          -0.186    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  0.071    <hidden>
+
+Slack (MET) :             0.071ns  (arrival time - required time)
+  Source:                 bridge/emulator/pio/engines[1].core/rx_fifo/write_ptr_reg[1]/C
+                            (rising edge-triggered cell FDRE clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            bridge/emulator/pio/engines[1].core/rx_fifo/words_reg_0_3_0_5/RAMB_D1/WADR1
+                            (rising edge-triggered cell RAMD32 clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk50_raw
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (clk50_raw rise@0.000ns - clk50_raw rise@0.000ns)
+  Data Path Delay:        0.415ns  (logic 0.141ns (33.986%)  route 0.274ns (66.014%))
+  Logic Levels:           0  
+  Clock Path Skew:        0.035ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    -0.841ns
+    Source Clock Delay      (SCD):    -0.601ns
+    Clock Pessimism Removal (CPR):    -0.275ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk50_raw rise edge)
+                                                      0.000     0.000 r  <hidden>
+    E3                                                0.000     0.000 r  clk100
+                         net (fo=0)                   0.000     0.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         0.250     0.250 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           0.440     0.690    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -2.379    -1.689 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           0.499    -1.190    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.026    -1.164 r  core_clock_buf/O
+                         net (fo=2049, routed)        0.563    -0.601    bridge/emulator/pio/engines[1].core/rx_fifo/clk50
+    SLICE_X40Y147        FDRE                                         r  bridge/emulator/pio/engines[1].core/rx_fifo/write_ptr_reg[1]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X40Y147        FDRE (Prop_fdre_C_Q)         0.141    -0.460 r  bridge/emulator/pio/engines[1].core/rx_fifo/write_ptr_reg[1]/Q
+                         net (fo=47, routed)          0.274    -0.186    bridge/emulator/pio/engines[1].core/rx_fifo/words_reg_0_3_0_5/ADDRD1
+    SLICE_X42Y146        RAMD32                                       r  bridge/emulator/pio/engines[1].core/rx_fifo/words_reg_0_3_0_5/RAMB_D1/WADR1
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk50_raw rise edge)
+                                                      0.000     0.000 r  <hidden>
+    E3                                                0.000     0.000 r  clk100
+                         net (fo=0)                   0.000     0.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         0.438     0.438 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           0.480     0.918    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -3.163    -2.245 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           0.544    -1.702    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.029    -1.673 r  core_clock_buf/O
+                         net (fo=2049, routed)        0.831    -0.841    bridge/emulator/pio/engines[1].core/rx_fifo/words_reg_0_3_0_5/WCLK
+    SLICE_X42Y146        RAMD32                                       r  bridge/emulator/pio/engines[1].core/rx_fifo/words_reg_0_3_0_5/RAMB_D1/CLK
+                         clock pessimism              0.275    -0.566    <hidden>
+    SLICE_X42Y146        RAMD32 (Hold_ramd32_CLK_WADR1)
+                                                      0.309    -0.257    bridge/emulator/pio/engines[1].core/rx_fifo/words_reg_0_3_0_5/RAMB_D1
+  -------------------------------------------------------------------
+                         required time                          0.257    <hidden>
+                         arrival time                          -0.186    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  0.071    <hidden>
+
+Slack (MET) :             0.071ns  (arrival time - required time)
+  Source:                 bridge/emulator/pio/engines[1].core/rx_fifo/write_ptr_reg[1]/C
+                            (rising edge-triggered cell FDRE clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            bridge/emulator/pio/engines[1].core/rx_fifo/words_reg_0_3_0_5/RAMC/WADR1
+                            (rising edge-triggered cell RAMD32 clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk50_raw
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (clk50_raw rise@0.000ns - clk50_raw rise@0.000ns)
+  Data Path Delay:        0.415ns  (logic 0.141ns (33.986%)  route 0.274ns (66.014%))
+  Logic Levels:           0  
+  Clock Path Skew:        0.035ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    -0.841ns
+    Source Clock Delay      (SCD):    -0.601ns
+    Clock Pessimism Removal (CPR):    -0.275ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk50_raw rise edge)
+                                                      0.000     0.000 r  <hidden>
+    E3                                                0.000     0.000 r  clk100
+                         net (fo=0)                   0.000     0.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         0.250     0.250 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           0.440     0.690    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -2.379    -1.689 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           0.499    -1.190    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.026    -1.164 r  core_clock_buf/O
+                         net (fo=2049, routed)        0.563    -0.601    bridge/emulator/pio/engines[1].core/rx_fifo/clk50
+    SLICE_X40Y147        FDRE                                         r  bridge/emulator/pio/engines[1].core/rx_fifo/write_ptr_reg[1]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X40Y147        FDRE (Prop_fdre_C_Q)         0.141    -0.460 r  bridge/emulator/pio/engines[1].core/rx_fifo/write_ptr_reg[1]/Q
+                         net (fo=47, routed)          0.274    -0.186    bridge/emulator/pio/engines[1].core/rx_fifo/words_reg_0_3_0_5/ADDRD1
+    SLICE_X42Y146        RAMD32                                       r  bridge/emulator/pio/engines[1].core/rx_fifo/words_reg_0_3_0_5/RAMC/WADR1
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk50_raw rise edge)
+                                                      0.000     0.000 r  <hidden>
+    E3                                                0.000     0.000 r  clk100
+                         net (fo=0)                   0.000     0.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         0.438     0.438 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           0.480     0.918    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -3.163    -2.245 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           0.544    -1.702    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.029    -1.673 r  core_clock_buf/O
+                         net (fo=2049, routed)        0.831    -0.841    bridge/emulator/pio/engines[1].core/rx_fifo/words_reg_0_3_0_5/WCLK
+    SLICE_X42Y146        RAMD32                                       r  bridge/emulator/pio/engines[1].core/rx_fifo/words_reg_0_3_0_5/RAMC/CLK
+                         clock pessimism              0.275    -0.566    <hidden>
+    SLICE_X42Y146        RAMD32 (Hold_ramd32_CLK_WADR1)
+                                                      0.309    -0.257    bridge/emulator/pio/engines[1].core/rx_fifo/words_reg_0_3_0_5/RAMC
+  -------------------------------------------------------------------
+                         required time                          0.257    <hidden>
+                         arrival time                          -0.186    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  0.071    <hidden>
+
+Slack (MET) :             0.071ns  (arrival time - required time)
+  Source:                 bridge/emulator/pio/engines[1].core/rx_fifo/write_ptr_reg[1]/C
+                            (rising edge-triggered cell FDRE clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            bridge/emulator/pio/engines[1].core/rx_fifo/words_reg_0_3_0_5/RAMC_D1/WADR1
+                            (rising edge-triggered cell RAMD32 clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk50_raw
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (clk50_raw rise@0.000ns - clk50_raw rise@0.000ns)
+  Data Path Delay:        0.415ns  (logic 0.141ns (33.986%)  route 0.274ns (66.014%))
+  Logic Levels:           0  
+  Clock Path Skew:        0.035ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    -0.841ns
+    Source Clock Delay      (SCD):    -0.601ns
+    Clock Pessimism Removal (CPR):    -0.275ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk50_raw rise edge)
+                                                      0.000     0.000 r  <hidden>
+    E3                                                0.000     0.000 r  clk100
+                         net (fo=0)                   0.000     0.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         0.250     0.250 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           0.440     0.690    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -2.379    -1.689 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           0.499    -1.190    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.026    -1.164 r  core_clock_buf/O
+                         net (fo=2049, routed)        0.563    -0.601    bridge/emulator/pio/engines[1].core/rx_fifo/clk50
+    SLICE_X40Y147        FDRE                                         r  bridge/emulator/pio/engines[1].core/rx_fifo/write_ptr_reg[1]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X40Y147        FDRE (Prop_fdre_C_Q)         0.141    -0.460 r  bridge/emulator/pio/engines[1].core/rx_fifo/write_ptr_reg[1]/Q
+                         net (fo=47, routed)          0.274    -0.186    bridge/emulator/pio/engines[1].core/rx_fifo/words_reg_0_3_0_5/ADDRD1
+    SLICE_X42Y146        RAMD32                                       r  bridge/emulator/pio/engines[1].core/rx_fifo/words_reg_0_3_0_5/RAMC_D1/WADR1
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk50_raw rise edge)
+                                                      0.000     0.000 r  <hidden>
+    E3                                                0.000     0.000 r  clk100
+                         net (fo=0)                   0.000     0.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         0.438     0.438 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           0.480     0.918    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -3.163    -2.245 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           0.544    -1.702    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.029    -1.673 r  core_clock_buf/O
+                         net (fo=2049, routed)        0.831    -0.841    bridge/emulator/pio/engines[1].core/rx_fifo/words_reg_0_3_0_5/WCLK
+    SLICE_X42Y146        RAMD32                                       r  bridge/emulator/pio/engines[1].core/rx_fifo/words_reg_0_3_0_5/RAMC_D1/CLK
+                         clock pessimism              0.275    -0.566    <hidden>
+    SLICE_X42Y146        RAMD32 (Hold_ramd32_CLK_WADR1)
+                                                      0.309    -0.257    bridge/emulator/pio/engines[1].core/rx_fifo/words_reg_0_3_0_5/RAMC_D1
+  -------------------------------------------------------------------
+                         required time                          0.257    <hidden>
+                         arrival time                          -0.186    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  0.071    <hidden>
+
+Slack (MET) :             0.071ns  (arrival time - required time)
+  Source:                 bridge/emulator/pio/engines[1].core/rx_fifo/write_ptr_reg[1]/C
+                            (rising edge-triggered cell FDRE clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            bridge/emulator/pio/engines[1].core/rx_fifo/words_reg_0_3_0_5/RAMD/ADR1
+                            (rising edge-triggered cell RAMS32 clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk50_raw
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (clk50_raw rise@0.000ns - clk50_raw rise@0.000ns)
+  Data Path Delay:        0.415ns  (logic 0.141ns (33.986%)  route 0.274ns (66.014%))
+  Logic Levels:           0  
+  Clock Path Skew:        0.035ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    -0.841ns
+    Source Clock Delay      (SCD):    -0.601ns
+    Clock Pessimism Removal (CPR):    -0.275ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk50_raw rise edge)
+                                                      0.000     0.000 r  <hidden>
+    E3                                                0.000     0.000 r  clk100
+                         net (fo=0)                   0.000     0.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         0.250     0.250 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           0.440     0.690    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -2.379    -1.689 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           0.499    -1.190    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.026    -1.164 r  core_clock_buf/O
+                         net (fo=2049, routed)        0.563    -0.601    bridge/emulator/pio/engines[1].core/rx_fifo/clk50
+    SLICE_X40Y147        FDRE                                         r  bridge/emulator/pio/engines[1].core/rx_fifo/write_ptr_reg[1]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X40Y147        FDRE (Prop_fdre_C_Q)         0.141    -0.460 r  bridge/emulator/pio/engines[1].core/rx_fifo/write_ptr_reg[1]/Q
+                         net (fo=47, routed)          0.274    -0.186    bridge/emulator/pio/engines[1].core/rx_fifo/words_reg_0_3_0_5/ADDRD1
+    SLICE_X42Y146        RAMS32                                       r  bridge/emulator/pio/engines[1].core/rx_fifo/words_reg_0_3_0_5/RAMD/ADR1
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk50_raw rise edge)
+                                                      0.000     0.000 r  <hidden>
+    E3                                                0.000     0.000 r  clk100
+                         net (fo=0)                   0.000     0.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         0.438     0.438 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           0.480     0.918    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -3.163    -2.245 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           0.544    -1.702    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.029    -1.673 r  core_clock_buf/O
+                         net (fo=2049, routed)        0.831    -0.841    bridge/emulator/pio/engines[1].core/rx_fifo/words_reg_0_3_0_5/WCLK
+    SLICE_X42Y146        RAMS32                                       r  bridge/emulator/pio/engines[1].core/rx_fifo/words_reg_0_3_0_5/RAMD/CLK
+                         clock pessimism              0.275    -0.566    <hidden>
+    SLICE_X42Y146        RAMS32 (Hold_rams32_CLK_ADR1)
+                                                      0.309    -0.257    bridge/emulator/pio/engines[1].core/rx_fifo/words_reg_0_3_0_5/RAMD
+  -------------------------------------------------------------------
+                         required time                          0.257    <hidden>
+                         arrival time                          -0.186    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  0.071    <hidden>
+
+Slack (MET) :             0.071ns  (arrival time - required time)
+  Source:                 bridge/emulator/pio/engines[1].core/rx_fifo/write_ptr_reg[1]/C
+                            (rising edge-triggered cell FDRE clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            bridge/emulator/pio/engines[1].core/rx_fifo/words_reg_0_3_0_5/RAMD_D1/ADR1
+                            (rising edge-triggered cell RAMS32 clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk50_raw
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (clk50_raw rise@0.000ns - clk50_raw rise@0.000ns)
+  Data Path Delay:        0.415ns  (logic 0.141ns (33.986%)  route 0.274ns (66.014%))
+  Logic Levels:           0  
+  Clock Path Skew:        0.035ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    -0.841ns
+    Source Clock Delay      (SCD):    -0.601ns
+    Clock Pessimism Removal (CPR):    -0.275ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk50_raw rise edge)
+                                                      0.000     0.000 r  <hidden>
+    E3                                                0.000     0.000 r  clk100
+                         net (fo=0)                   0.000     0.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         0.250     0.250 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           0.440     0.690    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -2.379    -1.689 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           0.499    -1.190    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.026    -1.164 r  core_clock_buf/O
+                         net (fo=2049, routed)        0.563    -0.601    bridge/emulator/pio/engines[1].core/rx_fifo/clk50
+    SLICE_X40Y147        FDRE                                         r  bridge/emulator/pio/engines[1].core/rx_fifo/write_ptr_reg[1]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X40Y147        FDRE (Prop_fdre_C_Q)         0.141    -0.460 r  bridge/emulator/pio/engines[1].core/rx_fifo/write_ptr_reg[1]/Q
+                         net (fo=47, routed)          0.274    -0.186    bridge/emulator/pio/engines[1].core/rx_fifo/words_reg_0_3_0_5/ADDRD1
+    SLICE_X42Y146        RAMS32                                       r  bridge/emulator/pio/engines[1].core/rx_fifo/words_reg_0_3_0_5/RAMD_D1/ADR1
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk50_raw rise edge)
+                                                      0.000     0.000 r  <hidden>
+    E3                                                0.000     0.000 r  clk100
+                         net (fo=0)                   0.000     0.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         0.438     0.438 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           0.480     0.918    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -3.163    -2.245 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           0.544    -1.702    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.029    -1.673 r  core_clock_buf/O
+                         net (fo=2049, routed)        0.831    -0.841    bridge/emulator/pio/engines[1].core/rx_fifo/words_reg_0_3_0_5/WCLK
+    SLICE_X42Y146        RAMS32                                       r  bridge/emulator/pio/engines[1].core/rx_fifo/words_reg_0_3_0_5/RAMD_D1/CLK
+                         clock pessimism              0.275    -0.566    <hidden>
+    SLICE_X42Y146        RAMS32 (Hold_rams32_CLK_ADR1)
+                                                      0.309    -0.257    bridge/emulator/pio/engines[1].core/rx_fifo/words_reg_0_3_0_5/RAMD_D1
+  -------------------------------------------------------------------
+                         required time                          0.257    <hidden>
+                         arrival time                          -0.186    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  0.071    <hidden>
+
+Slack (MET) :             0.072ns  (arrival time - required time)
+  Source:                 bridge/emulator/pio/engines[0].core/rx_fifo/write_ptr_reg[1]/C
+                            (rising edge-triggered cell FDRE clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            bridge/emulator/pio/engines[0].core/rx_fifo/words_reg_0_3_6_11/RAMA/WADR1
+                            (rising edge-triggered cell RAMD32 clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk50_raw
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (clk50_raw rise@0.000ns - clk50_raw rise@0.000ns)
+  Data Path Delay:        0.413ns  (logic 0.141ns (34.165%)  route 0.272ns (65.835%))
+  Logic Levels:           0  
+  Clock Path Skew:        0.032ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    -0.855ns
+    Source Clock Delay      (SCD):    -0.612ns
+    Clock Pessimism Removal (CPR):    -0.275ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk50_raw rise edge)
+                                                      0.000     0.000 r  <hidden>
+    E3                                                0.000     0.000 r  clk100
+                         net (fo=0)                   0.000     0.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         0.250     0.250 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           0.440     0.690    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -2.379    -1.689 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           0.499    -1.190    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.026    -1.164 r  core_clock_buf/O
+                         net (fo=2049, routed)        0.552    -0.612    bridge/emulator/pio/engines[0].core/rx_fifo/clk50
+    SLICE_X45Y128        FDRE                                         r  bridge/emulator/pio/engines[0].core/rx_fifo/write_ptr_reg[1]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X45Y128        FDRE (Prop_fdre_C_Q)         0.141    -0.471 r  bridge/emulator/pio/engines[0].core/rx_fifo/write_ptr_reg[1]/Q
+                         net (fo=47, routed)          0.272    -0.199    bridge/emulator/pio/engines[0].core/rx_fifo/words_reg_0_3_6_11/ADDRD1
+    SLICE_X46Y127        RAMD32                                       r  bridge/emulator/pio/engines[0].core/rx_fifo/words_reg_0_3_6_11/RAMA/WADR1
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk50_raw rise edge)
+                                                      0.000     0.000 r  <hidden>
+    E3                                                0.000     0.000 r  clk100
+                         net (fo=0)                   0.000     0.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         0.438     0.438 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           0.480     0.918    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -3.163    -2.245 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           0.544    -1.702    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.029    -1.673 r  core_clock_buf/O
+                         net (fo=2049, routed)        0.817    -0.855    bridge/emulator/pio/engines[0].core/rx_fifo/words_reg_0_3_6_11/WCLK
+    SLICE_X46Y127        RAMD32                                       r  bridge/emulator/pio/engines[0].core/rx_fifo/words_reg_0_3_6_11/RAMA/CLK
+                         clock pessimism              0.275    -0.580    <hidden>
+    SLICE_X46Y127        RAMD32 (Hold_ramd32_CLK_WADR1)
+                                                      0.309    -0.271    bridge/emulator/pio/engines[0].core/rx_fifo/words_reg_0_3_6_11/RAMA
+  -------------------------------------------------------------------
+                         required time                          0.271    <hidden>
+                         arrival time                          -0.199    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  0.072    <hidden>
+
+Slack (MET) :             0.072ns  (arrival time - required time)
+  Source:                 bridge/emulator/pio/engines[0].core/rx_fifo/write_ptr_reg[1]/C
+                            (rising edge-triggered cell FDRE clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            bridge/emulator/pio/engines[0].core/rx_fifo/words_reg_0_3_6_11/RAMA_D1/WADR1
+                            (rising edge-triggered cell RAMD32 clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk50_raw
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (clk50_raw rise@0.000ns - clk50_raw rise@0.000ns)
+  Data Path Delay:        0.413ns  (logic 0.141ns (34.165%)  route 0.272ns (65.835%))
+  Logic Levels:           0  
+  Clock Path Skew:        0.032ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    -0.855ns
+    Source Clock Delay      (SCD):    -0.612ns
+    Clock Pessimism Removal (CPR):    -0.275ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk50_raw rise edge)
+                                                      0.000     0.000 r  <hidden>
+    E3                                                0.000     0.000 r  clk100
+                         net (fo=0)                   0.000     0.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         0.250     0.250 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           0.440     0.690    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -2.379    -1.689 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           0.499    -1.190    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.026    -1.164 r  core_clock_buf/O
+                         net (fo=2049, routed)        0.552    -0.612    bridge/emulator/pio/engines[0].core/rx_fifo/clk50
+    SLICE_X45Y128        FDRE                                         r  bridge/emulator/pio/engines[0].core/rx_fifo/write_ptr_reg[1]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X45Y128        FDRE (Prop_fdre_C_Q)         0.141    -0.471 r  bridge/emulator/pio/engines[0].core/rx_fifo/write_ptr_reg[1]/Q
+                         net (fo=47, routed)          0.272    -0.199    bridge/emulator/pio/engines[0].core/rx_fifo/words_reg_0_3_6_11/ADDRD1
+    SLICE_X46Y127        RAMD32                                       r  bridge/emulator/pio/engines[0].core/rx_fifo/words_reg_0_3_6_11/RAMA_D1/WADR1
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk50_raw rise edge)
+                                                      0.000     0.000 r  <hidden>
+    E3                                                0.000     0.000 r  clk100
+                         net (fo=0)                   0.000     0.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         0.438     0.438 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           0.480     0.918    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -3.163    -2.245 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           0.544    -1.702    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.029    -1.673 r  core_clock_buf/O
+                         net (fo=2049, routed)        0.817    -0.855    bridge/emulator/pio/engines[0].core/rx_fifo/words_reg_0_3_6_11/WCLK
+    SLICE_X46Y127        RAMD32                                       r  bridge/emulator/pio/engines[0].core/rx_fifo/words_reg_0_3_6_11/RAMA_D1/CLK
+                         clock pessimism              0.275    -0.580    <hidden>
+    SLICE_X46Y127        RAMD32 (Hold_ramd32_CLK_WADR1)
+                                                      0.309    -0.271    bridge/emulator/pio/engines[0].core/rx_fifo/words_reg_0_3_6_11/RAMA_D1
+  -------------------------------------------------------------------
+                         required time                          0.271    <hidden>
+                         arrival time                          -0.199    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  0.072    <hidden>
+
+Slack (MET) :             0.072ns  (arrival time - required time)
+  Source:                 bridge/emulator/pio/engines[0].core/rx_fifo/write_ptr_reg[1]/C
+                            (rising edge-triggered cell FDRE clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            bridge/emulator/pio/engines[0].core/rx_fifo/words_reg_0_3_6_11/RAMB/WADR1
+                            (rising edge-triggered cell RAMD32 clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk50_raw
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (clk50_raw rise@0.000ns - clk50_raw rise@0.000ns)
+  Data Path Delay:        0.413ns  (logic 0.141ns (34.165%)  route 0.272ns (65.835%))
+  Logic Levels:           0  
+  Clock Path Skew:        0.032ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    -0.855ns
+    Source Clock Delay      (SCD):    -0.612ns
+    Clock Pessimism Removal (CPR):    -0.275ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk50_raw rise edge)
+                                                      0.000     0.000 r  <hidden>
+    E3                                                0.000     0.000 r  clk100
+                         net (fo=0)                   0.000     0.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         0.250     0.250 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           0.440     0.690    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -2.379    -1.689 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           0.499    -1.190    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.026    -1.164 r  core_clock_buf/O
+                         net (fo=2049, routed)        0.552    -0.612    bridge/emulator/pio/engines[0].core/rx_fifo/clk50
+    SLICE_X45Y128        FDRE                                         r  bridge/emulator/pio/engines[0].core/rx_fifo/write_ptr_reg[1]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X45Y128        FDRE (Prop_fdre_C_Q)         0.141    -0.471 r  bridge/emulator/pio/engines[0].core/rx_fifo/write_ptr_reg[1]/Q
+                         net (fo=47, routed)          0.272    -0.199    bridge/emulator/pio/engines[0].core/rx_fifo/words_reg_0_3_6_11/ADDRD1
+    SLICE_X46Y127        RAMD32                                       r  bridge/emulator/pio/engines[0].core/rx_fifo/words_reg_0_3_6_11/RAMB/WADR1
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk50_raw rise edge)
+                                                      0.000     0.000 r  <hidden>
+    E3                                                0.000     0.000 r  clk100
+                         net (fo=0)                   0.000     0.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         0.438     0.438 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           0.480     0.918    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -3.163    -2.245 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           0.544    -1.702    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.029    -1.673 r  core_clock_buf/O
+                         net (fo=2049, routed)        0.817    -0.855    bridge/emulator/pio/engines[0].core/rx_fifo/words_reg_0_3_6_11/WCLK
+    SLICE_X46Y127        RAMD32                                       r  bridge/emulator/pio/engines[0].core/rx_fifo/words_reg_0_3_6_11/RAMB/CLK
+                         clock pessimism              0.275    -0.580    <hidden>
+    SLICE_X46Y127        RAMD32 (Hold_ramd32_CLK_WADR1)
+                                                      0.309    -0.271    bridge/emulator/pio/engines[0].core/rx_fifo/words_reg_0_3_6_11/RAMB
+  -------------------------------------------------------------------
+                         required time                          0.271    <hidden>
+                         arrival time                          -0.199    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  0.072    <hidden>
+
+Slack (MET) :             0.072ns  (arrival time - required time)
+  Source:                 bridge/emulator/pio/engines[0].core/rx_fifo/write_ptr_reg[1]/C
+                            (rising edge-triggered cell FDRE clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            bridge/emulator/pio/engines[0].core/rx_fifo/words_reg_0_3_6_11/RAMB_D1/WADR1
+                            (rising edge-triggered cell RAMD32 clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk50_raw
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (clk50_raw rise@0.000ns - clk50_raw rise@0.000ns)
+  Data Path Delay:        0.413ns  (logic 0.141ns (34.165%)  route 0.272ns (65.835%))
+  Logic Levels:           0  
+  Clock Path Skew:        0.032ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    -0.855ns
+    Source Clock Delay      (SCD):    -0.612ns
+    Clock Pessimism Removal (CPR):    -0.275ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk50_raw rise edge)
+                                                      0.000     0.000 r  <hidden>
+    E3                                                0.000     0.000 r  clk100
+                         net (fo=0)                   0.000     0.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         0.250     0.250 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           0.440     0.690    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -2.379    -1.689 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           0.499    -1.190    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.026    -1.164 r  core_clock_buf/O
+                         net (fo=2049, routed)        0.552    -0.612    bridge/emulator/pio/engines[0].core/rx_fifo/clk50
+    SLICE_X45Y128        FDRE                                         r  bridge/emulator/pio/engines[0].core/rx_fifo/write_ptr_reg[1]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X45Y128        FDRE (Prop_fdre_C_Q)         0.141    -0.471 r  bridge/emulator/pio/engines[0].core/rx_fifo/write_ptr_reg[1]/Q
+                         net (fo=47, routed)          0.272    -0.199    bridge/emulator/pio/engines[0].core/rx_fifo/words_reg_0_3_6_11/ADDRD1
+    SLICE_X46Y127        RAMD32                                       r  bridge/emulator/pio/engines[0].core/rx_fifo/words_reg_0_3_6_11/RAMB_D1/WADR1
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk50_raw rise edge)
+                                                      0.000     0.000 r  <hidden>
+    E3                                                0.000     0.000 r  clk100
+                         net (fo=0)                   0.000     0.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         0.438     0.438 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           0.480     0.918    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -3.163    -2.245 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           0.544    -1.702    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.029    -1.673 r  core_clock_buf/O
+                         net (fo=2049, routed)        0.817    -0.855    bridge/emulator/pio/engines[0].core/rx_fifo/words_reg_0_3_6_11/WCLK
+    SLICE_X46Y127        RAMD32                                       r  bridge/emulator/pio/engines[0].core/rx_fifo/words_reg_0_3_6_11/RAMB_D1/CLK
+                         clock pessimism              0.275    -0.580    <hidden>
+    SLICE_X46Y127        RAMD32 (Hold_ramd32_CLK_WADR1)
+                                                      0.309    -0.271    bridge/emulator/pio/engines[0].core/rx_fifo/words_reg_0_3_6_11/RAMB_D1
+  -------------------------------------------------------------------
+                         required time                          0.271    <hidden>
+                         arrival time                          -0.199    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  0.072    <hidden>
+
+Slack (MET) :             0.072ns  (arrival time - required time)
+  Source:                 bridge/emulator/pio/engines[0].core/rx_fifo/write_ptr_reg[1]/C
+                            (rising edge-triggered cell FDRE clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            bridge/emulator/pio/engines[0].core/rx_fifo/words_reg_0_3_6_11/RAMC/WADR1
+                            (rising edge-triggered cell RAMD32 clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk50_raw
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (clk50_raw rise@0.000ns - clk50_raw rise@0.000ns)
+  Data Path Delay:        0.413ns  (logic 0.141ns (34.165%)  route 0.272ns (65.835%))
+  Logic Levels:           0  
+  Clock Path Skew:        0.032ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    -0.855ns
+    Source Clock Delay      (SCD):    -0.612ns
+    Clock Pessimism Removal (CPR):    -0.275ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk50_raw rise edge)
+                                                      0.000     0.000 r  <hidden>
+    E3                                                0.000     0.000 r  clk100
+                         net (fo=0)                   0.000     0.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         0.250     0.250 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           0.440     0.690    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -2.379    -1.689 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           0.499    -1.190    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.026    -1.164 r  core_clock_buf/O
+                         net (fo=2049, routed)        0.552    -0.612    bridge/emulator/pio/engines[0].core/rx_fifo/clk50
+    SLICE_X45Y128        FDRE                                         r  bridge/emulator/pio/engines[0].core/rx_fifo/write_ptr_reg[1]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X45Y128        FDRE (Prop_fdre_C_Q)         0.141    -0.471 r  bridge/emulator/pio/engines[0].core/rx_fifo/write_ptr_reg[1]/Q
+                         net (fo=47, routed)          0.272    -0.199    bridge/emulator/pio/engines[0].core/rx_fifo/words_reg_0_3_6_11/ADDRD1
+    SLICE_X46Y127        RAMD32                                       r  bridge/emulator/pio/engines[0].core/rx_fifo/words_reg_0_3_6_11/RAMC/WADR1
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk50_raw rise edge)
+                                                      0.000     0.000 r  <hidden>
+    E3                                                0.000     0.000 r  clk100
+                         net (fo=0)                   0.000     0.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         0.438     0.438 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           0.480     0.918    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -3.163    -2.245 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           0.544    -1.702    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.029    -1.673 r  core_clock_buf/O
+                         net (fo=2049, routed)        0.817    -0.855    bridge/emulator/pio/engines[0].core/rx_fifo/words_reg_0_3_6_11/WCLK
+    SLICE_X46Y127        RAMD32                                       r  bridge/emulator/pio/engines[0].core/rx_fifo/words_reg_0_3_6_11/RAMC/CLK
+                         clock pessimism              0.275    -0.580    <hidden>
+    SLICE_X46Y127        RAMD32 (Hold_ramd32_CLK_WADR1)
+                                                      0.309    -0.271    bridge/emulator/pio/engines[0].core/rx_fifo/words_reg_0_3_6_11/RAMC
+  -------------------------------------------------------------------
+                         required time                          0.271    <hidden>
+                         arrival time                          -0.199    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  0.072    <hidden>
+
+Slack (MET) :             0.072ns  (arrival time - required time)
+  Source:                 bridge/emulator/pio/engines[0].core/rx_fifo/write_ptr_reg[1]/C
+                            (rising edge-triggered cell FDRE clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            bridge/emulator/pio/engines[0].core/rx_fifo/words_reg_0_3_6_11/RAMC_D1/WADR1
+                            (rising edge-triggered cell RAMD32 clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk50_raw
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (clk50_raw rise@0.000ns - clk50_raw rise@0.000ns)
+  Data Path Delay:        0.413ns  (logic 0.141ns (34.165%)  route 0.272ns (65.835%))
+  Logic Levels:           0  
+  Clock Path Skew:        0.032ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    -0.855ns
+    Source Clock Delay      (SCD):    -0.612ns
+    Clock Pessimism Removal (CPR):    -0.275ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk50_raw rise edge)
+                                                      0.000     0.000 r  <hidden>
+    E3                                                0.000     0.000 r  clk100
+                         net (fo=0)                   0.000     0.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         0.250     0.250 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           0.440     0.690    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -2.379    -1.689 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           0.499    -1.190    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.026    -1.164 r  core_clock_buf/O
+                         net (fo=2049, routed)        0.552    -0.612    bridge/emulator/pio/engines[0].core/rx_fifo/clk50
+    SLICE_X45Y128        FDRE                                         r  bridge/emulator/pio/engines[0].core/rx_fifo/write_ptr_reg[1]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X45Y128        FDRE (Prop_fdre_C_Q)         0.141    -0.471 r  bridge/emulator/pio/engines[0].core/rx_fifo/write_ptr_reg[1]/Q
+                         net (fo=47, routed)          0.272    -0.199    bridge/emulator/pio/engines[0].core/rx_fifo/words_reg_0_3_6_11/ADDRD1
+    SLICE_X46Y127        RAMD32                                       r  bridge/emulator/pio/engines[0].core/rx_fifo/words_reg_0_3_6_11/RAMC_D1/WADR1
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk50_raw rise edge)
+                                                      0.000     0.000 r  <hidden>
+    E3                                                0.000     0.000 r  clk100
+                         net (fo=0)                   0.000     0.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         0.438     0.438 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           0.480     0.918    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -3.163    -2.245 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           0.544    -1.702    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.029    -1.673 r  core_clock_buf/O
+                         net (fo=2049, routed)        0.817    -0.855    bridge/emulator/pio/engines[0].core/rx_fifo/words_reg_0_3_6_11/WCLK
+    SLICE_X46Y127        RAMD32                                       r  bridge/emulator/pio/engines[0].core/rx_fifo/words_reg_0_3_6_11/RAMC_D1/CLK
+                         clock pessimism              0.275    -0.580    <hidden>
+    SLICE_X46Y127        RAMD32 (Hold_ramd32_CLK_WADR1)
+                                                      0.309    -0.271    bridge/emulator/pio/engines[0].core/rx_fifo/words_reg_0_3_6_11/RAMC_D1
+  -------------------------------------------------------------------
+                         required time                          0.271    <hidden>
+                         arrival time                          -0.199    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  0.072    <hidden>
+
+Slack (MET) :             0.072ns  (arrival time - required time)
+  Source:                 bridge/emulator/pio/engines[0].core/rx_fifo/write_ptr_reg[1]/C
+                            (rising edge-triggered cell FDRE clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            bridge/emulator/pio/engines[0].core/rx_fifo/words_reg_0_3_6_11/RAMD/ADR1
+                            (rising edge-triggered cell RAMS32 clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk50_raw
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (clk50_raw rise@0.000ns - clk50_raw rise@0.000ns)
+  Data Path Delay:        0.413ns  (logic 0.141ns (34.165%)  route 0.272ns (65.835%))
+  Logic Levels:           0  
+  Clock Path Skew:        0.032ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    -0.855ns
+    Source Clock Delay      (SCD):    -0.612ns
+    Clock Pessimism Removal (CPR):    -0.275ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk50_raw rise edge)
+                                                      0.000     0.000 r  <hidden>
+    E3                                                0.000     0.000 r  clk100
+                         net (fo=0)                   0.000     0.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         0.250     0.250 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           0.440     0.690    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -2.379    -1.689 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           0.499    -1.190    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.026    -1.164 r  core_clock_buf/O
+                         net (fo=2049, routed)        0.552    -0.612    bridge/emulator/pio/engines[0].core/rx_fifo/clk50
+    SLICE_X45Y128        FDRE                                         r  bridge/emulator/pio/engines[0].core/rx_fifo/write_ptr_reg[1]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X45Y128        FDRE (Prop_fdre_C_Q)         0.141    -0.471 r  bridge/emulator/pio/engines[0].core/rx_fifo/write_ptr_reg[1]/Q
+                         net (fo=47, routed)          0.272    -0.199    bridge/emulator/pio/engines[0].core/rx_fifo/words_reg_0_3_6_11/ADDRD1
+    SLICE_X46Y127        RAMS32                                       r  bridge/emulator/pio/engines[0].core/rx_fifo/words_reg_0_3_6_11/RAMD/ADR1
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk50_raw rise edge)
+                                                      0.000     0.000 r  <hidden>
+    E3                                                0.000     0.000 r  clk100
+                         net (fo=0)                   0.000     0.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         0.438     0.438 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           0.480     0.918    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -3.163    -2.245 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           0.544    -1.702    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.029    -1.673 r  core_clock_buf/O
+                         net (fo=2049, routed)        0.817    -0.855    bridge/emulator/pio/engines[0].core/rx_fifo/words_reg_0_3_6_11/WCLK
+    SLICE_X46Y127        RAMS32                                       r  bridge/emulator/pio/engines[0].core/rx_fifo/words_reg_0_3_6_11/RAMD/CLK
+                         clock pessimism              0.275    -0.580    <hidden>
+    SLICE_X46Y127        RAMS32 (Hold_rams32_CLK_ADR1)
+                                                      0.309    -0.271    bridge/emulator/pio/engines[0].core/rx_fifo/words_reg_0_3_6_11/RAMD
+  -------------------------------------------------------------------
+                         required time                          0.271    <hidden>
+                         arrival time                          -0.199    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  0.072    <hidden>
+
+
+
+

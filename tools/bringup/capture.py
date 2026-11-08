@@ -49,7 +49,7 @@ class Recorder:
         self.config = fixture.get('capture', {'mode': 'none'})
         self.current = None
 
-    async def arm(self, label, *, channel, decimation=0, immediate=False, expected=None):
+    async def arm(self, label, *, channel, decimation=0, immediate=False, falling=True, expected=None):
         if self.current is not None:
             raise RuntimeError('Finish or cancel the previous capture before arming another')
         mode = self.config.get('mode', 'none')
@@ -68,7 +68,7 @@ class Recorder:
         metadata = dict(status='ARMED', label=label, source='fpga_digital_observer',
             evidence_kind=getattr(self.io, 'evidence_kind', 'simulation'),
             image_sha256=self.image_hash, clock_hz=self.fixture['clock_hz'],
-            decimation=decimation, trigger=dict(channel=channel, falling=True, immediate=immediate),
+            decimation=decimation, trigger=dict(channel=channel, falling=falling, immediate=immediate),
             expected=expected or {}, fixture_loopbacks=self.config.get('loopbacks', {}),
             fixture_pad_conditions=self.fixture.get('pads', {}),
             signal_scope={name: ('physical_input' if name in PHYSICAL_INPUTS else 'internal_net') for name in CHANNELS},
@@ -79,7 +79,7 @@ class Recorder:
         save_json(directory/'capture.json', metadata)
         self.current = (directory, metadata)
         await self.io.trace_cancel()
-        await self.io.trace_arm(CHANNELS.index(channel), decimation=decimation, immediate=immediate)
+        await self.io.trace_arm(CHANNELS.index(channel), decimation=decimation, immediate=immediate, falling=falling)
         self.emit(dict(test=label, type='capture', status='ARMED', trigger=metadata['trigger']))
         return True
 

@@ -1,0 +1,116 @@
+{
+  "status": "PASS",
+  "evidence_kind": "simulation",
+  "kind": "usb_feeder",
+  "expectation": {
+    "kind": "usb_feeder",
+    "packets": [
+      {
+        "engine": 0,
+        "payload_hex": "ffffffffffffffff",
+        "data1": false,
+        "sequence": 101,
+        "channels": [
+          "pad0",
+          "pad1",
+          "pad2"
+        ]
+      },
+      {
+        "engine": 1,
+        "payload_hex": "0001020304050607",
+        "data1": true,
+        "sequence": 102,
+        "channels": [
+          "pad3",
+          "in0",
+          "in1"
+        ]
+      }
+    ]
+  },
+  "sample_count": 8192,
+  "max_sample_interval_s": 2.000000000001675e-08,
+  "scope": "sampled digital behavior; no analog compliance or timing signoff",
+  "physical_input_evidence": false,
+  "usb_feeder": [
+    {
+      "engine": 0,
+      "physical": {
+        "payload_hex": "ffffffffffffffff",
+        "data1": false,
+        "symbols": 111,
+        "edge_tolerance": 3,
+        "first_symbol_clock": 3,
+        "total_clocks": 3700,
+        "edge_quantization_min_clocks": -0.6666666666666666,
+        "edge_quantization_max_clocks": 0.0
+      },
+      "internal": {
+        "payload_hex": "ffffffffffffffff",
+        "data1": false,
+        "symbols": 111,
+        "edge_tolerance": 0,
+        "first_symbol_clock": 1,
+        "total_clocks": 3700,
+        "edge_quantization_min_clocks": -0.6666666666666666,
+        "edge_quantization_max_clocks": 0.0
+      }
+    },
+    {
+      "engine": 1,
+      "physical": {
+        "payload_hex": "0001020304050607",
+        "data1": true,
+        "symbols": 99,
+        "edge_tolerance": 3,
+        "first_symbol_clock": 20,
+        "total_clocks": 3300,
+        "edge_quantization_min_clocks": -0.6666666666666666,
+        "edge_quantization_max_clocks": 0.0
+      },
+      "internal": {
+        "payload_hex": "0001020304050607",
+        "data1": true,
+        "symbols": 99,
+        "edge_tolerance": 0,
+        "first_symbol_clock": 18,
+        "total_clocks": 3300,
+        "edge_quantization_min_clocks": -0.6666666666666666,
+        "edge_quantization_max_clocks": 0.0
+      }
+    }
+  ],
+  "loopbacks": {
+    "pad0": {
+      "output": "out0",
+      "inconsistent_samples": 0,
+      "scope": "sampled digital correlation"
+    },
+    "pad1": {
+      "output": "out1",
+      "inconsistent_samples": 0,
+      "scope": "sampled digital correlation"
+    },
+    "pad2": {
+      "output": "out2",
+      "inconsistent_samples": 0,
+      "scope": "sampled digital correlation"
+    },
+    "pad3": {
+      "output": "out3",
+      "inconsistent_samples": 0,
+      "scope": "sampled digital correlation"
+    },
+    "in0": {
+      "output": "out4",
+      "inconsistent_samples": 0,
+      "scope": "sampled digital correlation"
+    },
+    "in1": {
+      "output": "out5",
+      "inconsistent_samples": 0,
+      "scope": "sampled digital correlation"
+    }
+  }
+}

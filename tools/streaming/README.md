@@ -86,3 +86,13 @@ The [combined campaign report](../../docs/streaming_20261104.md) and
 retain measured results, inherited timing budgets and pending hardware work.
 Historical receipts retain their original machine-local paths and measured
 source snapshots. `verify_evidence.py` checks their bytes after relocation.
+
+## Autonomous FPGA feeder
+
+The [two-slot feeder](../../docs/fpga_packet_feeder.md) uploads complete USB
+symbol scripts before launch and services both engines locally through the
+unchanged four-word ASIC FIFOs. The opt-in FPGA image has passed routed
+timing/CDC/DRC; physical validation is pending. Its host API is in
+`feeder.py`; `feeder_hardware.py` runs finite packets and saves completion/
+optional physical-loopback capture evidence. The guide includes build,
+programming, loopback and offline-analysis commands.

@@ -1,0 +1,1787 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2026 Advanced Micro Devices, Inc. All Rights Reserved.
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2026.1 (win64) Build 6511674 Tue Jun 16 11:02:23 MDT 2026
+| Date         : Sat Nov  7 16:34:25 2026
+| Host         : ShanesPC running 64-bit major release  (build 9200)
+| Command      : report_timing -delay_type max -max_paths 20 -nworst 1 -file C:/Users/shane/Projects/JaneStreet-protocol-emulator-ASIC-competition/.bringup/feeder-builds/20261107-01/setup_paths.rpt
+| Design       : arty_bringup_top
+| Device       : 7a100t-csg324
+| Speed File   : -1  PRODUCTION 1.23 2018-06-13
+| Design State : Routed
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack (MET) :             5.050ns  (required time - arrival time)
+  Source:                 bridge/emulator/pio/engines[0].core/program_counter/pc_out_reg[0]_replica_1/C
+                            (rising edge-triggered cell FDRE clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_6_11/RAMA/WE
+                            (rising edge-triggered cell RAMD32 clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk50_raw
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            20.000ns  (clk50_raw rise@20.000ns - clk50_raw rise@0.000ns)
+  Data Path Delay:        14.294ns  (logic 3.128ns (21.883%)  route 11.166ns (78.117%))
+  Logic Levels:           13  (CARRY4=1 LUT2=1 LUT3=2 LUT4=2 LUT5=1 LUT6=5 RAMD32=1)
+  Clock Path Skew:        -0.041ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    -1.529ns = ( 18.471 - 20.000 ) 
+    Source Clock Delay      (SCD):    -0.928ns
+    Clock Pessimism Removal (CPR):    0.560ns
+  Clock Uncertainty:      0.082ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.147ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk50_raw rise edge)
+                                                      0.000     0.000 r  <hidden>
+    E3                                                0.000     0.000 r  clk100
+                         net (fo=0)                   0.000     0.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           1.233     2.715    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.070    -4.355 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           1.719    -2.636    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096    -2.540 r  core_clock_buf/O
+                         net (fo=2049, routed)        1.612    -0.928    bridge/emulator/pio/engines[0].core/program_counter/clk50
+    SLICE_X41Y131        FDRE                                         r  bridge/emulator/pio/engines[0].core/program_counter/pc_out_reg[0]_replica_1/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X41Y131        FDRE (Prop_fdre_C_Q)         0.456    -0.472 r  bridge/emulator/pio/engines[0].core/program_counter/pc_out_reg[0]_replica_1/Q
+                         net (fo=9, routed)           0.862     0.390    bridge/emulator/pio/engines[0].core/fetch/words_reg_0_31_1_1/DPRA0
+    SLICE_X38Y131        RAMD32 (Prop_ramd32_RADR0_O)
+                                                      0.124     0.514 f  bridge/emulator/pio/engines[0].core/fetch/words_reg_0_31_1_1/DP/O
+                         net (fo=89, routed)          1.566     2.079    bridge/emulator/pio/engines[0].core/fetch/instr_out[1]
+    SLICE_X29Y111        LUT3 (Prop_lut3_I2_O)        0.150     2.229 f  bridge/emulator/pio/engines[0].core/fetch/in_count[1]_i_2/O
+                         net (fo=236, routed)         1.981     4.210    bridge/emulator/pio/engines[0].core/fetch/exec_instruction_reg[1]
+    SLICE_X48Y127        LUT5 (Prop_lut5_I1_O)        0.326     4.536 r  bridge/emulator/pio/engines[0].core/fetch/in_count[5]_i_13_replica_2/O
+                         net (fo=2, routed)           0.465     5.001    bridge/emulator/pio/engines[0].core/fetch/bit_count[0]_repN_2
+    SLICE_X54Y127        LUT2 (Prop_lut2_I1_O)        0.124     5.125 r  bridge/emulator/pio/engines[0].core/fetch/in_count[5]_i_18/O
+                         net (fo=1, routed)           0.000     5.125    bridge/emulator/pio/engines[0].core/fetch/in_count[5]_i_18_n_0
+    SLICE_X54Y127        CARRY4 (Prop_carry4_S[1]_CO[2])
+                                                      0.574     5.699 r  bridge/emulator/pio/engines[0].core/fetch/in_count_reg[5]_i_9/CO[2]
+                         net (fo=10, routed)          0.709     6.409    bridge/emulator/pio/engines[0].core/fetch/in_count_reg[5]_i_9_n_1
+    SLICE_X54Y125        LUT4 (Prop_lut4_I1_O)        0.310     6.719 r  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_17/O
+                         net (fo=1, routed)           0.843     7.561    bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_17_n_0
+    SLICE_X54Y125        LUT6 (Prop_lut6_I0_O)        0.124     7.685 f  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_12/O
+                         net (fo=1, routed)           0.645     8.330    bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_12_n_0
+    SLICE_X48Y128        LUT6 (Prop_lut6_I5_O)        0.124     8.454 f  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_7/O
+                         net (fo=1, routed)           0.492     8.946    bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_7_n_0
+    SLICE_X45Y128        LUT6 (Prop_lut6_I1_O)        0.124     9.070 f  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_6/O
+                         net (fo=5, routed)           0.469     9.538    bridge/emulator/pio/engines[0].core/fetch/exec_instruction_reg[15]_9
+    SLICE_X46Y128        LUT3 (Prop_lut3_I0_O)        0.124     9.662 f  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_3/O
+                         net (fo=7, routed)           0.832    10.494    bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_3_n_0
+    SLICE_X52Y127        LUT4 (Prop_lut4_I3_O)        0.118    10.612 r  bridge/emulator/pio/engines[0].core/fetch/pc_out[4]_i_6/O
+                         net (fo=121, routed)         0.847    11.459    bridge/emulator/pio/engines[0].core/fetch/running_reg_0
+    SLICE_X43Y126        LUT6 (Prop_lut6_I5_O)        0.326    11.785 r  bridge/emulator/pio/engines[0].core/fetch/write_ptr[1]_i_6/O
+                         net (fo=9, routed)           0.540    12.325    bridge/emulator/pio/engines[0].core/tx_fifo/tx_pop
+    SLICE_X42Y124        LUT6 (Prop_lut6_I0_O)        0.124    12.449 r  bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_0_5_i_1/O
+                         net (fo=44, routed)          0.917    13.366    bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_6_11/WE
+    SLICE_X46Y114        RAMD32                                       r  bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_6_11/RAMA/WE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk50_raw rise edge)
+                                                     20.000    20.000 r  <hidden>
+    E3                                                0.000    20.000 r  clk100
+                         net (fo=0)                   0.000    20.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         1.411    21.411 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           1.162    22.573    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.324    15.249 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           1.639    16.888    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091    16.979 r  core_clock_buf/O
+                         net (fo=2049, routed)        1.492    18.471    bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_6_11/WCLK
+    SLICE_X46Y114        RAMD32                                       r  bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_6_11/RAMA/CLK
+                         clock pessimism              0.560    19.031    <hidden>
+                         clock uncertainty           -0.082    18.949    <hidden>
+    SLICE_X46Y114        RAMD32 (Setup_ramd32_CLK_WE)
+                                                     -0.533    18.416    bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_6_11/RAMA
+  -------------------------------------------------------------------
+                         required time                         18.416    <hidden>
+                         arrival time                         -13.366    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  5.050    <hidden>
+
+Slack (MET) :             5.050ns  (required time - arrival time)
+  Source:                 bridge/emulator/pio/engines[0].core/program_counter/pc_out_reg[0]_replica_1/C
+                            (rising edge-triggered cell FDRE clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_6_11/RAMA_D1/WE
+                            (rising edge-triggered cell RAMD32 clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk50_raw
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            20.000ns  (clk50_raw rise@20.000ns - clk50_raw rise@0.000ns)
+  Data Path Delay:        14.294ns  (logic 3.128ns (21.883%)  route 11.166ns (78.117%))
+  Logic Levels:           13  (CARRY4=1 LUT2=1 LUT3=2 LUT4=2 LUT5=1 LUT6=5 RAMD32=1)
+  Clock Path Skew:        -0.041ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    -1.529ns = ( 18.471 - 20.000 ) 
+    Source Clock Delay      (SCD):    -0.928ns
+    Clock Pessimism Removal (CPR):    0.560ns
+  Clock Uncertainty:      0.082ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.147ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk50_raw rise edge)
+                                                      0.000     0.000 r  <hidden>
+    E3                                                0.000     0.000 r  clk100
+                         net (fo=0)                   0.000     0.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           1.233     2.715    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.070    -4.355 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           1.719    -2.636    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096    -2.540 r  core_clock_buf/O
+                         net (fo=2049, routed)        1.612    -0.928    bridge/emulator/pio/engines[0].core/program_counter/clk50
+    SLICE_X41Y131        FDRE                                         r  bridge/emulator/pio/engines[0].core/program_counter/pc_out_reg[0]_replica_1/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X41Y131        FDRE (Prop_fdre_C_Q)         0.456    -0.472 r  bridge/emulator/pio/engines[0].core/program_counter/pc_out_reg[0]_replica_1/Q
+                         net (fo=9, routed)           0.862     0.390    bridge/emulator/pio/engines[0].core/fetch/words_reg_0_31_1_1/DPRA0
+    SLICE_X38Y131        RAMD32 (Prop_ramd32_RADR0_O)
+                                                      0.124     0.514 f  bridge/emulator/pio/engines[0].core/fetch/words_reg_0_31_1_1/DP/O
+                         net (fo=89, routed)          1.566     2.079    bridge/emulator/pio/engines[0].core/fetch/instr_out[1]
+    SLICE_X29Y111        LUT3 (Prop_lut3_I2_O)        0.150     2.229 f  bridge/emulator/pio/engines[0].core/fetch/in_count[1]_i_2/O
+                         net (fo=236, routed)         1.981     4.210    bridge/emulator/pio/engines[0].core/fetch/exec_instruction_reg[1]
+    SLICE_X48Y127        LUT5 (Prop_lut5_I1_O)        0.326     4.536 r  bridge/emulator/pio/engines[0].core/fetch/in_count[5]_i_13_replica_2/O
+                         net (fo=2, routed)           0.465     5.001    bridge/emulator/pio/engines[0].core/fetch/bit_count[0]_repN_2
+    SLICE_X54Y127        LUT2 (Prop_lut2_I1_O)        0.124     5.125 r  bridge/emulator/pio/engines[0].core/fetch/in_count[5]_i_18/O
+                         net (fo=1, routed)           0.000     5.125    bridge/emulator/pio/engines[0].core/fetch/in_count[5]_i_18_n_0
+    SLICE_X54Y127        CARRY4 (Prop_carry4_S[1]_CO[2])
+                                                      0.574     5.699 r  bridge/emulator/pio/engines[0].core/fetch/in_count_reg[5]_i_9/CO[2]
+                         net (fo=10, routed)          0.709     6.409    bridge/emulator/pio/engines[0].core/fetch/in_count_reg[5]_i_9_n_1
+    SLICE_X54Y125        LUT4 (Prop_lut4_I1_O)        0.310     6.719 r  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_17/O
+                         net (fo=1, routed)           0.843     7.561    bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_17_n_0
+    SLICE_X54Y125        LUT6 (Prop_lut6_I0_O)        0.124     7.685 f  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_12/O
+                         net (fo=1, routed)           0.645     8.330    bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_12_n_0
+    SLICE_X48Y128        LUT6 (Prop_lut6_I5_O)        0.124     8.454 f  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_7/O
+                         net (fo=1, routed)           0.492     8.946    bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_7_n_0
+    SLICE_X45Y128        LUT6 (Prop_lut6_I1_O)        0.124     9.070 f  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_6/O
+                         net (fo=5, routed)           0.469     9.538    bridge/emulator/pio/engines[0].core/fetch/exec_instruction_reg[15]_9
+    SLICE_X46Y128        LUT3 (Prop_lut3_I0_O)        0.124     9.662 f  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_3/O
+                         net (fo=7, routed)           0.832    10.494    bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_3_n_0
+    SLICE_X52Y127        LUT4 (Prop_lut4_I3_O)        0.118    10.612 r  bridge/emulator/pio/engines[0].core/fetch/pc_out[4]_i_6/O
+                         net (fo=121, routed)         0.847    11.459    bridge/emulator/pio/engines[0].core/fetch/running_reg_0
+    SLICE_X43Y126        LUT6 (Prop_lut6_I5_O)        0.326    11.785 r  bridge/emulator/pio/engines[0].core/fetch/write_ptr[1]_i_6/O
+                         net (fo=9, routed)           0.540    12.325    bridge/emulator/pio/engines[0].core/tx_fifo/tx_pop
+    SLICE_X42Y124        LUT6 (Prop_lut6_I0_O)        0.124    12.449 r  bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_0_5_i_1/O
+                         net (fo=44, routed)          0.917    13.366    bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_6_11/WE
+    SLICE_X46Y114        RAMD32                                       r  bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_6_11/RAMA_D1/WE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk50_raw rise edge)
+                                                     20.000    20.000 r  <hidden>
+    E3                                                0.000    20.000 r  clk100
+                         net (fo=0)                   0.000    20.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         1.411    21.411 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           1.162    22.573    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.324    15.249 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           1.639    16.888    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091    16.979 r  core_clock_buf/O
+                         net (fo=2049, routed)        1.492    18.471    bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_6_11/WCLK
+    SLICE_X46Y114        RAMD32                                       r  bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_6_11/RAMA_D1/CLK
+                         clock pessimism              0.560    19.031    <hidden>
+                         clock uncertainty           -0.082    18.949    <hidden>
+    SLICE_X46Y114        RAMD32 (Setup_ramd32_CLK_WE)
+                                                     -0.533    18.416    bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_6_11/RAMA_D1
+  -------------------------------------------------------------------
+                         required time                         18.416    <hidden>
+                         arrival time                         -13.366    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  5.050    <hidden>
+
+Slack (MET) :             5.050ns  (required time - arrival time)
+  Source:                 bridge/emulator/pio/engines[0].core/program_counter/pc_out_reg[0]_replica_1/C
+                            (rising edge-triggered cell FDRE clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_6_11/RAMB/WE
+                            (rising edge-triggered cell RAMD32 clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk50_raw
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            20.000ns  (clk50_raw rise@20.000ns - clk50_raw rise@0.000ns)
+  Data Path Delay:        14.294ns  (logic 3.128ns (21.883%)  route 11.166ns (78.117%))
+  Logic Levels:           13  (CARRY4=1 LUT2=1 LUT3=2 LUT4=2 LUT5=1 LUT6=5 RAMD32=1)
+  Clock Path Skew:        -0.041ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    -1.529ns = ( 18.471 - 20.000 ) 
+    Source Clock Delay      (SCD):    -0.928ns
+    Clock Pessimism Removal (CPR):    0.560ns
+  Clock Uncertainty:      0.082ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.147ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk50_raw rise edge)
+                                                      0.000     0.000 r  <hidden>
+    E3                                                0.000     0.000 r  clk100
+                         net (fo=0)                   0.000     0.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           1.233     2.715    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.070    -4.355 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           1.719    -2.636    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096    -2.540 r  core_clock_buf/O
+                         net (fo=2049, routed)        1.612    -0.928    bridge/emulator/pio/engines[0].core/program_counter/clk50
+    SLICE_X41Y131        FDRE                                         r  bridge/emulator/pio/engines[0].core/program_counter/pc_out_reg[0]_replica_1/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X41Y131        FDRE (Prop_fdre_C_Q)         0.456    -0.472 r  bridge/emulator/pio/engines[0].core/program_counter/pc_out_reg[0]_replica_1/Q
+                         net (fo=9, routed)           0.862     0.390    bridge/emulator/pio/engines[0].core/fetch/words_reg_0_31_1_1/DPRA0
+    SLICE_X38Y131        RAMD32 (Prop_ramd32_RADR0_O)
+                                                      0.124     0.514 f  bridge/emulator/pio/engines[0].core/fetch/words_reg_0_31_1_1/DP/O
+                         net (fo=89, routed)          1.566     2.079    bridge/emulator/pio/engines[0].core/fetch/instr_out[1]
+    SLICE_X29Y111        LUT3 (Prop_lut3_I2_O)        0.150     2.229 f  bridge/emulator/pio/engines[0].core/fetch/in_count[1]_i_2/O
+                         net (fo=236, routed)         1.981     4.210    bridge/emulator/pio/engines[0].core/fetch/exec_instruction_reg[1]
+    SLICE_X48Y127        LUT5 (Prop_lut5_I1_O)        0.326     4.536 r  bridge/emulator/pio/engines[0].core/fetch/in_count[5]_i_13_replica_2/O
+                         net (fo=2, routed)           0.465     5.001    bridge/emulator/pio/engines[0].core/fetch/bit_count[0]_repN_2
+    SLICE_X54Y127        LUT2 (Prop_lut2_I1_O)        0.124     5.125 r  bridge/emulator/pio/engines[0].core/fetch/in_count[5]_i_18/O
+                         net (fo=1, routed)           0.000     5.125    bridge/emulator/pio/engines[0].core/fetch/in_count[5]_i_18_n_0
+    SLICE_X54Y127        CARRY4 (Prop_carry4_S[1]_CO[2])
+                                                      0.574     5.699 r  bridge/emulator/pio/engines[0].core/fetch/in_count_reg[5]_i_9/CO[2]
+                         net (fo=10, routed)          0.709     6.409    bridge/emulator/pio/engines[0].core/fetch/in_count_reg[5]_i_9_n_1
+    SLICE_X54Y125        LUT4 (Prop_lut4_I1_O)        0.310     6.719 r  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_17/O
+                         net (fo=1, routed)           0.843     7.561    bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_17_n_0
+    SLICE_X54Y125        LUT6 (Prop_lut6_I0_O)        0.124     7.685 f  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_12/O
+                         net (fo=1, routed)           0.645     8.330    bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_12_n_0
+    SLICE_X48Y128        LUT6 (Prop_lut6_I5_O)        0.124     8.454 f  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_7/O
+                         net (fo=1, routed)           0.492     8.946    bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_7_n_0
+    SLICE_X45Y128        LUT6 (Prop_lut6_I1_O)        0.124     9.070 f  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_6/O
+                         net (fo=5, routed)           0.469     9.538    bridge/emulator/pio/engines[0].core/fetch/exec_instruction_reg[15]_9
+    SLICE_X46Y128        LUT3 (Prop_lut3_I0_O)        0.124     9.662 f  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_3/O
+                         net (fo=7, routed)           0.832    10.494    bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_3_n_0
+    SLICE_X52Y127        LUT4 (Prop_lut4_I3_O)        0.118    10.612 r  bridge/emulator/pio/engines[0].core/fetch/pc_out[4]_i_6/O
+                         net (fo=121, routed)         0.847    11.459    bridge/emulator/pio/engines[0].core/fetch/running_reg_0
+    SLICE_X43Y126        LUT6 (Prop_lut6_I5_O)        0.326    11.785 r  bridge/emulator/pio/engines[0].core/fetch/write_ptr[1]_i_6/O
+                         net (fo=9, routed)           0.540    12.325    bridge/emulator/pio/engines[0].core/tx_fifo/tx_pop
+    SLICE_X42Y124        LUT6 (Prop_lut6_I0_O)        0.124    12.449 r  bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_0_5_i_1/O
+                         net (fo=44, routed)          0.917    13.366    bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_6_11/WE
+    SLICE_X46Y114        RAMD32                                       r  bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_6_11/RAMB/WE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk50_raw rise edge)
+                                                     20.000    20.000 r  <hidden>
+    E3                                                0.000    20.000 r  clk100
+                         net (fo=0)                   0.000    20.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         1.411    21.411 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           1.162    22.573    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.324    15.249 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           1.639    16.888    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091    16.979 r  core_clock_buf/O
+                         net (fo=2049, routed)        1.492    18.471    bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_6_11/WCLK
+    SLICE_X46Y114        RAMD32                                       r  bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_6_11/RAMB/CLK
+                         clock pessimism              0.560    19.031    <hidden>
+                         clock uncertainty           -0.082    18.949    <hidden>
+    SLICE_X46Y114        RAMD32 (Setup_ramd32_CLK_WE)
+                                                     -0.533    18.416    bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_6_11/RAMB
+  -------------------------------------------------------------------
+                         required time                         18.416    <hidden>
+                         arrival time                         -13.366    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  5.050    <hidden>
+
+Slack (MET) :             5.050ns  (required time - arrival time)
+  Source:                 bridge/emulator/pio/engines[0].core/program_counter/pc_out_reg[0]_replica_1/C
+                            (rising edge-triggered cell FDRE clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_6_11/RAMB_D1/WE
+                            (rising edge-triggered cell RAMD32 clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk50_raw
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            20.000ns  (clk50_raw rise@20.000ns - clk50_raw rise@0.000ns)
+  Data Path Delay:        14.294ns  (logic 3.128ns (21.883%)  route 11.166ns (78.117%))
+  Logic Levels:           13  (CARRY4=1 LUT2=1 LUT3=2 LUT4=2 LUT5=1 LUT6=5 RAMD32=1)
+  Clock Path Skew:        -0.041ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    -1.529ns = ( 18.471 - 20.000 ) 
+    Source Clock Delay      (SCD):    -0.928ns
+    Clock Pessimism Removal (CPR):    0.560ns
+  Clock Uncertainty:      0.082ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.147ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk50_raw rise edge)
+                                                      0.000     0.000 r  <hidden>
+    E3                                                0.000     0.000 r  clk100
+                         net (fo=0)                   0.000     0.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           1.233     2.715    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.070    -4.355 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           1.719    -2.636    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096    -2.540 r  core_clock_buf/O
+                         net (fo=2049, routed)        1.612    -0.928    bridge/emulator/pio/engines[0].core/program_counter/clk50
+    SLICE_X41Y131        FDRE                                         r  bridge/emulator/pio/engines[0].core/program_counter/pc_out_reg[0]_replica_1/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X41Y131        FDRE (Prop_fdre_C_Q)         0.456    -0.472 r  bridge/emulator/pio/engines[0].core/program_counter/pc_out_reg[0]_replica_1/Q
+                         net (fo=9, routed)           0.862     0.390    bridge/emulator/pio/engines[0].core/fetch/words_reg_0_31_1_1/DPRA0
+    SLICE_X38Y131        RAMD32 (Prop_ramd32_RADR0_O)
+                                                      0.124     0.514 f  bridge/emulator/pio/engines[0].core/fetch/words_reg_0_31_1_1/DP/O
+                         net (fo=89, routed)          1.566     2.079    bridge/emulator/pio/engines[0].core/fetch/instr_out[1]
+    SLICE_X29Y111        LUT3 (Prop_lut3_I2_O)        0.150     2.229 f  bridge/emulator/pio/engines[0].core/fetch/in_count[1]_i_2/O
+                         net (fo=236, routed)         1.981     4.210    bridge/emulator/pio/engines[0].core/fetch/exec_instruction_reg[1]
+    SLICE_X48Y127        LUT5 (Prop_lut5_I1_O)        0.326     4.536 r  bridge/emulator/pio/engines[0].core/fetch/in_count[5]_i_13_replica_2/O
+                         net (fo=2, routed)           0.465     5.001    bridge/emulator/pio/engines[0].core/fetch/bit_count[0]_repN_2
+    SLICE_X54Y127        LUT2 (Prop_lut2_I1_O)        0.124     5.125 r  bridge/emulator/pio/engines[0].core/fetch/in_count[5]_i_18/O
+                         net (fo=1, routed)           0.000     5.125    bridge/emulator/pio/engines[0].core/fetch/in_count[5]_i_18_n_0
+    SLICE_X54Y127        CARRY4 (Prop_carry4_S[1]_CO[2])
+                                                      0.574     5.699 r  bridge/emulator/pio/engines[0].core/fetch/in_count_reg[5]_i_9/CO[2]
+                         net (fo=10, routed)          0.709     6.409    bridge/emulator/pio/engines[0].core/fetch/in_count_reg[5]_i_9_n_1
+    SLICE_X54Y125        LUT4 (Prop_lut4_I1_O)        0.310     6.719 r  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_17/O
+                         net (fo=1, routed)           0.843     7.561    bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_17_n_0
+    SLICE_X54Y125        LUT6 (Prop_lut6_I0_O)        0.124     7.685 f  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_12/O
+                         net (fo=1, routed)           0.645     8.330    bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_12_n_0
+    SLICE_X48Y128        LUT6 (Prop_lut6_I5_O)        0.124     8.454 f  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_7/O
+                         net (fo=1, routed)           0.492     8.946    bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_7_n_0
+    SLICE_X45Y128        LUT6 (Prop_lut6_I1_O)        0.124     9.070 f  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_6/O
+                         net (fo=5, routed)           0.469     9.538    bridge/emulator/pio/engines[0].core/fetch/exec_instruction_reg[15]_9
+    SLICE_X46Y128        LUT3 (Prop_lut3_I0_O)        0.124     9.662 f  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_3/O
+                         net (fo=7, routed)           0.832    10.494    bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_3_n_0
+    SLICE_X52Y127        LUT4 (Prop_lut4_I3_O)        0.118    10.612 r  bridge/emulator/pio/engines[0].core/fetch/pc_out[4]_i_6/O
+                         net (fo=121, routed)         0.847    11.459    bridge/emulator/pio/engines[0].core/fetch/running_reg_0
+    SLICE_X43Y126        LUT6 (Prop_lut6_I5_O)        0.326    11.785 r  bridge/emulator/pio/engines[0].core/fetch/write_ptr[1]_i_6/O
+                         net (fo=9, routed)           0.540    12.325    bridge/emulator/pio/engines[0].core/tx_fifo/tx_pop
+    SLICE_X42Y124        LUT6 (Prop_lut6_I0_O)        0.124    12.449 r  bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_0_5_i_1/O
+                         net (fo=44, routed)          0.917    13.366    bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_6_11/WE
+    SLICE_X46Y114        RAMD32                                       r  bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_6_11/RAMB_D1/WE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk50_raw rise edge)
+                                                     20.000    20.000 r  <hidden>
+    E3                                                0.000    20.000 r  clk100
+                         net (fo=0)                   0.000    20.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         1.411    21.411 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           1.162    22.573    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.324    15.249 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           1.639    16.888    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091    16.979 r  core_clock_buf/O
+                         net (fo=2049, routed)        1.492    18.471    bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_6_11/WCLK
+    SLICE_X46Y114        RAMD32                                       r  bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_6_11/RAMB_D1/CLK
+                         clock pessimism              0.560    19.031    <hidden>
+                         clock uncertainty           -0.082    18.949    <hidden>
+    SLICE_X46Y114        RAMD32 (Setup_ramd32_CLK_WE)
+                                                     -0.533    18.416    bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_6_11/RAMB_D1
+  -------------------------------------------------------------------
+                         required time                         18.416    <hidden>
+                         arrival time                         -13.366    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  5.050    <hidden>
+
+Slack (MET) :             5.050ns  (required time - arrival time)
+  Source:                 bridge/emulator/pio/engines[0].core/program_counter/pc_out_reg[0]_replica_1/C
+                            (rising edge-triggered cell FDRE clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_6_11/RAMC/WE
+                            (rising edge-triggered cell RAMD32 clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk50_raw
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            20.000ns  (clk50_raw rise@20.000ns - clk50_raw rise@0.000ns)
+  Data Path Delay:        14.294ns  (logic 3.128ns (21.883%)  route 11.166ns (78.117%))
+  Logic Levels:           13  (CARRY4=1 LUT2=1 LUT3=2 LUT4=2 LUT5=1 LUT6=5 RAMD32=1)
+  Clock Path Skew:        -0.041ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    -1.529ns = ( 18.471 - 20.000 ) 
+    Source Clock Delay      (SCD):    -0.928ns
+    Clock Pessimism Removal (CPR):    0.560ns
+  Clock Uncertainty:      0.082ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.147ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk50_raw rise edge)
+                                                      0.000     0.000 r  <hidden>
+    E3                                                0.000     0.000 r  clk100
+                         net (fo=0)                   0.000     0.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           1.233     2.715    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.070    -4.355 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           1.719    -2.636    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096    -2.540 r  core_clock_buf/O
+                         net (fo=2049, routed)        1.612    -0.928    bridge/emulator/pio/engines[0].core/program_counter/clk50
+    SLICE_X41Y131        FDRE                                         r  bridge/emulator/pio/engines[0].core/program_counter/pc_out_reg[0]_replica_1/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X41Y131        FDRE (Prop_fdre_C_Q)         0.456    -0.472 r  bridge/emulator/pio/engines[0].core/program_counter/pc_out_reg[0]_replica_1/Q
+                         net (fo=9, routed)           0.862     0.390    bridge/emulator/pio/engines[0].core/fetch/words_reg_0_31_1_1/DPRA0
+    SLICE_X38Y131        RAMD32 (Prop_ramd32_RADR0_O)
+                                                      0.124     0.514 f  bridge/emulator/pio/engines[0].core/fetch/words_reg_0_31_1_1/DP/O
+                         net (fo=89, routed)          1.566     2.079    bridge/emulator/pio/engines[0].core/fetch/instr_out[1]
+    SLICE_X29Y111        LUT3 (Prop_lut3_I2_O)        0.150     2.229 f  bridge/emulator/pio/engines[0].core/fetch/in_count[1]_i_2/O
+                         net (fo=236, routed)         1.981     4.210    bridge/emulator/pio/engines[0].core/fetch/exec_instruction_reg[1]
+    SLICE_X48Y127        LUT5 (Prop_lut5_I1_O)        0.326     4.536 r  bridge/emulator/pio/engines[0].core/fetch/in_count[5]_i_13_replica_2/O
+                         net (fo=2, routed)           0.465     5.001    bridge/emulator/pio/engines[0].core/fetch/bit_count[0]_repN_2
+    SLICE_X54Y127        LUT2 (Prop_lut2_I1_O)        0.124     5.125 r  bridge/emulator/pio/engines[0].core/fetch/in_count[5]_i_18/O
+                         net (fo=1, routed)           0.000     5.125    bridge/emulator/pio/engines[0].core/fetch/in_count[5]_i_18_n_0
+    SLICE_X54Y127        CARRY4 (Prop_carry4_S[1]_CO[2])
+                                                      0.574     5.699 r  bridge/emulator/pio/engines[0].core/fetch/in_count_reg[5]_i_9/CO[2]
+                         net (fo=10, routed)          0.709     6.409    bridge/emulator/pio/engines[0].core/fetch/in_count_reg[5]_i_9_n_1
+    SLICE_X54Y125        LUT4 (Prop_lut4_I1_O)        0.310     6.719 r  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_17/O
+                         net (fo=1, routed)           0.843     7.561    bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_17_n_0
+    SLICE_X54Y125        LUT6 (Prop_lut6_I0_O)        0.124     7.685 f  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_12/O
+                         net (fo=1, routed)           0.645     8.330    bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_12_n_0
+    SLICE_X48Y128        LUT6 (Prop_lut6_I5_O)        0.124     8.454 f  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_7/O
+                         net (fo=1, routed)           0.492     8.946    bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_7_n_0
+    SLICE_X45Y128        LUT6 (Prop_lut6_I1_O)        0.124     9.070 f  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_6/O
+                         net (fo=5, routed)           0.469     9.538    bridge/emulator/pio/engines[0].core/fetch/exec_instruction_reg[15]_9
+    SLICE_X46Y128        LUT3 (Prop_lut3_I0_O)        0.124     9.662 f  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_3/O
+                         net (fo=7, routed)           0.832    10.494    bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_3_n_0
+    SLICE_X52Y127        LUT4 (Prop_lut4_I3_O)        0.118    10.612 r  bridge/emulator/pio/engines[0].core/fetch/pc_out[4]_i_6/O
+                         net (fo=121, routed)         0.847    11.459    bridge/emulator/pio/engines[0].core/fetch/running_reg_0
+    SLICE_X43Y126        LUT6 (Prop_lut6_I5_O)        0.326    11.785 r  bridge/emulator/pio/engines[0].core/fetch/write_ptr[1]_i_6/O
+                         net (fo=9, routed)           0.540    12.325    bridge/emulator/pio/engines[0].core/tx_fifo/tx_pop
+    SLICE_X42Y124        LUT6 (Prop_lut6_I0_O)        0.124    12.449 r  bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_0_5_i_1/O
+                         net (fo=44, routed)          0.917    13.366    bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_6_11/WE
+    SLICE_X46Y114        RAMD32                                       r  bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_6_11/RAMC/WE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk50_raw rise edge)
+                                                     20.000    20.000 r  <hidden>
+    E3                                                0.000    20.000 r  clk100
+                         net (fo=0)                   0.000    20.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         1.411    21.411 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           1.162    22.573    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.324    15.249 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           1.639    16.888    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091    16.979 r  core_clock_buf/O
+                         net (fo=2049, routed)        1.492    18.471    bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_6_11/WCLK
+    SLICE_X46Y114        RAMD32                                       r  bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_6_11/RAMC/CLK
+                         clock pessimism              0.560    19.031    <hidden>
+                         clock uncertainty           -0.082    18.949    <hidden>
+    SLICE_X46Y114        RAMD32 (Setup_ramd32_CLK_WE)
+                                                     -0.533    18.416    bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_6_11/RAMC
+  -------------------------------------------------------------------
+                         required time                         18.416    <hidden>
+                         arrival time                         -13.366    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  5.050    <hidden>
+
+Slack (MET) :             5.050ns  (required time - arrival time)
+  Source:                 bridge/emulator/pio/engines[0].core/program_counter/pc_out_reg[0]_replica_1/C
+                            (rising edge-triggered cell FDRE clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_6_11/RAMC_D1/WE
+                            (rising edge-triggered cell RAMD32 clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk50_raw
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            20.000ns  (clk50_raw rise@20.000ns - clk50_raw rise@0.000ns)
+  Data Path Delay:        14.294ns  (logic 3.128ns (21.883%)  route 11.166ns (78.117%))
+  Logic Levels:           13  (CARRY4=1 LUT2=1 LUT3=2 LUT4=2 LUT5=1 LUT6=5 RAMD32=1)
+  Clock Path Skew:        -0.041ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    -1.529ns = ( 18.471 - 20.000 ) 
+    Source Clock Delay      (SCD):    -0.928ns
+    Clock Pessimism Removal (CPR):    0.560ns
+  Clock Uncertainty:      0.082ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.147ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk50_raw rise edge)
+                                                      0.000     0.000 r  <hidden>
+    E3                                                0.000     0.000 r  clk100
+                         net (fo=0)                   0.000     0.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           1.233     2.715    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.070    -4.355 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           1.719    -2.636    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096    -2.540 r  core_clock_buf/O
+                         net (fo=2049, routed)        1.612    -0.928    bridge/emulator/pio/engines[0].core/program_counter/clk50
+    SLICE_X41Y131        FDRE                                         r  bridge/emulator/pio/engines[0].core/program_counter/pc_out_reg[0]_replica_1/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X41Y131        FDRE (Prop_fdre_C_Q)         0.456    -0.472 r  bridge/emulator/pio/engines[0].core/program_counter/pc_out_reg[0]_replica_1/Q
+                         net (fo=9, routed)           0.862     0.390    bridge/emulator/pio/engines[0].core/fetch/words_reg_0_31_1_1/DPRA0
+    SLICE_X38Y131        RAMD32 (Prop_ramd32_RADR0_O)
+                                                      0.124     0.514 f  bridge/emulator/pio/engines[0].core/fetch/words_reg_0_31_1_1/DP/O
+                         net (fo=89, routed)          1.566     2.079    bridge/emulator/pio/engines[0].core/fetch/instr_out[1]
+    SLICE_X29Y111        LUT3 (Prop_lut3_I2_O)        0.150     2.229 f  bridge/emulator/pio/engines[0].core/fetch/in_count[1]_i_2/O
+                         net (fo=236, routed)         1.981     4.210    bridge/emulator/pio/engines[0].core/fetch/exec_instruction_reg[1]
+    SLICE_X48Y127        LUT5 (Prop_lut5_I1_O)        0.326     4.536 r  bridge/emulator/pio/engines[0].core/fetch/in_count[5]_i_13_replica_2/O
+                         net (fo=2, routed)           0.465     5.001    bridge/emulator/pio/engines[0].core/fetch/bit_count[0]_repN_2
+    SLICE_X54Y127        LUT2 (Prop_lut2_I1_O)        0.124     5.125 r  bridge/emulator/pio/engines[0].core/fetch/in_count[5]_i_18/O
+                         net (fo=1, routed)           0.000     5.125    bridge/emulator/pio/engines[0].core/fetch/in_count[5]_i_18_n_0
+    SLICE_X54Y127        CARRY4 (Prop_carry4_S[1]_CO[2])
+                                                      0.574     5.699 r  bridge/emulator/pio/engines[0].core/fetch/in_count_reg[5]_i_9/CO[2]
+                         net (fo=10, routed)          0.709     6.409    bridge/emulator/pio/engines[0].core/fetch/in_count_reg[5]_i_9_n_1
+    SLICE_X54Y125        LUT4 (Prop_lut4_I1_O)        0.310     6.719 r  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_17/O
+                         net (fo=1, routed)           0.843     7.561    bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_17_n_0
+    SLICE_X54Y125        LUT6 (Prop_lut6_I0_O)        0.124     7.685 f  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_12/O
+                         net (fo=1, routed)           0.645     8.330    bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_12_n_0
+    SLICE_X48Y128        LUT6 (Prop_lut6_I5_O)        0.124     8.454 f  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_7/O
+                         net (fo=1, routed)           0.492     8.946    bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_7_n_0
+    SLICE_X45Y128        LUT6 (Prop_lut6_I1_O)        0.124     9.070 f  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_6/O
+                         net (fo=5, routed)           0.469     9.538    bridge/emulator/pio/engines[0].core/fetch/exec_instruction_reg[15]_9
+    SLICE_X46Y128        LUT3 (Prop_lut3_I0_O)        0.124     9.662 f  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_3/O
+                         net (fo=7, routed)           0.832    10.494    bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_3_n_0
+    SLICE_X52Y127        LUT4 (Prop_lut4_I3_O)        0.118    10.612 r  bridge/emulator/pio/engines[0].core/fetch/pc_out[4]_i_6/O
+                         net (fo=121, routed)         0.847    11.459    bridge/emulator/pio/engines[0].core/fetch/running_reg_0
+    SLICE_X43Y126        LUT6 (Prop_lut6_I5_O)        0.326    11.785 r  bridge/emulator/pio/engines[0].core/fetch/write_ptr[1]_i_6/O
+                         net (fo=9, routed)           0.540    12.325    bridge/emulator/pio/engines[0].core/tx_fifo/tx_pop
+    SLICE_X42Y124        LUT6 (Prop_lut6_I0_O)        0.124    12.449 r  bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_0_5_i_1/O
+                         net (fo=44, routed)          0.917    13.366    bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_6_11/WE
+    SLICE_X46Y114        RAMD32                                       r  bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_6_11/RAMC_D1/WE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk50_raw rise edge)
+                                                     20.000    20.000 r  <hidden>
+    E3                                                0.000    20.000 r  clk100
+                         net (fo=0)                   0.000    20.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         1.411    21.411 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           1.162    22.573    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.324    15.249 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           1.639    16.888    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091    16.979 r  core_clock_buf/O
+                         net (fo=2049, routed)        1.492    18.471    bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_6_11/WCLK
+    SLICE_X46Y114        RAMD32                                       r  bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_6_11/RAMC_D1/CLK
+                         clock pessimism              0.560    19.031    <hidden>
+                         clock uncertainty           -0.082    18.949    <hidden>
+    SLICE_X46Y114        RAMD32 (Setup_ramd32_CLK_WE)
+                                                     -0.533    18.416    bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_6_11/RAMC_D1
+  -------------------------------------------------------------------
+                         required time                         18.416    <hidden>
+                         arrival time                         -13.366    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  5.050    <hidden>
+
+Slack (MET) :             5.050ns  (required time - arrival time)
+  Source:                 bridge/emulator/pio/engines[0].core/program_counter/pc_out_reg[0]_replica_1/C
+                            (rising edge-triggered cell FDRE clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_6_11/RAMD/WE
+                            (rising edge-triggered cell RAMS32 clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk50_raw
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            20.000ns  (clk50_raw rise@20.000ns - clk50_raw rise@0.000ns)
+  Data Path Delay:        14.294ns  (logic 3.128ns (21.883%)  route 11.166ns (78.117%))
+  Logic Levels:           13  (CARRY4=1 LUT2=1 LUT3=2 LUT4=2 LUT5=1 LUT6=5 RAMD32=1)
+  Clock Path Skew:        -0.041ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    -1.529ns = ( 18.471 - 20.000 ) 
+    Source Clock Delay      (SCD):    -0.928ns
+    Clock Pessimism Removal (CPR):    0.560ns
+  Clock Uncertainty:      0.082ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.147ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk50_raw rise edge)
+                                                      0.000     0.000 r  <hidden>
+    E3                                                0.000     0.000 r  clk100
+                         net (fo=0)                   0.000     0.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           1.233     2.715    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.070    -4.355 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           1.719    -2.636    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096    -2.540 r  core_clock_buf/O
+                         net (fo=2049, routed)        1.612    -0.928    bridge/emulator/pio/engines[0].core/program_counter/clk50
+    SLICE_X41Y131        FDRE                                         r  bridge/emulator/pio/engines[0].core/program_counter/pc_out_reg[0]_replica_1/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X41Y131        FDRE (Prop_fdre_C_Q)         0.456    -0.472 r  bridge/emulator/pio/engines[0].core/program_counter/pc_out_reg[0]_replica_1/Q
+                         net (fo=9, routed)           0.862     0.390    bridge/emulator/pio/engines[0].core/fetch/words_reg_0_31_1_1/DPRA0
+    SLICE_X38Y131        RAMD32 (Prop_ramd32_RADR0_O)
+                                                      0.124     0.514 f  bridge/emulator/pio/engines[0].core/fetch/words_reg_0_31_1_1/DP/O
+                         net (fo=89, routed)          1.566     2.079    bridge/emulator/pio/engines[0].core/fetch/instr_out[1]
+    SLICE_X29Y111        LUT3 (Prop_lut3_I2_O)        0.150     2.229 f  bridge/emulator/pio/engines[0].core/fetch/in_count[1]_i_2/O
+                         net (fo=236, routed)         1.981     4.210    bridge/emulator/pio/engines[0].core/fetch/exec_instruction_reg[1]
+    SLICE_X48Y127        LUT5 (Prop_lut5_I1_O)        0.326     4.536 r  bridge/emulator/pio/engines[0].core/fetch/in_count[5]_i_13_replica_2/O
+                         net (fo=2, routed)           0.465     5.001    bridge/emulator/pio/engines[0].core/fetch/bit_count[0]_repN_2
+    SLICE_X54Y127        LUT2 (Prop_lut2_I1_O)        0.124     5.125 r  bridge/emulator/pio/engines[0].core/fetch/in_count[5]_i_18/O
+                         net (fo=1, routed)           0.000     5.125    bridge/emulator/pio/engines[0].core/fetch/in_count[5]_i_18_n_0
+    SLICE_X54Y127        CARRY4 (Prop_carry4_S[1]_CO[2])
+                                                      0.574     5.699 r  bridge/emulator/pio/engines[0].core/fetch/in_count_reg[5]_i_9/CO[2]
+                         net (fo=10, routed)          0.709     6.409    bridge/emulator/pio/engines[0].core/fetch/in_count_reg[5]_i_9_n_1
+    SLICE_X54Y125        LUT4 (Prop_lut4_I1_O)        0.310     6.719 r  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_17/O
+                         net (fo=1, routed)           0.843     7.561    bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_17_n_0
+    SLICE_X54Y125        LUT6 (Prop_lut6_I0_O)        0.124     7.685 f  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_12/O
+                         net (fo=1, routed)           0.645     8.330    bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_12_n_0
+    SLICE_X48Y128        LUT6 (Prop_lut6_I5_O)        0.124     8.454 f  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_7/O
+                         net (fo=1, routed)           0.492     8.946    bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_7_n_0
+    SLICE_X45Y128        LUT6 (Prop_lut6_I1_O)        0.124     9.070 f  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_6/O
+                         net (fo=5, routed)           0.469     9.538    bridge/emulator/pio/engines[0].core/fetch/exec_instruction_reg[15]_9
+    SLICE_X46Y128        LUT3 (Prop_lut3_I0_O)        0.124     9.662 f  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_3/O
+                         net (fo=7, routed)           0.832    10.494    bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_3_n_0
+    SLICE_X52Y127        LUT4 (Prop_lut4_I3_O)        0.118    10.612 r  bridge/emulator/pio/engines[0].core/fetch/pc_out[4]_i_6/O
+                         net (fo=121, routed)         0.847    11.459    bridge/emulator/pio/engines[0].core/fetch/running_reg_0
+    SLICE_X43Y126        LUT6 (Prop_lut6_I5_O)        0.326    11.785 r  bridge/emulator/pio/engines[0].core/fetch/write_ptr[1]_i_6/O
+                         net (fo=9, routed)           0.540    12.325    bridge/emulator/pio/engines[0].core/tx_fifo/tx_pop
+    SLICE_X42Y124        LUT6 (Prop_lut6_I0_O)        0.124    12.449 r  bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_0_5_i_1/O
+                         net (fo=44, routed)          0.917    13.366    bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_6_11/WE
+    SLICE_X46Y114        RAMS32                                       r  bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_6_11/RAMD/WE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk50_raw rise edge)
+                                                     20.000    20.000 r  <hidden>
+    E3                                                0.000    20.000 r  clk100
+                         net (fo=0)                   0.000    20.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         1.411    21.411 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           1.162    22.573    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.324    15.249 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           1.639    16.888    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091    16.979 r  core_clock_buf/O
+                         net (fo=2049, routed)        1.492    18.471    bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_6_11/WCLK
+    SLICE_X46Y114        RAMS32                                       r  bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_6_11/RAMD/CLK
+                         clock pessimism              0.560    19.031    <hidden>
+                         clock uncertainty           -0.082    18.949    <hidden>
+    SLICE_X46Y114        RAMS32 (Setup_rams32_CLK_WE)
+                                                     -0.533    18.416    bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_6_11/RAMD
+  -------------------------------------------------------------------
+                         required time                         18.416    <hidden>
+                         arrival time                         -13.366    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  5.050    <hidden>
+
+Slack (MET) :             5.050ns  (required time - arrival time)
+  Source:                 bridge/emulator/pio/engines[0].core/program_counter/pc_out_reg[0]_replica_1/C
+                            (rising edge-triggered cell FDRE clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_6_11/RAMD_D1/WE
+                            (rising edge-triggered cell RAMS32 clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk50_raw
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            20.000ns  (clk50_raw rise@20.000ns - clk50_raw rise@0.000ns)
+  Data Path Delay:        14.294ns  (logic 3.128ns (21.883%)  route 11.166ns (78.117%))
+  Logic Levels:           13  (CARRY4=1 LUT2=1 LUT3=2 LUT4=2 LUT5=1 LUT6=5 RAMD32=1)
+  Clock Path Skew:        -0.041ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    -1.529ns = ( 18.471 - 20.000 ) 
+    Source Clock Delay      (SCD):    -0.928ns
+    Clock Pessimism Removal (CPR):    0.560ns
+  Clock Uncertainty:      0.082ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.147ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk50_raw rise edge)
+                                                      0.000     0.000 r  <hidden>
+    E3                                                0.000     0.000 r  clk100
+                         net (fo=0)                   0.000     0.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           1.233     2.715    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.070    -4.355 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           1.719    -2.636    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096    -2.540 r  core_clock_buf/O
+                         net (fo=2049, routed)        1.612    -0.928    bridge/emulator/pio/engines[0].core/program_counter/clk50
+    SLICE_X41Y131        FDRE                                         r  bridge/emulator/pio/engines[0].core/program_counter/pc_out_reg[0]_replica_1/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X41Y131        FDRE (Prop_fdre_C_Q)         0.456    -0.472 r  bridge/emulator/pio/engines[0].core/program_counter/pc_out_reg[0]_replica_1/Q
+                         net (fo=9, routed)           0.862     0.390    bridge/emulator/pio/engines[0].core/fetch/words_reg_0_31_1_1/DPRA0
+    SLICE_X38Y131        RAMD32 (Prop_ramd32_RADR0_O)
+                                                      0.124     0.514 f  bridge/emulator/pio/engines[0].core/fetch/words_reg_0_31_1_1/DP/O
+                         net (fo=89, routed)          1.566     2.079    bridge/emulator/pio/engines[0].core/fetch/instr_out[1]
+    SLICE_X29Y111        LUT3 (Prop_lut3_I2_O)        0.150     2.229 f  bridge/emulator/pio/engines[0].core/fetch/in_count[1]_i_2/O
+                         net (fo=236, routed)         1.981     4.210    bridge/emulator/pio/engines[0].core/fetch/exec_instruction_reg[1]
+    SLICE_X48Y127        LUT5 (Prop_lut5_I1_O)        0.326     4.536 r  bridge/emulator/pio/engines[0].core/fetch/in_count[5]_i_13_replica_2/O
+                         net (fo=2, routed)           0.465     5.001    bridge/emulator/pio/engines[0].core/fetch/bit_count[0]_repN_2
+    SLICE_X54Y127        LUT2 (Prop_lut2_I1_O)        0.124     5.125 r  bridge/emulator/pio/engines[0].core/fetch/in_count[5]_i_18/O
+                         net (fo=1, routed)           0.000     5.125    bridge/emulator/pio/engines[0].core/fetch/in_count[5]_i_18_n_0
+    SLICE_X54Y127        CARRY4 (Prop_carry4_S[1]_CO[2])
+                                                      0.574     5.699 r  bridge/emulator/pio/engines[0].core/fetch/in_count_reg[5]_i_9/CO[2]
+                         net (fo=10, routed)          0.709     6.409    bridge/emulator/pio/engines[0].core/fetch/in_count_reg[5]_i_9_n_1
+    SLICE_X54Y125        LUT4 (Prop_lut4_I1_O)        0.310     6.719 r  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_17/O
+                         net (fo=1, routed)           0.843     7.561    bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_17_n_0
+    SLICE_X54Y125        LUT6 (Prop_lut6_I0_O)        0.124     7.685 f  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_12/O
+                         net (fo=1, routed)           0.645     8.330    bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_12_n_0
+    SLICE_X48Y128        LUT6 (Prop_lut6_I5_O)        0.124     8.454 f  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_7/O
+                         net (fo=1, routed)           0.492     8.946    bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_7_n_0
+    SLICE_X45Y128        LUT6 (Prop_lut6_I1_O)        0.124     9.070 f  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_6/O
+                         net (fo=5, routed)           0.469     9.538    bridge/emulator/pio/engines[0].core/fetch/exec_instruction_reg[15]_9
+    SLICE_X46Y128        LUT3 (Prop_lut3_I0_O)        0.124     9.662 f  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_3/O
+                         net (fo=7, routed)           0.832    10.494    bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_3_n_0
+    SLICE_X52Y127        LUT4 (Prop_lut4_I3_O)        0.118    10.612 r  bridge/emulator/pio/engines[0].core/fetch/pc_out[4]_i_6/O
+                         net (fo=121, routed)         0.847    11.459    bridge/emulator/pio/engines[0].core/fetch/running_reg_0
+    SLICE_X43Y126        LUT6 (Prop_lut6_I5_O)        0.326    11.785 r  bridge/emulator/pio/engines[0].core/fetch/write_ptr[1]_i_6/O
+                         net (fo=9, routed)           0.540    12.325    bridge/emulator/pio/engines[0].core/tx_fifo/tx_pop
+    SLICE_X42Y124        LUT6 (Prop_lut6_I0_O)        0.124    12.449 r  bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_0_5_i_1/O
+                         net (fo=44, routed)          0.917    13.366    bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_6_11/WE
+    SLICE_X46Y114        RAMS32                                       r  bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_6_11/RAMD_D1/WE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk50_raw rise edge)
+                                                     20.000    20.000 r  <hidden>
+    E3                                                0.000    20.000 r  clk100
+                         net (fo=0)                   0.000    20.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         1.411    21.411 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           1.162    22.573    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.324    15.249 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           1.639    16.888    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091    16.979 r  core_clock_buf/O
+                         net (fo=2049, routed)        1.492    18.471    bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_6_11/WCLK
+    SLICE_X46Y114        RAMS32                                       r  bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_6_11/RAMD_D1/CLK
+                         clock pessimism              0.560    19.031    <hidden>
+                         clock uncertainty           -0.082    18.949    <hidden>
+    SLICE_X46Y114        RAMS32 (Setup_rams32_CLK_WE)
+                                                     -0.533    18.416    bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_6_11/RAMD_D1
+  -------------------------------------------------------------------
+                         required time                         18.416    <hidden>
+                         arrival time                         -13.366    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  5.050    <hidden>
+
+Slack (MET) :             5.108ns  (required time - arrival time)
+  Source:                 bridge/emulator/pio/engines[0].core/program_counter/pc_out_reg[0]_replica_1/C
+                            (rising edge-triggered cell FDRE clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_24_29/RAMA/WE
+                            (rising edge-triggered cell RAMD32 clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk50_raw
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            20.000ns  (clk50_raw rise@20.000ns - clk50_raw rise@0.000ns)
+  Data Path Delay:        14.239ns  (logic 3.128ns (21.967%)  route 11.111ns (78.033%))
+  Logic Levels:           13  (CARRY4=1 LUT2=1 LUT3=2 LUT4=2 LUT5=1 LUT6=5 RAMD32=1)
+  Clock Path Skew:        -0.038ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    -1.526ns = ( 18.474 - 20.000 ) 
+    Source Clock Delay      (SCD):    -0.928ns
+    Clock Pessimism Removal (CPR):    0.560ns
+  Clock Uncertainty:      0.082ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.147ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk50_raw rise edge)
+                                                      0.000     0.000 r  <hidden>
+    E3                                                0.000     0.000 r  clk100
+                         net (fo=0)                   0.000     0.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           1.233     2.715    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.070    -4.355 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           1.719    -2.636    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096    -2.540 r  core_clock_buf/O
+                         net (fo=2049, routed)        1.612    -0.928    bridge/emulator/pio/engines[0].core/program_counter/clk50
+    SLICE_X41Y131        FDRE                                         r  bridge/emulator/pio/engines[0].core/program_counter/pc_out_reg[0]_replica_1/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X41Y131        FDRE (Prop_fdre_C_Q)         0.456    -0.472 r  bridge/emulator/pio/engines[0].core/program_counter/pc_out_reg[0]_replica_1/Q
+                         net (fo=9, routed)           0.862     0.390    bridge/emulator/pio/engines[0].core/fetch/words_reg_0_31_1_1/DPRA0
+    SLICE_X38Y131        RAMD32 (Prop_ramd32_RADR0_O)
+                                                      0.124     0.514 f  bridge/emulator/pio/engines[0].core/fetch/words_reg_0_31_1_1/DP/O
+                         net (fo=89, routed)          1.566     2.079    bridge/emulator/pio/engines[0].core/fetch/instr_out[1]
+    SLICE_X29Y111        LUT3 (Prop_lut3_I2_O)        0.150     2.229 f  bridge/emulator/pio/engines[0].core/fetch/in_count[1]_i_2/O
+                         net (fo=236, routed)         1.981     4.210    bridge/emulator/pio/engines[0].core/fetch/exec_instruction_reg[1]
+    SLICE_X48Y127        LUT5 (Prop_lut5_I1_O)        0.326     4.536 r  bridge/emulator/pio/engines[0].core/fetch/in_count[5]_i_13_replica_2/O
+                         net (fo=2, routed)           0.465     5.001    bridge/emulator/pio/engines[0].core/fetch/bit_count[0]_repN_2
+    SLICE_X54Y127        LUT2 (Prop_lut2_I1_O)        0.124     5.125 r  bridge/emulator/pio/engines[0].core/fetch/in_count[5]_i_18/O
+                         net (fo=1, routed)           0.000     5.125    bridge/emulator/pio/engines[0].core/fetch/in_count[5]_i_18_n_0
+    SLICE_X54Y127        CARRY4 (Prop_carry4_S[1]_CO[2])
+                                                      0.574     5.699 r  bridge/emulator/pio/engines[0].core/fetch/in_count_reg[5]_i_9/CO[2]
+                         net (fo=10, routed)          0.709     6.409    bridge/emulator/pio/engines[0].core/fetch/in_count_reg[5]_i_9_n_1
+    SLICE_X54Y125        LUT4 (Prop_lut4_I1_O)        0.310     6.719 r  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_17/O
+                         net (fo=1, routed)           0.843     7.561    bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_17_n_0
+    SLICE_X54Y125        LUT6 (Prop_lut6_I0_O)        0.124     7.685 f  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_12/O
+                         net (fo=1, routed)           0.645     8.330    bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_12_n_0
+    SLICE_X48Y128        LUT6 (Prop_lut6_I5_O)        0.124     8.454 f  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_7/O
+                         net (fo=1, routed)           0.492     8.946    bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_7_n_0
+    SLICE_X45Y128        LUT6 (Prop_lut6_I1_O)        0.124     9.070 f  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_6/O
+                         net (fo=5, routed)           0.469     9.538    bridge/emulator/pio/engines[0].core/fetch/exec_instruction_reg[15]_9
+    SLICE_X46Y128        LUT3 (Prop_lut3_I0_O)        0.124     9.662 f  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_3/O
+                         net (fo=7, routed)           0.832    10.494    bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_3_n_0
+    SLICE_X52Y127        LUT4 (Prop_lut4_I3_O)        0.118    10.612 r  bridge/emulator/pio/engines[0].core/fetch/pc_out[4]_i_6/O
+                         net (fo=121, routed)         0.847    11.459    bridge/emulator/pio/engines[0].core/fetch/running_reg_0
+    SLICE_X43Y126        LUT6 (Prop_lut6_I5_O)        0.326    11.785 r  bridge/emulator/pio/engines[0].core/fetch/write_ptr[1]_i_6/O
+                         net (fo=9, routed)           0.540    12.325    bridge/emulator/pio/engines[0].core/tx_fifo/tx_pop
+    SLICE_X42Y124        LUT6 (Prop_lut6_I0_O)        0.124    12.449 r  bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_0_5_i_1/O
+                         net (fo=44, routed)          0.862    13.311    bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_24_29/WE
+    SLICE_X38Y116        RAMD32                                       r  bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_24_29/RAMA/WE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk50_raw rise edge)
+                                                     20.000    20.000 r  <hidden>
+    E3                                                0.000    20.000 r  clk100
+                         net (fo=0)                   0.000    20.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         1.411    21.411 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           1.162    22.573    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.324    15.249 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           1.639    16.888    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091    16.979 r  core_clock_buf/O
+                         net (fo=2049, routed)        1.495    18.474    bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_24_29/WCLK
+    SLICE_X38Y116        RAMD32                                       r  bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_24_29/RAMA/CLK
+                         clock pessimism              0.560    19.034    <hidden>
+                         clock uncertainty           -0.082    18.952    <hidden>
+    SLICE_X38Y116        RAMD32 (Setup_ramd32_CLK_WE)
+                                                     -0.533    18.419    bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_24_29/RAMA
+  -------------------------------------------------------------------
+                         required time                         18.419    <hidden>
+                         arrival time                         -13.311    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  5.108    <hidden>
+
+Slack (MET) :             5.108ns  (required time - arrival time)
+  Source:                 bridge/emulator/pio/engines[0].core/program_counter/pc_out_reg[0]_replica_1/C
+                            (rising edge-triggered cell FDRE clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_24_29/RAMA_D1/WE
+                            (rising edge-triggered cell RAMD32 clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk50_raw
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            20.000ns  (clk50_raw rise@20.000ns - clk50_raw rise@0.000ns)
+  Data Path Delay:        14.239ns  (logic 3.128ns (21.967%)  route 11.111ns (78.033%))
+  Logic Levels:           13  (CARRY4=1 LUT2=1 LUT3=2 LUT4=2 LUT5=1 LUT6=5 RAMD32=1)
+  Clock Path Skew:        -0.038ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    -1.526ns = ( 18.474 - 20.000 ) 
+    Source Clock Delay      (SCD):    -0.928ns
+    Clock Pessimism Removal (CPR):    0.560ns
+  Clock Uncertainty:      0.082ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.147ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk50_raw rise edge)
+                                                      0.000     0.000 r  <hidden>
+    E3                                                0.000     0.000 r  clk100
+                         net (fo=0)                   0.000     0.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           1.233     2.715    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.070    -4.355 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           1.719    -2.636    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096    -2.540 r  core_clock_buf/O
+                         net (fo=2049, routed)        1.612    -0.928    bridge/emulator/pio/engines[0].core/program_counter/clk50
+    SLICE_X41Y131        FDRE                                         r  bridge/emulator/pio/engines[0].core/program_counter/pc_out_reg[0]_replica_1/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X41Y131        FDRE (Prop_fdre_C_Q)         0.456    -0.472 r  bridge/emulator/pio/engines[0].core/program_counter/pc_out_reg[0]_replica_1/Q
+                         net (fo=9, routed)           0.862     0.390    bridge/emulator/pio/engines[0].core/fetch/words_reg_0_31_1_1/DPRA0
+    SLICE_X38Y131        RAMD32 (Prop_ramd32_RADR0_O)
+                                                      0.124     0.514 f  bridge/emulator/pio/engines[0].core/fetch/words_reg_0_31_1_1/DP/O
+                         net (fo=89, routed)          1.566     2.079    bridge/emulator/pio/engines[0].core/fetch/instr_out[1]
+    SLICE_X29Y111        LUT3 (Prop_lut3_I2_O)        0.150     2.229 f  bridge/emulator/pio/engines[0].core/fetch/in_count[1]_i_2/O
+                         net (fo=236, routed)         1.981     4.210    bridge/emulator/pio/engines[0].core/fetch/exec_instruction_reg[1]
+    SLICE_X48Y127        LUT5 (Prop_lut5_I1_O)        0.326     4.536 r  bridge/emulator/pio/engines[0].core/fetch/in_count[5]_i_13_replica_2/O
+                         net (fo=2, routed)           0.465     5.001    bridge/emulator/pio/engines[0].core/fetch/bit_count[0]_repN_2
+    SLICE_X54Y127        LUT2 (Prop_lut2_I1_O)        0.124     5.125 r  bridge/emulator/pio/engines[0].core/fetch/in_count[5]_i_18/O
+                         net (fo=1, routed)           0.000     5.125    bridge/emulator/pio/engines[0].core/fetch/in_count[5]_i_18_n_0
+    SLICE_X54Y127        CARRY4 (Prop_carry4_S[1]_CO[2])
+                                                      0.574     5.699 r  bridge/emulator/pio/engines[0].core/fetch/in_count_reg[5]_i_9/CO[2]
+                         net (fo=10, routed)          0.709     6.409    bridge/emulator/pio/engines[0].core/fetch/in_count_reg[5]_i_9_n_1
+    SLICE_X54Y125        LUT4 (Prop_lut4_I1_O)        0.310     6.719 r  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_17/O
+                         net (fo=1, routed)           0.843     7.561    bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_17_n_0
+    SLICE_X54Y125        LUT6 (Prop_lut6_I0_O)        0.124     7.685 f  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_12/O
+                         net (fo=1, routed)           0.645     8.330    bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_12_n_0
+    SLICE_X48Y128        LUT6 (Prop_lut6_I5_O)        0.124     8.454 f  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_7/O
+                         net (fo=1, routed)           0.492     8.946    bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_7_n_0
+    SLICE_X45Y128        LUT6 (Prop_lut6_I1_O)        0.124     9.070 f  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_6/O
+                         net (fo=5, routed)           0.469     9.538    bridge/emulator/pio/engines[0].core/fetch/exec_instruction_reg[15]_9
+    SLICE_X46Y128        LUT3 (Prop_lut3_I0_O)        0.124     9.662 f  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_3/O
+                         net (fo=7, routed)           0.832    10.494    bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_3_n_0
+    SLICE_X52Y127        LUT4 (Prop_lut4_I3_O)        0.118    10.612 r  bridge/emulator/pio/engines[0].core/fetch/pc_out[4]_i_6/O
+                         net (fo=121, routed)         0.847    11.459    bridge/emulator/pio/engines[0].core/fetch/running_reg_0
+    SLICE_X43Y126        LUT6 (Prop_lut6_I5_O)        0.326    11.785 r  bridge/emulator/pio/engines[0].core/fetch/write_ptr[1]_i_6/O
+                         net (fo=9, routed)           0.540    12.325    bridge/emulator/pio/engines[0].core/tx_fifo/tx_pop
+    SLICE_X42Y124        LUT6 (Prop_lut6_I0_O)        0.124    12.449 r  bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_0_5_i_1/O
+                         net (fo=44, routed)          0.862    13.311    bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_24_29/WE
+    SLICE_X38Y116        RAMD32                                       r  bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_24_29/RAMA_D1/WE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk50_raw rise edge)
+                                                     20.000    20.000 r  <hidden>
+    E3                                                0.000    20.000 r  clk100
+                         net (fo=0)                   0.000    20.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         1.411    21.411 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           1.162    22.573    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.324    15.249 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           1.639    16.888    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091    16.979 r  core_clock_buf/O
+                         net (fo=2049, routed)        1.495    18.474    bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_24_29/WCLK
+    SLICE_X38Y116        RAMD32                                       r  bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_24_29/RAMA_D1/CLK
+                         clock pessimism              0.560    19.034    <hidden>
+                         clock uncertainty           -0.082    18.952    <hidden>
+    SLICE_X38Y116        RAMD32 (Setup_ramd32_CLK_WE)
+                                                     -0.533    18.419    bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_24_29/RAMA_D1
+  -------------------------------------------------------------------
+                         required time                         18.419    <hidden>
+                         arrival time                         -13.311    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  5.108    <hidden>
+
+Slack (MET) :             5.108ns  (required time - arrival time)
+  Source:                 bridge/emulator/pio/engines[0].core/program_counter/pc_out_reg[0]_replica_1/C
+                            (rising edge-triggered cell FDRE clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_24_29/RAMB/WE
+                            (rising edge-triggered cell RAMD32 clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk50_raw
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            20.000ns  (clk50_raw rise@20.000ns - clk50_raw rise@0.000ns)
+  Data Path Delay:        14.239ns  (logic 3.128ns (21.967%)  route 11.111ns (78.033%))
+  Logic Levels:           13  (CARRY4=1 LUT2=1 LUT3=2 LUT4=2 LUT5=1 LUT6=5 RAMD32=1)
+  Clock Path Skew:        -0.038ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    -1.526ns = ( 18.474 - 20.000 ) 
+    Source Clock Delay      (SCD):    -0.928ns
+    Clock Pessimism Removal (CPR):    0.560ns
+  Clock Uncertainty:      0.082ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.147ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk50_raw rise edge)
+                                                      0.000     0.000 r  <hidden>
+    E3                                                0.000     0.000 r  clk100
+                         net (fo=0)                   0.000     0.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           1.233     2.715    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.070    -4.355 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           1.719    -2.636    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096    -2.540 r  core_clock_buf/O
+                         net (fo=2049, routed)        1.612    -0.928    bridge/emulator/pio/engines[0].core/program_counter/clk50
+    SLICE_X41Y131        FDRE                                         r  bridge/emulator/pio/engines[0].core/program_counter/pc_out_reg[0]_replica_1/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X41Y131        FDRE (Prop_fdre_C_Q)         0.456    -0.472 r  bridge/emulator/pio/engines[0].core/program_counter/pc_out_reg[0]_replica_1/Q
+                         net (fo=9, routed)           0.862     0.390    bridge/emulator/pio/engines[0].core/fetch/words_reg_0_31_1_1/DPRA0
+    SLICE_X38Y131        RAMD32 (Prop_ramd32_RADR0_O)
+                                                      0.124     0.514 f  bridge/emulator/pio/engines[0].core/fetch/words_reg_0_31_1_1/DP/O
+                         net (fo=89, routed)          1.566     2.079    bridge/emulator/pio/engines[0].core/fetch/instr_out[1]
+    SLICE_X29Y111        LUT3 (Prop_lut3_I2_O)        0.150     2.229 f  bridge/emulator/pio/engines[0].core/fetch/in_count[1]_i_2/O
+                         net (fo=236, routed)         1.981     4.210    bridge/emulator/pio/engines[0].core/fetch/exec_instruction_reg[1]
+    SLICE_X48Y127        LUT5 (Prop_lut5_I1_O)        0.326     4.536 r  bridge/emulator/pio/engines[0].core/fetch/in_count[5]_i_13_replica_2/O
+                         net (fo=2, routed)           0.465     5.001    bridge/emulator/pio/engines[0].core/fetch/bit_count[0]_repN_2
+    SLICE_X54Y127        LUT2 (Prop_lut2_I1_O)        0.124     5.125 r  bridge/emulator/pio/engines[0].core/fetch/in_count[5]_i_18/O
+                         net (fo=1, routed)           0.000     5.125    bridge/emulator/pio/engines[0].core/fetch/in_count[5]_i_18_n_0
+    SLICE_X54Y127        CARRY4 (Prop_carry4_S[1]_CO[2])
+                                                      0.574     5.699 r  bridge/emulator/pio/engines[0].core/fetch/in_count_reg[5]_i_9/CO[2]
+                         net (fo=10, routed)          0.709     6.409    bridge/emulator/pio/engines[0].core/fetch/in_count_reg[5]_i_9_n_1
+    SLICE_X54Y125        LUT4 (Prop_lut4_I1_O)        0.310     6.719 r  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_17/O
+                         net (fo=1, routed)           0.843     7.561    bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_17_n_0
+    SLICE_X54Y125        LUT6 (Prop_lut6_I0_O)        0.124     7.685 f  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_12/O
+                         net (fo=1, routed)           0.645     8.330    bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_12_n_0
+    SLICE_X48Y128        LUT6 (Prop_lut6_I5_O)        0.124     8.454 f  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_7/O
+                         net (fo=1, routed)           0.492     8.946    bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_7_n_0
+    SLICE_X45Y128        LUT6 (Prop_lut6_I1_O)        0.124     9.070 f  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_6/O
+                         net (fo=5, routed)           0.469     9.538    bridge/emulator/pio/engines[0].core/fetch/exec_instruction_reg[15]_9
+    SLICE_X46Y128        LUT3 (Prop_lut3_I0_O)        0.124     9.662 f  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_3/O
+                         net (fo=7, routed)           0.832    10.494    bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_3_n_0
+    SLICE_X52Y127        LUT4 (Prop_lut4_I3_O)        0.118    10.612 r  bridge/emulator/pio/engines[0].core/fetch/pc_out[4]_i_6/O
+                         net (fo=121, routed)         0.847    11.459    bridge/emulator/pio/engines[0].core/fetch/running_reg_0
+    SLICE_X43Y126        LUT6 (Prop_lut6_I5_O)        0.326    11.785 r  bridge/emulator/pio/engines[0].core/fetch/write_ptr[1]_i_6/O
+                         net (fo=9, routed)           0.540    12.325    bridge/emulator/pio/engines[0].core/tx_fifo/tx_pop
+    SLICE_X42Y124        LUT6 (Prop_lut6_I0_O)        0.124    12.449 r  bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_0_5_i_1/O
+                         net (fo=44, routed)          0.862    13.311    bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_24_29/WE
+    SLICE_X38Y116        RAMD32                                       r  bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_24_29/RAMB/WE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk50_raw rise edge)
+                                                     20.000    20.000 r  <hidden>
+    E3                                                0.000    20.000 r  clk100
+                         net (fo=0)                   0.000    20.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         1.411    21.411 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           1.162    22.573    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.324    15.249 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           1.639    16.888    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091    16.979 r  core_clock_buf/O
+                         net (fo=2049, routed)        1.495    18.474    bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_24_29/WCLK
+    SLICE_X38Y116        RAMD32                                       r  bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_24_29/RAMB/CLK
+                         clock pessimism              0.560    19.034    <hidden>
+                         clock uncertainty           -0.082    18.952    <hidden>
+    SLICE_X38Y116        RAMD32 (Setup_ramd32_CLK_WE)
+                                                     -0.533    18.419    bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_24_29/RAMB
+  -------------------------------------------------------------------
+                         required time                         18.419    <hidden>
+                         arrival time                         -13.311    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  5.108    <hidden>
+
+Slack (MET) :             5.108ns  (required time - arrival time)
+  Source:                 bridge/emulator/pio/engines[0].core/program_counter/pc_out_reg[0]_replica_1/C
+                            (rising edge-triggered cell FDRE clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_24_29/RAMB_D1/WE
+                            (rising edge-triggered cell RAMD32 clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk50_raw
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            20.000ns  (clk50_raw rise@20.000ns - clk50_raw rise@0.000ns)
+  Data Path Delay:        14.239ns  (logic 3.128ns (21.967%)  route 11.111ns (78.033%))
+  Logic Levels:           13  (CARRY4=1 LUT2=1 LUT3=2 LUT4=2 LUT5=1 LUT6=5 RAMD32=1)
+  Clock Path Skew:        -0.038ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    -1.526ns = ( 18.474 - 20.000 ) 
+    Source Clock Delay      (SCD):    -0.928ns
+    Clock Pessimism Removal (CPR):    0.560ns
+  Clock Uncertainty:      0.082ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.147ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk50_raw rise edge)
+                                                      0.000     0.000 r  <hidden>
+    E3                                                0.000     0.000 r  clk100
+                         net (fo=0)                   0.000     0.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           1.233     2.715    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.070    -4.355 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           1.719    -2.636    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096    -2.540 r  core_clock_buf/O
+                         net (fo=2049, routed)        1.612    -0.928    bridge/emulator/pio/engines[0].core/program_counter/clk50
+    SLICE_X41Y131        FDRE                                         r  bridge/emulator/pio/engines[0].core/program_counter/pc_out_reg[0]_replica_1/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X41Y131        FDRE (Prop_fdre_C_Q)         0.456    -0.472 r  bridge/emulator/pio/engines[0].core/program_counter/pc_out_reg[0]_replica_1/Q
+                         net (fo=9, routed)           0.862     0.390    bridge/emulator/pio/engines[0].core/fetch/words_reg_0_31_1_1/DPRA0
+    SLICE_X38Y131        RAMD32 (Prop_ramd32_RADR0_O)
+                                                      0.124     0.514 f  bridge/emulator/pio/engines[0].core/fetch/words_reg_0_31_1_1/DP/O
+                         net (fo=89, routed)          1.566     2.079    bridge/emulator/pio/engines[0].core/fetch/instr_out[1]
+    SLICE_X29Y111        LUT3 (Prop_lut3_I2_O)        0.150     2.229 f  bridge/emulator/pio/engines[0].core/fetch/in_count[1]_i_2/O
+                         net (fo=236, routed)         1.981     4.210    bridge/emulator/pio/engines[0].core/fetch/exec_instruction_reg[1]
+    SLICE_X48Y127        LUT5 (Prop_lut5_I1_O)        0.326     4.536 r  bridge/emulator/pio/engines[0].core/fetch/in_count[5]_i_13_replica_2/O
+                         net (fo=2, routed)           0.465     5.001    bridge/emulator/pio/engines[0].core/fetch/bit_count[0]_repN_2
+    SLICE_X54Y127        LUT2 (Prop_lut2_I1_O)        0.124     5.125 r  bridge/emulator/pio/engines[0].core/fetch/in_count[5]_i_18/O
+                         net (fo=1, routed)           0.000     5.125    bridge/emulator/pio/engines[0].core/fetch/in_count[5]_i_18_n_0
+    SLICE_X54Y127        CARRY4 (Prop_carry4_S[1]_CO[2])
+                                                      0.574     5.699 r  bridge/emulator/pio/engines[0].core/fetch/in_count_reg[5]_i_9/CO[2]
+                         net (fo=10, routed)          0.709     6.409    bridge/emulator/pio/engines[0].core/fetch/in_count_reg[5]_i_9_n_1
+    SLICE_X54Y125        LUT4 (Prop_lut4_I1_O)        0.310     6.719 r  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_17/O
+                         net (fo=1, routed)           0.843     7.561    bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_17_n_0
+    SLICE_X54Y125        LUT6 (Prop_lut6_I0_O)        0.124     7.685 f  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_12/O
+                         net (fo=1, routed)           0.645     8.330    bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_12_n_0
+    SLICE_X48Y128        LUT6 (Prop_lut6_I5_O)        0.124     8.454 f  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_7/O
+                         net (fo=1, routed)           0.492     8.946    bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_7_n_0
+    SLICE_X45Y128        LUT6 (Prop_lut6_I1_O)        0.124     9.070 f  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_6/O
+                         net (fo=5, routed)           0.469     9.538    bridge/emulator/pio/engines[0].core/fetch/exec_instruction_reg[15]_9
+    SLICE_X46Y128        LUT3 (Prop_lut3_I0_O)        0.124     9.662 f  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_3/O
+                         net (fo=7, routed)           0.832    10.494    bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_3_n_0
+    SLICE_X52Y127        LUT4 (Prop_lut4_I3_O)        0.118    10.612 r  bridge/emulator/pio/engines[0].core/fetch/pc_out[4]_i_6/O
+                         net (fo=121, routed)         0.847    11.459    bridge/emulator/pio/engines[0].core/fetch/running_reg_0
+    SLICE_X43Y126        LUT6 (Prop_lut6_I5_O)        0.326    11.785 r  bridge/emulator/pio/engines[0].core/fetch/write_ptr[1]_i_6/O
+                         net (fo=9, routed)           0.540    12.325    bridge/emulator/pio/engines[0].core/tx_fifo/tx_pop
+    SLICE_X42Y124        LUT6 (Prop_lut6_I0_O)        0.124    12.449 r  bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_0_5_i_1/O
+                         net (fo=44, routed)          0.862    13.311    bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_24_29/WE
+    SLICE_X38Y116        RAMD32                                       r  bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_24_29/RAMB_D1/WE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk50_raw rise edge)
+                                                     20.000    20.000 r  <hidden>
+    E3                                                0.000    20.000 r  clk100
+                         net (fo=0)                   0.000    20.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         1.411    21.411 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           1.162    22.573    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.324    15.249 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           1.639    16.888    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091    16.979 r  core_clock_buf/O
+                         net (fo=2049, routed)        1.495    18.474    bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_24_29/WCLK
+    SLICE_X38Y116        RAMD32                                       r  bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_24_29/RAMB_D1/CLK
+                         clock pessimism              0.560    19.034    <hidden>
+                         clock uncertainty           -0.082    18.952    <hidden>
+    SLICE_X38Y116        RAMD32 (Setup_ramd32_CLK_WE)
+                                                     -0.533    18.419    bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_24_29/RAMB_D1
+  -------------------------------------------------------------------
+                         required time                         18.419    <hidden>
+                         arrival time                         -13.311    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  5.108    <hidden>
+
+Slack (MET) :             5.108ns  (required time - arrival time)
+  Source:                 bridge/emulator/pio/engines[0].core/program_counter/pc_out_reg[0]_replica_1/C
+                            (rising edge-triggered cell FDRE clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_24_29/RAMC/WE
+                            (rising edge-triggered cell RAMD32 clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk50_raw
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            20.000ns  (clk50_raw rise@20.000ns - clk50_raw rise@0.000ns)
+  Data Path Delay:        14.239ns  (logic 3.128ns (21.967%)  route 11.111ns (78.033%))
+  Logic Levels:           13  (CARRY4=1 LUT2=1 LUT3=2 LUT4=2 LUT5=1 LUT6=5 RAMD32=1)
+  Clock Path Skew:        -0.038ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    -1.526ns = ( 18.474 - 20.000 ) 
+    Source Clock Delay      (SCD):    -0.928ns
+    Clock Pessimism Removal (CPR):    0.560ns
+  Clock Uncertainty:      0.082ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.147ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk50_raw rise edge)
+                                                      0.000     0.000 r  <hidden>
+    E3                                                0.000     0.000 r  clk100
+                         net (fo=0)                   0.000     0.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           1.233     2.715    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.070    -4.355 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           1.719    -2.636    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096    -2.540 r  core_clock_buf/O
+                         net (fo=2049, routed)        1.612    -0.928    bridge/emulator/pio/engines[0].core/program_counter/clk50
+    SLICE_X41Y131        FDRE                                         r  bridge/emulator/pio/engines[0].core/program_counter/pc_out_reg[0]_replica_1/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X41Y131        FDRE (Prop_fdre_C_Q)         0.456    -0.472 r  bridge/emulator/pio/engines[0].core/program_counter/pc_out_reg[0]_replica_1/Q
+                         net (fo=9, routed)           0.862     0.390    bridge/emulator/pio/engines[0].core/fetch/words_reg_0_31_1_1/DPRA0
+    SLICE_X38Y131        RAMD32 (Prop_ramd32_RADR0_O)
+                                                      0.124     0.514 f  bridge/emulator/pio/engines[0].core/fetch/words_reg_0_31_1_1/DP/O
+                         net (fo=89, routed)          1.566     2.079    bridge/emulator/pio/engines[0].core/fetch/instr_out[1]
+    SLICE_X29Y111        LUT3 (Prop_lut3_I2_O)        0.150     2.229 f  bridge/emulator/pio/engines[0].core/fetch/in_count[1]_i_2/O
+                         net (fo=236, routed)         1.981     4.210    bridge/emulator/pio/engines[0].core/fetch/exec_instruction_reg[1]
+    SLICE_X48Y127        LUT5 (Prop_lut5_I1_O)        0.326     4.536 r  bridge/emulator/pio/engines[0].core/fetch/in_count[5]_i_13_replica_2/O
+                         net (fo=2, routed)           0.465     5.001    bridge/emulator/pio/engines[0].core/fetch/bit_count[0]_repN_2
+    SLICE_X54Y127        LUT2 (Prop_lut2_I1_O)        0.124     5.125 r  bridge/emulator/pio/engines[0].core/fetch/in_count[5]_i_18/O
+                         net (fo=1, routed)           0.000     5.125    bridge/emulator/pio/engines[0].core/fetch/in_count[5]_i_18_n_0
+    SLICE_X54Y127        CARRY4 (Prop_carry4_S[1]_CO[2])
+                                                      0.574     5.699 r  bridge/emulator/pio/engines[0].core/fetch/in_count_reg[5]_i_9/CO[2]
+                         net (fo=10, routed)          0.709     6.409    bridge/emulator/pio/engines[0].core/fetch/in_count_reg[5]_i_9_n_1
+    SLICE_X54Y125        LUT4 (Prop_lut4_I1_O)        0.310     6.719 r  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_17/O
+                         net (fo=1, routed)           0.843     7.561    bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_17_n_0
+    SLICE_X54Y125        LUT6 (Prop_lut6_I0_O)        0.124     7.685 f  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_12/O
+                         net (fo=1, routed)           0.645     8.330    bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_12_n_0
+    SLICE_X48Y128        LUT6 (Prop_lut6_I5_O)        0.124     8.454 f  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_7/O
+                         net (fo=1, routed)           0.492     8.946    bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_7_n_0
+    SLICE_X45Y128        LUT6 (Prop_lut6_I1_O)        0.124     9.070 f  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_6/O
+                         net (fo=5, routed)           0.469     9.538    bridge/emulator/pio/engines[0].core/fetch/exec_instruction_reg[15]_9
+    SLICE_X46Y128        LUT3 (Prop_lut3_I0_O)        0.124     9.662 f  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_3/O
+                         net (fo=7, routed)           0.832    10.494    bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_3_n_0
+    SLICE_X52Y127        LUT4 (Prop_lut4_I3_O)        0.118    10.612 r  bridge/emulator/pio/engines[0].core/fetch/pc_out[4]_i_6/O
+                         net (fo=121, routed)         0.847    11.459    bridge/emulator/pio/engines[0].core/fetch/running_reg_0
+    SLICE_X43Y126        LUT6 (Prop_lut6_I5_O)        0.326    11.785 r  bridge/emulator/pio/engines[0].core/fetch/write_ptr[1]_i_6/O
+                         net (fo=9, routed)           0.540    12.325    bridge/emulator/pio/engines[0].core/tx_fifo/tx_pop
+    SLICE_X42Y124        LUT6 (Prop_lut6_I0_O)        0.124    12.449 r  bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_0_5_i_1/O
+                         net (fo=44, routed)          0.862    13.311    bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_24_29/WE
+    SLICE_X38Y116        RAMD32                                       r  bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_24_29/RAMC/WE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk50_raw rise edge)
+                                                     20.000    20.000 r  <hidden>
+    E3                                                0.000    20.000 r  clk100
+                         net (fo=0)                   0.000    20.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         1.411    21.411 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           1.162    22.573    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.324    15.249 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           1.639    16.888    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091    16.979 r  core_clock_buf/O
+                         net (fo=2049, routed)        1.495    18.474    bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_24_29/WCLK
+    SLICE_X38Y116        RAMD32                                       r  bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_24_29/RAMC/CLK
+                         clock pessimism              0.560    19.034    <hidden>
+                         clock uncertainty           -0.082    18.952    <hidden>
+    SLICE_X38Y116        RAMD32 (Setup_ramd32_CLK_WE)
+                                                     -0.533    18.419    bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_24_29/RAMC
+  -------------------------------------------------------------------
+                         required time                         18.419    <hidden>
+                         arrival time                         -13.311    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  5.108    <hidden>
+
+Slack (MET) :             5.108ns  (required time - arrival time)
+  Source:                 bridge/emulator/pio/engines[0].core/program_counter/pc_out_reg[0]_replica_1/C
+                            (rising edge-triggered cell FDRE clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_24_29/RAMC_D1/WE
+                            (rising edge-triggered cell RAMD32 clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk50_raw
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            20.000ns  (clk50_raw rise@20.000ns - clk50_raw rise@0.000ns)
+  Data Path Delay:        14.239ns  (logic 3.128ns (21.967%)  route 11.111ns (78.033%))
+  Logic Levels:           13  (CARRY4=1 LUT2=1 LUT3=2 LUT4=2 LUT5=1 LUT6=5 RAMD32=1)
+  Clock Path Skew:        -0.038ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    -1.526ns = ( 18.474 - 20.000 ) 
+    Source Clock Delay      (SCD):    -0.928ns
+    Clock Pessimism Removal (CPR):    0.560ns
+  Clock Uncertainty:      0.082ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.147ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk50_raw rise edge)
+                                                      0.000     0.000 r  <hidden>
+    E3                                                0.000     0.000 r  clk100
+                         net (fo=0)                   0.000     0.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           1.233     2.715    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.070    -4.355 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           1.719    -2.636    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096    -2.540 r  core_clock_buf/O
+                         net (fo=2049, routed)        1.612    -0.928    bridge/emulator/pio/engines[0].core/program_counter/clk50
+    SLICE_X41Y131        FDRE                                         r  bridge/emulator/pio/engines[0].core/program_counter/pc_out_reg[0]_replica_1/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X41Y131        FDRE (Prop_fdre_C_Q)         0.456    -0.472 r  bridge/emulator/pio/engines[0].core/program_counter/pc_out_reg[0]_replica_1/Q
+                         net (fo=9, routed)           0.862     0.390    bridge/emulator/pio/engines[0].core/fetch/words_reg_0_31_1_1/DPRA0
+    SLICE_X38Y131        RAMD32 (Prop_ramd32_RADR0_O)
+                                                      0.124     0.514 f  bridge/emulator/pio/engines[0].core/fetch/words_reg_0_31_1_1/DP/O
+                         net (fo=89, routed)          1.566     2.079    bridge/emulator/pio/engines[0].core/fetch/instr_out[1]
+    SLICE_X29Y111        LUT3 (Prop_lut3_I2_O)        0.150     2.229 f  bridge/emulator/pio/engines[0].core/fetch/in_count[1]_i_2/O
+                         net (fo=236, routed)         1.981     4.210    bridge/emulator/pio/engines[0].core/fetch/exec_instruction_reg[1]
+    SLICE_X48Y127        LUT5 (Prop_lut5_I1_O)        0.326     4.536 r  bridge/emulator/pio/engines[0].core/fetch/in_count[5]_i_13_replica_2/O
+                         net (fo=2, routed)           0.465     5.001    bridge/emulator/pio/engines[0].core/fetch/bit_count[0]_repN_2
+    SLICE_X54Y127        LUT2 (Prop_lut2_I1_O)        0.124     5.125 r  bridge/emulator/pio/engines[0].core/fetch/in_count[5]_i_18/O
+                         net (fo=1, routed)           0.000     5.125    bridge/emulator/pio/engines[0].core/fetch/in_count[5]_i_18_n_0
+    SLICE_X54Y127        CARRY4 (Prop_carry4_S[1]_CO[2])
+                                                      0.574     5.699 r  bridge/emulator/pio/engines[0].core/fetch/in_count_reg[5]_i_9/CO[2]
+                         net (fo=10, routed)          0.709     6.409    bridge/emulator/pio/engines[0].core/fetch/in_count_reg[5]_i_9_n_1
+    SLICE_X54Y125        LUT4 (Prop_lut4_I1_O)        0.310     6.719 r  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_17/O
+                         net (fo=1, routed)           0.843     7.561    bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_17_n_0
+    SLICE_X54Y125        LUT6 (Prop_lut6_I0_O)        0.124     7.685 f  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_12/O
+                         net (fo=1, routed)           0.645     8.330    bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_12_n_0
+    SLICE_X48Y128        LUT6 (Prop_lut6_I5_O)        0.124     8.454 f  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_7/O
+                         net (fo=1, routed)           0.492     8.946    bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_7_n_0
+    SLICE_X45Y128        LUT6 (Prop_lut6_I1_O)        0.124     9.070 f  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_6/O
+                         net (fo=5, routed)           0.469     9.538    bridge/emulator/pio/engines[0].core/fetch/exec_instruction_reg[15]_9
+    SLICE_X46Y128        LUT3 (Prop_lut3_I0_O)        0.124     9.662 f  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_3/O
+                         net (fo=7, routed)           0.832    10.494    bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_3_n_0
+    SLICE_X52Y127        LUT4 (Prop_lut4_I3_O)        0.118    10.612 r  bridge/emulator/pio/engines[0].core/fetch/pc_out[4]_i_6/O
+                         net (fo=121, routed)         0.847    11.459    bridge/emulator/pio/engines[0].core/fetch/running_reg_0
+    SLICE_X43Y126        LUT6 (Prop_lut6_I5_O)        0.326    11.785 r  bridge/emulator/pio/engines[0].core/fetch/write_ptr[1]_i_6/O
+                         net (fo=9, routed)           0.540    12.325    bridge/emulator/pio/engines[0].core/tx_fifo/tx_pop
+    SLICE_X42Y124        LUT6 (Prop_lut6_I0_O)        0.124    12.449 r  bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_0_5_i_1/O
+                         net (fo=44, routed)          0.862    13.311    bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_24_29/WE
+    SLICE_X38Y116        RAMD32                                       r  bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_24_29/RAMC_D1/WE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk50_raw rise edge)
+                                                     20.000    20.000 r  <hidden>
+    E3                                                0.000    20.000 r  clk100
+                         net (fo=0)                   0.000    20.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         1.411    21.411 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           1.162    22.573    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.324    15.249 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           1.639    16.888    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091    16.979 r  core_clock_buf/O
+                         net (fo=2049, routed)        1.495    18.474    bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_24_29/WCLK
+    SLICE_X38Y116        RAMD32                                       r  bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_24_29/RAMC_D1/CLK
+                         clock pessimism              0.560    19.034    <hidden>
+                         clock uncertainty           -0.082    18.952    <hidden>
+    SLICE_X38Y116        RAMD32 (Setup_ramd32_CLK_WE)
+                                                     -0.533    18.419    bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_24_29/RAMC_D1
+  -------------------------------------------------------------------
+                         required time                         18.419    <hidden>
+                         arrival time                         -13.311    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  5.108    <hidden>
+
+Slack (MET) :             5.108ns  (required time - arrival time)
+  Source:                 bridge/emulator/pio/engines[0].core/program_counter/pc_out_reg[0]_replica_1/C
+                            (rising edge-triggered cell FDRE clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_24_29/RAMD/WE
+                            (rising edge-triggered cell RAMS32 clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk50_raw
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            20.000ns  (clk50_raw rise@20.000ns - clk50_raw rise@0.000ns)
+  Data Path Delay:        14.239ns  (logic 3.128ns (21.967%)  route 11.111ns (78.033%))
+  Logic Levels:           13  (CARRY4=1 LUT2=1 LUT3=2 LUT4=2 LUT5=1 LUT6=5 RAMD32=1)
+  Clock Path Skew:        -0.038ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    -1.526ns = ( 18.474 - 20.000 ) 
+    Source Clock Delay      (SCD):    -0.928ns
+    Clock Pessimism Removal (CPR):    0.560ns
+  Clock Uncertainty:      0.082ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.147ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk50_raw rise edge)
+                                                      0.000     0.000 r  <hidden>
+    E3                                                0.000     0.000 r  clk100
+                         net (fo=0)                   0.000     0.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           1.233     2.715    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.070    -4.355 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           1.719    -2.636    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096    -2.540 r  core_clock_buf/O
+                         net (fo=2049, routed)        1.612    -0.928    bridge/emulator/pio/engines[0].core/program_counter/clk50
+    SLICE_X41Y131        FDRE                                         r  bridge/emulator/pio/engines[0].core/program_counter/pc_out_reg[0]_replica_1/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X41Y131        FDRE (Prop_fdre_C_Q)         0.456    -0.472 r  bridge/emulator/pio/engines[0].core/program_counter/pc_out_reg[0]_replica_1/Q
+                         net (fo=9, routed)           0.862     0.390    bridge/emulator/pio/engines[0].core/fetch/words_reg_0_31_1_1/DPRA0
+    SLICE_X38Y131        RAMD32 (Prop_ramd32_RADR0_O)
+                                                      0.124     0.514 f  bridge/emulator/pio/engines[0].core/fetch/words_reg_0_31_1_1/DP/O
+                         net (fo=89, routed)          1.566     2.079    bridge/emulator/pio/engines[0].core/fetch/instr_out[1]
+    SLICE_X29Y111        LUT3 (Prop_lut3_I2_O)        0.150     2.229 f  bridge/emulator/pio/engines[0].core/fetch/in_count[1]_i_2/O
+                         net (fo=236, routed)         1.981     4.210    bridge/emulator/pio/engines[0].core/fetch/exec_instruction_reg[1]
+    SLICE_X48Y127        LUT5 (Prop_lut5_I1_O)        0.326     4.536 r  bridge/emulator/pio/engines[0].core/fetch/in_count[5]_i_13_replica_2/O
+                         net (fo=2, routed)           0.465     5.001    bridge/emulator/pio/engines[0].core/fetch/bit_count[0]_repN_2
+    SLICE_X54Y127        LUT2 (Prop_lut2_I1_O)        0.124     5.125 r  bridge/emulator/pio/engines[0].core/fetch/in_count[5]_i_18/O
+                         net (fo=1, routed)           0.000     5.125    bridge/emulator/pio/engines[0].core/fetch/in_count[5]_i_18_n_0
+    SLICE_X54Y127        CARRY4 (Prop_carry4_S[1]_CO[2])
+                                                      0.574     5.699 r  bridge/emulator/pio/engines[0].core/fetch/in_count_reg[5]_i_9/CO[2]
+                         net (fo=10, routed)          0.709     6.409    bridge/emulator/pio/engines[0].core/fetch/in_count_reg[5]_i_9_n_1
+    SLICE_X54Y125        LUT4 (Prop_lut4_I1_O)        0.310     6.719 r  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_17/O
+                         net (fo=1, routed)           0.843     7.561    bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_17_n_0
+    SLICE_X54Y125        LUT6 (Prop_lut6_I0_O)        0.124     7.685 f  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_12/O
+                         net (fo=1, routed)           0.645     8.330    bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_12_n_0
+    SLICE_X48Y128        LUT6 (Prop_lut6_I5_O)        0.124     8.454 f  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_7/O
+                         net (fo=1, routed)           0.492     8.946    bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_7_n_0
+    SLICE_X45Y128        LUT6 (Prop_lut6_I1_O)        0.124     9.070 f  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_6/O
+                         net (fo=5, routed)           0.469     9.538    bridge/emulator/pio/engines[0].core/fetch/exec_instruction_reg[15]_9
+    SLICE_X46Y128        LUT3 (Prop_lut3_I0_O)        0.124     9.662 f  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_3/O
+                         net (fo=7, routed)           0.832    10.494    bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_3_n_0
+    SLICE_X52Y127        LUT4 (Prop_lut4_I3_O)        0.118    10.612 r  bridge/emulator/pio/engines[0].core/fetch/pc_out[4]_i_6/O
+                         net (fo=121, routed)         0.847    11.459    bridge/emulator/pio/engines[0].core/fetch/running_reg_0
+    SLICE_X43Y126        LUT6 (Prop_lut6_I5_O)        0.326    11.785 r  bridge/emulator/pio/engines[0].core/fetch/write_ptr[1]_i_6/O
+                         net (fo=9, routed)           0.540    12.325    bridge/emulator/pio/engines[0].core/tx_fifo/tx_pop
+    SLICE_X42Y124        LUT6 (Prop_lut6_I0_O)        0.124    12.449 r  bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_0_5_i_1/O
+                         net (fo=44, routed)          0.862    13.311    bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_24_29/WE
+    SLICE_X38Y116        RAMS32                                       r  bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_24_29/RAMD/WE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk50_raw rise edge)
+                                                     20.000    20.000 r  <hidden>
+    E3                                                0.000    20.000 r  clk100
+                         net (fo=0)                   0.000    20.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         1.411    21.411 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           1.162    22.573    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.324    15.249 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           1.639    16.888    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091    16.979 r  core_clock_buf/O
+                         net (fo=2049, routed)        1.495    18.474    bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_24_29/WCLK
+    SLICE_X38Y116        RAMS32                                       r  bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_24_29/RAMD/CLK
+                         clock pessimism              0.560    19.034    <hidden>
+                         clock uncertainty           -0.082    18.952    <hidden>
+    SLICE_X38Y116        RAMS32 (Setup_rams32_CLK_WE)
+                                                     -0.533    18.419    bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_24_29/RAMD
+  -------------------------------------------------------------------
+                         required time                         18.419    <hidden>
+                         arrival time                         -13.311    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  5.108    <hidden>
+
+Slack (MET) :             5.108ns  (required time - arrival time)
+  Source:                 bridge/emulator/pio/engines[0].core/program_counter/pc_out_reg[0]_replica_1/C
+                            (rising edge-triggered cell FDRE clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_24_29/RAMD_D1/WE
+                            (rising edge-triggered cell RAMS32 clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk50_raw
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            20.000ns  (clk50_raw rise@20.000ns - clk50_raw rise@0.000ns)
+  Data Path Delay:        14.239ns  (logic 3.128ns (21.967%)  route 11.111ns (78.033%))
+  Logic Levels:           13  (CARRY4=1 LUT2=1 LUT3=2 LUT4=2 LUT5=1 LUT6=5 RAMD32=1)
+  Clock Path Skew:        -0.038ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    -1.526ns = ( 18.474 - 20.000 ) 
+    Source Clock Delay      (SCD):    -0.928ns
+    Clock Pessimism Removal (CPR):    0.560ns
+  Clock Uncertainty:      0.082ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.147ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk50_raw rise edge)
+                                                      0.000     0.000 r  <hidden>
+    E3                                                0.000     0.000 r  clk100
+                         net (fo=0)                   0.000     0.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           1.233     2.715    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.070    -4.355 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           1.719    -2.636    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096    -2.540 r  core_clock_buf/O
+                         net (fo=2049, routed)        1.612    -0.928    bridge/emulator/pio/engines[0].core/program_counter/clk50
+    SLICE_X41Y131        FDRE                                         r  bridge/emulator/pio/engines[0].core/program_counter/pc_out_reg[0]_replica_1/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X41Y131        FDRE (Prop_fdre_C_Q)         0.456    -0.472 r  bridge/emulator/pio/engines[0].core/program_counter/pc_out_reg[0]_replica_1/Q
+                         net (fo=9, routed)           0.862     0.390    bridge/emulator/pio/engines[0].core/fetch/words_reg_0_31_1_1/DPRA0
+    SLICE_X38Y131        RAMD32 (Prop_ramd32_RADR0_O)
+                                                      0.124     0.514 f  bridge/emulator/pio/engines[0].core/fetch/words_reg_0_31_1_1/DP/O
+                         net (fo=89, routed)          1.566     2.079    bridge/emulator/pio/engines[0].core/fetch/instr_out[1]
+    SLICE_X29Y111        LUT3 (Prop_lut3_I2_O)        0.150     2.229 f  bridge/emulator/pio/engines[0].core/fetch/in_count[1]_i_2/O
+                         net (fo=236, routed)         1.981     4.210    bridge/emulator/pio/engines[0].core/fetch/exec_instruction_reg[1]
+    SLICE_X48Y127        LUT5 (Prop_lut5_I1_O)        0.326     4.536 r  bridge/emulator/pio/engines[0].core/fetch/in_count[5]_i_13_replica_2/O
+                         net (fo=2, routed)           0.465     5.001    bridge/emulator/pio/engines[0].core/fetch/bit_count[0]_repN_2
+    SLICE_X54Y127        LUT2 (Prop_lut2_I1_O)        0.124     5.125 r  bridge/emulator/pio/engines[0].core/fetch/in_count[5]_i_18/O
+                         net (fo=1, routed)           0.000     5.125    bridge/emulator/pio/engines[0].core/fetch/in_count[5]_i_18_n_0
+    SLICE_X54Y127        CARRY4 (Prop_carry4_S[1]_CO[2])
+                                                      0.574     5.699 r  bridge/emulator/pio/engines[0].core/fetch/in_count_reg[5]_i_9/CO[2]
+                         net (fo=10, routed)          0.709     6.409    bridge/emulator/pio/engines[0].core/fetch/in_count_reg[5]_i_9_n_1
+    SLICE_X54Y125        LUT4 (Prop_lut4_I1_O)        0.310     6.719 r  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_17/O
+                         net (fo=1, routed)           0.843     7.561    bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_17_n_0
+    SLICE_X54Y125        LUT6 (Prop_lut6_I0_O)        0.124     7.685 f  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_12/O
+                         net (fo=1, routed)           0.645     8.330    bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_12_n_0
+    SLICE_X48Y128        LUT6 (Prop_lut6_I5_O)        0.124     8.454 f  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_7/O
+                         net (fo=1, routed)           0.492     8.946    bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_7_n_0
+    SLICE_X45Y128        LUT6 (Prop_lut6_I1_O)        0.124     9.070 f  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_6/O
+                         net (fo=5, routed)           0.469     9.538    bridge/emulator/pio/engines[0].core/fetch/exec_instruction_reg[15]_9
+    SLICE_X46Y128        LUT3 (Prop_lut3_I0_O)        0.124     9.662 f  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_3/O
+                         net (fo=7, routed)           0.832    10.494    bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_3_n_0
+    SLICE_X52Y127        LUT4 (Prop_lut4_I3_O)        0.118    10.612 r  bridge/emulator/pio/engines[0].core/fetch/pc_out[4]_i_6/O
+                         net (fo=121, routed)         0.847    11.459    bridge/emulator/pio/engines[0].core/fetch/running_reg_0
+    SLICE_X43Y126        LUT6 (Prop_lut6_I5_O)        0.326    11.785 r  bridge/emulator/pio/engines[0].core/fetch/write_ptr[1]_i_6/O
+                         net (fo=9, routed)           0.540    12.325    bridge/emulator/pio/engines[0].core/tx_fifo/tx_pop
+    SLICE_X42Y124        LUT6 (Prop_lut6_I0_O)        0.124    12.449 r  bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_0_5_i_1/O
+                         net (fo=44, routed)          0.862    13.311    bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_24_29/WE
+    SLICE_X38Y116        RAMS32                                       r  bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_24_29/RAMD_D1/WE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk50_raw rise edge)
+                                                     20.000    20.000 r  <hidden>
+    E3                                                0.000    20.000 r  clk100
+                         net (fo=0)                   0.000    20.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         1.411    21.411 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           1.162    22.573    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.324    15.249 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           1.639    16.888    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091    16.979 r  core_clock_buf/O
+                         net (fo=2049, routed)        1.495    18.474    bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_24_29/WCLK
+    SLICE_X38Y116        RAMS32                                       r  bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_24_29/RAMD_D1/CLK
+                         clock pessimism              0.560    19.034    <hidden>
+                         clock uncertainty           -0.082    18.952    <hidden>
+    SLICE_X38Y116        RAMS32 (Setup_rams32_CLK_WE)
+                                                     -0.533    18.419    bridge/emulator/pio/engines[0].core/tx_fifo/words_reg_0_3_24_29/RAMD_D1
+  -------------------------------------------------------------------
+                         required time                         18.419    <hidden>
+                         arrival time                         -13.311    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  5.108    <hidden>
+
+Slack (MET) :             5.186ns  (required time - arrival time)
+  Source:                 bridge/emulator/pio/engines[1].core/program_counter/pc_out_reg[0]_replica_1/C
+                            (rising edge-triggered cell FDRE clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            bridge/emulator/pio/engines[1].core/rx_fifo/words_reg_0_3_24_29/RAMB_D1/I
+                            (rising edge-triggered cell RAMD32 clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk50_raw
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            20.000ns  (clk50_raw rise@20.000ns - clk50_raw rise@0.000ns)
+  Data Path Delay:        14.361ns  (logic 2.544ns (17.715%)  route 11.817ns (82.285%))
+  Logic Levels:           11  (LUT2=1 LUT3=2 LUT5=4 LUT6=3 RAMD32=1)
+  Clock Path Skew:        0.059ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    -1.346ns = ( 18.654 - 20.000 ) 
+    Source Clock Delay      (SCD):    -0.917ns
+    Clock Pessimism Removal (CPR):    0.488ns
+  Clock Uncertainty:      0.082ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.147ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk50_raw rise edge)
+                                                      0.000     0.000 r  <hidden>
+    E3                                                0.000     0.000 r  clk100
+                         net (fo=0)                   0.000     0.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           1.233     2.715    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.070    -4.355 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           1.719    -2.636    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096    -2.540 r  core_clock_buf/O
+                         net (fo=2049, routed)        1.623    -0.917    bridge/emulator/pio/engines[1].core/program_counter/clk50
+    SLICE_X35Y142        FDRE                                         r  bridge/emulator/pio/engines[1].core/program_counter/pc_out_reg[0]_replica_1/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X35Y142        FDRE (Prop_fdre_C_Q)         0.456    -0.461 r  bridge/emulator/pio/engines[1].core/program_counter/pc_out_reg[0]_replica_1/Q
+                         net (fo=9, routed)           1.152     0.691    bridge/emulator/pio/engines[1].core/fetch/words_reg_0_31_15_15/DPRA0
+    SLICE_X34Y140        RAMD32 (Prop_ramd32_RADR0_O)
+                                                      0.150     0.841 r  bridge/emulator/pio/engines[1].core/fetch/words_reg_0_31_15_15/DP/O
+                         net (fo=70, routed)          1.990     2.831    bridge/emulator/pio/engines[1].core/fetch/instr_out_0[15]
+    SLICE_X21Y159        LUT3 (Prop_lut3_I2_O)        0.356     3.187 r  bridge/emulator/pio/engines[1].core/fetch/out_count[5]_i_6__0/O
+                         net (fo=127, routed)         1.304     4.491    bridge/emulator/pio/engines[1].core/fetch/instruction[15]
+    SLICE_X31Y152        LUT6 (Prop_lut6_I3_O)        0.326     4.817 f  bridge/emulator/pio/engines[1].core/fetch/osr[30]_i_13__0/O
+                         net (fo=37, routed)          1.251     6.068    bridge/emulator/pio/engines[1].core/fetch/osr[30]_i_13__0_n_0
+    SLICE_X36Y158        LUT2 (Prop_lut2_I1_O)        0.152     6.220 f  bridge/emulator/pio/engines[1].core/fetch/osr[30]_i_9__0/O
+                         net (fo=25, routed)          1.087     7.307    bridge/emulator/pio/engines[1].core/fetch/osr[30]_i_9__0_n_0
+    SLICE_X36Y153        LUT6 (Prop_lut6_I0_O)        0.332     7.639 f  bridge/emulator/pio/engines[1].core/fetch/osr[19]_i_5__0/O
+                         net (fo=14, routed)          1.199     8.838    bridge/emulator/pio/engines[1].core/fetch/osr[19]_i_5__0_n_0
+    SLICE_X50Y157        LUT6 (Prop_lut6_I0_O)        0.124     8.962 r  bridge/emulator/pio/engines[1].core/fetch/words_reg_0_3_18_23_i_94__0/O
+                         net (fo=2, routed)           0.653     9.615    bridge/emulator/pio/engines[1].core/fetch/words_reg_0_3_18_23_i_94__0_n_0
+    SLICE_X50Y158        LUT5 (Prop_lut5_I0_O)        0.124     9.739 r  bridge/emulator/pio/engines[1].core/fetch/words_reg_0_3_24_29_i_50__0/O
+                         net (fo=2, routed)           0.472    10.211    bridge/emulator/pio/engines[1].core/fetch/words_reg_0_3_24_29_i_50__0_n_0
+    SLICE_X49Y160        LUT5 (Prop_lut5_I0_O)        0.124    10.335 r  bridge/emulator/pio/engines[1].core/fetch/words_reg_0_3_24_29_i_38__0/O
+                         net (fo=2, routed)           0.406    10.741    bridge/emulator/pio/engines[1].core/fetch/words_reg_0_3_24_29_i_38__0_n_0
+    SLICE_X47Y160        LUT5 (Prop_lut5_I4_O)        0.124    10.865 r  bridge/emulator/pio/engines[1].core/fetch/words_reg_0_3_24_29_i_19__0/O
+                         net (fo=2, routed)           0.453    11.318    bridge/emulator/pio/engines[1].core/fetch/words_reg_0_3_24_29_i_19__0_n_0
+    SLICE_X44Y160        LUT5 (Prop_lut5_I0_O)        0.124    11.442 r  bridge/emulator/pio/engines[1].core/fetch/words_reg_0_3_24_29_i_9__0/O
+                         net (fo=1, routed)           1.095    12.537    bridge/emulator/pio/engines[1].core/fetch/shifted_isr[27]
+    SLICE_X43Y155        LUT3 (Prop_lut3_I0_O)        0.152    12.689 r  bridge/emulator/pio/engines[1].core/fetch/words_reg_0_3_24_29_i_3__1/O
+                         net (fo=1, routed)           0.755    13.444    bridge/emulator/pio/engines[1].core/rx_fifo/words_reg_0_3_24_29/DIB1
+    SLICE_X42Y151        RAMD32                                       r  bridge/emulator/pio/engines[1].core/rx_fifo/words_reg_0_3_24_29/RAMB_D1/I
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk50_raw rise edge)
+                                                     20.000    20.000 r  <hidden>
+    E3                                                0.000    20.000 r  clk100
+                         net (fo=0)                   0.000    20.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         1.411    21.411 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           1.162    22.573    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.324    15.249 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           1.639    16.888    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091    16.979 r  core_clock_buf/O
+                         net (fo=2049, routed)        1.674    18.654    bridge/emulator/pio/engines[1].core/rx_fifo/words_reg_0_3_24_29/WCLK
+    SLICE_X42Y151        RAMD32                                       r  bridge/emulator/pio/engines[1].core/rx_fifo/words_reg_0_3_24_29/RAMB_D1/CLK
+                         clock pessimism              0.488    19.142    <hidden>
+                         clock uncertainty           -0.082    19.060    <hidden>
+    SLICE_X42Y151        RAMD32 (Setup_ramd32_CLK_I)
+                                                     -0.430    18.630    bridge/emulator/pio/engines[1].core/rx_fifo/words_reg_0_3_24_29/RAMB_D1
+  -------------------------------------------------------------------
+                         required time                         18.630    <hidden>
+                         arrival time                         -13.444    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  5.186    <hidden>
+
+Slack (MET) :             5.194ns  (required time - arrival time)
+  Source:                 bridge/emulator/pio/engines[1].core/program_counter/pc_out_reg[0]_replica_1/C
+                            (rising edge-triggered cell FDRE clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            bridge/emulator/pio/engines[1].core/rx_fifo/words_reg_0_3_24_29/RAMA/I
+                            (rising edge-triggered cell RAMD32 clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk50_raw
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            20.000ns  (clk50_raw rise@20.000ns - clk50_raw rise@0.000ns)
+  Data Path Delay:        14.421ns  (logic 2.544ns (17.641%)  route 11.877ns (82.359%))
+  Logic Levels:           11  (LUT2=1 LUT3=2 LUT5=4 LUT6=3 RAMD32=1)
+  Clock Path Skew:        0.059ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    -1.346ns = ( 18.654 - 20.000 ) 
+    Source Clock Delay      (SCD):    -0.917ns
+    Clock Pessimism Removal (CPR):    0.488ns
+  Clock Uncertainty:      0.082ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.147ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk50_raw rise edge)
+                                                      0.000     0.000 r  <hidden>
+    E3                                                0.000     0.000 r  clk100
+                         net (fo=0)                   0.000     0.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           1.233     2.715    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.070    -4.355 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           1.719    -2.636    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096    -2.540 r  core_clock_buf/O
+                         net (fo=2049, routed)        1.623    -0.917    bridge/emulator/pio/engines[1].core/program_counter/clk50
+    SLICE_X35Y142        FDRE                                         r  bridge/emulator/pio/engines[1].core/program_counter/pc_out_reg[0]_replica_1/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X35Y142        FDRE (Prop_fdre_C_Q)         0.456    -0.461 r  bridge/emulator/pio/engines[1].core/program_counter/pc_out_reg[0]_replica_1/Q
+                         net (fo=9, routed)           1.152     0.691    bridge/emulator/pio/engines[1].core/fetch/words_reg_0_31_15_15/DPRA0
+    SLICE_X34Y140        RAMD32 (Prop_ramd32_RADR0_O)
+                                                      0.150     0.841 r  bridge/emulator/pio/engines[1].core/fetch/words_reg_0_31_15_15/DP/O
+                         net (fo=70, routed)          1.990     2.831    bridge/emulator/pio/engines[1].core/fetch/instr_out_0[15]
+    SLICE_X21Y159        LUT3 (Prop_lut3_I2_O)        0.356     3.187 r  bridge/emulator/pio/engines[1].core/fetch/out_count[5]_i_6__0/O
+                         net (fo=127, routed)         1.304     4.491    bridge/emulator/pio/engines[1].core/fetch/instruction[15]
+    SLICE_X31Y152        LUT6 (Prop_lut6_I3_O)        0.326     4.817 f  bridge/emulator/pio/engines[1].core/fetch/osr[30]_i_13__0/O
+                         net (fo=37, routed)          1.251     6.068    bridge/emulator/pio/engines[1].core/fetch/osr[30]_i_13__0_n_0
+    SLICE_X36Y158        LUT2 (Prop_lut2_I1_O)        0.152     6.220 f  bridge/emulator/pio/engines[1].core/fetch/osr[30]_i_9__0/O
+                         net (fo=25, routed)          1.087     7.307    bridge/emulator/pio/engines[1].core/fetch/osr[30]_i_9__0_n_0
+    SLICE_X36Y153        LUT6 (Prop_lut6_I0_O)        0.332     7.639 f  bridge/emulator/pio/engines[1].core/fetch/osr[19]_i_5__0/O
+                         net (fo=14, routed)          1.199     8.838    bridge/emulator/pio/engines[1].core/fetch/osr[19]_i_5__0_n_0
+    SLICE_X50Y157        LUT6 (Prop_lut6_I0_O)        0.124     8.962 r  bridge/emulator/pio/engines[1].core/fetch/words_reg_0_3_18_23_i_94__0/O
+                         net (fo=2, routed)           0.629     9.591    bridge/emulator/pio/engines[1].core/fetch/words_reg_0_3_18_23_i_94__0_n_0
+    SLICE_X51Y158        LUT5 (Prop_lut5_I4_O)        0.124     9.715 r  bridge/emulator/pio/engines[1].core/fetch/words_reg_0_3_18_23_i_62__0/O
+                         net (fo=2, routed)           0.475    10.190    bridge/emulator/pio/engines[1].core/fetch/words_reg_0_3_18_23_i_62__0_n_0
+    SLICE_X50Y159        LUT5 (Prop_lut5_I0_O)        0.124    10.314 r  bridge/emulator/pio/engines[1].core/fetch/words_reg_0_3_18_23_i_45__0/O
+                         net (fo=2, routed)           0.607    10.921    bridge/emulator/pio/engines[1].core/fetch/words_reg_0_3_18_23_i_45__0_n_0
+    SLICE_X48Y159        LUT5 (Prop_lut5_I0_O)        0.124    11.045 r  bridge/emulator/pio/engines[1].core/fetch/words_reg_0_3_24_29_i_16__0/O
+                         net (fo=2, routed)           0.463    11.508    bridge/emulator/pio/engines[1].core/fetch/words_reg_0_3_24_29_i_16__0_n_0
+    SLICE_X44Y158        LUT5 (Prop_lut5_I0_O)        0.124    11.632 r  bridge/emulator/pio/engines[1].core/fetch/words_reg_0_3_24_29_i_8__0/O
+                         net (fo=1, routed)           1.094    12.726    bridge/emulator/pio/engines[1].core/fetch/shifted_isr[24]
+    SLICE_X43Y154        LUT3 (Prop_lut3_I0_O)        0.152    12.878 r  bridge/emulator/pio/engines[1].core/fetch/words_reg_0_3_24_29_i_2__0/O
+                         net (fo=1, routed)           0.626    13.504    bridge/emulator/pio/engines[1].core/rx_fifo/words_reg_0_3_24_29/DIA0
+    SLICE_X42Y151        RAMD32                                       r  bridge/emulator/pio/engines[1].core/rx_fifo/words_reg_0_3_24_29/RAMA/I
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk50_raw rise edge)
+                                                     20.000    20.000 r  <hidden>
+    E3                                                0.000    20.000 r  clk100
+                         net (fo=0)                   0.000    20.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         1.411    21.411 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           1.162    22.573    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.324    15.249 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           1.639    16.888    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091    16.979 r  core_clock_buf/O
+                         net (fo=2049, routed)        1.674    18.654    bridge/emulator/pio/engines[1].core/rx_fifo/words_reg_0_3_24_29/WCLK
+    SLICE_X42Y151        RAMD32                                       r  bridge/emulator/pio/engines[1].core/rx_fifo/words_reg_0_3_24_29/RAMA/CLK
+                         clock pessimism              0.488    19.142    <hidden>
+                         clock uncertainty           -0.082    19.060    <hidden>
+    SLICE_X42Y151        RAMD32 (Setup_ramd32_CLK_I)
+                                                     -0.363    18.697    bridge/emulator/pio/engines[1].core/rx_fifo/words_reg_0_3_24_29/RAMA
+  -------------------------------------------------------------------
+                         required time                         18.697    <hidden>
+                         arrival time                         -13.504    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  5.194    <hidden>
+
+Slack (MET) :             5.200ns  (required time - arrival time)
+  Source:                 bridge/emulator/pio/engines[0].core/program_counter/pc_out_reg[0]_replica_1/C
+                            (rising edge-triggered cell FDRE clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            bridge/emulator/pio/engines[0].core/rx_fifo/words_reg_0_3_30_31/DP/WE
+                            (rising edge-triggered cell RAMD32 clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk50_raw
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            20.000ns  (clk50_raw rise@20.000ns - clk50_raw rise@0.000ns)
+  Data Path Delay:        14.141ns  (logic 3.128ns (22.121%)  route 11.013ns (77.879%))
+  Logic Levels:           13  (CARRY4=1 LUT2=2 LUT3=2 LUT4=2 LUT5=1 LUT6=4 RAMD32=1)
+  Clock Path Skew:        -0.045ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    -1.533ns = ( 18.467 - 20.000 ) 
+    Source Clock Delay      (SCD):    -0.928ns
+    Clock Pessimism Removal (CPR):    0.560ns
+  Clock Uncertainty:      0.082ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.147ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk50_raw rise edge)
+                                                      0.000     0.000 r  <hidden>
+    E3                                                0.000     0.000 r  clk100
+                         net (fo=0)                   0.000     0.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           1.233     2.715    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.070    -4.355 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           1.719    -2.636    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096    -2.540 r  core_clock_buf/O
+                         net (fo=2049, routed)        1.612    -0.928    bridge/emulator/pio/engines[0].core/program_counter/clk50
+    SLICE_X41Y131        FDRE                                         r  bridge/emulator/pio/engines[0].core/program_counter/pc_out_reg[0]_replica_1/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X41Y131        FDRE (Prop_fdre_C_Q)         0.456    -0.472 r  bridge/emulator/pio/engines[0].core/program_counter/pc_out_reg[0]_replica_1/Q
+                         net (fo=9, routed)           0.862     0.390    bridge/emulator/pio/engines[0].core/fetch/words_reg_0_31_1_1/DPRA0
+    SLICE_X38Y131        RAMD32 (Prop_ramd32_RADR0_O)
+                                                      0.124     0.514 f  bridge/emulator/pio/engines[0].core/fetch/words_reg_0_31_1_1/DP/O
+                         net (fo=89, routed)          1.566     2.079    bridge/emulator/pio/engines[0].core/fetch/instr_out[1]
+    SLICE_X29Y111        LUT3 (Prop_lut3_I2_O)        0.150     2.229 f  bridge/emulator/pio/engines[0].core/fetch/in_count[1]_i_2/O
+                         net (fo=236, routed)         1.981     4.210    bridge/emulator/pio/engines[0].core/fetch/exec_instruction_reg[1]
+    SLICE_X48Y127        LUT5 (Prop_lut5_I1_O)        0.326     4.536 r  bridge/emulator/pio/engines[0].core/fetch/in_count[5]_i_13_replica_2/O
+                         net (fo=2, routed)           0.465     5.001    bridge/emulator/pio/engines[0].core/fetch/bit_count[0]_repN_2
+    SLICE_X54Y127        LUT2 (Prop_lut2_I1_O)        0.124     5.125 r  bridge/emulator/pio/engines[0].core/fetch/in_count[5]_i_18/O
+                         net (fo=1, routed)           0.000     5.125    bridge/emulator/pio/engines[0].core/fetch/in_count[5]_i_18_n_0
+    SLICE_X54Y127        CARRY4 (Prop_carry4_S[1]_CO[2])
+                                                      0.574     5.699 r  bridge/emulator/pio/engines[0].core/fetch/in_count_reg[5]_i_9/CO[2]
+                         net (fo=10, routed)          0.709     6.409    bridge/emulator/pio/engines[0].core/fetch/in_count_reg[5]_i_9_n_1
+    SLICE_X54Y125        LUT4 (Prop_lut4_I1_O)        0.310     6.719 r  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_17/O
+                         net (fo=1, routed)           0.843     7.561    bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_17_n_0
+    SLICE_X54Y125        LUT6 (Prop_lut6_I0_O)        0.124     7.685 f  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_12/O
+                         net (fo=1, routed)           0.645     8.330    bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_12_n_0
+    SLICE_X48Y128        LUT6 (Prop_lut6_I5_O)        0.124     8.454 f  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_7/O
+                         net (fo=1, routed)           0.492     8.946    bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_7_n_0
+    SLICE_X45Y128        LUT6 (Prop_lut6_I1_O)        0.124     9.070 f  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_6/O
+                         net (fo=5, routed)           0.469     9.538    bridge/emulator/pio/engines[0].core/fetch/exec_instruction_reg[15]_9
+    SLICE_X46Y128        LUT3 (Prop_lut3_I0_O)        0.124     9.662 f  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_3/O
+                         net (fo=7, routed)           0.832    10.494    bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_3_n_0
+    SLICE_X52Y127        LUT4 (Prop_lut4_I3_O)        0.118    10.612 r  bridge/emulator/pio/engines[0].core/fetch/pc_out[4]_i_6/O
+                         net (fo=121, routed)         0.821    11.432    bridge/emulator/pio/engines[0].core/fetch/running_reg_0
+    SLICE_X47Y128        LUT6 (Prop_lut6_I4_O)        0.326    11.758 r  bridge/emulator/pio/engines[0].core/fetch/write_ptr[1]_i_2__0/O
+                         net (fo=6, routed)           0.473    12.231    bridge/emulator/pio/engines[0].core/fetch/p_0_in__0[0]
+    SLICE_X46Y128        LUT2 (Prop_lut2_I0_O)        0.124    12.355 r  bridge/emulator/pio/engines[0].core/fetch/words_reg_0_3_0_5_i_1__0/O
+                         net (fo=44, routed)          0.858    13.212    bridge/emulator/pio/engines[0].core/rx_fifo/words_reg_0_3_30_31/WE
+    SLICE_X34Y126        RAMD32                                       r  bridge/emulator/pio/engines[0].core/rx_fifo/words_reg_0_3_30_31/DP/WE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk50_raw rise edge)
+                                                     20.000    20.000 r  <hidden>
+    E3                                                0.000    20.000 r  clk100
+                         net (fo=0)                   0.000    20.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         1.411    21.411 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           1.162    22.573    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.324    15.249 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           1.639    16.888    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091    16.979 r  core_clock_buf/O
+                         net (fo=2049, routed)        1.488    18.467    bridge/emulator/pio/engines[0].core/rx_fifo/words_reg_0_3_30_31/WCLK
+    SLICE_X34Y126        RAMD32                                       r  bridge/emulator/pio/engines[0].core/rx_fifo/words_reg_0_3_30_31/DP/CLK
+                         clock pessimism              0.560    19.027    <hidden>
+                         clock uncertainty           -0.082    18.945    <hidden>
+    SLICE_X34Y126        RAMD32 (Setup_ramd32_CLK_WE)
+                                                     -0.533    18.412    bridge/emulator/pio/engines[0].core/rx_fifo/words_reg_0_3_30_31/DP
+  -------------------------------------------------------------------
+                         required time                         18.412    <hidden>
+                         arrival time                         -13.212    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  5.200    <hidden>
+
+Slack (MET) :             5.200ns  (required time - arrival time)
+  Source:                 bridge/emulator/pio/engines[0].core/program_counter/pc_out_reg[0]_replica_1/C
+                            (rising edge-triggered cell FDRE clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            bridge/emulator/pio/engines[0].core/rx_fifo/words_reg_0_3_30_31/SP/WE
+                            (rising edge-triggered cell RAMD32 clocked by clk50_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk50_raw
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            20.000ns  (clk50_raw rise@20.000ns - clk50_raw rise@0.000ns)
+  Data Path Delay:        14.141ns  (logic 3.128ns (22.121%)  route 11.013ns (77.879%))
+  Logic Levels:           13  (CARRY4=1 LUT2=2 LUT3=2 LUT4=2 LUT5=1 LUT6=4 RAMD32=1)
+  Clock Path Skew:        -0.045ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    -1.533ns = ( 18.467 - 20.000 ) 
+    Source Clock Delay      (SCD):    -0.928ns
+    Clock Pessimism Removal (CPR):    0.560ns
+  Clock Uncertainty:      0.082ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.147ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk50_raw rise edge)
+                                                      0.000     0.000 r  <hidden>
+    E3                                                0.000     0.000 r  clk100
+                         net (fo=0)                   0.000     0.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           1.233     2.715    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.070    -4.355 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           1.719    -2.636    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096    -2.540 r  core_clock_buf/O
+                         net (fo=2049, routed)        1.612    -0.928    bridge/emulator/pio/engines[0].core/program_counter/clk50
+    SLICE_X41Y131        FDRE                                         r  bridge/emulator/pio/engines[0].core/program_counter/pc_out_reg[0]_replica_1/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X41Y131        FDRE (Prop_fdre_C_Q)         0.456    -0.472 r  bridge/emulator/pio/engines[0].core/program_counter/pc_out_reg[0]_replica_1/Q
+                         net (fo=9, routed)           0.862     0.390    bridge/emulator/pio/engines[0].core/fetch/words_reg_0_31_1_1/DPRA0
+    SLICE_X38Y131        RAMD32 (Prop_ramd32_RADR0_O)
+                                                      0.124     0.514 f  bridge/emulator/pio/engines[0].core/fetch/words_reg_0_31_1_1/DP/O
+                         net (fo=89, routed)          1.566     2.079    bridge/emulator/pio/engines[0].core/fetch/instr_out[1]
+    SLICE_X29Y111        LUT3 (Prop_lut3_I2_O)        0.150     2.229 f  bridge/emulator/pio/engines[0].core/fetch/in_count[1]_i_2/O
+                         net (fo=236, routed)         1.981     4.210    bridge/emulator/pio/engines[0].core/fetch/exec_instruction_reg[1]
+    SLICE_X48Y127        LUT5 (Prop_lut5_I1_O)        0.326     4.536 r  bridge/emulator/pio/engines[0].core/fetch/in_count[5]_i_13_replica_2/O
+                         net (fo=2, routed)           0.465     5.001    bridge/emulator/pio/engines[0].core/fetch/bit_count[0]_repN_2
+    SLICE_X54Y127        LUT2 (Prop_lut2_I1_O)        0.124     5.125 r  bridge/emulator/pio/engines[0].core/fetch/in_count[5]_i_18/O
+                         net (fo=1, routed)           0.000     5.125    bridge/emulator/pio/engines[0].core/fetch/in_count[5]_i_18_n_0
+    SLICE_X54Y127        CARRY4 (Prop_carry4_S[1]_CO[2])
+                                                      0.574     5.699 r  bridge/emulator/pio/engines[0].core/fetch/in_count_reg[5]_i_9/CO[2]
+                         net (fo=10, routed)          0.709     6.409    bridge/emulator/pio/engines[0].core/fetch/in_count_reg[5]_i_9_n_1
+    SLICE_X54Y125        LUT4 (Prop_lut4_I1_O)        0.310     6.719 r  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_17/O
+                         net (fo=1, routed)           0.843     7.561    bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_17_n_0
+    SLICE_X54Y125        LUT6 (Prop_lut6_I0_O)        0.124     7.685 f  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_12/O
+                         net (fo=1, routed)           0.645     8.330    bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_12_n_0
+    SLICE_X48Y128        LUT6 (Prop_lut6_I5_O)        0.124     8.454 f  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_7/O
+                         net (fo=1, routed)           0.492     8.946    bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_7_n_0
+    SLICE_X45Y128        LUT6 (Prop_lut6_I1_O)        0.124     9.070 f  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_6/O
+                         net (fo=5, routed)           0.469     9.538    bridge/emulator/pio/engines[0].core/fetch/exec_instruction_reg[15]_9
+    SLICE_X46Y128        LUT3 (Prop_lut3_I0_O)        0.124     9.662 f  bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_3/O
+                         net (fo=7, routed)           0.832    10.494    bridge/emulator/pio/engines[0].core/fetch/delay_left[4]_i_3_n_0
+    SLICE_X52Y127        LUT4 (Prop_lut4_I3_O)        0.118    10.612 r  bridge/emulator/pio/engines[0].core/fetch/pc_out[4]_i_6/O
+                         net (fo=121, routed)         0.821    11.432    bridge/emulator/pio/engines[0].core/fetch/running_reg_0
+    SLICE_X47Y128        LUT6 (Prop_lut6_I4_O)        0.326    11.758 r  bridge/emulator/pio/engines[0].core/fetch/write_ptr[1]_i_2__0/O
+                         net (fo=6, routed)           0.473    12.231    bridge/emulator/pio/engines[0].core/fetch/p_0_in__0[0]
+    SLICE_X46Y128        LUT2 (Prop_lut2_I0_O)        0.124    12.355 r  bridge/emulator/pio/engines[0].core/fetch/words_reg_0_3_0_5_i_1__0/O
+                         net (fo=44, routed)          0.858    13.212    bridge/emulator/pio/engines[0].core/rx_fifo/words_reg_0_3_30_31/WE
+    SLICE_X34Y126        RAMD32                                       r  bridge/emulator/pio/engines[0].core/rx_fifo/words_reg_0_3_30_31/SP/WE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk50_raw rise edge)
+                                                     20.000    20.000 r  <hidden>
+    E3                                                0.000    20.000 r  clk100
+                         net (fo=0)                   0.000    20.000    clk100
+    E3                   IBUF (Prop_ibuf_I_O)         1.411    21.411 r  clk100_IBUF_inst/O
+                         net (fo=1, routed)           1.162    22.573    clk100_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.324    15.249 r  clock_manager/CLKOUT0
+                         net (fo=1, routed)           1.639    16.888    clk50_raw
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091    16.979 r  core_clock_buf/O
+                         net (fo=2049, routed)        1.488    18.467    bridge/emulator/pio/engines[0].core/rx_fifo/words_reg_0_3_30_31/WCLK
+    SLICE_X34Y126        RAMD32                                       r  bridge/emulator/pio/engines[0].core/rx_fifo/words_reg_0_3_30_31/SP/CLK
+                         clock pessimism              0.560    19.027    <hidden>
+                         clock uncertainty           -0.082    18.945    <hidden>
+    SLICE_X34Y126        RAMD32 (Setup_ramd32_CLK_WE)
+                                                     -0.533    18.412    bridge/emulator/pio/engines[0].core/rx_fifo/words_reg_0_3_30_31/SP
+  -------------------------------------------------------------------
+                         required time                         18.412    <hidden>
+                         arrival time                         -13.212    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  5.200    <hidden>
+
+
+
+

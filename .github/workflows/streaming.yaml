@@ -20,10 +20,15 @@ jobs:
           python -B -m unittest discover -s test -p test_streaming_host.py -v
           python -B -m unittest discover -s test -p test_streaming_transport.py -v
           python -B -m unittest discover -s test -p test_usb_ls_tools.py -v
+          python -B -m unittest discover -s test -p test_feeder_tools.py -v
       - name: Packed streaming pins
         run: python -B tools/streaming/run_sim.py --out test/sim_build/streaming-ci
       - name: USB digital timing prototype
         run: python -B tools/streaming/run_sim.py --module test_usb_ls_tx --out test/sim_build/usb-symbol-ci
+      - name: Autonomous feeder ownership and dual-engine arbitration
+        run: |
+          python -B tools/streaming/run_sim.py --module test_packet_feeder --out test/sim_build/feeder-ci
+          python -B tools/streaming/run_sim.py --module test_packet_feeder_bank --out test/sim_build/feeder-bank-ci
       - uses: actions/upload-artifact@v7
         if: always()
         with:
@@ -34,3 +39,5 @@ jobs:
             test/sim_build/usb-symbol-ci/receipt.json
             test/sim_build/usb-symbol-ci/results.xml
             test/sim_build/usb-symbol-ci/measurements.json
+            test/sim_build/feeder-ci/**
+            test/sim_build/feeder-bank-ci/**

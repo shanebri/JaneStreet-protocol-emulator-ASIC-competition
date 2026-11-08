@@ -1,8 +1,9 @@
 # Invoked by tools/bringup/build.py, in a fresh build directory.
 # No hardware connection or programming is performed.
-if {$argc != 2} { error "Expected source manifest and job count" }
+if {$argc < 2 || $argc > 3} { error "Expected source manifest, job count and optional feeder enable" }
 set manifest [lindex $argv 0]
 set jobs [lindex $argv 1]
+set feeder [expr {$argc == 3 && [lindex $argv 2] == 1}]
 set root [file normalize [file join [file dirname [info script]] ..]]
 set out [pwd]
 create_project bringup [file join $out project] -part xc7a100tcsg324-1
@@ -13,6 +14,7 @@ foreach source [split [read $f] "\n"] {
 close $f
 add_files -fileset constrs_1 [file join $root fpga arty_bringup.xdc]
 set_property top arty_bringup_top [get_filesets sources_1]
+if {$feeder} { set_property generic {FEEDER_ENABLED=1} [get_filesets sources_1] }
 update_compile_order -fileset sources_1
 # Spend available FPGA area on timing-oriented synthesis and placement. This
 # changes mapping/locality, without changing RTL, clocks or cycle contracts.
@@ -41,8 +43,9 @@ route_design -directive Explore
 # Independently repair measured hold paths below the preserved 40 ps margin.
 # Use complete native clock-pin-to-data-pin paths (no path segmentation).
 # Temporary tighter requirements are always cleared before original-XDC checks.
+set hold_floor [expr {$feeder ? 0.047 : 0.040}]
 for {set pass 0} {$pass < 3} {incr pass} {
-    set weak [get_timing_paths -delay_type min -slack_lesser_than 0.040 -max_paths 200 -nworst 1]
+    set weak [get_timing_paths -delay_type min -slack_lesser_than $hold_floor -max_paths 200 -nworst 1]
     if {[llength $weak] == 0} { break }
     set log [open [file join $out hold_targets_$pass.txt] w]
     foreach path $weak {
@@ -85,6 +88,7 @@ if {[llength [get_pins -quiet {bridge/trace_inputs_meta_reg[*]/D}]] != 6} {
 }
 set f [open [file join $out margins.txt] w]
 set parent_margin [dict create max 4.618 min 0.040]
+if {$feeder} { set parent_margin [dict create max 4.871 min 0.047] }
 foreach kind {max min} {
     set paths [get_timing_paths -delay_type $kind -max_paths 1 -sort_by slack]
     if {[llength $paths] != 1} { error "No finite $kind timing path" }

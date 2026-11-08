@@ -43,8 +43,10 @@ def symbols(payload,*,data1=False):
         payload_hex=payload.hex(),data1=data1,crc16=crc16(payload))
 
 
-def inspect(samples):
+def inspect(samples, *, edge_tolerance=0):
     """Decode observed outputs at rational bit centers, independent of commands."""
+    if type(edge_tolerance) is not int or not 0 <= edge_tolerance <= 3:
+        raise ValueError('edge tolerance must be 0..3 sampled clocks')
     active=[i for i,s in enumerate(samples) if s&4]
     if not active: raise ValueError('missing TX marker')
     first=next((i for i in active if samples[i]&3==K),None)
@@ -61,10 +63,10 @@ def inspect(samples):
     edge_errors=[]
     for n,state in enumerate(line):
         begin=first+(n*100)//3;end=first+((n+1)*100)//3
-        if any((s&3)!=state for s in samples[begin:end]):
+        if any((s&3)!=state for s in samples[begin+edge_tolerance:end-edge_tolerance]):
             raise ValueError('symbol duration/phase mismatch')
         edge_errors.append(float(Fraction((n*100)//3)-Fraction(n*100,3)))
-    if stop-first!=(len(line)*100)//3: raise ValueError('packet duration mismatch')
+    if abs(stop-first-(len(line)*100)//3)>edge_tolerance: raise ValueError('packet duration mismatch')
     raw=[];previous=J
     for state in line[:-3]:
         if state not in (J,K): raise ValueError('invalid differential symbol')
@@ -91,7 +93,7 @@ def inspect(samples):
             if feedback: remainder^=0x8005
     reverse=int(f'{remainder:016b}'[::-1],2)^0xffff
     if int.from_bytes(data[-2:],'little')!=reverse: raise ValueError('CRC16 mismatch')
-    return dict(payload_hex=payload.hex(),data1=data[1]==0x4b,symbols=len(line),
+    return dict(payload_hex=payload.hex(),data1=data[1]==0x4b,symbols=len(line),edge_tolerance=edge_tolerance,
                 first_symbol_clock=first,total_clocks=stop-first,
                 edge_quantization_min_clocks=min(edge_errors),
                 edge_quantization_max_clocks=max(edge_errors))
