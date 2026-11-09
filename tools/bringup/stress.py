@@ -2,7 +2,7 @@
 import random
 import time
 from pioasm import assemble
-from pio_host import PIOHost, GROUP_START_BOTH
+from pio_host import DATA_ADDR, DATA_BYTES, PIOHost, GROUP_START_BOTH
 from bringup.scenarios import load
 
 ECHO = 'pull block\nmov isr, osr\npush block\njmp 0'
@@ -66,7 +66,9 @@ async def dual_engine_stress(io, seed, emit, *, rounds=64, duration_seconds=0, r
         await engine.write_word(0x12, 0x20 | (4*index))
         await engine.write_word(0x13, divider)
     if recorder:
-        await recorder.arm('dual-markers', channel='out0', decimation=6,
+        # At 50 MHz, 8192 samples cover about 42 ms, long enough to see
+        # the next host access on USB serial without losing marker edges.
+        await recorder.arm('dual-markers', channel='out0', decimation=8,
                            expected=dict(kind='markers', seed=seed, masks=[15, 240]))
     await host.engine(0).write_word(0x1c, 3)
     previous = [await host.engine(i).read_word(0) for i in (0, 1)]
@@ -335,10 +337,17 @@ async def pads(io, seed, emit, *, fixture, recorder=None, **unused):
             # Ownership cannot change while either engine still declares drive.
             await host.engine(0).write_word(0x1b, 0 if owner else 0xf00)
             check(emit, 'reject_driven_ownership_transfer', await engine.read_word(0x1b), 0xf00 if owner else 0)
-            if recorder:
-                await recorder.arm(f'open-drain-{owner}-{bit}', channel=f'pad{bit}', immediate=True,
-                                   decimation=8, expected=dict(kind='open_drain', pad=bit, owner=owner))
-            await engine.write_word(4, 0xf00)
+            # Stage the release before arming. Only the final byte commits it,
+            # so the capture window need only cover one serial command.
+            release = (0xf00).to_bytes(4, 'little')
+            async with engine.transaction() as bus:
+                await bus.write(DATA_ADDR, 4)
+                for address, value in zip(DATA_BYTES[:-1], release[:-1]):
+                    await bus.write(address, value)
+                if recorder:
+                    await recorder.arm(f'open-drain-{owner}-{bit}', channel=f'pad{bit}', immediate=True,
+                                       decimation=8, expected=dict(kind='open_drain', pad=bit, owner=owner))
+                await bus.write(DATA_BYTES[-1], release[-1])
             check(emit, 'open_drain_release_with_pullup', await io.sample_pads(), dict(inputs=15, oe=0), owner=owner, pad=bit)
             if recorder:
                 await recorder.finish()

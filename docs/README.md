@@ -23,6 +23,7 @@ The root [README](../README.md) is the entry point for users.
 - [Repeatable Python bring-up suite and its limits](../tools/bringup/README.md)
 - [Dual-engine stress, recovery and concurrent UART/SPI campaign](../tools/bringup/EXTENDED.md)
 - [FPGA v2 implementation attempts and timing headroom](fpga_bringup_v2_20261101.md)
+- [Revision 0x21 8x4 FPGA functional baseline](fpga_baseline_0x21_20261108.md)
 - [October 30 physical FPGA smoke baseline and evidence receipt](fpga_baseline_20261030.md)
 - [Fixed SPI/Nano hardware harness](../tools/spi_hardware/README.md)
 - [Fixed UART demo monitor](../tools/UART_CLIENT.md)

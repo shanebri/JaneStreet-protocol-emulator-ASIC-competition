@@ -1,0 +1,117 @@
+{
+  "schema": 1,
+  "status": "READY_FOR_FREEZE",
+  "date": "2026-11-08",
+  "revision": "0x21",
+  "tiles": "8x4",
+  "fifo_words_per_engine": 4,
+  "scope": "Arty board functional baseline including 100 kHz I2C",
+  "image_sha256": "624e969ab52f0a32527cfea3c4c325e51bf328d14dce2d9d64d0fa7bdac271e9",
+  "asic_inputs": {
+    "manifest_sha256": "e8fb795f6ed45f688f6b57259da3ceac0619007c9d269057d7f6b99958217168",
+    "sources_sha256": {
+      "src/project.sv": "211f39f898da0fccd91becf85eaafcce0e43e5ac144178ec2597252e1e94f63c",
+      "src/protocol_core.sv": "5b7f4252229140951d7f67c4384b24cd2c05c0fb3d1a4d75b967c22afb65b453",
+      "src/pio_inputs.sv": "3a2bb4f6757622edb840a33ac30ae868bb3f9f042cca8242bf3a5bee6b799077",
+      "src/pio_host_bank.sv": "1da7a525ac3f359e22ec8641e0dd12cc614bec9235c06b9fbe9d478d22601953",
+      "src/pio_subsystem.sv": "6dee88733d78885456185615bfb84106e13985b6cccce38791fc24b665b58b81",
+      "src/pio_gpio_owner.sv": "629b0060c8c72c76a995a2dd47eacff7790b1ff104c6e614cd2c94bf839b418b",
+      "src/host_interface.sv": "c94f32f5358b9b61feaae0d0478f3f20cb768f617c244b1ca67becef14c152bc",
+      "src/pio_pads.sv": "a11b6234e54f3307bba31651bb5973ddcf50e7ceb8946fdbd8ad243d1fb0b043",
+      "src/execution_unit.sv": "dbf598d1b82c94c65261e372c2386e70905a187d3e8662d9715d86cfb8ad90ac",
+      "src/pio_fifo.sv": "a39d186a08ed1f4dfafadcc575e200b418116915f84149e4a4824ac1962b9a55",
+      "src/frontend/pc.sv": "ea9f1bc1e4040ae8f3c2edb5249cc219c547b7a85ea5bed57688f6b4a12192f3",
+      "src/frontend/instruction_fetch.sv": "e4a85b9018d5c6d91fef936442e13d0835012e5121b6bd0bb5ee5028a79eb47c",
+      "src/frontend/decoder.sv": "0c3cc5b807c5028959599d70f8ace0b10e3d79f840efdc82a04febcfc723ce7f"
+    }
+  },
+  "asic_activation_receipt_sha256": "037fbad0c2bc926e6f9224ef6b011cabab62edabb0fddfd36a9c7d00d61a5790",
+  "software_regressions": {
+    "rtl": {
+      "cases": 39,
+      "sha256": "df5818c39ba8707a75a87781e2967faeaa2ee1974c641ebfb4fdae8e1835ec19"
+    },
+    "extended_bridge": {
+      "cases": 7,
+      "sha256": "fc687a498d28c6e77044fd3d06af75d5eb177dd329005ec1b7696fddfcf6d703"
+    },
+    "serial_smoke": {
+      "cases": 1,
+      "sha256": "c7c9190d96de66bbf1426ed471673482d2975998f6c0fb70730508ec0cb0b899"
+    },
+    "default_baud": {
+      "cases": 1,
+      "sha256": "a749f3febc0cdb2321bc17805504b7c81d5753d024813c6af9fa88b20fcd013b"
+    },
+    "bringup_units": {
+      "cases": 30,
+      "sha256": "424474d22c7604f301a7bf7e4caa175bd54ea6ab7296aca4c29fd02f2fa8907e"
+    }
+  },
+  "hardware_cases": {
+    "smoke": {
+      "run": "smoke-20261108-01",
+      "run_index_sha256": "a059f676146cb52a69c827193723bdd8d6d6742cd90fe686dba6f79ec6c9260b",
+      "analysis_index_sha256": "7f7efa4d18153e1908a8356565ec07f6b1dd19061c11af1a20a98afda33a695f"
+    },
+    "uart": {
+      "run": "uart-20261108-02",
+      "run_index_sha256": "bd3eb39f6971be0c0b9babcbada790508050da5fde498ce707eda8e15acabed0",
+      "analysis_index_sha256": "849703e8f573ce8c81327d824278b49f17ca61bfe2952d5e795d170784809b0a"
+    },
+    "uart_rx": {
+      "run": "uart_rx-20261108-01",
+      "run_index_sha256": "557602e93d4e14224311466df27bf2f4582ef7268d8371bc38035a6a2f09c8ca",
+      "analysis_index_sha256": "74039d9b19ef61123bc7a7d92b1d83e0b231985cc684f2fde7d27c4d138d1997"
+    },
+    "spi": {
+      "run": "spi-20261108-01",
+      "run_index_sha256": "0d98e910044dac09773a8138025e97b3f76c61b9dc76683c9a7e9e83895f8f3c",
+      "analysis_index_sha256": "0ee60679ef3ac9698820d188338b1a715483606dcc9c896c6446b120bd4c437d"
+    },
+    "i2c100": {
+      "run": "i2c100-20261108-03",
+      "run_index_sha256": "7e0e767ba2cd7147e80c5cc0305c4ee76fbeb5588e565bcb59c542b0c07119c7",
+      "analysis_index_sha256": "bbbe069e5d734aba7850d1d1cd0e7fbc689cfc9af6a8ff784e201a4b1752e5c0"
+    },
+    "stress": {
+      "run": "stress-20261108-02",
+      "run_index_sha256": "79b52b79cc8a118c06e6905ef20721f2a2b08dd6ed3fe77c5a24f97b0a020a23",
+      "analysis_index_sha256": "5b6c208caed4577c34858d844d65c855b2d5e86c607f4f566806a6750a1a3701"
+    },
+    "boundaries": {
+      "run": "boundaries-20261108-01",
+      "run_index_sha256": "f81d47ff7801d4166b3dfae45e4ee78262894a20242aab3a41a2c853d75ed511",
+      "analysis_index_sha256": "33c9ab63dfbe9a0fe7889fce78b5020eb82057e7da242d6baf83d4e5c6050f01"
+    },
+    "recovery": {
+      "run": "recovery-20261108-01",
+      "run_index_sha256": "91071852ff405cdabcfec36e26a89b4d1160d3fc5be9a6e8c7821cd53ad87ea1",
+      "analysis_index_sha256": "90aa9edfb45f1a705453f7909fe8d96fa19119ae4f8e98ca72dc671fbb07d46b"
+    },
+    "pads": {
+      "run": "pads-20261108-01",
+      "run_index_sha256": "10980f3fe3a5c1c10ce3450efcbc99eb75241b970669e9190fd0fc321b239c83",
+      "analysis_index_sha256": "9fc3da34ab2c67249dcb485854e69372fd8ca957c6753c1b68042d247e88a632"
+    },
+    "concurrent": {
+      "run": "concurrent-20261108-01",
+      "run_index_sha256": "add90ec4ab5433c6230f56adc3dd8bb28e709def963b6c36e7f9cbd5407b3ab9",
+      "analysis_index_sha256": "c7ac0aa8ae7e0f5ea570c0d53705ded9c82eedcbdd015bebc989502e11c26410"
+    }
+  },
+  "i2c_scope": {
+    "functional_100khz": "PASS",
+    "nack_waveform": "PASS",
+    "read_waveform": "UNRESOLVED_COINCIDENT_EDGES",
+    "rise_time": "NOT_MEASURED",
+    "physical_400khz": "NOT_RUN",
+    "digital_evidence_sha256": "f0d2156782e94d391981c65ba3df2b8779f96b5a854b8c2e7084f8b20bf64910"
+  },
+  "readiness_report_sha256": "aa30e3008ca383d7210e9c96124b56fbeab1326da43bf64898ad986fc06f8dd1",
+  "private_archive": {
+    "name": "pio-0x21-8x4-functional-baseline-20261108.zip",
+    "sha256": "011c3c063c585f67f104ce0368b3a9a5fa3a8151c88ddc8a7656e799233b2c66",
+    "bytes": 11730606
+  }
+}

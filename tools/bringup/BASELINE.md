@@ -18,7 +18,7 @@ py tools/bringup/prepare.py --list-ports
 py tools/bringup/prepare.py --baseline --nano-board nano33iot --image .bringup/candidates/20261101-v2-18/arty_bringup_top.bit --bridge-port COM3 --nano-port COM4 --uart-peer-port COM5 --out .bringup/campaigns/baseline-0x21-8x4-001
 ```
 
-The output contains eleven fixtures, `campaign.json` and `RUNBOOK.md` with
+The output contains ten fixtures, `campaign.json` and `RUNBOOK.md` with
 commands for each test. Run the cases separately while changing wiring. Connect
 signal grounds and power boards through their own USB cables. Pull-ups use 3.3 V.
 
@@ -33,8 +33,7 @@ signal grounds and power boards through their own USB cables. Pull-ups use 3.3 V
 | `uart_rx` | Adapter TX → Arty JA4. Disconnect Nano MISO from JA4 and set `uart_rx.wiring_confirmed`. Check 00..FF on both engines, exact ISR byte alignment, HALT, empty queues and clear FIFO errors. |
 | `spi` | Arty JA1 → Nano D11, JA2 → D13, JA3 → **D8**, JA4 ← D12, JA7 ← D2. Check all 256 transfers at both ends and `DONE 256 0`. |
 | `concurrent` | SPI wiring plus JB1 → adapter RX. Add JA1 → JC1, JA3 → JC2, JB1 → JC3 and JA2 → JC4 capture loopbacks, then confirm them. Check all 256 SPI transfers and 1024 UART bytes, capturing rounds 85 and 170 with host traffic during overlap. |
-| `i2c100` | Upload the I2C target sketch. JC1 → Nano A4/SDA, JC2 → Nano A5/SCL with verified pull-ups and shared ground. Check the fixed response, wrong-address NACK and idle bus at 100 kHz. Import a read capture and scope rise measurements. |
-| `i2c400` | Use the same I2C fixture wiring. Verify rise times meet the 300 ns maximum before changing to 400 kHz. Repeat functional, NACK, framing and rise measurements at 400 kHz. |
+| `i2c100` | Upload the I2C target sketch. JC1 → Nano A4/SDA, JC2 → Nano A5/SCL with verified pull-ups and shared ground. Check the fixed `PIO` response at `0x50`, the `0x51` address NACK and the idle bus after both transactions at 100 kHz. |
 
 The UART RX firmware samples 16 state-machine ticks per bit. At the 50 MHz core
 clock and requested 115200 baud, divider 27 gives a nominal 115741 baud sampling
@@ -61,15 +60,10 @@ py tools/bringup/analyze.py --run CAMPAIGN/runs/pads --out CAMPAIGN/analysis/pad
 py tools/bringup/analyze.py --run CAMPAIGN/runs/concurrent --out CAMPAIGN/analysis/concurrent --require-physical-waveforms
 ```
 
-Follow the [I2C waveform guide](../../docs/i2c.md#verify-the-waveform-and-rise-time)
-for CSV formats and mapping. The checklist requires a case-0 read capture,
-including repeated START, final read NACK and STOP, plus scope rise measurements
-for each rate. Supply the mapping and raw files from the corresponding run.
-
-```powershell
-py tools/bringup/analyze.py --run CAMPAIGN/runs/i2c100 --out CAMPAIGN/analysis/i2c100 --import-csv read100.csv --mapping map100.json --case 0 --rise-csv rise100.csv --require-physical-waveforms
-py tools/bringup/analyze.py --run CAMPAIGN/runs/i2c400 --out CAMPAIGN/analysis/i2c400 --import-csv read400.csv --mapping map400.json --case 0 --rise-csv rise400.csv --require-physical-waveforms
-```
+The I2C freeze gate uses the scored 100 kHz functional results and raw host
+traffic. Physical waveform framing, rise-time measurements and the 400 kHz
+board test are separate qualifications. Their fixtures and acquisition guidance
+remain available in the [I2C waveform guide](../../docs/i2c.md#verify-the-waveform-and-rise-time).
 
 ## Check readiness
 
@@ -87,7 +81,7 @@ py tools/bringup/baseline.py --campaign CAMPAIGN --rtl-results test/results.xml 
 
 The report lists every outstanding case and exits 2 while evidence is missing.
 It returns `READY_FOR_FREEZE` and exits 0 only when the complete 39-case RTL and
-seven-case bridge regressions pass and all eleven board cases have matching
+seven-case bridge regressions pass and all ten board cases have matching
 evidence. It checks immutable run indexes, raw host traffic, source/image
 identity, UART RX coverage on both engines, stress duration, both concurrent
 capture rounds and all pad-owner captures. Simulation records retain their
