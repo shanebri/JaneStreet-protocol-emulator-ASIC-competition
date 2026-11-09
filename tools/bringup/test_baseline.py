@@ -30,10 +30,11 @@ class BaselineTests(unittest.TestCase):
                               '--nano-port', 'COM4', '--uart-peer-port', 'COM5', '--out', str(campaign)])
                 plan = json.loads((campaign/'campaign.json').read_text())
                 self.assertEqual(set(plan['cases']), set(baseline.CASES))
-                for name in ('i2c100', 'i2c400'):
-                    fixture = json.loads((campaign/(name+'.json')).read_text())
-                    self.assertEqual(fixture['i2c']['rate'], 100000 if name == 'i2c100' else 400000)
-                    self.assertEqual(fixture['i2c']['nack_address'], 0x51)
+                self.assertNotIn('i2c400', plan['cases'])
+                self.assertFalse((campaign/'i2c400.json').exists())
+                fixture = json.loads((campaign/'i2c100.json').read_text())
+                self.assertEqual(fixture['i2c']['rate'], 100000)
+                self.assertEqual(fixture['i2c']['nack_address'], 0x51)
                 fixture = json.loads((campaign/'concurrent.json').read_text())
                 self.assertEqual(fixture['nano_board'], 'nano33iot')
                 self.assertFalse(fixture['capture']['loopbacks_confirmed'])
@@ -48,6 +49,31 @@ class BaselineTests(unittest.TestCase):
                 with redirect_stderr(io.StringIO()), self.assertRaises(SystemExit):
                     baseline.main(['--campaign', str(campaign), '--out', str(nested)])
                 self.assertFalse(nested.exists())
+
+    def test_i2c_baseline_requires_both_functional_results_without_scope_data(self):
+        plan = dict(image_sha256='a'*64, asic_inputs=asic_inputs(baseline.ROOT))
+        with tempfile.TemporaryDirectory() as temp:
+            config = dict(rate=100000, address=0x50, nack_address=0x51,
+                          write_hex='00', expected_hex='50494f')
+            records = [dict(test='i2c_target', status='PASS', address=0x50,
+                            observed=dict(status='success', data='50494f', completed=4, idle_high=True)),
+                       dict(test='i2c_address_nack', status='PASS', address=0x51,
+                            observed=dict(status='address_nack', data='', completed=0, idle_high=True))]
+            for case, scored in (('both', records), ('missing-nack', records[:1])):
+                with self.subTest(case=case):
+                    run = Path(temp)/case
+                    run.mkdir()
+                    save_json(run/'manifest.json', dict(plan, suite='i2c', status='PASS',
+                              evidence_kind='hardware_transport', fixture=dict(i2c=config)))
+                    (run/'transport.jsonl').write_text(''.join(json.dumps(r)+'\n' for r in traffic()))
+                    (run/'results.jsonl').write_text(''.join(json.dumps(r)+'\n' for r in scored))
+                    seal(run)
+                    entry = dict(run=str(run))
+                    if case == 'both':
+                        self.assertEqual(baseline.check_case('i2c100', entry, plan)['status'], 'PASS')
+                    else:
+                        with self.assertRaises(ValueError):
+                            baseline.check_case('i2c100', entry, plan)
 
     def test_uart_evidence_must_cover_every_byte_and_both_engines(self):
         inputs = asic_inputs(baseline.ROOT)

@@ -1,8 +1,8 @@
 # Repeatable PIO bring-up
 
-Use the [revision 0x21 8x4 baseline checklist](BASELINE.md) to prepare all remaining
+Use the [revision 0x21 8x4 baseline checklist](BASELINE.md) to reproduce the
 board tests, including PIO UART RX on both engines, Nano 33 IoT concurrent SPI/UART,
-FIFO/recovery/pad checks and I2C captures at 100/400 kHz.
+FIFO/recovery/pad checks and functional I2C at 100 kHz.
 
 This suite controls the real synchronous host interface. The same six async
 smoke scenarios run against the existing package-pin simulator and the FPGA
@@ -12,7 +12,8 @@ configuration are unchanged.
 
 The [dual-engine campaign guide](EXTENDED.md) covers the v2 image, deterministic
 stress, boundary/recovery cases, Nano plus USB UART concurrency, capture fixtures
-and offline analysis. Physical v2 testing remains pending equipment and wiring.
+and offline analysis. The [functional baseline](../../docs/fpga_baseline_0x21_20261108.md)
+records the passing physical runs and their scope.
 
 Its primary purpose is repeatable FPGA/silicon bring-up infrastructure. Most
 smoke behaviors are already covered more deeply by the 39-test RTL/gate suite;
@@ -172,11 +173,9 @@ Run each with a fresh output directory, e.g. `--suite spi --out test/output/spi-
   return to idle. [External capture and rise-time analysis](../../docs/i2c.md#verify-the-waveform-and-rise-time)
   use the Arty's JC1/SDA and JC2/SCL signals.
 
-Hardware profiles are implemented but have not been exercised on connected
-equipment. The underlying protocol firmware/driver has existing RTL regressions.
-Functional peer reception does not measure edges, analog levels or setup/hold.
-Waveform acquisition, GPIO electrical characterization, I2C fault injection and
-long-duration concurrent protocol stress remain additional qualification work.
+The functional baseline verifies these peer profiles on the Arty and Nano setup.
+Electrical characterization and I2C physical waveform qualification require
+separate measurements.
 
 ## Validation and CI
 

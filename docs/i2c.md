@@ -165,7 +165,8 @@ Python I2C profile using this driver. Its pads are **JC1/2/3/4**, not the JA
 mapping of the reusable wrapper above. Configure a target's address, write data
 and known expected response in the fixture file. This basic hardware profile
 does not reproduce all simulation fault-injection tests. The bridge is
-simulation-tested; physical target operation remains unverified here.
+simulation-tested. The [functional baseline](fpga_baseline_0x21_20261108.md)
+records the physical 100 kHz response, unused-address NACK and return to idle.
 
 ### Nano 33 IoT board test
 
@@ -198,6 +199,10 @@ and expected response, and choose a known unused address for `nack_address`.
 Older fixtures may omit that field for a positive-only run.
 
 ### Verify the waveform and rise time
+
+This section covers physical bus qualification separately from the 100 kHz
+functional freeze gate. The 400 kHz board profile can be selected by setting
+`i2c.rate` to `400000` in a separate fixture after verifying the rise-time limit.
 
 Use an external logic analyzer or scope with enough memory for the entire
 transaction, including pauses while the host services the FIFOs. Export digital

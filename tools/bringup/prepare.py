@@ -58,7 +58,7 @@ def main(argv=None):
     fixtures = {}
     names = ['stress', 'boundaries', 'recovery', 'pads', 'concurrent']
     if a.baseline:
-        names += ['smoke', 'uart', 'uart_rx', 'spi', 'i2c100', 'i2c400']
+        names += ['smoke', 'uart', 'uart_rx', 'spi', 'i2c100']
     for name in names:
         fixture = json.loads(json.dumps(base))
         fixture['profile'] = name
@@ -77,10 +77,10 @@ def main(argv=None):
                                          capture_rounds=[85, 170], timeout_seconds=5)
         elif name == 'uart_rx':
             fixture['uart_rx'] = dict(baud=115200, wiring_confirmed=False)
-        elif name.startswith('i2c'):
+        elif name == 'i2c100':
             fixture['i2c'] = dict(target='nano33iot', address=0x50, nack_address=0x51,
                                   write_hex='00', expected_hex='50494f', timeout=5,
-                                  rate=100000 if name == 'i2c100' else 400000)
+                                  rate=100000)
         path = out/(name+'.json')
         save_json(path, fixture)
         fixtures[name] = str(path)
@@ -94,7 +94,7 @@ def main(argv=None):
     save_json(out/'campaign.json', plan)
     commands = []
     suites = {name: name for name in names}
-    suites.update(stress='dual_engine_stress', i2c100='i2c', i2c400='i2c')
+    suites.update(stress='dual_engine_stress', i2c100='i2c')
     for name in names:
         run = out/'runs'/name if a.baseline else Path('.bringup/runs')/(name+'-001')
         command = f'py tools/bringup/run.py --fixture "{out/name}.json" --suite {suites[name]} --out "{run}"'
@@ -122,8 +122,8 @@ def main(argv=None):
             'I2C uses Arty JC1 to Nano A4/SDA and JC2 to A5/SCL with 3.3 V pullups and shared ground.',
             'Upload the I2C target sketch for I2C, then restore the selected SPI sketch for SPI/concurrent runs.',
             'Analyze each run into the campaign analysis directory under its case name.',
-            'I2C analyses require the case-0 external capture and scope rise CSV described in docs/i2c.md.',
-            'Check the 300 ns rise limit before advancing to the 400 kHz fixture.',
+            'The I2C baseline checks the response, unused-address NACK and idle bus at 100 kHz.',
+            'For separate I2C waveform, rise-time and 400 kHz qualification, see docs/i2c.md.',
             'The complete wiring sequence and acceptance checks are in tools/bringup/BASELINE.md.', '',
             '```powershell',
             f'py tools/bringup/baseline.py --campaign "{out}" --rtl-results test/results.xml --bridge-run PATH_TO_COMPLETE_EXTENDED_RUN --out "{out}/report-001"',

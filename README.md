@@ -64,8 +64,8 @@ concurrently. See the [architecture contract](docs/pio21_contract.md),
 The [repeatable bring-up suite](tools/bringup/README.md) provides Python-driven
 host-interface smoke tests, an FPGA serial bridge, saved run bundles and optional
 UART/SPI/I2C peer profiles. The bridge has a
-[preserved Arty smoke baseline](docs/fpga_baseline_20261030.md);
-physical UART/SPI/I2C peer qualification remains required.
+[revision 0x21 Arty functional baseline](docs/fpga_baseline_0x21_20261108.md)
+covering UART, SPI, 100 kHz I2C and dual-engine operation.
 
 ```sh
 python tools/pioasm.py examples/uart_v0.asm
@@ -106,14 +106,10 @@ explains the misleading native register-setup `Infinity` metric. The
 [documentation guide](docs/README.md) separates current contracts and commands
 from historical experiments and architecture proposals.
 
-The repeatable bring-up tooling has a passing Vivado build and 100 physical
-smoke iterations on the Arty; physical UART/SPI/I2C peer tests remain outstanding. Its smoke
-tests provide repeatable board access to behavior already covered more deeply by
-simulation; they do not establish ASIC timing or hardware interoperability.
-The [extended FPGA campaign](tools/bringup/EXTENDED.md) adds persistent dual-engine
-stress, boundary/recovery checks and a Nano plus USB UART concurrent demonstration,
-with reproducible raw traffic, digital captures and offline analysis. Its physical
-runs remain pending; see the [v2 implementation report](docs/fpga_bringup_v2_20261101.md).
+The [extended FPGA campaign](tools/bringup/EXTENDED.md) provides the test and
+capture procedures for dual-engine stress, FIFO boundaries, recovery, pad
+ownership and concurrent SPI/UART. See the [v2 implementation report](docs/fpga_bringup_v2_20261101.md)
+for the FPGA build and timing results.
 
 ## Origin and licensing
 
