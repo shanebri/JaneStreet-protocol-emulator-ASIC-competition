@@ -13,6 +13,7 @@ class BuildTests(unittest.TestCase):
         paths=builder.sources()
         self.assertIn(builder.ROOT/'src/pio_subsystem.sv',paths)
         self.assertIn(builder.ROOT/'fpga/bringup_bridge.sv',paths)
+        self.assertNotIn(builder.ROOT/'fpga/usb_ls_setup_ack.sv',paths)
         self.assertEqual(len(paths),len(set(paths)))
 
     def test_explicit_tool_must_exist(self):
@@ -31,6 +32,29 @@ class BuildTests(unittest.TestCase):
             self.assertTrue(fixture['packet_feeder'])
             self.assertEqual(fixture['expected_image_sha256'],record['image_sha256'])
             self.assertEqual(fixture['capture']['mode'],'none')
+
+    def test_usb_bench_build_is_explicitly_opt_in(self):
+        with tempfile.TemporaryDirectory() as temp:
+            out = Path(temp)/'usb'
+
+            def launch(command, **kwargs):
+                self.assertEqual(command[-2:], ['1', '1'])
+                (out/'arty_bringup_top.bit').write_bytes(b'usb bench bitstream')
+
+            with (
+                patch.object(builder, 'find_vivado', return_value=Path('/mock/vivado')),
+                patch.object(builder.subprocess, 'check_output', return_value='test-commit'),
+                patch.object(builder.subprocess, 'run', side_effect=launch),
+            ):
+                self.assertEqual(builder.main(['--usb-setup-ack', '--out', str(out)]), 0)
+            record = builder.json.loads((out/'build.json').read_text())
+            self.assertTrue(record['packet_feeder'])
+            self.assertTrue(record['usb_setup_ack'])
+            self.assertEqual(record['build_profile'], 'usb-ls-setup-ack-opt-in')
+            self.assertEqual(record['board_qualification'], 'PENDING')
+            paths = {Path(path).name for path in record['sources_sha256']}
+            self.assertIn('usb_ls_setup_ack.sv', paths)
+            self.assertIn('arty_usb_ls_setup_ack.xdc', paths)
 
     def test_success_and_failure_bundles(self):
         for success in (True,False):

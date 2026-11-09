@@ -25,6 +25,11 @@ jobs:
         run: python -B tools/streaming/run_sim.py --out test/sim_build/streaming-ci
       - name: USB digital timing prototype
         run: python -B tools/streaming/run_sim.py --module test_usb_ls_tx --out test/sim_build/usb-symbol-ci
+      - name: USB low-speed SETUP and ACK
+        run: |
+          mkdir -p test/sim_build
+          iverilog -g2012 -s usb_ls_setup_ack_tb -o test/sim_build/usb-setup-ack.vvp fpga/usb_ls_setup_ack.sv test/usb_ls_setup_ack_tb.sv
+          vvp test/sim_build/usb-setup-ack.vvp
       - name: Autonomous feeder ownership and dual-engine arbitration
         run: |
           python -B tools/streaming/run_sim.py --module test_packet_feeder --out test/sim_build/feeder-ci

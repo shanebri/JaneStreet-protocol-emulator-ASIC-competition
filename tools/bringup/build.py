@@ -15,7 +15,7 @@ EXTRA=('byte_nibble_host.sv','spi_test_uart_tx.sv','bringup_uart_rx.sv',
        'bringup_trace.sv','packet_feeder.sv','packet_feeder_bank.sv','bringup_bridge.sv','arty_bringup_top.sv')
 
 
-def sources(root=ROOT):
+def sources(root=ROOT, usb_setup_ack=False):
     text=(root/'info.yaml').read_text().split('  source_files:',1)[1]
     names=[]
     for line in text.splitlines()[1:]:
@@ -25,7 +25,11 @@ def sources(root=ROOT):
         names.append(root/'src'/match[1])
     if not names: raise ValueError('empty submission source manifest')
     names += [root/'fpga'/name for name in EXTRA]
-    for path in [*names,root/'fpga/arty_bringup.xdc',root/'fpga/build_bringup.tcl']:
+    constraints = [root/'fpga/arty_bringup.xdc', root/'fpga/build_bringup.tcl']
+    if usb_setup_ack:
+        names.append(root/'fpga/usb_ls_setup_ack.sv')
+        constraints.append(root/'fpga/arty_usb_ls_setup_ack.xdc')
+    for path in [*names, *constraints]:
         if not path.is_file(): raise FileNotFoundError(path)
     return names
 
@@ -62,10 +66,12 @@ def main(argv=None):
     p.add_argument('--out',type=Path,help='new output directory; never overwrites a build')
     p.add_argument('--check',action='store_true',help='check prerequisites only')
     p.add_argument('--packet-feeder', action='store_true', help='enable the autonomous two-slot packet interface')
+    p.add_argument('--usb-setup-ack', action='store_true',
+                   help='opt in to the USB-LS SETUP/ACK FPGA bench build (board validation pending)')
     a=p.parse_args(argv)
     if a.jobs<1: p.error('--jobs must be positive')
     try:
-        inputs=sources()
+        inputs=sources(usb_setup_ack=a.usb_setup_ack)
         vivado=find_vivado(a.vivado)
         print(f'Vivado: {vivado}\nSources: {len(inputs)}; top: arty_bringup_top; part: xc7a100tcsg324-1')
         if a.check: return 0
@@ -76,16 +82,24 @@ def main(argv=None):
         manifest.write_text(''.join(path.resolve().as_posix()+'\n' for path in inputs))
         command=[str(vivado),'-mode','batch','-notrace','-source',str(ROOT/'fpga/build_bringup.tcl'),
                  '-tclargs',str(manifest),str(a.jobs)]
-        if a.packet_feeder:
+        if a.packet_feeder or a.usb_setup_ack:
             command.append('1')
+        if a.usb_setup_ack:
+            command.append('1')
+        build_inputs = [*inputs, ROOT/'fpga/arty_bringup.xdc', ROOT/'fpga/build_bringup.tcl']
+        if a.usb_setup_ack:
+            build_inputs.append(ROOT/'fpga/arty_usb_ls_setup_ack.xdc')
         # Windows batch launch involves cmd.exe; reject shell metacharacters.
         if vivado.suffix.lower() in ('.bat','.cmd') and any(re.search(r'[&|<>^%!\r\n"]',s) for s in command):
             raise ValueError('Batch launcher paths must not contain shell metacharacters')
         record=dict(status='RUNNING',command=command,started=datetime.now(timezone.utc).isoformat(),
-                    packet_feeder=a.packet_feeder,
+                    packet_feeder=a.packet_feeder or a.usb_setup_ack,
+                    usb_setup_ack=a.usb_setup_ack,
                     commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),
                     sources_sha256={str(f.relative_to(ROOT)):hashlib.sha256(f.read_bytes()).hexdigest()
-                                    for f in [*inputs,ROOT/'fpga/arty_bringup.xdc',ROOT/'fpga/build_bringup.tcl']})
+                                    for f in build_inputs})
+        if a.usb_setup_ack:
+            record.update(build_profile='usb-ls-setup-ack-opt-in', board_qualification='PENDING')
         try:
             print(f'Building in {out}\nVivado may take several minutes. Full output: {out / "console.log"}',flush=True)
             with (out/'console.log').open('w') as log:
@@ -94,9 +108,11 @@ def main(argv=None):
             if not image.is_file() or not image.stat().st_size: raise RuntimeError('Vivado produced no bitstream')
             record.update(status='PASS',image_sha256=hashlib.sha256(image.read_bytes()).hexdigest())
             fixture=dict(bridge_protocol=2,clock_hz=50000000,port=a.port,baud=115200,image=str(image))
-            if a.packet_feeder:
+            if a.packet_feeder or a.usb_setup_ack:
                 fixture.update(packet_feeder=True,expected_image_sha256=record['image_sha256'],capture=dict(mode='none'))
             (out/'fixture.json').write_text(json.dumps(fixture,indent=2)+'\n')
+            if a.usb_setup_ack:
+                print('Opt-in USB-LS SETUP/ACK bench build. Board qualification is pending.')
             print(f'Build passed. Program this file in Hardware Manager:\n{image}\n')
             print('After programming, run:\n'+subprocess.list2cmdline([sys.executable,str(ROOT/'tools/bringup/run.py'),
                   '--fixture',str(out/'fixture.json'),'--suite','smoke','--out',str(out/'smoke-001')]))

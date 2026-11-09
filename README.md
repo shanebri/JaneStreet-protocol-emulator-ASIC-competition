@@ -69,7 +69,13 @@ covering UART, SPI, 100 kHz I2C and dual-engine operation.
 
 The opt-in [autonomous FPGA packet feeder](docs/fpga_packet_feeder.md) uploads
 complete USB logical-line scripts and feeds both PIO engines without PC service
-after launch. Its routed FPGA image is built; physical validation is pending.
+after launch. The routed feeder image passed physical loopback validation.
+
+The [USB low-speed SETUP/ACK bench candidate](docs/usb_ls_setup_ack.md) is a
+separate **opt-in FPGA build** selected with
+`tools/bringup/build.py --usb-setup-ack`. It needs an external USB
+transceiver on JD. Routed functional checks passed and connector-level
+validation is pending.
 
 ```sh
 python tools/pioasm.py examples/uart_v0.asm

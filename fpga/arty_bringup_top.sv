@@ -6,6 +6,11 @@ module arty_bringup_top #(parameter integer FEEDER_ENABLED=0) (
     output wire [7:0] dedicated_out,
     inout wire [3:0] protocol_pad,
     output wire locked_led
+`ifdef ARTY_USB_LS_SETUP_ACK
+    , input wire [2:0] usb_rx
+    , output wire [1:0] usb_tx
+    , output wire usb_tx_oe_n
+`endif
 );
     wire clk50, clk50_raw, feedback, feedback_buffered, locked;
     // 100 MHz * 10 / 20 = 50 MHz; the MMCM VCO runs at 1 GHz.
@@ -40,5 +45,9 @@ module arty_bringup_top #(parameter integer FEEDER_ENABLED=0) (
     bringup_bridge #(.FEEDER_ENABLED(FEEDER_ENABLED)) bridge(.clk(clk50),.reset(reset),.uart_rx(uart_rx),.uart_tx(uart_tx),
         .dedicated_in(dedicated_in),.dedicated_out(dedicated_out),.protocol_pad(protocol_pad));
     assign locked_led=locked;
+`ifdef ARTY_USB_LS_SETUP_ACK
+    usb_ls_setup_ack usb_link (.clk(clk50), .reset(reset),
+        .rx_pins(usb_rx), .tx_pins(usb_tx), .tx_oe_n(usb_tx_oe_n));
+`endif
 endmodule
 `default_nettype wire

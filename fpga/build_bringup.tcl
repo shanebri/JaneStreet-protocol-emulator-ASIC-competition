@@ -1,9 +1,10 @@
 # Invoked by tools/bringup/build.py, in a fresh build directory.
 # No hardware connection or programming is performed.
-if {$argc < 2 || $argc > 3} { error "Expected source manifest, job count and optional feeder enable" }
+if {$argc < 2 || $argc > 4} { error "Expected manifest, jobs, optional feeder and USB enables" }
 set manifest [lindex $argv 0]
 set jobs [lindex $argv 1]
-set feeder [expr {$argc == 3 && [lindex $argv 2] == 1}]
+set feeder [expr {$argc >= 3 && [lindex $argv 2] == 1}]
+set usb [expr {$argc == 4 && [lindex $argv 3] == 1}]
 set root [file normalize [file join [file dirname [info script]] ..]]
 set out [pwd]
 create_project bringup [file join $out project] -part xc7a100tcsg324-1
@@ -13,6 +14,10 @@ foreach source [split [read $f] "\n"] {
 }
 close $f
 add_files -fileset constrs_1 [file join $root fpga arty_bringup.xdc]
+if {$usb} {
+    add_files -fileset constrs_1 [file join $root fpga arty_usb_ls_setup_ack.xdc]
+    set_property verilog_define ARTY_USB_LS_SETUP_ACK [get_filesets sources_1]
+}
 set_property top arty_bringup_top [get_filesets sources_1]
 if {$feeder} { set_property generic {FEEDER_ENABLED=1} [get_filesets sources_1] }
 update_compile_order -fileset sources_1
@@ -35,15 +40,20 @@ phys_opt_design -directive Explore
 # Measured early-decode and bit-count fanout dominates the PC-to-RX-FIFO cone.
 # Replicate these LUT drivers before final routing; preserve all register cycles.
 set locality_net [get_nets -hierarchical -regexp {^bridge/emulator/pio/engines\[[01]\]\.core/fetch/(exec_instruction_reg\[14\]\[[01]\]|bit_count\[0\])$}]
-if {[llength $locality_net] != 6} { error "Missing measured decode/count locality targets" }
+if {!$usb && [llength $locality_net] != 6} { error "Missing measured decode/count locality targets" }
 set pc_pins [get_pins -hierarchical -regexp {^bridge/emulator/pio/engines\[[01]\]\.core/program_counter/pc_out_reg\[[0-4]\]/Q$}]
-if {[llength $pc_pins] != 10} { error "Missing measured PC locality targets" }
-phys_opt_design -force_replication_on_nets [concat $locality_net [get_nets -of_objects $pc_pins]]
+if {!$usb && [llength $pc_pins] != 10} { error "Missing measured PC locality targets" }
+set replicate $locality_net
+if {[llength $pc_pins]} { set replicate [concat $replicate [get_nets -of_objects $pc_pins]] }
+if {[llength $replicate]} {
+    puts "Candidate decode/count/PC replication targets: $replicate"
+    phys_opt_design -force_replication_on_nets $replicate
+}
 route_design -directive Explore
 # Independently repair measured hold paths below the preserved 40 ps margin.
 # Use complete native clock-pin-to-data-pin paths (no path segmentation).
 # Temporary tighter requirements are always cleared before original-XDC checks.
-set hold_floor [expr {$feeder ? 0.047 : 0.040}]
+set hold_floor [expr {$feeder && !$usb ? 0.047 : 0.040}]
 for {set pass 0} {$pass < 3} {incr pass} {
     set weak [get_timing_paths -delay_type min -slack_lesser_than $hold_floor -max_paths 200 -nworst 1]
     if {[llength $weak] == 0} { break }
@@ -61,6 +71,7 @@ for {set pass 0} {$pass < 3} {incr pass} {
     report_timing -delay_type min -max_paths 20 -file [file join $out hold_repair_tightened_$pass.rpt]
     reset_timing
     read_xdc [file join $root fpga arty_bringup.xdc]
+    if {$usb} { read_xdc [file join $root fpga arty_usb_ls_setup_ack.xdc] }
 }
 write_checkpoint [file join $out qualified_routed.dcp]
 report_timing_summary -report_unconstrained -file [file join $out timing_summary.rpt]
@@ -73,6 +84,21 @@ report_drc -file [file join $out drc.rpt]
 report_cdc -file [file join $out cdc.rpt]
 check_timing -verbose -file [file join $out check_timing.rpt]
 report_utilization -file [file join $out utilization.rpt]
+if {$usb} {
+    report_clock_utilization -file [file join $out clock_utilization.rpt]
+    if {[llength [get_pins -quiet {usb_link/rx_meta_reg[*]/D}]] != [llength [get_ports {usb_rx[*]}]]} {
+        error "Each USB receiver input needs a first-stage synchronizer exception"
+    }
+    foreach port [get_ports {usb_tx[*] usb_tx_oe_n}] {
+        foreach kind {max min} {
+            if {[llength [get_timing_paths -to $port -delay_type $kind -max_paths 1]] != 1} {
+                error "Missing $kind timing coverage for USB output $port"
+            }
+        }
+    }
+    report_timing -to [get_ports {usb_tx[*] usb_tx_oe_n}] -delay_type min_max -max_paths 12 \
+        -file [file join $out usb_outputs.rpt]
+}
 # An exception that silently matches nothing must not qualify the build.
 foreach pin {
     reset_button_sync_reg[0]/D
@@ -102,7 +128,7 @@ foreach kind {max min} {
     if {![string is double -strict $slack] || $slack < 0 || $slack > 1e10} {
         error "Invalid/failing $kind timing slack: $slack"
     }
-    if {$slack < [dict get $parent_margin $kind]} {
+    if {!$usb && $slack < [dict get $parent_margin $kind]} {
         error "Timing headroom regression: $kind $slack < preserved parent [dict get $parent_margin $kind] ns"
     }
 }
