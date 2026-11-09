@@ -1,4 +1,4 @@
-# Packed UART/SPI streaming — hardware validation pending
+# Packed UART/SPI streaming
 
 The opt-in finite-stream programs pack four protocol bytes into each existing
 32-bit FIFO word. `tools/streaming/host.py` batches host service using observed
@@ -42,13 +42,16 @@ four packed-stream pin tests on RTL and the exact qualified functional gate
 netlist, and the long-transfer checks. Qualification of the retained ASIC is
 inherited through exact input identity, not a new place-and-route claim.
 
-The streaming-specific bridge adapter is independent of the separate uncommitted
-bring-up work. Hardware runs require the recorded bridge v2 image, actual
-three-port wiring and a UART receiver. The user reports Arty COM3; it was not
-exposed to this runtime, and the receiver had not arrived. Peer runs, physical
-waveforms and electrical measurements remain pending. No new FPGA image is
-programmed by these tools.
+## Physical peer validation
 
-Recommendation: retain for physical evaluation on `codex/packed-streaming`.
-Keep the qualified ASIC and FPGA images available. See
-[run instructions](../tools/streaming/README.md).
+The November 8, 2026 packed run passed at `5751ebd` on the Arty A7-100T with
+the preserved `20261101-v2-18` bridge image, a Nano 33 IoT and a 3.3 V USB-UART
+receiver. At 1200 baud and SPI divider 8192, the receiver matched all 256 UART
+bytes and both SPI peers verified all 256 transfers. The Nano reported
+`DONE 256 0`. Both engines halted with empty queues and clear FIFO errors.
+
+Each engine accepted 65 TX words, including its length header, and the SPI
+engine returned 64 packed RX words. The run used seed 2204 and checked READY
+before each SPI frame. This was a functional peer check. The traffic SHA-256
+was `2895f2dcbcfb41d6e7413adbba422b786b8b6c1b1e0093dd3d03dfa778ae82eb`.
+[Run instructions](../tools/streaming/README.md#prepared-physical-run)

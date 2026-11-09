@@ -1,8 +1,8 @@
 # Packed streaming on the qualified dual PIO
 
-Hardware validation is pending. These opt-in programs and the batching driver
-use the unchanged revision-0x21 ASIC and its four-word FIFOs. See the
-[feature contract and status](../../docs/packed_streaming.md).
+These opt-in programs and the batching driver use the revision-0x21 ASIC and
+its four-word FIFOs. Packed UART and SPI passed the concurrent physical peer
+run on November 8, 2026. [Feature contract and results](../../docs/packed_streaming.md)
 
 `uart_packed_stream.asm` sends finite 8N1 streams. `spi_packed_stream.asm` sends
 finite mode-0 streams with CS released between bytes. Queue byte count minus
@@ -39,11 +39,11 @@ The runner uses the preserved bridge v2 image identified by
 `fixture.example.json` privately, set the three actual ports and the preserved
 image path, then confirm the programmed-image and wiring facts.
 
-| Signal | Arty A7 | Nano 33 BLE / 3.3 V UART receiver |
+| Signal | Arty A7 | Nano 33 IoT / 3.3 V UART receiver |
 | --- | --- | --- |
 | SPI MOSI | JA1 | Nano D11 |
 | SPI SCLK | JA2 | Nano D13 |
-| SPI CS_n | JA3 | Nano D10 |
+| SPI CS_n | JA3 | Nano D8 |
 | SPI MISO | JA4 | Nano D12 |
 | SPI READY | JA7 | Nano D2 |
 | UART TX | JB1 | Receiver RX |
@@ -51,8 +51,8 @@ image path, then confirm the programmed-image and wiring facts.
 
 Receiver TX/VCC remain unconnected. The hardware SPI program waits for READY
 before every CS assertion; bit timing is unchanged. Defaults are UART 1200 baud
-and SPI divider 8192. Use the existing Nano 33 BLE SPIS/checker sketch; this
-profile is not for a classic 5 V Nano.
+and SPI divider 8192. Use the Nano 33 IoT checker with chip select on D8.
+For the Nano 33 BLE checker, use D10 instead. [Peer sketch and wiring](../spi_hardware/README.md)
 
 ```sh
 python -m serial.tools.list_ports -v
@@ -64,7 +64,6 @@ The INFO probe does not reset or start engines. The peer run checks 256 SPI
 bytes in both directions and 256 UART bytes, terminal queues and error flags.
 It records raw bridge traffic and peer results. It reports waveforms as
 `NOT_ACQUIRED`; full waveform/electrical qualification needs separate captures.
-No physical peer pass has been recorded yet.
 
 ## Digital USB low-speed prototype
 
@@ -92,7 +91,7 @@ source snapshots. `verify_evidence.py` checks their bytes after relocation.
 The [two-slot feeder](../../docs/fpga_packet_feeder.md) uploads complete USB
 symbol scripts before launch and services both engines locally through the
 unchanged four-word ASIC FIFOs. The opt-in FPGA image has passed routed
-timing/CDC/DRC; physical validation is pending. Its host API is in
-`feeder.py`; `feeder_hardware.py` runs finite packets and saves completion/
+timing, CDC, DRC and the dual-packet Arty loopback test. Its host API is in
+`feeder.py`. The `feeder_hardware.py` runner saves completion and
 optional physical-loopback capture evidence. The guide includes build,
 programming, loopback and offline-analysis commands.

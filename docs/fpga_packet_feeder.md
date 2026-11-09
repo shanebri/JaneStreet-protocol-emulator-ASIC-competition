@@ -1,4 +1,4 @@
-# Autonomous FPGA packet feeder — board validation pending
+# Autonomous FPGA packet feeder
 
 The Arty wrapper now supports two complete, immutable USB low-speed logical-line
 scripts on the existing revision-0x21 8×4 ASIC. Both engines can execute without
@@ -127,9 +127,18 @@ sources, simulator, gate runtime and results.
 
 ## Board run
 
-Programming and physical capture remain pending. Program the selected feeder
-image in Vivado Hardware Manager when back at the FPGA. Copy its generated
-fixture privately and set the actual control port, retaining the image hash.
+The November 8, 2026 board run passed at `ac995b5` using the bitstream
+identified above. The FPGA observer captured 8192 samples through six physical
+loopbacks. Both overlapping packets decoded as expected, with valid CRC and
+bit stuffing. Engine 0 transmitted DATA0 `ffffffffffffffff` and engine 1
+transmitted DATA1 `0001020304050607`. Both workers completed with empty queues
+and clear FIFO errors. The host remained quiet for 32 ms after launch. The
+run index SHA-256
+was `2a285f16355efcff45e471d220a14f08f1d8d8da91a51db2a2951dfc9f26077b`.
+
+To repeat the run, program the selected feeder image in Vivado Hardware
+Manager. Copy its generated fixture privately and set the actual control port,
+retaining the image hash.
 Install the host dependency with
 `python -m pip install -r tools/bringup/requirements.txt`.
 The capability query checks the interface, not programmed fabric identity;
@@ -176,5 +185,6 @@ python -B tools/bringup/analyze.py --run .bringup/runs/feeder-001 --out .bringup
 Use `--engine 0` or `--engine 1` for a single slot and declare only that engine's
 three loopbacks. Fresh sealed bundles retain raw traffic, completions, image/
 software/firmware hashes, timestamps, native samples, CSV/VCD and failures.
-Analysis writes separately and never changes the source evidence. Baseline
-freeze and physical USB functionality still require their own board tests.
+Analysis writes separately to preserve the source evidence. The frozen
+revision-0x21 baseline has a separate hardware campaign.
+[Baseline results](fpga_baseline_0x21_20261108.md)
