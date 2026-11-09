@@ -209,24 +209,29 @@ slack is +4.618/+0.040 ns; routed DRC reports zero violations. The preserved
 archive and checksum receipt identify the exact image, sources, reports and raw
 host packets. These checks do not establish sustained dual-engine execution
 during host traffic, complete FIFO boundaries or electrical pad ownership.
-UART/SPI/I2C peer profiles remain physically unvalidated. Measured waveforms
-were not acquired. Automated waveform acquisition and electrical characterization
-are not implemented. A silicon fixture must still implement physical chip-pin
+The [revision 0x21 FPGA functional baseline](fpga_baseline_0x21_20261108.md)
+records ten passing hardware cases on the preserved v2 image. These cover
+UART TX/RX, standalone SPI, concurrent SPI/UART, sustained dual-engine stress,
+FIFO boundaries, recovery, both pad owners and functional I2C at 100 kHz.
+The [campaign infrastructure](../tools/bringup/EXTENDED.md) retains raw host
+and peer traffic, digital captures and indexed analysis for the relevant cases.
+I2C physical waveform framing, rise time and 400 kHz board operation remain
+separate qualifications. The
+[v2 implementation report](fpga_bringup_v2_20261101.md) records qualification
+attempts and timing headroom against the preserved FPGA parent.
+A silicon fixture must still implement physical chip-pin
 driving; the current FPGA bridge instantiates the emulated ASIC core.
 
 Bring-up work changes no ASIC RTL, timing constraints or production GDS flow;
 it introduces no ASIC timing-cone change or consumed timing headroom. This is
 not a new extracted signoff measurement.
 
-## Next qualification work
+## Reproducing the baseline
 
-1. Preserve the qualified artifacts and confirm CI for the exact release revision.
-2. Back up the preserved FPGA image, source snapshot and hardware evidence archive
-   outside this checkout; retain its checksums for future comparisons.
-3. Extend physical tests for sustained dual-engine host traffic, RX-full and error
-   boundaries, reset/disable recovery and bidirectional pad ownership.
-4. Run separately wired UART/SPI/I2C profiles and acquire measured waveforms and
-   electrical checks before making hardware interoperability claims.
+The [revision 0x21 8x4 checklist](../tools/bringup/BASELINE.md) prepares the ten
+board fixtures and checks their evidence against the pinned image and source
+hashes. The [I2C waveform guide](i2c.md#verify-the-waveform-and-rise-time)
+describes the additional measurements required to qualify the physical bus.
 
 SRAM and further architecture changes remain separate proposals. Area headroom
 alone is not timing closure or a justification to change cycle behavior.

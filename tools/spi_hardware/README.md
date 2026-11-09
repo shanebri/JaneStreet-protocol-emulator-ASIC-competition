@@ -47,6 +47,15 @@ SPIS2 directly; the normal Arduino SPI master library is not used.
 
 ## 2. Load the Nano sketch
 
+For a Nano 33 IoT, use
+[nano33iot_spi_slave.ino](nano33iot_spi_slave/nano33iot_spi_slave.ino), select
+**Arduino Nano 33 IoT** with the Arduino SAMD Boards core, and connect Arty JA3
+to **Nano D8** for chip select. MOSI D11, SCLK D13, MISO D12 and READY D2 follow
+the table above. Set `nano_board` to `nano33iot` in programmable fixtures.
+This sketch is compile-checked with SAMD core 1.8.14 and shares the
+`PING`/`ARM`/`RX`/`DONE` protocol. See the
+[8x4 baseline campaign](../bringup/BASELINE.md) for the concurrent test and captures.
+
 In Arduino IDE, install **Arduino Mbed OS Nano Boards**, select **Arduino Nano
 33 BLE**, and open [nano_spi_slave.ino](nano_spi_slave/nano_spi_slave.ino). Upload
 to the Nano's USB port. This sketch was compile-checked with board package 4.6.0

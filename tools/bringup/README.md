@@ -1,10 +1,19 @@
 # Repeatable PIO bring-up
 
+Use the [revision 0x21 8x4 baseline checklist](BASELINE.md) to reproduce the
+board tests, including PIO UART RX on both engines, Nano 33 IoT concurrent SPI/UART,
+FIFO/recovery/pad checks and functional I2C at 100 kHz.
+
 This suite controls the real synchronous host interface. The same six async
 smoke scenarios run against the existing package-pin simulator and the FPGA
 serial bridge. UART, SPI and I2C hardware profiles require explicitly wired peers;
 they never silently skip missing equipment. ASIC submission sources and GDS
 configuration are unchanged.
+
+The [dual-engine campaign guide](EXTENDED.md) covers the v2 image, deterministic
+stress, boundary/recovery cases, Nano plus USB UART concurrency, capture fixtures
+and offline analysis. The [functional baseline](../../docs/fpga_baseline_0x21_20261108.md)
+records the passing physical runs and their scope.
 
 Its primary purpose is repeatable FPGA/silicon bring-up infrastructure. Most
 smoke behaviors are already covered more deeply by the 39-test RTL/gate suite;
@@ -57,6 +66,7 @@ SystemVerilog sources listed by `info.yaml`, plus:
 fpga/byte_nibble_host.sv
 fpga/spi_test_uart_tx.sv
 fpga/bringup_uart_rx.sv
+fpga/bringup_trace.sv
 fpga/bringup_bridge.sv
 fpga/arty_bringup_top.sv
 ```
@@ -157,16 +167,15 @@ Run each with a fresh output directory, e.g. `--suite spi --out test/output/spi-
 - **UART:** wire dedicated output 0 (JA1) to a separate 3.3 V UART receiver and
   set `uart_peer_port`. Runs `uart_v0.asm` with divider 31 and checks bytes 00..FF
   at 115200. The FPGA USB UART remains exclusively the control link.
-- **I2C:** wire a deterministic target to pad0 SDA (JC1), pad1 SCL (JC2) with
-  appropriate external pullups. Set the fixture's 7-bit address, write bytes and
-  expected response; the example values are placeholders, not a device preset.
-  The profile uses the existing `I2C` driver, including its bounded service waits.
+- **I2C:** use the [Nano 33 IoT target and standalone fixture](../../docs/i2c.md#nano-33-iot-board-test),
+  or set the fixture's seven-bit address, write bytes and expected response for
+  another target. The profile can verify an unused address NACK and the bus's
+  return to idle. [External capture and rise-time analysis](../../docs/i2c.md#verify-the-waveform-and-rise-time)
+  use the Arty's JC1/SDA and JC2/SCL signals.
 
-Hardware profiles are implemented but have not been exercised on connected
-equipment. The underlying protocol firmware/driver has existing RTL regressions.
-Functional peer reception does not measure edges, analog levels or setup/hold.
-Waveform acquisition, GPIO electrical characterization, I2C fault injection and
-long-duration concurrent protocol stress remain additional qualification work.
+The functional baseline verifies these peer profiles on the Arty and Nano setup.
+Electrical characterization and I2C physical waveform qualification require
+separate measurements.
 
 ## Validation and CI
 
@@ -189,7 +198,9 @@ transport failure tests in addition to existing tests.
 One outstanding eight-byte command: `C3 sequence opcode address lo hi 00 XOR`.
 The XOR includes all previous bytes. Reply: `C3 sequence status data 00 00 00 XOR`.
 Opcodes 1=read byte, 2=write byte, 3=reset, 4=wait core cycles (16-bit), 5=enable,
-6=sample dedicated outputs. Status 0=success, 1=bad packet, 2=disabled/invalid byte,
+6=sample dedicated outputs. The [v2 additions](EXTENDED.md#bridge-v2-additions-and-validation)
+provide raw beats and digital capture, with wide data replies only for opcodes
+12/13. Status 0=success, 1=bad packet, 2=disabled/invalid byte,
 3=unknown opcode, 4=host timeout. Invalid packets have no host side effects.
 Truncated packets expire after twenty idle UART bit periods. No pipelining/retry
 is supported. Wait specifies a minimum explicit delay; serial transfers also
