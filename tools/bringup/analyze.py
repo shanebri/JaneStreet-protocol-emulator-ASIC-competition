@@ -21,6 +21,21 @@ def verify_records(manifest, records):
         if record.get('type') == 'assertion' and record.get('status') == 'PASS':
             if record['expected'] != record['observed']:
                 raise ValueError('saved PASS assertion has mismatched expected/observed values')
+    if manifest.get('suite') == 'packet_feeder' and manifest['status'] == 'PASS':
+        from streaming.usb_ls import symbols
+        completions=[r for r in records if r.get('test') == 'feeder_completion']
+        if len(completions) != len(manifest['packets']):
+            raise ValueError('missing packet feeder completion records')
+        for slot,(record,packet) in enumerate(zip(completions,manifest['packets'])):
+            _,spec=symbols(bytes.fromhex(packet['payload_hex']),data1=packet['data1'])
+            wanted=dict(result=0,words_sent=1+(spec['symbols']+3)//4,terminal_levels=0,terminal_errors=0)
+            completion=record['completion']
+            if (record.get('status') != 'PASS' or record['slot'] != slot
+                    or record['expected'] != wanted or record['observed'] != wanted
+                    or any(completion[key] != value for key,value in wanted.items())
+                    or completion['state'] != 4 or completion['engine'] != packet['engine']
+                    or completion['sequence'] != packet['sequence']):
+                raise ValueError('packet feeder completion differs from the submitted packet')
     if manifest.get('suite') == 'uart_rx' and manifest['status'] == 'PASS':
         payload = bytes.fromhex(manifest['fixture'].get('uart_rx', {}).get('payload_hex', bytes(range(256)).hex()))
         summaries = [r for r in records if r.get('test') == 'uart_rx_engine' and r.get('status') == 'PASS']
@@ -229,7 +244,7 @@ def main(argv=None):
     (out/'analysis.md').write_text('\n'.join(lines)+'\n', encoding='utf-8')
     with (out/'decoded_transactions.jsonl').open('x', encoding='utf-8') as decoded:
         for capture in result['captures']:
-            for protocol in ('uart', 'spi', 'i2c'):
+            for protocol in ('uart', 'spi', 'i2c', 'usb_feeder'):
                 for frame in capture.get(protocol, []):
                     decoded.write(json.dumps(dict(capture=capture['path'], protocol=protocol, **frame))+'\n')
     seal(out)

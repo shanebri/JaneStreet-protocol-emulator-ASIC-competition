@@ -16,20 +16,22 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--default-baud-link',action='store_true')
     parser.add_argument('--extended', action='store_true')
+    parser.add_argument('--packet-feeder', action='store_true')
     parser.add_argument('--out', type=Path, help='fresh simulation directory')
     parser.add_argument('--test-filter', help='explicit diagnostic subset, recorded in run.json')
     args=parser.parse_args()
-    if args.extended and args.default_baud_link:
-        parser.error('--extended and --default-baud-link are separate qualifications')
+    if sum((args.extended,args.default_baud_link,args.packet_feeder)) > 1:
+        parser.error('choose one simulation suite')
     cycles=434 if args.default_baud_link else 8
     sources=[]
     for line in (ROOT/'info.yaml').read_text().splitlines():
         if line.startswith('    - "'):
             sources.append(ROOT/'src'/line.split('"')[1])
     sources += [ROOT/'fpga'/name for name in ('byte_nibble_host.sv',
-                'spi_test_uart_tx.sv','bringup_uart_rx.sv','bringup_trace.sv','bringup_bridge.sv')]
+                'spi_test_uart_tx.sv','bringup_uart_rx.sv','bringup_trace.sv',
+                'packet_feeder.sv','packet_feeder_bank.sv','bringup_bridge.sv')]
     sources.append(ROOT/'test/bringup_bridge_tb.sv')
-    kind='extended' if args.extended else ('default-baud' if args.default_baud_link else 'smoke')
+    kind='feeder' if args.packet_feeder else ('extended' if args.extended else ('default-baud' if args.default_baud_link else 'smoke'))
     out=(args.out or ROOT/'test/sim_build'/('bringup-'+kind)/datetime.now().strftime('%Y%m%d-%H%M%S-%f')).resolve()
     out.mkdir(parents=True, exist_ok=False)
     (out/'.gitignore').write_text('*\n')
@@ -41,11 +43,12 @@ def main():
     try:
         runner=get_runner('icarus')
         runner.build(sources=sources, hdl_toplevel='bringup_bridge_tb',
-                     parameters={'BIT_CYCLES':cycles, 'TRACE_DEPTH':1024 if args.extended else 256},
+                     parameters={'BIT_CYCLES':cycles, 'TRACE_DEPTH':8192 if args.packet_feeder else (1024 if args.extended else 256),
+                                 'FEEDER_ENABLED':int(args.packet_feeder)},
                      build_args=['-Wall','-Wno-timescale'], build_dir=out,
                      timescale=('1ns','1ps'), always=True,log_file=out/'build.log')
         report=runner.test(hdl_toplevel='bringup_bridge_tb',
-            test_module='test_bringup_extended' if args.extended else 'test_bringup_serial',
+            test_module='test_bringup_feeder' if args.packet_feeder else ('test_bringup_extended' if args.extended else 'test_bringup_serial'),
             test_dir=ROOT/'test', results_xml=str(out/'results.xml'), test_filter=args.test_filter,
             log_file=out/'simulator.log',
             extra_env={'BRINGUP_BIT_CYCLES':str(cycles),'BRINGUP_LINK_ONLY':str(int(args.default_baud_link)),
@@ -58,7 +61,7 @@ def main():
         metadata['scope'] = 'diagnostic subset' if args.test_filter else 'complete suite'
         if not metadata['executed_tests'] or metadata['failures'] or (metadata['skips'] and not args.test_filter):
             raise RuntimeError('simulation failed; inspect the retained simulator.log and results.xml')
-        if not args.test_filter and metadata['tests'] != (7 if args.extended else 1):
+        if not args.test_filter and metadata['tests'] != (6 if args.packet_feeder else (7 if args.extended else 1)):
             raise RuntimeError('unexpected regression test count')
         metadata['status']='PASS'
     except BaseException as exc:
@@ -68,7 +71,7 @@ def main():
         metadata['finished']=datetime.now(timezone.utc).isoformat()
         (out/'run.json').write_text(json.dumps(metadata,indent=2)+'\n')
         if (out/'results.xml').exists():
-            name='bringup-extended.xml' if args.extended else ('bringup-default-baud.xml' if args.default_baud_link else 'bringup-serial.xml')
+            name='bringup-feeder.xml' if args.packet_feeder else ('bringup-extended.xml' if args.extended else ('bringup-default-baud.xml' if args.default_baud_link else 'bringup-serial.xml'))
             shutil.copy2(out/'results.xml',ROOT/'test'/name)
 
 

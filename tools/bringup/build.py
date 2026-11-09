@@ -12,7 +12,7 @@ import sys
 
 ROOT=Path(__file__).resolve().parents[2]
 EXTRA=('byte_nibble_host.sv','spi_test_uart_tx.sv','bringup_uart_rx.sv',
-       'bringup_trace.sv','bringup_bridge.sv','arty_bringup_top.sv')
+       'bringup_trace.sv','packet_feeder.sv','packet_feeder_bank.sv','bringup_bridge.sv','arty_bringup_top.sv')
 
 
 def sources(root=ROOT):
@@ -61,6 +61,7 @@ def main(argv=None):
     p.add_argument('--port',default='COM3',help='port written to generated fixture.json')
     p.add_argument('--out',type=Path,help='new output directory; never overwrites a build')
     p.add_argument('--check',action='store_true',help='check prerequisites only')
+    p.add_argument('--packet-feeder', action='store_true', help='enable the autonomous two-slot packet interface')
     a=p.parse_args(argv)
     if a.jobs<1: p.error('--jobs must be positive')
     try:
@@ -75,10 +76,13 @@ def main(argv=None):
         manifest.write_text(''.join(path.resolve().as_posix()+'\n' for path in inputs))
         command=[str(vivado),'-mode','batch','-notrace','-source',str(ROOT/'fpga/build_bringup.tcl'),
                  '-tclargs',str(manifest),str(a.jobs)]
+        if a.packet_feeder:
+            command.append('1')
         # Windows batch launch involves cmd.exe; reject shell metacharacters.
         if vivado.suffix.lower() in ('.bat','.cmd') and any(re.search(r'[&|<>^%!\r\n"]',s) for s in command):
             raise ValueError('Batch launcher paths must not contain shell metacharacters')
         record=dict(status='RUNNING',command=command,started=datetime.now(timezone.utc).isoformat(),
+                    packet_feeder=a.packet_feeder,
                     commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),
                     sources_sha256={str(f.relative_to(ROOT)):hashlib.sha256(f.read_bytes()).hexdigest()
                                     for f in [*inputs,ROOT/'fpga/arty_bringup.xdc',ROOT/'fpga/build_bringup.tcl']})
@@ -90,6 +94,8 @@ def main(argv=None):
             if not image.is_file() or not image.stat().st_size: raise RuntimeError('Vivado produced no bitstream')
             record.update(status='PASS',image_sha256=hashlib.sha256(image.read_bytes()).hexdigest())
             fixture=dict(bridge_protocol=2,clock_hz=50000000,port=a.port,baud=115200,image=str(image))
+            if a.packet_feeder:
+                fixture.update(packet_feeder=True,expected_image_sha256=record['image_sha256'],capture=dict(mode='none'))
             (out/'fixture.json').write_text(json.dumps(fixture,indent=2)+'\n')
             print(f'Build passed. Program this file in Hardware Manager:\n{image}\n')
             print('After programming, run:\n'+subprocess.list2cmdline([sys.executable,str(ROOT/'tools/bringup/run.py'),

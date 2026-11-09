@@ -1,5 +1,5 @@
 `default_nettype none
-module arty_bringup_top (
+module arty_bringup_top #(parameter integer FEEDER_ENABLED=0) (
     input wire clk100, btn_reset, uart_rx,
     output wire uart_tx,
     input wire [1:0] dedicated_in,
@@ -37,7 +37,7 @@ module arty_bringup_top (
     end
     wire reset = reset_pipe[3] || reset_button_sync[1];
 
-    bringup_bridge bridge(.clk(clk50),.reset(reset),.uart_rx(uart_rx),.uart_tx(uart_tx),
+    bringup_bridge #(.FEEDER_ENABLED(FEEDER_ENABLED)) bridge(.clk(clk50),.reset(reset),.uart_rx(uart_rx),.uart_tx(uart_tx),
         .dedicated_in(dedicated_in),.dedicated_out(dedicated_out),.protocol_pad(protocol_pad));
     assign locked_led=locked;
 endmodule

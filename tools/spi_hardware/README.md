@@ -69,6 +69,29 @@ Close Arduino Serial Monitor before using the PC checker. Only one application
 can own a COM port at a time. The Nano's upload/bootloader COM number can differ
 from its running-sketch COM number; rediscover it after uploading if necessary.
 
+### Arduino Nano 33 IoT option
+
+Use the [Nano 33 IoT sketch](nano33iot_spi_slave/nano33iot_spi_slave.ino) with
+**Arduino SAMD Boards** and select **Arduino Nano 33 IoT**
+(`arduino:samd:nano_33_iot`, compile-checked with core 1.8.14). It uses the
+SAMD21 SERCOM1 SPI peripheral and the existing `PING`, `ARM`, `RX`, and `DONE`
+messages, so the Python checker can still compare all 256 bytes at both ends.
+
+Follow the table above with one wiring change. **Connect Arty JA3 to Nano D8
+for chip select.** D8 is SERCOM1 PAD2, the hardware select pin for this SPI
+configuration. Use JA1 to D11, JA2 to D13, JA4 to D12, JA7 to D2, and shared
+ground as above. Power the boards through their separate USB cables.
+[Arduino pin mapping](https://github.com/arduino/ArduinoCore-samd/blob/1.8.14/variants/nano_33_iot/variant.cpp)
+
+Start with the programmable SPI-only profile and the bridge v2 image. Upload
+the IoT sketch before wiring the peer and recheck its runtime COM port after
+upload. The profile drives chip select high before asking the Nano to arm.
+The November 5, 2026 board run with bridge image `20261101-v2-18` verified all
+256 one-byte transfers in both directions and received `DONE 256 0`. The local
+run bundle is `.bringup/runs/spi-iot-peer-20261105-185953`. This run establishes
+SPI functional interoperability. Waveform and concurrent UART/SPI checks are
+separate runs.
+
 ## 3. Build the FPGA test image manually in Vivado
 
 Use a separate project for `xc7a100tcsg324-1`, or copy these sources into your

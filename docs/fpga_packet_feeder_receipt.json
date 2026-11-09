@@ -1,0 +1,65 @@
+{
+  "schema": 1,
+  "status": "QUALIFIED_FPGA_IMPLEMENTATION_HARDWARE_PENDING",
+  "created_utc": "2026-11-08T00:03:30.854617+00:00",
+  "candidate": ".bringup/feeder-builds/20261107-01",
+  "archive": "docs/fpga_packet_feeder/20261107",
+  "artifact_index_sha256": "8638809efe862f09deab565fea55f184766d0e39aae40ecf13148e7cf4359f97",
+  "image_sha256": "b1d10fbefb043bcc4ab657220a0ee4ecfbcbd2b64eccb9a5b0f06b9c7ae0bc0b",
+  "build_commit": "7e14aca9f4d23f373de7c117ce2693c38ccc95e6",
+  "source_identity": "Build includes uncommitted implementation; exact hashed inputs are frozen in archive/fpga_inputs",
+  "setup_ns": 5.05,
+  "hold_ns": 0.049,
+  "parent_setup_ns": 4.871,
+  "parent_hold_ns": 0.047,
+  "consumed_headroom_ns": {
+    "setup": 0,
+    "hold": 0
+  },
+  "improvements_ps": {
+    "setup": 179,
+    "hold": 2
+  },
+  "drc_findings": 0,
+  "cdc_safe_endpoints": 14,
+  "cdc_unsafe_endpoints": 0,
+  "unconstrained_internal_endpoints": 0,
+  "no_clock_registers": 0,
+  "utilization": {
+    "luts": 5871,
+    "registers": 1643,
+    "ramb36": 7
+  },
+  "parent_utilization": {
+    "luts": 5089,
+    "registers": 1304,
+    "ramb36": 7
+  },
+  "core_rtl_tests": 39,
+  "feeder_serial_tests": 6,
+  "feeder_worker_gate_tests": 5,
+  "feeder_bank_gate_tests": 2,
+  "usb_gate_tests": 2,
+  "packed_rtl_tests": 4,
+  "legacy_smoke_tests": 1,
+  "default_baud_link_tests": 1,
+  "legacy_extended_tests": 7,
+  "software_unit_tests": 49,
+  "physical_runs": "NOT_PERFORMED",
+  "asic_revision": "0x21",
+  "tiles": "8x4",
+  "asic_changes": false,
+  "programmed": false,
+  "reports_sha256": {
+    "cdc.rpt": "6a067d20f469dc6d8f66a79e71456edc015c5f524938329e90c17f8dd68b943d",
+    "check_timing.rpt": "6bb5f75620292387c34d6380a9a5dc2c36d9ce1fe2a96d198a9d7ca5044f2094",
+    "clocks.rpt": "648219534049e89c8dea87d8a92fdd1383b0dd0206ae3a1799786b7869988d0d",
+    "clock_interaction.rpt": "2355368210fe5ad5b53bb875ab5266ba0536267cab15a93527634129ec4540f4",
+    "drc.rpt": "f3c7de0c3ddba9d32ba4d3ab358bd2657cce884c791b41b5547418bbd2f28821",
+    "exceptions.rpt": "c8c92d4a7ffe14fd32e9e3293ce9683fcc61ca21ab2132260dcab14630dd6dcd",
+    "hold_paths.rpt": "77bfe98795964ad644f16745e62ee306e367d70a99467d083a5c65a44dd26cb2",
+    "setup_paths.rpt": "235e099e2bc178153b77392bd618e58acf5be7cef38a45d7e26c9cced25ae5db",
+    "timing_summary.rpt": "80321d9c207e7a4bb992da0d61433b4ce405f90f2b808db8fa94fbd5f72546e1",
+    "utilization.rpt": "74fcc4f2cfc45b656434f405ad657d00e0fd9d866aa602704075eaf24a7117eb"
+  }
+}

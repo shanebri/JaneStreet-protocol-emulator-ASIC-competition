@@ -67,6 +67,10 @@ UART/SPI/I2C peer profiles. The bridge has a
 [revision 0x21 Arty functional baseline](docs/fpga_baseline_0x21_20261108.md)
 covering UART, SPI, 100 kHz I2C and dual-engine operation.
 
+The opt-in [autonomous FPGA packet feeder](docs/fpga_packet_feeder.md) uploads
+complete USB logical-line scripts and feeds both PIO engines without PC service
+after launch. Its routed FPGA image is built; physical validation is pending.
+
 ```sh
 python tools/pioasm.py examples/uart_v0.asm
 python -m pip install -r test/requirements.txt

@@ -10,3 +10,17 @@ docs/timing/20261030-control-refactor/** -text
 docs/timing/20261030-control-refactor/local-endpoints/*.rpt whitespace=-blank-at-eof
 tools/timing/*refactor*.py -text
 tools/timing/production/last-fanout.json -text
+
+# Keep streaming receipts and their source identities byte-stable on Windows.
+docs/streaming/** -text whitespace=cr-at-eol
+docs/streaming_20261104.md -text
+docs/packet_stream_interface_20261104.md -text
+tools/streaming/** -text
+test/test_streaming*.py -text
+test/test_usb_ls*.py -text
+examples/*packed_stream.* -text
+examples/usb_ls_tx_symbols.* -text
+
+# Routed feeder reports and measured source snapshots retain their exact bytes.
+docs/fpga_packet_feeder/** -text whitespace=cr-at-eol
+docs/fpga_packet_feeder/**/*.rpt whitespace=-blank-at-eol,-blank-at-eof,cr-at-eol

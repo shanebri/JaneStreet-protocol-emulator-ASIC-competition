@@ -18,6 +18,20 @@ class BuildTests(unittest.TestCase):
     def test_explicit_tool_must_exist(self):
         with self.assertRaises(FileNotFoundError): builder.find_vivado('/missing/vivado')
 
+    def test_feeder_image_has_capability_and_pinned_fixture(self):
+        with tempfile.TemporaryDirectory() as temp:
+            out=Path(temp)/'feeder'
+            def launch(command,**kwargs):
+                self.assertEqual(command[-1],'1')
+                (out/'arty_bringup_top.bit').write_bytes(b'feeder bitstream')
+            with patch.object(builder,'find_vivado',return_value=Path('/mock/vivado')),patch.object(builder.subprocess,'check_output',return_value='test-commit'),patch.object(builder.subprocess,'run',side_effect=launch):
+                self.assertEqual(builder.main(['--packet-feeder','--out',str(out)]),0)
+            fixture=builder.json.loads((out/'fixture.json').read_text())
+            record=builder.json.loads((out/'build.json').read_text())
+            self.assertTrue(fixture['packet_feeder'])
+            self.assertEqual(fixture['expected_image_sha256'],record['image_sha256'])
+            self.assertEqual(fixture['capture']['mode'],'none')
+
     def test_success_and_failure_bundles(self):
         for success in (True,False):
             with tempfile.TemporaryDirectory() as temp:

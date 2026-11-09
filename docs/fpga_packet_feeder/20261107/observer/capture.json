@@ -1,0 +1,82 @@
+{
+  "status": "COMPLETE",
+  "label": "usb-feeder",
+  "source": "fpga_digital_observer",
+  "evidence_kind": "simulation",
+  "image_sha256": "simulation",
+  "clock_hz": 50000000,
+  "decimation": 0,
+  "trigger": {
+    "channel": "out2",
+    "falling": false,
+    "immediate": false
+  },
+  "expected": {
+    "kind": "usb_feeder",
+    "packets": [
+      {
+        "engine": 0,
+        "payload_hex": "ffffffffffffffff",
+        "data1": false,
+        "sequence": 101,
+        "channels": [
+          "pad0",
+          "pad1",
+          "pad2"
+        ]
+      },
+      {
+        "engine": 1,
+        "payload_hex": "0001020304050607",
+        "data1": true,
+        "sequence": 102,
+        "channels": [
+          "pad3",
+          "in0",
+          "in1"
+        ]
+      }
+    ]
+  },
+  "fixture_loopbacks": {
+    "pad0": "out0",
+    "pad1": "out1",
+    "pad2": "out2",
+    "pad3": "out3",
+    "in0": "out4",
+    "in1": "out5"
+  },
+  "fixture_pad_conditions": {},
+  "signal_scope": {
+    "out0": "internal_net",
+    "out1": "internal_net",
+    "out2": "internal_net",
+    "out3": "internal_net",
+    "out4": "internal_net",
+    "out5": "internal_net",
+    "out6": "internal_net",
+    "out7": "internal_net",
+    "pad0": "physical_input",
+    "pad1": "physical_input",
+    "pad2": "physical_input",
+    "pad3": "physical_input",
+    "in0": "physical_input",
+    "in1": "physical_input",
+    "oe0": "internal_net",
+    "oe1": "internal_net",
+    "oe2": "internal_net",
+    "oe3": "internal_net",
+    "enabled": "internal_net",
+    "rst_n": "internal_net",
+    "host_write_bin": "internal_net",
+    "host_read_bin": "internal_net"
+  },
+  "host_activity": "OR of each host strobe over its sample interval; not an exact edge timestamp",
+  "timebase": "nominal FPGA clock; oscillator accuracy and analog voltages are not measured",
+  "input_sampling": "two physical-input synchronizer registers, then one shared observation register for all channels; no subcycle timing or analog claim",
+  "started_utc": "2026-11-07T23:57:25.973556+00:00",
+  "samples": 8192,
+  "sample_period_ns": 20,
+  "native_sha256": "c2c7ae8d90ac8338a0b3b9329072fb1a8c9e65a17bf3870508045915421a777e",
+  "finished_utc": "2026-11-08T00:02:47.194719+00:00"
+}

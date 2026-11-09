@@ -1,0 +1,158 @@
+{
+  "clock_ns": 20,
+  "rows": [
+    {
+      "depth": 8,
+      "packed": true,
+      "batch": false,
+      "payload_bytes_per_protocol": 1024,
+      "uart_divider": 1,
+      "spi_divider": 1,
+      "extra_gap_clocks": 512,
+      "elapsed_clocks": 150304,
+      "service_clocks": 19192,
+      "service_rounds": 257,
+      "host": [
+        {
+          "service_calls": 258,
+          "selector_writes": 506,
+          "level_reads": 258,
+          "data_reads": 256,
+          "data_writes": 257,
+          "payload_bytes": 1024,
+          "packed": true
+        },
+        {
+          "service_calls": 258,
+          "selector_writes": 250,
+          "level_reads": 258,
+          "data_reads": 0,
+          "data_writes": 257,
+          "payload_bytes": 1024,
+          "packed": true
+        }
+      ],
+      "stalls": [
+        {
+          "tx_stall": 5089,
+          "rx_stall": 0,
+          "first_tx_stall": 62954,
+          "first_rx_stall": null
+        },
+        {
+          "tx_stall": 17,
+          "rx_stall": 0,
+          "first_tx_stall": 145314,
+          "first_rx_stall": null
+        }
+      ],
+      "uart_frames": 1024,
+      "spi_frames": 1024,
+      "spi_rx_bytes": 1024,
+      "payload_and_waveforms": "pass",
+      "execution": "rtl"
+    },
+    {
+      "depth": 8,
+      "packed": true,
+      "batch": true,
+      "payload_bytes_per_protocol": 1024,
+      "uart_divider": 1,
+      "spi_divider": 1,
+      "extra_gap_clocks": 512,
+      "elapsed_clocks": 146588,
+      "service_clocks": 18916,
+      "service_rounds": 250,
+      "host": [
+        {
+          "service_calls": 251,
+          "selector_writes": 473,
+          "level_reads": 251,
+          "data_reads": 256,
+          "data_writes": 257,
+          "payload_bytes": 1024,
+          "packed": true
+        },
+        {
+          "service_calls": 251,
+          "selector_writes": 242,
+          "level_reads": 251,
+          "data_reads": 0,
+          "data_writes": 257,
+          "payload_bytes": 1024,
+          "packed": true
+        }
+      ],
+      "stalls": [
+        {
+          "tx_stall": 0,
+          "rx_stall": 0,
+          "first_tx_stall": null,
+          "first_rx_stall": null
+        },
+        {
+          "tx_stall": 0,
+          "rx_stall": 0,
+          "first_tx_stall": null,
+          "first_rx_stall": null
+        }
+      ],
+      "uart_frames": 1024,
+      "spi_frames": 1024,
+      "spi_rx_bytes": 1024,
+      "payload_and_waveforms": "pass",
+      "execution": "rtl"
+    },
+    {
+      "depth": 8,
+      "packed": true,
+      "batch": true,
+      "payload_bytes_per_protocol": 4096,
+      "uart_divider": 1,
+      "spi_divider": 1,
+      "extra_gap_clocks": 512,
+      "elapsed_clocks": 586060,
+      "service_clocks": 76436,
+      "service_rounds": 996,
+      "host": [
+        {
+          "service_calls": 997,
+          "selector_writes": 1909,
+          "level_reads": 997,
+          "data_reads": 1024,
+          "data_writes": 1025,
+          "payload_bytes": 4096,
+          "packed": true
+        },
+        {
+          "service_calls": 997,
+          "selector_writes": 986,
+          "level_reads": 997,
+          "data_reads": 0,
+          "data_writes": 1025,
+          "payload_bytes": 4096,
+          "packed": true
+        }
+      ],
+      "stalls": [
+        {
+          "tx_stall": 0,
+          "rx_stall": 0,
+          "first_tx_stall": null,
+          "first_rx_stall": null
+        },
+        {
+          "tx_stall": 0,
+          "rx_stall": 0,
+          "first_tx_stall": null,
+          "first_rx_stall": null
+        }
+      ],
+      "uart_frames": 4096,
+      "spi_frames": 4096,
+      "spi_rx_bytes": 4096,
+      "payload_and_waveforms": "pass",
+      "execution": "rtl"
+    }
+  ]
+}

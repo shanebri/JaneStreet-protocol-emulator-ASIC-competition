@@ -189,17 +189,21 @@ def measure_i2c_rise(path, *, supply_v, rate):
                 scope='sampled 30–70% crossings with linear interpolation')
 
 
-def loopbacks(wave, declared):
+def loopbacks(wave, declared, *, lag_samples=1, triggered_output=None):
     result = {}
     for physical, output in declared.items():
         if physical not in wave.channels or output not in wave.channels:
             raise ValueError('declared loopback channel missing')
         source, sampled = wave.channels[output], wave.channels[physical]
-        if len(wave.edges(physical)) < 2 or len(wave.edges(output)) < 2:
+        # A rising-edge trigger can make sample zero already high. Its
+        # pre-capture rising edge is absent, but release must still be visible.
+        source_edges=1 if output==triggered_output and source[0] else 2
+        input_edges=1 if output==triggered_output and sampled[0] else 2
+        if len(wave.edges(physical)) < input_edges or len(wave.edges(output)) < source_edges:
             raise ValueError('loopback correlation requires observable activity at both ends')
-        # The observer has a two-register input synchronizer. Allow one sampled
-        # interval of lag; timestamps cannot establish subcycle propagation.
-        bad = sum(sampled[i] not in (source[i], source[i-1]) for i in range(1, len(source)))
+        # Allow the declared sampled lag, including input synchronization.
+        # Timestamps cannot establish subcycle propagation.
+        bad = sum(sampled[i] not in source[max(0,i-lag_samples):i+1] for i in range(lag_samples, len(source)))
         if bad:
             raise ValueError(f'{physical}->{output}: {bad} inconsistent digital samples')
         result[physical] = dict(output=output, inconsistent_samples=bad, scope='sampled digital correlation')
@@ -247,6 +251,37 @@ def analyze_capture(directory):
         if metadata.get('fixture_loopbacks'):
             result['loopbacks'] = loopbacks(wave, metadata['fixture_loopbacks'])
             result['physical_input_evidence'] = hardware
+    elif kind == 'usb_feeder':
+        from streaming.usb_ls import inspect
+        if abs(wave.max_interval-20e-9) > 1e-12:
+            raise ValueError('USB feeder capture requires nominal 50 MHz sampling without decimation')
+        if any(any(wave.channels[f'oe{pad}']) for pad in range(4)):
+            raise ValueError('USB feeder loopback pads were driven during capture')
+        declared={name:f'out{packet["engine"]*3+bit}' for packet in expected['packets']
+                  for bit,name in enumerate(packet['channels'])}
+        if not declared or metadata.get('fixture_loopbacks') != declared:
+            raise ValueError('USB feeder loopbacks must identify all physical DP/DM/marker inputs')
+        frames=[]
+        for packet in expected['packets']:
+            engine=packet['engine']
+            channels=packet['channels']
+            if any(metadata['signal_scope'].get(name) != 'physical_input' for name in channels):
+                raise ValueError('USB feeder evidence requires physical DP/DM/marker input samples')
+            physical=[sum(wave.channels[name][i]<<bit for bit,name in enumerate(channels))
+                      for i in range(len(wave.times))]
+            internal=[sum(wave.channels[f'out{engine*3+bit}'][i]<<bit for bit in range(3))
+                      for i in range(len(wave.times))]
+            decoded=inspect(physical,edge_tolerance=3)
+            precise=inspect(internal)
+            if any(decoded[key] != packet[key] for key in ('payload_hex','data1')):
+                raise ValueError('USB feeder physical payload/PID differs from the submitted packet')
+            if any(decoded[key] != precise[key] for key in ('payload_hex','data1','symbols')):
+                raise ValueError('physical and internal USB packet decodes differ')
+            frames.append(dict(engine=engine,physical=decoded,internal=precise))
+        result['usb_feeder']=frames
+        result['loopbacks']=loopbacks(wave,metadata['fixture_loopbacks'],lag_samples=3,
+                                     triggered_output=metadata.get('trigger',{}).get('channel'))
+        result['physical_input_evidence']=hardware
     elif kind == 'i2c':
         decoded = decode_i2c(wave, rate=expected['rate'])
         if [phase['frames'] for phase in decoded['phases']] != expected['phases']:

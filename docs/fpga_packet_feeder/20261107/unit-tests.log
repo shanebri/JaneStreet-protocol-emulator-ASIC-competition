@@ -1,0 +1,80 @@
+test_invalid_inputs_have_no_transport_side_effects (test_feeder_tools.ClientTests.test_invalid_inputs_have_no_transport_side_effects) ... ok
+test_serial_transport_accepts_fragmented_wide_feeder_replies (test_feeder_tools.ClientTests.test_serial_transport_accepts_fragmented_wide_feeder_replies) ... ok
+test_terminal_failure_sequence_and_poll_deadline (test_feeder_tools.ClientTests.test_terminal_failure_sequence_and_poll_deadline) ... ok
+test_upload_is_serialized_and_full_words_are_little_endian (test_feeder_tools.ClientTests.test_upload_is_serialized_and_full_words_are_little_endian) ... ok
+test_completion_evidence_is_bound_to_declared_packet (test_feeder_tools.EvidenceTests.test_completion_evidence_is_bound_to_declared_packet) ... ok
+test_hardware_open_failure_seals_reproducible_failure_bundle (test_feeder_tools.EvidenceTests.test_hardware_open_failure_seals_reproducible_failure_bundle) ... ok
+test_synchronized_physical_dual_packets_and_evidence_classification (test_feeder_tools.EvidenceTests.test_synchronized_physical_dual_packets_and_evidence_classification) ... ok
+test_invalid_configuration_has_no_side_effect (test_streaming_host.StreamingTests.test_invalid_configuration_has_no_side_effect) ... ok
+test_packing_and_tail_contract (test_streaming_host.StreamingTests.test_packing_and_tail_contract) ... ok
+test_program_capacity (test_streaming_host.StreamingTests.test_program_capacity) ... ok
+test_single_word_policy_and_capacity_guard (test_streaming_host.StreamingTests.test_single_word_policy_and_capacity_guard) ... ok
+test_snapshot_batch_and_partial_tail (test_streaming_host.StreamingTests.test_snapshot_batch_and_partial_tail) ... ok
+test_two_banks_share_atomic_batches (test_streaming_host.StreamingTests.test_two_banks_share_atomic_batches) ... ok
+test_corruption_prevents_further_side_effects (test_streaming_transport.TransportTests.test_corruption_prevents_further_side_effects) ... ok
+test_old_bridge_is_rejected (test_streaming_transport.TransportTests.test_old_bridge_is_rejected) ... ok
+test_v2_query_uses_only_info (test_streaming_transport.TransportTests.test_v2_query_uses_only_info) ... ok
+test_known_crc_and_sync (test_usb_ls_tools.USBToolsTests.test_known_crc_and_sync) ... ok
+test_malformed_and_oversize_rejected (test_usb_ls_tools.USBToolsTests.test_malformed_and_oversize_rejected) ... ok
+test_stuffing_and_quantization (test_usb_ls_tools.USBToolsTests.test_stuffing_and_quantization) ... ok
+test_filtered_or_skipped_regression_cannot_pass (test_baseline.BaselineTests.test_filtered_or_skipped_regression_cannot_pass) ... ok
+test_peer_variants_and_invalid_board (test_baseline.BaselineTests.test_peer_variants_and_invalid_board) ... ok
+test_prepared_8x4_checklist_and_missing_runs (test_baseline.BaselineTests.test_prepared_8x4_checklist_and_missing_runs) ... ok
+test_uart_evidence_must_cover_every_byte_and_both_engines (test_baseline.BaselineTests.test_uart_evidence_must_cover_every_byte_and_both_engines) ... ok
+test_explicit_tool_must_exist (test_build.BuildTests.test_explicit_tool_must_exist) ... ok
+FAIL C:\Users\shane\Projects\JaneStreet-protocol-emulator-ASIC-competition\.bringup\review-temp\tmpnocukgx8\run
+Vivado: \mock\vivado
+Sources: 21; top: arty_bringup_top; part: xc7a100tcsg324-1
+Building in C:\Users\shane\Projects\JaneStreet-protocol-emulator-ASIC-competition\.bringup\review-temp\tmpr072oghp\feeder
+Vivado may take several minutes. Full output: C:\Users\shane\Projects\JaneStreet-protocol-emulator-ASIC-competition\.bringup\review-temp\tmpr072oghp\feeder\console.log
+test_feeder_image_has_capability_and_pinned_fixture (test_build.BuildTests.test_feeder_image_has_capability_and_pinned_fixture) ... ok
+test_manifest_includes_banked_core_and_bridge (test_build.BuildTests.test_manifest_includes_banked_core_and_bridge) ... ok
+Build passed. Program this file in Hardware Manager:
+C:\Users\shane\Projects\JaneStreet-protocol-emulator-ASIC-competition\.bringup\review-temp\tmpr072oghp\feeder\arty_bringup_top.bit
+
+After programming, run:
+C:\Users\shane\Projects\JaneStreet-protocol-emulator-ASIC-competition\.tools\venv\Scripts\python.exe C:\Users\shane\Projects\JaneStreet-protocol-emulator-ASIC-competition\test\sim_build\fpga_packet_feeder_complete\tools\bringup\run.py --fixture C:\Users\shane\Projects\JaneStreet-protocol-emulator-ASIC-competition\.bringup\review-temp\tmpr072oghp\feeder\fixture.json --suite smoke --out C:\Users\shane\Projects\JaneStreet-protocol-emulator-ASIC-competition\.bringup\review-temp\tmpr072oghp\feeder\smoke-001
+Review timing_summary.rpt, check_timing.rpt, cdc.rpt and exceptions.rpt before board use.
+Vivado: \mock\vivado
+Sources: 21; top: arty_bringup_top; part: xc7a100tcsg324-1
+Building in C:\Users\shane\Projects\JaneStreet-protocol-emulator-ASIC-competition\.bringup\review-temp\tmppfimimw9\new build
+Vivado may take several minutes. Full output: C:\Users\shane\Projects\JaneStreet-protocol-emulator-ASIC-competition\.bringup\review-temp\tmppfimimw9\new build\console.log
+Build passed. Program this file in Hardware Manager:
+C:\Users\shane\Projects\JaneStreet-protocol-emulator-ASIC-competition\.bringup\review-temp\tmppfimimw9\new build\arty_bringup_top.bit
+
+After programming, run:
+C:\Users\shane\Projects\JaneStreet-protocol-emulator-ASIC-competition\.tools\venv\Scripts\python.exe C:\Users\shane\Projects\JaneStreet-protocol-emulator-ASIC-competition\test\sim_build\fpga_packet_feeder_complete\tools\bringup\run.py --fixture "C:\Users\shane\Projects\JaneStreet-protocol-emulator-ASIC-competition\.bringup\review-temp\tmppfimimw9\new build\fixture.json" --suite smoke --out "C:\Users\shane\Projects\JaneStreet-protocol-emulator-ASIC-competition\.bringup\review-temp\tmppfimimw9\new build\smoke-001"
+Review timing_summary.rpt, check_timing.rpt, cdc.rpt and exceptions.rpt before board use.
+Vivado: \mock\vivado
+Sources: 21; top: arty_bringup_top; part: xc7a100tcsg324-1
+Building in C:\Users\shane\Projects\JaneStreet-protocol-emulator-ASIC-competition\.bringup\review-temp\tmpsddm__v_\new build
+Vivado may take several minutes. Full output: C:\Users\shane\Projects\JaneStreet-protocol-emulator-ASIC-competition\.bringup\review-temp\tmpsddm__v_\new build\console.log
+test_success_and_failure_bundles (test_build.BuildTests.test_success_and_failure_bundles) ... BUILD FAILED: Command '['\\mock\\vivado', '-mode', 'batch', '-notrace', '-source', 'C:\\Users\\shane\\Projects\\JaneStreet-protocol-emulator-ASIC-competition\\test\\sim_build\\fpga_packet_feeder_complete\\fpga\\build_bringup.tcl', '-tclargs', 'C:\\Users\\shane\\Projects\\JaneStreet-protocol-emulator-ASIC-competition\\.bringup\\review-temp\\tmpsddm__v_\\new build\\sources.txt', '4']' returned non-zero exit status 1.
+ok
+test_analysis_missing_waveforms_and_tamper (test_evidence.BundleTests.test_analysis_missing_waveforms_and_tamper) ... ok
+test_external_capture_import_never_promotes_simulation (test_evidence.BundleTests.test_external_capture_import_never_promotes_simulation) ... ok
+test_index_extra_changed_and_traversal (test_evidence.BundleTests.test_index_extra_changed_and_traversal) ... ok
+test_preparation_and_failed_run_retention (test_evidence.BundleTests.test_preparation_and_failed_run_retention) ... ok
+test_seed_revalidation (test_evidence.BundleTests.test_seed_revalidation) ... ok
+test_capture_arm_failure_remains_identifiable (test_evidence.PacketTests.test_capture_arm_failure_remains_identifiable) ... ok
+test_impossible_capture_window_rejected_before_core_reset (test_evidence.PacketTests.test_impossible_capture_window_rejected_before_core_reset) ... ok
+test_long_capture_window_gets_enough_explicit_waits (test_evidence.PacketTests.test_long_capture_window_gets_enough_explicit_waits) ... ok
+test_partial_timeout_retained (test_evidence.PacketTests.test_partial_timeout_retained) ... ok
+test_traffic_rejects_corruption_short_write_and_incomplete (test_evidence.PacketTests.test_traffic_rejects_corruption_short_write_and_incomplete) ... ok
+test_wide_fragmented_reply_and_no_retry (test_evidence.PacketTests.test_wide_fragmented_reply_and_no_retry) ... ok
+test_capture_classification_and_reset_release (test_evidence.WaveformTests.test_capture_classification_and_reset_release) ... ok
+test_empty_csv_clean_error (test_evidence.WaveformTests.test_empty_csv_clean_error) ... ok
+test_partial_aliasing_undefined_and_loopback (test_evidence.WaveformTests.test_partial_aliasing_undefined_and_loopback) ... ok
+test_real_decoding_and_corrupt_stop (test_evidence.WaveformTests.test_real_decoding_and_corrupt_stop) ... ok
+test_i2c_only_fixture_and_external_capture_import (test_i2c_profile.I2CProfileTests.test_i2c_only_fixture_and_external_capture_import) ... ok
+test_missing_stop_and_slow_rise (test_i2c_profile.I2CProfileTests.test_missing_stop_and_slow_rise) ... ok
+test_profile_scores_read_and_nack_and_releases_on_failure (test_i2c_profile.I2CProfileTests.test_profile_scores_read_and_nack_and_releases_on_failure) ... ok
+test_corrupt_stale_rejected_no_retry (test_transport.TransportTests.test_corrupt_stale_rejected_no_retry) ... ok
+test_deadline (test_transport.TransportTests.test_deadline) ... ok
+test_fragmented_reply_and_wrap (test_transport.TransportTests.test_fragmented_reply_and_wrap) ... ok
+test_validation (test_transport.TransportTests.test_validation) ... ok
+
+----------------------------------------------------------------------
+Ran 49 tests in 1.065s
+
+OK

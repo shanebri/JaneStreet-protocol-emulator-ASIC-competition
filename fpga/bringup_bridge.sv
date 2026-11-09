@@ -1,7 +1,8 @@
 `default_nettype none
 // FPGA-only serial control plane. Core clock runs continuously at 50 MHz.
 // No retries, one command at a time. Bridge reset also resets the ASIC.
-module bringup_bridge #(parameter integer BIT_CYCLES=434, TRACE_DEPTH=8192)(
+module bringup_bridge #(parameter integer BIT_CYCLES=434, TRACE_DEPTH=8192,
+                       parameter integer FEEDER_ENABLED=0, FEEDER_TIMEOUT_CYCLES=500000)(
     input wire clk, reset, uart_rx,
     output wire uart_tx,
     input wire [1:0] dedicated_in,
@@ -25,13 +26,37 @@ module bringup_bridge #(parameter integer BIT_CYCLES=434, TRACE_DEPTH=8192)(
     reg [7:0] write_data=0;
     wire [5:0] control; wire [3:0] nibble;
     wire [7:0] data,oe,read_data; wire done;
+    wire feeder_busy, feeder_ready;
+    wire [5:0] feeder_request;
+    wire [7:0] feeder_write;
+    wire [31:0] feeder_query;
+    reg feeder_valid=0, feeder_slot=0, feeder_engine=0, feeder_both=0;
+    reg [2:0] feeder_cmd=0;
+    reg [31:0] feeder_data=0;
+    reg [15:0] feeder_length=0;
+    reg [31:0] upload_sequence[0:1];
+    reg [15:0] sequence_low[0:1], word_low[0:1];
+    reg [1:0] sequence_low_valid=0, sequence_valid=0, word_low_valid=0;
+    generate if (FEEDER_ENABLED) begin: packet_queue
+        packet_feeder_bank #(.MAX_ACTIVE_CYCLES(FEEDER_TIMEOUT_CYCLES)) bank(
+            .clk(clk),.reset(reset|core_reset),.cmd_valid(feeder_valid),.cmd_slot(feeder_slot),
+            .cmd_engine(feeder_engine),.cmd_both(feeder_both),.cmd(feeder_cmd),
+            .cmd_data(feeder_data),.cmd_length_minus_one(feeder_length),.cmd_ready(feeder_ready),
+            .query_slot(packet[3][0]),.query(packet[3][2:1]),.query_data(feeder_query),
+            .busy(feeder_busy),.bus_request(feeder_request),.bus_write_data(feeder_write),
+            .bus_read_data(read_data),.bus_done(done && feeder_busy));
+    end else begin: no_packet_queue
+        assign feeder_busy=0, feeder_ready=0, feeder_request=0, feeder_write=0, feeder_query=0;
+    end endgenerate
+    wire [5:0] adapter_request=feeder_busy ? feeder_request : request;
+    wire [7:0] adapter_write=feeder_busy ? feeder_write : write_data;
     reg raw_mode=0;
     reg [5:0] raw_control=0;
     reg [3:0] raw_nibble=0;
     wire [5:0] core_control=raw_mode ? raw_control : control;
     wire [3:0] core_nibble=raw_mode ? raw_nibble : nibble;
-    byte_nibble_host host(.clk(clk),.reset(reset|core_reset),.request(request),
-        .write_data(write_data),.nibble_in(data[3:0]),.control(control),
+    byte_nibble_host host(.clk(clk),.reset(reset|core_reset),.request(adapter_request),
+        .write_data(adapter_write),.nibble_in(data[3:0]),.control(control),
         .nibble_out(nibble),.read_data(read_data),.done(done));
     tt_um_shanebri_top emulator(.clk(clk),.rst_n(!(reset|core_reset)),.ena(enabled),
         .ui_in({dedicated_in,core_control}),.uio_in({protocol_pad,core_nibble}),
@@ -78,10 +103,13 @@ module bringup_bridge #(parameter integer BIT_CYCLES=434, TRACE_DEPTH=8192)(
     always @(posedge clk) begin
         tx_start<=0;
         trace_arm<=0; trace_cancel<=0;
+        if(core_reset) begin sequence_valid<=0; sequence_low_valid<=0; word_low_valid<=0; end
         if(reset) begin
             state<=8; remaining<=8; core_reset<=1; enabled<=1;
             request<=0; count<=0; checksum<=0; reply[0]<=0; gap<=0;
             raw_mode<=0; raw_control<=0; trace_address<=0;
+            feeder_valid<=0; feeder_both<=0;
+            sequence_valid<=0; sequence_low_valid<=0; word_low_valid<=0;
         end else case(state)
             0: if(rx_valid) begin
                 gap<=0;
@@ -101,7 +129,46 @@ module bringup_bridge #(parameter integer BIT_CYCLES=434, TRACE_DEPTH=8192)(
                 reply[0]<=8'hc3; reply[1]<=packet[1];
                 count<=0; checksum<=0;
                 if(checksum!=0 || packet[6]!=0 || packet[3]>15) begin reply[2]<=1; state<=4; end
-                else case(packet[2])
+                else if(feeder_busy && (packet[2]==1 || packet[2]==2 || packet[2]==5 || packet[2]==8)) begin
+                    reply[2]<=5; state<=4;
+                end else if(packet[2]>=15 && packet[2]<=26) begin
+                    if(!FEEDER_ENABLED) begin reply[2]<=3; state<=4; end
+                    else if(packet[2]==15 && packet[3]==0 && packet[4]==0 && packet[5]==0) begin
+                        {reply[6],reply[5],reply[4],reply[3]}<=32'h031d0201; state<=4;
+                    end else if(packet[2]==25 && packet[3]<8 && packet[4]==0 && packet[5]==0) begin
+                        {reply[6],reply[5],reply[4],reply[3]}<=feeder_query; state<=4;
+                    end else if(packet[2]==16 && packet[3]<2 && feeder_query[2:0]==0) begin
+                        sequence_low[packet[3][0]]<={packet[5],packet[4]};
+                        sequence_low_valid[packet[3][0]]<=1; sequence_valid[packet[3][0]]<=0; state<=4;
+                    end else if(packet[2]==17 && packet[3]<2 && feeder_query[2:0]==0 &&
+                                sequence_low_valid[packet[3][0]]) begin
+                        upload_sequence[packet[3][0]]<={packet[5],packet[4],sequence_low[packet[3][0]]};
+                        sequence_valid[packet[3][0]]<=1; sequence_low_valid[packet[3][0]]<=0; state<=4;
+                    end else if(packet[2]==19 && packet[3]<2 && feeder_query[2:0]==1) begin
+                        word_low[packet[3][0]]<={packet[5],packet[4]}; word_low_valid[packet[3][0]]<=1; state<=4;
+                    end else if((packet[2]==18 && packet[3]<4 && sequence_valid[packet[3][0]]) ||
+                                (packet[2]==20 && packet[3]<2 && word_low_valid[packet[3][0]]) ||
+                                (packet[2]>=21 && packet[2]<=24 && packet[3]<2 && packet[4]==0 && packet[5]==0) ||
+                                (packet[2]==26 && packet[3]==0 && packet[4]==0 && packet[5]==0)) begin
+                        if((packet[2]==21 && word_low_valid[packet[3][0]]) ||
+                           ((packet[2]==22 || packet[2]==26) && (!enabled || raw_mode))) begin
+                            reply[2]<=2; state<=4;
+                        end else begin
+                            feeder_slot<=packet[3][0]; feeder_engine<=packet[3][1];
+                            feeder_length<={packet[5],packet[4]}; feeder_both<=packet[2]==26;
+                            case(packet[2])
+                                18: begin feeder_cmd<=0; feeder_data<=upload_sequence[packet[3][0]]; end
+                                20: begin feeder_cmd<=1; feeder_data<={packet[5],packet[4],word_low[packet[3][0]]}; end
+                                21: feeder_cmd<=2;
+                                22,26: feeder_cmd<=3;
+                                23: feeder_cmd<=4;
+                                24: feeder_cmd<=5;
+                                default: feeder_cmd<=0;
+                            endcase
+                            feeder_valid<=1; state<=21;
+                        end
+                    end else begin reply[2]<=2; state<=4; end
+                end else case(packet[2])
                     1,2: begin
                         if(!enabled || packet[5]!=0) begin reply[2]<=2; state<=4; end
                         else if(raw_mode) begin
@@ -196,6 +263,18 @@ module bringup_bridge #(parameter integer BIT_CYCLES=434, TRACE_DEPTH=8192)(
                 raw_mode<=0; request<={(packet[2]==1),(packet[2]==2),packet[3][3:0]};
                 write_data<=packet[4]; remaining<=32; state<=2;
             end else remaining<=remaining-1'b1;
+            21: begin
+                feeder_valid<=0;
+                if(!feeder_ready) reply[2]<=2;
+                else begin
+                    if(packet[2]==18 || packet[2]==23 || packet[2]==24) begin
+                        sequence_valid[feeder_slot]<=0; sequence_low_valid[feeder_slot]<=0;
+                        word_low_valid[feeder_slot]<=0;
+                    end
+                    if(packet[2]==20) word_low_valid[feeder_slot]<=0;
+                end
+                state<=4;
+            end
             default: state<=0;
         endcase
     end
