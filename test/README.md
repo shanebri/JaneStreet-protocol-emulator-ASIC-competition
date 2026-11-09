@@ -161,3 +161,70 @@ with `COCOTB_TEST_FILTER=^test_dual_pio\.` for focused development. The subsyste
 SV unit checks simultaneous operations at the byte interface; it intentionally
 uses RTL hierarchy and is not part of the gate-netlist suite. Host-wrapper tests
 can also run with `python -m unittest discover -s test -p test_pio_host.py -v`.
+
+## Python ISA reference and RTL differential suite
+
+The reference model implements the documented 0x21 binary ISA using only the
+Python standard library. `Engine` runs one machine
+with optional accepted host operations. `Chip` adds the nibble bus, two banked
+engines, input synchronization and qualification, GPIO ownership and digital
+pad data/OE. Pass externally resolved input levels to `Chip.step` on each rising
+edge. The program store survives reset. Load every reachable word before
+execution, as required by the chip's power-up contract. [Python reference model](../tools/pio_reference.py)
+
+This example runs `SET X,7` followed by `HALT` at divider one.
+
+```python
+from tools.pio_reference import Engine, START
+
+engine = Engine()
+engine.imem[:2] = [0xE027, 0xC080]
+engine.step(control=START)
+engine.step()
+assert (engine.pc, engine.x) == (1, 7)
+engine.step()
+assert not engine.running
+```
+
+Run the separate RTL suite with `python test/run.py --isa-reference`, or
+`./test/run.ps1 --isa-reference` with the local Windows tools. The runner uses
+the submission manifest. The suite drives the top-level pins and compares pin
+data and OEs, both engines' architectural state and timers, ordered FIFO words,
+host staging/snapshots and input qualification on each edge. The RTL probe is
+read-only. Results and the waveform go to `test/sim_build/isa_reference/`.
+The 39 functional tests keep their separate `test/results.xml` report.
+
+The differential workloads complement the functional and dual-engine tests.
+[Functional coverage matrix](../docs/pio21_verification.md)
+
+| Workload | Edge cases |
+| --- | --- |
+| Raw opcode sweep | All 2,048 opcode/argument pairs, including 996 reserved forms with enabled side-set that must be suppressed on a fault |
+| EXEC and control flow | Nested OUT/MOV EXEC, injected waits and acknowledgment, taken and untaken injected branches, injected HALT/fault, delay freeze, PC writes overriding wrap |
+| Shifts and timing | All 32 FIFO threshold settings, exact and overshooting shifts, independent shift directions, maximum divider rollover and maximum branch delay |
+| Same-edge arbitration | Empty TX with no bypass, full TX replacement, full/empty RX snapshot with simultaneous autopush, IRQ set/clear priority, and a sticky error during clear |
+| Random programs | Two independently generated 32-word images per seed, randomized mapping/ownership/filters, FIFO and IRQ traffic, lifecycle commands, host phase abandonment and IMEM retention |
+
+The random run defaults to 16 consecutive seeds starting at `0x21c0ffee`.
+Mismatches report the seed or directed case, the first divergent core edge,
+the differing state and the preceding pin samples. The following PowerShell
+commands replay one seed.
+
+```powershell
+$env:COCOTB_TEST_FILTER = 'reference_randomized_dual_programs$'
+$env:PIO_REF_SEED = '0x21c0ffee'
+$env:PIO_REF_SEEDS = '1'
+./test/run.ps1 --isa-reference
+```
+
+The model keeps the documented behavior for two baseline discrepancies. The
+default suite logs each exact mismatch as a warning and fails on any other
+difference. Set `PIO_REF_STRICT=1` to fail on the known mismatches as well.
+
+- `reference_live_resume_atomicity` sends RESUME to an already running engine
+  on a blocking PULL's retirement edge. RTL advances PC and consumes the TX
+  word while leaving OSR and its count stale. The reference treats RESUME on a
+  running engine as idempotent and commits the PULL atomically.
+- `reference_legacy_route_side_set` leaves extended routing disabled but sets
+  ROUTE bit 27. RTL suppresses a legacy side-set to dedicated output 0. The
+  reference uses legacy PINCTRL value side-set while extended routing is off.

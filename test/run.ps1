@@ -12,7 +12,7 @@ try {
         $env:PATH = $localSimulator + ';' + $dependencyBin + ';' + $env:PATH
     }
     $testPython = if (Test-Path -LiteralPath $localPython) { $localPython } else { 'python' }
-    & $testPython (Join-Path $PSScriptRoot 'run.py')
+    & $testPython (Join-Path $PSScriptRoot 'run.py') @args
     if ($LASTEXITCODE -ne 0) { throw "RTL regression failed (exit $LASTEXITCODE)" }
 } finally {
     $env:PATH = $savedPath

@@ -26,6 +26,9 @@ jobs:
       - name: Run tests
         run: python test/run.py
 
+      - name: Compare the Python ISA reference against RTL
+        run: python test/run.py --isa-reference
+
       - name: Bring-up transport and complete UART bridge regression
         run: |
           python -m unittest discover -s tools/bringup -p 'test_*.py' -v
@@ -39,6 +42,7 @@ jobs:
         with:
           paths: |
             test/results.xml
+            test/sim_build/isa_reference/results.xml
             test/bringup-serial.xml
             test/bringup-default-baud.xml
             test/bringup-extended.xml
@@ -53,6 +57,8 @@ jobs:
           path: |
             test/tb.fst
             test/results.xml
+            test/sim_build/isa_reference/results.xml
+            test/sim_build/isa_reference/tb.fst
             test/output/*
             test/bringup-serial.xml
             test/bringup-default-baud.xml
