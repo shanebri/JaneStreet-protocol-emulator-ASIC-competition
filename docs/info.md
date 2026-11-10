@@ -39,6 +39,10 @@ edge before the first beat. Raw reset releases host/protocol OEs even with a
 stopped clock. See the [reset and timing contract](pio21_contract.md#reset-and-timing-qualification)
 for reset retention, re-arm and the unchanged timing budgets/corner requirements.
 
+On the Tiny Tapeout demo board, deselecting the design powers it down. After
+reselecting it, reset the design and reload firmware and configuration before
+issuing `START`.
+
 The complete logical correspondence and pad capabilities are defined in the
 [single pin table](pio21_contract.md#ownership-and-transport). Dedicated outputs
 retain indices 0..7. Protocol pads have value indices 8..11 and input indices 2..5.
@@ -248,6 +252,11 @@ report and single-engine matrix are historical records.
 Use a synchronous host and compatible logic levels. A logic analyzer can observe
 all programmable outputs; a UART adapter receives the example at 115200 8N1 with
 a 50 MHz core clock. Input0 (`ui[6]`) can receive the RX example at 16 clocks/bit.
+
+For I2C on the Tiny Tapeout demo board, share ground with the target and use
+external pull-ups to 3.3 V on SDA (`uio[4]`) and SCL (`uio[5]`) in the default mapping.
+See the [I2C guide](i2c.md) for configuration and rise-time checks.
+
 The fixed Arty UART demo uses a transmit-only USB connection. The separate
 [programmable bring-up top](../tools/bringup/README.md) uses USB UART for host
 commands and exposes protocol pins independently. Its I2C pads are on JC1/2;

@@ -7,8 +7,8 @@ project:
   language:     "SystemVerilog" # other examples include SystemVerilog, Amaranth, VHDL, etc
   clock_hz:     50000000       # Clock frequency in Hz (or 0 if not applicable)
 
-  # How many tiles your design occupies? A single tile is about 167x108 uM.
-  tiles: "8x4"          # Updated Jane Street competition allocation (CMOS5L)
+  # A CMOS5L tile is about 202 × 155 µm.
+  tiles: "8x4"
 
   # Your top module name must start with "tt_um_". Make it unique by including your github username:
   top_module:  "tt_um_shanebri_top"

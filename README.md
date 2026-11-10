@@ -115,6 +115,28 @@ capture procedures for dual-engine stress, FIFO boundaries, recovery, pad
 ownership and concurrent SPI/UART. See the [v2 implementation report](docs/fpga_bringup_v2_20261101.md)
 for the FPGA build and timing results.
 
+## Competition submission
+
+Entries are due January 18, 2027. See the [competition FAQ](https://blog.janestreet.com/protocol-emulator-asic-competition/#faq).
+
+- [Architecture and host interface](docs/dual_pio.md), [pinout and board setup](docs/info.md),
+  and [instruction set](docs/isa.md).
+- [Python assembler](tools/pioasm.py) and [UART](examples/uart_v0.asm),
+  [SPI](examples/spi_mode0.asm), and [I2C](examples/i2c.asm) firmware.
+
+Unit tests exercise FIFO and pad behavior. Pin-level tests drive the host bus
+and protocol pins against both RTL and the generated gate netlist. FPGA bring-up
+exercises the host and firmware with physical protocol peers.
+[Verification instructions](test/README.md) · [Qualification results](docs/project_status.md)
+
+Before submitting, run the [March shuttle precheck](https://github.com/TinyTapeout/tt-gds-action/blob/ttihp27a/precheck/action.yml)
+on the GDS for the release commit and link the passing GDS and precheck results.
+
+Codex assisted with comparing the shuttle configuration and drafting the
+submission documentation. The timing-closure work plan records how AI was
+asked to diagnose and repair timing failures, and which measured checks were
+required to accept a repair. [Archived Astra brief](docs/astra_timing_closure_prompt_20261027.md)
+
 ## Origin and licensing
 
 The project started from
